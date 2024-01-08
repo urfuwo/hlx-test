@@ -1,5 +1,5 @@
-# Your Project's Title...
-Your project's description...
+# SAP Content Hub
+Temporary location prior to enabling https://github.tools.sap/UDEx/dx-web 
 
 ## Environments
 - Preview: https://main--hlx-test--urfuwo.hlx.page/
