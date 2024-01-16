@@ -5,7 +5,15 @@
 export default async function decorate(block) {
   // fetch optimized image
   const image = block.querySelector('img');
-  const imageSrc = image.getAttribute('src').replace('format=jpeg', 'format=webply');
+  let imageSrc = image.getAttribute('src')
+    .replace('format=jpeg', 'format=webply')
+    .replace('format=png', 'format=webply');
+
+  const mediaQuery = window.matchMedia('(max-width: 650px)');
+  // Check if the media query is true
+  if (mediaQuery.matches) {
+    imageSrc = imageSrc.replace('width=750', 'width=350');
+  }
   const hero = document.createElement('div');
   hero.innerHTML = `<udex-hero-banner
     background-image="${imageSrc}"
@@ -18,4 +26,7 @@ export default async function decorate(block) {
   </udex-hero-banner>`;
   hero.querySelector('.hero-banner').append(block.querySelector('h1'));
   block.replaceWith(hero);
+  setTimeout(() => {
+    hero.querySelector('udex-hero-banner')?.shadowRoot.querySelector('img')?.setAttribute('loading', 'eager');
+  }, 1);
 }
