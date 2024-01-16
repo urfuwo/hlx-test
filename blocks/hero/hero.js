@@ -5,7 +5,9 @@
 export default async function decorate(block) {
   // fetch optimized image
   const image = block.querySelector('img');
-  const imageSrc = image.getAttribute('src').replace('format=jpeg', 'format=webply');
+  const imageSrc = image.getAttribute('src')
+    .replace('format=jpeg', 'format=webply')
+    .replace('format=png', 'format=webply');
   const hero = document.createElement('div');
   hero.innerHTML = `<udex-hero-banner
     background-image="${imageSrc}"
