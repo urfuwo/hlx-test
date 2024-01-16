@@ -87,20 +87,39 @@ export function toClassName(name) {
 }
 
 /**
+ * Map business template to implementation (technical) template name (itn)
+ * It will be used to load <itn>/<itn>.js and <itn>/<itn>.css
+ */
+async function getImplTemplateName() {
+  try {
+    const businessTemplateName = toClassName(getMetadata('template'));
+    if (businessTemplateName) {
+      const businessTemplates = Object.keys(TEMPLATE_LIST);
+      if (businessTemplates.includes(businessTemplateName)) {
+        return TEMPLATE_LIST[businessTemplateName];
+      }
+    }
+    return null;
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('Template mapping error', error);
+    return null;
+  }
+}
+
+/**
  * Run template specific decoration code.
  * @param {Element} main The container element
  */
 async function decorateTemplates(main) {
   try {
-    const template = toClassName(getMetadata('template'));
-    const templates = Object.keys(TEMPLATE_LIST);
-    if (templates.includes(template)) {
-      const templateName = TEMPLATE_LIST[template];
-      const mod = await import(`../templates/${templateName}/${templateName}.js`);
+    const implTemplateName = await getImplTemplateName();
+    if (implTemplateName) {
+      const mod = await import(`../templates/${implTemplateName}/${implTemplateName}.js`);
       if (mod.default) {
         await mod.default(main);
       }
-      document.body.classList.add(templateName);
+      document.body.classList.add(implTemplateName);
     }
   } catch (error) {
     // eslint-disable-next-line no-console
@@ -178,8 +197,9 @@ async function loadLazy(doc) {
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
   loadFonts();
 
-  // Load template styles (#todo: refactor)
-  loadCSS(`${window.hlx.codeBasePath}/templates/blog/blog.css`);
+  // Load template CSS
+  const techTemplateName = await getImplTemplateName();
+  loadCSS(`${window.hlx.codeBasePath}/templates/${techTemplateName}/${techTemplateName}.css`);
 
   sampleRUM('lazy');
   sampleRUM.observe(main.querySelectorAll('div[data-block-name]'));
