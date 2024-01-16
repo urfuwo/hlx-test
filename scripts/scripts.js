@@ -16,7 +16,9 @@ import {
 
 const LCP_BLOCKS = []; // add your LCP blocks to the list
 const TEMPLATE_LIST = {
-  blog: 'blog',
+  blog: 'article',
+  feature: 'article',
+  newsbyte: 'article',
 };
 
 /**
