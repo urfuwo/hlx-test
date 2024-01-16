@@ -1,0 +1,10 @@
+@media (min-width: 900px) {
+    /* Blog: default section paragraphs */
+    body.blog div.default-content-wrapper p {
+        margin: 0 auto;
+        padding-left: 180px;
+        padding-right: 180px;
+        width: 780px;
+        max-width: 780px;
+    }
+}
