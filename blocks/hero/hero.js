@@ -20,4 +20,7 @@ export default async function decorate(block) {
   </udex-hero-banner>`;
   hero.querySelector('.hero-banner').append(block.querySelector('h1'));
   block.replaceWith(hero);
+  setTimeout(() => {
+    hero.querySelector('udex-hero-banner')?.shadowRoot.querySelector('img')?.setAttribute('loading', 'eager');
+  }, 1);
 }
