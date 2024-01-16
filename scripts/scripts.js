@@ -1,17 +1,17 @@
 import {
-  sampleRUM,
   buildBlock,
-  loadHeader,
-  loadFooter,
+  decorateBlocks,
   decorateButtons,
   decorateIcons,
   decorateSections,
-  decorateBlocks,
   decorateTemplateAndTheme,
-  waitForLCP,
   getMetadata,
   loadBlocks,
   loadCSS,
+  loadFooter,
+  loadHeader,
+  sampleRUM,
+  waitForLCP,
 } from './aem.js';
 
 const LCP_BLOCKS = ['hero']; // add your LCP blocks to the list
@@ -108,6 +108,32 @@ async function decorateTemplates(main) {
   }
 }
 
+async function loadSAPTheme() {
+  try {
+    const sapTheme = getMetadata('saptheme', document) || 'sap_glow';
+    if (sapTheme) {
+      const head = document.querySelector('head');
+      // <link rel="stylesheet" type="text/css" href="/themes/sap_glow/css_variables.css">
+      const designTokenLink = document.createElement('link');
+      designTokenLink.setAttribute('rel', 'stylesheet');
+      designTokenLink.setAttribute('type', 'text/css');
+      const themeLink = `/themes/${sapTheme}/css_variables.css`;
+      designTokenLink.setAttribute('href', themeLink);
+      head.append(designTokenLink);
+
+      // <script data-ui5-config type="application/json">{"theme": "sap_glow"}</script>
+      const ui5ThemeScript = document.createElement('script');
+      ui5ThemeScript.setAttribute('data-ui5-config', '');
+      ui5ThemeScript.setAttribute('type', 'application/json');
+      ui5ThemeScript.textContent = `{"theme": "${sapTheme}"}`;
+      head.append(ui5ThemeScript);
+    }
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.error('SAP-Theme loading failed', e);
+  }
+}
+
 /**
  * Loads everything needed to get to LCP.
  * @param {Element} doc The container element
@@ -119,6 +145,7 @@ async function loadEager(doc) {
   if (main) {
     decorateMain(main);
     await decorateTemplates(main);
+    loadSAPTheme();
     document.body.classList.add('appear');
     await waitForLCP(LCP_BLOCKS);
   }
