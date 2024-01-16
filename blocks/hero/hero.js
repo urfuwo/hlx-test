@@ -4,9 +4,11 @@
  */
 export default async function decorate(block) {
   // decorate hero DOM
+  const image = block.querySelector('img');
+  const imageSrc = image.getAttribute('src').replace('format=jpeg', 'format=webply');
   const hero = document.createElement('div');
   hero.innerHTML = `<udex-hero-banner
-  background-image="/images/bg3.png"
+  background-image="${imageSrc}"
   background-image-label="Hero Banner background image label"
   background-color="#fbdab9"
   id="showcase"
