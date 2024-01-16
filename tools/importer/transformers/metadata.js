@@ -1,0 +1,76 @@
+/* global WebImporter */
+// eslint-disable-next-line no-unused-vars
+const createMetadata = (main, document, html, params, urlStr) => {
+  const meta = {};
+
+  const title = document.querySelector('title');
+  if (title) {
+    meta.Title = title.textContent.replace(/[\n\t]/gm, '');
+  }
+  const keywords = document.querySelector('[name="keywords"]');
+  if (keywords) {
+    meta.keywords = keywords.content;
+  }
+
+  const tags = document.querySelector('[name="tags"]');
+  if (tags && tags.content) {
+    meta.Tags = tags.content;
+  }
+
+  const desc = document.querySelector('[property="og:description"]');
+  if (desc) {
+    meta.Description = desc.content;
+  }
+
+  const img = document.querySelector('[property="og:image"]');
+  if (img && img.content) {
+    const el = document.createElement('img');
+    const imgUrl = new URL(img.content);
+    el.src = imgUrl.pathname;
+    meta.Image = el;
+  }
+
+  const ogLocale = document.querySelector('[property="og:locale"]');
+  if (ogLocale) {
+    meta.Language = ogLocale.content;
+  }
+  const ogType = document.querySelector('[property="og:type"]');
+  if (ogType) {
+    meta.Type = ogType.content;
+  }
+  const published = document.querySelector('[property="article:published_time"]');
+  if (published) {
+    meta['Published Date'] = published.content;
+  }
+  const modified = document.querySelector('[property="article:modified_time"]');
+  if (modified) {
+    meta['Modified Date'] = modified.content;
+  }
+  const author = document.querySelector('[name="author"]');
+  if (author) {
+    meta.Author = author.content;
+  }
+  const twitterLabel1 = document.querySelector('[name="twitter:label1"]');
+  if (twitterLabel1) {
+    meta['twitter:label1'] = twitterLabel1.content;
+  }
+  const twitterData1 = document.querySelector('[name="twitter:data1"]');
+  if (twitterData1) {
+    meta['twitter:data1'] = twitterData1.content;
+  }
+  const twitterLabel2 = document.querySelector('[name="twitter:label2"]');
+  if (twitterLabel2) {
+    meta['twitter:label2'] = twitterLabel2.content;
+  }
+  const twitterData2 = document.querySelector('[name="twitter:data2"]');
+  if (twitterData2) {
+    meta['twitter:data2'] = twitterData2.content;
+  }
+  const block = WebImporter.Blocks.getMetadataBlock(document, meta);
+  block.id = 'metadata';
+  main.append(block);
+
+  return meta;
+};
+
+export default createMetadata;
