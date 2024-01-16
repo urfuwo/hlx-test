@@ -35,26 +35,26 @@ const createMetadata = (main, document, html, params, urlStr) => {
   if (article && article.className.indexOf('sapn-type') > -1) {
     article.classList.forEach((className) => {
       if (className.startsWith('sapn-type')) {
-        meta['template'] = className.replace('sapn-type-', '');
+        meta.template = className.replace('sapn-type-', '');
       }
     });
   }
 
   const ogLocale = document.querySelector('[property="og:locale"]');
   if (ogLocale) {
-    meta.Language = ogLocale.content;
+    meta['og:locale'] = ogLocale.content;
   }
   const ogType = document.querySelector('[property="og:type"]');
   if (ogType) {
-    meta.Type = ogType.content;
+    meta['og:type'] = ogType.content;
   }
   const published = document.querySelector('[property="article:published_time"]');
   if (published) {
-    meta['Published Date'] = published.content;
+    meta['article:published_time'] = published.content;
   }
   const modified = document.querySelector('[property="article:modified_time"]');
   if (modified) {
-    meta['Modified Date'] = modified.content;
+    meta['article:modified_time'] = modified.content;
   }
   const author = document.querySelector('[name="author"]');
   if (author) {
@@ -68,7 +68,7 @@ const createMetadata = (main, document, html, params, urlStr) => {
 
   const hostStory = document.querySelector('.c-hero-post__content .c-entry-hot-story');
   if (hostStory) {
-    meta['Host Story'] = 'Yes';
+    meta['Hot Story'] = 'Yes';
   }
 
   const twitterLabel1 = document.querySelector('[name="twitter:label1"]');

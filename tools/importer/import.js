@@ -48,6 +48,8 @@ export default {
       'div.cloudservice.testandtarget',
       'ds-contextual-navigation',
       'div.breadcrumbs',
+      'div.cmp-container',
+      'div#more-posts',
       'a.skip-link',
     ]);
 
