@@ -12,3 +12,16 @@ footer .footer {
 footer .footer p {
   margin: 0;
 }
+
+footer .footer ul {
+  padding: 0;
+}
+
+footer .footer div > ul {
+  display: flex;
+  justify-content: space-around;
+}
+
+footer .footer li {
+  list-style: none;
+}

@@ -1,17 +1,17 @@
 import {
-  sampleRUM,
   buildBlock,
-  loadHeader,
-  loadFooter,
+  decorateBlocks,
   decorateButtons,
   decorateIcons,
   decorateSections,
-  decorateBlocks,
   decorateTemplateAndTheme,
-  waitForLCP,
   getMetadata,
   loadBlocks,
   loadCSS,
+  loadFooter,
+  loadHeader,
+  sampleRUM,
+  waitForLCP,
 } from './aem.js';
 
 const LCP_BLOCKS = ['hero']; // add your LCP blocks to the list
@@ -87,24 +87,69 @@ export function toClassName(name) {
 }
 
 /**
+ * Map business template to implementation (technical) template name (itn)
+ * It will be used to load <itn>/<itn>.js and <itn>/<itn>.css
+ */
+async function getImplTemplateName() {
+  try {
+    const businessTemplateName = toClassName(getMetadata('template'));
+    if (businessTemplateName) {
+      const businessTemplates = Object.keys(TEMPLATE_LIST);
+      if (businessTemplates.includes(businessTemplateName)) {
+        return TEMPLATE_LIST[businessTemplateName];
+      }
+    }
+    return null;
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('Template mapping error', error);
+    return null;
+  }
+}
+
+/**
  * Run template specific decoration code.
  * @param {Element} main The container element
  */
 async function decorateTemplates(main) {
   try {
-    const template = toClassName(getMetadata('template'));
-    const templates = Object.keys(TEMPLATE_LIST);
-    if (templates.includes(template)) {
-      const templateName = TEMPLATE_LIST[template];
-      const mod = await import(`../templates/${templateName}/${templateName}.js`);
+    const implTemplateName = await getImplTemplateName();
+    if (implTemplateName) {
+      const mod = await import(`../templates/${implTemplateName}/${implTemplateName}.js`);
       if (mod.default) {
         await mod.default(main);
       }
-      document.body.classList.add(templateName);
+      document.body.classList.add(implTemplateName);
     }
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Auto Blocking failed', error);
+  }
+}
+
+async function loadSAPTheme() {
+  try {
+    const sapTheme = getMetadata('saptheme', document) || 'sap_glow';
+    if (sapTheme) {
+      const head = document.querySelector('head');
+      // <link rel="stylesheet" type="text/css" href="/themes/sap_glow/css_variables.css">
+      const designTokenLink = document.createElement('link');
+      designTokenLink.setAttribute('rel', 'stylesheet');
+      designTokenLink.setAttribute('type', 'text/css');
+      const themeLink = `/themes/${sapTheme}/css_variables.css`;
+      designTokenLink.setAttribute('href', themeLink);
+      head.append(designTokenLink);
+
+      // <script data-ui5-config type="application/json">{"theme": "sap_glow"}</script>
+      const ui5ThemeScript = document.createElement('script');
+      ui5ThemeScript.setAttribute('data-ui5-config', '');
+      ui5ThemeScript.setAttribute('type', 'application/json');
+      ui5ThemeScript.textContent = `{"theme": "${sapTheme}"}`;
+      head.append(ui5ThemeScript);
+    }
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.error('SAP-Theme loading failed', e);
   }
 }
 
@@ -119,6 +164,7 @@ async function loadEager(doc) {
   if (main) {
     decorateMain(main);
     await decorateTemplates(main);
+    loadSAPTheme();
     document.body.classList.add('appear');
     await waitForLCP(LCP_BLOCKS);
   }
@@ -151,8 +197,9 @@ async function loadLazy(doc) {
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
   loadFonts();
 
-  // Load template styles (#todo: refactor)
-  loadCSS(`${window.hlx.codeBasePath}/templates/blog/blog.css`);
+  // Load template CSS
+  const techTemplateName = await getImplTemplateName();
+  loadCSS(`${window.hlx.codeBasePath}/templates/${techTemplateName}/${techTemplateName}.css`);
 
   sampleRUM('lazy');
   sampleRUM.observe(main.querySelectorAll('div[data-block-name]'));
