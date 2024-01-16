@@ -9,11 +9,15 @@ import {
   decorateBlocks,
   decorateTemplateAndTheme,
   waitForLCP,
+  getMetadata,
   loadBlocks,
   loadCSS,
 } from './aem.js';
 
 const LCP_BLOCKS = []; // add your LCP blocks to the list
+const TEMPLATE_LIST = {
+  blog: 'blog',
+};
 
 /**
  * Builds hero block and prepends to main in a new section.
@@ -70,6 +74,39 @@ export function decorateMain(main) {
 }
 
 /**
+ * Sanitizes a string for use as class name.
+ * @param {string} name The unsanitized string
+ * @returns {string} The class name
+ */
+export function toClassName(name) {
+  return typeof name === 'string'
+    ? name.toLowerCase().replace(/[^0-9a-z]/gi, '-').replace(/-+/g, '-').replace(/^-|-$/g, '')
+    : '';
+}
+
+/**
+ * Run template specific decoration code.
+ * @param {Element} main The container element
+ */
+async function decorateTemplates(main) {
+  try {
+    const template = toClassName(getMetadata('template'));
+    const templates = Object.keys(TEMPLATE_LIST);
+    if (templates.includes(template)) {
+      const templateName = TEMPLATE_LIST[template];
+      const mod = await import(`../templates/${templateName}/${templateName}.js`);
+      if (mod.default) {
+        await mod.default(main);
+      }
+      document.body.classList.add(templateName);
+    }
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('Auto Blocking failed', error);
+  }
+}
+
+/**
  * Loads everything needed to get to LCP.
  * @param {Element} doc The container element
  */
@@ -79,6 +116,7 @@ async function loadEager(doc) {
   const main = doc.querySelector('main');
   if (main) {
     decorateMain(main);
+    await decorateTemplates(main);
     document.body.classList.add('appear');
     await waitForLCP(LCP_BLOCKS);
   }
@@ -110,6 +148,9 @@ async function loadLazy(doc) {
 
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
   loadFonts();
+
+  // Load template styles (#todo: refactor)
+  loadCSS(`${window.hlx.codeBasePath}/templates/blog/blog.css`);
 
   sampleRUM('lazy');
   sampleRUM.observe(main.querySelectorAll('div[data-block-name]'));
