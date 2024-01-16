@@ -1,33 +1,27 @@
 /*
- * Copyright 2020 Adobe. All rights reserved.
- * This file is licensed to you under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License. You may obtain a copy
- * of the License at http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software distributed under
- * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
- * OF ANY KIND, either express or implied. See the License for the specific language
- * governing permissions and limitations under the License.
+ * SAP root styles using theme design tokens (see themes/sap_glow/css_variables.css)
  */
-
 :root {
   /* colors */
-  --link-color: #035fe6;
-  --link-hover-color: #136ff6;
+  --link-color: var(--sapLinkColor);
+  --link-hover-color: var(--sapLink_Hover_Color);
   --background-color: white;
   --light-color: #eee;
   --dark-color: #ccc;
   --text-color: black;
 
   /* fonts */
-  --body-font-family: roboto, roboto-fallback;
-  --heading-font-family: var(--body-font-family);
+  --body-font-family: var(--udexTypographyBodyMFontFamily);
+  --heading-font-family: var(--udexTypographyHeadingRegularMFontFamily);
   --fixed-font-family: 'Roboto Mono', menlo, consolas, 'Liberation Mono', monospace;
 
   /* body sizes */
-  --body-font-size-m: 22px;
-  --body-font-size-s: 18px;
-  --body-font-size-xs: 16px;
+  --body-font-size-m: var(--udexTypographyBodyMFontSize);
+  --body-font-size-s: var(--udexTypographyBodySFontSize);
+  --body-font-size-xs: var(--udexTypographyBodyXSFontSize);
+
+  /* body line height */
+  --body-line-height-m: var(--udexTypographyBodyMLineHeight);
 
   /* heading sizes */
   --heading-font-size-xxl: 48px;
@@ -63,7 +57,7 @@ body {
   font-size: var(--body-font-size-m);
   margin: 0;
   font-family: var(--body-font-family);
-  line-height: 1.6;
+  line-height: var(--body-line-height-m);
   color: var(--text-color);
   background-color: var(--background-color);
   display: none;
@@ -79,7 +73,7 @@ header {
 
 h1, h2, h3,
 h4, h5, h6 {
-  font-family: var(--heading-font-family);
+  font-family: var(--heading-font-family-m);
   font-weight: 600;
   line-height: 1.25;
   margin-top: 1em;
