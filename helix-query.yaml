@@ -2,13 +2,16 @@ version: 1
 indices:
   default:
     include:
-      - /blog/2023/**
+      - /blog/**
     exclude:
       - '**/fragments/**'
     target: /blog/articles-index.json
     properties:
       template:
         select: head > meta[name="template"]
+        value: attribute(el, "content")
+      title:
+        select: head > meta[property="og:title"]
         value: attribute(el, "content")
       author:
         select: head > meta[name="author"]
