@@ -30,6 +30,16 @@ const createMetadata = (main, document, html, params, urlStr) => {
     meta.Image = el;
   }
 
+  // get doc type from main > article classlist
+  const article = document.querySelector('section#main > article');
+  if (article && article.className.indexOf('sapn-type') > -1) {
+    article.classList.forEach((className) => {
+      if (className.startsWith('sapn-type')) {
+        meta['template'] = className.replace('sapn-type-', '');
+      }
+    });
+  }
+
   const ogLocale = document.querySelector('[property="og:locale"]');
   if (ogLocale) {
     meta.Language = ogLocale.content;
@@ -50,6 +60,17 @@ const createMetadata = (main, document, html, params, urlStr) => {
   if (author) {
     meta.Author = author.content;
   }
+
+  const displayAuthor = [...document.querySelectorAll('.c-hero-post__content .c-entry-author a')].map((el) => el.textContent).join(', ');
+  if (displayAuthor) {
+    meta['Display Author'] = displayAuthor;
+  }
+
+  const hostStory = document.querySelector('.c-hero-post__content .c-entry-hot-story');
+  if (hostStory) {
+    meta['Host Story'] = 'Yes';
+  }
+
   const twitterLabel1 = document.querySelector('[name="twitter:label1"]');
   if (twitterLabel1) {
     meta['twitter:label1'] = twitterLabel1.content;
