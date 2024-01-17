@@ -62,6 +62,18 @@ function buildAutoBlocks(main) {
 }
 
 /**
+ * Remove all paragraphs that contain only whitespace, incl. newlines
+ */
+function removeEmptyParagraphs(main) {
+  main.querySelectorAll('p').forEach((paragraph) => {
+    const c = paragraph.innerText;
+    if (c.match(/^\s*$/g)) {
+      paragraph.remove();
+    }
+  });
+}
+
+/**
  * Decorates the main element.
  * @param {Element} main The main element
  */
@@ -72,6 +84,7 @@ export function decorateMain(main) {
   decorateIcons(main);
   buildAutoBlocks(main);
   decorateSections(main);
+  removeEmptyParagraphs(main);
   decorateBlocks(main);
 }
 
