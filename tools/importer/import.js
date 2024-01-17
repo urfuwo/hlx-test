@@ -17,6 +17,52 @@ import {
   transformers,
 } from './transformers/index.js';
 
+/**
+   * Apply DOM operations to the provided document and return
+   * the root element to be then transformed to Markdown.
+   * @param {HTMLDocument} document The document
+   * @param {string} url The url of the page imported
+   * @param {string} html The raw html (the document is cleaned up during preprocessing)
+   * @param {object} params Object containing some parameters given by the import process.
+   * @returns {HTMLElement} The root element to be transformed
+   */
+async function _transformDOM(document, url, html, params) {
+  // define the main element: the one that will be transformed to Markdown
+  const main = document.body;
+
+  // use helper method to remove header, footer, etc.
+  WebImporter.DOMUtils.remove(main, [
+    'header',
+    'footer',
+    'component',
+    'div.social',
+    'ds-contextual-navigation',
+    'div.breadcrumbs',
+    'div.cmp-container',
+    'div#more-posts',
+    'a.skip-link',
+    'aside#secondary',
+  ]);
+
+  transformers.forEach(
+    (fn) => fn.call(this, main, document, params, url),
+  );
+  return main;
+}
+
+/**
+   * Return a path that describes the document being transformed (file name, nesting...).
+   * The path is then used to create the corresponding Word document.
+   * @param {HTMLDocument} document The document
+   * @param {string} url The url of the page imported
+   * @param {string} html The raw html (the document is cleaned up during preprocessing)
+   * @param {object} params Object containing some parameters given by the import process.
+   * @return {string} The path
+   */
+async function _generateDocumentPath (document, url, html, params) {
+  return WebImporter.FileUtils.sanitizePath(new URL(url).pathname.replace(/\.html$/, '').replace(/\/$/, ''));
+}
+
 export default {
   /**
    * Apply DOM pre processing
@@ -37,55 +83,25 @@ export default {
     preTransformers.forEach((fn) => fn.call(this, main, document, html, params, url));
   },
 
-  /**
-   * Apply DOM operations to the provided document and return
-   * the root element to be then transformed to Markdown.
-   * @param {HTMLDocument} document The document
-   * @param {string} url The url of the page imported
-   * @param {string} html The raw html (the document is cleaned up during preprocessing)
-   * @param {object} params Object containing some parameters given by the import process.
-   * @returns {HTMLElement} The root element to be transformed
-   */
-  transformDOM: async ({
+  
+
+  
+  transform: async ({
     // eslint-disable-next-line no-unused-vars
     document, url, html, params,
   }) => {
-    // define the main element: the one that will be transformed to Markdown
-    const main = document.body;
+    const authorLinks = [...document.body.querySelectorAll('a[rel=author]')]
+    .map((a) => a.href);
 
-    // use helper method to remove header, footer, etc.
-    WebImporter.DOMUtils.remove(main, [
-      'header',
-      'footer',
-      'component',
-      'div.social',
-      'ds-contextual-navigation',
-      'div.breadcrumbs',
-      'div.cmp-container',
-      'div#more-posts',
-      'a.skip-link',
-      'aside#secondary',
-    ]);
+    return [
+      {
+        element: await _transformDOM(document, url, html, params),
+        path: await _generateDocumentPath(document, url, html, params),
+        report: {
+          'author-links': authorLinks,
+        },
+      },
+    ];
 
-    transformers.forEach(
-      (fn) => fn.call(this, main, document, params, url),
-    );
-    return main;
-  },
-
-  /**
-   * Return a path that describes the document being transformed (file name, nesting...).
-   * The path is then used to create the corresponding Word document.
-   * @param {HTMLDocument} document The document
-   * @param {string} url The url of the page imported
-   * @param {string} html The raw html (the document is cleaned up during preprocessing)
-   * @param {object} params Object containing some parameters given by the import process.
-   * @return {string} The path
-   */
-  generateDocumentPath: ({
-    // eslint-disable-next-line no-unused-vars
-    document, url, html, params,
-  }) => WebImporter.FileUtils.sanitizePath(
-    new URL(url).pathname.replace(/\.html$/, '').replace(/\/$/, ''),
-  ),
+  }
 };
