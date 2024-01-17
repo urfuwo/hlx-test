@@ -22,7 +22,7 @@ export default async function decorate(block) {
   hero.setAttribute('background-color', '#fbdab9');
   hero.innerHTML = '<div slot="content" class="hero-banner hero-banner--showcase"></div>';
 
-  hero.querySelector('.hero-banner').append(block.querySelector('div > div > div'));
+  hero.querySelector('.hero-banner').append(block.querySelector('div'));
 
   block.innerHTML = hero.outerHTML;
   setTimeout(() => {
