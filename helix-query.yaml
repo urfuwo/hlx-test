@@ -2,7 +2,7 @@ version: 1
 indices:
   default:
     include:
-      - /blog/**
+      - '/blog/**'
     exclude:
       - '**/fragments/**'
     target: /blog/articles-index.json
