@@ -10,6 +10,10 @@ const authorProfile = (main, document, html) => {
       const block = [['Columns'], [profileImgEL, profileDetailsEL.innerHTML]];
       const table = WebImporter.DOMUtils.createTable(block, document);
       profileEL.replaceWith(table);
+    } else {
+      const h1 = document.createElement('h1');
+      h1.innerHTML = document._AUTHOR_H1.innerHTML.replace(/<br>(.*)/g, '<b>$1</b>');
+      document.querySelector('body').prepend(h1);
     }
 
     // section with article cards
