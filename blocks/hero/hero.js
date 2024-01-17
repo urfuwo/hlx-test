@@ -14,18 +14,17 @@ export default async function decorate(block) {
   if (mediaQuery.matches) {
     imageSrc = imageSrc.replace('width=750', 'width=350');
   }
-  const hero = document.createElement('div');
-  hero.innerHTML = `<udex-hero-banner
-    background-image="${imageSrc}"
-    background-image-label="Hero Banner background image label"
-    background-color="#fbdab9"
-    id="showcase"
-  >
-    <div slot="content" class="hero-banner hero-banner--showcase">
-    </div>
-  </udex-hero-banner>`;
-  hero.querySelector('.hero-banner').append(block.querySelector('h1'));
-  block.replaceWith(hero);
+  image.closest('picture').remove();
+
+  const hero = document.createElement('udex-hero-banner');
+  hero.setAttribute('background-image', imageSrc);
+  hero.setAttribute('background-image-label', 'Hero Banner background image label');
+  hero.setAttribute('background-color', '#fbdab9');
+  hero.innerHTML = '<div slot="content" class="hero-banner hero-banner--showcase"></div>';
+
+  hero.querySelector('.hero-banner').append(block.querySelector('div > div > div'));
+
+  block.innerHTML = hero.outerHTML;
   setTimeout(() => {
     hero.querySelector('udex-hero-banner')?.shadowRoot.querySelector('img')?.setAttribute('loading', 'eager');
   }, 1);
