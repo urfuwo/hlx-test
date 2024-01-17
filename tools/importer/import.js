@@ -19,6 +19,24 @@ import {
 
 export default {
   /**
+   * Apply DOM pre processing
+   * @param {HTMLDocument} document The document
+   * @param {string} url The url of the page imported
+   * @param {string} html The raw html (the document is cleaned up during preprocessing)
+   * @param {object} params Object containing some parameters given by the import process.
+   * @returns {HTMLElement} The root element to be transformed
+   */
+  preprocess: ({
+    // eslint-disable-next-line no-unused-vars
+    document,
+    url,
+    html,
+    params,
+  }) => {
+    const main = document.body;
+  },
+
+  /**
    * Apply DOM operations to the provided document and return
    * the root element to be then transformed to Markdown.
    * @param {HTMLDocument} document The document
@@ -45,12 +63,12 @@ export default {
       'footer',
       'component',
       'div.social',
-      'div.cloudservice.testandtarget',
       'ds-contextual-navigation',
       'div.breadcrumbs',
       'div.cmp-container',
       'div#more-posts',
       'a.skip-link',
+      'aside#secondary',
     ]);
 
     transformers.forEach(
