@@ -1,3 +1,4 @@
+import { getMetadata } from '../../scripts/aem.js';
 import {
   ul, div, a, img, span, h3,
 } from '../../scripts/dom-builder.js';
@@ -20,16 +21,23 @@ function buildCard(article) {
       span({ class: 'template' }, article.template),
       span({ class: 'title' }, article.title),
     ),
-    a({ href: '#' }, span({ class: 'author' }, `By ${article.author}`)),
+    a({ href: '#' }, span({ class: 'author' }, `By ${article.author}`)), // TODO: link to author page
     span({ class: 'date' }, formattedDate),
   );
   return card;
 }
 
+function getCategoryForReadMore() {
+  const tags = getMetadata('article:tag').split(',');
+  return tags.length > 0 ? tags[0] : null;
+}
+
 export default async function decorateBlock(block) {
-  const title = h3({}, 'Read More');
+  const category = getCategoryForReadMore();
+  const title = h3({}, `More on ${category}`);
 
   let articles = await ffetch('/blog/articles-index.json')
+    .filter((entry) => JSON.parse(entry.tags).includes(category))
     .all();
 
   articles = articles.sort((item1, item2) => item2.publishDate - item1.publishDate).slice(0, 2);
