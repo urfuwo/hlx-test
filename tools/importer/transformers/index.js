@@ -1,13 +1,15 @@
 import metadata from './metadata.js';
-import blogCtaBanner from './postCtaBanner.js';
-import extractTags from './postTags.js';
-import transformHero from './postHero.js';
+import artcileCtaBanner from './articleCtaBanner.js';
+import extractTags from './articleTags.js';
+import articleHero from './articleHero.js';
+import authorProfile from './authorProfile.js';
 
 export const transformers = [
   metadata,
   extractTags, // must be after metadata
-  transformHero, // must be after metadata
-  blogCtaBanner,
+  articleHero, // must be after metadata
+  artcileCtaBanner,
+  authorProfile,
 ];
 
 export const preTransformers = [
