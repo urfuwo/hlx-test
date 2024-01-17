@@ -34,6 +34,7 @@ export default {
     params,
   }) => {
     const main = document.body;
+    preTransformers.forEach((fn) => fn.call(this, main, document, html, params, url));
   },
 
   /**
@@ -47,15 +48,10 @@ export default {
    */
   transformDOM: async ({
     // eslint-disable-next-line no-unused-vars
-    document,
-    url,
-    html,
-    params,
+    document, url, html, params,
   }) => {
     // define the main element: the one that will be transformed to Markdown
     const main = document.body;
-
-    preTransformers.forEach((fn) => fn.call(this, main, document, html, params, url));
 
     // use helper method to remove header, footer, etc.
     WebImporter.DOMUtils.remove(main, [
