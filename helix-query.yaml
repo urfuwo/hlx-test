@@ -2,7 +2,7 @@ version: 1
 indices:
   default:
     include:
-      - '/blog/**'
+      - /blog/**
     exclude:
       - '**/fragments/**'
     target: /blog/articles-index.json
@@ -21,6 +21,37 @@ indices:
         value: attribute(el, "content")
       hot-story:
         select: head > meta[name="hot-story"]
+        value: attribute(el, "content")
+      tags:
+        select: head > meta[property="article:tag"]
+        values: attribute(el, "content")
+      image:
+        select: head > meta[property="og:image"]
+        value: attribute(el, "content")
+      lastModified:
+        select: head > meta[property="article:modified_time"]
+        value: parseTimestamp(attribute(el, "content"))
+      publicationDate:
+        select: head > meta[property="article:published_time"]
+        value: parseTimestamp(attribute(el, "content"))
+  author:
+    include:
+      - /author/**
+    exclude:
+      - '**/fragments/**'
+    target: /blog/authors-index.json
+    properties:
+      template:
+        select: head > meta[name="template"]
+        value: attribute(el, "content")
+      title:
+        select: head > meta[property="og:title"]
+        value: attribute(el, "content")
+      author:
+        select: head > meta[name="author"]
+        value: attribute(el, "content")
+      display-author:
+        select: head > meta[name="display-author"]
         value: attribute(el, "content")
       tags:
         select: head > meta[property="article:tag"]
