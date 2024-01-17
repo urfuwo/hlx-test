@@ -8,6 +8,11 @@
     margin-bottom: 18px;
 }
 
+/* Highlight first paragraph of blog pages using increased font size */
+.blog p.blog--highlight {
+    font-size: var(--udexTypographyBodyXLFontSize);
+}
+
 /* Blog-CTA-Banner */
 .blog .blog-cta-banner {
     background-color: var(--sapProgress_Value_InformationBackground);
