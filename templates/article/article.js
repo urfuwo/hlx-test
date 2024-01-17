@@ -25,7 +25,7 @@ export default function decorateMain(main) {
   const div = document.createElement('div');
   div.classList.add('section', 'article-footer');
 
-  const readMore = buildBlock('read-more', { elems: [] });
+  const readMore = buildBlock('related-articles', { elems: [] });
   div.append(readMore);
   main.append(div);
 

@@ -1,0 +1,30 @@
+.read-more h3 {
+    font-size: var(--udexTypographyHeadingRegularLFontSize);
+    font-family: var(--udexTypographyHeadingRegularLFontFamily);
+    font-weight: var(--udexTypographyHeadingRegularLFontWeight);
+    line-height: var(--udexTypographyHeadingRegularLLineHeight);
+    
+    --webkit-font-smoothing: antialiased;
+}
+
+.read-more img {
+    width: 300px;
+}
+
+.read-more {
+    display: flex;
+    flex-direction: column;
+}
+
+.read-more .card-list {
+    display: flex;
+    flex-wrap: wrap; /* Allows cards to wrap to the next line if needed */
+    gap: 10px; /* Adjusts the space between cards */
+    justify-content: flex-start; /* Aligns cards to the start of the flex container */
+}
+
+.read-more .card {
+    display: flex;
+    flex-direction: column; /* Stacks the contents of each card vertically */
+    flex: 0 1 auto; /* Makes each card flexible but maintains its size */
+}
