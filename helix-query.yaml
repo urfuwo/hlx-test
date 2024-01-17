@@ -41,11 +41,8 @@ indices:
       - '**/fragments/**'
     target: /blog/authors-index.json
     properties:
-      template:
-        select: head > meta[name="template"]
-        value: attribute(el, "content")
       author:
-        select: head > meta[name="og:title"]
+        select: head > meta[name="author"]
         value: attribute(el, "content")
       image:
         select: head > meta[property="og:image"]
