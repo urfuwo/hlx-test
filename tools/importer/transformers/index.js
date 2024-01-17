@@ -3,6 +3,7 @@ import artcileCtaBanner from './articleCtaBanner.js';
 import extractTags from './articleTags.js';
 import articleHero from './articleHero.js';
 import authorProfile from './authorProfile.js';
+import preProcessArticleSection from './preProcessArticleSection.js';
 
 export const transformers = [
   metadata,
@@ -13,4 +14,5 @@ export const transformers = [
 ];
 
 export const preTransformers = [
+  preProcessArticleSection,
 ];

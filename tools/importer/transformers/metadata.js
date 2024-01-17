@@ -5,8 +5,9 @@ const createMetadata = (main, document, html, params, urlStr) => {
 
   const title = document.querySelector('title');
   if (title) {
-    meta.Title = title.textContent.replace(/[\n\t]/gm, '');
+    meta.Title = title.textContent.replace(/[\n\t]/gm, '').replace(/ \| .*/gm, '');
   }
+
   const keywords = document.querySelector('[name="keywords"]');
   if (keywords) {
     meta.keywords = keywords.content;
@@ -60,7 +61,9 @@ const createMetadata = (main, document, html, params, urlStr) => {
   if (author) {
     meta.Author = author.content;
   }
-
+  if (meta.Title && html.originalURL.indexOf('/author') > 0) {
+      meta.Author = meta.Title.replace(/[^a-zA-Z\s]+.*/, '').trim();
+  }
   const displayAuthor = [...document.querySelectorAll('.c-hero-post__content .c-entry-author a')].map((el) => el.textContent).join(', ');
   if (displayAuthor) {
     meta['Display Author'] = displayAuthor;
@@ -87,6 +90,11 @@ const createMetadata = (main, document, html, params, urlStr) => {
   if (twitterData2) {
     meta['twitter:data2'] = twitterData2.content;
   }
+
+  if (document._ARTICLE_SECTIONS_) {
+    meta['Topics'] = [...document._ARTICLE_SECTIONS_].join(', ');
+  }
+
   const block = WebImporter.Blocks.getMetadataBlock(document, meta);
   block.id = 'metadata';
   main.append(block);
