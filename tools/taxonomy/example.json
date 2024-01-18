@@ -1,0 +1,52 @@
+{
+      "terms": [
+        {
+          "path": "type/blog",
+          "name": "blog"
+        },
+        {
+          "path": "type/newsbyte",
+          "name": "newsbyte"
+        },
+        {
+          "path": "tag/ai",
+          "name": "AI"
+        },
+        {
+          "path": "tag/artificial-intelligence",
+          "name": "Artificial Intelligence"
+        },
+        {
+          "path": "tag/cx",
+          "name": "CX"
+        },
+        {
+          "path": "tag/nrf",
+          "name": "NRF"
+        },
+        {
+          "path": "tag/retail",
+          "name": "Retail"
+        },
+        {
+          "path": "tag/sap-emarsys-customer-engagement",
+          "name": "SAP Emarsys Customer Engagement"
+        },
+        {
+          "path": "topic/technology",
+          "name": "Technology"
+        },
+        {
+          "path": "topic/erp",
+          "name": "ERP"
+        },
+        {
+          "path": "topic/services-and-support",
+          "name": "Services and Support"
+        },
+        {
+          "path": "topic/cloud",
+          "name": "Cloud"
+        }
+      ]
+    }

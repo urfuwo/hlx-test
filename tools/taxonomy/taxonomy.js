@@ -17,45 +17,28 @@ async function main() {
       }
       if (element.topics) {
         element.topics
-          .substring(1, element.topics.length - 1)
           .split(',')
-          .forEach((topic) => topics.add(topic.substring(1, topic.length - 1)));
+          .forEach((topic) => topics.add(topic.trim()));
       }
     });
     // eslint-disable-next-line no-console
     console.log(`{
       "metadata": {
-        "version": "1.2.0.0",
-        "source": "some_url",
-        "version_origin": "44"
+        "version": "0.0.0.1",
+        "description": "news processing by adobe franklin integration workshop on 2024.01.17"
       },
-      "terms": [
+      "terms": [${Array.from(types).map((type) => `
         {
-          "id": "type",
-          "name": "Type"
-        },
-        {
-          "id": "tag",
-          "name": "Tag"
-        },
-        {
-          "id": "topic",
-          "name": "Topic"
-        },${Array.from(types).map((type) => `
-        {
-          "id": "type-${type}",
-          "name": "${type}",
-          "parent": "type"
+          "path": "type/${type.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()}",
+          "name": "${type}"
         }`).concat(Array.from(tags).filter((tag) => tag.trim().length > 0).map((tag) => `
         {
-          "id": "tag-${tag}",
-          "name": "${tag}",
-          "parent": "tag"
-        }`)).concat(Array.from(topics).filter((topic) => topic.trim().length > 0).map((topic) => `
+          "path": "tag/${tag.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()}",
+          "name": "${tag}"
+        }`)).concat(Array.from(topics).filter((topic) => topic.trim().length > 0).filter((topic) => topic.trim() !== '[]').map((topic) => `
         {
-          "id": "topic-${topic}",
-          "name": "${topic}",
-          "parent": "topic"
+          "path": "topic/${topic.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()}",
+          "name": "${topic}"
         }`))}
       ]
     }`);
