@@ -64,6 +64,18 @@ const createMetadata = (main, document, html, params, urlStr) => {
   if (meta.Title && html.originalURL.indexOf('/author') > 0) {
       meta.Author = meta.Title.replace(/[^a-zA-Z\s]+.*/, '').trim();
   }
+
+  if (!meta.Author) {
+    const entryMeta = document.querySelector('p.entry-meta');
+    const parseInfo = str => ({ timestamp: new Date(str.match(/\b\w+ \d{1,2}, \d{4}/)[0]).toISOString(), linkText: str.match(/<a href="[^"]*" title="[^"]*" rel="[^"]*">([^<]*)<\/a>/)[1] });
+    const info = parseInfo(entryMeta.innerHTML);
+    meta.Author = info.linkText;
+    if (!meta['article:published_time']) {
+      meta['article:published_time'] = info.timestamp;
+    }
+    entryMeta.remove();
+  }
+
   const displayAuthor = [...document.querySelectorAll('.c-hero-post__content .c-entry-author a')].map((el) => el.textContent).join(', ');
   if (displayAuthor) {
     meta['Display Author'] = displayAuthor;
