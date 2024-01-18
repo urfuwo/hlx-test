@@ -1,0 +1,23 @@
+.title-banner {
+    width: 100%;
+    background-color: black;
+    color: white;
+}
+
+.title-banner.author {
+    background-color: rgb(54 123 179);
+}
+
+.title-banner  h1 {
+    padding: 30px;
+    font-size: var(--udexTypographyHeadingRegularXSFontSize);
+    font-family: var(--udexTypographyHeadingRegularXSFontFamily);
+    font-weight: var(--udexTypographyHeadingRegularXSFontWeight);
+    line-height: var(--udexTypographyHeadingRegularXSLineHeight);
+}
+
+.title-banner h1 strong {
+    display: block;
+    margin-top: 20px;
+    font-weight: 700;
+}
