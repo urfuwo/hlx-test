@@ -36,6 +36,7 @@ async function _transformDOM(document, url, html, params) {
     'footer',
     'component',
     'div.social',
+    'ul.social-share-list',
     'ds-contextual-navigation',
     'div.breadcrumbs',
     'div.cmp-container',
