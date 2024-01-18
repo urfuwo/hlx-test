@@ -10,13 +10,14 @@ import {
   loadFooter,
   loadHeader,
   sampleRUM,
+  toClassName,
   waitForLCP,
 } from './aem.js';
 
 const LCP_BLOCKS = ['hero']; // add your LCP blocks to the list
 const TEMPLATE_LIST = {
   blog: 'article',
-  feature: 'article',
+  'feature-article': 'article',
   newsbyte: 'article',
 };
 
@@ -32,30 +33,6 @@ async function loadFonts() {
   }
 }
 
-/**
- * Decorates the main element.
- * @param {Element} main The main element
- */
-// eslint-disable-next-line import/prefer-default-export
-export function decorateMain(main) {
-  // hopefully forward compatible button decoration
-  decorateButtons(main);
-  decorateIcons(main);
-  decorateSections(main);
-  decorateBlocks(main);
-}
-
-/**
- * Sanitizes a string for use as class name.
- * @param {string} name The unsanitized string
- * @returns {string} The class name
- */
-export function toClassName(name) {
-  return typeof name === 'string'
-    ? name.toLowerCase().replace(/[^0-9a-z]/gi, '-').replace(/-+/g, '-').replace(/^-|-$/g, '')
-    : '';
-}
-
 async function decorateTemplates(main) {
   try {
     const template = toClassName(getMetadata('template'));
@@ -63,36 +40,56 @@ async function decorateTemplates(main) {
     if (templates.includes(template)) {
       const templateName = TEMPLATE_LIST[template];
       const mod = await import(`../templates/${templateName}/${templateName}.js`);
-      loadCSS(`${window.hlx.codeBasePath}/templates/${templateName}/${templateName}.css`);
       if (mod.default) {
         await mod.default(main);
       }
     }
   } catch (error) {
     // eslint-disable-next-line no-console
-    console.error('Auto Blocking failed', error);
+    console.error('Template decoration failed', error);
   }
+}
+
+async function loadTemplateStyles() {
+  try {
+    const template = toClassName(getMetadata('template'));
+    const templates = Object.keys(TEMPLATE_LIST);
+    if (templates.includes(template)) {
+      const templateName = TEMPLATE_LIST[template];
+      loadCSS(`${window.hlx.codeBasePath}/templates/${templateName}/${templateName}.css`);
+    }
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('Template styles failed to load', error);
+  }
+}
+
+/**
+ * Decorates the main element.
+ * @param {Element} main The main element
+ */
+// eslint-disable-next-line import/prefer-default-export
+export async function decorateMain(main) {
+  // hopefully forward compatible button decoration
+  decorateButtons(main);
+  decorateIcons(main);
+  await decorateTemplates(main);
+  decorateSections(main);
+  decorateBlocks(main);
 }
 
 async function loadSAPTheme() {
   try {
     const sapTheme = getMetadata('saptheme', document) || 'sap_glow';
     if (sapTheme) {
-      const head = document.querySelector('head');
-      // <link rel="stylesheet" type="text/css" href="/themes/sap_glow/css_variables.css">
-      const designTokenLink = document.createElement('link');
-      designTokenLink.setAttribute('rel', 'stylesheet');
-      designTokenLink.setAttribute('type', 'text/css');
-      const themeLink = `/themes/${sapTheme}/css_variables.css`;
-      designTokenLink.setAttribute('href', themeLink);
-      head.append(designTokenLink);
+      loadCSS(`/themes/${sapTheme}/css_variables.css`);
 
       // <script data-ui5-config type="application/json">{"theme": "sap_glow"}</script>
-      const ui5ThemeScript = document.createElement('script');
-      ui5ThemeScript.setAttribute('data-ui5-config', '');
-      ui5ThemeScript.setAttribute('type', 'application/json');
-      ui5ThemeScript.textContent = `{"theme": "${sapTheme}"}`;
-      head.append(ui5ThemeScript);
+      // const ui5ThemeScript = document.createElement('script');
+      // ui5ThemeScript.setAttribute('data-ui5-config', '');
+      // ui5ThemeScript.setAttribute('type', 'application/json');
+      // ui5ThemeScript.textContent = `{"theme": "${sapTheme}"}`;
+      // head.append(ui5ThemeScript);
     }
   } catch (e) {
     // eslint-disable-next-line no-console
@@ -109,8 +106,7 @@ async function loadEager(doc) {
   decorateTemplateAndTheme();
   const main = doc.querySelector('main');
   if (main) {
-    decorateMain(main);
-    await decorateTemplates(main);
+    await decorateMain(main);
     loadSAPTheme();
     document.body.classList.add('appear');
     await waitForLCP(LCP_BLOCKS);
@@ -142,6 +138,7 @@ async function loadLazy(doc) {
   loadFooter(doc.querySelector('footer'));
 
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
+  loadTemplateStyles();
   loadFonts();
 
   sampleRUM('lazy');

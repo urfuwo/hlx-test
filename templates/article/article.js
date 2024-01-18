@@ -1,7 +1,5 @@
 import {
   buildBlock,
-  decorateBlock,
-  decorateSections,
   getMetadata,
 } from '../../scripts/aem.js';
 
@@ -23,12 +21,7 @@ export default function decorateMain(main) {
   highlightBlogFirstParagraph(main);
 
   const div = document.createElement('div');
-  div.classList.add('section', 'article-footer');
-
   const readMore = buildBlock('related-articles', { elems: [] });
   div.append(readMore);
   main.append(div);
-
-  decorateSections(main);
-  decorateBlock(readMore);
 }

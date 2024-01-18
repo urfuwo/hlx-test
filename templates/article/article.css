@@ -3,13 +3,13 @@
  */
 
 /* Blog paragraph spacing */
-.blog p {
+.blog p, .feature-article p {
     margin-top: 18px;
     margin-bottom: 18px;
 }
 
 /* Highlight first paragraph of blog pages using increased font size */
-.blog p.blog--highlight {
+.blog p.blog--highlight, .feature-article p.blog--highlight {
     font-size: var(--udexTypographyBodyXLFontSize);
 }
 
@@ -54,8 +54,10 @@
 /* Desktop view */
 @media (min-width: 900px) {
     /* Blog: desktop view: text and cta-banner width constraint */
-    .blog div.default-content-wrapper p,
-    .blog div.blog-cta-banner-wrapper {
+    .blog div.default-content-wrapper,
+    .blog div.blog-cta-banner-wrapper,
+    .feature-article div.default-content-wrapper,
+    .feature-article div.blog-cta-banner-wrapper {
         margin-left: auto;
         margin-right: auto;
         padding-left: 180px;
