@@ -2,6 +2,7 @@ import { getMetadata } from '../../scripts/aem.js';
 
 export default async function decorate(block) {
   if (block.classList.contains('author')) {
+    // if the block is empty, add a title
     if (!block.querySelector('h1')) {
       const author = getMetadata('author');
       if (author) {
