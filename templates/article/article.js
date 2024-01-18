@@ -10,9 +10,9 @@ import {
  */
 function highlightBlogFirstParagraph(main) {
   if (getMetadata('template') === 'blog') {
-    const firstPara = main.querySelector('p');
-    if (firstPara) {
-      firstPara.classList.add('blog--highlight');
+    const firstParagraph = main.querySelector('.hero + p');
+    if (firstParagraph) {
+      firstParagraph.classList.add('blog--highlight');
     }
   }
 }
