@@ -1,6 +1,6 @@
 import { createOptimizedPicture, getMetadata, toClassName } from '../../scripts/aem.js';
 import {
-  ul, li, a, img, span,
+  ul, li, a, span,
 } from '../../scripts/dom-builder.js';
 import ffetch from '../../scripts/ffetch.js';
 
