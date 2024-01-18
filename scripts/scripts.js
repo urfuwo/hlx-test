@@ -85,11 +85,12 @@ async function loadSAPTheme() {
       loadCSS(`/themes/${sapTheme}/css_variables.css`);
 
       // <script data-ui5-config type="application/json">{"theme": "sap_glow"}</script>
-      // const ui5ThemeScript = document.createElement('script');
-      // ui5ThemeScript.setAttribute('data-ui5-config', '');
-      // ui5ThemeScript.setAttribute('type', 'application/json');
-      // ui5ThemeScript.textContent = `{"theme": "${sapTheme}"}`;
-      // head.append(ui5ThemeScript);
+      const head = document.querySelector('head');
+      const ui5ThemeScript = document.createElement('script');
+      ui5ThemeScript.setAttribute('data-ui5-config', '');
+      ui5ThemeScript.setAttribute('type', 'application/json');
+      ui5ThemeScript.textContent = `{"theme": "${sapTheme}"}`;
+      head.append(ui5ThemeScript);
     }
   } catch (e) {
     // eslint-disable-next-line no-console
