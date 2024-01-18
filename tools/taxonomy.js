@@ -17,9 +17,8 @@ async function main() {
       }
       if (element.topics) {
         element.topics
-          .substring(1, element.topics.length - 1)
           .split(',')
-          .forEach((topic) => topics.add(topic.substring(1, topic.length - 1)));
+          .forEach((topic) => topics.add(topic.trim()));
       }
     });
     // eslint-disable-next-line no-console
