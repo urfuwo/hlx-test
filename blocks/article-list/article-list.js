@@ -1,6 +1,6 @@
-import { getMetadata } from '../../scripts/aem.js';
+import { createOptimizedPicture, getMetadata, toClassName } from '../../scripts/aem.js';
 import {
-  ul, div, a, img, span,
+  ul, li, a, span,
 } from '../../scripts/dom-builder.js';
 import ffetch from '../../scripts/ffetch.js';
 
@@ -16,15 +16,21 @@ const ARTICLE_FORMATTER = new Intl.DateTimeFormat('default', {
 function renderCard(card) {
   const formattedDate = ARTICLE_FORMATTER.format(new Date(card.publicationDate * 1000));
   const cardclass = `card${card['hot story'] ? ' hot-story' : ''}`;
-  const cardElement = div(
+  const cardAuthorUrl = `/author/${toClassName(card.author).replace('-', '')}`; // TODO look up author URL from index
+  const cardElement = li(
     { class: cardclass },
     a(
       { href: card.path },
-      img({ src: card.image, alt: card.title }),
+      createOptimizedPicture(card.image, card.tile, false, [{ width: '750' }]),
       span({ class: 'template' }, card.template),
       span({ class: 'title' }, card.title),
     ),
-    a({ href: '#' }, span({ class: 'author' }, `By ${card.author}`)), // TODO: link to author page
+    span(
+      { class: 'author' },
+      'By ',
+      a({ href: cardAuthorUrl }, span(`${card.author}`)),
+    ),
+
     span({ class: 'date' }, formattedDate),
   );
   return cardElement;
@@ -39,6 +45,18 @@ function determineContextFilter() {
   // for authors, filter by author
   if (window.location.pathname.startsWith('/author/') > 0) {
     return (entry) => entry.author === getMetadata('author');
+  }
+
+  // for topics get filter from URL
+  if (window.location.pathname.startsWith('/topics/') > 0) {
+    const topic = window.location.pathname.split('/')[2];
+    return (entry) => toClassName(entry.topics).includes(topic);
+  }
+
+  // for tags get filter from URL
+  if (window.location.pathname.startsWith('/tags/') > 0) {
+    const tag = window.location.pathname.split('/')[2];
+    return (entry) => JSON.parse(entry.tags).map((t) => toClassName(t)).includes(tag);
   }
 
   // for everything else, filter by category
@@ -63,13 +81,11 @@ export default async function listArticles(block, config = { filter: null, maxEn
 
   articles = await articles.all();
 
-  const cardList = ul({ class: 'card-list' });
+  const cardList = ul({ class: 'article-list' });
 
   articles.forEach((article) => {
     const card = renderCard(article);
     cardList.append(card);
   });
-
-  block.textContent = '';
-  block.append(cardList);
+  block.replaceWith(cardList);
 }
