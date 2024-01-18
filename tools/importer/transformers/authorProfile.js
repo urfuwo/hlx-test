@@ -13,7 +13,9 @@ const authorProfile = (main, document, html) => {
     } else {
       const h1 = document.createElement('h1');
       h1.innerHTML = document._AUTHOR_H1.innerHTML.replace(/<br>(.*)/g, '<b>$1</b>');
-      document.querySelector('body').prepend(h1);
+      const block = [['Title Banner (author)'], [h1]];
+      const table = WebImporter.DOMUtils.createTable(block, document);
+      document.querySelector('body').prepend(table);
     }
 
     // section with article cards
