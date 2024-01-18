@@ -13,7 +13,7 @@
           "name": "AI"
         },
         {
-          "path": "tag/artificial_intelligence",
+          "path": "tag/artificial-intelligence",
           "name": "Artificial Intelligence"
         },
         {
@@ -29,7 +29,7 @@
           "name": "Retail"
         },
         {
-          "path": "tag/sap_emarsys_customer_engagement",
+          "path": "tag/sap-emarsys-customer-engagement",
           "name": "SAP Emarsys Customer Engagement"
         },
         {
@@ -41,7 +41,7 @@
           "name": "ERP"
         },
         {
-          "path": "topic/services_and_support",
+          "path": "topic/services-and-support",
           "name": "Services and Support"
         },
         {

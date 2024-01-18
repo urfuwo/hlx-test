@@ -13,7 +13,7 @@
           "name": "newsbyte"
         },
         {
-          "path": "type/feature_article",
+          "path": "type/feature-article",
           "name": "feature-article"
         },
         {
@@ -21,7 +21,7 @@
           "name": "perspective"
         },
         {
-          "path": "type/press_release",
+          "path": "type/press-release",
           "name": "press-release"
         },
         {
@@ -29,7 +29,7 @@
           "name": "statement"
         },
         {
-          "path": "type/support_update",
+          "path": "type/support-update",
           "name": "support-update"
         },
         {
@@ -37,11 +37,11 @@
           "name": "AI"
         },
         {
-          "path": "tag/artificial_intelligence",
+          "path": "tag/artificial-intelligence",
           "name": "Artificial Intelligence"
         },
         {
-          "path": "tag/generative_ai",
+          "path": "tag/generative-ai",
           "name": "Generative AI"
         },
         {
@@ -57,31 +57,31 @@
           "name": "Retail"
         },
         {
-          "path": "tag/sap_emarsys_customer_engagement",
+          "path": "tag/sap-emarsys-customer-engagement",
           "name": "SAP Emarsys Customer Engagement"
         },
         {
-          "path": "tag/sap_order_management",
+          "path": "tag/sap-order-management",
           "name": "SAP Order Management"
         },
         {
-          "path": "tag/sap_predictive_demand_planning",
+          "path": "tag/sap-predictive-demand-planning",
           "name": "SAP Predictive Demand Planning"
         },
         {
-          "path": "tag/sap_predictive_replenishment",
+          "path": "tag/sap-predictive-replenishment",
           "name": "SAP Predictive Replenishment"
         },
         {
-          "path": "tag/consumer_products",
+          "path": "tag/consumer-products",
           "name": "Consumer Products"
         },
         {
-          "path": "tag/sap_commerce_cloud",
+          "path": "tag/sap-commerce-cloud",
           "name": "SAP Commerce Cloud"
         },
         {
-          "path": "tag/sap_partner",
+          "path": "tag/sap-partner",
           "name": "SAP Partner"
         },
         {
@@ -89,47 +89,47 @@
           "name": "Joule"
         },
         {
-          "path": "tag/catena_x",
+          "path": "tag/catena-x",
           "name": "Catena-X"
         },
         {
-          "path": "tag/design_to_operate",
+          "path": "tag/design-to-operate",
           "name": "Design-to-Operate"
         },
         {
-          "path": "tag/sap_business_network",
+          "path": "tag/sap-business-network",
           "name": "SAP Business Network"
         },
         {
-          "path": "tag/sap_digital_manufacturing",
+          "path": "tag/sap-digital-manufacturing",
           "name": "SAP Digital Manufacturing"
         },
         {
-          "path": "tag/sap_extended_warehouse_management",
+          "path": "tag/sap-extended-warehouse-management",
           "name": "SAP Extended Warehouse Management"
         },
         {
-          "path": "tag/sap_integrated_business_planning",
+          "path": "tag/sap-integrated-business-planning",
           "name": "SAP Integrated Business Planning"
         },
         {
-          "path": "tag/sap_integrated_business_planning_for_supply_chain",
+          "path": "tag/sap-integrated-business-planning-for-supply-chain",
           "name": "SAP Integrated Business Planning for Supply Chain"
         },
         {
-          "path": "tag/ai_ethics",
+          "path": "tag/ai-ethics",
           "name": "AI Ethics"
         },
         {
-          "path": "tag/horizons_by_sap",
+          "path": "tag/horizons-by-sap",
           "name": "Horizons by SAP"
         },
         {
-          "path": "tag/intelligent_enterprise",
+          "path": "tag/intelligent-enterprise",
           "name": "Intelligent Enterprise"
         },
         {
-          "path": "tag/intelligent_technologies",
+          "path": "tag/intelligent-technologies",
           "name": "Intelligent Technologies"
         },
         {
@@ -141,7 +141,7 @@
           "name": "Procurement"
         },
         {
-          "path": "tag/sap_ariba",
+          "path": "tag/sap-ariba",
           "name": "SAP Ariba"
         },
         {
@@ -157,11 +157,11 @@
           "name": "Cybersecurity"
         },
         {
-          "path": "tag/the_take",
+          "path": "tag/the-take",
           "name": "The Take"
         },
         {
-          "path": "tag/digital_transformation",
+          "path": "tag/digital-transformation",
           "name": "Digital Transformation"
         },
         {
@@ -169,11 +169,11 @@
           "name": "Gartner"
         },
         {
-          "path": "tag/industry_4_0",
+          "path": "tag/industry-4-0",
           "name": "Industry 4.0"
         },
         {
-          "path": "tag/machine_learning",
+          "path": "tag/machine-learning",
           "name": "Machine Learning"
         },
         {
@@ -181,7 +181,7 @@
           "name": "Manufacturing"
         },
         {
-          "path": "tag/sap_digital_manufacturing_cloud",
+          "path": "tag/sap-digital-manufacturing-cloud",
           "name": "SAP Digital Manufacturing Cloud"
         },
         {
@@ -197,7 +197,7 @@
           "name": "Finance"
         },
         {
-          "path": "tag/financial_services",
+          "path": "tag/financial-services",
           "name": "Financial Services"
         },
         {
@@ -209,11 +209,11 @@
           "name": "Digitalization"
         },
         {
-          "path": "tag/hannover_messe",
+          "path": "tag/hannover-messe",
           "name": "Hannover Messe"
         },
         {
-          "path": "tag/supply_chain_management",
+          "path": "tag/supply-chain-management",
           "name": "Supply Chain Management"
         },
         {
@@ -225,39 +225,39 @@
           "name": "Developers"
         },
         {
-          "path": "tag/sap_business_technology_platform",
+          "path": "tag/sap-business-technology-platform",
           "name": "SAP Business Technology Platform"
         },
         {
-          "path": "tag/sap_cloud_platform",
+          "path": "tag/sap-cloud-platform",
           "name": "SAP Cloud Platform"
         },
         {
-          "path": "tag/sap_s_4hana",
+          "path": "tag/sap-s-4hana",
           "name": "SAP S/4HANA"
         },
         {
-          "path": "tag/sap_teched",
+          "path": "tag/sap-teched",
           "name": "SAP TechEd"
         },
         {
-          "path": "tag/ariba_network",
+          "path": "tag/ariba-network",
           "name": "Ariba Network"
         },
         {
-          "path": "tag/intelligent_spend",
+          "path": "tag/intelligent-spend",
           "name": "Intelligent Spend"
         },
         {
-          "path": "tag/sap_asset_intelligence_network",
+          "path": "tag/sap-asset-intelligence-network",
           "name": "SAP Asset Intelligence Network"
         },
         {
-          "path": "tag/sap_logistics_business_network",
+          "path": "tag/sap-logistics-business-network",
           "name": "SAP Logistics Business Network"
         },
         {
-          "path": "tag/sap_sapphire",
+          "path": "tag/sap-sapphire",
           "name": "SAP Sapphire"
         },
         {
@@ -265,23 +265,23 @@
           "name": "Banking"
         },
         {
-          "path": "tag/sap_extreme_series",
+          "path": "tag/sap-extreme-series",
           "name": "SAP Extreme Series"
         },
         {
-          "path": "tag/business_process_intelligence",
+          "path": "tag/business-process-intelligence",
           "name": "Business Process Intelligence"
         },
         {
-          "path": "tag/sap_signavio",
+          "path": "tag/sap-signavio",
           "name": "SAP Signavio"
         },
         {
-          "path": "tag/covid_19",
+          "path": "tag/covid-19",
           "name": "COVID-19"
         },
         {
-          "path": "tag/customer_solution_support___innovation",
+          "path": "tag/customer-solution-support---innovation",
           "name": "Customer Solution Support & Innovation"
         },
         {
@@ -289,7 +289,7 @@
           "name": "Innovation"
         },
         {
-          "path": "tag/life_sciences",
+          "path": "tag/life-sciences",
           "name": "Life Sciences"
         },
         {
@@ -297,39 +297,39 @@
           "name": "Pharmaceuticals"
         },
         {
-          "path": "tag/research___development",
+          "path": "tag/research---development",
           "name": "Research & Development"
         },
         {
-          "path": "tag/sap_advanced_track_and_trace_for_pharmaceuticals",
+          "path": "tag/sap-advanced-track-and-trace-for-pharmaceuticals",
           "name": "SAP Advanced Track and Trace for Pharmaceuticals"
         },
         {
-          "path": "tag/sap_btp",
+          "path": "tag/sap-btp",
           "name": "SAP BTP"
         },
         {
-          "path": "tag/sap_information_collaboration_hub_for_life_sciences",
+          "path": "tag/sap-information-collaboration-hub-for-life-sciences",
           "name": "SAP Information Collaboration Hub for Life Sciences"
         },
         {
-          "path": "tag/sap_services_and_support",
+          "path": "tag/sap-services-and-support",
           "name": "SAP Services and Support"
         },
         {
-          "path": "tag/supply_chains",
+          "path": "tag/supply-chains",
           "name": "Supply Chains"
         },
         {
-          "path": "tag/customer_experience",
+          "path": "tag/customer-experience",
           "name": "Customer Experience"
         },
         {
-          "path": "tag/data_management",
+          "path": "tag/data-management",
           "name": "Data Management"
         },
         {
-          "path": "tag/digital_supply_chain",
+          "path": "tag/digital-supply-chain",
           "name": "Digital Supply Chain"
         },
         {
@@ -337,19 +337,19 @@
           "name": "ERP"
         },
         {
-          "path": "tag/experience_economy",
+          "path": "tag/experience-economy",
           "name": "Experience Economy"
         },
         {
-          "path": "tag/experience_management",
+          "path": "tag/experience-management",
           "name": "Experience Management"
         },
         {
-          "path": "tag/intelligent_erp",
+          "path": "tag/intelligent-erp",
           "name": "Intelligent ERP"
         },
         {
-          "path": "tag/intelligent_spend_management",
+          "path": "tag/intelligent-spend-management",
           "name": "Intelligent Spend Management"
         },
         {
@@ -361,19 +361,19 @@
           "name": "Forrester"
         },
         {
-          "path": "tag/sap_data_intelligence",
+          "path": "tag/sap-data-intelligence",
           "name": "SAP Data Intelligence"
         },
         {
-          "path": "tag/sap_hana",
+          "path": "tag/sap-hana",
           "name": "SAP HANA"
         },
         {
-          "path": "tag/sap_anz",
+          "path": "tag/sap-anz",
           "name": "SAP ANZ"
         },
         {
-          "path": "tag/sap_enterprise_support",
+          "path": "tag/sap-enterprise-support",
           "name": "SAP Enterprise Support"
         },
         {
@@ -381,27 +381,27 @@
           "name": "Mobile"
         },
         {
-          "path": "tag/mobile_experience",
+          "path": "tag/mobile-experience",
           "name": "Mobile Experience"
         },
         {
-          "path": "tag/sap_mobile_start",
+          "path": "tag/sap-mobile-start",
           "name": "SAP Mobile Start"
         },
         {
-          "path": "tag/user_experience",
+          "path": "tag/user-experience",
           "name": "User Experience"
         },
         {
-          "path": "tag/net_zero",
+          "path": "tag/net-zero",
           "name": "Net-Zero"
         },
         {
-          "path": "tag/sap_cloud_for_sustainable_enterprises",
+          "path": "tag/sap-cloud-for-sustainable-enterprises",
           "name": "SAP Cloud for Sustainable Enterprises"
         },
         {
-          "path": "tag/chasing_zero",
+          "path": "tag/chasing-zero",
           "name": "Chasing Zero"
         },
         {
@@ -409,19 +409,19 @@
           "name": "Economics"
         },
         {
-          "path": "tag/sap_product_footprint_management",
+          "path": "tag/sap-product-footprint-management",
           "name": "SAP Product Footprint Management"
         },
         {
-          "path": "tag/sap_bw_4hana",
+          "path": "tag/sap-bw-4hana",
           "name": "SAP BW/4HANA"
         },
         {
-          "path": "tag/sap_employee_profile",
+          "path": "tag/sap-employee-profile",
           "name": "SAP Employee Profile"
         },
         {
-          "path": "tag/learning_for_life",
+          "path": "tag/learning-for-life",
           "name": "Learning for Life"
         },
         {
@@ -429,19 +429,19 @@
           "name": "MOOCs"
         },
         {
-          "path": "tag/sap_enable_now",
+          "path": "tag/sap-enable-now",
           "name": "SAP Enable Now"
         },
         {
-          "path": "tag/sap_help_portal",
+          "path": "tag/sap-help-portal",
           "name": "SAP Help Portal"
         },
         {
-          "path": "tag/sap_learning_hub",
+          "path": "tag/sap-learning-hub",
           "name": "SAP Learning Hub"
         },
         {
-          "path": "tag/sap_training_and_adoption",
+          "path": "tag/sap-training-and-adoption",
           "name": "SAP Training and Adoption"
         },
         {
@@ -449,7 +449,7 @@
           "name": "Cloud"
         },
         {
-          "path": "tag/sap_ecosystem",
+          "path": "tag/sap-ecosystem",
           "name": "SAP Ecosystem"
         },
         {
@@ -457,19 +457,19 @@
           "name": "Digitization"
         },
         {
-          "path": "tag/quote_to_cash",
+          "path": "tag/quote-to-cash",
           "name": "Quote-to-Cash"
         },
         {
-          "path": "tag/sap_billing_and_revenue_innovation_management",
+          "path": "tag/sap-billing-and-revenue-innovation-management",
           "name": "SAP Billing and Revenue Innovation Management"
         },
         {
-          "path": "tag/sap_cpq",
+          "path": "tag/sap-cpq",
           "name": "SAP CPQ"
         },
         {
-          "path": "tag/sap_s_4hana_cloud",
+          "path": "tag/sap-s-4hana-cloud",
           "name": "SAP S/4HANA Cloud"
         },
         {
@@ -489,11 +489,11 @@
           "name": "Analytics"
         },
         {
-          "path": "tag/database_and_data_management",
+          "path": "tag/database-and-data-management",
           "name": "Database and Data Management"
         },
         {
-          "path": "tag/sap_data_warehouse_cloud",
+          "path": "tag/sap-data-warehouse-cloud",
           "name": "SAP Data Warehouse Cloud"
         },
         {
@@ -509,23 +509,23 @@
           "name": "GreenToken"
         },
         {
-          "path": "tag/rise_with_sap",
+          "path": "tag/rise-with-sap",
           "name": "RISE with SAP"
         },
         {
-          "path": "tag/sap_supply_chain_control_tower",
+          "path": "tag/sap-supply-chain-control-tower",
           "name": "SAP Supply Chain Control Tower"
         },
         {
-          "path": "tag/sap_sustainability_control_tower",
+          "path": "tag/sap-sustainability-control-tower",
           "name": "SAP Sustainability Control Tower"
         },
         {
-          "path": "tag/recurring_revenue_models",
+          "path": "tag/recurring-revenue-models",
           "name": "Recurring Revenue Models"
         },
         {
-          "path": "tag/subscription_billing",
+          "path": "tag/subscription-billing",
           "name": "Subscription Billing"
         },
         {
@@ -533,19 +533,19 @@
           "name": "XaaS"
         },
         {
-          "path": "tag/sap_successfactors_employee_central",
+          "path": "tag/sap-successfactors-employee-central",
           "name": "SAP SuccessFactors Employee Central"
         },
         {
-          "path": "tag/sap_successfactors_learning",
+          "path": "tag/sap-successfactors-learning",
           "name": "SAP SuccessFactors Learning"
         },
         {
-          "path": "tag/intelligent_spend_and_business_network",
+          "path": "tag/intelligent-spend-and-business-network",
           "name": "Intelligent Spend and Business Network"
         },
         {
-          "path": "tag/spend_management",
+          "path": "tag/spend-management",
           "name": "Spend Management"
         },
         {
@@ -553,7 +553,7 @@
           "name": "OpenText"
         },
         {
-          "path": "tag/future_of_work",
+          "path": "tag/future-of-work",
           "name": "Future of Work"
         },
         {
@@ -561,11 +561,11 @@
           "name": "HR"
         },
         {
-          "path": "tag/human_experience_management",
+          "path": "tag/human-experience-management",
           "name": "Human Experience Management"
         },
         {
-          "path": "tag/human_resources",
+          "path": "tag/human-resources",
           "name": "Human Resources"
         },
         {
@@ -577,23 +577,23 @@
           "name": "Recruiting"
         },
         {
-          "path": "tag/talent_acquisition",
+          "path": "tag/talent-acquisition",
           "name": "Talent Acquisition"
         },
         {
-          "path": "tag/sap_concur",
+          "path": "tag/sap-concur",
           "name": "SAP Concur"
         },
         {
-          "path": "tag/sap_fieldglass",
+          "path": "tag/sap-fieldglass",
           "name": "SAP Fieldglass"
         },
         {
-          "path": "tag/sap_spend_connect_live",
+          "path": "tag/sap-spend-connect-live",
           "name": "SAP Spend Connect Live"
         },
         {
-          "path": "tag/sap_innovation_center_network",
+          "path": "tag/sap-innovation-center-network",
           "name": "SAP Innovation Center Network"
         },
         {
@@ -601,31 +601,31 @@
           "name": "Chemicals"
         },
         {
-          "path": "tag/sap_advisory_services",
+          "path": "tag/sap-advisory-services",
           "name": "SAP Advisory Services"
         },
         {
-          "path": "tag/sap_analytics_cloud",
+          "path": "tag/sap-analytics-cloud",
           "name": "SAP Analytics Cloud"
         },
         {
-          "path": "tag/sap_hana_cloud",
+          "path": "tag/sap-hana-cloud",
           "name": "SAP HANA Cloud"
         },
         {
-          "path": "tag/sapphire_now_converge",
+          "path": "tag/sapphire-now-converge",
           "name": "SAPPHIRE NOW Converge"
         },
         {
-          "path": "tag/sap_partner_excellence_awards",
+          "path": "tag/sap-partner-excellence-awards",
           "name": "SAP Partner Excellence Awards"
         },
         {
-          "path": "tag/sap_io_foundries",
+          "path": "tag/sap-io-foundries",
           "name": "SAP.iO Foundries"
         },
         {
-          "path": "tag/sap_io_foundry_munich",
+          "path": "tag/sap-io-foundry-munich",
           "name": "SAP.iO Foundry Munich"
         },
         {
@@ -633,31 +633,31 @@
           "name": "Security"
         },
         {
-          "path": "tag/voice_technology",
+          "path": "tag/voice-technology",
           "name": "Voice Technology"
         },
         {
-          "path": "tag/sap_ariba_live",
+          "path": "tag/sap-ariba-live",
           "name": "SAP Ariba Live"
         },
         {
-          "path": "tag/sap_erp",
+          "path": "tag/sap-erp",
           "name": "SAP ERP"
         },
         {
-          "path": "tag/supply_chain",
+          "path": "tag/supply-chain",
           "name": "Supply Chain"
         },
         {
-          "path": "tag/sap_solution_extensions",
+          "path": "tag/sap-solution-extensions",
           "name": "SAP Solution Extensions"
         },
         {
-          "path": "tag/sap_endorsed_apps",
+          "path": "tag/sap-endorsed-apps",
           "name": "SAP Endorsed Apps"
         },
         {
-          "path": "tag/sap_store",
+          "path": "tag/sap-store",
           "name": "SAP Store"
         },
         {
@@ -665,23 +665,23 @@
           "name": "IBM"
         },
         {
-          "path": "tag/industry_cloud",
+          "path": "tag/industry-cloud",
           "name": "Industry Cloud"
         },
         {
-          "path": "tag/sap_model_company",
+          "path": "tag/sap-model-company",
           "name": "SAP Model Company"
         },
         {
-          "path": "tag/climate_21",
+          "path": "tag/climate-21",
           "name": "Climate 21"
         },
         {
-          "path": "tag/sapphire_now_vision",
+          "path": "tag/sapphire-now-vision",
           "name": "SAPPHIRE NOW Vision"
         },
         {
-          "path": "tag/digital_education",
+          "path": "tag/digital-education",
           "name": "Digital Education"
         },
         {
@@ -689,7 +689,7 @@
           "name": "Education"
         },
         {
-          "path": "tag/higher_education_and_research",
+          "path": "tag/higher-education-and-research",
           "name": "Higher Education and Research"
         },
         {
@@ -697,39 +697,39 @@
           "name": "Mentoring"
         },
         {
-          "path": "tag/sap_university_alliances",
+          "path": "tag/sap-university-alliances",
           "name": "SAP University Alliances"
         },
         {
-          "path": "tag/master_data_management",
+          "path": "tag/master-data-management",
           "name": "Master Data Management"
         },
         {
-          "path": "tag/sap_master_data_governance",
+          "path": "tag/sap-master-data-governance",
           "name": "SAP Master Data Governance"
         },
         {
-          "path": "tag/sap_global_partner_summit",
+          "path": "tag/sap-global-partner-summit",
           "name": "SAP Global Partner Summit"
         },
         {
-          "path": "tag/sap_intelligent_robotic_process_automation",
+          "path": "tag/sap-intelligent-robotic-process-automation",
           "name": "SAP Intelligent Robotic Process Automation"
         },
         {
-          "path": "tag/sap_io",
+          "path": "tag/sap-io",
           "name": "SAP.iO"
         },
         {
-          "path": "tag/e_commerce",
+          "path": "tag/e-commerce",
           "name": "E-Commerce"
         },
         {
-          "path": "tag/sap_customer_experience",
+          "path": "tag/sap-customer-experience",
           "name": "SAP Customer Experience"
         },
         {
-          "path": "tag/sap_cx",
+          "path": "tag/sap-cx",
           "name": "SAP CX"
         },
         {
@@ -737,7 +737,7 @@
           "name": "Qualtrics"
         },
         {
-          "path": "tag/sap_ariba_discovery",
+          "path": "tag/sap-ariba-discovery",
           "name": "SAP Ariba Discovery"
         },
         {
@@ -749,7 +749,7 @@
           "name": "DSAG"
         },
         {
-          "path": "tag/sap_c_4hana",
+          "path": "tag/sap-c-4hana",
           "name": "SAP C/4HANA"
         },
         {
@@ -757,51 +757,51 @@
           "name": "HCM"
         },
         {
-          "path": "tag/sap_enterprise_adoption",
+          "path": "tag/sap-enterprise-adoption",
           "name": "SAP Enterprise Adoption"
         },
         {
-          "path": "tag/idc_marketscape",
+          "path": "tag/idc-marketscape",
           "name": "IDC Marketscape"
         },
         {
-          "path": "tag/sap_learning",
+          "path": "tag/sap-learning",
           "name": "SAP Learning"
         },
         {
-          "path": "tag/aerospace___defense",
+          "path": "tag/aerospace---defense",
           "name": "Aerospace & Defense"
         },
         {
-          "path": "tag/discrete_industries",
+          "path": "tag/discrete-industries",
           "name": "Discrete Industries"
         },
         {
-          "path": "tag/sap_ns2",
+          "path": "tag/sap-ns2",
           "name": "SAP NS2"
         },
         {
-          "path": "tag/service_industries",
+          "path": "tag/service-industries",
           "name": "Service Industries"
         },
         {
-          "path": "tag/travel_and_transportation",
+          "path": "tag/travel-and-transportation",
           "name": "Travel and Transportation"
         },
         {
-          "path": "tag/in_focus",
+          "path": "tag/in-focus",
           "name": "In Focus"
         },
         {
-          "path": "tag/magic_quadrant",
+          "path": "tag/magic-quadrant",
           "name": "Magic Quadrant"
         },
         {
-          "path": "tag/digital_skills",
+          "path": "tag/digital-skills",
           "name": "Digital Skills"
         },
         {
-          "path": "tag/sap_certification",
+          "path": "tag/sap-certification",
           "name": "SAP Certification"
         },
         {
@@ -813,7 +813,7 @@
           "name": "Commerce"
         },
         {
-          "path": "tag/consumer_industries",
+          "path": "tag/consumer-industries",
           "name": "Consumer Industries"
         },
         {
@@ -821,23 +821,23 @@
           "name": "CRM"
         },
         {
-          "path": "tag/business_network",
+          "path": "tag/business-network",
           "name": "Business Network"
         },
         {
-          "path": "tag/industrial_machinery_and_components",
+          "path": "tag/industrial-machinery-and-components",
           "name": "Industrial Machinery and Components"
         },
         {
-          "path": "tag/customer_story",
+          "path": "tag/customer-story",
           "name": "Customer Story"
         },
         {
-          "path": "tag/sap_conversational_ai",
+          "path": "tag/sap-conversational-ai",
           "name": "SAP Conversational AI"
         },
         {
-          "path": "tag/sap_work_zone_for_hr",
+          "path": "tag/sap-work-zone-for-hr",
           "name": "SAP Work Zone for HR"
         },
         {
@@ -845,11 +845,11 @@
           "name": "IIoT"
         },
         {
-          "path": "tag/industry_4_now",
+          "path": "tag/industry-4-now",
           "name": "Industry 4.Now"
         },
         {
-          "path": "tag/wholesale_distribution",
+          "path": "tag/wholesale-distribution",
           "name": "Wholesale Distribution"
         },
         {
@@ -857,19 +857,19 @@
           "name": "Signavio"
         },
         {
-          "path": "tag/forrester_wave",
+          "path": "tag/forrester-wave",
           "name": "Forrester Wave"
         },
         {
-          "path": "tag/sap_data_intelligence_cloud",
+          "path": "tag/sap-data-intelligence-cloud",
           "name": "SAP Data Intelligence Cloud"
         },
         {
-          "path": "tag/sap_apphaus",
+          "path": "tag/sap-apphaus",
           "name": "SAP AppHaus"
         },
         {
-          "path": "tag/sap_apphaus_network",
+          "path": "tag/sap-apphaus-network",
           "name": "SAP AppHaus Network"
         },
         {
@@ -881,23 +881,23 @@
           "name": "Startups"
         },
         {
-          "path": "tag/smart_cities",
+          "path": "tag/smart-cities",
           "name": "Smart Cities"
         },
         {
-          "path": "tag/next_generation_partnering",
+          "path": "tag/next-generation-partnering",
           "name": "Next-Generation Partnering"
         },
         {
-          "path": "tag/sap_partneredge",
+          "path": "tag/sap-partneredge",
           "name": "SAP PartnerEdge"
         },
         {
-          "path": "tag/sap_partners",
+          "path": "tag/sap-partners",
           "name": "SAP Partners"
         },
         {
-          "path": "tag/sap_qualified_partner_packaged_solutions",
+          "path": "tag/sap-qualified-partner-packaged-solutions",
           "name": "SAP-Qualified Partner-Packaged Solutions"
         },
         {
@@ -909,7 +909,7 @@
           "name": "Blockchain"
         },
         {
-          "path": "tag/robotic_process_automation",
+          "path": "tag/robotic-process-automation",
           "name": "Robotic Process Automation"
         },
         {
@@ -917,7 +917,7 @@
           "name": "RPA"
         },
         {
-          "path": "tag/sapphire_now_unplugged",
+          "path": "tag/sapphire-now-unplugged",
           "name": "SAPPHIRE NOW Unplugged"
         },
         {
@@ -925,15 +925,15 @@
           "name": "Accenture"
         },
         {
-          "path": "tag/energy_and_natural_resources",
+          "path": "tag/energy-and-natural-resources",
           "name": "Energy and Natural Resources"
         },
         {
-          "path": "tag/oil___gas",
+          "path": "tag/oil---gas",
           "name": "Oil & Gas"
         },
         {
-          "path": "tag/oil_and_gas",
+          "path": "tag/oil-and-gas",
           "name": "Oil and Gas"
         },
         {
@@ -941,19 +941,19 @@
           "name": "Technology"
         },
         {
-          "path": "tag/customer_first",
+          "path": "tag/customer-first",
           "name": "Customer First"
         },
         {
-          "path": "tag/sap_hana_enterprise_cloud",
+          "path": "tag/sap-hana-enterprise-cloud",
           "name": "SAP HANA Enterprise Cloud"
         },
         {
-          "path": "tag/data_privacy",
+          "path": "tag/data-privacy",
           "name": "Data Privacy"
         },
         {
-          "path": "tag/cloud_erp",
+          "path": "tag/cloud-erp",
           "name": "Cloud ERP"
         },
         {
@@ -961,63 +961,63 @@
           "name": "openSAP"
         },
         {
-          "path": "tag/low_code_no_code",
+          "path": "tag/low-code-no-code",
           "name": "Low-Code No-Code"
         },
         {
-          "path": "tag/sap_appgyver",
+          "path": "tag/sap-appgyver",
           "name": "SAP AppGyver"
         },
         {
-          "path": "tag/sap_process_automation",
+          "path": "tag/sap-process-automation",
           "name": "SAP Process Automation"
         },
         {
-          "path": "tag/sap_service_cloud",
+          "path": "tag/sap-service-cloud",
           "name": "SAP Service Cloud"
         },
         {
-          "path": "tag/sap_workflow_management",
+          "path": "tag/sap-workflow-management",
           "name": "SAP Workflow Management"
         },
         {
-          "path": "tag/sap_successfactors_hxm_suite",
+          "path": "tag/sap-successfactors-hxm-suite",
           "name": "SAP SuccessFactors HXM Suite"
         },
         {
-          "path": "tag/sap_transportation_management",
+          "path": "tag/sap-transportation-management",
           "name": "SAP Transportation Management"
         },
         {
-          "path": "tag/sap_fiori",
+          "path": "tag/sap-fiori",
           "name": "SAP Fiori"
         },
         {
-          "path": "tag/external_workforce",
+          "path": "tag/external-workforce",
           "name": "External Workforce"
         },
         {
-          "path": "tag/sap_ariba_contracts",
+          "path": "tag/sap-ariba-contracts",
           "name": "SAP Ariba Contracts"
         },
         {
-          "path": "tag/sap_integration_suite",
+          "path": "tag/sap-integration-suite",
           "name": "SAP Integration Suite"
         },
         {
-          "path": "tag/quantum_computing",
+          "path": "tag/quantum-computing",
           "name": "Quantum Computing"
         },
         {
-          "path": "tag/the_path_forward_series",
+          "path": "tag/the-path-forward-series",
           "name": "The Path Forward series"
         },
         {
-          "path": "tag/latin_america",
+          "path": "tag/latin-america",
           "name": "Latin America"
         },
         {
-          "path": "tag/public_services",
+          "path": "tag/public-services",
           "name": "Public Services"
         },
         {
@@ -1033,15 +1033,15 @@
           "name": "Logistics"
         },
         {
-          "path": "tag/digital_commerce",
+          "path": "tag/digital-commerce",
           "name": "Digital Commerce"
         },
         {
-          "path": "tag/sap_digital_commerce",
+          "path": "tag/sap-digital-commerce",
           "name": "SAP Digital Commerce"
         },
         {
-          "path": "tag/sap_pinnacle_award",
+          "path": "tag/sap-pinnacle-award",
           "name": "SAP Pinnacle Award"
         },
         {
@@ -1049,31 +1049,31 @@
           "name": "GRC"
         },
         {
-          "path": "tag/business_continuity",
+          "path": "tag/business-continuity",
           "name": "Business Continuity"
         },
         {
-          "path": "tag/sap_io_foundry_tokyo",
+          "path": "tag/sap-io-foundry-tokyo",
           "name": "SAP.iO Foundry Tokyo"
         },
         {
-          "path": "tag/enterprise_risk_management",
+          "path": "tag/enterprise-risk-management",
           "name": "Enterprise Risk Management"
         },
         {
-          "path": "tag/intelligent_asset_management",
+          "path": "tag/intelligent-asset-management",
           "name": "Intelligent Asset Management"
         },
         {
-          "path": "tag/internet_of_things",
+          "path": "tag/internet-of-things",
           "name": "Internet of Things"
         },
         {
-          "path": "tag/sap_fioneer",
+          "path": "tag/sap-fioneer",
           "name": "SAP Fioneer"
         },
         {
-          "path": "tag/sapphire_now_reimagined",
+          "path": "tag/sapphire-now-reimagined",
           "name": "SAPPHIRE NOW Reimagined"
         },
         {
@@ -1081,15 +1081,15 @@
           "name": "Inflation"
         },
         {
-          "path": "tag/sap_digital_supply_chain",
+          "path": "tag/sap-digital-supply-chain",
           "name": "SAP Digital Supply Chain"
         },
         {
-          "path": "tag/sap_treasury_and_risk_management",
+          "path": "tag/sap-treasury-and-risk-management",
           "name": "SAP Treasury and Risk Management"
         },
         {
-          "path": "tag/beyond_technologies",
+          "path": "tag/beyond-technologies",
           "name": "Beyond Technologies"
         },
         {
@@ -1097,31 +1097,31 @@
           "name": "Cryptocurrencies"
         },
         {
-          "path": "tag/electric_vehicles",
+          "path": "tag/electric-vehicles",
           "name": "Electric Vehicles"
         },
         {
-          "path": "tag/sap_e_mobility",
+          "path": "tag/sap-e-mobility",
           "name": "SAP E-Mobility"
         },
         {
-          "path": "tag/sap_industry_network_for_automotive",
+          "path": "tag/sap-industry-network-for-automotive",
           "name": "SAP Industry Network for Automotive"
         },
         {
-          "path": "tag/snap_",
+          "path": "tag/snap-",
           "name": "Snap!"
         },
         {
-          "path": "tag/sap_business_bydesign",
+          "path": "tag/sap-business-bydesign",
           "name": "SAP Business ByDesign"
         },
         {
-          "path": "tag/sap_io_foundry",
+          "path": "tag/sap-io-foundry",
           "name": "SAP.iO Foundry"
         },
         {
-          "path": "tag/sap_io_foundry_singapore",
+          "path": "tag/sap-io-foundry-singapore",
           "name": "SAP.iO Foundry Singapore"
         },
         {
@@ -1129,15 +1129,15 @@
           "name": "Startup"
         },
         {
-          "path": "tag/carbon_footprint",
+          "path": "tag/carbon-footprint",
           "name": "Carbon Footprint"
         },
         {
-          "path": "tag/clean_energy",
+          "path": "tag/clean-energy",
           "name": "Clean Energy"
         },
         {
-          "path": "tag/climate_change",
+          "path": "tag/climate-change",
           "name": "Climate Change"
         },
         {
@@ -1145,15 +1145,15 @@
           "name": "Purpose"
         },
         {
-          "path": "tag/sap_digital",
+          "path": "tag/sap-digital",
           "name": "SAP Digital"
         },
         {
-          "path": "tag/sap_sales_cloud",
+          "path": "tag/sap-sales-cloud",
           "name": "SAP Sales Cloud"
         },
         {
-          "path": "tag/corporate_learning",
+          "path": "tag/corporate-learning",
           "name": "Corporate Learning"
         },
         {
@@ -1161,27 +1161,27 @@
           "name": "Learning"
         },
         {
-          "path": "tag/software_adoption",
+          "path": "tag/software-adoption",
           "name": "Software Adoption"
         },
         {
-          "path": "tag/software_implementation",
+          "path": "tag/software-implementation",
           "name": "Software Implementation"
         },
         {
-          "path": "tag/sap_responsible_design_and_production",
+          "path": "tag/sap-responsible-design-and-production",
           "name": "SAP Responsible Design and Production"
         },
         {
-          "path": "tag/diversity___inclusion",
+          "path": "tag/diversity---inclusion",
           "name": "Diversity & Inclusion"
         },
         {
-          "path": "tag/people_sustainability",
+          "path": "tag/people-sustainability",
           "name": "People Sustainability"
         },
         {
-          "path": "tag/sap_successfactors",
+          "path": "tag/sap-successfactors",
           "name": "SAP SuccessFactors"
         },
         {
@@ -1189,51 +1189,51 @@
           "name": "Coursera"
         },
         {
-          "path": "tag/sap_build",
+          "path": "tag/sap-build",
           "name": "SAP Build"
         },
         {
-          "path": "tag/digital_twin",
+          "path": "tag/digital-twin",
           "name": "Digital Twin"
         },
         {
-          "path": "tag/sap_customer_data_cloud",
+          "path": "tag/sap-customer-data-cloud",
           "name": "SAP Customer Data Cloud"
         },
         {
-          "path": "tag/o_data",
+          "path": "tag/o-data",
           "name": "O-data"
         },
         {
-          "path": "tag/x_data",
+          "path": "tag/x-data",
           "name": "X-data"
         },
         {
-          "path": "tag/sap_activate",
+          "path": "tag/sap-activate",
           "name": "SAP Activate"
         },
         {
-          "path": "tag/sap_best_practices",
+          "path": "tag/sap-best-practices",
           "name": "SAP Best Practices"
         },
         {
-          "path": "tag/sap_solution_manager",
+          "path": "tag/sap-solution-manager",
           "name": "SAP Solution Manager"
         },
         {
-          "path": "tag/sap_cloud_application_services",
+          "path": "tag/sap-cloud-application-services",
           "name": "SAP Cloud Application Services"
         },
         {
-          "path": "tag/sap_community",
+          "path": "tag/sap-community",
           "name": "SAP Community"
         },
         {
-          "path": "tag/sap_for_me",
+          "path": "tag/sap-for-me",
           "name": "SAP for Me"
         },
         {
-          "path": "tag/mental_health_and_well_being",
+          "path": "tag/mental-health-and-well-being",
           "name": "Mental Health and Well-Being"
         },
         {
@@ -1241,15 +1241,15 @@
           "name": "Telecommunications"
         },
         {
-          "path": "tag/digital_learning",
+          "path": "tag/digital-learning",
           "name": "Digital Learning"
         },
         {
-          "path": "tag/employee_experience",
+          "path": "tag/employee-experience",
           "name": "Employee Experience"
         },
         {
-          "path": "tag/sap_successfactors_work_zone",
+          "path": "tag/sap-successfactors-work-zone",
           "name": "SAP SuccessFactors Work Zone"
         },
         {
@@ -1257,11 +1257,11 @@
           "name": "SuccessConnect"
         },
         {
-          "path": "tag/workforce_planning",
+          "path": "tag/workforce-planning",
           "name": "Workforce Planning"
         },
         {
-          "path": "tag/diversity_and_inclusion",
+          "path": "tag/diversity-and-inclusion",
           "name": "Diversity and Inclusion"
         },
         {
@@ -1273,7 +1273,7 @@
           "name": "Partners"
         },
         {
-          "path": "tag/sap_partner_demo_environment",
+          "path": "tag/sap-partner-demo-environment",
           "name": "SAP Partner Demo Environment"
         },
         {
@@ -1281,35 +1281,35 @@
           "name": "Earnings"
         },
         {
-          "path": "tag/carbon_emissions",
+          "path": "tag/carbon-emissions",
           "name": "Carbon Emissions"
         },
         {
-          "path": "tag/greenhouse_gas_emissions",
+          "path": "tag/greenhouse-gas-emissions",
           "name": "Greenhouse Gas Emissions"
         },
         {
-          "path": "tag/sap_ehs_management",
+          "path": "tag/sap-ehs-management",
           "name": "SAP EHS Management"
         },
         {
-          "path": "tag/sap_support_portal_spotlight",
+          "path": "tag/sap-support-portal-spotlight",
           "name": "SAP Support Portal Spotlight"
         },
         {
-          "path": "tag/sap_support_portal_spotlight_news",
+          "path": "tag/sap-support-portal-spotlight-news",
           "name": "SAP Support Portal Spotlight News"
         },
         {
-          "path": "tag/spotlight_news_archive",
+          "path": "tag/spotlight-news-archive",
           "name": "Spotlight News Archive"
         },
         {
-          "path": "tag/business_women_s_network",
+          "path": "tag/business-women-s-network",
           "name": "Business Women's Network"
         },
         {
-          "path": "tag/sap_csr",
+          "path": "tag/sap-csr",
           "name": "SAP CSR"
         },
         {
@@ -1321,7 +1321,7 @@
           "name": "Ukraine"
         },
         {
-          "path": "tag/sap_partner_connect",
+          "path": "tag/sap-partner-connect",
           "name": "SAP Partner Connect"
         },
         {
@@ -1337,27 +1337,27 @@
           "name": "Henkel"
         },
         {
-          "path": "tag/sap_sustainability_data_exchange",
+          "path": "tag/sap-sustainability-data-exchange",
           "name": "SAP Sustainability Data Exchange"
         },
         {
-          "path": "tag/un_sdgs",
+          "path": "tag/un-sdgs",
           "name": "UN SDGs"
         },
         {
-          "path": "tag/circular_economy",
+          "path": "tag/circular-economy",
           "name": "Circular Economy"
         },
         {
-          "path": "tag/sap_investor_relations",
+          "path": "tag/sap-investor-relations",
           "name": "SAP Investor Relations"
         },
         {
-          "path": "tag/sap_ariba_buying",
+          "path": "tag/sap-ariba-buying",
           "name": "SAP Ariba Buying"
         },
         {
-          "path": "tag/investor_relations",
+          "path": "tag/investor-relations",
           "name": "Investor Relations"
         },
         {
@@ -1365,7 +1365,7 @@
           "name": "Diversity"
         },
         {
-          "path": "tag/diversity_at_sap",
+          "path": "tag/diversity-at-sap",
           "name": "Diversity at SAP"
         },
         {
@@ -1373,11 +1373,11 @@
           "name": "Inclusion"
         },
         {
-          "path": "tag/pride_sap",
+          "path": "tag/pride-sap",
           "name": "Pride@SAP"
         },
         {
-          "path": "tag/grow_with_sap",
+          "path": "tag/grow-with-sap",
           "name": "GROW with SAP"
         },
         {
@@ -1389,31 +1389,31 @@
           "name": "NHL"
         },
         {
-          "path": "tag/asset_management",
+          "path": "tag/asset-management",
           "name": "Asset Management"
         },
         {
-          "path": "tag/enterprise_asset_management",
+          "path": "tag/enterprise-asset-management",
           "name": "Enterprise Asset Management"
         },
         {
-          "path": "tag/sap_business_ai",
+          "path": "tag/sap-business-ai",
           "name": "SAP Business AI"
         },
         {
-          "path": "tag/human_rights_day",
+          "path": "tag/human-rights-day",
           "name": "Human Rights Day"
         },
         {
-          "path": "tag/sap_ariba_category_management",
+          "path": "tag/sap-ariba-category-management",
           "name": "SAP Ariba Category Management"
         },
         {
-          "path": "tag/sap_ariba_sourcing",
+          "path": "tag/sap-ariba-sourcing",
           "name": "SAP Ariba Sourcing"
         },
         {
-          "path": "tag/sap_spend_control_tower",
+          "path": "tag/sap-spend-control-tower",
           "name": "SAP Spend Control Tower"
         },
         {
@@ -1421,7 +1421,7 @@
           "name": "Scoutbee"
         },
         {
-          "path": "tag/sap_datasphere",
+          "path": "tag/sap-datasphere",
           "name": "SAP Datasphere"
         },
         {
@@ -1429,7 +1429,7 @@
           "name": "Esports"
         },
         {
-          "path": "tag/sap_sponsorships",
+          "path": "tag/sap-sponsorships",
           "name": "SAP Sponsorships"
         },
         {
@@ -1437,63 +1437,63 @@
           "name": "Sponsorships"
         },
         {
-          "path": "tag/product_support",
+          "path": "tag/product-support",
           "name": "Product Support"
         },
         {
-          "path": "tag/real_time_support",
+          "path": "tag/real-time-support",
           "name": "Real-Time Support"
         },
         {
-          "path": "tag/abap_cloud",
+          "path": "tag/abap-cloud",
           "name": "ABAP Cloud"
         },
         {
-          "path": "tag/ai_foundation",
+          "path": "tag/ai-foundation",
           "name": "AI Foundation"
         },
         {
-          "path": "tag/sap_build_code",
+          "path": "tag/sap-build-code",
           "name": "SAP Build Code"
         },
         {
-          "path": "tag/stanford_hai",
+          "path": "tag/stanford-hai",
           "name": "Stanford HAI"
         },
         {
-          "path": "tag/gender_equality",
+          "path": "tag/gender-equality",
           "name": "Gender Equality"
         },
         {
-          "path": "tag/women_in_tech",
+          "path": "tag/women-in-tech",
           "name": "Women in Tech"
         },
         {
-          "path": "tag/sap_cloud_alm",
+          "path": "tag/sap-cloud-alm",
           "name": "SAP Cloud ALM"
         },
         {
-          "path": "tag/sap_support",
+          "path": "tag/sap-support",
           "name": "SAP Support"
         },
         {
-          "path": "tag/process_optimization",
+          "path": "tag/process-optimization",
           "name": "Process Optimization"
         },
         {
-          "path": "tag/hasso_plattner_founders__award",
+          "path": "tag/hasso-plattner-founders--award",
           "name": "Hasso Plattner Founders' Award"
         },
         {
-          "path": "tag/sap_maxattention",
+          "path": "tag/sap-maxattention",
           "name": "SAP MaxAttention"
         },
         {
-          "path": "tag/sap_history",
+          "path": "tag/sap-history",
           "name": "SAP History"
         },
         {
-          "path": "tag/sap_intelligent_rpa",
+          "path": "tag/sap-intelligent-rpa",
           "name": "SAP Intelligent RPA"
         },
         {
@@ -1501,15 +1501,15 @@
           "name": "Metaverse"
         },
         {
-          "path": "tag/sap_sports_one",
+          "path": "tag/sap-sports-one",
           "name": "SAP Sports One"
         },
         {
-          "path": "tag/sports___entertainment",
+          "path": "tag/sports---entertainment",
           "name": "Sports & Entertainment"
         },
         {
-          "path": "tag/autism_at_work",
+          "path": "tag/autism-at-work",
           "name": "Autism at Work"
         },
         {
@@ -1517,19 +1517,19 @@
           "name": "Automation"
         },
         {
-          "path": "tag/sap_warehouse_robotics",
+          "path": "tag/sap-warehouse-robotics",
           "name": "SAP Warehouse Robotics"
         },
         {
-          "path": "tag/sap_labs",
+          "path": "tag/sap-labs",
           "name": "SAP Labs"
         },
         {
-          "path": "tag/sap_signavio_process_explorer",
+          "path": "tag/sap-signavio-process-explorer",
           "name": "SAP Signavio Process Explorer"
         },
         {
-          "path": "tag/sap_innovation_awards",
+          "path": "tag/sap-innovation-awards",
           "name": "SAP Innovation Awards"
         },
         {
@@ -1545,35 +1545,35 @@
           "name": "Utilities"
         },
         {
-          "path": "tag/sap_successfactors_opportunity_marketplace",
+          "path": "tag/sap-successfactors-opportunity-marketplace",
           "name": "SAP SuccessFactors Opportunity Marketplace"
         },
         {
-          "path": "tag/sap_successfactors_performance___goals",
+          "path": "tag/sap-successfactors-performance---goals",
           "name": "SAP SuccessFactors Performance & Goals"
         },
         {
-          "path": "tag/sustainability_solutions",
+          "path": "tag/sustainability-solutions",
           "name": "sustainability solutions"
         },
         {
-          "path": "tag/carbon_accounting",
+          "path": "tag/carbon-accounting",
           "name": "Carbon Accounting"
         },
         {
-          "path": "tag/climate_action",
+          "path": "tag/climate-action",
           "name": "Climate Action"
         },
         {
-          "path": "tag/green_ledger",
+          "path": "tag/green-ledger",
           "name": "Green Ledger"
         },
         {
-          "path": "tag/sap_sustainability_footprint_management",
+          "path": "tag/sap-sustainability-footprint-management",
           "name": "SAP Sustainability Footprint Management"
         },
         {
-          "path": "tag/sap_sustainability_solutions",
+          "path": "tag/sap-sustainability-solutions",
           "name": "SAP Sustainability Solutions"
         },
         {
@@ -1585,11 +1585,11 @@
           "name": "Microsoft"
         },
         {
-          "path": "tag/sap_ai",
+          "path": "tag/sap-ai",
           "name": "SAP AI"
         },
         {
-          "path": "tag/redefining__you_th",
+          "path": "tag/redefining--you-th",
           "name": "Redefining (YOU)th"
         },
         {
@@ -1597,23 +1597,23 @@
           "name": "Energy"
         },
         {
-          "path": "tag/catalog_management",
+          "path": "tag/catalog-management",
           "name": "Catalog Management"
         },
         {
-          "path": "tag/sap_ariba_buying_and_invoicing",
+          "path": "tag/sap-ariba-buying-and-invoicing",
           "name": "SAP Ariba Buying and Invoicing"
         },
         {
-          "path": "tag/spend_control",
+          "path": "tag/spend-control",
           "name": "Spend Control"
         },
         {
-          "path": "tag/external_workforce_management",
+          "path": "tag/external-workforce-management",
           "name": "External Workforce Management"
         },
         {
-          "path": "tag/total_workforce_management",
+          "path": "tag/total-workforce-management",
           "name": "Total Workforce Management"
         },
         {
@@ -1621,31 +1621,31 @@
           "name": "Emarsys"
         },
         {
-          "path": "tag/sap_customer_data_platform",
+          "path": "tag/sap-customer-data-platform",
           "name": "SAP Customer Data Platform"
         },
         {
-          "path": "tag/sap_customer_experience_live",
+          "path": "tag/sap-customer-experience-live",
           "name": "SAP Customer Experience LIVE"
         },
         {
-          "path": "tag/sap_preferred_success",
+          "path": "tag/sap-preferred-success",
           "name": "SAP Preferred Success"
         },
         {
-          "path": "tag/africa_code_week",
+          "path": "tag/africa-code-week",
           "name": "Africa Code Week"
         },
         {
-          "path": "tag/life_at_sap",
+          "path": "tag/life-at-sap",
           "name": "Life at SAP"
         },
         {
-          "path": "tag/sap_analytics",
+          "path": "tag/sap-analytics",
           "name": "SAP Analytics"
         },
         {
-          "path": "tag/services_and_support",
+          "path": "tag/services-and-support",
           "name": "Services and Support"
         },
         {
@@ -1653,7 +1653,7 @@
           "name": "Sports"
         },
         {
-          "path": "tag/sap_north_america",
+          "path": "tag/sap-north-america",
           "name": "SAP North America"
         },
         {
@@ -1661,15 +1661,15 @@
           "name": "COP28"
         },
         {
-          "path": "tag/renewable_energy",
+          "path": "tag/renewable-energy",
           "name": "Renewable Energy"
         },
         {
-          "path": "tag/sap_green_token",
+          "path": "tag/sap-green-token",
           "name": "SAP Green Token"
         },
         {
-          "path": "tag/international_women_s_day",
+          "path": "tag/international-women-s-day",
           "name": "International Women's Day"
         },
         {
@@ -1681,11 +1681,11 @@
           "name": "WTA"
         },
         {
-          "path": "tag/sap_data_unleashed",
+          "path": "tag/sap-data-unleashed",
           "name": "SAP Data Unleashed"
         },
         {
-          "path": "tag/earth_day",
+          "path": "tag/earth-day",
           "name": "Earth Day"
         },
         {
@@ -1693,11 +1693,11 @@
           "name": "Accessibility"
         },
         {
-          "path": "tag/data_analytics",
+          "path": "tag/data-analytics",
           "name": "Data Analytics"
         },
         {
-          "path": "tag/data_fabric",
+          "path": "tag/data-fabric",
           "name": "Data Fabric"
         },
         {
@@ -1709,15 +1709,15 @@
           "name": "CPG"
         },
         {
-          "path": "tag/cloud_computing",
+          "path": "tag/cloud-computing",
           "name": "Cloud Computing"
         },
         {
-          "path": "tag/earth_overshoot_day",
+          "path": "tag/earth-overshoot-day",
           "name": "Earth Overshoot Day"
         },
         {
-          "path": "tag/sap_business_network_for_logistics",
+          "path": "tag/sap-business-network-for-logistics",
           "name": "SAP Business Network for Logistics"
         },
         {
@@ -1725,15 +1725,15 @@
           "name": "BMW"
         },
         {
-          "path": "tag/supply_chain_logistics",
+          "path": "tag/supply-chain-logistics",
           "name": "Supply Chain Logistics"
         },
         {
-          "path": "tag/business_process_transformation",
+          "path": "tag/business-process-transformation",
           "name": "Business Process Transformation"
         },
         {
-          "path": "tag/enterprise_architecture_management",
+          "path": "tag/enterprise-architecture-management",
           "name": "Enterprise Architecture Management"
         },
         {
@@ -1741,51 +1741,51 @@
           "name": "LeanIX"
         },
         {
-          "path": "tag/digital_skills_gap",
+          "path": "tag/digital-skills-gap",
           "name": "Digital Skills Gap"
         },
         {
-          "path": "tag/learning_management_system",
+          "path": "tag/learning-management-system",
           "name": "Learning Management System"
         },
         {
-          "path": "tag/sap_global_mindfulness",
+          "path": "tag/sap-global-mindfulness",
           "name": "SAP Global Mindfulness"
         },
         {
-          "path": "tag/sap_successfactors_recruiting",
+          "path": "tag/sap-successfactors-recruiting",
           "name": "SAP SuccessFactors Recruiting"
         },
         {
-          "path": "tag/sap_erp_hcm",
+          "path": "tag/sap-erp-hcm",
           "name": "SAP ERP HCM"
         },
         {
-          "path": "tag/field_service_management",
+          "path": "tag/field-service-management",
           "name": "Field Service Management"
         },
         {
-          "path": "tag/sap_experience_center",
+          "path": "tag/sap-experience-center",
           "name": "SAP Experience Center"
         },
         {
-          "path": "tag/business_process_management",
+          "path": "tag/business-process-management",
           "name": "Business Process Management"
         },
         {
-          "path": "tag/process_management",
+          "path": "tag/process-management",
           "name": "Process Management"
         },
         {
-          "path": "tag/process_transformation",
+          "path": "tag/process-transformation",
           "name": "Process Transformation"
         },
         {
-          "path": "tag/sap_insights",
+          "path": "tag/sap-insights",
           "name": "SAP Insights"
         },
         {
-          "path": "tag/regenerative_agriculture",
+          "path": "tag/regenerative-agriculture",
           "name": "Regenerative Agriculture"
         },
         {
@@ -1797,7 +1797,7 @@
           "name": "UNICEF"
         },
         {
-          "path": "tag/application_development",
+          "path": "tag/application-development",
           "name": "Application Development"
         },
         {
@@ -1809,15 +1809,15 @@
           "name": "Planon"
         },
         {
-          "path": "tag/schneider_electric",
+          "path": "tag/schneider-electric",
           "name": "Schneider Electric"
         },
         {
-          "path": "tag/employee_engagement",
+          "path": "tag/employee-engagement",
           "name": "Employee Engagement"
         },
         {
-          "path": "tag/corporate_social_responsibility",
+          "path": "tag/corporate-social-responsibility",
           "name": "Corporate Social Responsibility"
         },
         {
@@ -1825,15 +1825,15 @@
           "name": "CSR"
         },
         {
-          "path": "tag/sap_business_network_for_industry",
+          "path": "tag/sap-business-network-for-industry",
           "name": "SAP Business Network for Industry"
         },
         {
-          "path": "tag/manufacturing_x",
+          "path": "tag/manufacturing-x",
           "name": "Manufacturing-X"
         },
         {
-          "path": "tag/google_cloud",
+          "path": "tag/google-cloud",
           "name": "Google Cloud"
         },
         {
@@ -1841,15 +1841,15 @@
           "name": "Fashion"
         },
         {
-          "path": "tag/sap_one_support_launchpad",
+          "path": "tag/sap-one-support-launchpad",
           "name": "SAP ONE Support Launchpad"
         },
         {
-          "path": "tag/sap_support_portal",
+          "path": "tag/sap-support-portal",
           "name": "SAP Support Portal"
         },
         {
-          "path": "tag/ocean_plastics",
+          "path": "tag/ocean-plastics",
           "name": "Ocean Plastics"
         },
         {
@@ -1857,139 +1857,139 @@
           "name": "Coldplay"
         },
         {
-          "path": "tag/business_transformation",
+          "path": "tag/business-transformation",
           "name": "Business Transformation"
         },
         {
-          "path": "tag/health_and_well_being",
+          "path": "tag/health-and-well-being",
           "name": "Health and Well-Being"
         },
         {
-          "path": "tag/pledge_to_flex",
+          "path": "tag/pledge-to-flex",
           "name": "Pledge to Flex"
         },
         {
-          "path": "tag/public_sector",
+          "path": "tag/public-sector",
           "name": "Public Sector"
         },
         {
-          "path": "tag/sap_warehouse_insights",
+          "path": "tag/sap-warehouse-insights",
           "name": "SAP Warehouse Insights"
         },
         {
-          "path": "tag/women_in_leadership",
+          "path": "tag/women-in-leadership",
           "name": "Women in Leadership"
         },
         {
-          "path": "tag/dynamic_teams",
+          "path": "tag/dynamic-teams",
           "name": "Dynamic Teams"
         },
         {
-          "path": "tag/sap_successfactors_people_analytics",
+          "path": "tag/sap-successfactors-people-analytics",
           "name": "SAP SuccessFactors People Analytics"
         },
         {
-          "path": "tag/data_security",
+          "path": "tag/data-security",
           "name": "Data Security"
         },
         {
-          "path": "tag/service_management",
+          "path": "tag/service-management",
           "name": "Service Management"
         },
         {
-          "path": "tag/the_forrester_wave",
+          "path": "tag/the-forrester-wave",
           "name": "The Forrester Wave"
         },
         {
-          "path": "tag/sap_cloud_analytics",
+          "path": "tag/sap-cloud-analytics",
           "name": "SAP Cloud Analytics"
         },
         {
-          "path": "tag/sap_emarsys",
+          "path": "tag/sap-emarsys",
           "name": "SAP Emarsys"
         },
         {
-          "path": "tag/built_in_support",
+          "path": "tag/built-in-support",
           "name": "Built-In Support"
         },
         {
-          "path": "tag/sap_rural_sourcing_management",
+          "path": "tag/sap-rural-sourcing-management",
           "name": "SAP Rural Sourcing Management"
         },
         {
-          "path": "tag/new_zealand_rugby",
+          "path": "tag/new-zealand-rugby",
           "name": "New Zealand Rugby"
         },
         {
-          "path": "tag/customer_success",
+          "path": "tag/customer-success",
           "name": "Customer Success"
         },
         {
-          "path": "tag/premium_engagement",
+          "path": "tag/premium-engagement",
           "name": "Premium Engagement"
         },
         {
-          "path": "tag/sap_activeattention",
+          "path": "tag/sap-activeattention",
           "name": "SAP ActiveAttention"
         },
         {
-          "path": "tag/sap_integrated_delivery_framework",
+          "path": "tag/sap-integrated-delivery-framework",
           "name": "SAP Integrated Delivery Framework"
         },
         {
-          "path": "tag/sap_maxattention_summit",
+          "path": "tag/sap-maxattention-summit",
           "name": "SAP MaxAttention Summit"
         },
         {
-          "path": "tag/sap_digital_assistant",
+          "path": "tag/sap-digital-assistant",
           "name": "SAP Digital Assistant"
         },
         {
-          "path": "tag/sap_signavio_process_manager",
+          "path": "tag/sap-signavio-process-manager",
           "name": "SAP Signavio Process Manager"
         },
         {
-          "path": "tag/sap_assortment_planning",
+          "path": "tag/sap-assortment-planning",
           "name": "SAP Assortment Planning"
         },
         {
-          "path": "tag/sap_design",
+          "path": "tag/sap-design",
           "name": "SAP Design"
         },
         {
-          "path": "tag/predictive_analytics",
+          "path": "tag/predictive-analytics",
           "name": "Predictive Analytics"
         },
         {
-          "path": "tag/sap_marketing_cloud",
+          "path": "tag/sap-marketing-cloud",
           "name": "SAP Marketing Cloud"
         },
         {
-          "path": "tag/sap_social_sabbatical",
+          "path": "tag/sap-social-sabbatical",
           "name": "SAP Social Sabbatical"
         },
         {
-          "path": "tag/process_mining",
+          "path": "tag/process-mining",
           "name": "Process Mining"
         },
         {
-          "path": "tag/direct_to_consumer",
+          "path": "tag/direct-to-consumer",
           "name": "Direct-to-Consumer"
         },
         {
-          "path": "tag/human_capital_management",
+          "path": "tag/human-capital-management",
           "name": "Human Capital Management"
         },
         {
-          "path": "tag/sales_performance_management",
+          "path": "tag/sales-performance-management",
           "name": "Sales Performance Management"
         },
         {
-          "path": "tag/sap_sales_performance_management",
+          "path": "tag/sap-sales-performance-management",
           "name": "SAP Sales Performance Management"
         },
         {
-          "path": "tag/sap_successfactors_compensation",
+          "path": "tag/sap-successfactors-compensation",
           "name": "SAP SuccessFactors Compensation"
         },
         {
@@ -1997,7 +1997,7 @@
           "name": "Mining"
         },
         {
-          "path": "tag/employee_network_groups",
+          "path": "tag/employee-network-groups",
           "name": "Employee Network Groups"
         },
         {
@@ -2005,11 +2005,11 @@
           "name": "Trust"
         },
         {
-          "path": "tag/concur_travel",
+          "path": "tag/concur-travel",
           "name": "Concur Travel"
         },
         {
-          "path": "tag/sap_labs_network",
+          "path": "tag/sap-labs-network",
           "name": "SAP Labs Network"
         },
         {
@@ -2021,7 +2021,7 @@
           "name": "Icertis"
         },
         {
-          "path": "tag/well_being_at_work",
+          "path": "tag/well-being-at-work",
           "name": "Well-Being at Work"
         },
         {
@@ -2029,19 +2029,19 @@
           "name": "BPaaS"
         },
         {
-          "path": "tag/intelligent_audit",
+          "path": "tag/intelligent-audit",
           "name": "Intelligent Audit"
         },
         {
-          "path": "tag/social_entrepreneurship",
+          "path": "tag/social-entrepreneurship",
           "name": "Social Entrepreneurship"
         },
         {
-          "path": "tag/world_refugee_day",
+          "path": "tag/world-refugee-day",
           "name": "World Refugee Day"
         },
         {
-          "path": "tag/sap_educate_to_employ",
+          "path": "tag/sap-educate-to-employ",
           "name": "SAP Educate to Employ"
         },
         {
@@ -2053,31 +2053,31 @@
           "name": "Payroll"
         },
         {
-          "path": "tag/sap_services",
+          "path": "tag/sap-services",
           "name": "SAP Services"
         },
         {
-          "path": "tag/customer_engagement",
+          "path": "tag/customer-engagement",
           "name": "Customer Engagement"
         },
         {
-          "path": "tag/fan_experience",
+          "path": "tag/fan-experience",
           "name": "Fan Experience"
         },
         {
-          "path": "tag/oxford_economics",
+          "path": "tag/oxford-economics",
           "name": "Oxford Economics"
         },
         {
-          "path": "tag/transportation_management",
+          "path": "tag/transportation-management",
           "name": "Transportation Management"
         },
         {
-          "path": "tag/sap_io_foundry_paris",
+          "path": "tag/sap-io-foundry-paris",
           "name": "SAP.iO Foundry Paris"
         },
         {
-          "path": "tag/expert_chat",
+          "path": "tag/expert-chat",
           "name": "Expert Chat"
         },
         {
@@ -2085,11 +2085,11 @@
           "name": "EY"
         },
         {
-          "path": "tag/moments_of_service",
+          "path": "tag/moments-of-service",
           "name": "Moments of Service"
         },
         {
-          "path": "tag/sap_category_management",
+          "path": "tag/sap-category-management",
           "name": "SAP Category Management"
         },
         {
@@ -2097,7 +2097,7 @@
           "name": "Leadership"
         },
         {
-          "path": "tag/pro_bono_for_economic_equity",
+          "path": "tag/pro-bono-for-economic-equity",
           "name": "Pro Bono for Economic Equity"
         },
         {
@@ -2105,7 +2105,7 @@
           "name": "Deloitte"
         },
         {
-          "path": "tag/asset_collaboration",
+          "path": "tag/asset-collaboration",
           "name": "Asset Collaboration"
         },
         {
@@ -2121,19 +2121,19 @@
           "name": "Sourcing"
         },
         {
-          "path": "tag/sap_successfactors_workforce_analytics",
+          "path": "tag/sap-successfactors-workforce-analytics",
           "name": "SAP SuccessFactors Workforce Analytics"
         },
         {
-          "path": "tag/mercedes_amg",
+          "path": "tag/mercedes-amg",
           "name": "Mercedes-AMG"
         },
         {
-          "path": "tag/sap_s_4hana_finance",
+          "path": "tag/sap-s-4hana-finance",
           "name": "SAP S/4HANA Finance"
         },
         {
-          "path": "tag/art_at_sap",
+          "path": "tag/art-at-sap",
           "name": "Art at SAP"
         },
         {
@@ -2145,15 +2145,15 @@
           "name": "AWS"
         },
         {
-          "path": "tag/enterprise_applications",
+          "path": "tag/enterprise-applications",
           "name": "Enterprise Applications"
         },
         {
-          "path": "tag/sap_sports",
+          "path": "tag/sap-sports",
           "name": "SAP Sports"
         },
         {
-          "path": "tag/sap_at_davos",
+          "path": "tag/sap-at-davos",
           "name": "SAP at Davos"
         },
         {
@@ -2161,55 +2161,55 @@
           "name": "CRN"
         },
         {
-          "path": "tag/women_at_sap",
+          "path": "tag/women-at-sap",
           "name": "Women at SAP"
         },
         {
-          "path": "tag/it_learning",
+          "path": "tag/it-learning",
           "name": "IT Learning"
         },
         {
-          "path": "tag/sap_translation_hub",
+          "path": "tag/sap-translation-hub",
           "name": "SAP Translation Hub"
         },
         {
-          "path": "tag/high_tech",
+          "path": "tag/high-tech",
           "name": "High Tech"
         },
         {
-          "path": "tag/sap_enterprise_product_development",
+          "path": "tag/sap-enterprise-product-development",
           "name": "SAP Enterprise Product Development"
         },
         {
-          "path": "tag/sap_co_innovation_lab",
+          "path": "tag/sap-co-innovation-lab",
           "name": "SAP Co-Innovation Lab"
         },
         {
-          "path": "tag/data_integration",
+          "path": "tag/data-integration",
           "name": "Data Integration"
         },
         {
-          "path": "tag/sap_business_network_for_supply_chain_collaboration",
+          "path": "tag/sap-business-network-for-supply-chain-collaboration",
           "name": "SAP Business Network for Supply Chain Collaboration"
         },
         {
-          "path": "tag/sap_intelligent_returns_management",
+          "path": "tag/sap-intelligent-returns-management",
           "name": "SAP Intelligent Returns Management"
         },
         {
-          "path": "tag/sap_s_4hana_retail",
+          "path": "tag/sap-s-4hana-retail",
           "name": "SAP S/4HANA Retail"
         },
         {
-          "path": "tag/sap_build_process_automation",
+          "path": "tag/sap-build-process-automation",
           "name": "SAP Build Process Automation"
         },
         {
-          "path": "tag/sap_business_transformation_center",
+          "path": "tag/sap-business-transformation-center",
           "name": "SAP Business Transformation Center"
         },
         {
-          "path": "tag/sap_at_unga",
+          "path": "tag/sap-at-unga",
           "name": "SAP at UNGA"
         },
         {
@@ -2217,11 +2217,11 @@
           "name": "UNGA"
         },
         {
-          "path": "tag/schedule_an_expert",
+          "path": "tag/schedule-an-expert",
           "name": "Schedule an Expert"
         },
         {
-          "path": "topic/business_network",
+          "path": "topic/business-network",
           "name": "Business Network"
         },
         {
@@ -2233,12 +2233,16 @@
           "name": "Solutions"
         },
         {
-          "path": "topic/supply_chain_management",
+          "path": "topic/supply-chain-management",
           "name": "Supply Chain Management"
         },
         {
           "path": "topic/technology",
           "name": "Technology"
+        },
+        {
+          "path": "topic/corporate",
+          "name": "Corporate"
         },
         {
           "path": "topic/customers",
@@ -2249,11 +2253,11 @@
           "name": "ERP"
         },
         {
-          "path": "topic/human_capital_management",
+          "path": "topic/human-capital-management",
           "name": "Human Capital Management"
         },
         {
-          "path": "topic/services_and_support",
+          "path": "topic/services-and-support",
           "name": "Services and Support"
         },
         {

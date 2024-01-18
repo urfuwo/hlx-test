@@ -29,15 +29,15 @@ async function main() {
       },
       "terms": [${Array.from(types).map((type) => `
         {
-          "path": "type/${type.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase()}",
+          "path": "type/${type.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()}",
           "name": "${type}"
         }`).concat(Array.from(tags).filter((tag) => tag.trim().length > 0).map((tag) => `
         {
-          "path": "tag/${tag.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase()}",
+          "path": "tag/${tag.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()}",
           "name": "${tag}"
         }`)).concat(Array.from(topics).filter((topic) => topic.trim().length > 0).filter((topic) => topic.trim() !== '[]').map((topic) => `
         {
-          "path": "topic/${topic.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase()}",
+          "path": "topic/${topic.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()}",
           "name": "${topic}"
         }`))}
       ]
