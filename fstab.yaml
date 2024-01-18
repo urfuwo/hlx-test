@@ -4,4 +4,4 @@ mountpoints:
 folders:
   /tags/: /tags/tag-template
   /topics/: /topics/topic-template
-  /authors/: /authors/author-template
+  /author/: /author/author-template
