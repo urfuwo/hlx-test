@@ -8,6 +8,10 @@
     background-color: rgb(54 123 179);
 }
 
+.title-banner.topics, .title-banner.tags {
+    background-color: var(--sapShell_Category_3_Background);
+}
+
 .title-banner  h1 {
     padding: 30px;
     font-size: var(--udexTypographyHeadingRegularXSFontSize);
