@@ -39,6 +39,7 @@ async function decorateTemplates(main) {
     const templates = Object.keys(TEMPLATE_LIST);
     if (templates.includes(template)) {
       const templateName = TEMPLATE_LIST[template];
+      loadCSS(`${window.hlx.codeBasePath}/templates/${templateName}/${templateName}.css`);
       const mod = await import(`../templates/${templateName}/${templateName}.js`);
       if (mod.default) {
         await mod.default(main);
@@ -47,20 +48,6 @@ async function decorateTemplates(main) {
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Template decoration failed', error);
-  }
-}
-
-async function loadTemplateStyles() {
-  try {
-    const template = toClassName(getMetadata('template'));
-    const templates = Object.keys(TEMPLATE_LIST);
-    if (templates.includes(template)) {
-      const templateName = TEMPLATE_LIST[template];
-      loadCSS(`${window.hlx.codeBasePath}/templates/${templateName}/${templateName}.css`);
-    }
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error('Template styles failed to load', error);
   }
 }
 
@@ -172,7 +159,6 @@ async function loadLazy(doc) {
   loadFooter(doc.querySelector('footer'));
 
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
-  loadTemplateStyles();
   loadFonts();
 
   sampleRUM('lazy');

@@ -1,0 +1,14 @@
+main .article-tags div.tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+main .article-tags div.tag-list a {
+    text-align: center;
+    padding: 0.2rem 0.5rem;
+    background-color: var(--sapButton_Neutral_Background);
+    color: var(--sapButton_Neutral_TextColor);
+
+}
