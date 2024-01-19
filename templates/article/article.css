@@ -53,11 +53,7 @@
 
 /* Desktop view */
 @media (min-width: 900px) {
-    /* Blog: desktop view: text and cta-banner width constraint */
-    .blog div.default-content-wrapper,
-    .blog div.blog-cta-banner-wrapper,
-    .feature-article div.default-content-wrapper,
-    .feature-article div.blog-cta-banner-wrapper {
+    .blog div.section > div:not(.hero-wrapper) {
         margin-left: auto;
         margin-right: auto;
         padding-left: 180px;
