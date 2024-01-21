@@ -1,6 +1,5 @@
 import { getMetadata } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
-import { div } from '../../scripts/dom-builder.js';
 
 // media query match that indicates mobile/tablet width
 const isDesktop = window.matchMedia('(min-width: 900px)');
@@ -99,16 +98,6 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
   }
 }
 
-function createNestedDivs(classList, n) {
-  if (n === 0) {
-    return div();
-  }
-
-  const divElement = div({ class: classList[n - 1] });
-  divElement.appendChild(createNestedDivs(classList, n - 1));
-  return divElement;
-}
-
 /**
  * decorates the header, mainly the nav
  * @param {Element} block The header block element
@@ -123,27 +112,23 @@ export default async function decorate(block) {
   nav.id = 'nav';
   while (fragment.firstElementChild) nav.append(fragment.firstElementChild);
 
-  const classes = ['brand', 'sections', 'explore', 'tools'];
+  const classes = ['brand', 'sections', 'tools'];
   classes.forEach((c, i) => {
     const section = nav.children[i];
     if (section) section.classList.add(`nav-${c}`);
   });
 
+  // populate logo
   const navBrand = nav.querySelector('.nav-brand');
   const brandLink = navBrand.querySelector('.button');
   if (brandLink) {
     brandLink.className = '';
     brandLink.closest('.button-container').className = '';
   }
-
-  // populate logo
-  navBrand.appendChild(createNestedDivs(['group', 'logo'], 2));
-  const image = document.createElement('img');
-  image.classList.add('fill');
-  image.setAttribute('src', '/icons/logo.svg');
-  navBrand.querySelector('.group').appendChild(image);
-  navBrand.appendChild(div({ class: 'site-label' }, brandLink.textContent));
-  brandLink.remove();
+  const brandElement = navBrand.querySelectorAll('p');
+  brandElement[0].classList.add('logo');
+  brandElement[0].querySelector('span').classList.remove('icon');
+  brandElement[1].classList.add('site-label');
 
   // generate links
   const navSections = nav.querySelector('.nav-sections');
@@ -160,10 +145,12 @@ export default async function decorate(block) {
     });
   }
 
-  // generate links
-  const navExplore = nav.querySelector('.nav-explore');
-  if (navExplore && isDesktop.matches) {
-    navExplore.querySelector('a').setAttribute('class', 'text');
+  // create explore link
+  const navTools = nav.querySelector('.nav-tools');
+  if (navTools) {
+    const exploreSection = navTools.querySelector('p');
+    exploreSection.removeAttribute('class');
+    exploreSection.querySelector('a').setAttribute('class', 'text');
   }
 
   // hamburger for mobile

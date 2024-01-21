@@ -14,8 +14,9 @@ header nav {
   align-items: center;
   justify-content: space-between;
   position: relative;
+  background-color: var(--sapShell_Navigation_Background);
   height: 3.75rem;
-  padding: 0 1rem;
+  padding: 0 24px;
 }
 
 header nav p {
@@ -37,18 +38,29 @@ header nav .text {
   white-space: nowrap;
 }
 
-@media (width >= 600px) {
+@media (width >= 640px) {
   header nav {
-    padding: 0 2rem;
+    padding: 0 48px;
   }
 }
 
-@media (width >= 900px) {
+@media (width >= 980px) {
+  header nav {
+    padding: 0 72px;
+  }
+}
+
+@media (width >= 1600px) {
+  header nav {
+    padding: 0 246px;
+  }
+}
+
+@media (width >= 1600px) {
   header nav {
     gap: 0 2em;
-
-    /* max-width: 1920px; */
     width: auto;
+    padding: 0 246px;
   }
 
   header .nav-wrapper {
@@ -58,12 +70,13 @@ header nav .text {
 
 /* brand */
 header .nav-brand {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: var(--udexSpacer16);
   position: relative;
   align-self: stretch;
   flex: 0 0 auto;
+  padding: 0 14px;
 }
 
 header .nav-brand .logo {
@@ -71,10 +84,15 @@ header .nav-brand .logo {
   width: 4rem;
 }
 
-header .nav-brand .group {
+header .nav-brand .button-container {
+  position: relative;
+  width: 4rem;
+}
+
+header .nav-brand .icon-brand {
+  display: block;
   position: relative;
   height: 3.66vh;
-  background-image: url('/icons/group-3-3.png');
   background-size: 100% 100%;
 }
 
@@ -161,8 +179,6 @@ header nav .nav-sections ul > li > ul > li {
     display: flex;
     gap: 2em;
     margin: 0;
-
-    /* font-size: var(--body-font-size-xs); */
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li {

@@ -34,6 +34,17 @@
 
   /* nav height */
   --nav-height: 64px;
+
+  /* breakpoints */
+  --sap-breakpoint-XL-min: 1600px;
+  --sap-breakpoint-L-max: 1599px;
+  --sap-breakpoint-L-min: 1280px;
+  --sap-breakpoint-M-max: 1279px;
+  --sap-breakpoint-M-min: 980px;
+  --sap-breakpoint-S-max: 979px;
+  --sap-breakpoint-S-min: 640px;
+  --sap-breakpoint-XS-max: 639px;
+  --sap-breakpoint-XS-min: 360px;
 }
 
 @font-face {
