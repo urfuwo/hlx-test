@@ -1,5 +1,6 @@
 import { getMetadata } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
+import { div } from '../../scripts/dom-builder.js';
 
 // media query match that indicates mobile/tablet width
 const isDesktop = window.matchMedia('(min-width: 900px)');
@@ -100,23 +101,13 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
 
 function createNestedDivs(classList, n) {
   if (n === 0) {
-    return document.createElement('div');
+    return div();
   }
 
-  const div = document.createElement('div');
-  div.classList.add(classList[n - 1]);
-  div.appendChild(createNestedDivs(classList, n - 1));
-
-  return div;
+  const divElement = div({ class: classList[n - 1] });
+  divElement.appendChild(createNestedDivs(classList, n - 1));
+  return divElement;
 }
-
-// function wrapDiv(refNode, className) {
-//   const parent = refNode.parentNode;
-//   const wrapper = document.createElement('div');
-//   wrapper.classList.add(className);
-//   wrapper.appendChild(refNode);
-//   parent.appendChild(wrapper);
-// }
 
 /**
  * decorates the header, mainly the nav
@@ -127,13 +118,12 @@ export default async function decorate(block) {
   const navMeta = getMetadata('nav');
   const navPath = navMeta ? new URL(navMeta).pathname : '/nav';
   const fragment = await loadFragment(navPath);
-
   // decorate nav DOM
   const nav = document.createElement('nav');
   nav.id = 'nav';
   while (fragment.firstElementChild) nav.append(fragment.firstElementChild);
 
-  const classes = ['brand', 'sections', 'tools'];
+  const classes = ['brand', 'sections', 'explore', 'tools'];
   classes.forEach((c, i) => {
     const section = nav.children[i];
     if (section) section.classList.add(`nav-${c}`);
@@ -147,51 +137,33 @@ export default async function decorate(block) {
   }
 
   // populate logo
-  brandLink.remove();
   navBrand.appendChild(createNestedDivs(['group', 'logo'], 2));
   const image = document.createElement('img');
   image.classList.add('fill');
   image.setAttribute('src', '/icons/logo.svg');
   navBrand.querySelector('.group').appendChild(image);
+  navBrand.appendChild(div({ class: 'site-label' }, brandLink.textContent));
+  brandLink.remove();
 
   // generate links
   const navSections = nav.querySelector('.nav-sections');
   if (navSections && isDesktop.matches) {
     navSections.querySelectorAll(':scope ul > li').forEach((navSection) => {
-      // wrapDiv(navSection.firstChild, 'text');
       navSection.querySelector('a').setAttribute('class', 'text');
       if (navSection.querySelector('ul')) navSection.classList.add('nav-drop');
 
       navSection.addEventListener('click', () => {
-        // if (isDesktop.matches) {
         const expanded = navSection.getAttribute('aria-expanded') === 'true';
         toggleAllNavSections(navSections);
         navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-        // }
       });
     });
-  } else {
-    navSections.remove();
   }
 
-  // generate nav tools
-  if (isDesktop.matches) {
-    const navTools = nav.querySelector('.nav-tools');
-    navTools.querySelector('.button-container').remove();
-    navTools.appendChild(
-      createNestedDivs(['search', 'icon-container', 'header-menu-icon'], 3),
-    );
-    navTools.appendChild(
-      createNestedDivs(['cart', 'icon-container', 'header-menu-icon'], 3),
-    );
-    navTools.appendChild(
-      createNestedDivs(['bell', 'icon-container', 'header-menu-icon'], 3),
-    );
-    navTools.appendChild(
-      createNestedDivs(['person', 'icon-container', 'header-menu-icon'], 3),
-    );
-  } else {
-    navSections.remove();
+  // generate links
+  const navExplore = nav.querySelector('.nav-explore');
+  if (navExplore && isDesktop.matches) {
+    navExplore.querySelector('a').setAttribute('class', 'text');
   }
 
   // hamburger for mobile
@@ -201,7 +173,7 @@ export default async function decorate(block) {
       <span class="nav-hamburger-icon"></span>
     </button>`;
   hamburger.addEventListener('click', () => toggleMenu(nav, navSections));
-  nav.prepend(hamburger);
+  nav.append(hamburger);
   nav.setAttribute('aria-expanded', 'false');
   // prevent mobile nav behavior on window resize
   toggleMenu(nav, navSections, isDesktop.matches);
@@ -210,5 +182,5 @@ export default async function decorate(block) {
   const navWrapper = document.createElement('div');
   navWrapper.className = 'nav-wrapper';
   navWrapper.append(nav);
-  block.append(navWrapper);
+  block.append(nav);
 }
