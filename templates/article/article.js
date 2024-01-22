@@ -1,7 +1,4 @@
-import {
-  buildBlock,
-  getMetadata,
-} from '../../scripts/aem.js';
+import { buildBlock, getMetadata } from '../../scripts/aem.js';
 
 /**
  * Highlight the first paragraph of a blog page
@@ -18,10 +15,15 @@ function highlightBlogFirstParagraph(main) {
 }
 
 export default function decorateMain(main) {
-  highlightBlogFirstParagraph(main);
+  if (main.children.length !== 0) {
+    highlightBlogFirstParagraph(main);
 
-  const div = document.createElement('div');
-  const readMore = buildBlock('related-articles', { elems: [] });
-  div.append(readMore);
-  main.append(div);
+    const aritcleTags = buildBlock('article-tags', { elems: [] });
+    main.querySelector('div').append(aritcleTags);
+
+    const div = document.createElement('div');
+    const readMore = buildBlock('related-articles', { elems: [] });
+    div.append(readMore);
+    main.append(div);
+  }
 }
