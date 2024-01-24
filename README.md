@@ -5,6 +5,10 @@ Temporary location prior to enabling https://github.tools.sap/UDEx/dx-web
 - Preview: https://main--hlx-test--urfuwo.hlx.page/
 - Live: https://main--hlx-test--urfuwo.hlx.live/
 
+## Documentation
+
+All technical documentaion of the project lives in [/docs](/docs) folder.
+
 ## Installation
 
 ```sh
