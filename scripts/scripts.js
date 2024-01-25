@@ -99,6 +99,39 @@ export async function decorateMain(main) {
 }
 
 /**
+ * Add three entries to the head, in this order:
+ * <!-- Load SAP theme (here: sap_glow) -->
+ * <link rel="stylesheet" href="/themes/sap_glow/css_variables.css">
+ * <!-- Announce theme to UI5 components (before module is loaded) -->
+ * <script data-ui5-config type="application/json">{"theme": "sap_glow"}</script>
+ * <!-- Load SAP Digital Design System Web Components Module -->
+ * <script src="/libs/dds-wc-bundle.esm.m.js" type="module"></script>
+ * @returns {Promise<void>}
+ */
+async function loadSAPTheme() {
+  try {
+    const sapTheme = getMetadata('saptheme', document) || 'sap_glow';
+    if (sapTheme) {
+      loadCSS(`/themes/${sapTheme}/css_variables.css`);
+
+      const head = document.querySelector('head');
+      const ui5ThemeScript = document.createElement('script');
+      ui5ThemeScript.setAttribute('data-ui5-config', '');
+      ui5ThemeScript.setAttribute('type', 'application/json');
+      ui5ThemeScript.textContent = `{"theme": "${sapTheme}"}`;
+      head.append(ui5ThemeScript);
+      const webComponentsModule = document.createElement('script');
+      webComponentsModule.setAttribute('src', '/libs/dds-wc-bundle.esm.m.js');
+      webComponentsModule.setAttribute('type', 'module');
+      head.append(webComponentsModule);
+    }
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.error('SAP-Theme loading failed', e);
+  }
+}
+
+/**
  * Loads everything needed to get to LCP.
  * @param {Element} doc The container element
  */
@@ -108,6 +141,7 @@ async function loadEager(doc) {
   const main = doc.querySelector('main');
   if (main) {
     await decorateMain(main);
+    loadSAPTheme();
     document.body.classList.add('appear');
     await waitForLCP(LCP_BLOCKS);
   }
