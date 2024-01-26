@@ -1,0 +1,27 @@
+/**
+* Defines which direction the items of ui5-toolbar will be aligned.
+ *
+ * @readonly
+ * @enum {string}
+ * @public
+ * @type {string}
+ * @author SAP SE
+ * @alias sap.ui.webc.main.types.ToolbarAlign
+ */
+var ToolbarAlign;
+(function (ToolbarAlign) {
+    /**
+     * @public
+     * @type {Start}
+     * Toolbar items are situated at the <code>start</code> of the Toolbar
+     */
+    ToolbarAlign["Start"] = "Start";
+    /**
+     * @public
+     * @type {End}
+     * Toolbar items are situated at the <code>end</code> of the Toolbar
+     */
+    ToolbarAlign["End"] = "End";
+})(ToolbarAlign || (ToolbarAlign = {}));
+export default ToolbarAlign;
+//# sourceMappingURL=ToolbarAlign.js.map

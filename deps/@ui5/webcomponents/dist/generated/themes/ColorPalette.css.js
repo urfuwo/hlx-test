@@ -1,0 +1,9 @@
+import { registerThemePropertiesLoader } from "@ui5/webcomponents-base/dist/asset-registries/Themes.js";
+import defaultThemeBase from "@ui5/webcomponents-theming/dist/generated/themes/sap_horizon/parameters-bundle.css.js";
+import defaultTheme from "./sap_horizon/parameters-bundle.css.js";
+registerThemePropertiesLoader("@ui5/webcomponents-theming", "sap_horizon", async () => defaultThemeBase);
+registerThemePropertiesLoader("@ui5/webcomponents", "sap_horizon", async () => defaultTheme);
+const styleData = { packageName: "@ui5/webcomponents", fileName: "themes/ColorPalette.css.ts", content: `:host(:not([hidden])){display:inline-block}:host(:not([hidden])[popup-mode]){width:100%}.ui5-cp-root{display:flex;flex-direction:column}.ui5-cp-root.ui5-cp-root-phone,.ui5-cp-separator,.ui5-cp-root.ui5-cp-root-phone .ui5-cp-more-colors-wrapper,.ui5-cp-root.ui5-cp-root-phone .ui5-cp-default-color-button-wrapper,.ui5-cp-recent-colors-wrapper{width:100%}.ui5-cp-root.ui5-cp-root-phone .ui5-cp-item-container{width:18.5rem;max-width:19.5rem;max-height:13rem;padding:.375rem .625rem}.ui5-cp-recent-colors-wrapper{display:flex;align-items:center;flex-direction:column}.ui5-cp-root.ui5-cp-root-phone{display:flex;align-items:center}.ui5-cp-item-container{display:flex;max-width:var(--_ui5-v1-21-2_color-palette-row-width);flex-flow:wrap;max-height:var(--_ui5-v1-21-2_color-palette-row-height);overflow:hidden;padding:var(--_ui5-v1-21-2_color-palette-swatch-container-padding)}.ui5-cp-more-colors,.ui5-cp-default-color-button{width:100%;height:var(--_ui5-v1-21-2_color-palette-button-height);text-align:center;border:none}.ui5-cp-more-colors-wrapper,.ui5-cp-default-color-button-wrapper{display:flex;flex-direction:column}.ui5-cp-separator{height:.0625rem;background:var(--sapToolbar_SeparatorColor)}.ui5-cp-default-color-button,.ui5-cp-more-colors{padding:.0625rem}
+` };
+export default styleData;
+//# sourceMappingURL=ColorPalette.css.js.map
