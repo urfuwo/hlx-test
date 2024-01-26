@@ -1,10 +1,93 @@
-import { v as instanceOfUI5Element, p as property, f as customElement, U as UI5Element, e as effectiveHtml, l, a as registerThemePropertiesLoader, c as styleData$d, d as styleData$e, m as getI18nBundle, n as litRender, s as scopeTag, i as isLegacyThemeFamily, k as isPhone, E as isDesktop, h as getFeature, F as effectiveSvg, C as renderFinished } from "./parameters-bundle.css-SwkfcYC-.js";
-import { s as slot, b as getEffectiveAriaLabelText } from "./AriaLabelHelper-C568z_QZ.js";
-import { p as isLeft, q as isRight, d as isUp, f as isDown, m as isHome, n as isEnd, k as isPageUp, l as isPageDown, e as event, j as isEnter, g as isSpace, r as registerIcon, s as isUpShift, t as isDownShift, u as isLeftShift, v as isRightShift, I as Icon, h as isTabNext, o as isTabPrevious, a as isDelete, c, w as isShow } from "./entry-icon-6nxMzUd9.js";
-import { g as getActiveElement, o, s as styleMap, V as ValueState, a as Popup, b as PopupAccessibleRole, c as clamp, d as styleData$f, e as styleData$g, P as Popover, f as getNextZIndex, i as isElementHidden, I as Integer, R as ResizeHandler, h as getEffectiveScrollbarStyle } from "./Popover-cpOKHOlO.js";
-import { L as LINK_SUBTLE, m as LINK_EMPHASIZED, D as DIALOG_HEADER_ARIA_ROLE_DESCRIPTION, n as DIALOG_HEADER_ARIA_DESCRIBEDBY_RESIZABLE, o as DIALOG_HEADER_ARIA_DESCRIBEDBY_DRAGGABLE, p as DIALOG_HEADER_ARIA_DESCRIBEDBY_DRAGGABLE_RESIZABLE, R as RESPONSIVE_POPOVER_CLOSE_DIALOG_BUTTON, B as BUSY_INDICATOR_TITLE, f as VALUE_STATE_ERROR, g as VALUE_STATE_WARNING, d as VALUE_STATE_SUCCESS, e as VALUE_STATE_INFORMATION, q as RADIO_BUTTON_GROUP_REQUIRED, A as ARIA_LABEL_LIST_MULTISELECTABLE, r as ARIA_LABEL_LIST_SELECTABLE, s as ARIA_LABEL_LIST_DELETABLE, t as LOAD_MORE_TEXT, u as LIST_ITEM_SELECTED, v as LIST_ITEM_NOT_SELECTED, w as DELETE, x as ARIA_LABEL_LIST_ITEM_CHECKBOX, y as ARIA_LABEL_LIST_ITEM_RADIO_BUTTON, z as AVATAR_TOOLTIP, C as BREADCRUMB_ITEM_POS, E as BREADCRUMBS_ARIA_LABEL, F as BREADCRUMBS_OVERFLOW_ARIA_LABEL, G as BREADCRUMBS_CANCEL_BUTTON } from "./i18n-defaults-0fqsgv55.js";
-import { m as markEvent, B as Button, g as getEventMark } from "./entry-button-DaRJubYY.js";
-import { W as WrappingType, L as Label } from "./entry-label-Ia7v3-GB.js";
+import { e, i, t, T, a as isLeft, b as isRight, c as isUp, d as isDown, f as isHome, g as isEnd, h as isPageUp, j as isPageDown, k as instanceOfUI5Element, p as property, s as slot, l as customElement, U as UI5Element, m as effectiveHtml, n as l, r as registerThemePropertiesLoader, o as styleData$k, q as styleData$l, u as event, v as getEffectiveAriaLabelText, L as LINK_SUBTLE, w as LINK_EMPHASIZED, x as getI18nBundle, y as markEvent, z as isEnter, A as isSpace, B as litRender, C as LABEL_COLON, D as getSharedResource, E as getFeature, F as scopeTag, G as isEscape, H as hasStyle, I as createStyle, J as isTabPrevious, K as isSafari, M as isChrome, N as renderFinished, O as isIOS, P as registerIcon, Q as isLegacyThemeFamily, R as DIALOG_HEADER_ARIA_ROLE_DESCRIPTION, S as DIALOG_HEADER_ARIA_DESCRIBEDBY_RESIZABLE, V as DIALOG_HEADER_ARIA_DESCRIBEDBY_DRAGGABLE, W as DIALOG_HEADER_ARIA_DESCRIBEDBY_DRAGGABLE_RESIZABLE, X as isPhone, Y as isDesktop, Z as isUpShift, _ as isDownShift, $ as isLeftShift, a0 as isRightShift, a1 as Icon, a2 as Button, a3 as RESPONSIVE_POPOVER_CLOSE_DIALOG_BUTTON, a4 as isTabNext, a5 as BUSY_INDICATOR_TITLE, a6 as VALUE_STATE_ERROR, a7 as VALUE_STATE_WARNING, a8 as VALUE_STATE_SUCCESS, a9 as effectiveSvg, aa as VALUE_STATE_INFORMATION, ab as RADIO_BUTTON_GROUP_REQUIRED, ac as ARIA_LABEL_LIST_MULTISELECTABLE, ad as ARIA_LABEL_LIST_SELECTABLE, ae as ARIA_LABEL_LIST_DELETABLE, af as LOAD_MORE_TEXT, ag as isDelete, ah as getEventMark, ai as LIST_ITEM_SELECTED, aj as LIST_ITEM_NOT_SELECTED, ak as DELETE, al as ARIA_LABEL_LIST_ITEM_CHECKBOX, am as ARIA_LABEL_LIST_ITEM_RADIO_BUTTON, an as AVATAR_TOOLTIP, ao as c, ap as isShow, aq as BREADCRUMB_ITEM_POS, ar as BREADCRUMBS_ARIA_LABEL, as as BREADCRUMBS_OVERFLOW_ARIA_LABEL, at as BREADCRUMBS_CANCEL_BUTTON } from "./entry-button-y0VrvcGp.js";
+/**
+ * @license
+ * Copyright 2018 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */
+const o = e(class extends i {
+  constructor(t$1) {
+    var i2;
+    if (super(t$1), t$1.type !== t.ATTRIBUTE || "class" !== t$1.name || (null === (i2 = t$1.strings) || void 0 === i2 ? void 0 : i2.length) > 2)
+      throw Error("`classMap()` can only be used in the `class` attribute and must be the only part in the attribute.");
+  }
+  render(t2) {
+    return " " + Object.keys(t2).filter((i2) => t2[i2]).join(" ") + " ";
+  }
+  update(i2, [s]) {
+    var r, o2;
+    if (void 0 === this.it) {
+      this.it = /* @__PURE__ */ new Set(), void 0 !== i2.strings && (this.nt = new Set(i2.strings.join(" ").split(/\s/).filter((t2) => "" !== t2)));
+      for (const t2 in s)
+        s[t2] && !(null === (r = this.nt) || void 0 === r ? void 0 : r.has(t2)) && this.it.add(t2);
+      return this.render(s);
+    }
+    const e2 = i2.element.classList;
+    this.it.forEach((t2) => {
+      t2 in s || (e2.remove(t2), this.it.delete(t2));
+    });
+    for (const t2 in s) {
+      const i3 = !!s[t2];
+      i3 === this.it.has(t2) || (null === (o2 = this.nt) || void 0 === o2 ? void 0 : o2.has(t2)) || (i3 ? (e2.add(t2), this.it.add(t2)) : (e2.remove(t2), this.it.delete(t2)));
+    }
+    return T;
+  }
+});
+/**
+ * @license
+ * Copyright 2018 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */
+class StyleMapDirective extends i {
+  constructor(partInfo) {
+    var _a;
+    super(partInfo);
+    if (partInfo.type !== t.ATTRIBUTE || partInfo.name !== "style" || ((_a = partInfo.strings) === null || _a === void 0 ? void 0 : _a.length) > 2) {
+      throw new Error("The `styleMap` directive must be used in the `style` attribute and must be the only part in the attribute.");
+    }
+  }
+  render(styleInfo) {
+    return "";
+  }
+  update(part, [styleInfo]) {
+    const { style } = part.element;
+    if (this._previousStyleProperties === void 0) {
+      this._previousStyleProperties = /* @__PURE__ */ new Set();
+      for (const name2 in styleInfo) {
+        this._previousStyleProperties.add(name2);
+      }
+    }
+    this._previousStyleProperties.forEach((name2) => {
+      if (styleInfo[name2] == null) {
+        this._previousStyleProperties.delete(name2);
+        if (name2.includes("-")) {
+          style.removeProperty(name2);
+        } else {
+          style[name2] = "";
+        }
+      }
+    });
+    for (const name2 in styleInfo) {
+      const value = styleInfo[name2];
+      if (value != null) {
+        this._previousStyleProperties.add(name2);
+        if (name2.includes("-")) {
+          style.setProperty(name2, value);
+        } else {
+          style[name2] = value;
+        }
+      }
+    }
+    return T;
+  }
+}
+const styleMap = e(StyleMapDirective);
+const getActiveElement = () => {
+  let element = document.activeElement;
+  while (element && element.shadowRoot && element.shadowRoot.activeElement) {
+    element = element.shadowRoot.activeElement;
+  }
+  return element;
+};
 var NavigationMode;
 (function(NavigationMode2) {
   NavigationMode2["Auto"] = "Auto";
@@ -221,8 +304,8 @@ class ItemNavigation {
   }
   _applyTabIndex() {
     const items = this._getItems();
-    for (let i = 0; i < items.length; i++) {
-      items[i]._tabIndex = i === this._currentIndex ? "0" : "-1";
+    for (let i2 = 0; i2 < items.length; i2++) {
+      items[i2]._tabIndex = i2 === this._currentIndex ? "0" : "-1";
     }
     this._affectedPropertiesNames.forEach((propName) => {
       const prop = this.rootWebComponent[propName];
@@ -267,6 +350,118 @@ class ItemNavigation {
     }
   }
 }
+class DataType {
+  /**
+   * Checks if the value is valid for its data type.
+   * @public
+   * @abstract
+   * @returns {Boolean}
+   */
+  // eslint-disable-next-line
+  static isValid(value) {
+    return false;
+  }
+  static attributeToProperty(attributeValue) {
+    return attributeValue;
+  }
+  static propertyToAttribute(propertyValue) {
+    return propertyValue === null ? null : String(propertyValue);
+  }
+  static valuesAreEqual(value1, value2) {
+    return value1 === value2;
+  }
+  static generateTypeAccessors(types) {
+    Object.keys(types).forEach((type) => {
+      Object.defineProperty(this, type, {
+        get() {
+          return types[type];
+        }
+      });
+    });
+  }
+  static get isDataTypeClass() {
+    return true;
+  }
+}
+class Integer extends DataType {
+  static isValid(value) {
+    return Number.isInteger(value);
+  }
+  static attributeToProperty(attributeValue) {
+    return parseInt(attributeValue);
+  }
+}
+let resizeObserver;
+const observedElements = /* @__PURE__ */ new Map();
+const getResizeObserver = () => {
+  if (!resizeObserver) {
+    resizeObserver = new window.ResizeObserver((entries) => {
+      window.requestAnimationFrame(() => {
+        entries.forEach((entry) => {
+          const callbacks = observedElements.get(entry.target);
+          callbacks && Promise.all(callbacks.map((callback) => callback()));
+        });
+      });
+    });
+  }
+  return resizeObserver;
+};
+const observe = (element, callback) => {
+  const callbacks = observedElements.get(element) || [];
+  if (!callbacks.length) {
+    getResizeObserver().observe(element);
+  }
+  observedElements.set(element, [...callbacks, callback]);
+};
+const unobserve = (element, callback) => {
+  const callbacks = observedElements.get(element) || [];
+  if (callbacks.length === 0) {
+    return;
+  }
+  const filteredCallbacks = callbacks.filter((fn) => fn !== callback);
+  if (filteredCallbacks.length === 0) {
+    getResizeObserver().unobserve(element);
+    observedElements.delete(element);
+  } else {
+    observedElements.set(element, filteredCallbacks);
+  }
+};
+class ResizeHandler {
+  /**
+   * @static
+   * @public
+   * @param {*} element UI5 Web Component or DOM Element to be observed
+   * @param {*} callback Callback to be executed
+   */
+  static register(element, callback) {
+    let effectiveElement = element;
+    if (instanceOfUI5Element(effectiveElement)) {
+      effectiveElement = effectiveElement.getDomRef();
+    }
+    if (effectiveElement instanceof HTMLElement) {
+      observe(effectiveElement, callback);
+    } else {
+      console.warn("Cannot register ResizeHandler for element", element);
+    }
+  }
+  /**
+   * @static
+   * @public
+   * @param {*} element UI5 Web Component or DOM Element to be unobserved
+   * @param {*} callback Callback to be removed
+   */
+  static deregister(element, callback) {
+    let effectiveElement = element;
+    if (instanceOfUI5Element(effectiveElement)) {
+      effectiveElement = effectiveElement.getDomRef();
+    }
+    if (effectiveElement instanceof HTMLElement) {
+      unobserve(effectiveElement, callback);
+    } else {
+      console.warn("Cannot deregister ResizeHandler for element", element);
+    }
+  }
+}
 var BreadcrumbsDesign;
 (function(BreadcrumbsDesign2) {
   BreadcrumbsDesign2["Standard"] = "Standard";
@@ -283,13 +478,13 @@ var BreadcrumbsSeparatorStyle;
   BreadcrumbsSeparatorStyle2["GreaterThan"] = "GreaterThan";
 })(BreadcrumbsSeparatorStyle || (BreadcrumbsSeparatorStyle = {}));
 const BreadcrumbsSeparatorStyle$1 = BreadcrumbsSeparatorStyle;
-var __decorate$d = function(decorators, target, key, desc) {
+var __decorate$g = function(decorators, target, key, desc) {
   var c2 = arguments.length, r = c2 < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
   if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
     r = Reflect.decorate(decorators, target, key, desc);
   else
-    for (var i = decorators.length - 1; i >= 0; i--)
-      if (d = decorators[i])
+    for (var i2 = decorators.length - 1; i2 >= 0; i2--)
+      if (d = decorators[i2])
         r = (c2 < 3 ? d(r) : c2 > 3 ? d(target, key, r) : d(target, key)) || r;
   return c2 > 3 && r && Object.defineProperty(target, key, r), r;
 };
@@ -298,19 +493,19 @@ let BreadcrumbsItem = class BreadcrumbsItem2 extends UI5Element {
     return this.getAttribute("stable-dom-ref") || `${this._id}-stable-dom-ref`;
   }
 };
-__decorate$d([
+__decorate$g([
   property()
 ], BreadcrumbsItem.prototype, "href", void 0);
-__decorate$d([
+__decorate$g([
   property({ defaultValue: void 0 })
 ], BreadcrumbsItem.prototype, "target", void 0);
-__decorate$d([
+__decorate$g([
   property()
 ], BreadcrumbsItem.prototype, "accessibleName", void 0);
-__decorate$d([
+__decorate$g([
   slot({ type: Node, "default": true })
 ], BreadcrumbsItem.prototype, "text", void 0);
-BreadcrumbsItem = __decorate$d([
+BreadcrumbsItem = __decorate$g([
   customElement("ui5-breadcrumbs-item")
 ], BreadcrumbsItem);
 BreadcrumbsItem.define();
@@ -322,23 +517,29 @@ var LinkDesign;
   LinkDesign2["Emphasized"] = "Emphasized";
 })(LinkDesign || (LinkDesign = {}));
 const LinkDesign$1 = LinkDesign;
-function block0$b(context, tags, suffix) {
-  return effectiveHtml`<a class="ui5-link-root" role="${l(this.effectiveAccRole)}" href="${l(this.parsedRef)}" target="${l(this.target)}" rel="${l(this._rel)}" tabindex="${l(this.effectiveTabIndex)}" title="${l(this.title)}" ?disabled="${this.disabled}" aria-label="${l(this.ariaLabelText)}" aria-haspopup="${l(this.accessibilityAttributes.hasPopup)}" aria-expanded="${l(this.accessibilityAttributes.expanded)}" @focusin=${this._onfocusin} @focusout=${this._onfocusout} @click=${this._onclick} @keydown=${this._onkeydown} @keyup=${this._onkeyup}><slot></slot>${this.hasLinkType ? block1$b.call(this, context, tags, suffix) : void 0}</a>`;
+var WrappingType;
+(function(WrappingType2) {
+  WrappingType2["None"] = "None";
+  WrappingType2["Normal"] = "Normal";
+})(WrappingType || (WrappingType = {}));
+const WrappingType$1 = WrappingType;
+function block0$f(context, tags, suffix) {
+  return effectiveHtml`<a class="ui5-link-root" role="${l(this.effectiveAccRole)}" href="${l(this.parsedRef)}" target="${l(this.target)}" rel="${l(this._rel)}" tabindex="${l(this.effectiveTabIndex)}" title="${l(this.title)}" ?disabled="${this.disabled}" aria-label="${l(this.ariaLabelText)}" aria-haspopup="${l(this.accessibilityAttributes.hasPopup)}" aria-expanded="${l(this.accessibilityAttributes.expanded)}" @focusin=${this._onfocusin} @focusout=${this._onfocusout} @click=${this._onclick} @keydown=${this._onkeydown} @keyup=${this._onkeyup}><slot></slot>${this.hasLinkType ? block1$c.call(this, context, tags, suffix) : void 0}</a>`;
 }
-function block1$b(context, tags, suffix) {
+function block1$c(context, tags, suffix) {
   return effectiveHtml`<span class="ui5-hidden-text">${l(this.linkTypeText)}</span>`;
 }
-registerThemePropertiesLoader("@ui5/webcomponents-theming", "sap_horizon", async () => styleData$d);
-registerThemePropertiesLoader("@ui5/webcomponents", "sap_horizon", async () => styleData$e);
-const styleData$c = { packageName: "@ui5/webcomponents", fileName: "themes/Link.css.ts", content: `.ui5-hidden-text{position:absolute;clip:rect(1px,1px,1px,1px);user-select:none;left:-1000px;top:-1000px;pointer-events:none;font-size:0}:host(:not([hidden])){display:inline-flex}:host{max-width:100%;color:var(--sapLinkColor);font-family:var(--sapFontFamily);font-size:var(--sapFontSize);cursor:pointer;outline:none;text-decoration:var(--_ui5-v1-21-2_link_text_decoration);text-shadow:var(--sapContent_TextShadow);white-space:nowrap;overflow-wrap:normal}:host(:hover){color:var(--sapLink_Hover_Color);text-decoration:var(--_ui5-v1-21-2_link_hover_text_decoration)}:host(:active){color:var(--sapLink_Active_Color);text-decoration:var(--_ui5-v1-21-2_link_active_text_decoration)}:host([disabled]){pointer-events:none}:host([disabled]) .ui5-link-root{text-shadow:none;outline:none;cursor:default;pointer-events:none;opacity:var(--sapContent_DisabledOpacity)}:host([design="Emphasized"]) .ui5-link-root{font-family:var(--sapFontBoldFamily)}:host([design="Subtle"]){color:var(--sapLink_SubtleColor);text-decoration:var(--_ui5-v1-21-2_link_subtle_text_decoration)}:host([design="Subtle"]:hover:not(:active)){color:var(--sapLink_SubtleColor);text-decoration:var(--_ui5-v1-21-2_link_subtle_text_decoration_hover)}:host([wrapping-type="Normal"]){white-space:normal;overflow-wrap:break-word}.ui5-link-root{max-width:100%;display:inline-block;position:relative;overflow:hidden;text-overflow:ellipsis;outline:none;white-space:inherit;overflow-wrap:inherit;text-decoration:inherit;color:inherit}:host .ui5-link-root{border:var(--_ui5-v1-21-2_link_border);border-radius:var(--_ui5-v1-21-2_link_focus_border-radius)}:host([focused]) .ui5-link-root,:host([design="Subtle"][focused]) .ui5-link-root{background-color:var(--_ui5-v1-21-2_link_focus_background_color);border:var(--_ui5-v1-21-2_link_border_focus);border-radius:var(--_ui5-v1-21-2_link_focus_border-radius);text-shadow:none}:host([focused]),:host([design="Subtle"][focused]){color:var(--_ui5-v1-21-2_link_focus_color);text-decoration:var(--_ui5-v1-21-2_link_focus_text_decoration)}:host([focused]:hover:not(:active)){color:var(--_ui5-v1-21-2_link_focused_hover_text_color);text-decoration:var(--_ui5-v1-21-2_link_focused_hover_text_decoration)}
+registerThemePropertiesLoader("@ui5/webcomponents-theming", "sap_horizon", async () => styleData$k);
+registerThemePropertiesLoader("@ui5/webcomponents", "sap_horizon", async () => styleData$l);
+const styleData$j = { packageName: "@ui5/webcomponents", fileName: "themes/Link.css.ts", content: `.ui5-hidden-text{position:absolute;clip:rect(1px,1px,1px,1px);user-select:none;left:-1000px;top:-1000px;pointer-events:none;font-size:0}:host(:not([hidden])){display:inline-flex}:host{max-width:100%;color:var(--sapLinkColor);font-family:var(--sapFontFamily);font-size:var(--sapFontSize);cursor:pointer;outline:none;text-decoration:var(--_ui5-v1-21-2_link_text_decoration);text-shadow:var(--sapContent_TextShadow);white-space:nowrap;overflow-wrap:normal}:host(:hover){color:var(--sapLink_Hover_Color);text-decoration:var(--_ui5-v1-21-2_link_hover_text_decoration)}:host(:active){color:var(--sapLink_Active_Color);text-decoration:var(--_ui5-v1-21-2_link_active_text_decoration)}:host([disabled]){pointer-events:none}:host([disabled]) .ui5-link-root{text-shadow:none;outline:none;cursor:default;pointer-events:none;opacity:var(--sapContent_DisabledOpacity)}:host([design="Emphasized"]) .ui5-link-root{font-family:var(--sapFontBoldFamily)}:host([design="Subtle"]){color:var(--sapLink_SubtleColor);text-decoration:var(--_ui5-v1-21-2_link_subtle_text_decoration)}:host([design="Subtle"]:hover:not(:active)){color:var(--sapLink_SubtleColor);text-decoration:var(--_ui5-v1-21-2_link_subtle_text_decoration_hover)}:host([wrapping-type="Normal"]){white-space:normal;overflow-wrap:break-word}.ui5-link-root{max-width:100%;display:inline-block;position:relative;overflow:hidden;text-overflow:ellipsis;outline:none;white-space:inherit;overflow-wrap:inherit;text-decoration:inherit;color:inherit}:host .ui5-link-root{border:var(--_ui5-v1-21-2_link_border);border-radius:var(--_ui5-v1-21-2_link_focus_border-radius)}:host([focused]) .ui5-link-root,:host([design="Subtle"][focused]) .ui5-link-root{background-color:var(--_ui5-v1-21-2_link_focus_background_color);border:var(--_ui5-v1-21-2_link_border_focus);border-radius:var(--_ui5-v1-21-2_link_focus_border-radius);text-shadow:none}:host([focused]),:host([design="Subtle"][focused]){color:var(--_ui5-v1-21-2_link_focus_color);text-decoration:var(--_ui5-v1-21-2_link_focus_text_decoration)}:host([focused]:hover:not(:active)){color:var(--_ui5-v1-21-2_link_focused_hover_text_color);text-decoration:var(--_ui5-v1-21-2_link_focused_hover_text_decoration)}
 ` };
-var __decorate$c = function(decorators, target, key, desc) {
+var __decorate$f = function(decorators, target, key, desc) {
   var c2 = arguments.length, r = c2 < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
   if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
     r = Reflect.decorate(decorators, target, key, desc);
   else
-    for (var i = decorators.length - 1; i >= 0; i--)
-      if (d = decorators[i])
+    for (var i2 = decorators.length - 1; i2 >= 0; i2--)
+      if (d = decorators[i2])
         r = (c2 < 3 ? d(r) : c2 > 3 ? d(target, key, r) : d(target, key)) || r;
   return c2 > 3 && r && Object.defineProperty(target, key, r), r;
 };
@@ -388,10 +589,10 @@ let Link = Link_1 = class Link2 extends UI5Element {
   static async onDefine() {
     Link_1.i18nBundle = await getI18nBundle("@ui5/webcomponents");
   }
-  _onclick(e) {
-    const { altKey, ctrlKey, metaKey, shiftKey } = e;
-    e.stopImmediatePropagation();
-    markEvent(e, "link");
+  _onclick(e2) {
+    const { altKey, ctrlKey, metaKey, shiftKey } = e2;
+    e2.stopImmediatePropagation();
+    markEvent(e2, "link");
     const executeEvent = this.fireEvent("click", {
       altKey,
       ctrlKey,
@@ -399,83 +600,83 @@ let Link = Link_1 = class Link2 extends UI5Element {
       shiftKey
     }, true);
     if (!executeEvent) {
-      e.preventDefault();
+      e2.preventDefault();
     }
   }
-  _onfocusin(e) {
-    markEvent(e, "link");
+  _onfocusin(e2) {
+    markEvent(e2, "link");
     this.focused = true;
   }
   _onfocusout() {
     this.focused = false;
   }
-  _onkeydown(e) {
-    if (isEnter(e) && !this.href) {
-      this._onclick(e);
-    } else if (isSpace(e)) {
-      e.preventDefault();
+  _onkeydown(e2) {
+    if (isEnter(e2) && !this.href) {
+      this._onclick(e2);
+    } else if (isSpace(e2)) {
+      e2.preventDefault();
     }
-    markEvent(e, "link");
+    markEvent(e2, "link");
   }
-  _onkeyup(e) {
-    if (!isSpace(e)) {
-      markEvent(e, "link");
+  _onkeyup(e2) {
+    if (!isSpace(e2)) {
+      markEvent(e2, "link");
       return;
     }
-    this._onclick(e);
-    if (this.href && !e.defaultPrevented) {
+    this._onclick(e2);
+    if (this.href && !e2.defaultPrevented) {
       const customEvent = new MouseEvent("click");
       customEvent.stopImmediatePropagation();
       this.getDomRef().dispatchEvent(customEvent);
     }
   }
 };
-__decorate$c([
+__decorate$f([
   property({ type: Boolean })
 ], Link.prototype, "disabled", void 0);
-__decorate$c([
+__decorate$f([
   property()
 ], Link.prototype, "title", void 0);
-__decorate$c([
+__decorate$f([
   property()
 ], Link.prototype, "href", void 0);
-__decorate$c([
+__decorate$f([
   property()
 ], Link.prototype, "target", void 0);
-__decorate$c([
+__decorate$f([
   property({ type: LinkDesign$1, defaultValue: LinkDesign$1.Default })
 ], Link.prototype, "design", void 0);
-__decorate$c([
-  property({ type: WrappingType, defaultValue: WrappingType.None })
+__decorate$f([
+  property({ type: WrappingType$1, defaultValue: WrappingType$1.None })
 ], Link.prototype, "wrappingType", void 0);
-__decorate$c([
+__decorate$f([
   property()
 ], Link.prototype, "accessibleName", void 0);
-__decorate$c([
+__decorate$f([
   property()
 ], Link.prototype, "accessibleNameRef", void 0);
-__decorate$c([
+__decorate$f([
   property({ defaultValue: "link" })
 ], Link.prototype, "accessibleRole", void 0);
-__decorate$c([
+__decorate$f([
   property({ type: Object })
 ], Link.prototype, "accessibilityAttributes", void 0);
-__decorate$c([
+__decorate$f([
   property({ noAttribute: true })
 ], Link.prototype, "_rel", void 0);
-__decorate$c([
+__decorate$f([
   property({ noAttribute: true })
 ], Link.prototype, "_tabIndex", void 0);
-__decorate$c([
+__decorate$f([
   property({ type: Boolean })
 ], Link.prototype, "focused", void 0);
-Link = Link_1 = __decorate$c([
+Link = Link_1 = __decorate$f([
   customElement({
     tag: "ui5-link",
     languageAware: true,
     renderer: litRender,
-    template: block0$b,
-    styles: styleData$c
+    template: block0$f,
+    styles: styleData$j
   }),
   event("click", {
     detail: {
@@ -488,22 +689,153 @@ Link = Link_1 = __decorate$c([
 ], Link);
 Link.define();
 const Link$1 = Link;
-function block0$a(context, tags, suffix) {
-  return effectiveHtml`${this._isPhone ? block1$a.call(this, context, tags, suffix) : block7$3.call(this, context, tags, suffix)}`;
+function block0$e(context, tags, suffix) {
+  return effectiveHtml`<label class="ui5-label-root" @click=${this._onclick}><span class="ui5-label-text-wrapper"><bdi id="${l(this._id)}-bdi"><slot></slot></bdi></span><span aria-hidden="true" class="ui5-label-required-colon" data-colon="${l(this._colonSymbol)}"></span></label>`;
 }
-function block1$a(context, tags, suffix) {
-  return suffix ? effectiveHtml`<${scopeTag("ui5-dialog", tags, suffix)} accessible-name=${l(this.accessibleName)} accessible-name-ref=${l(this.accessibleNameRef)} accessible-role=${l(this.accessibleRole)} stretch _disable-initial-focus @ui5-before-open="${l(this._beforeDialogOpen)}" @ui5-after-open="${l(this._propagateDialogEvent)}" @ui5-before-close="${l(this._propagateDialogEvent)}" @ui5-after-close="${l(this._afterDialogClose)}" exportparts="content, header, footer">${!this._hideHeader ? block2$9.call(this, context, tags, suffix) : void 0}<slot></slot><slot slot="footer" name="footer"></slot></${scopeTag("ui5-dialog", tags, suffix)}>` : effectiveHtml`<ui5-dialog accessible-name=${l(this.accessibleName)} accessible-name-ref=${l(this.accessibleNameRef)} accessible-role=${l(this.accessibleRole)} stretch _disable-initial-focus @ui5-before-open="${l(this._beforeDialogOpen)}" @ui5-after-open="${l(this._propagateDialogEvent)}" @ui5-before-close="${l(this._propagateDialogEvent)}" @ui5-after-close="${l(this._afterDialogClose)}" exportparts="content, header, footer">${!this._hideHeader ? block2$9.call(this, context, tags, suffix) : void 0}<slot></slot><slot slot="footer" name="footer"></slot></ui5-dialog>`;
+registerThemePropertiesLoader("@ui5/webcomponents-theming", "sap_horizon", async () => styleData$k);
+registerThemePropertiesLoader("@ui5/webcomponents", "sap_horizon", async () => styleData$l);
+const styleData$i = { packageName: "@ui5/webcomponents", fileName: "themes/Label.css.ts", content: `:host(:not([hidden])){display:inline-flex}:host{max-width:100%;color:var(--sapContent_LabelColor);font-family:"72override",var(--sapFontFamily);font-size:var(--sapFontSize);font-weight:400;cursor:text}.ui5-label-root{width:100%;cursor:inherit}:host([wrapping-type="Normal"]) .ui5-label-root{white-space:normal}:host(:not([wrapping-type="Normal"])) .ui5-label-root{display:inline-flex;white-space:nowrap}:host(:not([wrapping-type="Normal"])) .ui5-label-text-wrapper{text-overflow:ellipsis;overflow:hidden;display:inline-block;vertical-align:top;flex:0 1 auto;min-width:0}:host([show-colon]) .ui5-label-required-colon:before{content:attr(data-colon)}:host([required]) .ui5-label-required-colon:after{content:"*";color:var(--sapField_RequiredColor);font-size:1.25rem;font-weight:700;position:relative;font-style:normal;vertical-align:middle;line-height:0}:host([required][show-colon]) .ui5-label-required-colon:after{margin-inline-start:.125rem}bdi{padding-right:.075rem}:host([show-colon]) .ui5-label-required-colon{margin-inline-start:-.05rem;white-space:pre}
+` };
+var __decorate$e = function(decorators, target, key, desc) {
+  var c2 = arguments.length, r = c2 < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+  if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+    r = Reflect.decorate(decorators, target, key, desc);
+  else
+    for (var i2 = decorators.length - 1; i2 >= 0; i2--)
+      if (d = decorators[i2])
+        r = (c2 < 3 ? d(r) : c2 > 3 ? d(target, key, r) : d(target, key)) || r;
+  return c2 > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var Label_1;
+let Label = Label_1 = class Label2 extends UI5Element {
+  static async onDefine() {
+    Label_1.i18nBundle = await getI18nBundle("@ui5/webcomponents");
+  }
+  /**
+   * Defines the text of the component.
+   * <br><b>Note:</b> Although this slot accepts HTML Elements, it is strongly recommended that you only use text in order to preserve the intended design.
+   *
+   * @type {Node[]}
+   * @slot
+   * @public
+   * @name sap.ui.webc.main.Label.prototype.default
+   */
+  _onclick() {
+    if (!this.for) {
+      return;
+    }
+    const elementToFocus = this.getRootNode().querySelector(`[id="${this.for}"]`);
+    if (elementToFocus) {
+      elementToFocus.focus();
+    }
+  }
+  get _colonSymbol() {
+    return Label_1.i18nBundle.getText(LABEL_COLON);
+  }
+};
+__decorate$e([
+  property()
+], Label.prototype, "for", void 0);
+__decorate$e([
+  property({ type: Boolean })
+], Label.prototype, "showColon", void 0);
+__decorate$e([
+  property({ type: Boolean })
+], Label.prototype, "required", void 0);
+__decorate$e([
+  property({ type: WrappingType$1, defaultValue: WrappingType$1.None })
+], Label.prototype, "wrappingType", void 0);
+Label = Label_1 = __decorate$e([
+  customElement({
+    tag: "ui5-label",
+    renderer: litRender,
+    template: block0$e,
+    styles: styleData$i,
+    languageAware: true
+  })
+], Label);
+Label.define();
+const Label$1 = Label;
+const popupUtilsData = getSharedResource("PopupUtilsData", { currentZIndex: 100 });
+const getFocusedElement = () => {
+  const element = getActiveElement();
+  return element && typeof element.focus === "function" ? element : null;
+};
+const isFocusedElementWithinNode = (node) => {
+  const fe = getFocusedElement();
+  if (fe) {
+    return isNodeContainedWithin(node, fe);
+  }
+  return false;
+};
+const isNodeContainedWithin = (parent, child) => {
+  let currentNode = parent;
+  if (currentNode.shadowRoot) {
+    const children = Array.from(currentNode.shadowRoot.children);
+    currentNode = children.find((n) => n.localName !== "style");
+    if (!currentNode) {
+      return false;
+    }
+  }
+  if (currentNode === child) {
+    return true;
+  }
+  const childNodes = currentNode.localName === "slot" ? currentNode.assignedNodes() : currentNode.children;
+  if (childNodes) {
+    return Array.from(childNodes).some((n) => isNodeContainedWithin(n, child));
+  }
+  return false;
+};
+const isPointInRect = (x, y, rect) => {
+  return x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom;
+};
+const isClickInRect = (e2, rect) => {
+  let x;
+  let y;
+  if (e2 instanceof MouseEvent) {
+    x = e2.clientX;
+    y = e2.clientY;
+  } else {
+    const touch = e2.touches[0];
+    x = touch.clientX;
+    y = touch.clientY;
+  }
+  return isPointInRect(x, y, rect);
+};
+function instanceOfPopup(object) {
+  return "isUI5Element" in object && "_show" in object;
 }
-function block2$9(context, tags, suffix) {
-  return effectiveHtml`${this.header.length ? block3$7.call(this, context, tags, suffix) : block4$5.call(this, context, tags, suffix)}`;
+const getClosedPopupParent = (el) => {
+  const parent = el.parentElement || el.getRootNode && el.getRootNode().host;
+  if (parent && (instanceOfPopup(parent) || parent === document.documentElement)) {
+    return parent;
+  }
+  return getClosedPopupParent(parent);
+};
+const getNextZIndex = () => {
+  const openUI5Support = getFeature("OpenUI5Support");
+  if (openUI5Support && openUI5Support.isOpenUI5Detected()) {
+    return openUI5Support.getNextZIndex();
+  }
+  popupUtilsData.currentZIndex += 2;
+  return popupUtilsData.currentZIndex;
+};
+function block0$d(context, tags, suffix) {
+  return effectiveHtml`${this._isPhone ? block1$b.call(this, context, tags, suffix) : block7$3.call(this, context, tags, suffix)}`;
 }
-function block3$7(context, tags, suffix) {
+function block1$b(context, tags, suffix) {
+  return suffix ? effectiveHtml`<${scopeTag("ui5-dialog", tags, suffix)} accessible-name=${l(this.accessibleName)} accessible-name-ref=${l(this.accessibleNameRef)} accessible-role=${l(this.accessibleRole)} stretch _disable-initial-focus @ui5-before-open="${l(this._beforeDialogOpen)}" @ui5-after-open="${l(this._propagateDialogEvent)}" @ui5-before-close="${l(this._propagateDialogEvent)}" @ui5-after-close="${l(this._afterDialogClose)}" exportparts="content, header, footer">${!this._hideHeader ? block2$a.call(this, context, tags, suffix) : void 0}<slot></slot><slot slot="footer" name="footer"></slot></${scopeTag("ui5-dialog", tags, suffix)}>` : effectiveHtml`<ui5-dialog accessible-name=${l(this.accessibleName)} accessible-name-ref=${l(this.accessibleNameRef)} accessible-role=${l(this.accessibleRole)} stretch _disable-initial-focus @ui5-before-open="${l(this._beforeDialogOpen)}" @ui5-after-open="${l(this._propagateDialogEvent)}" @ui5-before-close="${l(this._propagateDialogEvent)}" @ui5-after-close="${l(this._afterDialogClose)}" exportparts="content, header, footer">${!this._hideHeader ? block2$a.call(this, context, tags, suffix) : void 0}<slot></slot><slot slot="footer" name="footer"></slot></ui5-dialog>`;
+}
+function block2$a(context, tags, suffix) {
+  return effectiveHtml`${this.header.length ? block3$8.call(this, context, tags, suffix) : block4$6.call(this, context, tags, suffix)}`;
+}
+function block3$8(context, tags, suffix) {
   return effectiveHtml`<slot slot="header" name="header"></slot>`;
 }
-function block4$5(context, tags, suffix) {
-  return effectiveHtml`<div class="${o(this.classes.header)}" slot="header">${this.headerText ? block5$4.call(this, context, tags, suffix) : void 0}${!this._hideCloseButton ? block6$4.call(this, context, tags, suffix) : void 0}</div>`;
+function block4$6(context, tags, suffix) {
+  return effectiveHtml`<div class="${o(this.classes.header)}" slot="header">${this.headerText ? block5$5.call(this, context, tags, suffix) : void 0}${!this._hideCloseButton ? block6$4.call(this, context, tags, suffix) : void 0}</div>`;
 }
-function block5$4(context, tags, suffix) {
+function block5$5(context, tags, suffix) {
   return suffix ? effectiveHtml`<${scopeTag("ui5-title", tags, suffix)} level="H2" class="ui5-popup-header-text ui5-responsive-popover-header-text">${l(this.headerText)}</${scopeTag("ui5-title", tags, suffix)}>` : effectiveHtml`<ui5-title level="H2" class="ui5-popup-header-text ui5-responsive-popover-header-text">${l(this.headerText)}</ui5-title>`;
 }
 function block6$4(context, tags, suffix) {
@@ -527,19 +859,1366 @@ function block11$2(context, tags, suffix) {
 function block12$1(context, tags, suffix) {
   return effectiveHtml`<footer class="ui5-popup-footer-root" part="footer"><slot name="footer"></slot></footer>`;
 }
-const name$b = "resize-corner";
-const pathData$b = "M384 224v32q0 12-10 22L182 470q-10 10-22 10h-32zM224 480l160-160v32q0 12-10 22l-96 96q-10 10-22 10h-32zm160-64v32q0 12-10 22t-22 10h-32z";
-const ltr$b = false;
-const collection$b = "SAP-icons-v4";
-const packageName$b = "@ui5/webcomponents-icons";
-registerIcon(name$b, { pathData: pathData$b, ltr: ltr$b, collection: collection$b, packageName: packageName$b });
-const name$a = "resize-corner";
-const pathData$a = "M202 512q-11 0-18.5-7.5T176 486q0-10 8-18l204-205q7-7 18-7t18.5 7.5T432 282t-7 18L220 505q-7 7-18 7zm128 0q-11 0-18.5-7.5T304 486q0-10 8-18l76-77q7-7 18-7t18.5 7.5T432 410t-7 18l-77 77q-7 7-18 7z";
-const ltr$a = false;
-const collection$a = "SAP-icons-v5";
-const packageName$a = "@ui5/webcomponents-icons";
-registerIcon(name$a, { pathData: pathData$a, ltr: ltr$a, collection: collection$a, packageName: packageName$a });
-isLegacyThemeFamily() ? pathData$b : pathData$a;
+class DOMReference extends DataType {
+  static isValid(value) {
+    return typeof value === "string" || value instanceof HTMLElement;
+  }
+  static propertyToAttribute(propertyValue) {
+    if (propertyValue instanceof HTMLElement) {
+      return null;
+    }
+    return propertyValue;
+  }
+}
+const clamp = (val, min, max) => {
+  return Math.min(Math.max(val, min), max);
+};
+const isElementContainingBlock = (el) => {
+  const computedStyle = getComputedStyle(el);
+  return ["size", "inline-size"].indexOf(computedStyle.containerType) > -1 || ["transform", "perspective"].indexOf(computedStyle.willChange) > -1 || ["layout", "paint", "strict", "content"].indexOf(computedStyle.contain) > -1 || computedStyle.transform && computedStyle.transform !== "none" || computedStyle.perspective && computedStyle.perspective !== "none" || computedStyle.backdropFilter && computedStyle.backdropFilter !== "none";
+};
+const getParentElement = (el) => {
+  return el.parentElement ? el.parentNode : el.parentNode.host;
+};
+const isElementHidden = (el) => {
+  if (el.nodeName === "SLOT") {
+    return false;
+  }
+  return el.offsetWidth <= 0 && el.offsetHeight <= 0 || el.style && el.style.visibility === "hidden";
+};
+const rClickable = /^(?:a|area)$/i;
+const rFocusable = /^(?:input|select|textarea|button)$/i;
+const isElementClickable = (el) => {
+  if (el.disabled) {
+    return false;
+  }
+  const tabIndex = el.getAttribute("tabindex");
+  if (tabIndex !== null && tabIndex !== void 0) {
+    return parseInt(tabIndex) >= 0;
+  }
+  return rFocusable.test(el.nodeName) || rClickable.test(el.nodeName) && !!el.href;
+};
+const isFocusTrap = (el) => {
+  return el.hasAttribute("data-ui5-focus-trap");
+};
+const getFirstFocusableElement = async (container, startFromContainer) => {
+  if (!container || isElementHidden(container)) {
+    return null;
+  }
+  return findFocusableElement(container, true, startFromContainer);
+};
+const getLastFocusableElement = async (container, startFromContainer) => {
+  if (!container || isElementHidden(container)) {
+    return null;
+  }
+  return findFocusableElement(container, false, startFromContainer);
+};
+const isElemFocusable = (el) => {
+  return el.hasAttribute("data-ui5-focus-redirect") || !isElementHidden(el);
+};
+const findFocusableElement = async (container, forward, startFromContainer) => {
+  let child;
+  let assignedElements;
+  let currentIndex = -1;
+  if (container.shadowRoot) {
+    child = forward ? container.shadowRoot.firstChild : container.shadowRoot.lastChild;
+  } else if (container instanceof HTMLSlotElement && container.assignedNodes()) {
+    assignedElements = container.assignedNodes();
+    currentIndex = forward ? 0 : assignedElements.length - 1;
+    child = assignedElements[currentIndex];
+  } else if (startFromContainer) {
+    child = container;
+  } else {
+    child = forward ? container.firstElementChild : container.lastElementChild;
+  }
+  let focusableDescendant;
+  while (child) {
+    const originalChild = child;
+    if (instanceOfUI5Element(child)) {
+      child = await child.getFocusDomRefAsync();
+    }
+    if (!child) {
+      return null;
+    }
+    if (child.nodeType === 1 && isElemFocusable(child) && !isFocusTrap(child)) {
+      if (isElementClickable(child)) {
+        return child && typeof child.focus === "function" ? child : null;
+      }
+      focusableDescendant = await findFocusableElement(child, forward);
+      if (focusableDescendant) {
+        return focusableDescendant && typeof focusableDescendant.focus === "function" ? focusableDescendant : null;
+      }
+    }
+    child = forward ? originalChild.nextSibling : originalChild.previousSibling;
+    if (assignedElements && !assignedElements[currentIndex].contains(child)) {
+      currentIndex = forward ? currentIndex + 1 : currentIndex - 1;
+      child = assignedElements[currentIndex];
+    }
+  }
+  return null;
+};
+const NO_SCROLLBAR_STYLE_CLASS = "ui5-content-native-scrollbars";
+const getEffectiveScrollbarStyle = () => document.body.classList.contains(NO_SCROLLBAR_STYLE_CLASS);
+const mediaRanges = /* @__PURE__ */ new Map();
+const DEAFULT_RANGE_SET = /* @__PURE__ */ new Map();
+DEAFULT_RANGE_SET.set("S", [0, 599]);
+DEAFULT_RANGE_SET.set("M", [600, 1023]);
+DEAFULT_RANGE_SET.set("L", [1024, 1439]);
+DEAFULT_RANGE_SET.set("XL", [1440, Infinity]);
+var RANGESETS;
+(function(RANGESETS2) {
+  RANGESETS2["RANGE_4STEPS"] = "4Step";
+})(RANGESETS || (RANGESETS = {}));
+const initRangeSet = (name2, range) => {
+  mediaRanges.set(name2, range);
+};
+const getCurrentRange = (name2, width = window.innerWidth) => {
+  let rangeSet = mediaRanges.get(name2);
+  if (!rangeSet) {
+    rangeSet = mediaRanges.get(RANGESETS.RANGE_4STEPS);
+  }
+  let currentRangeName;
+  const effectiveWidth = Math.floor(width);
+  rangeSet.forEach((value, key) => {
+    if (effectiveWidth >= value[0] && effectiveWidth <= value[1]) {
+      currentRangeName = key;
+    }
+  });
+  return currentRangeName || [...rangeSet.keys()][0];
+};
+const MediaRange = {
+  RANGESETS,
+  initRangeSet,
+  getCurrentRange
+};
+MediaRange.initRangeSet(MediaRange.RANGESETS.RANGE_4STEPS, DEAFULT_RANGE_SET);
+function block0$c(context, tags, suffix) {
+  return effectiveHtml`<section style="${styleMap(this.styles.root)}" class="${o(this.classes.root)}" role="${l(this._role)}" aria-modal="${l(this._ariaModal)}" aria-label="${l(this._ariaLabel)}" aria-labelledby="${l(this._ariaLabelledBy)}" @keydown=${this._onkeydown} @focusout=${this._onfocusout} @mouseup=${this._onmouseup} @mousedown=${this._onmousedown}><span class="first-fe" data-ui5-focus-trap tabindex="0" @focusin=${this.forwardToLast}></span><div style="${styleMap(this.styles.content)}" class="${o(this.classes.content)}"  @scroll="${this._scroll}" part="content"><slot></slot></div><span class="last-fe" data-ui5-focus-trap tabindex="0" @focusin=${this.forwardToFirst}></span></section> `;
+}
+function block0$b(context, tags, suffix) {
+  return effectiveHtml`<div class="ui5-block-layer" ?hidden=${this._blockLayerHidden} tabindex="0" style="${styleMap(this.styles.blockLayer)}" @keydown="${this._preventBlockLayerFocus}" @mousedown="${this._preventBlockLayerFocus}"></div>`;
+}
+var PopupAccessibleRole;
+(function(PopupAccessibleRole2) {
+  PopupAccessibleRole2["None"] = "None";
+  PopupAccessibleRole2["Dialog"] = "Dialog";
+  PopupAccessibleRole2["AlertDialog"] = "AlertDialog";
+})(PopupAccessibleRole || (PopupAccessibleRole = {}));
+const PopupAccessibleRole$1 = PopupAccessibleRole;
+let openedRegistry$1 = [];
+const addOpenedPopup = (instance, parentPopovers = []) => {
+  if (!openedRegistry$1.some((popup) => popup.instance === instance)) {
+    openedRegistry$1.push({
+      instance,
+      parentPopovers
+    });
+  }
+  _updateTopModalPopup();
+  if (openedRegistry$1.length === 1) {
+    attachGlobalListener();
+  }
+};
+const removeOpenedPopup = (instance) => {
+  openedRegistry$1 = openedRegistry$1.filter((el) => {
+    return el.instance !== instance;
+  });
+  _updateTopModalPopup();
+  if (!openedRegistry$1.length) {
+    detachGlobalListener();
+  }
+};
+const getOpenedPopups = () => {
+  return [...openedRegistry$1];
+};
+const _keydownListener = (event2) => {
+  if (!openedRegistry$1.length) {
+    return;
+  }
+  if (isEscape(event2)) {
+    openedRegistry$1[openedRegistry$1.length - 1].instance.close(true);
+  }
+};
+const attachGlobalListener = () => {
+  document.addEventListener("keydown", _keydownListener);
+};
+const detachGlobalListener = () => {
+  document.removeEventListener("keydown", _keydownListener);
+};
+const _updateTopModalPopup = () => {
+  let popup;
+  let hasModal = false;
+  for (let i2 = openedRegistry$1.length - 1; i2 >= 0; i2--) {
+    popup = openedRegistry$1[i2].instance;
+    if (!hasModal && popup.isModal) {
+      popup.isTopModalPopup = true;
+      hasModal = true;
+    } else {
+      popup.isTopModalPopup = false;
+    }
+  }
+};
+registerThemePropertiesLoader("@ui5/webcomponents-theming", "sap_horizon", async () => styleData$k);
+registerThemePropertiesLoader("@ui5/webcomponents", "sap_horizon", async () => styleData$l);
+const styleData$h = { packageName: "@ui5/webcomponents", fileName: "themes/Popup.css.ts", content: `:host{min-width:1px;display:none;position:fixed}
+` };
+registerThemePropertiesLoader("@ui5/webcomponents-theming", "sap_horizon", async () => styleData$k);
+registerThemePropertiesLoader("@ui5/webcomponents", "sap_horizon", async () => styleData$l);
+const styleData$g = { packageName: "@ui5/webcomponents", fileName: "themes/PopupStaticAreaStyles.css.ts", content: `.ui5-block-layer{display:none;position:fixed;background-color:var(--sapBlockLayer_Background);opacity:.6;inset:-500px;outline:none;pointer-events:all;z-index:-1}.ui5-block-layer:not([hidden]){display:inline-block}
+` };
+registerThemePropertiesLoader("@ui5/webcomponents-theming", "sap_horizon", async () => styleData$k);
+registerThemePropertiesLoader("@ui5/webcomponents", "sap_horizon", async () => styleData$l);
+const styleData$f = { packageName: "@ui5/webcomponents", fileName: "themes/PopupGlobal.css.ts", content: `.ui5-popup-scroll-blocker{overflow:hidden}
+` };
+var __decorate$d = function(decorators, target, key, desc) {
+  var c2 = arguments.length, r = c2 < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+  if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+    r = Reflect.decorate(decorators, target, key, desc);
+  else
+    for (var i2 = decorators.length - 1; i2 >= 0; i2--)
+      if (d = decorators[i2])
+        r = (c2 < 3 ? d(r) : c2 > 3 ? d(target, key, r) : d(target, key)) || r;
+  return c2 > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var Popup_1;
+const createBlockingStyle = () => {
+  if (!hasStyle("data-ui5-popup-scroll-blocker")) {
+    createStyle(styleData$f, "data-ui5-popup-scroll-blocker");
+  }
+};
+createBlockingStyle();
+const pageScrollingBlockers = /* @__PURE__ */ new Set();
+let Popup = Popup_1 = class Popup2 extends UI5Element {
+  constructor() {
+    super();
+    this._resizeHandler = this._resize.bind(this);
+  }
+  onBeforeRendering() {
+    this._blockLayerHidden = !this.isOpen() || !this.isTopModalPopup;
+  }
+  onAfterRendering() {
+    this._updateMediaRange();
+  }
+  onEnterDOM() {
+    ResizeHandler.register(this, this._resizeHandler);
+  }
+  onExitDOM() {
+    if (this.isOpen()) {
+      Popup_1.unblockPageScrolling(this);
+      this._removeOpenedPopup();
+    }
+    ResizeHandler.deregister(this, this._resizeHandler);
+  }
+  get _displayProp() {
+    return "block";
+  }
+  _resize() {
+    this._updateMediaRange();
+  }
+  /**
+   * Prevents the user from interacting with the content under the block layer
+   */
+  _preventBlockLayerFocus(e2) {
+    e2.preventDefault();
+  }
+  /**
+   * Temporarily removes scrollbars from the html element
+   * @protected
+   */
+  static blockPageScrolling(popup) {
+    pageScrollingBlockers.add(popup);
+    if (pageScrollingBlockers.size !== 1) {
+      return;
+    }
+    document.documentElement.classList.add("ui5-popup-scroll-blocker");
+  }
+  /**
+   * Restores scrollbars on the html element, if needed
+   * @protected
+   */
+  static unblockPageScrolling(popup) {
+    pageScrollingBlockers.delete(popup);
+    if (pageScrollingBlockers.size !== 0) {
+      return;
+    }
+    document.documentElement.classList.remove("ui5-popup-scroll-blocker");
+  }
+  _scroll(e2) {
+    this.fireEvent("scroll", {
+      scrollTop: e2.target.scrollTop,
+      targetRef: e2.target
+    });
+  }
+  _onkeydown(e2) {
+    const isTabOutAttempt = e2.target === this._root && isTabPrevious(e2);
+    const isEnterOnClosedPopupChild = isEnter(e2) && !this.isOpen();
+    if (isTabOutAttempt || isEnterOnClosedPopupChild) {
+      e2.preventDefault();
+    }
+  }
+  _onfocusout(e2) {
+    if (!e2.relatedTarget) {
+      this._shouldFocusRoot = true;
+    }
+  }
+  _onmousedown(e2) {
+    if (!isSafari()) {
+      this._root.removeAttribute("tabindex");
+    }
+    if (this.shadowRoot.contains(e2.target)) {
+      this._shouldFocusRoot = true;
+    } else {
+      this._shouldFocusRoot = false;
+    }
+  }
+  _onmouseup() {
+    if (!isSafari()) {
+      this._root.tabIndex = -1;
+    }
+    if (this._shouldFocusRoot) {
+      if (isChrome()) {
+        this._root.focus();
+      }
+      this._shouldFocusRoot = false;
+    }
+  }
+  /**
+   * Focus trapping
+   * @private
+   */
+  async forwardToFirst() {
+    const firstFocusable = await getFirstFocusableElement(this);
+    if (firstFocusable) {
+      firstFocusable.focus();
+    } else {
+      this._root.focus();
+    }
+  }
+  /**
+   * Focus trapping
+   * @private
+   */
+  async forwardToLast() {
+    const lastFocusable = await getLastFocusableElement(this);
+    if (lastFocusable) {
+      lastFocusable.focus();
+    } else {
+      this._root.focus();
+    }
+  }
+  /**
+   * Use this method to focus the element denoted by "initialFocus", if provided, or the first focusable element otherwise.
+   * @protected
+   */
+  async applyInitialFocus() {
+    await this.applyFocus();
+  }
+  /**
+   * Focuses the element denoted by <code>initialFocus</code>, if provided,
+   * or the first focusable element otherwise.
+   * @public
+   * @method
+   * @name sap.ui.webc.main.Popup#applyFocus
+   * @async
+   * @returns {Promise} Promise that resolves when the focus is applied
+   */
+  async applyFocus() {
+    await this._waitForDomRef();
+    if (this.getRootNode() === this) {
+      return;
+    }
+    let element;
+    if (this.initialFocus) {
+      element = this.getRootNode().getElementById(this.initialFocus) || document.getElementById(this.initialFocus);
+    }
+    element = element || await getFirstFocusableElement(this) || this._root;
+    if (element) {
+      if (element === this._root) {
+        element.tabIndex = -1;
+      }
+      element.focus();
+    }
+  }
+  /**
+   * Tells if the component is opened
+   * @public
+   * @method
+   * @name sap.ui.webc.main.Popup#isOpen
+   * @returns {boolean}
+   */
+  isOpen() {
+    return this.opened;
+  }
+  isFocusWithin() {
+    return isFocusedElementWithinNode(this._root);
+  }
+  /**
+   * Shows the block layer (for modal popups only) and sets the correct z-index for the purpose of popup stacking
+   * @protected
+   */
+  async _open(preventInitialFocus) {
+    var _a;
+    const prevented = !this.fireEvent("before-open", {}, true, false);
+    if (prevented) {
+      return;
+    }
+    if (this.isModal && !this.shouldHideBackdrop) {
+      this.getStaticAreaItemDomRef();
+      this._blockLayerHidden = false;
+      Popup_1.blockPageScrolling(this);
+    }
+    this._zIndex = getNextZIndex();
+    this.style.zIndex = ((_a = this._zIndex) == null ? void 0 : _a.toString()) || "";
+    this._focusedElementBeforeOpen = getFocusedElement();
+    this._show();
+    if (this.getDomRef()) {
+      this._updateMediaRange();
+    }
+    this._addOpenedPopup();
+    this.opened = true;
+    this.open = true;
+    await renderFinished();
+    if (!this._disableInitialFocus && !preventInitialFocus) {
+      await this.applyInitialFocus();
+    }
+    this.fireEvent("after-open", {}, false, false);
+  }
+  _updateMediaRange() {
+    this.mediaRange = MediaRange.getCurrentRange(MediaRange.RANGESETS.RANGE_4STEPS, this.getDomRef().offsetWidth);
+  }
+  /**
+   * Adds the popup to the "opened popups registry"
+   * @protected
+   */
+  _addOpenedPopup() {
+    addOpenedPopup(this);
+  }
+  /**
+   * Closes the popup.
+   * @public
+   * @method
+   * @name sap.ui.webc.main.Popup#close
+   * @returns {void}
+   */
+  close(escPressed = false, preventRegistryUpdate = false, preventFocusRestore = false) {
+    if (!this.opened) {
+      return;
+    }
+    const prevented = !this.fireEvent("before-close", { escPressed }, true, false);
+    if (prevented) {
+      return;
+    }
+    if (this.isModal) {
+      this._blockLayerHidden = true;
+      Popup_1.unblockPageScrolling(this);
+    }
+    this.hide();
+    this.opened = false;
+    this.open = false;
+    if (!preventRegistryUpdate) {
+      this._removeOpenedPopup();
+    }
+    if (!this.preventFocusRestore && !preventFocusRestore) {
+      this.resetFocus();
+    }
+    this.fireEvent("after-close", {}, false, false);
+  }
+  /**
+   * Removes the popup from the "opened popups registry"
+   * @protected
+   */
+  _removeOpenedPopup() {
+    removeOpenedPopup(this);
+  }
+  /**
+   * Returns the focus to the previously focused element
+   * @protected
+   */
+  resetFocus() {
+    if (!this._focusedElementBeforeOpen) {
+      return;
+    }
+    this._focusedElementBeforeOpen.focus();
+    this._focusedElementBeforeOpen = null;
+  }
+  /**
+   * Sets "block" display to the popup. The property can be overriden by derivatives of Popup.
+   * @protected
+   */
+  _show() {
+    this.style.display = this._displayProp;
+  }
+  /**
+   * Sets "none" display to the popup
+   * @protected
+   */
+  hide() {
+    this.style.display = "none";
+  }
+  /**
+   * Ensures ariaLabel is never null or empty string
+   * @returns {string | undefined}
+   * @protected
+   */
+  get _ariaLabel() {
+    return getEffectiveAriaLabelText(this);
+  }
+  get _root() {
+    return this.shadowRoot.querySelector(".ui5-popup-root");
+  }
+  get _role() {
+    return this.accessibleRole === PopupAccessibleRole$1.None ? void 0 : this.accessibleRole.toLowerCase();
+  }
+  get _ariaModal() {
+    return this.accessibleRole === PopupAccessibleRole$1.None ? void 0 : "true";
+  }
+  get contentDOM() {
+    return this.shadowRoot.querySelector(".ui5-popup-content");
+  }
+  get styles() {
+    return {
+      root: {},
+      content: {},
+      blockLayer: {
+        "zIndex": this._zIndex ? this._zIndex - 1 : ""
+      }
+    };
+  }
+  get classes() {
+    return {
+      root: {
+        "ui5-popup-root": true,
+        "ui5-content-native-scrollbars": getEffectiveScrollbarStyle()
+      },
+      content: {
+        "ui5-popup-content": true
+      }
+    };
+  }
+};
+__decorate$d([
+  property()
+], Popup.prototype, "initialFocus", void 0);
+__decorate$d([
+  property({ type: Boolean })
+], Popup.prototype, "preventFocusRestore", void 0);
+__decorate$d([
+  property({ type: Boolean })
+], Popup.prototype, "open", void 0);
+__decorate$d([
+  property({ type: Boolean, noAttribute: true })
+], Popup.prototype, "opened", void 0);
+__decorate$d([
+  property({ defaultValue: void 0 })
+], Popup.prototype, "accessibleName", void 0);
+__decorate$d([
+  property({ defaultValue: "" })
+], Popup.prototype, "accessibleNameRef", void 0);
+__decorate$d([
+  property({ type: PopupAccessibleRole$1, defaultValue: PopupAccessibleRole$1.Dialog })
+], Popup.prototype, "accessibleRole", void 0);
+__decorate$d([
+  property()
+], Popup.prototype, "mediaRange", void 0);
+__decorate$d([
+  property({ type: Boolean })
+], Popup.prototype, "_disableInitialFocus", void 0);
+__decorate$d([
+  property({ type: Boolean })
+], Popup.prototype, "_blockLayerHidden", void 0);
+__decorate$d([
+  property({ type: Boolean, noAttribute: true })
+], Popup.prototype, "isTopModalPopup", void 0);
+__decorate$d([
+  slot({ type: HTMLElement, "default": true })
+], Popup.prototype, "content", void 0);
+Popup = Popup_1 = __decorate$d([
+  customElement({
+    renderer: litRender,
+    styles: styleData$h,
+    template: block0$c,
+    staticAreaTemplate: block0$b,
+    staticAreaStyles: styleData$g
+  }),
+  event("before-open"),
+  event("after-open"),
+  event("before-close", {
+    escPressed: { type: Boolean }
+  }),
+  event("after-close"),
+  event("scroll")
+], Popup);
+const Popup$1 = Popup;
+var PopoverPlacementType;
+(function(PopoverPlacementType2) {
+  PopoverPlacementType2["Left"] = "Left";
+  PopoverPlacementType2["Right"] = "Right";
+  PopoverPlacementType2["Top"] = "Top";
+  PopoverPlacementType2["Bottom"] = "Bottom";
+})(PopoverPlacementType || (PopoverPlacementType = {}));
+const PopoverPlacementType$1 = PopoverPlacementType;
+var PopoverVerticalAlign;
+(function(PopoverVerticalAlign2) {
+  PopoverVerticalAlign2["Center"] = "Center";
+  PopoverVerticalAlign2["Top"] = "Top";
+  PopoverVerticalAlign2["Bottom"] = "Bottom";
+  PopoverVerticalAlign2["Stretch"] = "Stretch";
+})(PopoverVerticalAlign || (PopoverVerticalAlign = {}));
+const PopoverVerticalAlign$1 = PopoverVerticalAlign;
+var PopoverHorizontalAlign;
+(function(PopoverHorizontalAlign2) {
+  PopoverHorizontalAlign2["Center"] = "Center";
+  PopoverHorizontalAlign2["Left"] = "Left";
+  PopoverHorizontalAlign2["Right"] = "Right";
+  PopoverHorizontalAlign2["Stretch"] = "Stretch";
+})(PopoverHorizontalAlign || (PopoverHorizontalAlign = {}));
+const PopoverHorizontalAlign$1 = PopoverHorizontalAlign;
+let updateInterval;
+const intervalTimeout = 300;
+const openedRegistry = [];
+const repositionPopovers = () => {
+  openedRegistry.forEach((popover) => {
+    popover.instance.reposition();
+  });
+};
+const closePopoversIfLostFocus = () => {
+  if (document.activeElement.tagName === "IFRAME") {
+    getRegistry().reverse().forEach((popup) => popup.instance.close(false, false, true));
+  }
+};
+const runUpdateInterval = () => {
+  updateInterval = setInterval(() => {
+    repositionPopovers();
+    closePopoversIfLostFocus();
+  }, intervalTimeout);
+};
+const stopUpdateInterval = () => {
+  clearInterval(updateInterval);
+};
+const attachGlobalScrollHandler = () => {
+  document.addEventListener("scroll", repositionPopovers, { capture: true });
+};
+const detachGlobalScrollHandler = () => {
+  document.removeEventListener("scroll", repositionPopovers, { capture: true });
+};
+const attachScrollHandler = (popover) => {
+  popover && popover.shadowRoot.addEventListener("scroll", repositionPopovers, { capture: true });
+};
+const detachScrollHandler = (popover) => {
+  popover && popover.shadowRoot.removeEventListener("scroll", repositionPopovers, { capture: true });
+};
+const attachGlobalClickHandler = () => {
+  document.addEventListener("mousedown", clickHandler);
+};
+const detachGlobalClickHandler = () => {
+  document.removeEventListener("mousedown", clickHandler);
+};
+const clickHandler = (event2) => {
+  const openedPopups = getOpenedPopups();
+  if (openedPopups.length === 0) {
+    return;
+  }
+  const isTopPopupPopover = instanceOfPopover(openedPopups[openedPopups.length - 1].instance);
+  if (!isTopPopupPopover) {
+    return;
+  }
+  for (let i2 = openedPopups.length - 1; i2 !== -1; i2--) {
+    const popup = openedPopups[i2].instance;
+    if (popup.isModal || popup.isOpenerClicked(event2)) {
+      return;
+    }
+    if (isClickInRect(event2, popup.getBoundingClientRect())) {
+      break;
+    }
+    popup.close();
+  }
+};
+const addOpenedPopover = (instance) => {
+  const parentPopovers = getParentPopoversIfNested(instance);
+  addOpenedPopup(instance, parentPopovers);
+  openedRegistry.push({
+    instance,
+    parentPopovers
+  });
+  attachScrollHandler(instance);
+  if (openedRegistry.length === 1) {
+    attachGlobalScrollHandler();
+    attachGlobalClickHandler();
+    runUpdateInterval();
+  }
+};
+const removeOpenedPopover = (instance) => {
+  const popoversToClose = [instance];
+  for (let i2 = 0; i2 < openedRegistry.length; i2++) {
+    const indexOfCurrentInstance = openedRegistry[i2].parentPopovers.indexOf(instance);
+    if (openedRegistry[i2].parentPopovers.length > 0 && indexOfCurrentInstance > -1) {
+      popoversToClose.push(openedRegistry[i2].instance);
+    }
+  }
+  for (let i2 = popoversToClose.length - 1; i2 >= 0; i2--) {
+    for (let j = 0; j < openedRegistry.length; j++) {
+      let indexOfItemToRemove = -1;
+      if (popoversToClose[i2] === openedRegistry[j].instance) {
+        indexOfItemToRemove = j;
+      }
+      if (indexOfItemToRemove >= 0) {
+        removeOpenedPopup(openedRegistry[indexOfItemToRemove].instance);
+        detachScrollHandler(openedRegistry[indexOfItemToRemove].instance);
+        const itemToClose = openedRegistry.splice(indexOfItemToRemove, 1);
+        itemToClose[0].instance.close(false, true);
+      }
+    }
+  }
+  if (!openedRegistry.length) {
+    detachGlobalScrollHandler();
+    detachGlobalClickHandler();
+    stopUpdateInterval();
+  }
+};
+const getRegistry = () => {
+  return openedRegistry;
+};
+const getParentPopoversIfNested = (instance) => {
+  let currentElement = instance.parentNode;
+  const parentPopovers = [];
+  while (currentElement && currentElement.parentNode) {
+    for (let i2 = 0; i2 < openedRegistry.length; i2++) {
+      if (currentElement === openedRegistry[i2].instance) {
+        parentPopovers.push(currentElement);
+      }
+    }
+    currentElement = currentElement.parentNode;
+  }
+  return parentPopovers;
+};
+function block0$a(context, tags, suffix) {
+  return effectiveHtml`<section style="${styleMap(this.styles.root)}" class="${o(this.classes.root)}" role="${l(this._role)}" aria-modal="${l(this._ariaModal)}" aria-label="${l(this._ariaLabel)}" aria-labelledby="${l(this._ariaLabelledBy)}" @keydown=${this._onkeydown} @focusout=${this._onfocusout} @mouseup=${this._onmouseup} @mousedown=${this._onmousedown}><span class="first-fe" data-ui5-focus-trap tabindex="0" @focusin=${this.forwardToLast}></span><span class="ui5-popover-arrow" style="${styleMap(this.styles.arrow)}"></span>${this._displayHeader ? block1$a.call(this, context, tags, suffix) : void 0}<div style="${styleMap(this.styles.content)}" class="${o(this.classes.content)}"  @scroll="${this._scroll}" part="content"><slot></slot></div>${this._displayFooter ? block4$5.call(this, context, tags, suffix) : void 0}<span class="last-fe" data-ui5-focus-trap tabindex="0" @focusin=${this.forwardToFirst}></span></section> `;
+}
+function block1$a(context, tags, suffix) {
+  return effectiveHtml`<header class="ui5-popup-header-root" id="ui5-popup-header" part="header">${this.header.length ? block2$9.call(this, context, tags, suffix) : block3$7.call(this, context, tags, suffix)}</header>`;
+}
+function block2$9(context, tags, suffix) {
+  return effectiveHtml`<slot name="header"></slot>`;
+}
+function block3$7(context, tags, suffix) {
+  return effectiveHtml`<h1 class="ui5-popup-header-text">${l(this.headerText)}</h1>`;
+}
+function block4$5(context, tags, suffix) {
+  return effectiveHtml`${this.footer.length ? block5$4.call(this, context, tags, suffix) : void 0}`;
+}
+function block5$4(context, tags, suffix) {
+  return effectiveHtml`<footer class="ui5-popup-footer-root" part="footer"><slot name="footer"></slot></footer>`;
+}
+registerThemePropertiesLoader("@ui5/webcomponents-theming", "sap_horizon", async () => styleData$k);
+registerThemePropertiesLoader("@ui5/webcomponents", "sap_horizon", async () => styleData$l);
+const styleData$e = { packageName: "@ui5/webcomponents", fileName: "themes/BrowserScrollbar.css.ts", content: `:not(.ui5-content-native-scrollbars) ::-webkit-scrollbar:horizontal{height:var(--sapScrollBar_Dimension)}:not(.ui5-content-native-scrollbars) ::-webkit-scrollbar:vertical{width:var(--sapScrollBar_Dimension)}:not(.ui5-content-native-scrollbars) ::-webkit-scrollbar{background-color:var(--sapScrollBar_TrackColor);border-left:var(--browser_scrollbar_border)}:not(.ui5-content-native-scrollbars) ::-webkit-scrollbar-thumb{border-radius:var(--browser_scrollbar_border_radius);background-color:var(--sapScrollBar_FaceColor)}:not(.ui5-content-native-scrollbars) ::-webkit-scrollbar-thumb:hover{background-color:var(--sapScrollBar_Hover_FaceColor)}:not(.ui5-content-native-scrollbars) ::-webkit-scrollbar-corner{background-color:var(--sapScrollBar_TrackColor)}
+` };
+registerThemePropertiesLoader("@ui5/webcomponents-theming", "sap_horizon", async () => styleData$k);
+registerThemePropertiesLoader("@ui5/webcomponents", "sap_horizon", async () => styleData$l);
+const styleData$d = { packageName: "@ui5/webcomponents", fileName: "themes/PopupsCommon.css.ts", content: `:host{display:none;position:fixed;background:var(--sapGroup_ContentBackground);border-radius:var(--_ui5-v1-21-2_popup_border_radius);min-height:2rem;box-sizing:border-box}.ui5-popup-root{background:inherit;border-radius:inherit;width:100%;height:100%;box-sizing:border-box;display:flex;flex-direction:column;overflow:hidden;outline:none}.ui5-popup-root .ui5-popup-header-root{color:var(--sapPageHeader_TextColor);box-shadow:var(--_ui5-v1-21-2_popup_header_shadow);border-bottom:var(--_ui5-v1-21-2_popup_header_border)}.ui5-popup-content{color:var(--sapTextColor)}.ui5-popup-footer-root{background:var(--sapPageFooter_Background);border-top:1px solid var(--sapPageFooter_BorderColor);color:var(--sapPageFooter_TextColor)}.ui5-popup-header-root,.ui5-popup-footer-root,:host([header-text]) .ui5-popup-header-text{margin:0;font-size:1rem;font-family:"72override",var(--_ui5-v1-21-2_popup_header_font_family);display:flex;justify-content:center;align-items:center}.ui5-popup-header-root .ui5-popup-header-text{font-weight:var(--_ui5-v1-21-2_popup_header_font_weight)}.ui5-popup-content{overflow:auto;box-sizing:border-box}:host([header-text]) .ui5-popup-header-text{text-align:center;min-height:var(--_ui5-v1-21-2_popup_default_header_height);max-height:var(--_ui5-v1-21-2_popup_default_header_height);line-height:var(--_ui5-v1-21-2_popup_default_header_height);text-overflow:ellipsis;overflow:hidden;white-space:nowrap;max-width:100%;display:inline-block}:host([header-text]) .ui5-popup-header-root{justify-content:var(--_ui5-v1-21-2_popup_header_prop_header_text_alignment)}:host(:not([header-text])) .ui5-popup-header-text{display:none}:host([disable-scrolling]) .ui5-popup-content{overflow:hidden}:host([media-range="S"]) .ui5-popup-content{padding:1rem var(--_ui5-v1-21-2_popup_content_padding_s)}:host([media-range="M"]) .ui5-popup-content,:host([media-range="L"]) .ui5-popup-content{padding:1rem var(--_ui5-v1-21-2_popup_content_padding_m_l)}:host([media-range="XL"]) .ui5-popup-content{padding:1rem var(--_ui5-v1-21-2_popup_content_padding_xl)}.ui5-popup-header-root{background:var(--_ui5-v1-21-2_popup_header_background)}:host([media-range="S"]) .ui5-popup-header-root,:host([media-range="S"]) .ui5-popup-footer-root{padding-left:var(--_ui5-v1-21-2_popup_header_footer_padding_s);padding-right:var(--_ui5-v1-21-2_popup_header_footer_padding_s)}:host([media-range="M"]) .ui5-popup-header-root,:host([media-range="L"]) .ui5-popup-header-root,:host([media-range="M"]) .ui5-popup-footer-root,:host([media-range="L"]) .ui5-popup-footer-root{padding-left:var(--_ui5-v1-21-2_popup_header_footer_padding_m_l);padding-right:var(--_ui5-v1-21-2_popup_header_footer_padding_m_l)}:host([media-range="XL"]) .ui5-popup-header-root,:host([media-range="XL"]) .ui5-popup-footer-root{padding-left:var(--_ui5-v1-21-2_popup_header_footer_padding_xl);padding-right:var(--_ui5-v1-21-2_popup_header_footer_padding_xl)}
+` };
+registerThemePropertiesLoader("@ui5/webcomponents-theming", "sap_horizon", async () => styleData$k);
+registerThemePropertiesLoader("@ui5/webcomponents", "sap_horizon", async () => styleData$l);
+const styleData$c = { packageName: "@ui5/webcomponents", fileName: "themes/Popover.css.ts", content: `:host{box-shadow:var(--_ui5-v1-21-2_popover_box_shadow);background-color:var(--_ui5-v1-21-2_popover_background);max-width:calc(100vw - (100vw - 100%) - 2 * var(--_ui5-v1-21-2_popup_viewport_margin))}:host([hide-arrow]){box-shadow:var(--_ui5-v1-21-2_popover_no_arrow_box_shadow)}:host([opened][actual-placement-type="Top"]){margin-top:var(--_ui5-v1-21-2-popover-margin-bottom)}:host([opened][actual-placement-type="Bottom"]){margin-top:var(--_ui5-v1-21-2-popover-margin-top)}:host([actual-placement-type="Bottom"]) .ui5-popover-arrow{left:calc(50% - .5625rem);top:-.5rem;height:.5625rem}:host([actual-placement-type="Bottom"]) .ui5-popover-arrow:after{margin:var(--_ui5-v1-21-2_popover_upward_arrow_margin)}:host([actual-placement-type="Left"]) .ui5-popover-arrow{top:calc(50% - .5625rem);right:-.5625rem;width:.5625rem}:host([actual-placement-type="Left"]) .ui5-popover-arrow:after{margin:var(--_ui5-v1-21-2_popover_right_arrow_margin)}:host([actual-placement-type="Top"]) .ui5-popover-arrow{left:calc(50% - .5625rem);height:.5625rem;top:100%}:host([actual-placement-type="Top"]) .ui5-popover-arrow:after{margin:var(--_ui5-v1-21-2_popover_downward_arrow_margin)}:host(:not([actual-placement-type])) .ui5-popover-arrow,:host([actual-placement-type="Right"]) .ui5-popover-arrow{left:-.5625rem;top:calc(50% - .5625rem);width:.5625rem;height:1rem}:host(:not([actual-placement-type])) .ui5-popover-arrow:after,:host([actual-placement-type="Right"]) .ui5-popover-arrow:after{margin:var(--_ui5-v1-21-2_popover_left_arrow_margin)}:host([hide-arrow]) .ui5-popover-arrow{display:none}.ui5-popover-root{min-width:6.25rem}.ui5-popover-arrow{pointer-events:none;display:block;width:1rem;height:1rem;position:absolute;overflow:hidden}.ui5-popover-arrow:after{content:"";display:block;width:.7rem;height:.7rem;background-color:var(--_ui5-v1-21-2_popover_background);box-shadow:var(--_ui5-v1-21-2_popover_box_shadow);transform:rotate(-45deg)}
+` };
+var __decorate$c = function(decorators, target, key, desc) {
+  var c2 = arguments.length, r = c2 < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+  if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+    r = Reflect.decorate(decorators, target, key, desc);
+  else
+    for (var i2 = decorators.length - 1; i2 >= 0; i2--)
+      if (d = decorators[i2])
+        r = (c2 < 3 ? d(r) : c2 > 3 ? d(target, key, r) : d(target, key)) || r;
+  return c2 > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var Popover_1;
+const ARROW_SIZE = 8;
+let Popover = Popover_1 = class Popover2 extends Popup$1 {
+  static get VIEWPORT_MARGIN() {
+    return 10;
+  }
+  constructor() {
+    super();
+  }
+  onAfterRendering() {
+    super.onAfterRendering();
+    if (!this.isOpen() && this.open) {
+      let opener;
+      if (this.opener instanceof HTMLElement) {
+        opener = this.opener;
+      } else if (typeof this.opener === "string") {
+        opener = this.getRootNode().getElementById(this.opener) || document.getElementById(this.opener);
+      }
+      if (!opener) {
+        console.warn("Valid opener id is required.");
+        return;
+      }
+      this.showAt(opener);
+    } else if (this.isOpen() && !this.open) {
+      this.close();
+    }
+  }
+  isOpenerClicked(e2) {
+    const target = e2.target;
+    if (target === this._opener) {
+      return true;
+    }
+    const ui5ElementTarget = target;
+    if (ui5ElementTarget.getFocusDomRef && ui5ElementTarget.getFocusDomRef() === this._opener) {
+      return true;
+    }
+    return e2.composedPath().indexOf(this._opener) > -1;
+  }
+  /**
+   * Shows the popover.
+   * @param {HTMLElement} opener the element that the popover is shown at
+   * @param {boolean} [preventInitialFocus=false] prevents applying the focus inside the popover
+   * @public
+   * @async
+   * @method
+   * @name sap.ui.webc.main.Popover#showAt
+   * @async
+   * @returns {Promise} Resolved when the popover is open
+   */
+  async showAt(opener, preventInitialFocus = false) {
+    if (!opener || this.opened) {
+      return;
+    }
+    this._opener = opener;
+    this._openerRect = opener.getBoundingClientRect();
+    await super._open(preventInitialFocus);
+  }
+  /**
+   * Override for the _addOpenedPopup hook, which would otherwise just call addOpenedPopup(this)
+   * @private
+   */
+  _addOpenedPopup() {
+    addOpenedPopover(this);
+  }
+  /**
+   * Override for the _removeOpenedPopup hook, which would otherwise just call removeOpenedPopup(this)
+   * @private
+   */
+  _removeOpenedPopup() {
+    removeOpenedPopover(this);
+  }
+  shouldCloseDueToOverflow(placement, openerRect) {
+    const threshold = 32;
+    const limits = {
+      "Right": openerRect.right,
+      "Left": openerRect.left,
+      "Top": openerRect.top,
+      "Bottom": openerRect.bottom
+    };
+    const closedPopupParent = getClosedPopupParent(this._opener);
+    let overflowsBottom = false;
+    let overflowsTop = false;
+    if (closedPopupParent.showAt) {
+      const contentRect = closedPopupParent.contentDOM.getBoundingClientRect();
+      overflowsBottom = openerRect.top > contentRect.top + contentRect.height;
+      overflowsTop = openerRect.top + openerRect.height < contentRect.top;
+    }
+    return limits[placement] < 0 || limits[placement] + threshold > closedPopupParent.innerHeight || overflowsBottom || overflowsTop;
+  }
+  shouldCloseDueToNoOpener(openerRect) {
+    return openerRect.top === 0 && openerRect.bottom === 0 && openerRect.left === 0 && openerRect.right === 0;
+  }
+  isOpenerOutsideViewport(openerRect) {
+    return openerRect.bottom < 0 || openerRect.top > window.innerHeight || openerRect.right < 0 || openerRect.left > window.innerWidth;
+  }
+  /**
+   * @override
+   */
+  _resize() {
+    super._resize();
+    if (this.opened) {
+      this.reposition();
+    }
+  }
+  reposition() {
+    this._show();
+  }
+  _show() {
+    if (!this.opened) {
+      this._showOutsideViewport();
+    }
+    const popoverSize = this.getPopoverSize();
+    let placement;
+    if (popoverSize.width === 0 || popoverSize.height === 0) {
+      return;
+    }
+    if (this.isOpen()) {
+      this._openerRect = this._opener.getBoundingClientRect();
+    }
+    if (this.shouldCloseDueToNoOpener(this._openerRect) && this.isFocusWithin() && this._oldPlacement) {
+      placement = this._oldPlacement;
+    } else {
+      placement = this.calcPlacement(this._openerRect, popoverSize);
+    }
+    if (this._preventRepositionAndClose || this.isOpenerOutsideViewport(this._openerRect)) {
+      return this.close();
+    }
+    this._oldPlacement = placement;
+    this.actualPlacementType = placement.placementType;
+    let left = clamp(this._left, Popover_1.VIEWPORT_MARGIN, document.documentElement.clientWidth - popoverSize.width - Popover_1.VIEWPORT_MARGIN);
+    if (this.actualPlacementType === PopoverPlacementType$1.Right) {
+      left = Math.max(left, this._left);
+    }
+    let top = clamp(this._top, Popover_1.VIEWPORT_MARGIN, document.documentElement.clientHeight - popoverSize.height - Popover_1.VIEWPORT_MARGIN);
+    if (this.actualPlacementType === PopoverPlacementType$1.Bottom) {
+      top = Math.max(top, this._top);
+    }
+    this.arrowTranslateX = placement.arrow.x;
+    this.arrowTranslateY = placement.arrow.y;
+    top = this._adjustForIOSKeyboard(top);
+    const containingBlockClientLocation = this._getContainingBlockClientLocation();
+    left -= containingBlockClientLocation.left;
+    top -= containingBlockClientLocation.top;
+    Object.assign(this.style, {
+      top: `${top}px`,
+      left: `${left}px`
+    });
+    if (this.horizontalAlign === PopoverHorizontalAlign$1.Stretch && this._width) {
+      this.style.width = this._width;
+    }
+  }
+  /**
+   * Adjust the desired top position to compensate for shift of the screen
+   * caused by opened keyboard on iOS which affects all elements with position:fixed.
+   * @private
+   * @param {int} top The target top in px.
+   * @returns {int} The adjusted top in px.
+   */
+  _adjustForIOSKeyboard(top) {
+    if (!isIOS()) {
+      return top;
+    }
+    const actualTop = Math.ceil(this.getBoundingClientRect().top);
+    return top + (Number.parseInt(this.style.top || "0") - actualTop);
+  }
+  _getContainingBlockClientLocation() {
+    let parentElement = getParentElement(this);
+    while (parentElement) {
+      if (isElementContainingBlock(parentElement)) {
+        return parentElement.getBoundingClientRect();
+      }
+      parentElement = getParentElement(parentElement);
+    }
+    return { left: 0, top: 0 };
+  }
+  getPopoverSize() {
+    const rect = this.getBoundingClientRect(), width = rect.width, height = rect.height;
+    return { width, height };
+  }
+  _showOutsideViewport() {
+    Object.assign(this.style, {
+      display: this._displayProp,
+      top: "-10000px",
+      left: "-10000px"
+    });
+  }
+  get arrowDOM() {
+    return this.shadowRoot.querySelector(".ui5-popover-arrow");
+  }
+  /**
+   * @private
+   */
+  calcPlacement(targetRect, popoverSize) {
+    let left = 0;
+    let top = 0;
+    const allowTargetOverlap = this.allowTargetOverlap;
+    const clientWidth = document.documentElement.clientWidth;
+    const clientHeight = document.documentElement.clientHeight;
+    let maxHeight = clientHeight;
+    let maxWidth = clientWidth;
+    const placementType = this.getActualPlacementType(targetRect, popoverSize);
+    this._preventRepositionAndClose = this.shouldCloseDueToNoOpener(targetRect) || this.shouldCloseDueToOverflow(placementType, targetRect);
+    const isVertical = placementType === PopoverPlacementType$1.Top || placementType === PopoverPlacementType$1.Bottom;
+    if (this.horizontalAlign === PopoverHorizontalAlign$1.Stretch && isVertical) {
+      popoverSize.width = targetRect.width;
+      this._width = `${targetRect.width}px`;
+    } else if (this.verticalAlign === PopoverVerticalAlign$1.Stretch && !isVertical) {
+      popoverSize.height = targetRect.height;
+    }
+    const arrowOffset = this.hideArrow ? 0 : ARROW_SIZE;
+    switch (placementType) {
+      case PopoverPlacementType$1.Top:
+        left = this.getVerticalLeft(targetRect, popoverSize);
+        top = Math.max(targetRect.top - popoverSize.height - arrowOffset, 0);
+        if (!allowTargetOverlap) {
+          maxHeight = targetRect.top - arrowOffset;
+        }
+        break;
+      case PopoverPlacementType$1.Bottom:
+        left = this.getVerticalLeft(targetRect, popoverSize);
+        top = targetRect.bottom + arrowOffset;
+        if (allowTargetOverlap) {
+          top = Math.max(Math.min(top, clientHeight - popoverSize.height), 0);
+        } else {
+          maxHeight = clientHeight - targetRect.bottom - arrowOffset;
+        }
+        break;
+      case PopoverPlacementType$1.Left:
+        left = Math.max(targetRect.left - popoverSize.width - arrowOffset, 0);
+        top = this.getHorizontalTop(targetRect, popoverSize);
+        if (!allowTargetOverlap) {
+          maxWidth = targetRect.left - arrowOffset;
+        }
+        break;
+      case PopoverPlacementType$1.Right:
+        left = targetRect.left + targetRect.width + arrowOffset;
+        top = this.getHorizontalTop(targetRect, popoverSize);
+        if (allowTargetOverlap) {
+          left = Math.max(Math.min(left, clientWidth - popoverSize.width), 0);
+        } else {
+          maxWidth = clientWidth - targetRect.right - arrowOffset;
+        }
+        break;
+    }
+    if (isVertical) {
+      if (popoverSize.width > clientWidth || left < 0) {
+        left = 0;
+      } else if (left + popoverSize.width > clientWidth) {
+        left -= left + popoverSize.width - clientWidth;
+      }
+    } else {
+      if (popoverSize.height > clientHeight || top < 0) {
+        top = 0;
+      } else if (top + popoverSize.height > clientHeight) {
+        top -= top + popoverSize.height - clientHeight;
+      }
+    }
+    this._maxHeight = Math.round(maxHeight - Popover_1.VIEWPORT_MARGIN);
+    this._maxWidth = Math.round(maxWidth - Popover_1.VIEWPORT_MARGIN);
+    if (this._left === void 0 || Math.abs(this._left - left) > 1.5) {
+      this._left = Math.round(left);
+    }
+    if (this._top === void 0 || Math.abs(this._top - top) > 1.5) {
+      this._top = Math.round(top);
+    }
+    const borderRadius = Number.parseInt(window.getComputedStyle(this).getPropertyValue("border-radius"));
+    const arrowPos = this.getArrowPosition(targetRect, popoverSize, left, top, isVertical, borderRadius);
+    return {
+      arrow: arrowPos,
+      top: this._top,
+      left: this._left,
+      placementType
+    };
+  }
+  /**
+   * Calculates the position for the arrow.
+   * @private
+   * @param targetRect BoundingClientRect of the target element
+   * @param {{width: number, height: number}} popoverSize Width and height of the popover
+   * @param left Left offset of the popover
+   * @param top Top offset of the popover
+   * @param isVertical If the popover is positioned vertically to the target element
+   * @param {number} borderRadius Value of the border-radius property
+   * @returns {{x: number, y: number}} Arrow's coordinates
+   */
+  getArrowPosition(targetRect, popoverSize, left, top, isVertical, borderRadius) {
+    const horizontalAlign = this._actualHorizontalAlign;
+    let arrowXCentered = horizontalAlign === PopoverHorizontalAlign$1.Center || horizontalAlign === PopoverHorizontalAlign$1.Stretch;
+    if (horizontalAlign === PopoverHorizontalAlign$1.Right && left <= targetRect.left) {
+      arrowXCentered = true;
+    }
+    if (horizontalAlign === PopoverHorizontalAlign$1.Left && left + popoverSize.width >= targetRect.left + targetRect.width) {
+      arrowXCentered = true;
+    }
+    let arrowTranslateX = 0;
+    if (isVertical && arrowXCentered) {
+      arrowTranslateX = targetRect.left + targetRect.width / 2 - left - popoverSize.width / 2;
+    }
+    let arrowTranslateY = 0;
+    if (!isVertical) {
+      arrowTranslateY = targetRect.top + targetRect.height / 2 - top - popoverSize.height / 2;
+    }
+    const safeRangeForArrowY = popoverSize.height / 2 - borderRadius - ARROW_SIZE / 2;
+    arrowTranslateY = clamp(arrowTranslateY, -safeRangeForArrowY, safeRangeForArrowY);
+    const safeRangeForArrowX = popoverSize.width / 2 - borderRadius - ARROW_SIZE / 2;
+    arrowTranslateX = clamp(arrowTranslateX, -safeRangeForArrowX, safeRangeForArrowX);
+    return {
+      x: Math.round(arrowTranslateX),
+      y: Math.round(arrowTranslateY)
+    };
+  }
+  /**
+   * Fallbacks to new placement, prioritizing <code>Left</code> and <code>Right</code> placements.
+   * @private
+   */
+  fallbackPlacement(clientWidth, clientHeight, targetRect, popoverSize) {
+    if (targetRect.left > popoverSize.width) {
+      return PopoverPlacementType$1.Left;
+    }
+    if (clientWidth - targetRect.right > targetRect.left) {
+      return PopoverPlacementType$1.Right;
+    }
+    if (clientHeight - targetRect.bottom > popoverSize.height) {
+      return PopoverPlacementType$1.Bottom;
+    }
+    if (clientHeight - targetRect.bottom < targetRect.top) {
+      return PopoverPlacementType$1.Top;
+    }
+  }
+  getActualPlacementType(targetRect, popoverSize) {
+    const placementType = this.placementType;
+    let actualPlacementType = placementType;
+    const clientWidth = document.documentElement.clientWidth;
+    const clientHeight = document.documentElement.clientHeight;
+    switch (placementType) {
+      case PopoverPlacementType$1.Top:
+        if (targetRect.top < popoverSize.height && targetRect.top < clientHeight - targetRect.bottom) {
+          actualPlacementType = PopoverPlacementType$1.Bottom;
+        }
+        break;
+      case PopoverPlacementType$1.Bottom:
+        if (clientHeight - targetRect.bottom < popoverSize.height && clientHeight - targetRect.bottom < targetRect.top) {
+          actualPlacementType = PopoverPlacementType$1.Top;
+        }
+        break;
+      case PopoverPlacementType$1.Left:
+        if (targetRect.left < popoverSize.width) {
+          actualPlacementType = this.fallbackPlacement(clientWidth, clientHeight, targetRect, popoverSize) || placementType;
+        }
+        break;
+      case PopoverPlacementType$1.Right:
+        if (clientWidth - targetRect.right < popoverSize.width) {
+          actualPlacementType = this.fallbackPlacement(clientWidth, clientHeight, targetRect, popoverSize) || placementType;
+        }
+        break;
+    }
+    return actualPlacementType;
+  }
+  getVerticalLeft(targetRect, popoverSize) {
+    const horizontalAlign = this._actualHorizontalAlign;
+    let left = 0;
+    switch (horizontalAlign) {
+      case PopoverHorizontalAlign$1.Center:
+      case PopoverHorizontalAlign$1.Stretch:
+        left = targetRect.left - (popoverSize.width - targetRect.width) / 2;
+        break;
+      case PopoverHorizontalAlign$1.Left:
+        left = targetRect.left;
+        break;
+      case PopoverHorizontalAlign$1.Right:
+        left = targetRect.right - popoverSize.width;
+        break;
+    }
+    return left;
+  }
+  getHorizontalTop(targetRect, popoverSize) {
+    let top = 0;
+    switch (this.verticalAlign) {
+      case PopoverVerticalAlign$1.Center:
+      case PopoverVerticalAlign$1.Stretch:
+        top = targetRect.top - (popoverSize.height - targetRect.height) / 2;
+        break;
+      case PopoverVerticalAlign$1.Top:
+        top = targetRect.top;
+        break;
+      case PopoverVerticalAlign$1.Bottom:
+        top = targetRect.bottom - popoverSize.height;
+        break;
+    }
+    return top;
+  }
+  get isModal() {
+    return this.modal;
+  }
+  get shouldHideBackdrop() {
+    return this.hideBackdrop;
+  }
+  get _ariaLabelledBy() {
+    if (!this._ariaLabel && this._displayHeader) {
+      return "ui5-popup-header";
+    }
+    return void 0;
+  }
+  get styles() {
+    return {
+      ...super.styles,
+      root: {
+        "max-height": this._maxHeight ? `${this._maxHeight}px` : "",
+        "max-width": this._maxWidth ? `${this._maxWidth}px` : ""
+      },
+      arrow: {
+        transform: `translate(${this.arrowTranslateX}px, ${this.arrowTranslateY}px)`
+      }
+    };
+  }
+  get classes() {
+    const allClasses = super.classes;
+    allClasses.root["ui5-popover-root"] = true;
+    return allClasses;
+  }
+  /**
+   * Hook for descendants to hide header.
+   */
+  get _displayHeader() {
+    return !!(this.header.length || this.headerText);
+  }
+  /**
+   * Hook for descendants to hide footer.
+   */
+  get _displayFooter() {
+    return true;
+  }
+  get _actualHorizontalAlign() {
+    if (this.effectiveDir === "rtl") {
+      if (this.horizontalAlign === PopoverHorizontalAlign$1.Left) {
+        return PopoverHorizontalAlign$1.Right;
+      }
+      if (this.horizontalAlign === PopoverHorizontalAlign$1.Right) {
+        return PopoverHorizontalAlign$1.Left;
+      }
+    }
+    return this.horizontalAlign;
+  }
+};
+__decorate$c([
+  property()
+], Popover.prototype, "headerText", void 0);
+__decorate$c([
+  property({ type: PopoverPlacementType$1, defaultValue: PopoverPlacementType$1.Right })
+], Popover.prototype, "placementType", void 0);
+__decorate$c([
+  property({ type: PopoverHorizontalAlign$1, defaultValue: PopoverHorizontalAlign$1.Center })
+], Popover.prototype, "horizontalAlign", void 0);
+__decorate$c([
+  property({ type: PopoverVerticalAlign$1, defaultValue: PopoverVerticalAlign$1.Center })
+], Popover.prototype, "verticalAlign", void 0);
+__decorate$c([
+  property({ type: Boolean })
+], Popover.prototype, "modal", void 0);
+__decorate$c([
+  property({ type: Boolean })
+], Popover.prototype, "hideBackdrop", void 0);
+__decorate$c([
+  property({ type: Boolean })
+], Popover.prototype, "hideArrow", void 0);
+__decorate$c([
+  property({ type: Boolean })
+], Popover.prototype, "allowTargetOverlap", void 0);
+__decorate$c([
+  property({ validator: DOMReference })
+], Popover.prototype, "opener", void 0);
+__decorate$c([
+  property({ type: Boolean })
+], Popover.prototype, "disableScrolling", void 0);
+__decorate$c([
+  property({ validator: Integer, defaultValue: 0, noAttribute: true })
+], Popover.prototype, "arrowTranslateX", void 0);
+__decorate$c([
+  property({ validator: Integer, defaultValue: 0, noAttribute: true })
+], Popover.prototype, "arrowTranslateY", void 0);
+__decorate$c([
+  property({ type: PopoverPlacementType$1, defaultValue: PopoverPlacementType$1.Right })
+], Popover.prototype, "actualPlacementType", void 0);
+__decorate$c([
+  property({ validator: Integer, noAttribute: true })
+], Popover.prototype, "_maxHeight", void 0);
+__decorate$c([
+  property({ validator: Integer, noAttribute: true })
+], Popover.prototype, "_maxWidth", void 0);
+__decorate$c([
+  slot({ type: HTMLElement })
+], Popover.prototype, "header", void 0);
+__decorate$c([
+  slot({ type: HTMLElement })
+], Popover.prototype, "footer", void 0);
+Popover = Popover_1 = __decorate$c([
+  customElement({
+    tag: "ui5-popover",
+    styles: [
+      styleData$e,
+      styleData$d,
+      styleData$c
+    ],
+    template: block0$a
+  })
+], Popover);
+const instanceOfPopover = (object) => {
+  return "showAt" in object;
+};
+Popover.define();
+const Popover$1 = Popover;
+var ValueState;
+(function(ValueState2) {
+  ValueState2["None"] = "None";
+  ValueState2["Success"] = "Success";
+  ValueState2["Warning"] = "Warning";
+  ValueState2["Error"] = "Error";
+  ValueState2["Information"] = "Information";
+})(ValueState || (ValueState = {}));
+const ValueState$1 = ValueState;
+const name$l = "resize-corner";
+const pathData$l = "M384 224v32q0 12-10 22L182 470q-10 10-22 10h-32zM224 480l160-160v32q0 12-10 22l-96 96q-10 10-22 10h-32zm160-64v32q0 12-10 22t-22 10h-32z";
+const ltr$l = false;
+const collection$l = "SAP-icons-v4";
+const packageName$l = "@ui5/webcomponents-icons";
+registerIcon(name$l, { pathData: pathData$l, ltr: ltr$l, collection: collection$l, packageName: packageName$l });
+const name$k = "resize-corner";
+const pathData$k = "M202 512q-11 0-18.5-7.5T176 486q0-10 8-18l204-205q7-7 18-7t18.5 7.5T432 282t-7 18L220 505q-7 7-18 7zm128 0q-11 0-18.5-7.5T304 486q0-10 8-18l76-77q7-7 18-7t18.5 7.5T432 410t-7 18l-77 77q-7 7-18 7z";
+const ltr$k = false;
+const collection$k = "SAP-icons-v5";
+const packageName$k = "@ui5/webcomponents-icons";
+registerIcon(name$k, { pathData: pathData$k, ltr: ltr$k, collection: collection$k, packageName: packageName$k });
+isLegacyThemeFamily() ? pathData$l : pathData$k;
+const ICON_DECLINE = { key: "ICON_DECLINE", defaultText: "Decline" };
+const ICON_ERROR = { key: "ICON_ERROR", defaultText: "Error" };
+const name$j = "error";
+const pathData$j = "M512 256q0 53-20.5 100t-55 81.5-81 54.5-99.5 20-100-20.5-81.5-55T20 355 0 256q0-54 20-100.5t55-81T156.5 20 256 0t99.5 20T437 75t55 81.5 20 99.5zM399 364q6-6 0-12l-86-86q-6-6 0-12l81-81q6-6 0-12l-37-37q-2-2-6-2t-6 2l-83 82q-1 3-6 3-3 0-6-3l-84-83q-1-2-6-2-4 0-6 2l-37 37q-6 6 0 12l83 82q6 6 0 12l-83 82q-2 2-2.5 6t2.5 6l36 37q4 2 6 2 4 0 6-2l85-84q2-2 6-2t6 2l88 88q4 2 6 2t6-2z";
+const ltr$j = false;
+const accData$3 = ICON_ERROR;
+const collection$j = "SAP-icons-v4";
+const packageName$j = "@ui5/webcomponents-icons";
+registerIcon(name$j, { pathData: pathData$j, ltr: ltr$j, accData: accData$3, collection: collection$j, packageName: packageName$j });
+const name$i = "error";
+const pathData$i = "M256 0q53 0 99.5 20T437 75t55 81.5 20 99.5-20 99.5-55 81.5-81.5 55-99.5 20-99.5-20T75 437t-55-81.5T0 256t20-99.5T75 75t81.5-55T256 0zm45 256l74-73q9-11 9-23 0-13-9.5-22.5T352 128q-12 0-23 9l-73 74-73-74q-10-9-23-9t-22.5 9.5T128 160q0 12 9 23l74 73-74 73q-9 10-9 23t9.5 22.5T160 384t23-9l73-74 73 74q11 9 23 9 13 0 22.5-9.5T384 352t-9-23z";
+const ltr$i = false;
+const accData$2 = ICON_ERROR;
+const collection$i = "SAP-icons-v5";
+const packageName$i = "@ui5/webcomponents-icons";
+registerIcon(name$i, { pathData: pathData$i, ltr: ltr$i, accData: accData$2, collection: collection$i, packageName: packageName$i });
+isLegacyThemeFamily() ? pathData$j : pathData$i;
+const name$h = "alert";
+const pathData$h = "M501 374q5 10 7.5 19.5T512 412v5q0 31-23 47t-50 16H74q-13 0-26-4t-23.5-12-17-20T0 417q0-13 4-22.5t9-20.5L198 38q21-38 61-38 38 0 59 38zM257 127q-13 0-23.5 8T223 161q1 7 2 12 3 25 4.5 48t3.5 61q0 11 7.5 16t16.5 5q22 0 23-21l2-36 9-85q0-18-10.5-26t-23.5-8zm0 299q20 0 31.5-12t11.5-32q0-19-11.5-31T257 339t-31.5 12-11.5 31q0 20 11.5 32t31.5 12z";
+const ltr$h = false;
+const collection$h = "SAP-icons-v4";
+const packageName$h = "@ui5/webcomponents-icons";
+registerIcon(name$h, { pathData: pathData$h, ltr: ltr$h, collection: collection$h, packageName: packageName$h });
+const name$g = "alert";
+const pathData$g = "M505 399q7 13 7 27 0 21-15.5 37.5T456 480H56q-25 0-40.5-16.5T0 426q0-14 7-27L208 59q17-27 48-27 14 0 27 6.5T304 59zM288 176q0-14-9-23t-23-9-23 9-9 23v96q0 14 9 23t23 9 23-9 9-23v-96zm-32 240q14 0 23-9t9-23-9-23-23-9-23 9-9 23 9 23 23 9z";
+const ltr$g = false;
+const collection$g = "SAP-icons-v5";
+const packageName$g = "@ui5/webcomponents-icons";
+registerIcon(name$g, { pathData: pathData$g, ltr: ltr$g, collection: collection$g, packageName: packageName$g });
+isLegacyThemeFamily() ? pathData$h : pathData$g;
+const name$f = "sys-enter-2";
+const pathData$f = "M512 256q0 54-20 100.5t-54.5 81T356 492t-100 20q-54 0-100.5-20t-81-55T20 355.5 0 256t20.5-100 55-81.5T157 20t99-20q53 0 100 20t81.5 54.5T492 156t20 100zm-118-87q4-8-1-13l-36-36q-3-4-8-4t-8 5L237 294q-3 1-4 0l-70-52q-4-3-7-3t-4.5 2-2.5 3l-29 41q-6 8 2 14l113 95q2 2 7 2t8-4z";
+const ltr$f = true;
+const collection$f = "SAP-icons-v4";
+const packageName$f = "@ui5/webcomponents-icons";
+registerIcon(name$f, { pathData: pathData$f, ltr: ltr$f, collection: collection$f, packageName: packageName$f });
+const name$e = "sys-enter-2";
+const pathData$e = "M256 0q53 0 100 20t81.5 54.5T492 156t20 100-20 100-54.5 81.5T356 492t-100 20-100-20-81.5-54.5T20 356 0 256t20-100 54.5-81.5T156 20 256 0zm150 183q10-9 10-23 0-13-9.5-22.5T384 128t-22 9L186 308l-68-63q-9-9-22-9t-22.5 9.5T64 268q0 15 10 24l91 83q9 9 21 9 13 0 23-9z";
+const ltr$e = true;
+const collection$e = "SAP-icons-v5";
+const packageName$e = "@ui5/webcomponents-icons";
+registerIcon(name$e, { pathData: pathData$e, ltr: ltr$e, collection: collection$e, packageName: packageName$e });
+isLegacyThemeFamily() ? pathData$f : pathData$e;
+const name$d = "information";
+const pathData$d = "M0 256q0-53 20.5-100t55-81.5T157 20t99-20q54 0 100.5 20t81 55 54.5 81.5 20 99.5q0 54-20 100.5t-54.5 81T356 492t-100 20q-54 0-100.5-20t-81-55T20 355.5 0 256zm192 112v33h128v-33h-32V215q0-6-7-6h-88v31h32v128h-33zm34-201q14 11 30 11 17 0 29.5-11.5T298 138q0-19-13-31-12-12-29-12-19 0-30.5 12.5T214 138q0 17 12 29z";
+const ltr$d = false;
+const collection$d = "SAP-icons-v4";
+const packageName$d = "@ui5/webcomponents-icons";
+registerIcon(name$d, { pathData: pathData$d, ltr: ltr$d, collection: collection$d, packageName: packageName$d });
+const name$c = "information";
+const pathData$c = "M256 0q53 0 99.5 20T437 75t55 81.5 20 99.5-20 99.5-55 81.5-81.5 55-99.5 20-99.5-20T75 437t-55-81.5T0 256t20-99.5T75 75t81.5-55T256 0zm0 160q14 0 23-9t9-23-9-23-23-9-23 9-9 23 9 23 23 9zm32 64q0-14-9-23t-23-9-23 9-9 23v160q0 14 9 23t23 9 23-9 9-23V224z";
+const ltr$c = false;
+const collection$c = "SAP-icons-v5";
+const packageName$c = "@ui5/webcomponents-icons";
+registerIcon(name$c, { pathData: pathData$c, ltr: ltr$c, collection: collection$c, packageName: packageName$c });
+isLegacyThemeFamily() ? pathData$d : pathData$c;
 function block0$9(context, tags, suffix) {
   return effectiveHtml`<section style="${styleMap(this.styles.root)}" class="${o(this.classes.root)}" role="${l(this._role)}" aria-modal="${l(this._ariaModal)}" aria-label="${l(this._ariaLabel)}" aria-labelledby="${l(this._ariaLabelledBy)}" @keydown=${this._onkeydown} @focusout=${this._onfocusout} @mouseup=${this._onmouseup} @mousedown=${this._onmousedown}><span class="first-fe" data-ui5-focus-trap tabindex="0" @focusin=${this.forwardToLast}></span>${this._displayHeader ? block1$9.call(this, context, tags, suffix) : void 0}<div style="${styleMap(this.styles.content)}" class="${o(this.classes.content)}"  @scroll="${this._scroll}" part="content"><slot></slot></div>${this.footer.length ? block10$1.call(this, context, tags, suffix) : void 0}${this._showResizeHandle ? block11$1.call(this, context, tags, suffix) : void 0}<span class="last-fe" data-ui5-focus-trap tabindex="0" @focusin=${this.forwardToFirst}></span></section> `;
 }
@@ -576,8 +2255,8 @@ function block10$1(context, tags, suffix) {
 function block11$1(context, tags, suffix) {
   return suffix ? effectiveHtml`<${scopeTag("ui5-icon", tags, suffix)} name="resize-corner" class="ui5-popup-resize-handle" @mousedown="${this._onResizeMouseDown}"></${scopeTag("ui5-icon", tags, suffix)}>` : effectiveHtml`<ui5-icon name="resize-corner" class="ui5-popup-resize-handle" @mousedown="${this._onResizeMouseDown}"></ui5-icon>`;
 }
-registerThemePropertiesLoader("@ui5/webcomponents-theming", "sap_horizon", async () => styleData$d);
-registerThemePropertiesLoader("@ui5/webcomponents", "sap_horizon", async () => styleData$e);
+registerThemePropertiesLoader("@ui5/webcomponents-theming", "sap_horizon", async () => styleData$k);
+registerThemePropertiesLoader("@ui5/webcomponents", "sap_horizon", async () => styleData$l);
 const styleData$b = { packageName: "@ui5/webcomponents", fileName: "themes/Dialog.css.ts", content: `.ui5-hidden-text{position:absolute;clip:rect(1px,1px,1px,1px);user-select:none;left:-1000px;top:-1000px;pointer-events:none;font-size:0}:host{min-width:20rem;min-height:6rem;max-height:94%;max-width:90%;flex-direction:column;box-shadow:var(--sapContent_Shadow3);border-radius:var(--sapElement_BorderCornerRadius)}:host([stretch]){width:90%;height:94%}:host([stretch][on-phone]){width:100%;height:100%;max-height:100%;max-width:100%;border-radius:0}:host([draggable]) .ui5-popup-header-root,:host([draggable]) ::slotted([slot="header"]){cursor:move}:host([draggable]) .ui5-popup-header-root *{cursor:auto}:host([draggable]) .ui5-popup-root{user-select:text}.ui5-popup-root{display:flex;flex-direction:column;max-width:100vw}.ui5-popup-header-root{position:relative}.ui5-popup-header-root:before{content:"";position:absolute;inset-block-start:auto;inset-block-end:0;inset-inline-start:0;inset-inline-end:0;height:var(--_ui5-v1-21-2_dialog_header_state_line_height);background:var(--sapObjectHeader_BorderColor)}:host([state="Error"]) .ui5-popup-header-root:before{background:var(--sapErrorBorderColor)}:host([state="Information"]) .ui5-popup-header-root:before{background:var(--sapInformationBorderColor)}:host([state="Success"]) .ui5-popup-header-root:before{background:var(--sapSuccessBorderColor)}:host([state="Warning"]) .ui5-popup-header-root:before{background:var(--sapWarningBorderColor)}.ui5-dialog-value-state-icon{margin-inline-end:.5rem}:host([state="Error"]) .ui5-dialog-value-state-icon{color:var(--_ui5-v1-21-2_dialog_header_error_state_icon_color)}:host([state="Information"]) .ui5-dialog-value-state-icon{color:var(--_ui5-v1-21-2_dialog_header_information_state_icon_color)}:host([state="Success"]) .ui5-dialog-value-state-icon{color:var(--_ui5-v1-21-2_dialog_header_success_state_icon_color)}:host([state="Warning"]) .ui5-dialog-value-state-icon{color:var(--_ui5-v1-21-2_dialog_header_warning_state_icon_color)}.ui5-popup-header-root{outline:none}.ui5-popup-header-root:focus:after{content:"";position:absolute;left:var(--_ui5-v1-21-2_dialog_header_focus_left_offset);bottom:var(--_ui5-v1-21-2_dialog_header_focus_bottom_offset);right:var(--_ui5-v1-21-2_dialog_header_focus_right_offset);top:var(--_ui5-v1-21-2_dialog_header_focus_top_offset);border:var(--sapContent_FocusWidth) var(--sapContent_FocusStyle) var(--sapContent_FocusColor);border-radius:var(--_ui5-v1-21-2_dialog_header_border_radius) var(--_ui5-v1-21-2_dialog_header_border_radius) 0 0;pointer-events:none}:host([stretch]) .ui5-popup-content{width:100%;height:100%}.ui5-popup-content{min-height:var(--_ui5-v1-21-2_dialog_content_min_height);flex:1 1 auto}.ui5-popup-resize-handle{position:absolute;bottom:var(--_ui5-v1-21-2_dialog_resize_handle_bottom);inset-inline-end:var(--_ui5-v1-21-2_dialog_resize_handle_right);cursor:var(--_ui5-v1-21-2_dialog_resize_cursor);color:var(--_ui5-v1-21-2_dialog_resize_handle_color)}::slotted([slot="footer"]){height:var(--_ui5-v1-21-2_dialog_footer_height)}::slotted([slot="footer"][ui5-bar][design="Footer"]){border-top:none}::slotted([slot="header"][ui5-bar]){box-shadow:none}
 ` };
 var __decorate$b = function(decorators, target, key, desc) {
@@ -585,20 +2264,20 @@ var __decorate$b = function(decorators, target, key, desc) {
   if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
     r = Reflect.decorate(decorators, target, key, desc);
   else
-    for (var i = decorators.length - 1; i >= 0; i--)
-      if (d = decorators[i])
+    for (var i2 = decorators.length - 1; i2 >= 0; i2--)
+      if (d = decorators[i2])
         r = (c2 < 3 ? d(r) : c2 > 3 ? d(target, key, r) : d(target, key)) || r;
   return c2 > 3 && r && Object.defineProperty(target, key, r), r;
 };
 var Dialog_1;
 const STEP_SIZE = 16;
 const ICON_PER_STATE = {
-  [ValueState.Error]: "error",
-  [ValueState.Warning]: "alert",
-  [ValueState.Success]: "sys-enter-2",
-  [ValueState.Information]: "information"
+  [ValueState$1.Error]: "error",
+  [ValueState$1.Warning]: "alert",
+  [ValueState$1.Success]: "sys-enter-2",
+  [ValueState$1.Information]: "information"
 };
-let Dialog = Dialog_1 = class Dialog2 extends Popup {
+let Dialog = Dialog_1 = class Dialog2 extends Popup$1 {
   constructor() {
     super();
     this._draggedOrResized = false;
@@ -695,17 +2374,17 @@ let Dialog = Dialog_1 = class Dialog2 extends Popup {
     return minHeight;
   }
   get hasValueState() {
-    return this.state !== ValueState.None;
+    return this.state !== ValueState$1.None;
   }
   get _dialogStateIcon() {
     return ICON_PER_STATE[this.state];
   }
   get _role() {
-    if (this.accessibleRole === PopupAccessibleRole.None) {
+    if (this.accessibleRole === PopupAccessibleRole$1.None) {
       return void 0;
     }
-    if (this.state === ValueState.Error || this.state === ValueState.Warning) {
-      return PopupAccessibleRole.AlertDialog.toLowerCase();
+    if (this.state === ValueState$1.Error || this.state === ValueState$1.Warning) {
+      return PopupAccessibleRole$1.AlertDialog.toLowerCase();
     }
     return this.accessibleRole.toLowerCase();
   }
@@ -771,11 +2450,11 @@ let Dialog = Dialog_1 = class Dialog2 extends Popup {
   /**
    * Event handlers
    */
-  _onDragMouseDown(e) {
-    if (!this._movable || !this.draggable || !Dialog_1._isHeader(e.target)) {
+  _onDragMouseDown(e2) {
+    if (!this._movable || !this.draggable || !Dialog_1._isHeader(e2.target)) {
       return;
     }
-    e.preventDefault();
+    e2.preventDefault();
     const { top, left } = this.getBoundingClientRect();
     const { width, height } = window.getComputedStyle(this);
     Object.assign(this.style, {
@@ -784,14 +2463,14 @@ let Dialog = Dialog_1 = class Dialog2 extends Popup {
       width: `${Math.round(Number.parseFloat(width) * 100) / 100}px`,
       height: `${Math.round(Number.parseFloat(height) * 100) / 100}px`
     });
-    this._x = e.clientX;
-    this._y = e.clientY;
+    this._x = e2.clientX;
+    this._y = e2.clientY;
     this._draggedOrResized = true;
     this._attachMouseDragHandlers();
   }
-  _onDragMouseMove(e) {
-    e.preventDefault();
-    const { clientX, clientY } = e;
+  _onDragMouseMove(e2) {
+    e2.preventDefault();
+    const { clientX, clientY } = e2;
     const calcX = this._x - clientX;
     const calcY = this._y - clientY;
     const { left, top } = this.getBoundingClientRect();
@@ -807,36 +2486,36 @@ let Dialog = Dialog_1 = class Dialog2 extends Popup {
     delete this._y;
     this._detachMouseDragHandlers();
   }
-  _onDragOrResizeKeyDown(e) {
-    if (!this._movable || !Dialog_1._isHeader(e.target)) {
+  _onDragOrResizeKeyDown(e2) {
+    if (!this._movable || !Dialog_1._isHeader(e2.target)) {
       return;
     }
-    if (this.draggable && [isUp, isDown, isLeft, isRight].some((key) => key(e))) {
-      this._dragWithEvent(e);
+    if (this.draggable && [isUp, isDown, isLeft, isRight].some((key) => key(e2))) {
+      this._dragWithEvent(e2);
       return;
     }
-    if (this.resizable && [isUpShift, isDownShift, isLeftShift, isRightShift].some((key) => key(e))) {
-      this._resizeWithEvent(e);
+    if (this.resizable && [isUpShift, isDownShift, isLeftShift, isRightShift].some((key) => key(e2))) {
+      this._resizeWithEvent(e2);
     }
   }
-  _dragWithEvent(e) {
+  _dragWithEvent(e2) {
     const { top, left, width, height } = this.getBoundingClientRect();
     let newPos = 0;
     let posDirection = "top";
     switch (true) {
-      case isUp(e):
+      case isUp(e2):
         newPos = top - STEP_SIZE;
         posDirection = "top";
         break;
-      case isDown(e):
+      case isDown(e2):
         newPos = top + STEP_SIZE;
         posDirection = "top";
         break;
-      case isLeft(e):
+      case isLeft(e2):
         newPos = left - STEP_SIZE;
         posDirection = "left";
         break;
-      case isRight(e):
+      case isRight(e2):
         newPos = left + STEP_SIZE;
         posDirection = "left";
         break;
@@ -844,22 +2523,22 @@ let Dialog = Dialog_1 = class Dialog2 extends Popup {
     newPos = clamp(newPos, 0, posDirection === "left" ? window.innerWidth - width : window.innerHeight - height);
     this.style[posDirection] = `${newPos}px`;
   }
-  _resizeWithEvent(e) {
+  _resizeWithEvent(e2) {
     this._draggedOrResized = true;
     this.addEventListener("ui5-before-close", this._revertSize, { once: true });
     const { top, left } = this.getBoundingClientRect(), style = window.getComputedStyle(this), minWidth = Number.parseFloat(style.minWidth), maxWidth = window.innerWidth - left, maxHeight = window.innerHeight - top;
     let width = Number.parseFloat(style.width), height = Number.parseFloat(style.height);
     switch (true) {
-      case isUpShift(e):
+      case isUpShift(e2):
         height -= STEP_SIZE;
         break;
-      case isDownShift(e):
+      case isDownShift(e2):
         height += STEP_SIZE;
         break;
-      case isLeftShift(e):
+      case isLeftShift(e2):
         width -= STEP_SIZE;
         break;
-      case isRightShift(e):
+      case isRightShift(e2):
         width += STEP_SIZE;
         break;
     }
@@ -878,15 +2557,15 @@ let Dialog = Dialog_1 = class Dialog2 extends Popup {
     window.removeEventListener("mousemove", this._dragMouseMoveHandler);
     window.removeEventListener("mouseup", this._dragMouseUpHandler);
   }
-  _onResizeMouseDown(e) {
+  _onResizeMouseDown(e2) {
     if (!this._movable || !this.resizable) {
       return;
     }
-    e.preventDefault();
+    e2.preventDefault();
     const { top, left } = this.getBoundingClientRect();
     const { width, height, minWidth } = window.getComputedStyle(this);
-    this._initialX = e.clientX;
-    this._initialY = e.clientY;
+    this._initialX = e2.clientX;
+    this._initialY = e2.clientY;
     this._initialWidth = Number.parseFloat(width);
     this._initialHeight = Number.parseFloat(height);
     this._initialTop = top;
@@ -900,8 +2579,8 @@ let Dialog = Dialog_1 = class Dialog2 extends Popup {
     this._draggedOrResized = true;
     this._attachMouseResizeHandlers();
   }
-  _onResizeMouseMove(e) {
-    const { clientX, clientY } = e;
+  _onResizeMouseMove(e2) {
+    const { clientX, clientY } = e2;
     let newWidth, newLeft;
     if (this._isRTL) {
       newWidth = clamp(this._initialWidth - (clientX - this._initialX), this._minWidth, this._initialLeft + this._initialWidth);
@@ -927,9 +2606,9 @@ let Dialog = Dialog_1 = class Dialog2 extends Popup {
     delete this._cachedMinHeight;
     this._detachMouseResizeHandlers();
   }
-  _handleDragStart(e) {
+  _handleDragStart(e2) {
     if (this.draggable) {
-      e.preventDefault();
+      e2.preventDefault();
     }
   }
   _attachMouseResizeHandlers() {
@@ -955,7 +2634,7 @@ __decorate$b([
   property({ type: Boolean })
 ], Dialog.prototype, "resizable", void 0);
 __decorate$b([
-  property({ type: ValueState, defaultValue: ValueState.None })
+  property({ type: ValueState$1, defaultValue: ValueState$1.None })
 ], Dialog.prototype, "state", void 0);
 __decorate$b([
   property({ type: Boolean })
@@ -974,8 +2653,8 @@ Dialog = Dialog_1 = __decorate$b([
     tag: "ui5-dialog",
     template: block0$9,
     styles: [
-      styleData$f,
-      styleData$g,
+      styleData$e,
+      styleData$d,
       styleData$b
     ],
     dependencies: [
@@ -1016,8 +2695,8 @@ function block5$2(context, tags, suffix) {
 function block6$2(context, tags, suffix) {
   return effectiveHtml`<h6 class="ui5-title-root"><span id="${l(this._id)}-inner"><slot></slot></span></h6>`;
 }
-registerThemePropertiesLoader("@ui5/webcomponents-theming", "sap_horizon", async () => styleData$d);
-registerThemePropertiesLoader("@ui5/webcomponents", "sap_horizon", async () => styleData$e);
+registerThemePropertiesLoader("@ui5/webcomponents-theming", "sap_horizon", async () => styleData$k);
+registerThemePropertiesLoader("@ui5/webcomponents", "sap_horizon", async () => styleData$l);
 const styleData$a = { packageName: "@ui5/webcomponents", fileName: "themes/Title.css.ts", content: `:host(:not([hidden])){display:block;cursor:text}:host{max-width:100%;color:var(--sapGroup_TitleTextColor);font-size:var(--sapFontHeader2Size);font-family:"72override",var(--sapFontHeaderFamily);text-shadow:var(--sapContent_TextShadow)}.ui5-title-root{display:inline-block;position:relative;font-weight:400;font-size:inherit;box-sizing:border-box;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%;vertical-align:bottom;-webkit-margin-before:0;-webkit-margin-after:0;-webkit-margin-start:0;-webkit-margin-end:0;margin:0;cursor:inherit}:host([wrapping-type="Normal"]) .ui5-title-root,:host([wrapping-type="Normal"]) ::slotted(*){white-space:pre-line}::slotted(*){font-size:inherit;font-family:inherit;text-shadow:inherit}:host([level="H1"]){font-size:var(--sapFontHeader1Size)}:host([level="H2"]){font-size:var(--sapFontHeader2Size)}:host([level="H3"]){font-size:var(--sapFontHeader3Size)}:host([level="H4"]){font-size:var(--sapFontHeader4Size)}:host([level="H5"]){font-size:var(--sapFontHeader5Size)}:host([level="H6"]){font-size:var(--sapFontHeader6Size)}
 ` };
 var __decorate$a = function(decorators, target, key, desc) {
@@ -1025,8 +2704,8 @@ var __decorate$a = function(decorators, target, key, desc) {
   if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
     r = Reflect.decorate(decorators, target, key, desc);
   else
-    for (var i = decorators.length - 1; i >= 0; i--)
-      if (d = decorators[i])
+    for (var i2 = decorators.length - 1; i2 >= 0; i2--)
+      if (d = decorators[i2])
         r = (c2 < 3 ? d(r) : c2 > 3 ? d(target, key, r) : d(target, key)) || r;
   return c2 > 3 && r && Object.defineProperty(target, key, r), r;
 };
@@ -1065,7 +2744,7 @@ let Title = class Title2 extends UI5Element {
   }
 };
 __decorate$a([
-  property({ type: WrappingType, defaultValue: WrappingType.None })
+  property({ type: WrappingType$1, defaultValue: WrappingType$1.None })
 ], Title.prototype, "wrappingType", void 0);
 __decorate$a([
   property({ type: TitleLevel$1, defaultValue: TitleLevel$1.H2 })
@@ -1080,8 +2759,23 @@ Title = __decorate$a([
 ], Title);
 Title.define();
 const Title$1 = Title;
-registerThemePropertiesLoader("@ui5/webcomponents-theming", "sap_horizon", async () => styleData$d);
-registerThemePropertiesLoader("@ui5/webcomponents", "sap_horizon", async () => styleData$e);
+const name$b = "decline";
+const pathData$b = "M86 109l22-23q5-5 12-5 6 0 11 5l124 125L380 86q5-5 11-5 7 0 12 5l22 23q12 11 0 23L301 256l124 125q11 11 0 22l-22 23q-8 5-12 5-3 0-11-5L255 301 131 426q-5 5-11 5-4 0-12-5l-22-23q-11-11 0-22l124-125L86 132q-12-12 0-23z";
+const ltr$b = false;
+const accData$1 = ICON_DECLINE;
+const collection$b = "SAP-icons-v4";
+const packageName$b = "@ui5/webcomponents-icons";
+registerIcon(name$b, { pathData: pathData$b, ltr: ltr$b, accData: accData$1, collection: collection$b, packageName: packageName$b });
+const name$a = "decline";
+const pathData$a = "M292 256l117 116q7 7 7 18 0 12-7.5 19t-18.5 7q-10 0-18-8L256 292 140 408q-8 8-18 8-11 0-18.5-7.5T96 390q0-10 8-18l116-116-116-116q-8-8-8-18 0-11 7.5-18.5T122 96t18 7l116 117 116-117q7-7 18-7t18.5 7.5T416 122t-7 18z";
+const ltr$a = false;
+const accData = ICON_DECLINE;
+const collection$a = "SAP-icons-v5";
+const packageName$a = "@ui5/webcomponents-icons";
+registerIcon(name$a, { pathData: pathData$a, ltr: ltr$a, accData, collection: collection$a, packageName: packageName$a });
+isLegacyThemeFamily() ? pathData$b : pathData$a;
+registerThemePropertiesLoader("@ui5/webcomponents-theming", "sap_horizon", async () => styleData$k);
+registerThemePropertiesLoader("@ui5/webcomponents", "sap_horizon", async () => styleData$l);
 const styleData$9 = { packageName: "@ui5/webcomponents", fileName: "themes/ResponsivePopover.css.ts", content: `:host{--_ui5-v1-21-2_input_width: 100%;min-width:6.25rem;min-height:2rem}:host([opened]){display:inline-block}.ui5-responsive-popover-header{height:var(--_ui5-v1-21-2-responsive_popover_header_height);display:flex;justify-content:space-between;align-items:center;width:100%}.ui5-responsive-popover-header-text{width:calc(100% - var(--_ui5-v1-21-2_button_base_min_width))}.ui5-responsive-popover-header-no-title{justify-content:flex-end}
 ` };
 var __decorate$9 = function(decorators, target, key, desc) {
@@ -1089,13 +2783,13 @@ var __decorate$9 = function(decorators, target, key, desc) {
   if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
     r = Reflect.decorate(decorators, target, key, desc);
   else
-    for (var i = decorators.length - 1; i >= 0; i--)
-      if (d = decorators[i])
+    for (var i2 = decorators.length - 1; i2 >= 0; i2--)
+      if (d = decorators[i2])
         r = (c2 < 3 ? d(r) : c2 > 3 ? d(target, key, r) : d(target, key)) || r;
   return c2 > 3 && r && Object.defineProperty(target, key, r), r;
 };
 var ResponsivePopover_1;
-let ResponsivePopover = ResponsivePopover_1 = class ResponsivePopover2 extends Popover {
+let ResponsivePopover = ResponsivePopover_1 = class ResponsivePopover2 extends Popover$1 {
   constructor() {
     super();
   }
@@ -1178,19 +2872,19 @@ let ResponsivePopover = ResponsivePopover_1 = class ResponsivePopover2 extends P
   get _closeDialogAriaLabel() {
     return ResponsivePopover_1.i18nBundle.getText(RESPONSIVE_POPOVER_CLOSE_DIALOG_BUTTON);
   }
-  _beforeDialogOpen(e) {
+  _beforeDialogOpen(e2) {
     this.open = true;
     this.opened = true;
-    this._propagateDialogEvent(e);
+    this._propagateDialogEvent(e2);
   }
-  _afterDialogClose(e) {
+  _afterDialogClose(e2) {
     this.open = false;
     this.opened = false;
-    this._propagateDialogEvent(e);
+    this._propagateDialogEvent(e2);
   }
-  _propagateDialogEvent(e) {
-    const type = e.type.replace("ui5-", "");
-    this.fireEvent(type, e.detail);
+  _propagateDialogEvent(e2) {
+    const type = e2.type.replace("ui5-", "");
+    this.fireEvent(type, e2.detail);
   }
   get isModal() {
     if (!isPhone()) {
@@ -1214,10 +2908,10 @@ __decorate$9([
 ResponsivePopover = ResponsivePopover_1 = __decorate$9([
   customElement({
     tag: "ui5-responsive-popover",
-    styles: [Popover.styles, styleData$9],
-    template: block0$a,
+    styles: [Popover$1.styles, styleData$9],
+    template: block0$d,
     dependencies: [
-      ...Popover.dependencies,
+      ...Popover$1.dependencies,
       Button,
       Dialog$1,
       Title$1
@@ -1317,8 +3011,8 @@ const getTabbables = (nodes, tabbables) => {
   });
   return tabbableElements;
 };
-registerThemePropertiesLoader("@ui5/webcomponents-theming", "sap_horizon", async () => styleData$d);
-registerThemePropertiesLoader("@ui5/webcomponents", "sap_horizon", async () => styleData$e);
+registerThemePropertiesLoader("@ui5/webcomponents-theming", "sap_horizon", async () => styleData$k);
+registerThemePropertiesLoader("@ui5/webcomponents", "sap_horizon", async () => styleData$l);
 const styleData$8 = { packageName: "@ui5/webcomponents", fileName: "themes/ListItemBase.css.ts", content: `:host(:not([hidden])){display:block}:host{height:var(--_ui5-v1-21-2_list_item_base_height);background:var(--ui5-v1-21-2-listitem-background-color);box-sizing:border-box;border-bottom:1px solid transparent}:host([selected]){background:var(--sapList_SelectionBackgroundColor)}:host([has-border]){border-bottom:var(--ui5-v1-21-2-listitem-border-bottom)}:host([selected]){border-bottom:var(--ui5-v1-21-2-listitem-selected-border-bottom)}:host(:not([focused])[selected][has-border]){border-bottom:var(--ui5-v1-21-2-listitem-selected-border-bottom)}:host([focused][selected]){border-bottom:var(--ui5-v1-21-2-listitem-focused-selected-border-bottom)}.ui5-li-root{position:relative;display:flex;align-items:center;width:100%;height:100%;padding:0 1rem;box-sizing:border-box}:host([focused]) .ui5-li-root.ui5-li--focusable{outline:none}:host([focused]) .ui5-li-root.ui5-li--focusable:after{content:"";border:var(--sapContent_FocusWidth) var(--sapContent_FocusStyle) var(--sapContent_FocusColor);position:absolute;border-radius:0;inset:.125rem;pointer-events:none}:host([focused]) .ui5-li-content:focus:after{content:"";border:var(--sapContent_FocusWidth) var(--sapContent_FocusStyle) var(--sapContent_FocusColor);position:absolute;inset:0;pointer-events:none}:host([active][focused]) .ui5-li-root.ui5-li--focusable:after{border-color:var(--ui5-v1-21-2-listitem-active-border-color)}:host([disabled]){opacity:var(--_ui5-v1-21-2-listitembase_disabled_opacity);pointer-events:none}.ui5-li-content{max-width:100%;font-family:"72override",var(--sapFontFamily);color:var(--sapList_TextColor)}
 ` };
 var __decorate$8 = function(decorators, target, key, desc) {
@@ -1326,43 +3020,43 @@ var __decorate$8 = function(decorators, target, key, desc) {
   if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
     r = Reflect.decorate(decorators, target, key, desc);
   else
-    for (var i = decorators.length - 1; i >= 0; i--)
-      if (d = decorators[i])
+    for (var i2 = decorators.length - 1; i2 >= 0; i2--)
+      if (d = decorators[i2])
         r = (c2 < 3 ? d(r) : c2 > 3 ? d(target, key, r) : d(target, key)) || r;
   return c2 > 3 && r && Object.defineProperty(target, key, r), r;
 };
 let ListItemBase = class ListItemBase2 extends UI5Element {
-  _onfocusin(e) {
-    this.fireEvent("_request-tabindex-change", e);
-    if (e.target !== this.getFocusDomRef()) {
+  _onfocusin(e2) {
+    this.fireEvent("_request-tabindex-change", e2);
+    if (e2.target !== this.getFocusDomRef()) {
       return;
     }
     this.focused = true;
-    this.fireEvent("_focused", e);
+    this.fireEvent("_focused", e2);
   }
   _onfocusout() {
     this.focused = false;
   }
-  _onkeydown(e) {
-    if (isTabNext(e)) {
-      return this._handleTabNext(e);
+  _onkeydown(e2) {
+    if (isTabNext(e2)) {
+      return this._handleTabNext(e2);
     }
-    if (isTabPrevious(e)) {
-      return this._handleTabPrevious(e);
+    if (isTabPrevious(e2)) {
+      return this._handleTabPrevious(e2);
     }
   }
-  _onkeyup(e) {
+  _onkeyup(e2) {
   }
   // eslint-disable-line
-  _handleTabNext(e) {
+  _handleTabNext(e2) {
     if (this.shouldForwardTabAfter()) {
       if (!this.fireEvent("_forward-after", {}, true)) {
-        e.preventDefault();
+        e2.preventDefault();
       }
     }
   }
-  _handleTabPrevious(e) {
-    const target = e.target;
+  _handleTabPrevious(e2) {
+    const target = e2.target;
     if (this.shouldForwardTabBefore(target)) {
       this.fireEvent("_forward-before");
     }
@@ -1457,8 +3151,8 @@ function block2$6(context, tags, suffix) {
 function block3$4(context, tags, suffix) {
   return effectiveHtml`<span data-ui5-focus-redirect tabindex="0" @focusin="${this._redirectFocus}"></span>`;
 }
-registerThemePropertiesLoader("@ui5/webcomponents-theming", "sap_horizon", async () => styleData$d);
-registerThemePropertiesLoader("@ui5/webcomponents", "sap_horizon", async () => styleData$e);
+registerThemePropertiesLoader("@ui5/webcomponents-theming", "sap_horizon", async () => styleData$k);
+registerThemePropertiesLoader("@ui5/webcomponents", "sap_horizon", async () => styleData$l);
 const styleData$7 = { packageName: "@ui5/webcomponents", fileName: "themes/BusyIndicator.css.ts", content: `:host(:not([hidden])){display:inline-block}:host([_is-busy]){color:var(--_ui5-v1-21-2_busy_indicator_color)}:host([size="Small"]) .ui5-busy-indicator-root{min-width:1.625rem;min-height:.5rem}:host([size="Small"][text]:not([text=""])) .ui5-busy-indicator-root{min-height:1.75rem}:host([size="Small"]) .ui5-busy-indicator-circle{width:.5rem;height:.5rem}:host([size="Small"]) .ui5-busy-indicator-circle:first-child,:host([size="Small"]) .ui5-busy-indicator-circle:nth-child(2){margin-inline-end:.0625rem}:host(:not([size])) .ui5-busy-indicator-root,:host([size="Medium"]) .ui5-busy-indicator-root{min-width:3.375rem;min-height:1rem}:host([size="Medium"]) .ui5-busy-indicator-circle:first-child,:host([size="Medium"]) .ui5-busy-indicator-circle:nth-child(2){margin-inline-end:.1875rem}:host(:not([size])[text]:not([text=""])) .ui5-busy-indicator-root,:host([size="Medium"][text]:not([text=""])) .ui5-busy-indicator-root{min-height:2.25rem}:host(:not([size])) .ui5-busy-indicator-circle,:host([size="Medium"]) .ui5-busy-indicator-circle{width:1rem;height:1rem}:host([size="Large"]) .ui5-busy-indicator-root{min-width:6.5rem;min-height:2rem}:host([size="Large"]) .ui5-busy-indicator-circle:first-child,:host([size="Large"]) .ui5-busy-indicator-circle:nth-child(2){margin-inline-end:.25rem}:host([size="Large"][text]:not([text=""])) .ui5-busy-indicator-root{min-height:3.25rem}:host([size="Large"]) .ui5-busy-indicator-circle{width:2rem;height:2rem}.ui5-busy-indicator-root{display:flex;justify-content:center;align-items:center;position:relative;background-color:inherit;height:inherit}.ui5-busy-indicator-busy-area{position:absolute;z-index:99;inset:0;display:flex;justify-content:center;align-items:center;background-color:inherit;flex-direction:column}.ui5-busy-indicator-busy-area:focus{outline:var(--_ui5-v1-21-2_busy_indicator_focus_outline);outline-offset:-2px;border-radius:var(--_ui5-v1-21-2_busy_indicator_focus_border_radius)}.ui5-busy-indicator-circles-wrapper{line-height:0}.ui5-busy-indicator-circle{display:inline-block;background-color:currentColor;border-radius:50%}.ui5-busy-indicator-circle:before{content:"";width:100%;height:100%;border-radius:100%}.circle-animation-0{animation:grow 1.6s infinite cubic-bezier(.32,.06,.85,1.11)}.circle-animation-1{animation:grow 1.6s infinite cubic-bezier(.32,.06,.85,1.11);animation-delay:.2s}.circle-animation-2{animation:grow 1.6s infinite cubic-bezier(.32,.06,.85,1.11);animation-delay:.4s}.ui5-busy-indicator-text{width:100%;margin-top:.25rem;text-align:center}@keyframes grow{0%,50%,to{-webkit-transform:scale(.5);-moz-transform:scale(.5);transform:scale(.5)}25%{-webkit-transform:scale(1);-moz-transform:scale(1);transform:scale(1)}}
 ` };
 var __decorate$7 = function(decorators, target, key, desc) {
@@ -1466,8 +3160,8 @@ var __decorate$7 = function(decorators, target, key, desc) {
   if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
     r = Reflect.decorate(decorators, target, key, desc);
   else
-    for (var i = decorators.length - 1; i >= 0; i--)
-      if (d = decorators[i])
+    for (var i2 = decorators.length - 1; i2 >= 0; i2--)
+      if (d = decorators[i2])
         r = (c2 < 3 ? d(r) : c2 > 3 ? d(target, key, r) : d(target, key)) || r;
   return c2 > 3 && r && Object.defineProperty(target, key, r), r;
 };
@@ -1526,30 +3220,30 @@ let BusyIndicator = BusyIndicator_1 = class BusyIndicator2 extends UI5Element {
       this._isBusy = false;
     }
   }
-  _handleKeydown(e) {
+  _handleKeydown(e2) {
     if (!this._isBusy) {
       return;
     }
-    e.stopImmediatePropagation();
-    if (isTabNext(e)) {
+    e2.stopImmediatePropagation();
+    if (isTabNext(e2)) {
       this.focusForward = true;
       this.shadowRoot.querySelector("[data-ui5-focus-redirect]").focus();
       this.focusForward = false;
     }
   }
-  _preventEvent(e) {
+  _preventEvent(e2) {
     if (this._isBusy) {
-      e.stopImmediatePropagation();
+      e2.stopImmediatePropagation();
     }
   }
   /**
    * Moves the focus to busy area when coming with SHIFT + TAB
    */
-  _redirectFocus(e) {
+  _redirectFocus(e2) {
     if (this.focusForward) {
       return;
     }
-    e.preventDefault();
+    e2.preventDefault();
     this.shadowRoot.querySelector(".ui5-busy-indicator-busy-area").focus();
   }
 };
@@ -1575,7 +3269,7 @@ BusyIndicator = BusyIndicator_1 = __decorate$7([
     styles: styleData$7,
     renderer: litRender,
     template: block0$7,
-    dependencies: [Label]
+    dependencies: [Label$1]
   })
 ], BusyIndicator);
 BusyIndicator.define();
@@ -1607,8 +3301,8 @@ function block7$1(context, tags, suffix) {
 function block8$1(context, tags, suffix) {
   return suffix ? effectiveHtml`<div class="ui5-list-busy-row"><${scopeTag("ui5-busy-indicator", tags, suffix)} delay="${l(this.busyDelay)}" active size="Medium" class="ui5-list-busy-ind" style="${styleMap(this.styles.busyInd)}" data-sap-focus-ref></${scopeTag("ui5-busy-indicator", tags, suffix)}></div>` : effectiveHtml`<div class="ui5-list-busy-row"><ui5-busy-indicator delay="${l(this.busyDelay)}" active size="Medium" class="ui5-list-busy-ind" style="${styleMap(this.styles.busyInd)}" data-sap-focus-ref></ui5-busy-indicator></div>`;
 }
-registerThemePropertiesLoader("@ui5/webcomponents-theming", "sap_horizon", async () => styleData$d);
-registerThemePropertiesLoader("@ui5/webcomponents", "sap_horizon", async () => styleData$e);
+registerThemePropertiesLoader("@ui5/webcomponents-theming", "sap_horizon", async () => styleData$k);
+registerThemePropertiesLoader("@ui5/webcomponents", "sap_horizon", async () => styleData$l);
 const styleData$6 = { packageName: "@ui5/webcomponents", fileName: "themes/List.css.ts", content: `.ui5-hidden-text{position:absolute;clip:rect(1px,1px,1px,1px);user-select:none;left:-1000px;top:-1000px;pointer-events:none;font-size:0}[growing-button]{display:flex;align-items:center;padding:var(--_ui5-v1-21-2_load_more_padding);border-top:1px solid var(--sapList_BorderColor);border-bottom:var(--_ui5-v1-21-2_load_more_border-bottom);box-sizing:border-box;cursor:pointer;outline:none}[growing-button-inner]{display:flex;align-items:center;justify-content:center;flex-direction:column;min-height:var(--_ui5-v1-21-2_load_more_text_height);width:100%;color:var(--sapButton_TextColor);background-color:var(--sapList_Background);border:var(--_ui5-v1-21-2_load_more_border);border-radius:var(--_ui5-v1-21-2_load_more_border_radius);box-sizing:border-box}[growing-button-inner]:focus{outline:var(--_ui5-v1-21-2_load_more_outline_width) var(--sapContent_FocusStyle) var(--sapContent_FocusColor);outline-offset:-.125rem;border-color:transparent}[growing-button-inner]:hover{background-color:var(--sapList_Hover_Background)}[growing-button-inner]:active,[growing-button-inner][active]{background-color:var(--sapList_Active_Background);border-color:var(--sapList_Active_Background)}[growing-button-inner]:active>*,[growing-button-inner][active]>*{color:var(--sapList_Active_TextColor)}[growing-button-text],[growing-button-subtext]{width:100%;text-align:center;font-family:"72override",var(--sapFontFamily);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-sizing:border-box}[growing-button-text]{height:var(--_ui5-v1-21-2_load_more_text_height);padding:.875rem 1rem 0;font-size:var(--_ui5-v1-21-2_load_more_text_font_size);font-weight:700}[growing-button-subtext]{font-size:var(--sapFontSize);padding:var(--_ui5-v1-21-2_load_more_desc_padding)}:host(:not([hidden])){display:block;max-width:100%;width:100%;-webkit-tap-highlight-color:transparent}:host([indent]) .ui5-list-root{padding:2rem}:host([separators="None"]) .ui5-list-nodata{border-bottom:0}:host([busy]){opacity:.72}:host([busy]) .ui5-list-busy-row{position:absolute;inset:0;outline:none}:host([busy]) .ui5-list-busy-ind{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:1}.ui5-list-root{width:100%;height:100%;position:relative;box-sizing:border-box}.ui5-list-scroll-container{overflow:auto;height:100%}.ui5-list-ul{list-style-type:none;padding:0;margin:0}.ui5-list-ul:focus{outline:none}.ui5-list-focusarea{position:fixed}.ui5-list-header{overflow:hidden;white-space:nowrap;text-overflow:ellipsis;box-sizing:border-box;font-size:var(--sapFontHeader4Size);font-family:"72override",var(--sapFontFamily);color:var(--sapGroup_TitleTextColor);height:3rem;line-height:3rem;padding:0 1rem;background-color:var(--sapGroup_TitleBackground);border-bottom:1px solid var(--sapGroup_TitleBorderColor)}.ui5-list-footer{height:2rem;box-sizing:border-box;-webkit-text-size-adjust:none;font-size:var(--sapFontSize);font-family:"72override",var(--sapFontFamily);line-height:2rem;background-color:var(--sapList_FooterBackground);color:var(--ui5-v1-21-2_list_footer_text_color);padding:0 1rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ui5-list-nodata{list-style-type:none;display:-webkit-box;display:flex;-webkit-box-align:center;align-items:center;-webkit-box-pack:center;justify-content:center;color:var(--sapTextColor);background-color:var(--sapList_Background);border-bottom:1px solid var(--sapList_BorderColor);padding:0 1rem!important;height:var(--_ui5-v1-21-2_list_no_data_height);font-size:var(--_ui5-v1-21-2_list_no_data_font_size);font-family:"72override",var(--sapFontFamily)}.ui5-list-nodata-text{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 ` };
 const name$9 = "accept";
@@ -1624,8 +3318,8 @@ const collection$8 = "SAP-icons-v5";
 const packageName$8 = "@ui5/webcomponents-icons";
 registerIcon(name$8, { pathData: pathData$8, ltr: ltr$8, collection: collection$8, packageName: packageName$8 });
 isLegacyThemeFamily() ? pathData$9 : pathData$8;
-registerThemePropertiesLoader("@ui5/webcomponents-theming", "sap_horizon", async () => styleData$d);
-registerThemePropertiesLoader("@ui5/webcomponents", "sap_horizon", async () => styleData$e);
+registerThemePropertiesLoader("@ui5/webcomponents-theming", "sap_horizon", async () => styleData$k);
+registerThemePropertiesLoader("@ui5/webcomponents", "sap_horizon", async () => styleData$l);
 const styleData$5 = { packageName: "@ui5/webcomponents", fileName: "themes/CheckBox.css.ts", content: `.ui5-hidden-text{position:absolute;clip:rect(1px,1px,1px,1px);user-select:none;left:-1000px;top:-1000px;pointer-events:none;font-size:0}:host{-webkit-tap-highlight-color:rgba(0,0,0,0)}:host(:not([hidden])){display:inline-block}:host{overflow:hidden;max-width:100%;outline:none;border-radius:var(--_ui5-v1-21-2_checkbox_border_radius);transition:var(--_ui5-v1-21-2_checkbox_transition);cursor:pointer;user-select:none;-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none}:host([disabled]){cursor:default}:host([disabled]) .ui5-checkbox-root{opacity:var(--_ui5-v1-21-2_checkbox_disabled_opacity)}:host([disabled]) .ui5-checkbox-inner{border-color:var(--_ui5-v1-21-2_checkbox_inner_disabled_border_color)}:host([disabled]) .ui5-checkbox-label{color:var(--_ui5-v1-21-2_checkbox_disabled_label_color)}:host([readonly]:not([value-state="Warning"]):not([value-state="Error"])) .ui5-checkbox-inner{background:var(--sapField_ReadOnly_Background);border:var(--_ui5-v1-21-2_checkbox_inner_readonly_border);color:var(--sapField_TextColor)}:host([wrapping-type="Normal"][text]) .ui5-checkbox-root{min-height:auto;box-sizing:border-box;align-items:flex-start;padding-top:var(--_ui5-v1-21-2_checkbox_root_side_padding);padding-bottom:var(--_ui5-v1-21-2_checkbox_root_side_padding)}:host([wrapping-type="Normal"][text]) .ui5-checkbox-root .ui5-checkbox-inner,:host([wrapping-type="Normal"][text]) .ui5-checkbox-root .ui5-checkbox-label{margin-top:var(--_ui5-v1-21-2_checkbox_wrapped_content_margin_top)}:host([wrapping-type="Normal"][text]) .ui5-checkbox-root .ui5-checkbox-label{overflow-wrap:break-word;align-self:center}:host([wrapping-type="Normal"]) .ui5-checkbox-root:focus:before{bottom:var(--_ui5-v1-21-2_checkbox_wrapped_focus_left_top_bottom_position)}:host([value-state="Error"]) .ui5-checkbox-inner,:host([value-state="Error"]) .ui5-checkbox--hoverable:hover .ui5-checkbox-inner{background:var(--sapField_InvalidBackground);border:var(--_ui5-v1-21-2_checkbox_inner_error_border);color:var(--sapField_InvalidColor)}:host([value-state="Error"]) .ui5-checkbox--hoverable:hover .ui5-checkbox-inner{background:var(--_ui5-v1-21-2_checkbox_inner_error_background_hover)}:host([value-state="Warning"]) .ui5-checkbox-inner,:host([value-state="Warning"]) .ui5-checkbox--hoverable:hover .ui5-checkbox-inner{background:var(--sapField_WarningBackground);border:var(--_ui5-v1-21-2_checkbox_inner_warning_border);color:var(--_ui5-v1-21-2_checkbox_inner_warning_color)}:host([value-state="Warning"]) .ui5-checkbox--hoverable:hover .ui5-checkbox-inner{background:var(--_ui5-v1-21-2_checkbox_inner_warning_background_hover)}:host([value-state="Information"]) .ui5-checkbox-inner,:host([value-state="Information"]) .ui5-checkbox--hoverable:hover .ui5-checkbox-inner{background:var(--sapField_InformationBackground);border:var(--_ui5-v1-21-2_checkbox_inner_information_border);color:var(--_ui5-v1-21-2_checkbox_inner_information_color)}:host([value-state="Information"]) .ui5-checkbox--hoverable:hover .ui5-checkbox-inner{background:var(--_ui5-v1-21-2_checkbox_inner_information_background_hover)}:host([value-state="Success"]) .ui5-checkbox-inner,:host([value-state="Success"]) .ui5-checkbox--hoverable:hover .ui5-checkbox-inner{background:var(--sapField_SuccessBackground);border:var(--_ui5-v1-21-2_checkbox_inner_success_border);color:var(--sapField_SuccessColor)}:host([value-state="Success"]) .ui5-checkbox--hoverable:hover .ui5-checkbox-inner{background:var(--_ui5-v1-21-2_checkbox_inner_success_background_hover)}:host([value-state="Warning"]) .ui5-checkbox-icon,:host([value-state="Warning"][indeterminate]) .ui5-checkbox-inner:after{color:var(--_ui5-v1-21-2_checkbox_checkmark_warning_color)}:host([text]) .ui5-checkbox-root{padding-inline-end:var(--_ui5-v1-21-2_checkbox_right_focus_distance)}:host([text]) .ui5-checkbox-root:focus:before{inset-inline-end:0}.ui5-checkbox-root{position:relative;display:inline-flex;align-items:center;width:100%;min-height:var(--_ui5-v1-21-2_checkbox_width_height);min-width:var(--_ui5-v1-21-2_checkbox_width_height);padding:0 var(--_ui5-v1-21-2_checkbox_wrapper_padding);outline:none;transition:var(--_ui5-v1-21-2_checkbox_transition);border:var(--_ui5-v1-21-2_checkbox_default_focus_border);border-radius:var(--_ui5-v1-21-2_checkbox_border_radius);box-sizing:border-box}.ui5-checkbox-root:focus:before{display:var(--_ui5-v1-21-2_checkbox_focus_outline_display);content:"";position:absolute;inset-inline:var(--_ui5-v1-21-2_checkbox_focus_position);inset-block:var(--_ui5-v1-21-2_checkbox_focus_position);border:var(--_ui5-v1-21-2_checkbox_focus_outline);border-radius:var(--_ui5-v1-21-2_checkbox_focus_border_radius)}:host .ui5-checkbox-root:focus{border:var(--_ui5-v1-21-2_checkbox_focus_border);border-radius:.5rem}:host(:hover:not([disabled])){background:var(--_ui5-v1-21-2_checkbox_outer_hover_background)}.ui5-checkbox--hoverable .ui5-checkbox-label:hover{color:var(--_ui5-v1-21-2_checkbox_label_color)}:host(:not([active]):not([checked]):not([value-state])) .ui5-checkbox--hoverable:hover .ui5-checkbox-inner,:host(:not([active]):not([checked])[value-state="None"]) .ui5-checkbox--hoverable:hover .ui5-checkbox-inner{background:var(--_ui5-v1-21-2_checkbox_hover_background);border-color:var(--_ui5-v1-21-2_checkbox_inner_hover_border_color)}:host(:not([active])[checked]:not([value-state])) .ui5-checkbox--hoverable:hover .ui5-checkbox-inner,:host(:not([active])[checked][value-state="None"]) .ui5-checkbox--hoverable:hover .ui5-checkbox-inner{background:var(--_ui5-v1-21-2_checkbox_hover_background);border-color:var(--_ui5-v1-21-2_checkbox_inner_hover_checked_border_color)}:host([checked]:not([value-state])) .ui5-checkbox-inner,:host([checked][value-state="None"]) .ui5-checkbox-inner{border-color:var(--_ui5-v1-21-2_checkbox_inner_selected_border_color)}:host([active]:not([checked]):not([value-state]):not([disabled])) .ui5-checkbox-inner,:host([active]:not([checked])[value-state="None"]:not([disabled])) .ui5-checkbox-inner{border-color:var(--_ui5-v1-21-2_checkbox_inner_active_border_color);background-color:var(--_ui5-v1-21-2_checkbox_active_background)}:host([active][checked]:not([value-state]):not([disabled])) .ui5-checkbox-inner,:host([active][checked][value-state="None"]:not([disabled])) .ui5-checkbox-inner{border-color:var(--_ui5-v1-21-2_checkbox_inner_selected_border_color);background-color:var(--_ui5-v1-21-2_checkbox_active_background)}.ui5-checkbox-inner{min-width:var(--_ui5-v1-21-2_checkbox_inner_width_height);max-width:var(--_ui5-v1-21-2_checkbox_inner_width_height);height:var(--_ui5-v1-21-2_checkbox_inner_width_height);max-height:var(--_ui5-v1-21-2_checkbox_inner_width_height);border:var(--_ui5-v1-21-2_checkbox_inner_border);border-radius:var(--_ui5-v1-21-2_checkbox_inner_border_radius);background:var(--_ui5-v1-21-2_checkbox_inner_background);color:var(--_ui5-v1-21-2_checkbox_checkmark_color);box-sizing:border-box;position:relative;cursor:inherit}:host([indeterminate][checked]) .ui5-checkbox-inner:after{content:"";background-color:currentColor;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:var(--_ui5-v1-21-2_checkbox_partially_icon_size);height:var(--_ui5-v1-21-2_checkbox_partially_icon_size)}.ui5-checkbox-inner input{-webkit-appearance:none;visibility:hidden;width:0;left:0;position:absolute;font-size:inherit}.ui5-checkbox-root .ui5-checkbox-label{margin-inline-start:var(--_ui5-v1-21-2_checkbox_label_offset);cursor:inherit;text-overflow:ellipsis;overflow:hidden;pointer-events:none;color:var(--_ui5-v1-21-2_checkbox_label_color)}.ui5-checkbox-icon{width:var(--_ui5-v1-21-2_checkbox_icon_size);height:var(--_ui5-v1-21-2_checkbox_icon_size);color:currentColor;cursor:inherit;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%)}
 ` };
 function block0$5(context, tags, suffix) {
@@ -1645,8 +3339,8 @@ var __decorate$6 = function(decorators, target, key, desc) {
   if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
     r = Reflect.decorate(decorators, target, key, desc);
   else
-    for (var i = decorators.length - 1; i >= 0; i--)
-      if (d = decorators[i])
+    for (var i2 = decorators.length - 1; i2 >= 0; i2--)
+      if (d = decorators[i2])
         r = (c2 < 3 ? d(r) : c2 > 3 ? d(target, key, r) : d(target, key)) || r;
   return c2 > 3 && r && Object.defineProperty(target, key, r), r;
 };
@@ -1697,18 +3391,18 @@ let CheckBox = CheckBox_1 = class CheckBox2 extends UI5Element {
   _onfocusout() {
     this.active = false;
   }
-  _onkeydown(e) {
-    if (isSpace(e)) {
-      e.preventDefault();
+  _onkeydown(e2) {
+    if (isSpace(e2)) {
+      e2.preventDefault();
       this.active = true;
     }
-    if (isEnter(e)) {
+    if (isEnter(e2)) {
       this.toggle();
       this.active = true;
     }
   }
-  _onkeyup(e) {
-    if (isSpace(e)) {
+  _onkeyup(e2) {
+    if (isSpace(e2)) {
       this.toggle();
     }
     this.active = false;
@@ -1773,10 +3467,10 @@ let CheckBox = CheckBox_1 = class CheckBox2 extends UI5Element {
     return this.hasValueState ? `${this._id}-descr` : void 0;
   }
   get hasValueState() {
-    return this.valueState !== ValueState.None;
+    return this.valueState !== ValueState$1.None;
   }
   get valueStateText() {
-    if (this.valueState !== ValueState.None && this.valueState !== ValueState.Information) {
+    if (this.valueState !== ValueState$1.None && this.valueState !== ValueState$1.Information) {
       return this.valueStateTextMappings()[this.valueState];
     }
   }
@@ -1816,10 +3510,10 @@ __decorate$6([
   property()
 ], CheckBox.prototype, "text", void 0);
 __decorate$6([
-  property({ type: ValueState, defaultValue: ValueState.None })
+  property({ type: ValueState$1, defaultValue: ValueState$1.None })
 ], CheckBox.prototype, "valueState", void 0);
 __decorate$6([
-  property({ type: WrappingType, defaultValue: WrappingType.None })
+  property({ type: WrappingType$1, defaultValue: WrappingType$1.None })
 ], CheckBox.prototype, "wrappingType", void 0);
 __decorate$6([
   property()
@@ -1838,7 +3532,7 @@ CheckBox = CheckBox_1 = __decorate$6([
     template: block0$5,
     styles: styleData$5,
     dependencies: [
-      Label,
+      Label$1,
       Icon
     ]
   }),
@@ -2049,8 +3743,8 @@ function block2$3(context, tags, suffix) {
 function blockSVG1(context, tags, suffix) {
   return effectiveSvg`<circle class="ui5-radio-svg-outer" cx="50%" cy="50%" r="50%" /><circle class="ui5-radio-svg-inner" cx="50%" cy="50%" />`;
 }
-registerThemePropertiesLoader("@ui5/webcomponents-theming", "sap_horizon", async () => styleData$d);
-registerThemePropertiesLoader("@ui5/webcomponents", "sap_horizon", async () => styleData$e);
+registerThemePropertiesLoader("@ui5/webcomponents-theming", "sap_horizon", async () => styleData$k);
+registerThemePropertiesLoader("@ui5/webcomponents", "sap_horizon", async () => styleData$l);
 const styleData$4 = { packageName: "@ui5/webcomponents", fileName: "themes/RadioButton.css.ts", content: `.ui5-hidden-text{position:absolute;clip:rect(1px,1px,1px,1px);user-select:none;left:-1000px;top:-1000px;pointer-events:none;font-size:0}:host(:not([hidden])){display:inline-block}:host{min-width:var(--_ui5-v1-21-2_radio_button_min_width);max-width:100%;text-overflow:ellipsis;overflow:hidden;color:var(--_ui5-v1-21-2_radio_button_color);border-radius:var(--_ui5-v1-21-2_radio_button_border_radius)}:host(:not([disabled])) .ui5-radio-root{cursor:pointer}:host([checked]){color:var(--_ui5-v1-21-2_radio_button_checked_fill)}:host([checked]) .ui5-radio-svg-inner{fill:var(--_ui5-v1-21-2_radio_button_inner_ring_color)}:host([checked]) .ui5-radio-svg-outer{stroke:var(--_ui5-v1-21-2_radio_button_outer_ring_color)}:host([disabled]) .ui5-radio-root{color:var(--_ui5-v1-21-2_radio_button_color);opacity:var(--sapContent_DisabledOpacity)}:host([disabled][checked]) .ui5-radio-svg-outer{stroke:var(--_ui5-v1-21-2_radio_button_color)}:host(:not([disabled])) .ui5-radio-root:focus:before{content:"";display:var(--_ui5-v1-21-2_radio_button_focus_outline);position:absolute;inset:var(--_ui5-v1-21-2_radio_button_focus_dist);pointer-events:none;border:var(--_ui5-v1-21-2_radio_button_border_width) var(--sapContent_FocusStyle) var(--sapContent_FocusColor);border-radius:var(--_ui5-v1-21-2_radio_button_border_radius)}:host(:not([disabled])) .ui5-radio-root:focus{border-radius:var(--_ui5-v1-21-2_radio_button_border_radius);border:var(--_ui5-v1-21-2_radio_button_focus_border)}:host(:not([value-state="Error"]):not([value-state="Warning"]):not([value-state="Success"]):not([value-state="Information"])) .ui5-radio-root:hover .ui5-radio-inner--hoverable .ui5-radio-svg-outer{stroke:var(--_ui5-v1-21-2_radio_button_outer_ring_hover_color)}:host(:not([value-state="Error"]):not([value-state="Warning"]):not([value-state="Success"]):not([value-state="Information"])[checked]) .ui5-radio-root:hover .ui5-radio-inner--hoverable .ui5-radio-svg-outer{stroke:var(--_ui5-v1-21-2_radio_button_outer_ring_checked_hover_color)}.ui5-radio-root:hover .ui5-radio-inner--hoverable .ui5-radio-svg-outer,:host([checked]) .ui5-radio-root:hover .ui5-radio-inner--hoverable .ui5-radio-svg-outer{fill:var(--_ui5-v1-21-2_radio_button_hover_fill)}:host([active][checked]:not([value-state]):not([disabled]):not([readonly])) .ui5-radio-svg-outer{stroke:var(--_ui5-v1-21-2_radio_button_outer_ring_checked_hover_color)}:host([active]:not([checked]):not([value-state]):not([disabled]):not([readonly])) .ui5-radio-svg-outer{stroke:var(--_ui5-v1-21-2_radio_button_outer_ring_active_color)}:host([text]) .ui5-radio-root{padding-inline-end:var(--_ui5-v1-21-2_radio_button_border_width)}:host([text]) .ui5-radio-root:focus:before{inset-inline-end:0px}:host([text]) .ui5-radio-inner{padding:var(--_ui5-v1-21-2_radio_button_outer_ring_padding_with_label)}:host([checked][readonly]) .ui5-radio-svg-inner{fill:var(--_ui5-v1-21-2_radio_button_read_only_inner_ring_color)}:host([readonly]) .ui5-radio-root .ui5-radio-svg-outer{fill:var(--sapField_ReadOnly_Background);stroke:var(--sapField_ReadOnly_BorderColor);stroke-dasharray:var(--_ui5-v1-21-2_radio_button_read_only_border_type);stroke-width:var(--_ui5-v1-21-2_radio_button_read_only_border_width)}:host([value-state="Error"]) .ui5-radio-svg-outer,:host([value-state="Warning"]) .ui5-radio-svg-outer{stroke-width:var(--sapField_InvalidBorderWidth)}:host([value-state="Information"]) .ui5-radio-svg-outer{stroke-width:var(--_ui5-v1-21-2_radio_button_information_border_width)}:host([value-state="Error"][checked]) .ui5-radio-svg-inner{fill:var(--_ui5-v1-21-2_radio_button_checked_error_fill)}:host([value-state="Error"]) .ui5-radio-svg-outer,:host([value-state="Error"]) .ui5-radio-root:hover .ui5-radio-inner.ui5-radio-inner--hoverable:hover .ui5-radio-svg-outer{stroke:var(--sapField_InvalidColor);fill:var(--sapField_InvalidBackground)}:host([value-state="Error"]) .ui5-radio-root:hover .ui5-radio-inner.ui5-radio-inner--hoverable .ui5-radio-svg-outer{fill:var(--_ui5-v1-21-2_radio_button_hover_fill_error)}:host([value-state="Warning"][checked]) .ui5-radio-svg-inner{fill:var(--_ui5-v1-21-2_radio_button_checked_warning_fill)}:host([value-state="Warning"]) .ui5-radio-svg-outer,:host([value-state="Warning"]) .ui5-radio-root:hover .ui5-radio-inner.ui5-radio-inner--hoverable:hover .ui5-radio-svg-outer{stroke:var(--sapField_WarningColor);fill:var(--sapField_WarningBackground)}:host([value-state="Warning"]) .ui5-radio-root:hover .ui5-radio-inner.ui5-radio-inner--hoverable .ui5-radio-svg-outer{fill:var(--_ui5-v1-21-2_radio_button_hover_fill_warning)}:host([value-state="Success"][checked]) .ui5-radio-svg-inner{fill:var(--_ui5-v1-21-2_radio_button_checked_success_fill)}:host([value-state="Success"]) .ui5-radio-svg-outer,:host([value-state="Success"]) .ui5-radio-root:hover .ui5-radio-inner.ui5-radio-inner--hoverable:hover .ui5-radio-svg-outer{stroke:var(--sapField_SuccessColor);fill:var(--sapField_SuccessBackground)}:host([value-state="Success"]) .ui5-radio-root:hover .ui5-radio-inner.ui5-radio-inner--hoverable .ui5-radio-svg-outer{fill:var(--_ui5-v1-21-2_radio_button_hover_fill_success)}:host([value-state="Information"][checked]) .ui5-radio-svg-inner{fill:var(--_ui5-v1-21-2_radio_button_checked_information_fill)}:host([value-state="Information"]) .ui5-radio-svg-outer,:host([value-state="Information"]) .ui5-radio-root:hover .ui5-radio-inner.ui5-radio-inner--hoverable:hover .ui5-radio-svg-outer{stroke:var(--sapField_InformationColor);fill:var(--sapField_InformationBackground)}:host([value-state="Information"]) .ui5-radio-root:hover .ui5-radio-inner.ui5-radio-inner--hoverable .ui5-radio-svg-outer{fill:var(--_ui5-v1-21-2_radio_button_hover_fill_information)}:host([value-state="Error"]) .ui5-radio-root,:host([value-state="Warning"]) .ui5-radio-root,:host([value-state="Information"]) .ui5-radio-root{stroke-dasharray:var(--_ui5-v1-21-2_radio_button_warning_error_border_dash)}.ui5-radio-root{height:var(--_ui5-v1-21-2_radio_button_height);position:relative;display:inline-flex;flex-wrap:nowrap;outline:none;max-width:100%;box-sizing:border-box;border:var(--_ui5-v1-21-2_radio_button_border);border-radius:var(--_ui5-v1-21-2_radio_button_border_radius)}.ui5-radio-inner{display:flex;align-items:center;padding:var(--_ui5-v1-21-2_radio_button_outer_ring_padding);flex-shrink:0;height:var(--_ui5-v1-21-2_radio_button_inner_size);font-size:1rem;pointer-events:none;vertical-align:top}.ui5-radio-inner{outline:none}.ui5-radio-inner input{-webkit-appearance:none;visibility:hidden;width:0;left:0;position:absolute;font-size:inherit;margin:0}[ui5-label].ui5-radio-label{display:flex;align-items:center;padding-inline-end:var(--_ui5-v1-21-2_radio_button_label_offset);vertical-align:top;max-width:100%;text-overflow:ellipsis;overflow:hidden;pointer-events:none;color:var(--_ui5-v1-21-2_radio_button_label_color)}:host([wrapping-type="Normal"][text]) .ui5-radio-root{height:auto}:host([wrapping-type="Normal"][text]) [ui5-label].ui5-radio-label{padding:var(--_ui5-v1-21-2_radio_button_label_side_padding) 0;overflow-wrap:break-word}.ui5-radio-svg{height:var(--_ui5-v1-21-2_radio_button_svg_size);width:var(--_ui5-v1-21-2_radio_button_svg_size);overflow:visible;pointer-events:none}.ui5-radio-svg-outer{fill:var(--_ui5-v1-21-2_radio_button_outer_ring_bg);stroke:currentColor;stroke-width:var(--_ui5-v1-21-2_radio_button_outer_ring_width)}.ui5-radio-svg-inner{fill:none;r:var(--_ui5-v1-21-2_radio_button_inner_ring_radius)}.ui5-radio-svg-outer,.ui5-radio-svg-inner{flex-shrink:0}:host(.ui5-li-singlesel-radiobtn) .ui5-radio-root .ui5-radio-inner .ui5-radio-svg-outer{fill:var(--sapList_Background)}
 ` };
 var __decorate$5 = function(decorators, target, key, desc) {
@@ -2058,8 +3752,8 @@ var __decorate$5 = function(decorators, target, key, desc) {
   if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
     r = Reflect.decorate(decorators, target, key, desc);
   else
-    for (var i = decorators.length - 1; i >= 0; i--)
-      if (d = decorators[i])
+    for (var i2 = decorators.length - 1; i2 >= 0; i2--)
+      if (d = decorators[i2])
         r = (c2 < 3 ? d(r) : c2 > 3 ? d(target, key, r) : d(target, key)) || r;
   return c2 > 3 && r && Object.defineProperty(target, key, r), r;
 };
@@ -2137,41 +3831,41 @@ let RadioButton = RadioButton_1 = class RadioButton2 extends UI5Element {
   _onclick() {
     return this.toggle();
   }
-  _handleDown(e) {
+  _handleDown(e2) {
     const currentGroup = this.name;
     if (!currentGroup) {
       return;
     }
-    e.preventDefault();
+    e2.preventDefault();
     RadioButtonGroup.selectNextItem(this, currentGroup);
   }
-  _handleUp(e) {
+  _handleUp(e2) {
     const currentGroup = this.name;
     if (!currentGroup) {
       return;
     }
-    e.preventDefault();
+    e2.preventDefault();
     RadioButtonGroup.selectPreviousItem(this, currentGroup);
   }
-  _onkeydown(e) {
-    if (isSpace(e)) {
+  _onkeydown(e2) {
+    if (isSpace(e2)) {
       this.active = true;
-      return e.preventDefault();
+      return e2.preventDefault();
     }
-    if (isEnter(e)) {
+    if (isEnter(e2)) {
       this.active = true;
       return this.toggle();
     }
     const isRTL = this.effectiveDir === "rtl";
-    if (isDown(e) || !isRTL && isRight(e) || isRTL && isLeft(e)) {
-      this._handleDown(e);
+    if (isDown(e2) || !isRTL && isRight(e2) || isRTL && isLeft(e2)) {
+      this._handleDown(e2);
     }
-    if (isUp(e) || !isRTL && isLeft(e) || isRTL && isRight(e)) {
-      this._handleUp(e);
+    if (isUp(e2) || !isRTL && isLeft(e2) || isRTL && isRight(e2)) {
+      this._handleUp(e2);
     }
   }
-  _onkeyup(e) {
-    if (isSpace(e)) {
+  _onkeyup(e2) {
+    if (isSpace(e2)) {
       this.toggle();
     }
     this.active = false;
@@ -2218,17 +3912,17 @@ let RadioButton = RadioButton_1 = class RadioButton2 extends UI5Element {
     return this.hasValueState ? `${this._id}-descr` : void 0;
   }
   get hasValueState() {
-    return this.valueState !== ValueState.None;
+    return this.valueState !== ValueState$1.None;
   }
   get valueStateText() {
     switch (this.valueState) {
-      case ValueState.Error:
+      case ValueState$1.Error:
         return RadioButton_1.i18nBundle.getText(VALUE_STATE_ERROR);
-      case ValueState.Warning:
+      case ValueState$1.Warning:
         return RadioButton_1.i18nBundle.getText(VALUE_STATE_WARNING);
-      case ValueState.Success:
+      case ValueState$1.Success:
         return RadioButton_1.i18nBundle.getText(VALUE_STATE_SUCCESS);
-      case ValueState.Information:
+      case ValueState$1.Information:
         return RadioButton_1.i18nBundle.getText(VALUE_STATE_INFORMATION);
       default:
         return "";
@@ -2267,7 +3961,7 @@ __decorate$5([
   property()
 ], RadioButton.prototype, "text", void 0);
 __decorate$5([
-  property({ type: ValueState, defaultValue: ValueState.None })
+  property({ type: ValueState$1, defaultValue: ValueState$1.None })
 ], RadioButton.prototype, "valueState", void 0);
 __decorate$5([
   property()
@@ -2276,7 +3970,7 @@ __decorate$5([
   property()
 ], RadioButton.prototype, "value", void 0);
 __decorate$5([
-  property({ type: WrappingType, defaultValue: WrappingType.None })
+  property({ type: WrappingType$1, defaultValue: WrappingType$1.None })
 ], RadioButton.prototype, "wrappingType", void 0);
 __decorate$5([
   property()
@@ -2300,7 +3994,7 @@ RadioButton = RadioButton_1 = __decorate$5([
     renderer: litRender,
     template: block0$4,
     styles: styleData$4,
-    dependencies: [Label]
+    dependencies: [Label$1]
   }),
   event("change")
 ], RadioButton);
@@ -2311,8 +4005,8 @@ var __decorate$4 = function(decorators, target, key, desc) {
   if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
     r = Reflect.decorate(decorators, target, key, desc);
   else
-    for (var i = decorators.length - 1; i >= 0; i--)
-      if (d = decorators[i])
+    for (var i2 = decorators.length - 1; i2 >= 0; i2--)
+      if (d = decorators[i2])
         r = (c2 < 3 ? d(r) : c2 > 3 ? d(target, key, r) : d(target, key)) || r;
   return c2 > 3 && r && Object.defineProperty(target, key, r), r;
 };
@@ -2497,20 +4191,20 @@ let List = List_1 = class List2 extends UI5Element {
   /*
   * ITEM SELECTION BASED ON THE CURRENT MODE
   */
-  onSelectionRequested(e) {
+  onSelectionRequested(e2) {
     const previouslySelectedItems = this.getSelectedItems();
     let selectionChange = false;
     this._selectionRequested = true;
     if (this.mode !== ListMode$1.None && this[`handle${this.mode}`]) {
-      selectionChange = this[`handle${this.mode}`](e.detail.item, !!e.detail.selected);
+      selectionChange = this[`handle${this.mode}`](e2.detail.item, !!e2.detail.selected);
     }
     if (selectionChange) {
       const changePrevented = !this.fireEvent("selection-change", {
         selectedItems: this.getSelectedItems(),
         previouslySelectedItems,
-        selectionComponentPressed: e.detail.selectionComponentPressed,
-        targetItem: e.detail.item,
-        key: e.detail.key
+        selectionComponentPressed: e2.detail.selectionComponentPressed,
+        targetItem: e2.detail.item,
+        key: e2.detail.key
       }, true);
       if (changePrevented) {
         this._revertSelection(previouslySelectedItems);
@@ -2572,34 +4266,34 @@ let List = List_1 = class List2 extends UI5Element {
       }
     });
   }
-  _onkeydown(e) {
-    if (isTabNext(e)) {
-      this._handleTabNext(e);
+  _onkeydown(e2) {
+    if (isTabNext(e2)) {
+      this._handleTabNext(e2);
     }
   }
-  _onLoadMoreKeydown(e) {
-    if (isSpace(e)) {
-      e.preventDefault();
+  _onLoadMoreKeydown(e2) {
+    if (isSpace(e2)) {
+      e2.preventDefault();
       this._loadMoreActive = true;
     }
-    if (isEnter(e)) {
+    if (isEnter(e2)) {
       this._onLoadMoreClick();
       this._loadMoreActive = true;
     }
-    if (isTabNext(e)) {
+    if (isTabNext(e2)) {
       this.focusAfterElement();
     }
-    if (isTabPrevious(e)) {
+    if (isTabPrevious(e2)) {
       if (this.getPreviouslyFocusedItem()) {
         this.focusPreviouslyFocusedItem();
       } else {
         this.focusFirstItem();
       }
-      e.preventDefault();
+      e2.preventDefault();
     }
   }
-  _onLoadMoreKeyup(e) {
-    if (isSpace(e)) {
+  _onLoadMoreKeyup(e2) {
+    if (isSpace(e2)) {
       this._onLoadMoreClick();
     }
     this._loadMoreActive = false;
@@ -2622,16 +4316,16 @@ let List = List_1 = class List2 extends UI5Element {
   /*
   * KEYBOARD SUPPORT
   */
-  _handleTabNext(e) {
-    getNormalizedTarget(e.target);
+  _handleTabNext(e2) {
+    getNormalizedTarget(e2.target);
     {
       return;
     }
   }
-  _onfocusin(e) {
-    const target = getNormalizedTarget(e.target);
+  _onfocusin(e2) {
+    const target = getNormalizedTarget(e2.target);
     if (!this.isForwardElement(target)) {
-      e.stopImmediatePropagation();
+      e2.stopImmediatePropagation();
       return;
     }
     if (!this.getPreviouslyFocusedItem()) {
@@ -2640,17 +4334,17 @@ let List = List_1 = class List2 extends UI5Element {
       } else {
         this.focusFirstItem();
       }
-      e.stopImmediatePropagation();
+      e2.stopImmediatePropagation();
       return;
     }
     if (!this.getForwardingFocus()) {
       if (this.growsWithButton && this.isForwardAfterElement(target)) {
         this.focusGrowingButton();
-        e.stopImmediatePropagation();
+        e2.stopImmediatePropagation();
         return;
       }
       this.focusPreviouslyFocusedItem();
-      e.stopImmediatePropagation();
+      e2.stopImmediatePropagation();
     }
     this.setForwardingFocus(false);
   }
@@ -2667,13 +4361,13 @@ let List = List_1 = class List2 extends UI5Element {
     const afterElement = this.getAfterElement();
     return afterElement && afterElement.id === elementId;
   }
-  onItemTabIndexChange(e) {
-    const target = e.target;
+  onItemTabIndexChange(e2) {
+    const target = e2.target;
     this._itemNavigation.setCurrentItem(target);
   }
-  onItemFocused(e) {
-    const target = e.target;
-    e.stopPropagation();
+  onItemFocused(e2) {
+    const target = e2.target;
+    e2.stopPropagation();
     this._itemNavigation.setCurrentItem(target);
     this.fireEvent("item-focused", { item: target });
     if (this.mode === ListMode$1.SingleSelectAuto) {
@@ -2681,13 +4375,13 @@ let List = List_1 = class List2 extends UI5Element {
         item: target,
         selectionComponentPressed: false,
         selected: true,
-        key: e.detail.key
+        key: e2.detail.key
       };
       this.onSelectionRequested({ detail });
     }
   }
-  onItemPress(e) {
-    const pressedItem = e.detail.item;
+  onItemPress(e2) {
+    const pressedItem = e2.detail.item;
     if (!this.fireEvent("item-click", { item: pressedItem }, true)) {
       return;
     }
@@ -2697,38 +4391,38 @@ let List = List_1 = class List2 extends UI5Element {
         item: pressedItem,
         selectionComponentPressed: false,
         selected: !pressedItem.selected,
-        key: e.detail.key
+        key: e2.detail.key
       };
       this.onSelectionRequested({ detail });
     }
     this._selectionRequested = false;
   }
   // This is applicable to NotificationListItem
-  onItemClose(e) {
+  onItemClose(e2) {
     var _a;
-    const target = e.target;
+    const target = e2.target;
     const shouldFireItemClose = (target == null ? void 0 : target.hasAttribute("ui5-li-notification")) || (target == null ? void 0 : target.hasAttribute("ui5-li-notification-group"));
     if (shouldFireItemClose) {
-      this.fireEvent("item-close", { item: (_a = e.detail) == null ? void 0 : _a.item });
+      this.fireEvent("item-close", { item: (_a = e2.detail) == null ? void 0 : _a.item });
     }
   }
-  onItemToggle(e) {
-    this.fireEvent("item-toggle", { item: e.detail.item });
+  onItemToggle(e2) {
+    this.fireEvent("item-toggle", { item: e2.detail.item });
   }
-  onForwardBefore(e) {
-    this.setPreviouslyFocusedItem(e.target);
+  onForwardBefore(e2) {
+    this.setPreviouslyFocusedItem(e2.target);
     this.focusBeforeElement();
-    e.stopPropagation();
+    e2.stopPropagation();
   }
-  onForwardAfter(e) {
-    this.setPreviouslyFocusedItem(e.target);
+  onForwardAfter(e2) {
+    this.setPreviouslyFocusedItem(e2.target);
     if (!this.growsWithButton) {
       this.focusAfterElement();
     } else {
       this.focusGrowingButton();
-      e.preventDefault();
+      e2.preventDefault();
     }
-    e.stopPropagation();
+    e2.stopPropagation();
   }
   focusBeforeElement() {
     this.setForwardingFocus(true);
@@ -2778,9 +4472,9 @@ let List = List_1 = class List2 extends UI5Element {
     this._itemNavigation.setCurrentItem(item);
     item.focus();
   }
-  onFocusRequested(e) {
+  onFocusRequested(e2) {
     setTimeout(() => {
-      this.setPreviouslyFocusedItem(e.target);
+      this.setPreviouslyFocusedItem(e2.target);
       this.focusPreviouslyFocusedItem();
     }, 0);
   }
@@ -2802,9 +4496,9 @@ let List = List_1 = class List2 extends UI5Element {
     if (!filter) {
       return slottedItems.length ? slottedItems[0] : null;
     }
-    for (let i = 0; i < slottedItems.length; i++) {
-      if (filter(slottedItems[i])) {
-        firstItem = slottedItems[i];
+    for (let i2 = 0; i2 < slottedItems.length; i2++) {
+      if (filter(slottedItems[i2])) {
+        firstItem = slottedItems[i2];
         break;
       }
     }
@@ -2890,7 +4584,7 @@ List = List_1 = __decorate$4([
     fastNavigation: true,
     renderer: litRender,
     template: block0$6,
-    styles: [styleData$f, styleData$6],
+    styles: [styleData$e, styleData$6],
     dependencies: [BusyIndicator$1]
   }),
   event("item-click", {
@@ -2952,8 +4646,8 @@ var ListItemType;
   ListItemType2["Navigation"] = "Navigation";
 })(ListItemType || (ListItemType = {}));
 const ListItemType$1 = ListItemType;
-registerThemePropertiesLoader("@ui5/webcomponents-theming", "sap_horizon", async () => styleData$d);
-registerThemePropertiesLoader("@ui5/webcomponents", "sap_horizon", async () => styleData$e);
+registerThemePropertiesLoader("@ui5/webcomponents-theming", "sap_horizon", async () => styleData$k);
+registerThemePropertiesLoader("@ui5/webcomponents", "sap_horizon", async () => styleData$l);
 const styleData$3 = { packageName: "@ui5/webcomponents", fileName: "themes/ListItem.css.ts", content: `.ui5-hidden-text{position:absolute;clip:rect(1px,1px,1px,1px);user-select:none;left:-1000px;top:-1000px;pointer-events:none;font-size:0}:host([actionable]:not([disabled])){cursor:pointer}:host([selected][actionable]:not([active]):hover){background:var(--sapList_Hover_SelectionBackground)}:host([active][actionable]),:host([selected][active][actionable]){background:var(--sapList_Active_Background)}:host([actionable]:not([active]):not([selected]):hover){background:var(--sapList_Hover_Background)}:host([active][actionable]) .ui5-li-root.ui5-li--focusable:focus,:host([active][actionable]) .ui5-li-root.ui5-li--focusable .ui5-li-content:focus{outline-color:var(--sapContent_ContrastFocusColor)}:host([navigated]) .ui5-li-root .ui5-li-navigated{width:.1875rem;position:absolute;right:0;top:0;bottom:0;background-color:var(--sapList_SelectionBorderColor)}:host([active][actionable]) .ui5-li-root .ui5-li-icon{color:var(--sapList_Active_TextColor)}:host([active][actionable]) .ui5-li-title,:host([active][actionable]) .ui5-li-desc,:host([active][actionable]) .ui5-li-additional-text{color:var(--sapList_Active_TextColor)}:host([additional-text-state="Warning"]) .ui5-li-additional-text{color:var(--sapCriticalTextColor)}:host([additional-text-state="Success"]) .ui5-li-additional-text{color:var(--sapPositiveTextColor)}:host([additional-text-state="Error"]) .ui5-li-additional-text{color:var(--sapNegativeTextColor)}:host([additional-text-state="Information"]) .ui5-li-additional-text{color:var(--sapInformativeTextColor)}:host([has-title][description]){height:5rem}:host([has-title][image]){height:5rem}:host([_has-image-content]){height:5rem}:host([image]) .ui5-li-content{height:3rem}:host([description]) .ui5-li-root{padding:1rem}:host([description]) .ui5-li-content{height:3rem}:host([has-title][description]) .ui5-li-title{padding-bottom:.375rem}.ui5-li-text-wrapper{display:flex;flex-direction:column;flex:auto;min-width:1px;line-height:normal}:host([description]) .ui5-li-text-wrapper{height:100%;justify-content:space-between;padding:.125rem 0}.ui5-li-description-info-wrapper{display:flex;justify-content:space-between}.ui5-li-title{color:var(--sapList_TextColor);font-size:var(--_ui5-v1-21-2_list_item_title_size)}.ui5-li-additional-text,:host(:not([wrapping-type="Normal"])) .ui5-li-title,.ui5-li-desc{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}:host([wrapping-type="Normal"]){height:auto}:host([wrapping-type="Normal"]) .ui5-li-content{margin:var(--_ui5-v1-21-2_list_item_content_vertical_offset) 0}.ui5-li-desc{color:var(--sapContent_LabelColor);font-size:var(--sapFontSize)}.ui5-li-additional-text{margin:0 .25rem;color:var(--sapNeutralTextColor);font-size:var(--sapFontSize);min-width:3.75rem;text-align:end}:host([description]) .ui5-li-additional-text{align-self:flex-end}.ui5-li-img{width:var(--_ui5-v1-21-2_list_item_img_size);height:var(--_ui5-v1-21-2_list_item_img_size);border-radius:var(--ui5-v1-21-2-avatar-border-radius)}.ui5-li-img,.ui5-li-imgContent{min-width:var(--_ui5-v1-21-2_list_item_img_size);min-height:var(--_ui5-v1-21-2_list_item_img_size);margin-top:var(--_ui5-v1-21-2_list_item_img_top_margin);margin-bottom:var(--_ui5-v1-21-2_list_item_img_bottom_margin);margin-inline-end:var(--_ui5-v1-21-2_list_item_img_hn_margin)}.ui5-li-img-inner{object-fit:contain}.ui5-li-icon{min-width:var(--_ui5-v1-21-2_list_item_icon_size);min-height:var(--_ui5-v1-21-2_list_item_icon_size);color:var(--sapContent_NonInteractiveIconColor);padding-inline-end:var(--_ui5-v1-21-2_list_item_icon_padding-inline-end)}.ui5-li-content{display:flex;align-items:center;flex:auto;overflow:hidden}.ui5-li-detailbtn,.ui5-li-deletebtn{display:flex;align-items:center;margin-left:var(--_ui5-v1-21-2_list_buttons_left_space)}.ui5-li-multisel-cb,.ui5-li-singlesel-radiobtn{flex-shrink:0}:host([description]) .ui5-li-singlesel-radiobtn{align-self:flex-start;margin-top:var(--_ui5-v1-21-2_list_item_selection_btn_margin_top)}:host([description]) .ui5-li-multisel-cb{align-self:flex-start;margin-top:var(--_ui5-v1-21-2_list_item_selection_btn_margin_top)}:host([_mode="SingleSelectBegin"]) .ui5-li-root{padding-inline:0 1rem}:host([_mode="MultiSelect"]) .ui5-li-root{padding-inline:0 1rem}:host([_mode="SingleSelectEnd"]) .ui5-li-root{padding-inline:1rem 0}:host [ui5-checkbox].ui5-li-singlesel-radiobtn{margin-right:var(--_ui5-v1-21-2_list_item_cb_margin_right)}
 ` };
 var HasPopup;
@@ -2983,8 +4677,8 @@ var __decorate$3 = function(decorators, target, key, desc) {
   if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
     r = Reflect.decorate(decorators, target, key, desc);
   else
-    for (var i = decorators.length - 1; i >= 0; i--)
-      if (d = decorators[i])
+    for (var i2 = decorators.length - 1; i2 >= 0; i2--)
+      if (d = decorators[i2])
         r = (c2 < 3 ? d(r) : c2 > 3 ? d(target, key, r) : d(target, key)) || r;
   return c2 > 3 && r && Object.defineProperty(target, key, r), r;
 };
@@ -2992,8 +4686,8 @@ var ListItem_1;
 let ListItem = ListItem_1 = class ListItem2 extends ListItemBase$1 {
   constructor() {
     super();
-    this.deactivateByKey = (e) => {
-      if (isEnter(e)) {
+    this.deactivateByKey = (e2) => {
+      if (isEnter(e2)) {
         this.deactivate();
       }
     };
@@ -3002,8 +4696,8 @@ let ListItem = ListItem_1 = class ListItem2 extends ListItemBase$1 {
         this.active = false;
       }
     };
-    const handleTouchStartEvent = (e) => {
-      this._onmousedown(e);
+    const handleTouchStartEvent = (e2) => {
+      this._onmousedown(e2);
     };
     this._ontouchstart = {
       handleEvent: handleTouchStartEvent,
@@ -3023,70 +4717,70 @@ let ListItem = ListItem_1 = class ListItem2 extends ListItemBase$1 {
     document.removeEventListener("keyup", this.deactivateByKey);
     document.removeEventListener("touchend", this.deactivate);
   }
-  _onkeydown(e) {
-    super._onkeydown(e);
+  _onkeydown(e2) {
+    super._onkeydown(e2);
     const itemActive = this.type === ListItemType$1.Active, itemNavigated = this.typeNavigation;
-    if (isSpace(e)) {
-      e.preventDefault();
+    if (isSpace(e2)) {
+      e2.preventDefault();
     }
-    if ((isSpace(e) || isEnter(e)) && (itemActive || itemNavigated)) {
+    if ((isSpace(e2) || isEnter(e2)) && (itemActive || itemNavigated)) {
       this.activate();
     }
-    if (isEnter(e)) {
-      this.fireItemPress(e);
+    if (isEnter(e2)) {
+      this.fireItemPress(e2);
     }
   }
-  _onkeyup(e) {
-    if (isSpace(e) || isEnter(e)) {
+  _onkeyup(e2) {
+    if (isSpace(e2) || isEnter(e2)) {
       this.deactivate();
     }
-    if (isSpace(e)) {
-      this.fireItemPress(e);
+    if (isSpace(e2)) {
+      this.fireItemPress(e2);
     }
-    if (this.modeDelete && isDelete(e)) {
+    if (this.modeDelete && isDelete(e2)) {
       this.onDelete();
     }
   }
-  _onmousedown(e) {
-    if (getEventMark(e) === "button") {
+  _onmousedown(e2) {
+    if (getEventMark(e2) === "button") {
       return;
     }
     this.activate();
   }
-  _onmouseup(e) {
-    if (getEventMark(e) === "button") {
+  _onmouseup(e2) {
+    if (getEventMark(e2) === "button") {
       return;
     }
     this.deactivate();
   }
-  _ontouchend(e) {
-    this._onmouseup(e);
+  _ontouchend(e2) {
+    this._onmouseup(e2);
   }
   _onfocusout() {
     super._onfocusout();
     this.deactivate();
   }
-  _onclick(e) {
-    if (getEventMark(e) === "button") {
+  _onclick(e2) {
+    if (getEventMark(e2) === "button") {
       return;
     }
-    this.fireItemPress(e);
+    this.fireItemPress(e2);
   }
   /*
    * Called when selection components in Single (ui5-radio-button)
    * and Multi (ui5-checkbox) selection modes are used.
    */
-  onMultiSelectionComponentPress(e) {
+  onMultiSelectionComponentPress(e2) {
     if (this.isInactive) {
       return;
     }
-    this.fireEvent("_selection-requested", { item: this, selected: e.target.checked, selectionComponentPressed: true });
+    this.fireEvent("_selection-requested", { item: this, selected: e2.target.checked, selectionComponentPressed: true });
   }
-  onSingleSelectionComponentPress(e) {
+  onSingleSelectionComponentPress(e2) {
     if (this.isInactive) {
       return;
     }
-    this.fireEvent("_selection-requested", { item: this, selected: !e.target.checked, selectionComponentPressed: true });
+    this.fireEvent("_selection-requested", { item: this, selected: !e2.target.checked, selectionComponentPressed: true });
   }
   activate() {
     if (this.type === ListItemType$1.Active || this.type === ListItemType$1.Navigation) {
@@ -3099,14 +4793,14 @@ let ListItem = ListItem_1 = class ListItem2 extends ListItemBase$1 {
   onDetailClick() {
     this.fireEvent("detail-click", { item: this, selected: this.selected });
   }
-  fireItemPress(e) {
+  fireItemPress(e2) {
     if (this.isInactive) {
       return;
     }
-    if (isEnter(e)) {
-      e.preventDefault();
+    if (isEnter(e2)) {
+      e2.preventDefault();
     }
-    this.fireEvent("_press", { item: this, selected: this.selected, key: e.key });
+    this.fireEvent("_press", { item: this, selected: this.selected, key: e2.key });
   }
   get isInactive() {
     return this.type === ListItemType$1.Inactive || this.type === ListItemType$1.Detail;
@@ -3266,8 +4960,8 @@ function block3$1(context, tags, suffix) {
 function block4$1(context, tags, suffix) {
   return suffix ? effectiveHtml`<span class="ui5-avatar-initials">${l(this.validInitials)}</span><${scopeTag("ui5-icon", tags, suffix)} class="ui5-avatar-icon ui5-avatar-icon-fallback" name="${l(this.fallbackIcon)}"></${scopeTag("ui5-icon", tags, suffix)}>` : effectiveHtml`<span class="ui5-avatar-initials">${l(this.validInitials)}</span><ui5-icon class="ui5-avatar-icon ui5-avatar-icon-fallback" name="${l(this.fallbackIcon)}"></ui5-icon>`;
 }
-registerThemePropertiesLoader("@ui5/webcomponents-theming", "sap_horizon", async () => styleData$d);
-registerThemePropertiesLoader("@ui5/webcomponents", "sap_horizon", async () => styleData$e);
+registerThemePropertiesLoader("@ui5/webcomponents-theming", "sap_horizon", async () => styleData$k);
+registerThemePropertiesLoader("@ui5/webcomponents", "sap_horizon", async () => styleData$l);
 const styleData$2 = { packageName: "@ui5/webcomponents", fileName: "themes/Avatar.css.ts", content: `:host(:not([hidden])){display:inline-block;box-sizing:border-box;position:relative}:host(:not([hidden]).ui5_hovered){opacity:.7}:host(:is([interactive]):not([disabled])){cursor:pointer}:host(:is([interactive][pressed]):not([hidden])){background:var(--sapButton_Active_Background);border-color:var(--sapButton_Active_BorderColor);color:var(--sapButton_Active_TextColor)}:host(:is([interactive][pressed]):not([hidden]):hover){background:var(--sapButton_Selected_Hover_Background);border-color:var(--sapButton_Selected_Hover_BorderColor);color:var(--sapButton_Selected_TextColor)}:host(:is([interactive]):not([hidden]):not([pressed]):not([disabled]):hover){box-shadow:var(--ui5-v1-21-2-avatar-hover-box-shadow-offset)}:host(:is([interactive][focused]):not([hidden]):not([pressed])){outline:var(--_ui5-v1-21-2_avatar_outline);outline-offset:var(--_ui5-v1-21-2_avatar_focus_offset)}:host(:is([disabled])){opacity:var(--sapContent_DisabledOpacity)}:host{height:3rem;width:3rem;border-radius:50%;border:var(--ui5-v1-21-2-avatar-initials-border);outline:none;color:var(--ui5-v1-21-2-avatar-initials-color)}.ui5-avatar-root{display:flex;align-items:center;justify-content:center;outline:none;height:100%;width:100%}:host([_size="XS"]),:host([size="XS"]){height:2rem;width:2rem;min-height:2rem;min-width:2rem;font-size:var(--_ui5-v1-21-2_avatar_fontsize_XS)}:host([_size="S"]),:host([size="S"]){min-height:3rem;min-width:3rem;font-size:var(--_ui5-v1-21-2_avatar_fontsize_S)}:host([_size="M"]),:host([size="M"]){min-height:4rem;min-width:4rem;font-size:var(--_ui5-v1-21-2_avatar_fontsize_M)}:host([_size="L"]),:host([size="L"]){min-height:5rem;min-width:5rem;font-size:var(--_ui5-v1-21-2_avatar_fontsize_L)}:host([_size="XL"]),:host([size="XL"]){min-height:7rem;min-width:7rem;font-size:var(--_ui5-v1-21-2_avatar_fontsize_XL)}:host .ui5-avatar-icon{height:var(--_ui5-v1-21-2_avatar_fontsize_S);width:var(--_ui5-v1-21-2_avatar_fontsize_S);color:inherit}:host([_size="XS"]) .ui5-avatar-icon,:host([size="XS"]) .ui5-avatar-icon{height:var(--_ui5-v1-21-2_avatar_icon_XS);width:var(--_ui5-v1-21-2_avatar_icon_XS)}:host([_size="S"]) .ui5-avatar-icon,:host([size="S"]) .ui5-avatar-icon{height:var(--_ui5-v1-21-2_avatar_icon_S);width:var(--_ui5-v1-21-2_avatar_icon_S)}:host([_size="M"]) .ui5-avatar-icon,:host([size="M"]) .ui5-avatar-icon{height:var(--_ui5-v1-21-2_avatar_icon_M);width:var(--_ui5-v1-21-2_avatar_icon_M)}:host([_size="L"]) .ui5-avatar-icon,:host([size="L"]) .ui5-avatar-icon{height:var(--_ui5-v1-21-2_avatar_icon_L);width:var(--_ui5-v1-21-2_avatar_icon_L)}:host([_size="XL"]) .ui5-avatar-icon,:host([size="XL"]) .ui5-avatar-icon{height:var(--_ui5-v1-21-2_avatar_icon_XL);width:var(--_ui5-v1-21-2_avatar_icon_XL)}::slotted(*){border-radius:50%;width:100%;height:100%;pointer-events:none}:host([shape="Square"]){border-radius:var(--ui5-v1-21-2-avatar-border-radius)}:host([shape="Square"]) ::slotted(*){border-radius:calc(var(--ui5-v1-21-2-avatar-border-radius) - var(--ui5-v1-21-2-avatar-border-radius-img-deduction))}:host(:not([color-scheme])),:host(:not([_has-image])),:host([_color-scheme="Accent6"]),:host([ui5-avatar][color-scheme="Accent6"]){background-color:var(--ui5-v1-21-2-avatar-accent6);color:var(--ui5-v1-21-2-avatar-accent6-color);border-color:var(--ui5-v1-21-2-avatar-accent6-border-color)}:host([_color-scheme="Accent1"]),:host([ui5-avatar][color-scheme="Accent1"]){background-color:var(--ui5-v1-21-2-avatar-accent1);color:var(--ui5-v1-21-2-avatar-accent1-color);border-color:var(--ui5-v1-21-2-avatar-accent1-border-color)}:host([_color-scheme="Accent2"]),:host([ui5-avatar][color-scheme="Accent2"]){background-color:var(--ui5-v1-21-2-avatar-accent2);color:var(--ui5-v1-21-2-avatar-accent2-color);border-color:var(--ui5-v1-21-2-avatar-accent2-border-color)}:host([_color-scheme="Accent3"]),:host([ui5-avatar][color-scheme="Accent3"]){background-color:var(--ui5-v1-21-2-avatar-accent3);color:var(--ui5-v1-21-2-avatar-accent3-color);border-color:var(--ui5-v1-21-2-avatar-accent3-border-color)}:host([_color-scheme="Accent4"]),:host([ui5-avatar][color-scheme="Accent4"]){background-color:var(--ui5-v1-21-2-avatar-accent4);color:var(--ui5-v1-21-2-avatar-accent4-color);border-color:var(--ui5-v1-21-2-avatar-accent4-border-color)}:host([_color-scheme="Accent5"]),:host([ui5-avatar][color-scheme="Accent5"]){background-color:var(--ui5-v1-21-2-avatar-accent5);color:var(--ui5-v1-21-2-avatar-accent5-color);border-color:var(--ui5-v1-21-2-avatar-accent5-border-color)}:host([_color-scheme="Accent7"]),:host([ui5-avatar][color-scheme="Accent7"]){background-color:var(--ui5-v1-21-2-avatar-accent7);color:var(--ui5-v1-21-2-avatar-accent7-color);border-color:var(--ui5-v1-21-2-avatar-accent7-border-color)}:host([_color-scheme="Accent8"]),:host([ui5-avatar][color-scheme="Accent8"]){background-color:var(--ui5-v1-21-2-avatar-accent8);color:var(--ui5-v1-21-2-avatar-accent8-color);border-color:var(--ui5-v1-21-2-avatar-accent8-border-color)}:host([_color-scheme="Accent9"]),:host([ui5-avatar][color-scheme="Accent9"]){background-color:var(--ui5-v1-21-2-avatar-accent9);color:var(--ui5-v1-21-2-avatar-accent9-color);border-color:var(--ui5-v1-21-2-avatar-accent9-border-color)}:host([_color-scheme="Accent10"]),:host([ui5-avatar][color-scheme="Accent10"]){background-color:var(--ui5-v1-21-2-avatar-accent10);color:var(--ui5-v1-21-2-avatar-accent10-color);border-color:var(--ui5-v1-21-2-avatar-accent10-border-color)}:host([_color-scheme="Placeholder"]),:host([ui5-avatar][color-scheme="Placeholder"]){background-color:var(--ui5-v1-21-2-avatar-placeholder);color:var(--ui5-v1-21-2-avatar-placeholder-color);border-color:var(--ui5-v1-21-2-avatar-placeholder-border-color)}:host([_has-image]){color:var(--ui5-v1-21-2-avatar-accent10-color);background-color:transparent;vertical-align:middle}.ui5-avatar-initials{color:inherit}.ui5-avatar-icon~.ui5-avatar-initials,.ui5-avatar-icon~.ui5-avatar-icon-fallback{display:none}.ui5-avatar-initials:not(.ui5-avatar-initials-hidden)+.ui5-avatar-icon-fallback{display:none}.ui5-avatar-initials-hidden{position:absolute;visibility:hidden;z-index:0;pointer-events:none}::slotted([slot="badge"]){position:absolute;bottom:0;right:0;width:1.125rem;height:1.125rem;background:var(--sapButton_Emphasized_Background);border:var(--sapButton_Emphasized_Background);border-radius:1rem;color:var(--sapContent_BadgeTextColor);justify-content:center;font-family:"72override",var(--sapFontFamily);font-size:var(--sapFontSmallSize)}::slotted([ui5-badge][slot="badge"]){padding:.1875rem}:host([_size="L"]) ::slotted([slot="badge"]),:host([size="L"]) ::slotted([slot="badge"]){width:1.25rem;height:1.25rem}:host([_size="XL"]) ::slotted([slot="badge"]),:host([size="XL"]) ::slotted([slot="badge"]){padding:.375rem;width:1.75rem;height:1.75rem}:host([shape="Square"]) ::slotted([slot="badge"]){bottom:-.125rem;right:-.125rem}:host([_size="L"][shape="Square"]) ::slotted([slot="badge"]),:host([size="L"][shape="Square"]) ::slotted([slot="badge"]){bottom:-.1875rem;right:-.1875rem}:host([_size="XL"][shape="Square"]) ::slotted([slot="badge"]),:host([size="XL"][shape="Square"]) ::slotted([slot="badge"]){bottom:-.25rem;right:-.25rem}
 ` };
 var AvatarSize;
@@ -3318,8 +5012,8 @@ var __decorate$2 = function(decorators, target, key, desc) {
   if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
     r = Reflect.decorate(decorators, target, key, desc);
   else
-    for (var i = decorators.length - 1; i >= 0; i--)
-      if (d = decorators[i])
+    for (var i2 = decorators.length - 1; i2 >= 0; i2--)
+      if (d = decorators[i2])
         r = (c2 < 3 ? d(r) : c2 > 3 ? d(target, key, r) : d(target, key)) || r;
   return c2 > 3 && r && Object.defineProperty(target, key, r), r;
 };
@@ -3423,23 +5117,23 @@ let Avatar = Avatar_1 = class Avatar2 extends UI5Element {
       }
     }
   }
-  _onClickHandler(e) {
-    e.stopPropagation();
+  _onClickHandler(e2) {
+    e2.stopPropagation();
     this._fireClick();
   }
-  _onkeydown(e) {
+  _onkeydown(e2) {
     if (!this._interactive) {
       return;
     }
-    if (isEnter(e)) {
+    if (isEnter(e2)) {
       this._fireClick();
     }
-    if (isSpace(e)) {
-      e.preventDefault();
+    if (isSpace(e2)) {
+      e2.preventDefault();
     }
   }
-  _onkeyup(e) {
-    if (this._interactive && !e.shiftKey && isSpace(e)) {
+  _onkeyup(e2) {
+    if (this._interactive && !e2.shiftKey && isSpace(e2)) {
       this._fireClick();
     }
   }
@@ -3612,8 +5306,8 @@ var __decorate$1 = function(decorators, target, key, desc) {
   if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
     r = Reflect.decorate(decorators, target, key, desc);
   else
-    for (var i = decorators.length - 1; i >= 0; i--)
-      if (d = decorators[i])
+    for (var i2 = decorators.length - 1; i2 >= 0; i2--)
+      if (d = decorators[i2])
         r = (c2 < 3 ? d(r) : c2 > 3 ? d(target, key, r) : d(target, key)) || r;
   return c2 > 3 && r && Object.defineProperty(target, key, r), r;
 };
@@ -3652,13 +5346,13 @@ __decorate$1([
   property()
 ], StandardListItem.prototype, "additionalText", void 0);
 __decorate$1([
-  property({ type: ValueState, defaultValue: ValueState.None })
+  property({ type: ValueState$1, defaultValue: ValueState$1.None })
 ], StandardListItem.prototype, "additionalTextState", void 0);
 __decorate$1([
   property()
 ], StandardListItem.prototype, "accessibleName", void 0);
 __decorate$1([
-  property({ type: WrappingType, defaultValue: WrappingType.None })
+  property({ type: WrappingType$1, defaultValue: WrappingType$1.None })
 ], StandardListItem.prototype, "wrappingType", void 0);
 __decorate$1([
   property({ type: Boolean })
@@ -3710,12 +5404,12 @@ function block0(context, tags, suffix) {
 function block1(context, tags, suffix, item, index) {
   return suffix ? effectiveHtml`<${scopeTag("ui5-li", tags, suffix)} id="${l(item._id)}-li" accessible-name="${l(item.accessibleName)}" data-ui5-stable="${l(item.stableDomRef)}">${l(item.textContent)}</${scopeTag("ui5-li", tags, suffix)}>` : effectiveHtml`<ui5-li id="${l(item._id)}-li" accessible-name="${l(item.accessibleName)}" data-ui5-stable="${l(item.stableDomRef)}">${l(item.textContent)}</ui5-li>`;
 }
-registerThemePropertiesLoader("@ui5/webcomponents-theming", "sap_horizon", async () => styleData$d);
-registerThemePropertiesLoader("@ui5/webcomponents", "sap_horizon", async () => styleData$e);
+registerThemePropertiesLoader("@ui5/webcomponents-theming", "sap_horizon", async () => styleData$k);
+registerThemePropertiesLoader("@ui5/webcomponents", "sap_horizon", async () => styleData$l);
 const styleData$1 = { packageName: "@ui5/webcomponents", fileName: "themes/Breadcrumbs.css.ts", content: `:host(:not([hidden])){display:block;width:100%}.ui5-breadcrumbs-root{white-space:nowrap;outline:none;margin:0 0 .5rem}.ui5-breadcrumbs-root>ol{margin:0;padding:0;list-style-type:none;display:-webkit-box;display:-webkit-flex;display:flex}.ui5-breadcrumbs-root>ol>li{display:inline}.ui5-breadcrumbs-current-location{min-width:1%;-webkit-flex:1;-webkit-box-flex:1;flex:1 1 auto;font-size:0;align-self:center}.ui5-breadcrumbs-current-location>span:focus{outline:var(--sapContent_FocusWidth) var(--sapContent_FocusStyle) var(--sapContent_FocusColor);border-radius:var(--_ui5-v1-21-2_breadcrumbs_current_location_focus_border_radius)}.ui5-breadcrumbs-dropdown-arrow-link-wrapper[hidden]{display:none}.ui5-breadcrumbs-dropdown-arrow-link-wrapper [ui5-icon]{width:var(--sapFontSize);height:var(--sapFontSize);padding-left:.675rem;vertical-align:text-top;color:var(--sapLinkColor)}.ui5-breadcrumbs-dropdown-arrow-link-wrapper [ui5-link][focused] [ui5-icon]{color:var(--_ui5-v1-21-2_link_focus_color)}.ui5-breadcrumbs-dropdown-arrow-link-wrapper [ui5-icon]:before{content:"...";vertical-align:middle;position:absolute;left:0;bottom:0}.ui5-breadcrumbs-dropdown-arrow-link-wrapper [ui5-link][focused] [ui5-icon]:after,.ui5-breadcrumbs-dropdown-arrow-link-wrapper:hover [ui5-icon]:after{content:"";position:absolute;border-bottom:.0625rem solid;inset:0 0 1px}li:not(.ui5-breadcrumbs-current-location):after{content:"/";padding:0 .25rem;cursor:auto;color:var(--sapContent_LabelColor);display:inline-block;font-family:"72override",var(--sapFontFamily);font-size:var(--sapFontSize)}.ui5-breadcrumbs-popover-footer{display:flex;justify-content:flex-end;width:100%}:host([separator-style="BackSlash"]) li:not(.ui5-breadcrumbs-current-location):after{content:"\\"}:host([separator-style="DoubleBackSlash"]) li:not(.ui5-breadcrumbs-current-location):after{content:"\\\\"}:host([separator-style="DoubleGreaterThan"]) li:not(.ui5-breadcrumbs-current-location):after{content:">>"}:host([separator-style="DoubleSlash"]) li:not(.ui5-breadcrumbs-current-location):after{content:"//"}:host([separator-style="GreaterThan"]) li:not(.ui5-breadcrumbs-current-location):after{content:">"}
 ` };
-registerThemePropertiesLoader("@ui5/webcomponents-theming", "sap_horizon", async () => styleData$d);
-registerThemePropertiesLoader("@ui5/webcomponents", "sap_horizon", async () => styleData$e);
+registerThemePropertiesLoader("@ui5/webcomponents-theming", "sap_horizon", async () => styleData$k);
+registerThemePropertiesLoader("@ui5/webcomponents", "sap_horizon", async () => styleData$l);
 const styleData = { packageName: "@ui5/webcomponents", fileName: "themes/BreadcrumbsPopover.css.ts", content: `.ui5-breadcrumbs-popover::part(content){padding:0}.ui5-breadcrumbs-popover-footer{display:flex;justify-content:flex-end;width:100%;padding-right:.5rem;align-items:center}
 ` };
 var __decorate = function(decorators, target, key, desc) {
@@ -3723,8 +5417,8 @@ var __decorate = function(decorators, target, key, desc) {
   if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
     r = Reflect.decorate(decorators, target, key, desc);
   else
-    for (var i = decorators.length - 1; i >= 0; i--)
-      if (d = decorators[i])
+    for (var i2 = decorators.length - 1; i2 >= 0; i2--)
+      if (d = decorators[i2])
         r = (c2 < 3 ? d(r) : c2 > 3 ? d(target, key, r) : d(target, key)) || r;
   return c2 > 3 && r && Object.defineProperty(target, key, r), r;
 };
@@ -3798,27 +5492,27 @@ let Breadcrumbs = Breadcrumbs_1 = class Breadcrumbs2 extends UI5Element {
     }
     return items;
   }
-  _onfocusin(e) {
-    const target = e.target, labelWrapper = this.getCurrentLocationLabelWrapper(), currentItem = target === labelWrapper ? this._labelFocusAdaptor : target;
+  _onfocusin(e2) {
+    const target = e2.target, labelWrapper = this.getCurrentLocationLabelWrapper(), currentItem = target === labelWrapper ? this._labelFocusAdaptor : target;
     this._itemNavigation.setCurrentItem(currentItem);
   }
-  _onkeydown(e) {
+  _onkeydown(e2) {
     const isDropdownArrowFocused = this._isDropdownArrowFocused;
-    if (isShow(e) && isDropdownArrowFocused && !this._isOverflowEmpty) {
-      e.preventDefault();
+    if (isShow(e2) && isDropdownArrowFocused && !this._isOverflowEmpty) {
+      e2.preventDefault();
       this._toggleRespPopover();
       return;
     }
-    if (isSpace(e) && isDropdownArrowFocused && !this._isOverflowEmpty && !this._isPickerOpen) {
-      e.preventDefault();
+    if (isSpace(e2) && isDropdownArrowFocused && !this._isOverflowEmpty && !this._isPickerOpen) {
+      e2.preventDefault();
       return;
     }
-    if ((isEnter(e) || isSpace(e)) && this._isCurrentLocationLabelFocused) {
-      this._onLabelPress(e);
+    if ((isEnter(e2) || isSpace(e2)) && this._isCurrentLocationLabelFocused) {
+      this._onLabelPress(e2);
     }
   }
-  _onkeyup(e) {
-    if (this._isDropdownArrowFocused && isSpace(e) && !this._isOverflowEmpty && !this._isPickerOpen) {
+  _onkeyup(e2) {
+    if (this._isDropdownArrowFocused && isSpace(e2) && !this._isOverflowEmpty && !this._isPickerOpen) {
       this._openRespPopover();
     }
   }
@@ -3828,8 +5522,8 @@ let Breadcrumbs = Breadcrumbs_1 = class Breadcrumbs2 extends UI5Element {
    */
   _cacheWidths() {
     const map = this._breadcrumbItemWidths, items = this._getItems(), label = this._currentLocationLabel;
-    for (let i = this._overflowSize; i < items.length; i++) {
-      const item = items[i], link = this.shadowRoot.querySelector(`#${item._id}-link-wrapper`);
+    for (let i2 = this._overflowSize; i2 < items.length; i2++) {
+      const item = items[i2], link = this.shadowRoot.querySelector(`#${item._id}-link-wrapper`);
       map.set(item, this._getElementWidth(link));
     }
     if (items.length && this._endsWithCurrentLocationLabel && label) {
@@ -3875,8 +5569,8 @@ let Breadcrumbs = Breadcrumbs_1 = class Breadcrumbs2 extends UI5Element {
     const items = this._getItems(), widthsMap = this._breadcrumbItemWidths, totalLinksWidth = items.reduce((sum, link) => sum + widthsMap.get(link), 0);
     return totalLinksWidth;
   }
-  _onLinkPress(e) {
-    const link = e.target, items = this._getItems(), item = items.find((x) => `${x._id}-link` === link.id), { altKey, ctrlKey, metaKey, shiftKey } = e.detail;
+  _onLinkPress(e2) {
+    const link = e2.target, items = this._getItems(), item = items.find((x) => `${x._id}-link` === link.id), { altKey, ctrlKey, metaKey, shiftKey } = e2.detail;
     if (!this.fireEvent("item-click", {
       item,
       altKey,
@@ -3884,11 +5578,11 @@ let Breadcrumbs = Breadcrumbs_1 = class Breadcrumbs2 extends UI5Element {
       metaKey,
       shiftKey
     }, true)) {
-      e.preventDefault();
+      e2.preventDefault();
     }
   }
-  _onLabelPress(e) {
-    const items = this._getItems(), item = items[items.length - 1], { altKey, ctrlKey, metaKey, shiftKey } = e;
+  _onLabelPress(e2) {
+    const items = this._getItems(), item = items[items.length - 1], { altKey, ctrlKey, metaKey, shiftKey } = e2;
     this.fireEvent("item-click", {
       item,
       altKey,
@@ -3897,8 +5591,8 @@ let Breadcrumbs = Breadcrumbs_1 = class Breadcrumbs2 extends UI5Element {
       shiftKey
     });
   }
-  _onOverflowListItemSelect(e) {
-    const listItem = e.detail.selectedItems[0], items = this._getItems(), item = items.find((x) => `${x._id}-li` === listItem.id);
+  _onOverflowListItemSelect(e2) {
+    const listItem = e2.detail.selectedItems[0], items = this._getItems(), item = items.find((x) => `${x._id}-li` === listItem.id);
     if (this.fireEvent("item-click", { item }, true)) {
       window.open(item.href, item.target || "_self", "noopener,noreferrer");
       this.responsivePopover.close();
@@ -3952,7 +5646,7 @@ let Breadcrumbs = Breadcrumbs_1 = class Breadcrumbs2 extends UI5Element {
     return this.shadowRoot.querySelector(".ui5-breadcrumbs-current-location > span");
   }
   get _visibleItems() {
-    return this._getItems().slice(this._overflowSize).filter((i) => this._isItemVisible(i));
+    return this._getItems().slice(this._overflowSize).filter((i2) => this._isItemVisible(i2));
   }
   get _endsWithCurrentLocationLabel() {
     return this.design === BreadcrumbsDesign$1.Standard;
@@ -4083,7 +5777,7 @@ Breadcrumbs = Breadcrumbs_1 = __decorate([
     dependencies: [
       BreadcrumbsItem$1,
       Link$1,
-      Label,
+      Label$1,
       ResponsivePopover$1,
       List$1,
       StandardListItem$1,
