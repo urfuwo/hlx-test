@@ -114,7 +114,7 @@ async function loadSAPThemeAndWebComponents() {
       ui5ThemeScript.setAttribute('type', 'application/json');
       ui5ThemeScript.textContent = `{"theme": "${sapTheme}"}`;
       head.append(ui5ThemeScript);
-      loadScript('/libs/dds-wc-bundle.esm.m.js', { type: 'module' });
+      // loadScript('/libs/dds-wc-bundle.esm.m.js', { type: 'module' });
     }
   } catch (e) {
     // eslint-disable-next-line no-console
