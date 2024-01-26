@@ -7,6 +7,7 @@ export default async function decorate(block) {
   items.forEach((item) => {
     const breadcrumbItem = document.createElement('ui5-breadcrumbs-item');
     breadcrumbItem.textContent = item.textContent;
+    if (item.querySelector('a')) breadcrumbItem.href = item.querySelector('a').href;
     breadcrumb.appendChild(breadcrumbItem);
   });
 
