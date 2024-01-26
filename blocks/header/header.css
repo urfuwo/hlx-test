@@ -1,3 +1,7 @@
+header {
+  height: 64px;
+}
+
 /* header and nav layout */
 header .nav-wrapper {
   display: flex;
@@ -5,7 +9,7 @@ header .nav-wrapper {
   justify-content: space-between;
   padding: 0 72px;
   position: relative;
-  background-color: var(--sap-shell-background);
+  background-color: var(--sapShell_Background);
   width: auto;
 }
 
@@ -38,24 +42,30 @@ header nav .text {
   white-space: nowrap;
 }
 
+/* Table view (--udexGridSMinWidth) */
 @media (width >= 640px) {
   header nav {
     padding: 0 48px;
   }
 }
 
+/* Desktop view (--udexGridMMinWidth) */
 @media (width >= 980px) {
   header nav {
     padding: 0 72px;
   }
 }
 
+/* XL Desktop view (--udexGridXLMinWidth) */
 @media (width >= 1600px) {
   header nav {
     padding: 0 246px;
   }
 }
 
+/* #todo: it appears this media query can be collapsed with the previous one */
+
+/* XL Desktop view (--udexGridXLMinWidth) */
 @media (width >= 1600px) {
   header nav {
     gap: 0 2em;
@@ -144,7 +154,8 @@ header nav .nav-sections ul > li > ul > li {
   font-weight: 500;
 }
 
-@media (width >= 900px) {
+/* Desktop view (--udexGridMMinWidth) */
+@media (width >= 980px) {
   header nav .nav-sections {
     display: inline-flex;
     visibility: visible;
@@ -203,7 +214,8 @@ header nav .nav-explore {
   display: none;
 }
 
-@media (width >= 900px) {
+/* Desktop view (--udexGridMMinWidth) */
+@media (width >= 980px) {
   header nav .nav-explore {
     display: inline;
     align-self: flex-end;
@@ -220,7 +232,8 @@ header nav .nav-tools {
   display: none;
 }
 
-@media (width >= 900px) {
+/* Desktop view (--udexGridMMinWidth) */
+@media (width >= 980px) {
   header nav .nav-tools {
     display: inline-flex;
     align-items: flex-end;
@@ -343,7 +356,8 @@ header nav[aria-expanded='true'] .nav-hamburger-icon::after {
   transform: rotate(-45deg);
 }
 
-@media (width >= 900px) {
+/* Desktop view (--udexGridMMinWidth) */
+@media (width >= 980px) {
   header nav .nav-hamburger {
     display: none;
     visibility: hidden;
