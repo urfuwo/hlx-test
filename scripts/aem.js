@@ -508,8 +508,7 @@ async function fetchPlaceholders(prefix = 'default') {
  */
 function updateSectionsStatus(main) {
   const sections = [...main.querySelectorAll(':scope > div.section')];
-  for (let i = 0; i < sections.length; i += 1) {
-    const section = sections[i];
+  for (const section of sections) {
     const status = section.dataset.sectionStatus;
     if (status !== 'loaded') {
       const loadingBlock = section.querySelector(
@@ -601,9 +600,9 @@ async function loadBlock(block) {
 async function loadBlocks(main) {
   updateSectionsStatus(main);
   const blocks = [...main.querySelectorAll('div.block')];
-  for (let i = 0; i < blocks.length; i += 1) {
+  for (const block of blocks) {
     // eslint-disable-next-line no-await-in-loop
-    await loadBlock(blocks[i]);
+    await loadBlock(block);
     updateSectionsStatus(main);
   }
 }

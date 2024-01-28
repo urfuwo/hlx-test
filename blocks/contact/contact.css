@@ -1,0 +1,57 @@
+.contact-wrapper .logo-lang-picker {
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 48px;
+}
+
+.contact-wrapper .icon--sap {
+  height: 32px;
+  width: 65.4px;
+}
+
+.block.contact {
+  display: flex;
+  flex-direction: row;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+  letter-spacing: 0px;
+  text-align: left;
+  padding-bottom: 20px;
+}
+
+.block.contact > div {
+  display: flex;
+  flex-direction: row;
+  padding: 8.5px 16px 8.5px 0px;
+}
+
+.block.contact .icon {
+  padding-right: 16px;
+}
+
+/* S */
+@media (width >= 640px) {
+    .block.contact {
+        flex-direction: column;
+      }
+}
+
+/* M */
+@media (width >= 980px) {
+  .block.contact {
+    flex-direction: row;
+  }
+}
+
+/* L */
+@media (width >= 1280px) {
+    .block.contact {
+        flex-direction: column;
+      }
+
+}
+
+/* XL */
+@media (width >= 1600px) {
+}
