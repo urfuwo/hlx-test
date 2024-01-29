@@ -19,7 +19,8 @@
   display: block;
 }
 
-@media (width >= 900px) {
+/* Desktop view (--udexGridMMinWidth) */
+@media (width >= 980px) {
   .columns > div {
     align-items: center;
     flex-direction: unset;
