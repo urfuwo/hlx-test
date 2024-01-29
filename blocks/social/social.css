@@ -1,0 +1,53 @@
+.link-group-container + .social-container {
+  display: block;
+}
+
+.contact-wrapper + .social-wrapper {
+  display: none;
+}
+
+.block.social {
+  display: flex;
+  flex-direction: row;
+}
+
+.block.social > div > div {
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 6px;
+    margin: 6px;
+}
+
+.block.social .icon {
+    display: flex;
+}
+
+.block.social .icon > img {
+    width: 16px;
+    height: 16px;
+    margin: auto;
+}
+
+/* S */
+@media (width >= 640px) {
+}
+
+/* M */
+@media (width >= 980px) {
+}
+
+/* L */
+@media (width >= 1280px) {
+  .link-group-container + .social-container {
+    display: none;
+  }
+
+  .contact-wrapper + .social-wrapper {
+    display: block;
+  }
+}
+
+/* XL */
+@media (width >= 1600px) {
+}

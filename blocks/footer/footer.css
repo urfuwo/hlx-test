@@ -21,6 +21,10 @@
   flex: 2;
 }
 
+.block.footer .icon-back-to-top {
+  padding: 16px;
+}
+
 /* S */
 @media (width >= 640px) {
   .block.footer > div {

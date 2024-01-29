@@ -4,6 +4,10 @@
   padding-bottom: 48px;
 }
 
+.contact-wrapper .logo-lang-picker select {
+  min-width: 282px;
+}
+
 .contact-wrapper .icon--sap {
   height: 32px;
   width: 65.4px;
