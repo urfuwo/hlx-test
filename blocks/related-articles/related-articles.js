@@ -1,4 +1,4 @@
-import { getMetadata } from '../../scripts/aem.js';
+import { getMetadata, loadCSS } from '../../scripts/aem.js';
 import { div, h3 } from '../../scripts/dom-builder.js';
 import listArticles from '../article-list/article-list.js';
 
@@ -8,6 +8,7 @@ function getCategoryForReadMore() {
 }
 
 export default async function decorateBlock(block) {
+  loadCSS(`${window.hlx.codeBasePath}/blocks/article-list/article-list.css`);
   const category = getCategoryForReadMore();
   const title = h3({}, `More on ${category}`);
 

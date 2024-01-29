@@ -1,4 +1,6 @@
-import { createOptimizedPicture, getMetadata, toClassName } from '../../scripts/aem.js';
+import {
+  createOptimizedPicture, fetchPlaceholders, getMetadata, toClassName,
+} from '../../scripts/aem.js';
 import {
   ul, li, a, span,
 } from '../../scripts/dom-builder.js';
@@ -13,25 +15,29 @@ const ARTICLE_FORMATTER = new Intl.DateTimeFormat('default', {
 });
 
 // TODO: change to web component once available
-function renderCard(card) {
+async function renderCard(card) {
+  const placeholders = await fetchPlaceholders();
   const formattedDate = ARTICLE_FORMATTER.format(new Date(card.publicationDate * 1000));
   const cardclass = `card${card['hot story'] ? ' hot-story' : ''}`;
   const cardAuthorUrl = `/author/${toClassName(card.author).replace('-', '')}`; // TODO look up author URL from index
+  const showArticleTemplate = placeholders.showArticleTypeOnArticleCards === 'yes';
   const cardElement = li(
     { class: cardclass },
     a(
       { href: card.path },
       createOptimizedPicture(card.image, card.tile, false, [{ width: '750' }]),
-      span({ class: 'template' }, card.template),
-      span({ class: 'title' }, card.title),
     ),
     span(
-      { class: 'author' },
-      'By ',
-      a({ href: cardAuthorUrl }, span(`${card.author}`)),
+      { class: 'cardcontent' },
+      showArticleTemplate ? span({ class: 'template' }, card.template.charAt(0).toUpperCase() + card.template.slice(1)) : '',
+      span({ class: 'title' }, card.title),
+      span(
+        { class: 'author' },
+        'By ',
+        a({ href: cardAuthorUrl }, span(`${card.author}`)),
+      ),
+      span({ class: 'date' }, formattedDate),
     ),
-
-    span({ class: 'date' }, formattedDate),
   );
   return cardElement;
 }
@@ -83,8 +89,8 @@ export default async function listArticles(block, config = { filter: null, maxEn
 
   const cardList = ul({ class: 'article-list' });
 
-  articles.forEach((article) => {
-    const card = renderCard(article);
+  articles.forEach(async (article) => {
+    const card = await renderCard(article);
     cardList.append(card);
   });
   block.replaceWith(cardList);
