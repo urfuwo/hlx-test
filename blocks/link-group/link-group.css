@@ -5,6 +5,11 @@
   justify-content: space-between;
 }
 
+.link-group-wrapper {
+  width: 100%;
+  border-bottom: 0.5px #a9b4be solid;
+}
+
 .link-group-container > div {
   margin: 0;
 }
@@ -31,6 +36,25 @@
 
 .block.link-group strong {
   padding: 8.5px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 18px;
+  letter-spacing: 0px;
+  text-align: left;
+}
+
+.block.link-group > div > div {
+  display: flex;
+  align-items: center;
+}
+
+.block.link-group > div:first-of-type > div {
+  padding: 8px 0;
+}
+
+.block.link-group .icon-slim-arrow-right {
+  width: 18px;
+  height: 18px;
 }
 
 /* S */
@@ -45,6 +69,14 @@
 
   .block.link-group ul {
     display: block;
+  }
+
+  .block.link-group .icon-slim-arrow-right {
+    display: none;
+  }
+
+  .link-group-wrapper {
+    border-bottom: none;
   }
 }
 
