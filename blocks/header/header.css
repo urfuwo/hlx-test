@@ -467,7 +467,7 @@ header nav .nav-actions .button {
   position: relative;
 }
 
-header nav[aria-expanded='false'] .nav-actions :is(.separator, .close-menu) {
+header nav[aria-expanded='false'] .nav-actions > :not(.burger-menu) {
   display: none;
 }
 
