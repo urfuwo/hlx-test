@@ -29,7 +29,7 @@ async function renderCard(card) {
     ),
     span(
       { class: 'cardcontent' },
-      showArticleTemplate ? span({ class: 'template' }, card.template.charAt(0).toUpperCase() + card.template.slice(1)) : '',
+      showArticleTemplate ? span({ class: 'template' }, card.template.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())) : '',
       span(
         { class: 'title' },
         a({ href: card.path }, card.title),
