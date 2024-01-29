@@ -9,11 +9,12 @@ main ul.article-list {
   grid-template-columns: repeat(auto-fill, minmax(var(--article-tile-width), 1fr));
 
   /* see https://adobe-dx-support.slack.com/archives/C05JM4HS24E/p1706284299634629?thread_ts=1706282770.564259&cid=C05JM4HS24E */
-  grid-gap: var(--udexGridXLGutters); 
+  grid-gap: var(---udexGridGutters); 
 }
 
 main ul.article-list>li {
-  border: 1px solid var(--dark-color);
+  border: 1px solid var(--udexColorGrey2);
+  box-shadow: 0 2px 4px rgb(34 54 73 / 20%);
   background-color: var(--background-color);
   width: var(--article-tile-width);
   height: var(--article-tile-height);
