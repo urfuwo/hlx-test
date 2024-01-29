@@ -61,8 +61,12 @@ main ul.article-list>li span.cardcontent span.template {
 
 main ul.article-list>li span.cardcontent span.title {
   display: block;
+}
+
+main ul.article-list>li span.cardcontent span.title, main ul.article-list>li span.cardcontent span.title a  {
   font-family: var(--udexTypographyBodyXXSFontFamily);
   font-style: normal;
+  text-decoration: none;
   font-weight: var(--udexTypographyDisplayMediumXSFontWeight);
   font-size: var(--udexSpacer20);
   line-height: var(--udexTypographyHeadingRegularXXSLineHeight);
@@ -81,6 +85,7 @@ main ul.article-list>li span.cardcontent span.author {
 main ul.article-list>li span.cardcontent span.author, main ul.article-list>li span.cardcontent span.author>a {
   font-family: var(--udexTypographyBodyXSFontFamily);
   font-style: normal;
+  text-decoration: none;
   font-weight: var(--udexTypographyDisplayMediumXSFontWeight);
   font-size: var(--udexTypographyBodyXSFontSize);
   line-height: var(--udexTypographyEyebrowMLineHeight);

@@ -30,7 +30,10 @@ async function renderCard(card) {
     span(
       { class: 'cardcontent' },
       showArticleTemplate ? span({ class: 'template' }, card.template.charAt(0).toUpperCase() + card.template.slice(1)) : '',
-      span({ class: 'title' }, card.title),
+      span(
+        { class: 'title' },
+        a({ href: card.path }, card.title),
+      ),
       span(
         { class: 'author' },
         'By ',
