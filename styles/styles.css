@@ -104,6 +104,7 @@ a:any-link {
 }
 
 a:hover {
+  color: var(--udexColorBlue9);
   cursor: pointer;
   text-decoration: underline;
 }
@@ -165,14 +166,14 @@ main .section {
   padding-bottom: 56px;
 }
 
-main .section > div:not(.hero-wrapper) {
+main .section > div {
   margin-left: 18px; /* missing design, assumption */
   margin-right: 18px; /* missing design, assumption */
 }
 
 /* Tablet view (--udexGridSMinWidth) */
 @media (width >= 640px) {
-  main .section > div:not(.hero-wrapper) {
+  main .section > div {
     margin-left: 36px; /* missing design, assumption */
     margin-right: 36px; /* missing design, assumption */
   }
@@ -180,7 +181,7 @@ main .section > div:not(.hero-wrapper) {
 
 /* Desktop view (--udexGridMMinWidth) */
 @media (width >= 980px) {
-  main .section > div:not(.hero-wrapper) {
+  main .section > div {
     margin-left: 72px;
     margin-right: 72px;
   }
