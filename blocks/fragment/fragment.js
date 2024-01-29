@@ -33,7 +33,7 @@ export async function loadFragment(path) {
       resetAttributeBase('img', 'src');
       resetAttributeBase('source', 'srcset');
 
-      await decorateMain(main);
+      await decorateMain(main, false);
       await loadBlocks(main);
       return main;
     }

@@ -89,11 +89,13 @@ async function decorateVideoLinks(main) {
  * @param {Element} main The main element
  */
 // eslint-disable-next-line import/prefer-default-export
-export async function decorateMain(main) {
+export async function decorateMain(main, shouldDecorateTemplates = true) {
   // hopefully forward compatible button decoration
   decorateButtons(main);
   decorateIcons(main);
-  await decorateTemplates(main);
+  if (shouldDecorateTemplates) {
+    await decorateTemplates(main);
+  }
   decorateSections(main);
   decorateBlocks(main);
   decorateVideoLinks(main);
