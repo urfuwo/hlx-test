@@ -9,6 +9,7 @@
 .block.social {
   display: flex;
   flex-direction: row;
+  padding-top: 32px;
 }
 
 .block.social > div > div {
