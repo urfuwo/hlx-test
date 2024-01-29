@@ -26,7 +26,7 @@
   font-size: 14px;
   font-weight: 400;
   line-height: 21px;
-  letter-spacing: 0px;
+  letter-spacing: 0;
   text-align: left;
 }
 
@@ -39,7 +39,7 @@
   font-size: 16px;
   font-weight: 400;
   line-height: 18px;
-  letter-spacing: 0px;
+  letter-spacing: 0;
   text-align: left;
 }
 
@@ -58,6 +58,7 @@
 }
 
 /* S */
+/* stylelint-disable-next-line block-no-empty */
 @media (width >= 640px) {
 }
 
@@ -81,9 +82,11 @@
 }
 
 /* L */
+/* stylelint-disable-next-line block-no-empty */
 @media (width >= 1280px) {
 }
 
 /* XL */
+/* stylelint-disable-next-line block-no-empty */
 @media (width >= 1600px) {
 }

@@ -508,6 +508,7 @@ async function fetchPlaceholders(prefix = 'default') {
  */
 function updateSectionsStatus(main) {
   const sections = [...main.querySelectorAll(':scope > div.section')];
+  // eslint-disable-next-line no-restricted-syntax
   for (const section of sections) {
     const status = section.dataset.sectionStatus;
     if (status !== 'loaded') {
@@ -600,6 +601,7 @@ async function loadBlock(block) {
 async function loadBlocks(main) {
   updateSectionsStatus(main);
   const blocks = [...main.querySelectorAll('div.block')];
+  // eslint-disable-next-line no-restricted-syntax
   for (const block of blocks) {
     // eslint-disable-next-line no-await-in-loop
     await loadBlock(block);

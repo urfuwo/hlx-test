@@ -19,11 +19,14 @@ export default async function decorate(block) {
   while (fragment.firstElementChild) footer.append(fragment.firstElementChild);
   const backToTop = span(
     {
-      'class': ['icon', 'icon-back-to-top'],
+      class: ['icon', 'icon-back-to-top'],
     },
     img(
-    { 'src': '/icons/back-to-top.svg'},
-  ));
+      {
+        src: '/icons/back-to-top.svg',
+      },
+    ),
+  );
 
   backToTop.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
