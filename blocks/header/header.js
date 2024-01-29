@@ -79,7 +79,7 @@ function addSearchBar(element) {
       div({ class: 'voice-search' }, div({ class: 'microphone' })),
       div({ class: 'search' }, div({ class: 'search-e' })),
     ),
-    input({ class: 'home-search-field-input', placeholder: 'Search' }),
+    input({ class: 'search-box', placeholder: 'Search' }),
   );
   element.prepend(searchBar);
 }

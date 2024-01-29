@@ -166,11 +166,10 @@ header nav .nav-sections ul > li {
 
 header nav .nav-sections > .search-bar {
   display: flex;
-  flex-direction: column;
+  flex-flow: column nowrap;
   align-items: flex-start;
   justify-content: center;
   align-self: stretch;
-  flex-wrap: nowrap;
   flex-shrink: 0;
   gap: -1px;
   position: relative;
@@ -197,7 +196,7 @@ header nav .nav-sections > .search-bar > .text-box > .label-text {
   flex: 1 0 auto;
   position: relative;
   height: var(--udexSpacer24);
-  color: #475e75;
+  color: var(--udexColorGrey7);
   line-height: 24px;
   text-align: center;
   white-space: nowrap;
@@ -209,7 +208,7 @@ header nav .nav-sections > .search-bar > .text-box > .voice-search {
   position: relative;
   width: 18px;
   height: 18px;
-  background: rgba(255, 255, 255, 0);
+  background: var(--udexColorNeutralWhite0);
   z-index: 29;
 }
 
@@ -244,13 +243,16 @@ header nav .nav-sections > .search-bar > .text-box > .search > .search-e {
   background: url('/icons/search.svg') no-repeat center;
 }
 
-header nav .nav-sections > .search-bar .home-search-field-input {
+header nav .nav-sections > .search-bar .search-box {
   flex-shrink: 0;
   position: absolute;
   background: transparent;
   border: none;
   z-index: 30;
   padding: 0 var(--udexSpacer24);
+  width: 75%;
+  outline: none;
+  margin-left: var(--udexSpacer16);
 }
 
 @media (width > 980px) {
