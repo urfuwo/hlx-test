@@ -1,75 +1,26 @@
 /*
  * SAP root styles using theme design tokens (see themes/sap_glow/css_variables.css)
+ * Currently implements three breakpoints:
+ * - min:0px (mobile first, default)
+ * - min:640px (--udexGridSMinWidth)
+ * - min:980px (--udexGridMMinWidth)
+ * - min:1600px (--udexGridXLMinWidth)
+ * Heading/Medium: per-element
+ * Heading/Regular: default
  */
 :root {
-  /* colors */
-  --link-color: var(--sapLinkColor);
-  --link-hover-color: var(--sapLink_Hover_Color);
-  --background-color: white;
-  --light-color: #eee;
-  --dark-color: #ccc;
-  --text-color: black;
-
-  /* fonts */
-  --body-font-family: var(--udexTypographyBodyMFontFamily);
-  --heading-font-family: var(--udexTypographyHeadingRegularMFontFamily);
-  --fixed-font-family: 'Roboto Mono', menlo, consolas, 'Liberation Mono',
-    monospace;
-
-  /* body sizes */
-  --body-font-size-m: var(--udexTypographyBodyMFontSize);
-  --body-font-size-s: var(--udexTypographyBodySFontSize);
-  --body-font-size-xs: var(--udexTypographyBodyXSFontSize);
-
-  /* body line height */
-  --body-line-height-m: var(--udexTypographyBodyMLineHeight);
-
-  /* heading sizes */
-  --heading-font-size-xxl: 48px;
-  --heading-font-size-xl: 40px;
-  --heading-font-size-l: 32px;
-  --heading-font-size-m: 24px;
-  --heading-font-size-s: 20px;
-  --heading-font-size-xs: 18px;
-
-  /* nav height */
-  --nav-height: 64px;
-
-  /* breakpoints */
-  --sap-breakpoint-XL-min: 1600px;
-  --sap-breakpoint-L-max: 1599px;
-  --sap-breakpoint-L-min: 1280px;
-  --sap-breakpoint-M-max: 1279px;
-  --sap-breakpoint-M-min: 980px;
-  --sap-breakpoint-S-max: 979px;
-  --sap-breakpoint-S-min: 640px;
-  --sap-breakpoint-XS-max: 639px;
-  --sap-breakpoint-XS-min: 360px;
-}
-
-@font-face {
-  font-family: roboto-fallback;
-  size-adjust: 100.06%;
-  ascent-override: 95%;
-  src: local('Arial');
-}
-
-@media (width >= 900px) {
-  :root {
-    --heading-font-size-xxl: 60px;
-    --heading-font-size-xl: 48px;
-    --heading-font-size-l: 36px;
-    --heading-font-size-m: 30px;
-    --heading-font-size-s: 24px;
-    --heading-font-size-xs: 22px;
-  }
+  /* default colors */
+  --background-color: var(--udexColorNeutralWhite);
+  --text-color: var(--sapShell_TextColor);
 }
 
 body {
-  font-size: var(--body-font-size-m);
+  font-family: var(--udexTypographyBodySFontFamily);
+  font-size: var(--udexTypographyBodySFontSize);
+  font-weight: var(--udexTypographyBodySFontWeight);
+  line-height: var(--udexTypographyBodySLineHeight);
   margin: 0;
-  font-family: var(--body-font-family);
-  line-height: var(--body-line-height-m);
+  padding-left: 0;
   color: var(--text-color);
   background-color: var(--background-color);
   display: none;
@@ -79,48 +30,48 @@ body.appear {
   display: block;
 }
 
-header {
-  height: var(--nav-height);
-}
-
-h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-  font-family: var(--heading-font-family-m);
-  font-weight: 600;
-  line-height: 1.25;
-  margin-top: 1em;
-  margin-bottom: 0.5em;
-  scroll-margin: calc(var(--nav-height) + 1em);
+  margin-top: 2rem; /* 32px */
+  margin-bottom: 0.5rem; /* 8px */
 }
 
 h1 {
-  font-size: var(--heading-font-size-xxl);
+  font-family: var(--udexTypographyHeadingRegularMFontFamily);
+  font-size: var(--udexTypographyHeadingRegularMFontSize);
+  font-weight: var(--udexTypographyHeadingRegularMFontWeight);
+  line-height: var(--udexTypographyHeadingRegularMLineHeight);
 }
 
 h2 {
-  font-size: var(--heading-font-size-xl);
+  font-family: var(--udexTypographyHeadingRegularSFontFamily);
+  font-size: var(--udexTypographyHeadingRegularSFontSize);
+  font-weight: var(--udexTypographyHeadingRegularSFontWeight);
+  line-height: var(--udexTypographyHeadingRegularSLineHeight);
 }
 
+/* missing design, assumption */
 h3 {
-  font-size: var(--heading-font-size-l);
+  font-family: var(--udexTypographyHeadingRegularXSFontFamily);
+  font-size: var(--udexTypographyHeadingRegularXSFontSize);
+  font-weight: var(--udexTypographyHeadingRegularXSFontWeight);
+  line-height: var(--udexTypographyHeadingRegularXSLineHeight);
 }
 
-h4 {
-  font-size: var(--heading-font-size-m);
-}
-
-h5 {
-  font-size: var(--heading-font-size-s);
-}
-
+/* missing styles, assumption */
+h4,
+h5,
 h6 {
-  font-size: var(--heading-font-size-xs);
+  font-family: var(--udexTypographyHeadingRegularXXSFontFamily);
+  font-size: var(--udexTypographyHeadingRegularXXSFontSize);
+  font-weight: var(--udexTypographyHeadingRegularXXSFontWeight);
+  line-height: var(--udexTypographyHeadingRegularXXSLineHeight);
 }
 
+/* missing styles, assumption */
 p,
 dl,
 ol,
@@ -131,42 +82,38 @@ blockquote {
   margin-bottom: 1em;
 }
 
-code,
-pre {
-  font-family: var(--fixed-font-family);
-  font-size: var(--body-font-size-s);
-}
-
+/* missing styles, assumption */
 code {
   padding: 0.125em;
 }
 
+/* missing styles, assumption */
 pre {
   overflow: scroll;
 }
 
+/* missing styles, assumption */
 main pre {
-  background-color: var(--light-color);
   padding: 1em;
   border-radius: 0.25em;
   overflow-x: auto;
   white-space: pre;
 }
 
-/* links */
 a:any-link {
-  color: var(--link-color);
-  text-decoration: none;
+  color: var(--udexColorBlue7);
+  text-decoration: underline;
 }
 
 a:hover {
+  color: var(--udexColorBlue9);
   cursor: pointer;
-  text-decoration: none;
+  text-decoration: underline;
 }
 
-/* buttons */
-a.button:any-link {
-  font-family: var(--body-font-family);
+/* missing styles, assumption */
+a.button:any-link,
+button {
   display: inline-block;
   box-sizing: border-box;
   text-decoration: none;
@@ -184,6 +131,7 @@ a.button:any-link {
   border-radius: 30px;
 }
 
+/* missing styles, assumption */
 a.button:hover,
 a.button:focus,
 button:hover,
@@ -192,17 +140,10 @@ button:focus {
   cursor: pointer;
 }
 
+/* missing styles, assumption */
 button:disabled,
 button:disabled:hover {
-  background-color: var(--light-color);
   cursor: unset;
-}
-
-a.button.secondary,
-button.secondary {
-  background-color: unset;
-  border: 2px solid currentcolor;
-  color: var(--text-color);
 }
 
 main img {
@@ -222,26 +163,28 @@ main img {
   width: 100%;
 }
 
-/* sections */
+/* sections: 56px spacing at the bottom */
 main .section {
-  padding: 64px 16px;
+  padding-bottom: 56px;
 }
 
-@media (width >= 600px) {
-  main .section {
-    padding: 64px 32px;
+main .section > div {
+  margin-left: 18px; /* missing design, assumption */
+  margin-right: 18px; /* missing design, assumption */
+}
+
+/* Tablet view (--udexGridSMinWidth) */
+@media (width >= 640px) {
+  main .section > div {
+    margin-left: 36px; /* missing design, assumption */
+    margin-right: 36px; /* missing design, assumption */
   }
 }
 
-@media (width >= 900px) {
-  .section > div {
-    max-width: 1200px;
-    margin: auto;
+/* Desktop view (--udexGridMMinWidth) */
+@media (width >= 980px) {
+  main .section > div {
+    margin-left: 72px;
+    margin-right: 72px;
   }
-}
-
-/* section metadata */
-main .section.light,
-main .section.highlight {
-  background-color: var(--light-color);
 }

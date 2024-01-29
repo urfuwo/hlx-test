@@ -1,4 +1,9 @@
 /* header and nav layout */
+header {
+  height: var(--udexSpacer64);
+  background: var(--sapShell_Navigation_Background);
+}
+
 header nav {
   display: flex;
   padding: var(--udexSpacer24) 0;
@@ -23,6 +28,7 @@ header nav .text {
   letter-spacing: 0;
   line-height: var(--udexTypographyNavigationRegularXLLineHeight);
   white-space: nowrap;
+  text-decoration: none;
 }
 
 @media screen and (width >= 980px) {
@@ -419,6 +425,7 @@ header nav .nav-explore ul > li > a {
   font-size: var(--udexTypographyNavigationRegularXLFontSize);
   line-height: var(--udexTypographyNavigationRegularXLLineHeight);
   white-space: nowrap;
+  text-decoration: none;
 }
 
 @media (width > 980px) {
@@ -432,6 +439,7 @@ header nav .nav-explore ul > li > a {
     background: unset;
     position: unset;
     padding: 0 var(--udexSpacer24);
+    height: unset;
   }
 
   header nav .nav-explore ul > li > a {
@@ -465,6 +473,7 @@ header nav .nav-actions .button {
   border: 0;
   background-color: var(--background-color);
   position: relative;
+  border-radius: unset;
 }
 
 header nav[aria-expanded='false'] .nav-actions > :not(.burger-menu) {
