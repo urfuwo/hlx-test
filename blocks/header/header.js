@@ -1,7 +1,7 @@
 import { getMetadata, decorateIcons } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
 import {
-  div, span, input, p, button
+  div, span, input, p, button,
 } from '../../scripts/dom-builder.js';
 
 // media query match that indicates mobile/tablet width
@@ -23,17 +23,6 @@ function closeOnEscape(e) {
       toggleMenu(nav, navSections);
       nav.querySelector('button').focus();
     }
-  }
-}
-
-function openOnKeydown(e) {
-  const focused = document.activeElement;
-  const isNavDrop = focused.className === 'nav-drop';
-  if (isNavDrop && (e.code === 'Enter' || e.code === 'Space')) {
-    const dropExpanded = focused.getAttribute('aria-expanded') === 'true';
-    // eslint-disable-next-line no-use-before-define
-    toggleAllNavSections(focused.closest('.nav-sections'));
-    focused.setAttribute('aria-expanded', dropExpanded ? 'false' : 'true');
   }
 }
 
@@ -60,18 +49,18 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
   const expanded = forceExpanded !== null
     ? !forceExpanded
     : nav.getAttribute('aria-expanded') === 'true';
-  const button = nav.querySelector('.burger-menu button');
+  const menuButton = nav.querySelector('.burger-menu button');
   document.body.style.overflowY = expanded || isDesktop.matches ? '' : 'hidden';
   nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
   toggleAllNavSections(
     navSections,
     expanded || isDesktop.matches ? 'false' : 'true',
   );
-  button.setAttribute(
+  menuButton.setAttribute(
     'aria-label',
     expanded ? 'Open navigation' : 'Close navigation',
   );
-  button.setAttribute('aria-current', !expanded);
+  menuButton.setAttribute('aria-current', !expanded);
   // enable menu collapse on escape keypress
   if (!expanded || isDesktop.matches) {
     // collapse menu on escape press
