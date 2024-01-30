@@ -142,6 +142,10 @@ function getActionBar(nav, navSections) {
 
 function decorateLogo(nav) {
   const navBrand = nav.querySelector('.nav-brand');
+  const brandElementsWrapper = navBrand.firstElementChild;
+  if (brandElementsWrapper != null && brandElementsWrapper.classList.contains('default-content-wrapper')) {
+    brandElementsWrapper.style.display = 'contents';
+  }
   const brandLink = navBrand.querySelector('.button');
   if (brandLink) {
     brandLink.className = '';
