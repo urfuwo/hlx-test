@@ -15,7 +15,7 @@ const ARTICLE_FORMATTER = new Intl.DateTimeFormat('default', {
 });
 
 // TODO: change to web component once available
-async function renderCard(card) {
+function renderCard(card) {
   const formattedDate = ARTICLE_FORMATTER.format(new Date(card.publicationDate * 1000));
   const cardclass = `card${card['hot story'] ? ' hot-story' : ''}`;
   const cardAuthorUrl = `/author/${toClassName(card.author).replace('-', '')}`; // TODO look up author URL from index
@@ -91,8 +91,8 @@ export default async function listArticles(block, config = { filter: null, maxEn
 
   const cardList = ul({ class: 'article-list' });
 
-  articles.forEach(async (article) => {
-    const card = await renderCard(article);
+  articles.forEach((article) => {
+    const card = renderCard(article);
     cardList.append(card);
   });
   block.replaceWith(cardList);
