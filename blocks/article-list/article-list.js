@@ -1,5 +1,5 @@
 import {
-  createOptimizedPicture, fetchPlaceholders, getMetadata, toClassName,
+  createOptimizedPicture, fetchPlaceholders, getMetadata, toClassName, loadCSS,
 } from '../../scripts/aem.js';
 import {
   ul, li, a, span,
@@ -76,6 +76,7 @@ function determineContextFilter() {
 }
 
 export default async function listArticles(block, config = { filter: null, maxEntries: null }) {
+  loadCSS(`${window.hlx.codeBasePath}/blocks/article-list/article-list.css`);
   let contextFilter = config.filter;
   if (!contextFilter) {
     contextFilter = determineContextFilter();
