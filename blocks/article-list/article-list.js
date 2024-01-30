@@ -16,11 +16,9 @@ const ARTICLE_FORMATTER = new Intl.DateTimeFormat('default', {
 
 // TODO: change to web component once available
 async function renderCard(card) {
-  const placeholders = await fetchPlaceholders();
   const formattedDate = ARTICLE_FORMATTER.format(new Date(card.publicationDate * 1000));
   const cardclass = `card${card['hot story'] ? ' hot-story' : ''}`;
   const cardAuthorUrl = `/author/${toClassName(card.author).replace('-', '')}`; // TODO look up author URL from index
-  const showArticleTemplate = placeholders.showArticleTypeOnArticleCards === 'yes';
   const cardElement = li(
     { class: cardclass },
     a(
@@ -29,7 +27,7 @@ async function renderCard(card) {
     ),
     span(
       { class: 'cardcontent' },
-      showArticleTemplate ? span({ class: 'template' }, card.template.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())) : '',
+      span({ class: 'template' }, card.template.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())),
       span(
         { class: 'title' },
         a({ href: card.path }, card.title),
