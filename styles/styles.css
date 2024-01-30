@@ -12,6 +12,25 @@
   /* default colors */
   --background-color: var(--udexColorNeutralWhite);
   --text-color: var(--sapShell_TextColor);
+  ---udexGridGutters: var(--udexGridXSGutters);
+}
+
+@media (width >= 640px) {
+  :root {
+    ---udexGridGutters: var(--udexGridSGutters);
+  }
+}
+
+@media (width >= 980px) {
+  :root {
+    ---udexGridGutters: var(--udexGridMGutters);
+  }
+}
+
+@media (width >= 1600) {
+  :root {
+    ---udexGridGutters: var(--udexGridXLGutters);
+  }
 }
 
 body {
