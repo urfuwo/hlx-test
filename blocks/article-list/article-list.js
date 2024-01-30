@@ -1,4 +1,6 @@
-import { createOptimizedPicture, getMetadata, toClassName } from '../../scripts/aem.js';
+import {
+  createOptimizedPicture, getMetadata, toClassName, loadCSS,
+} from '../../scripts/aem.js';
 import {
   ul, li, a, span,
 } from '../../scripts/dom-builder.js';
@@ -22,16 +24,21 @@ function renderCard(card) {
     a(
       { href: card.path },
       createOptimizedPicture(card.image, card.tile, false, [{ width: '750' }]),
-      span({ class: 'template' }, card.template),
-      span({ class: 'title' }, card.title),
     ),
     span(
-      { class: 'author' },
-      'By ',
-      a({ href: cardAuthorUrl }, span(`${card.author}`)),
+      { class: 'cardcontent' },
+      span({ class: 'template' }, card.template.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())),
+      span(
+        { class: 'title' },
+        a({ href: card.path }, card.title),
+      ),
+      span(
+        { class: 'author' },
+        'By ',
+        a({ href: cardAuthorUrl }, span(`${card.author}`)),
+      ),
+      span({ class: 'date' }, formattedDate),
     ),
-
-    span({ class: 'date' }, formattedDate),
   );
   return cardElement;
 }
@@ -67,6 +74,7 @@ function determineContextFilter() {
 }
 
 export default async function listArticles(block, config = { filter: null, maxEntries: null }) {
+  loadCSS(`${window.hlx.codeBasePath}/blocks/article-list/article-list.css`);
   let contextFilter = config.filter;
   if (!contextFilter) {
     contextFilter = determineContextFilter();
