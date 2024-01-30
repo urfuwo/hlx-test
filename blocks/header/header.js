@@ -149,8 +149,10 @@ export default async function decorate(block) {
   const navTools = nav.querySelector('.nav-tools');
   if (navTools) {
     const exploreSection = navTools.querySelector('p');
-    exploreSection.removeAttribute('class');
-    exploreSection.querySelector('a').setAttribute('class', 'text');
+    if (exploreSection) {
+      exploreSection.removeAttribute('class');
+      exploreSection.querySelector('a').setAttribute('class', 'text');
+    }
   }
 
   // hamburger for mobile
