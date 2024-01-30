@@ -81,7 +81,9 @@ h3 {
 }
 
 /* missing styles, assumption */
-h4, h5, h6 {
+h4,
+h5,
+h6 {
   font-family: var(--udexTypographyHeadingRegularXXSFontFamily);
   font-size: var(--udexTypographyHeadingRegularXXSFontSize);
   font-weight: var(--udexTypographyHeadingRegularXXSFontWeight);
