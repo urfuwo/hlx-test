@@ -1,0 +1,76 @@
+.contact-wrapper .logo-lang-picker {
+  display: flex;
+  flex-direction: row;
+  padding-bottom: var(--udexSpacer48);
+}
+
+.contact-wrapper .logo-lang-picker select {
+  padding: var(--udexSpacer4) var(--udexSpacer12);
+  border-radius: 4px;
+  border: 1px;
+  min-width: 282px;
+  font-size: var(--udexTypographyBodyXSFontSize);
+  font-weight: var(--udexTypographyBodyXSFontWeight);
+  font-family: var(--udexTypographyBodyXSFontFamily);
+  line-height: var(--udexTypographyBodyXSLineHeight);
+  letter-spacing: 0;
+  text-align: left;
+  color: var(--udexColorGrey7);
+  background-color: var(--udexColorNeutralWhite);
+}
+
+.contact-wrapper .icon-sap {
+  height: 32px;
+  width: 65.4px;
+}
+
+.block.contact {
+  display: flex;
+  flex-direction: row;
+  font-size: var(--udexTypographyBodyXSFontSize);
+  font-weight: var(--udexTypographyBodyXSFontWeight);
+  font-family: var(--udexTypographyBodyXSFontFamily);
+  line-height: var(--udexTypographyBodyXSLineHeight);
+  letter-spacing: 0;
+  text-align: left;
+  padding-bottom: var(--udexSpacer20);
+}
+
+.block.contact h2 {
+  font-size: var(--udexTypographyHeadingMediumXXSFontSize);
+  font-family: var(--udexTypographyHeadingMediumXXSFontFamily);
+  font-weight: var(--udexTypographyHeadingMediumXXSFontWeight);
+  line-height: var(--udexTypographyHeadingMediumXXSLineHeight);
+  margin: 0;
+}
+
+.block.contact > div {
+  display: flex;
+  flex-direction: row;
+  padding: 8.5px 16px 8.5px 0;
+}
+
+.block.contact .icon {
+  padding-right: var(--udexSpacer16);
+}
+
+/* S */
+@media (width >= 640px) {
+  .block.contact {
+    flex-direction: column;
+  }
+}
+
+/* M */
+@media (width >= 980px) {
+  .block.contact {
+    flex-direction: row;
+  }
+}
+
+/* L */
+@media (width >= 1280px) {
+  .block.contact {
+    flex-direction: column;
+  }
+}
