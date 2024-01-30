@@ -9,13 +9,13 @@
 .block.social {
   display: flex;
   flex-direction: row;
-  padding-top: 32px;
+  padding-top: var(--udexSpacer32);
 }
 
 .block.social > div > div {
     display: flex;
     align-items: center;
-    background-color: #fff;
+    background-color: var(--udexColorNeutralWhite);
     padding: 6px;
     margin: 6px;
 }
