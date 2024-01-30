@@ -1,5 +1,5 @@
 import {
-  createOptimizedPicture, fetchPlaceholders, getMetadata, toClassName, loadCSS,
+  createOptimizedPicture, getMetadata, toClassName, loadCSS,
 } from '../../scripts/aem.js';
 import {
   ul, li, a, span,
