@@ -1,8 +1,8 @@
 .block.footer {
   display: flex;
-  background: #eaecee;
-  padding-top: 72px;
-  padding-bottom: 72px;
+  background: var(--udexCoreSurfaceHigher);
+  padding-top: var(--udexSpacer72);
+  padding-bottom: var(--udexSpacer72);
 }
 
 .block.footer > div {
@@ -10,7 +10,7 @@
   flex-direction: column;
   width: 90%;
   margin: auto;
-  padding: 16px;
+  padding: var(--udexSpacer16);
 }
 
 .block.footer .contact-container {
@@ -22,7 +22,7 @@
 }
 
 .block.footer .icon-back-to-top {
-  padding: 16px;
+  padding-top: var(--udexSpacer16);
 }
 
 /* S */
@@ -42,6 +42,11 @@
   .block.footer > div {
     flex-direction: row;
   }
+
+  .block.footer .icon-back-to-top {
+    padding-top: 0;
+  }
+
 }
 
 /* XL */
