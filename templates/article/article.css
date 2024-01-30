@@ -51,9 +51,10 @@
     text-decoration: none;
 }
 
+
 /* Desktop view (--udexGridMMinWidth) */
 @media (width >= 980px) {
-    .blog div.section > div:not(.hero-wrapper, .related-articles-wrapper, .blog-cta-banner-wrapper) {
+    .blog main div.section > div:not(.hero-wrapper, .related-articles-wrapper, .blog-cta-banner-wrapper) {
         width: 755px; /* Option A */
         max-width: 755px;  /* Option A */
     }

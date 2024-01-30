@@ -1,5 +1,6 @@
 import { getMetadata } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
+import { img, span } from '../../scripts/dom-builder.js';
 
 /**
  * loads and decorates the footer
@@ -16,6 +17,21 @@ export default async function decorate(block) {
   // decorate footer DOM
   const footer = document.createElement('div');
   while (fragment.firstElementChild) footer.append(fragment.firstElementChild);
+  const backToTop = span(
+    {
+      class: ['icon', 'icon-back-to-top'],
+    },
+    img(
+      {
+        src: '/icons/back-to-top.svg',
+      },
+    ),
+  );
 
+  backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  footer.append(backToTop);
   block.append(footer);
 }
