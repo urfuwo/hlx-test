@@ -1,3 +1,7 @@
+.contact-container {
+  padding-top: var(--udexSpacer24);
+}
+
 .contact-wrapper .logo-lang-picker {
   display: flex;
   flex-direction: row;
@@ -22,6 +26,7 @@
 .contact-wrapper .icon-sap {
   height: 32px;
   width: 65.4px;
+  padding-right: var(--udexSpacer20);
 }
 
 .block.contact {
@@ -44,10 +49,14 @@
   margin: 0;
 }
 
+.block.contact h2 + p {
+  margin-top: var(--udexSpacer2);
+}
+
 .block.contact > div {
   display: flex;
   flex-direction: row;
-  padding: 8.5px 16px 8.5px 0;
+  padding: 10px 16px 10px 0;
 }
 
 .block.contact .icon {

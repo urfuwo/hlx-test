@@ -1,16 +1,15 @@
 .block.footer {
   display: flex;
   background: var(--udexCoreSurfaceHigher);
-  padding-top: var(--udexSpacer72);
+  padding-top: var(--udexSpacer48);
   padding-bottom: var(--udexSpacer72);
 }
 
 .block.footer > div {
   display: flex;
   flex-direction: column;
-  width: 90%;
-  margin: auto;
-  padding: var(--udexSpacer16);
+  width: 100%;
+  margin: 32px;
 }
 
 .block.footer .contact-container {
@@ -23,6 +22,8 @@
 
 .block.footer .icon-back-to-top {
   padding-top: var(--udexSpacer16);
+  height: 32px;
+  width: 32px;
 }
 
 /* S */
@@ -52,6 +53,7 @@
 /* XL */
 @media (width >= 1600px) {
   .block.footer > div {
-    width: 80%;
+    width: 100%;
+    padding-inline: var(--udexSpacer72);
   }
 }
