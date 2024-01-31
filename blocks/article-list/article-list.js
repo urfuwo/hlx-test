@@ -1,5 +1,5 @@
 import {
-  createOptimizedPicture, getMetadata, toClassName, loadCSS,
+  createOptimizedPicture, getMetadata, toClassName, loadCSS, fetchPlaceholders,
 } from '../../scripts/aem.js';
 import {
   ul, li, a, span,
@@ -17,10 +17,9 @@ const ARTICLE_FORMATTER = new Intl.DateTimeFormat('default', {
 // TODO: change to web component once available
 function renderCard(card) {
   const formattedDate = ARTICLE_FORMATTER.format(new Date(card.publicationDate * 1000));
-  const cardclass = `card${card['hot story'] ? ' hot-story' : ''}`;
   const cardAuthorUrl = `/author/${toClassName(card.author).replace('-', '')}`; // TODO look up author URL from index
   const cardElement = li(
-    { class: cardclass },
+    { class: 'card' },
     a(
       { href: card.path },
       createOptimizedPicture(card.image, card.tile, false, [{ width: '750' }]),
@@ -28,18 +27,22 @@ function renderCard(card) {
     span(
       { class: 'cardcontent' },
       span({ class: 'template' }, card.template.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())),
+      (card['hot-story'] ? span({ class: 'hot' }, 'Hot Story') : ''),
       span(
         { class: 'title' },
         a({ href: card.path }, card.title),
       ),
       span(
         { class: 'author' },
-        'By ',
         a({ href: cardAuthorUrl }, span(`${card.author}`)),
       ),
       span({ class: 'date' }, formattedDate),
     ),
   );
+  fetchPlaceholders().then((placeholders) => {
+    const hot = cardElement.querySelector('.hot');
+    if (hot) hot.textContent = placeholders['Hot Story'] || 'Hot Story';
+  });
   return cardElement;
 }
 
