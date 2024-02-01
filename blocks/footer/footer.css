@@ -2,11 +2,12 @@
   display: flex;
   background: var(--udexCoreSurfaceHigher);
   padding-top: var(--udexSpacer48);
-  padding-bottom: var(--udexSpacer72);
+  padding-bottom: var(--udexSpacer40);
 }
 
 .block.footer > div {
   display: flex;
+  position: relative;
   flex-direction: column;
   width: 100%;
   padding-inline: 18px;
@@ -21,10 +22,10 @@
 }
 
 .block.footer .icon-back-to-top {
-  padding-top: var(--udexSpacer16);
+  position: static;
   height: 32px;
   width: 32px;
-  margin: 6px;
+  padding-top: var(--udexSpacer40);
 }
 
 /* S */
@@ -41,6 +42,14 @@
   .block.footer > div {
     padding-inline: var(--udexSpacer72);
   }
+
+  .block.footer .icon-back-to-top {
+    right: var(--udexSpacer24);
+    position: absolute;
+    top: var(--udexSpacer24);
+    padding-top: 0;
+  }
+
 }
 
 /* L */

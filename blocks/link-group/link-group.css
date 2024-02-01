@@ -35,6 +35,10 @@
   display: block;
 }
 
+.block.link-group.active .icon-slim-arrow-right {
+  transform: rotate(90deg);
+}
+
 .block.link-group strong {
   padding: 8.5px;
   font-size: var(--udexTypographyHeadingRegularXXXXSFontSize);
