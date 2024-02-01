@@ -31,13 +31,15 @@
 @media (width >= 640px) {
   .block.footer > div {
     flex-direction: column;
-    padding-inline: var(--udexSpacer72);
   }
 }
 
 /* M */
 /* stylelint-disable-next-line block-no-empty */
 @media (width >= 980px) {
+  .block.footer > div {
+    padding-inline: var(--udexSpacer72);
+  }
 }
 
 /* L */
