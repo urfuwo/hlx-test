@@ -1,16 +1,16 @@
 .block.footer {
   display: flex;
   background: var(--udexCoreSurfaceHigher);
-  padding-top: var(--udexSpacer72);
-  padding-bottom: var(--udexSpacer72);
+  padding-top: var(--udexSpacer48);
+  padding-bottom: var(--udexSpacer40);
 }
 
 .block.footer > div {
   display: flex;
+  position: relative;
   flex-direction: column;
-  width: 90%;
-  margin: auto;
-  padding: var(--udexSpacer16);
+  width: 100%;
+  padding-inline: 18px;
 }
 
 .block.footer .contact-container {
@@ -22,19 +22,34 @@
 }
 
 .block.footer .icon-back-to-top {
-  padding-top: var(--udexSpacer16);
+  position: static;
+  height: 32px;
+  width: 32px;
+  padding-top: var(--udexSpacer40);
 }
 
 /* S */
 @media (width >= 640px) {
   .block.footer > div {
     flex-direction: column;
+    padding-inline: var(--udexSpacer32);
   }
 }
 
 /* M */
 /* stylelint-disable-next-line block-no-empty */
 @media (width >= 980px) {
+  .block.footer > div {
+    padding-inline: var(--udexSpacer72);
+  }
+
+  .block.footer .icon-back-to-top {
+    right: var(--udexSpacer24);
+    position: absolute;
+    top: var(--udexSpacer24);
+    padding-top: 0;
+  }
+
 }
 
 /* L */
@@ -52,6 +67,6 @@
 /* XL */
 @media (width >= 1600px) {
   .block.footer > div {
-    width: 80%;
+    width: 100%;
   }
 }
