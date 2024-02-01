@@ -1,0 +1,504 @@
+{
+      "metadata": {
+        "version": "0.0.0.1",
+        "description": "news processing by adobe franklin integration workshop on 2024.01.17"
+      },
+      "terms": [
+        {
+          "path": "type/pressemitteilung",
+          "name": "pressemitteilung"
+        },
+        {
+          "path": "type/feature",
+          "name": "feature"
+        },
+        {
+          "path": "type/newsbyte",
+          "name": "newsbyte"
+        },
+        {
+          "path": "type/stellungnahme",
+          "name": "stellungnahme"
+        },
+        {
+          "path": "type/blog",
+          "name": "blog"
+        },
+        {
+          "path": "type/video",
+          "name": "video"
+        },
+        {
+          "path": "tag/gesch-ftszahlen",
+          "name": "Geschäftszahlen"
+        },
+        {
+          "path": "tag/investor-relations",
+          "name": "Investor Relations"
+        },
+        {
+          "path": "tag/menschen",
+          "name": "Menschen"
+        },
+        {
+          "path": "tag/personalmanagement",
+          "name": "Personalmanagement"
+        },
+        {
+          "path": "tag/veranstaltungen",
+          "name": "Veranstaltungen"
+        },
+        {
+          "path": "tag/finance",
+          "name": "Finance"
+        },
+        {
+          "path": "tag/sap-s-4hana",
+          "name": "SAP S/4HANA"
+        },
+        {
+          "path": "tag/csr",
+          "name": "CSR"
+        },
+        {
+          "path": "tag/diversity",
+          "name": "Diversity"
+        },
+        {
+          "path": "tag/nachhaltigkeit",
+          "name": "Nachhaltigkeit"
+        },
+        {
+          "path": "tag/cloud",
+          "name": "Cloud"
+        },
+        {
+          "path": "tag/partner",
+          "name": "Partner"
+        },
+        {
+          "path": "tag/blockchain",
+          "name": "Blockchain"
+        },
+        {
+          "path": "tag/datenbanken",
+          "name": "Datenbanken"
+        },
+        {
+          "path": "tag/technologie",
+          "name": "Technologie"
+        },
+        {
+          "path": "tag/gesch-ftsnetzwerke",
+          "name": "Geschäftsnetzwerke"
+        },
+        {
+          "path": "tag/hr",
+          "name": "HR"
+        },
+        {
+          "path": "tag/sap-business-technology-platform",
+          "name": "SAP Business Technology Platform"
+        },
+        {
+          "path": "tag/k-nstliche-intelligenz",
+          "name": "Künstliche Intelligenz"
+        },
+        {
+          "path": "tag/logistik",
+          "name": "Logistik"
+        },
+        {
+          "path": "tag/sap",
+          "name": "SAP"
+        },
+        {
+          "path": "tag/start-up",
+          "name": "Start-up"
+        },
+        {
+          "path": "tag/ausbildung",
+          "name": "Ausbildung"
+        },
+        {
+          "path": "tag/fertigungsindustrie",
+          "name": "Fertigungsindustrie"
+        },
+        {
+          "path": "tag/produktion",
+          "name": "Produktion"
+        },
+        {
+          "path": "tag/digitalisierung",
+          "name": "Digitalisierung"
+        },
+        {
+          "path": "tag/it",
+          "name": "IT"
+        },
+        {
+          "path": "tag/schulungen",
+          "name": "Schulungen"
+        },
+        {
+          "path": "tag/retail",
+          "name": "Retail"
+        },
+        {
+          "path": "tag/frauen-in-sap-fuehrungspositionen",
+          "name": "Frauen in SAP Fuehrungspositionen"
+        },
+        {
+          "path": "tag/erp",
+          "name": "ERP"
+        },
+        {
+          "path": "tag/mobile",
+          "name": "Mobile"
+        },
+        {
+          "path": "tag/crm",
+          "name": "CRM"
+        },
+        {
+          "path": "tag/customer-experience",
+          "name": "Customer Experience"
+        },
+        {
+          "path": "tag/analytics",
+          "name": "Analytics"
+        },
+        {
+          "path": "tag/sap-now",
+          "name": "SAP NOW"
+        },
+        {
+          "path": "tag/big-data",
+          "name": "Big Data"
+        },
+        {
+          "path": "tag/healthcare",
+          "name": "Healthcare"
+        },
+        {
+          "path": "tag/public-sector",
+          "name": "Public Sector"
+        },
+        {
+          "path": "tag/social-media",
+          "name": "Social Media"
+        },
+        {
+          "path": "tag/sap-teched",
+          "name": "SAP TechEd"
+        },
+        {
+          "path": "tag/mittelstand",
+          "name": "Mittelstand"
+        },
+        {
+          "path": "tag/sicherheit",
+          "name": "Sicherheit"
+        },
+        {
+          "path": "tag/xm",
+          "name": "XM"
+        },
+        {
+          "path": "tag/user-experience",
+          "name": "User Experience"
+        },
+        {
+          "path": "tag/sapphire",
+          "name": "SAPPHIRE"
+        },
+        {
+          "path": "tag/design-thinking",
+          "name": "Design Thinking"
+        },
+        {
+          "path": "tag/sap-hana",
+          "name": "SAP HANA"
+        },
+        {
+          "path": "tag/strategie",
+          "name": "Strategie"
+        },
+        {
+          "path": "tag/beschaffung",
+          "name": "Beschaffung"
+        },
+        {
+          "path": "tag/e-commerce",
+          "name": "E-commerce"
+        },
+        {
+          "path": "tag/digital-farming",
+          "name": "Digital Farming"
+        },
+        {
+          "path": "tag/apps",
+          "name": "Apps"
+        },
+        {
+          "path": "tag/automotive",
+          "name": "Automotive"
+        },
+        {
+          "path": "tag/covid-19",
+          "name": "COVID-19"
+        },
+        {
+          "path": "tag/compliance",
+          "name": "Compliance"
+        },
+        {
+          "path": "tag/intelligentes-unternehmen",
+          "name": "Intelligentes Unternehmen"
+        },
+        {
+          "path": "tag/business-warehouse",
+          "name": "Business Warehouse"
+        },
+        {
+          "path": "tag/digitale-supply-chain",
+          "name": "Digitale Supply Chain"
+        },
+        {
+          "path": "tag/experience-management",
+          "name": "Experience Management"
+        },
+        {
+          "path": "tag/utility",
+          "name": "Utility"
+        },
+        {
+          "path": "tag/marketing",
+          "name": "Marketing"
+        },
+        {
+          "path": "tag/business-process-intelligence",
+          "name": "Business Process Intelligence"
+        },
+        {
+          "path": "tag/sap-fiori",
+          "name": "SAP Fiori"
+        },
+        {
+          "path": "tag/rise-with-sap",
+          "name": "RISE with SAP"
+        },
+        {
+          "path": "tag/reporting",
+          "name": "Reporting"
+        },
+        {
+          "path": "tag/sap-analytics-cloud",
+          "name": "SAP Analytics Cloud"
+        },
+        {
+          "path": "tag/gesundheitswesen",
+          "name": "Gesundheitswesen"
+        },
+        {
+          "path": "tag/sponsorships",
+          "name": "sponsorships"
+        },
+        {
+          "path": "tag/sap-business-suite",
+          "name": "SAP Business Suite"
+        },
+        {
+          "path": "tag/sap-s-4hana-cloud",
+          "name": "SAP S/4HANA Cloud"
+        },
+        {
+          "path": "tag/sales",
+          "name": "Sales"
+        },
+        {
+          "path": "tag/podcasts",
+          "name": "Podcasts"
+        },
+        {
+          "path": "tag/hasso-plattner-founders--award",
+          "name": "Hasso Plattner Founders' Award"
+        },
+        {
+          "path": "tag/employee-experience",
+          "name": "Employee Experience"
+        },
+        {
+          "path": "tag/rpa",
+          "name": "RPA"
+        },
+        {
+          "path": "tag/klimaschutz",
+          "name": "Klimaschutz"
+        },
+        {
+          "path": "tag/sap-btp",
+          "name": "SAP BTP"
+        },
+        {
+          "path": "tag/kreislaufwirtschaft",
+          "name": "Kreislaufwirtschaft"
+        },
+        {
+          "path": "tag/hxm",
+          "name": "HXM"
+        },
+        {
+          "path": "tag/new-work",
+          "name": "New Work"
+        },
+        {
+          "path": "tag/sap-successfactors",
+          "name": "SAP SuccessFactors"
+        },
+        {
+          "path": "tag/zukunft-der-arbeit",
+          "name": "Zukunft der Arbeit"
+        },
+        {
+          "path": "tag/sourcing",
+          "name": "Sourcing"
+        },
+        {
+          "path": "tag/kunden",
+          "name": "Kunden"
+        },
+        {
+          "path": "tag/women-in-tech",
+          "name": "Women in Tech"
+        },
+        {
+          "path": "tag/business-process-management",
+          "name": "Business Process Management"
+        },
+        {
+          "path": "tag/prozessindustrie",
+          "name": "Prozessindustrie"
+        },
+        {
+          "path": "tag/risikomanagement",
+          "name": "Risikomanagement"
+        },
+        {
+          "path": "tag/banking",
+          "name": "Banking"
+        },
+        {
+          "path": "tag/inklusion",
+          "name": "Inklusion"
+        },
+        {
+          "path": "tag/einkauf",
+          "name": "Einkauf"
+        },
+        {
+          "path": "tag/sap-build",
+          "name": "SAP Build"
+        },
+        {
+          "path": "tag/e-mobilit-t",
+          "name": "E-Mobilität"
+        },
+        {
+          "path": "tag/versorgungswirtschaft",
+          "name": "Versorgungswirtschaft"
+        },
+        {
+          "path": "tag/e-learning",
+          "name": "E-Learning"
+        },
+        {
+          "path": "tag/sap-datasphere",
+          "name": "SAP Datasphere"
+        },
+        {
+          "path": "tag/esg",
+          "name": "ESG"
+        },
+        {
+          "path": "topic/investor-relations",
+          "name": "Investor Relations"
+        },
+        {
+          "path": "topic/unternehmen",
+          "name": "Unternehmen"
+        },
+        {
+          "path": "topic/erp-und-finanzwesen",
+          "name": "ERP und Finanzwesen"
+        },
+        {
+          "path": "topic/nachhaltigkeit",
+          "name": "Nachhaltigkeit"
+        },
+        {
+          "path": "topic/branchen",
+          "name": "Branchen"
+        },
+        {
+          "path": "topic/cloud",
+          "name": "Cloud"
+        },
+        {
+          "path": "topic/personalmanagement",
+          "name": "Personalmanagement"
+        },
+        {
+          "path": "topic/partner",
+          "name": "Partner"
+        },
+        {
+          "path": "topic/l-sungen",
+          "name": "Lösungen"
+        },
+        {
+          "path": "topic/mittelstand",
+          "name": "Mittelstand"
+        },
+        {
+          "path": "topic/allgemein",
+          "name": "Allgemein"
+        },
+        {
+          "path": "topic/veranstaltungen",
+          "name": "Veranstaltungen"
+        },
+        {
+          "path": "topic/services-und-support",
+          "name": "Services und Support"
+        },
+        {
+          "path": "topic/business-technology-platform",
+          "name": "Business Technology Platform"
+        },
+        {
+          "path": "topic/crm-und-kundenerlebnis",
+          "name": "CRM und Kundenerlebnis"
+        },
+        {
+          "path": "topic/supply-chain-management",
+          "name": "Supply Chain Management"
+        },
+        {
+          "path": "topic/technologie",
+          "name": "Technologie"
+        },
+        {
+          "path": "topic/aus--und-weiterbildung",
+          "name": "Aus- und Weiterbildung"
+        },
+        {
+          "path": "topic/ausgabenmanagement",
+          "name": "Ausgabenmanagement"
+        },
+        {
+          "path": "topic/kunden",
+          "name": "Kunden"
+        }
+      ]
+    }
