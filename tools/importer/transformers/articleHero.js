@@ -1,6 +1,6 @@
 /* global WebImporter */
 const transformHero = (main, document) => {
-  const hero = document.querySelector('.c-hero ');
+  const hero = document.querySelector('.c-hero');
   if (hero) {
     // clean up hero stuff
     hero.querySelectorAll('.social-share-list, .c-post-type, .c-entry-meta').forEach((el) => el.remove());

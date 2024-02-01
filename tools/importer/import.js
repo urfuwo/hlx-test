@@ -12,21 +12,20 @@
 /* global WebImporter */
 /* eslint-disable class-methods-use-this */
 
-import {
-  preTransformers,
-  transformers,
-} from './transformers/index.js';
+import { preTransformers, transformers } from './transformers/index.js';
+
+const PROJECT_BASE_URL = 'https://main--hlx-test--urfuwo.hlx.page';
 
 /**
-   * Apply DOM operations to the provided document and return
-   * the root element to be then transformed to Markdown.
-   * @param {HTMLDocument} document The document
-   * @param {string} url The url of the page imported
-   * @param {string} html The raw html (the document is cleaned up during preprocessing)
-   * @param {object} params Object containing some parameters given by the import process.
-   * @returns {HTMLElement} The root element to be transformed
-   */
-async function _transformDOM(document, url, html, params) {
+ * Apply DOM operations to the provided document and return
+ * the root element to be then transformed to Markdown.
+ * @param {HTMLDocument} document The document
+ * @param {string} url The url of the page imported
+ * @param {string} html The raw html (the document is cleaned up during preprocessing)
+ * @param {object} params Object containing some parameters given by the import process.
+ * @returns {HTMLElement} The root element to be transformed
+ */
+async function transformDOM(document, url, html, params) {
   // define the main element: the one that will be transformed to Markdown
   const main = document.body;
 
@@ -45,23 +44,29 @@ async function _transformDOM(document, url, html, params) {
     'aside#secondary',
   ]);
 
-  transformers.forEach(
-    (fn) => fn.call(this, main, document, params, url),
-  );
+  transformers.forEach((fn) => fn.call(this, main, document, params, url));
   return main;
 }
 
 /**
-   * Return a path that describes the document being transformed (file name, nesting...).
-   * The path is then used to create the corresponding Word document.
-   * @param {HTMLDocument} document The document
-   * @param {string} url The url of the page imported
-   * @param {string} html The raw html (the document is cleaned up during preprocessing)
-   * @param {object} params Object containing some parameters given by the import process.
-   * @return {string} The path
-   */
-async function _generateDocumentPath (document, url, html, params) {
-  return WebImporter.FileUtils.sanitizePath(new URL(url).pathname.replace(/\.html$/, '').replace(/\/$/, ''));
+ * Return a path that describes the document being transformed (file name, nesting...).
+ * The path is then used to create the corresponding Word document.
+ * @param {HTMLDocument} document The document
+ * @param {string} url The url of the page imported
+ * @param {string} html The raw html (the document is cleaned up during preprocessing)
+ * @param {object} params Object containing some parameters given by the import process.
+ * @return {string} The path
+ */
+// eslint-disable-next-line no-unused-vars
+async function generateDocumentPath(document, url, html, params) {
+  return WebImporter.FileUtils.sanitizePath(
+    new URL(url).pathname.replace(/\.html$/, '').replace(/\/$/, ''),
+  );
+}
+
+async function loadImportMappings() {
+  const topicsMapping = await fetch(`${PROJECT_BASE_URL}/draft/mhaack/import-mapping-topics.json`).then((res) => res.json());
+  return topicsMapping;
 }
 
 export default {
@@ -84,25 +89,25 @@ export default {
     preTransformers.forEach((fn) => fn.call(this, main, document, html, params, url));
   },
 
-  
-
-  
   transform: async ({
     // eslint-disable-next-line no-unused-vars
     document, url, html, params,
   }) => {
-    const authorLinks = [...document.body.querySelectorAll('a[rel=author]')]
-    .map((a) => a.href);
+    const topicsMapping = await loadImportMappings();
+    if (topicsMapping) {
+      document.topicsMapping = topicsMapping.data;
+    }
+
+    const authorLinks = [...document.body.querySelectorAll('a[rel=author]')].map((a) => a.href);
 
     return [
       {
-        element: await _transformDOM(document, url, html, params),
-        path: await _generateDocumentPath(document, url, html, params),
+        element: await transformDOM(document, url, html, params),
+        path: await generateDocumentPath(document, url, html, params),
         report: {
           'author-links': authorLinks,
         },
       },
     ];
-
-  }
+  },
 };

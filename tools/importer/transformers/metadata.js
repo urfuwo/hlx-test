@@ -62,12 +62,12 @@ const createMetadata = (main, document, html, params, urlStr) => {
     meta.Author = author.content;
   }
   if (meta.Title && html.originalURL.indexOf('/author') > 0) {
-      meta.Author = meta.Title.replace(/[^a-zA-Z\s]+.*/, '').trim();
+    meta.Author = meta.Title.replace(/[^a-zA-Z\s]+.*/, '').trim();
   }
 
   if (!meta.Author) {
     const entryMeta = document.querySelector('p.entry-meta');
-    const parseInfo = str => ({ timestamp: new Date(str.match(/\b\w+ \d{1,2}, \d{4}/)[0]).toISOString(), linkText: str.match(/<a href="[^"]*" title="[^"]*" rel="[^"]*">([^<]*)<\/a>/)[1] });
+    const parseInfo = (str) => ({ timestamp: new Date(str.match(/\b\w+ \d{1,2}, \d{4}/)[0]).toISOString(), linkText: str.match(/<a href="[^"]*" title="[^"]*" rel="[^"]*">([^<]*)<\/a>/)[1] });
     const info = parseInfo(entryMeta.innerHTML);
     meta.Author = info.linkText;
     if (!meta['article:published_time']) {
@@ -81,9 +81,9 @@ const createMetadata = (main, document, html, params, urlStr) => {
     meta['Display Author'] = displayAuthor;
   }
 
-  const hostStory = document.querySelector('.c-hero-post__content .c-entry-hot-story');
-  if (hostStory) {
-    meta['Hot Story'] = 'Yes';
+  const hotStory = document.querySelector('.c-hero-post__content .c-entry-hot-story');
+  if (hotStory) {
+    meta['Hot Story'] = 'yes';
   }
 
   const twitterLabel1 = document.querySelector('[name="twitter:label1"]');
@@ -103,8 +103,14 @@ const createMetadata = (main, document, html, params, urlStr) => {
     meta['twitter:data2'] = twitterData2.content;
   }
 
-  if (document._ARTICLE_SECTIONS_) {
-    meta['Topics'] = [...document._ARTICLE_SECTIONS_].join(', ');
+  const articleContent = document.querySelector('section#main > article.post');
+  if (articleContent) {
+    let categories = [...articleContent.classList].filter((className) => className.startsWith('category-')).map((className) => className.replace('category-', ''));
+
+    if (document.topicsMapping) {
+      categories = categories.map((category) => document.topicsMapping.filter((topic) => topic.key === category && topic.region === ogLocale.content).map((topic) => topic.label));
+    }
+    meta.Topics = categories.join(', ');
   }
 
   const block = WebImporter.Blocks.getMetadataBlock(document, meta);
