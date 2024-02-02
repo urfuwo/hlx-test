@@ -138,6 +138,8 @@ function getActionBar(nav, navSections) {
     const toolElement = tool.cloneNode(true);
     actionBar.prepend(toolElement);
   });
+  decorateIcons(openButton);
+  decorateIcons(closeButton);
   return actionBar;
 }
 
@@ -165,10 +167,8 @@ function decorateLogo(nav) {
     brandLink.closest('.button-container').className = '';
   }
   const brandElement = navBrand.querySelectorAll('p');
-  // brandElement[0].classList.add('logo');
-  // brandElement[0].querySelector('span').classList.remove('icon');
   brandElement[0].classList.add('site-label');
-  decorateIcons(navBrand);
+  decorateIcons(brandLogo);
 }
 
 /**
@@ -218,6 +218,5 @@ export default async function decorate(block) {
   nav.append(getNavBar(nav));
   const actionBar = getActionBar(nav, navSections);
   nav.append(actionBar);
-  decorateIcons(nav.querySelector('.nav-actions'));
   block.append(nav);
 }
