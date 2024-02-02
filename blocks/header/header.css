@@ -1,7 +1,6 @@
 /* header and nav layout */
 header {
-  height: 60px;
-  background: var(--sapShell_Navigation_Background);
+  background: var(--udexCoreSurfaceLight);
 }
 
 header nav {
@@ -14,7 +13,7 @@ header nav {
 }
 
 header nav[aria-expanded='true'] {
-  background: var(--sapPageHeader_Background);
+  background: var(--udexCoreSurfaceLight);
   transition: background 0.3s ease;
 }
 
@@ -36,7 +35,6 @@ header nav .text {
     align-items: center;
     justify-content: space-between;
     position: relative;
-    background-color: var(--sapShell_Navigation_Background);
     height: 3.75rem;
     padding: 0 var(--udexSpacer72);
   }
@@ -361,7 +359,7 @@ header nav .nav-tools .button {
   white-space: nowrap;
   overflow: hidden;
   border: 0;
-  background-color: var(--background-color);
+  background-color: var(--udexColorGrey1);
 }
 
 @media (width > 640px) {
@@ -419,7 +417,7 @@ header nav .nav-tools .button {
     width: var(--udexCoreSizeIconInput);
     height: var(--udexCoreSizeIconInput);
     background-size: 100% 100%;
-    background-color: var(--udexColorNeutralWhite);
+    background-color: var(--udexColorGrey1);
   }
 }
 
@@ -497,7 +495,7 @@ header nav .nav-actions .button {
   margin: unset;
   white-space: nowrap;
   border: 0;
-  background-color: var(--background-color);
+  background-color: var(--udexColorGrey1);
   position: relative;
   border-radius: unset;
 }
