@@ -1,13 +1,11 @@
 /* header and nav layout */
 header {
-  height: var(--udexSpacer64);
-  background: var(--sapShell_Navigation_Background);
+  background: var(--udexCoreSurfaceLight);
 }
 
 header nav {
   display: flex;
-  padding: var(--udexSpacer24) 0;
-  position: fixed;
+  position: absolute;
   justify-content: space-between;
   inset: 0;
   z-index: 100;
@@ -15,7 +13,7 @@ header nav {
 }
 
 header nav[aria-expanded='true'] {
-  background: var(--sapPageHeader_Background);
+  background: var(--udexCoreSurfaceLight);
   transition: background 0.3s ease;
 }
 
@@ -37,7 +35,6 @@ header nav .text {
     align-items: center;
     justify-content: space-between;
     position: relative;
-    background-color: var(--sapShell_Navigation_Background);
     height: 3.75rem;
     padding: 0 var(--udexSpacer72);
   }
@@ -57,15 +54,26 @@ header nav .text {
 
 /* brand */
 
-header nav .nav-brand .logo {
-  position: absolute;
-  width: 4rem;
-  margin: 0 0 0 var(--udexSpacer24);
-  top: 2%;
+header nav .nav-brand {
+  display: flex;
+  gap: var(--udexSpacer8);
+  padding: var(--udexSpacer16);
 }
 
 header nav[aria-expanded='true'] .nav-brand {
   display: none;
+}
+
+@media (width > 640px) {
+  header nav .nav-brand {
+    top: 16px;
+    padding-left: var(--udexSpacer48);
+  }
+}
+
+header nav .nav-brand .logo {
+  /* position: absolute; */
+  width: 4rem;
 }
 
 @media (width > 980px) {
@@ -76,6 +84,8 @@ header nav[aria-expanded='true'] .nav-brand {
     align-items: center;
     flex: 0 0 auto;
     position: relative;
+    padding: unset;
+    top: unset;
   }
 
   header nav .nav-brand .logo {
@@ -85,9 +95,9 @@ header nav[aria-expanded='true'] .nav-brand {
   }
 }
 
-header nav .nav-brand .button-container {
-  position: relative;
-  width: 4rem;
+header nav .nav-brand .icon {
+  height: unset;
+  width: unset;
 }
 
 header nav .nav-brand .icon-brand {
@@ -96,7 +106,23 @@ header nav .nav-brand .icon-brand {
 }
 
 header nav .nav-brand .site-label {
-  display: none;
+  display: inline;
+  position: relative;
+  font-family: var(--udexTypographyNavigationBoldXLFontFamily);
+  font-weight: var(--udexTypographyNavigationBoldXLFontWeight);
+  color: var(--udexColorGrey8);
+  font-size: var(--udexTypographyNavigationBoldXLFontSize);
+  letter-spacing: var(--navigation-bold-XL-letter-spacing);
+  line-height: var(--udexTypographyNavigationBoldXLLineHeight);
+  white-space: nowrap;
+  font-style: normal;
+  top: -9px;
+}
+
+@media (width > 980px) {
+  header nav .nav-brand .site-label {
+    top: -9px;
+  }
 }
 
 @media (width > 980px) {
@@ -104,14 +130,7 @@ header nav .nav-brand .site-label {
     display: block;
     position: relative;
     width: fit-content;
-    font-family: var(--udexTypographyNavigationBoldXLFontFamily);
-    font-weight: var(--udexTypographyNavigationBoldXLFontWeight);
-    color: var(--udexColorGrey8);
-    font-size: var(--udexTypographyNavigationBoldXLFontSize);
-    letter-spacing: var(--navigation-bold-XL-letter-spacing);
-    line-height: var(--udexTypographyNavigationBoldXLLineHeight);
-    white-space: nowrap;
-    font-style: normal;
+    top: unset;
   }
 }
 
@@ -157,6 +176,7 @@ header nav .nav-sections ul {
   flex-direction: column;
   list-style: none;
   gap: 2.938 rem;
+  padding-right: var(--udexSpacer24);
 }
 
 header nav .nav-sections ul > li {
@@ -339,7 +359,7 @@ header nav .nav-tools .button {
   white-space: nowrap;
   overflow: hidden;
   border: 0;
-  background-color: var(--background-color);
+  background-color: var(--udexColorGrey1);
 }
 
 @media (width > 640px) {
@@ -397,7 +417,7 @@ header nav .nav-tools .button {
     width: var(--udexCoreSizeIconInput);
     height: var(--udexCoreSizeIconInput);
     background-size: 100% 100%;
-    background-color: var(--udexColorNeutralWhite);
+    background-color: var(--udexColorGrey1);
   }
 }
 
@@ -410,6 +430,7 @@ header nav .nav-explore {
   background-color: var(--udexColorBlue7);
   height: 3.938rem;
   width: 100%;
+  padding: 0 var(--udexSpacer24);
 }
 
 /* header nav[aria-expanded='false'] .nav-explore {
@@ -418,6 +439,7 @@ header nav .nav-explore {
 
 header nav .nav-explore ul {
   list-style: none;
+  padding: unset;
 }
 
 header nav .nav-explore ul > li > a {
@@ -440,7 +462,7 @@ header nav .nav-explore ul > li > a {
     margin: unset;
     background: unset;
     position: unset;
-    padding: 0 var(--udexSpacer24);
+    padding: 0 var(--udexSpacer24) 0 0;
     height: unset;
   }
 
@@ -473,7 +495,7 @@ header nav .nav-actions .button {
   margin: unset;
   white-space: nowrap;
   border: 0;
-  background-color: var(--background-color);
+  background-color: var(--udexColorGrey1);
   position: relative;
   border-radius: unset;
 }
