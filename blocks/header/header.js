@@ -157,7 +157,6 @@ function decorateLogo(nav) {
   const brandElementsWrapper = navBrand.firstElementChild;
   if (brandElementsWrapper != null && brandElementsWrapper.classList.contains('default-content-wrapper')) {
     brandElementsWrapper.prepend(brandLogo);
-    brandElementsWrapper.style.display = 'contents';
   } else {
     navBrand.prepend(brandLogo);
   }
@@ -195,9 +194,9 @@ export default async function decorate(block) {
   // generate links
   const navSections = nav.querySelector('.nav-sections');
   if (navSections) {
-    navSections.querySelectorAll(':scope ul > li').forEach((navSection) => {
-      navSection.querySelector('a').setAttribute('class', 'text');
-      if (navSection.querySelector('ul')) navSection.classList.add('nav-drop');
+    navSections.querySelectorAll(':scope > .default-content-wrapper > ul > li').forEach((navSection) => {
+      // navSection.querySelector('a').setAttribute('class', 'link');
+      if (navSection.querySelector('ul')) navSection.classList.add('nav-drop', 'text');
 
       navSection.addEventListener('click', () => {
         const expanded = navSection.getAttribute('aria-expanded') === 'true';
@@ -206,12 +205,6 @@ export default async function decorate(block) {
       });
     });
     addSearchBar(navSections);
-  }
-
-  const navExplore = nav.querySelector('.nav-explore');
-  const brandElementsWrapper = navExplore.firstElementChild;
-  if (brandElementsWrapper != null && brandElementsWrapper.classList.contains('default-content-wrapper')) {
-    brandElementsWrapper.style.display = 'contents';
   }
 
   nav.setAttribute('aria-expanded', 'false');
