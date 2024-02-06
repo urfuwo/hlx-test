@@ -12,24 +12,41 @@
   /* default colors */
   --background-color: var(--udexColorNeutralWhite);
   --text-color: var(--sapShell_TextColor);
-  ---udexGridGutters: var(--udexGridXSGutters);
+
+  /* Margin and gutters */
+  --udexGridGutters: var(--udexGridXSGutters);
+  --udexGridMargins: var(--udexGridXSMargins);
 }
 
+/* S */
 @media (width >= 640px) {
   :root {
-    ---udexGridGutters: var(--udexGridSGutters);
+    --udexGridGutters: var(--udexGridSGutters);
+    --udexGridMargins: var(--udexGridSMargins);
   }
 }
 
+/* M */
 @media (width >= 980px) {
   :root {
-    ---udexGridGutters: var(--udexGridMGutters);
+    --udexGridGutters: var(--udexGridMGutters);
+    --udexGridMargins: var(--udexGridMMargins);
   }
 }
 
-@media (width >= 1600) {
+/* L */
+@media (width >= 1280px) {
   :root {
-    ---udexGridGutters: var(--udexGridXLGutters);
+    --udexGridGutters: var(--udexGridLGutters);
+    --udexGridMargins: var(--udexGridLMargins);
+  }
+}
+
+/* XL */
+@media (width >= 1600px) {
+  :root {
+    --udexGridGutters: var(--udexGridXLGutters);
+    --udexGridMargins: var(--udexGridXLMargins);
   }
 }
 
@@ -192,22 +209,6 @@ main .section {
 }
 
 main .section > div {
-  margin-left: 18px; /* missing design, assumption */
-  margin-right: 18px; /* missing design, assumption */
-}
-
-/* Tablet view (--udexGridSMinWidth) */
-@media (width >= 640px) {
-  main .section > div {
-    margin-left: 36px; /* missing design, assumption */
-    margin-right: 36px; /* missing design, assumption */
-  }
-}
-
-/* Desktop view (--udexGridMMinWidth) */
-@media (width >= 980px) {
-  main .section > div {
-    margin-left: 72px;
-    margin-right: 72px;
-  }
+  margin-left: var(--udexGridMargins);
+  margin-right: var(--udexGridMargins);
 }
