@@ -7,7 +7,7 @@ main ul.article-list {
   padding: 0;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(var(--article-tile-width), 1fr));
-  grid-gap: var(---udexGridGutters); 
+  grid-gap: var(--udexGridGutters);
 }
 
 main ul.article-list>li {
