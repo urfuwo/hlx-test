@@ -7,7 +7,7 @@ main ul.article-list {
   padding: 0;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(var(--article-tile-width), 1fr));
-  grid-gap: var(---udexGridGutters); 
+  grid-gap: var(--udexGridGutters);
 }
 
 main ul.article-list>li {
@@ -34,6 +34,23 @@ main ul.article-list>li img {
 }
 
 main ul.article-list>li span.cardcontent span.template {
+  font-style: normal;
+  font-family: var(--udexTypographyBodyXSFontFamily);
+  font-weight: var(--udexTypographyDisplayMediumXSFontWeight);
+  font-size: var(--udexTypographyBodyXSFontSize);
+  line-height: var(--udexTypographyEyebrowMLineHeight);
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--udexColorGrey6);
+  flex: var(--sapContent_ForcedColorAdjust);
+  order: var(--sapShell_BackgroundImageOpacity);
+  flex-grow: var(--sapShell_BackgroundImageOpacity);
+  margin-bottom: var(--udexSpacer8);
+}
+
+main ul.article-list>li span.cardcontent span.hot {
   position: absolute;
   box-sizing: border-box;
   display: flex;
