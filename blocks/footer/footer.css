@@ -10,7 +10,7 @@
   position: relative;
   flex-direction: column;
   width: 100%;
-  padding-inline: 18px;
+  padding-inline: var(--udexGridMargins);
 }
 
 .block.footer .contact-container {
@@ -32,17 +32,12 @@
 @media (width >= 640px) {
   .block.footer > div {
     flex-direction: column;
-    padding-inline: var(--udexSpacer32);
   }
 }
 
 /* M */
 /* stylelint-disable-next-line block-no-empty */
 @media (width >= 980px) {
-  .block.footer > div {
-    padding-inline: var(--udexSpacer72);
-  }
-
   .block.footer .icon-back-to-top {
     right: var(--udexSpacer24);
     position: absolute;
@@ -62,11 +57,4 @@
     padding-top: 0;
   }
 
-}
-
-/* XL */
-@media (width >= 1600px) {
-  .block.footer > div {
-    width: 100%;
-  }
 }
