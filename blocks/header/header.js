@@ -138,6 +138,8 @@ function getActionBar(nav, navSections) {
     const toolElement = tool.cloneNode(true);
     actionBar.prepend(toolElement);
   });
+  decorateIcons(openButton);
+  decorateIcons(closeButton);
   return actionBar;
 }
 
@@ -155,7 +157,6 @@ function decorateLogo(nav) {
   const brandElementsWrapper = navBrand.firstElementChild;
   if (brandElementsWrapper != null && brandElementsWrapper.classList.contains('default-content-wrapper')) {
     brandElementsWrapper.prepend(brandLogo);
-    brandElementsWrapper.style.display = 'contents';
   } else {
     navBrand.prepend(brandLogo);
   }
@@ -165,10 +166,8 @@ function decorateLogo(nav) {
     brandLink.closest('.button-container').className = '';
   }
   const brandElement = navBrand.querySelectorAll('p');
-  // brandElement[0].classList.add('logo');
-  // brandElement[0].querySelector('span').classList.remove('icon');
   brandElement[0].classList.add('site-label');
-  decorateIcons(navBrand);
+  decorateIcons(brandLogo);
 }
 
 /**
@@ -195,9 +194,9 @@ export default async function decorate(block) {
   // generate links
   const navSections = nav.querySelector('.nav-sections');
   if (navSections) {
-    navSections.querySelectorAll(':scope ul > li').forEach((navSection) => {
-      navSection.querySelector('a').setAttribute('class', 'text');
-      if (navSection.querySelector('ul')) navSection.classList.add('nav-drop');
+    navSections.querySelectorAll(':scope > .default-content-wrapper > ul > li').forEach((navSection) => {
+      // navSection.querySelector('a').setAttribute('class', 'link');
+      if (navSection.querySelector('ul')) navSection.classList.add('nav-drop', 'text');
 
       navSection.addEventListener('click', () => {
         const expanded = navSection.getAttribute('aria-expanded') === 'true';
@@ -208,16 +207,9 @@ export default async function decorate(block) {
     addSearchBar(navSections);
   }
 
-  const navExplore = nav.querySelector('.nav-explore');
-  const brandElementsWrapper = navExplore.firstElementChild;
-  if (brandElementsWrapper != null && brandElementsWrapper.classList.contains('default-content-wrapper')) {
-    brandElementsWrapper.style.display = 'contents';
-  }
-
   nav.setAttribute('aria-expanded', 'false');
   nav.append(getNavBar(nav));
   const actionBar = getActionBar(nav, navSections);
   nav.append(actionBar);
-  decorateIcons(nav.querySelector('.nav-actions'));
   block.append(nav);
 }
