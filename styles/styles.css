@@ -62,6 +62,12 @@ body {
   display: none;
 }
 
+@media (width < 980px) {
+  body {
+    overflow-x: hidden;
+  }
+}
+
 body.appear {
   display: block;
 }
@@ -130,6 +136,12 @@ code {
 /* missing styles, assumption */
 pre {
   overflow: scroll;
+}
+
+@media (width >= 980px) {
+  main {
+    margin-left: 260px;
+  }
 }
 
 /* missing styles, assumption */

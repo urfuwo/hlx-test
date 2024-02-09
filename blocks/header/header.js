@@ -170,6 +170,17 @@ function decorateLogo(nav) {
   decorateIcons(brandLogo);
 }
 
+function createDropMenu(sections) {
+  sections.querySelectorAll(':scope > .default-content-wrapper > ul > li').forEach((section) => {
+    if (section.querySelector('ul')) section.classList.add('nav-drop', 'text');
+    section.addEventListener('click', () => {
+      const expanded = section.getAttribute('aria-expanded') === 'true';
+      toggleAllNavSections(sections);
+      section.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+    });
+  });
+}
+
 /**
  * decorates the header, mainly the nav
  * @param {Element} block The header block element
@@ -194,16 +205,7 @@ export default async function decorate(block) {
   // generate links
   const navSections = nav.querySelector('.nav-sections');
   if (navSections) {
-    navSections.querySelectorAll(':scope > .default-content-wrapper > ul > li').forEach((navSection) => {
-      // navSection.querySelector('a').setAttribute('class', 'link');
-      if (navSection.querySelector('ul')) navSection.classList.add('nav-drop', 'text');
-
-      navSection.addEventListener('click', () => {
-        const expanded = navSection.getAttribute('aria-expanded') === 'true';
-        toggleAllNavSections(navSections);
-        navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-      });
-    });
+    createDropMenu(navSections);
     addSearchBar(navSections);
   }
 
@@ -212,4 +214,25 @@ export default async function decorate(block) {
   const actionBar = getActionBar(nav, navSections);
   nav.append(actionBar);
   block.append(nav);
+
+  const sideFragment = await loadFragment('/draft/skhare/nav1');
+  const sideNav = document.createElement('aside');
+  sideNav.id = 'sideNav';
+  while (sideFragment.firstElementChild) sideNav.append(sideFragment.firstElementChild);
+  const sideClasses = ['home', 'sections'];
+  sideClasses.forEach((c, i) => {
+    const section = sideNav.children[i];
+    if (section) section.classList.add(`nav-side-${c}`);
+  });
+  const sideSections = sideNav.querySelector('.nav-side-sections');
+  if (sideSections) {
+    createDropMenu(sideSections);
+  }
+  const sideNavHome = sideNav.querySelector('.nav-side-home');
+  sideNavHome.addEventListener('click', () => {
+    const expanded = sideNav.getAttribute('aria-expanded') === 'true';
+    toggleAllNavSections(sideNav);
+    sideNav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+  });
+  block.append(sideNav);
 }
