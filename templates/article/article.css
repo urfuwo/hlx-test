@@ -9,7 +9,7 @@
 }
 
 /* Highlight first paragraph of blog pages using increased font size */
-.article p.article--highlight {
+.article main > div:first-child > div.default-content-wrapper:nth-child(2) > p:first-child {
     font-size: var(--udexTypographyBodyLFontSize); /* no design, assumption */
 }
 
