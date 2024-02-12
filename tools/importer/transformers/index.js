@@ -6,6 +6,7 @@ import preProcessAuthorH1 from './preProcessAuthorH1.js';
 import transformVideo from './youtubeVideo.js';
 import articleMoreSection from './articleMoreSection.js';
 import articleQuote from './articleQuote.js';
+import articleFooter from './articleContentFooter.js';
 
 export const transformers = [
   metadata,
@@ -13,6 +14,7 @@ export const transformers = [
   articleCtaBanner,
   articleMoreSection,
   articleQuote,
+  articleFooter,
   authorProfile,
   transformVideo,
 ];

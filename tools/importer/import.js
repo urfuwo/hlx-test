@@ -80,7 +80,6 @@ async function transformDOM(document, url, html, params) {
     'div.cmp-container',
     'a.skip-link',
     'aside#secondary',
-    'div.entry-footer > .tags-links',
   ]);
 
   transformers.forEach((fn) => fn.call(this, main, document, params, url));
