@@ -9,14 +9,13 @@
 .block.social {
   display: flex;
   flex-direction: row;
-  padding-top: var(--udexSpacer32);
 }
 
 .block.social > div > div {
     display: flex;
     align-items: center;
     background-color: var(--udexColorNeutralWhite);
-    padding: 6px;
+    padding: 8px;
     margin: 6px;
 }
 
@@ -28,6 +27,10 @@
 
 .block.social .icon > img {
     margin: auto;
+}
+
+footer .block.social {
+  padding-top: var(--udexSpacer32);
 }
 
 /* S */
