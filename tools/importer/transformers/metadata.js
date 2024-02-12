@@ -13,11 +13,6 @@ const createMetadata = (main, document, html, params, urlStr) => {
     meta.keywords = keywords.content;
   }
 
-  const tags = document.querySelector('[name="tags"]');
-  if (tags && tags.content) {
-    meta.Tags = tags.content;
-  }
-
   const desc = document.querySelector('[property="og:description"]');
   if (desc) {
     meta.Description = desc.content;
@@ -30,17 +25,6 @@ const createMetadata = (main, document, html, params, urlStr) => {
     el.src = imgUrl.pathname;
     meta.Image = el;
   }
-
-  // get doc type from main > article classlist
-  const article = document.querySelector('section#main > article');
-  if (article && article.className.indexOf('sapn-type') > -1) {
-    article.classList.forEach((className) => {
-      if (className.startsWith('sapn-type')) {
-        meta.template = className.replace('sapn-type-', '');
-      }
-    });
-  }
-
   const ogLocale = document.querySelector('[property="og:locale"]');
   if (ogLocale) {
     meta['og:locale'] = ogLocale.content;
@@ -83,9 +67,8 @@ const createMetadata = (main, document, html, params, urlStr) => {
 
   const hotStory = document.querySelector('.c-hero-post__content .c-entry-hot-story');
   if (hotStory) {
-    meta['Hot Story'] = 'yes';
+    meta.Priority = 'hot-topic';
   }
-
   const twitterLabel1 = document.querySelector('[name="twitter:label1"]');
   if (twitterLabel1) {
     meta['twitter:label1'] = twitterLabel1.content;
@@ -103,14 +86,59 @@ const createMetadata = (main, document, html, params, urlStr) => {
     meta['twitter:data2'] = twitterData2.content;
   }
 
+  // add tags, topics, content types etc based on mapping tables
   const articleContent = document.querySelector('section#main > article.post');
-  if (articleContent) {
-    let categories = [...articleContent.classList].filter((className) => className.startsWith('category-')).map((className) => className.replace('category-', ''));
+  const types = [...articleContent.classList]
+    .filter((className) => className.startsWith('sapn-type-'))
+    .map((className) => className.replace('sapn-type-', ''));
+  // eslint-disable-next-line prefer-destructuring
+  if (types?.length > 0) document.arictleType = types[0];
 
-    if (document.topicsMapping) {
-      categories = categories.map((category) => document.topicsMapping.filter((topic) => topic.key === category && topic.region === ogLocale.content).map((topic) => topic.label));
+  if (document.mappingTable) {
+    const regionMapping = document.mappingTable.filter(
+      (entry) => entry.region === ogLocale.content,
+    );
+    if (articleContent) {
+      const topicsMapping = regionMapping.filter((entry) => entry.type === 'topic');
+
+      // map categories to topics
+      const categories = [...articleContent.classList]
+        .filter((className) => className.startsWith('category-'))
+        .map((className) => className.replace('category-', ''));
+      if (categories?.length > 0) {
+        meta.Topics = [...new Set(
+          topicsMapping
+            .filter((entry) => categories.includes(entry.key))
+            .map((topic) => topic['replacement-tagging'].split('/').pop() || topic.key),
+        ),
+        ].join(', ');
+      }
+
+      // map types to content types
+      const typesMapping = regionMapping.filter((entry) => entry.type === 'type');
+      if (types?.length > 0) {
+        typesMapping
+          .filter((entry) => entry.key === types[0] && entry['additonal-tagging'] !== '')
+          .forEach((typeEntry) => {
+            if (typeEntry['additonal-tagging'].startsWith('content-type')) {
+              meta['Content Type'] = typeEntry['additonal-tagging'].split('/').pop();
+            }
+            if (typeEntry['additonal-tagging'].startsWith('author-name')) {
+              meta.Author += typeEntry['additonal-tagging'].split('/').pop();
+            }
+          });
+      }
+
+      // map tags
+      const tagsMapping = regionMapping.filter((entry) => entry.type === 'tag');
+      const tags = [...articleContent.classList]
+        .filter((className) => className.startsWith('tag-'))
+        .map((className) => className.replace('tag-', ''));
+      if (tags?.length > 0) {
+        meta.Tags = [...new Set(tagsMapping.filter((entry) => tags.includes(entry.key))
+          .map((entry) => entry['replacement-tagging'].split('/').pop() || entry.key))].join(', ');
+      }
     }
-    meta.Topics = categories.join(', ');
   }
 
   const block = WebImporter.Blocks.getMetadataBlock(document, meta);

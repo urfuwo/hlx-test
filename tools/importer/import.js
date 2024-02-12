@@ -16,6 +16,45 @@ import { preTransformers, transformers } from './transformers/index.js';
 
 const PROJECT_BASE_URL = 'https://main--hlx-test--urfuwo.hlx.page';
 
+const BASEPATH_MAPPING = [
+  {
+    type: 'feature-article',
+    basePath: '/blog',
+  },
+  {
+    type: 'blog',
+    basePath: '/blog',
+  },
+  {
+    type: 'insight',
+    basePath: '/blog',
+  },
+  {
+    type: 'support-update',
+    basePath: '/news',
+  },
+  {
+    type: 'perspective',
+    basePath: '/news',
+  },
+  {
+    type: 'statement',
+    basePath: '/news',
+  },
+  {
+    type: 'press-release',
+    basePath: '/news',
+  },
+  {
+    type: 'newsbyte',
+    basePath: '/news',
+  },
+  {
+    type: 'sap-tv',
+    basePath: '/news',
+  },
+];
+
 /**
  * Apply DOM operations to the provided document and return
  * the root element to be then transformed to Markdown.
@@ -39,9 +78,9 @@ async function transformDOM(document, url, html, params) {
     'ds-contextual-navigation',
     'div.breadcrumbs',
     'div.cmp-container',
-    'div#more-posts',
     'a.skip-link',
     'aside#secondary',
+    'div.entry-footer > .tags-links',
   ]);
 
   transformers.forEach((fn) => fn.call(this, main, document, params, url));
@@ -59,14 +98,23 @@ async function transformDOM(document, url, html, params) {
  */
 // eslint-disable-next-line no-unused-vars
 async function generateDocumentPath(document, url, html, params) {
-  return WebImporter.FileUtils.sanitizePath(
-    new URL(url).pathname.replace(/\.html$/, '').replace(/\/$/, ''),
-  );
+  // let newUrl = new URL(url).pathname.replace(/\.html$/, '').replace(/\/$/, ''),
+  const newUrl = new URL(url);
+  if (document.arictleType) {
+    const type = BASEPATH_MAPPING.find((mapping) => mapping.type === document.arictleType);
+    if (type) {
+      newUrl.pathname = `/${type.basePath}${newUrl.pathname}`;
+    }
+  }
+
+  return WebImporter.FileUtils.sanitizePath(newUrl.pathname.replace(/\.html$/, '').replace(/\/$/, ''));
 }
 
-async function loadImportMappings() {
-  const topicsMapping = await fetch(`${PROJECT_BASE_URL}/draft/mhaack/import-mapping-topics.json`).then((res) => res.json());
-  return topicsMapping;
+async function loadImportMappings(document) {
+  const mappingTable = await fetch(`${PROJECT_BASE_URL}/draft/mhaack/import-mapping.json?limit=1000`).then((res) => res.json());
+  if (mappingTable) {
+    document.mappingTable = mappingTable.data;
+  }
 }
 
 export default {
@@ -93,10 +141,7 @@ export default {
     // eslint-disable-next-line no-unused-vars
     document, url, html, params,
   }) => {
-    const topicsMapping = await loadImportMappings();
-    if (topicsMapping) {
-      document.topicsMapping = topicsMapping.data;
-    }
+    await loadImportMappings(document);
 
     const authorLinks = [...document.body.querySelectorAll('a[rel=author]')].map((a) => a.href);
 
