@@ -215,7 +215,10 @@ export default async function decorate(block) {
   nav.append(actionBar);
   block.append(nav);
 
-  const sideFragment = await loadFragment('/draft/skhare/nav1');
+  const sideNavMeta = getMetadata('sideNav');
+  const sideNavPath = sideNavMeta ? new URL(sideNavMeta).pathname : `/${window.location.pathname.split('/')[1]}/nav`;
+  const sideFragment = await loadFragment(sideNavPath);
+  if (!sideFragment) return;
   const sideNav = document.createElement('aside');
   sideNav.id = 'sideNav';
   while (sideFragment.firstElementChild) sideNav.append(sideFragment.firstElementChild);
@@ -233,6 +236,12 @@ export default async function decorate(block) {
     const expanded = sideNav.getAttribute('aria-expanded') === 'true';
     toggleAllNavSections(sideNav);
     sideNav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+  });
+
+  document.addEventListener('click', (event) => {
+    if (event.target.classList.contains('nav-drop')) return;
+    toggleAllNavSections(nav);
+    nav.setAttribute('aria-expanded', 'false');
   });
   block.append(sideNav);
 }
