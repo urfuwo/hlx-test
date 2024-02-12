@@ -239,7 +239,7 @@ export default async function decorate(block) {
   });
 
   document.addEventListener('click', (event) => {
-    if (event.target.classList.contains('nav-drop')) return;
+    if (event.target.classList.contains('nav-drop') || event.target.tagName === 'IMG') return;
     toggleAllNavSections(nav);
     nav.setAttribute('aria-expanded', 'false');
   });
