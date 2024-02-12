@@ -1,34 +1,26 @@
 import {
-  sampleRUM,
-  buildBlock,
-  loadHeader,
-  loadFooter,
+  decorateBlocks,
   decorateButtons,
   decorateIcons,
   decorateSections,
-  decorateBlocks,
   decorateTemplateAndTheme,
-  waitForLCP,
+  getMetadata,
   loadBlocks,
   loadCSS,
+  loadFooter,
+  loadHeader,
+  loadScript,
+  sampleRUM,
+  toClassName,
+  waitForLCP,
 } from './aem.js';
 
-const LCP_BLOCKS = []; // add your LCP blocks to the list
-
-/**
- * Builds hero block and prepends to main in a new section.
- * @param {Element} main The container element
- */
-function buildHeroBlock(main) {
-  const h1 = main.querySelector('h1');
-  const picture = main.querySelector('picture');
-  // eslint-disable-next-line no-bitwise
-  if (h1 && picture && (h1.compareDocumentPosition(picture) & Node.DOCUMENT_POSITION_PRECEDING)) {
-    const section = document.createElement('div');
-    section.append(buildBlock('hero', { elems: [picture, h1] }));
-    main.prepend(section);
-  }
-}
+const LCP_BLOCKS = ['hero']; // add your LCP blocks to the list
+const TEMPLATE_LIST = {
+  blog: 'article',
+  'feature-article': 'article',
+  newsbyte: 'article',
+};
 
 /**
  * load fonts.css and set a session storage flag
@@ -42,17 +34,54 @@ async function loadFonts() {
   }
 }
 
-/**
- * Builds all synthetic blocks in a container element.
- * @param {Element} main The container element
- */
-function buildAutoBlocks(main) {
+async function decorateTemplates(main) {
   try {
-    buildHeroBlock(main);
+    const template = toClassName(getMetadata('template'));
+    const templates = Object.keys(TEMPLATE_LIST);
+    if (templates.includes(template)) {
+      const templateName = TEMPLATE_LIST[template];
+      loadCSS(`${window.hlx.codeBasePath}/templates/${templateName}/${templateName}.css`);
+      const mod = await import(`../templates/${templateName}/${templateName}.js`);
+      if (mod.default) {
+        await mod.default(main);
+      }
+    }
   } catch (error) {
     // eslint-disable-next-line no-console
-    console.error('Auto Blocking failed', error);
+    console.error('Template decoration failed', error);
   }
+}
+
+async function decorateVideoLinks(main) {
+  const embedYoutube = (url, autoplay = false) => {
+    const usp = new URLSearchParams(url.search);
+    const suffix = autoplay ? '&muted=1&autoplay=1' : '';
+    let vid = usp.get('v') ? encodeURIComponent(usp.get('v')) : '';
+    const embed = url.pathname;
+    if (url.origin.includes('youtu.be')) {
+      [, vid] = url.pathname.split('/');
+    }
+    const embedHTML = `<div style="left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.25%;">
+        <iframe src="https://www.youtube.com${vid ? `/embed/${vid}?rel=0&v=${vid}${suffix}` : embed}" style="border: 0; top: 0; left: 0; width: 100%; height: 100%; position: absolute;"
+        allow="autoplay; fullscreen; picture-in-picture; encrypted-media; accelerometer; gyroscope; picture-in-picture" allowfullscreen="" scrolling="no" title="Content from Youtube" loading="lazy"></iframe>
+      </div>`;
+    return embedHTML;
+  };
+
+  const videoPs = main.querySelectorAll('p a[href*="youtu"]');
+  videoPs.forEach((a) => {
+    const videoP = a.parentNode;
+    const link = a.href;
+    videoP.textContent = '';
+    const observer = new IntersectionObserver((entries) => {
+      if (entries.some((e) => e.isIntersecting)) {
+        observer.disconnect();
+        videoP.innerHTML = embedYoutube(new URL(link), false);
+        videoP.classList.add('video');
+      }
+    });
+    observer.observe(videoP);
+  });
 }
 
 /**
@@ -60,13 +89,39 @@ function buildAutoBlocks(main) {
  * @param {Element} main The main element
  */
 // eslint-disable-next-line import/prefer-default-export
-export function decorateMain(main) {
+export async function decorateMain(main, shouldDecorateTemplates = true) {
   // hopefully forward compatible button decoration
   decorateButtons(main);
   decorateIcons(main);
-  buildAutoBlocks(main);
+  if (shouldDecorateTemplates) {
+    await decorateTemplates(main);
+  }
   decorateSections(main);
   decorateBlocks(main);
+  decorateVideoLinks(main);
+}
+
+/**
+ * Load the theme and the web components module
+ * @returns {Promise<void>}
+ */
+async function loadSAPThemeAndWebComponents() {
+  try {
+    const sapTheme = getMetadata('saptheme', document) || 'sap_glow';
+    if (sapTheme) {
+      loadCSS(`/themes/${sapTheme}/css_variables.css`);
+      const head = document.querySelector('head');
+      const ui5ThemeScript = document.createElement('script');
+      ui5ThemeScript.setAttribute('data-ui5-config', '');
+      ui5ThemeScript.setAttribute('type', 'application/json');
+      ui5ThemeScript.textContent = `{"theme": "${sapTheme}"}`;
+      head.append(ui5ThemeScript);
+      loadScript('/libs/dds-wc-bundle.esm.m.js', { type: 'module' });
+    }
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.error('SAP-Theme loading failed', e);
+  }
 }
 
 /**
@@ -78,7 +133,8 @@ async function loadEager(doc) {
   decorateTemplateAndTheme();
   const main = doc.querySelector('main');
   if (main) {
-    decorateMain(main);
+    await decorateMain(main);
+    loadSAPThemeAndWebComponents();
     document.body.classList.add('appear');
     await waitForLCP(LCP_BLOCKS);
   }

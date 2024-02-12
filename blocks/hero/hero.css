@@ -1,22 +1,31 @@
 main .hero-container > div {
   max-width: unset;
 }
-  
+
 main .hero-container {
-  padding: 0;
+  /* do not change padding-bottom */
+  padding-left: 0;
+  padding-right: 0;
+}
+
+main div.hero-wrapper {
+  margin-left: 0;
+  margin-right: 0;
 }
 
 .hero {
   position: relative;
-  padding: 32px;
   min-height: 300px;
 }
 
 .hero h1 {
+  font-family: var(--udexTypographyHeadingMediumLFontFamily);
+  font-size: var(--udexTypographyHeadingMediumLFontSize);
+  font-weight: var(--udexTypographyHeadingMediumLFontWeight);
+  line-height: var(--udexTypographyHeadingMediumLLineHeight);
   max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
-  color: white;
 }
 
 .hero picture {
