@@ -1,3 +1,7 @@
+main .article-tags {
+    margin-top: var(--udexSpacer20);
+}
+
 main .article-tags div.tag-list {
     display: flex;
     flex-wrap: wrap;
@@ -6,9 +10,19 @@ main .article-tags div.tag-list {
 }
 
 main .article-tags div.tag-list a {
+    font-size: var(--udexTypographyBodyXSFontSize);
+    font-weight: var(--udexTypographyBodyXSFontWeight);
+    line-height: var(--udexTypographyBodyXSLineHeight); 
+    text-decoration: none;
     text-align: center;
-    padding: 0.2rem 0.5rem;
-    background-color: var(--sapButton_Neutral_Background);
-    color: var(--sapButton_Neutral_TextColor);
+    padding: var(--udexSpacer2) var(--udexSpacer8);
+    background-color: var(--udexColorGrey2);
+    color: var(--udexColorGrey9);
+    border-radius: var(--udexRadiusS);
+    border: 1px solid var(--udexColorGrey2);
+}
 
+main .article-tags div.tag-list a:hover {
+    background-color: var(--udexColorNeutral);
+    border: 1px solid var(--udexColorGrey2);
 }
