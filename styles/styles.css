@@ -48,6 +48,12 @@
     --udexGridGutters: var(--udexGridXLGutters);
     --udexGridMargins: var(--udexGridXLMargins);
   }
+
+  main .section {
+    max-width: 1600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 body {
