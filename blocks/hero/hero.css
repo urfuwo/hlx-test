@@ -2,6 +2,18 @@ main .hero-container > div {
   max-width: unset;
 }
 
+/* XL: full width, ignore grid */
+@media (width >= 1600px) {
+  main .hero-container > .hero-wrapper {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+  }
+}
+
 main .hero-container {
   /* do not change padding-bottom */
   padding-left: 0;
