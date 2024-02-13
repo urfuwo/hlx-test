@@ -5,6 +5,14 @@
     padding-right: var(--udexGridMargins);
 }
 
+/* XL */
+@media (width >= 1600px) {
+    .title-banner {
+        padding-left: calc((100% - 1432px)/2);
+        padding-right: calc((100% - 1432px)/2);
+    }
+}
+
 .title-banner.author {
     background-color: rgb(54 123 179);
 }
