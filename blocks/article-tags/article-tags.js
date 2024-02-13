@@ -8,7 +8,7 @@ export default async function decorate(block) {
   if (tags) {
     const placeholders = await fetchPlaceholders();
     const tagsLiEL = tags.split(',').map((tag) => placeholders[toCamelCase(`tag/${tag}`)] || tag).map((tag) => a({ href: `/tags/${toClassName(tag.trim())}` }, tag.trim()));
-    const tagListEl = div({ class: 'tag-list' }, 'Tags: ', ...tagsLiEL);
+    const tagListEl = div({ class: 'tag-list' }, ...tagsLiEL);
     block.append(tagListEl);
   }
 }
