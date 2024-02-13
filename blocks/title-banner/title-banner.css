@@ -1,7 +1,16 @@
 .title-banner {
-    width: 100%;
     background-color: black;
     color: white;
+    padding-left: var(--udexGridMargins);
+    padding-right: var(--udexGridMargins);
+}
+
+/* XL */
+@media (width >= 1600px) {
+    .title-banner {
+        padding-left: calc((100% - 1432px)/2);
+        padding-right: calc((100% - 1432px)/2);
+    }
 }
 
 .title-banner.author {
@@ -13,7 +22,9 @@
 }
 
 .title-banner  h1 {
-    padding: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    padding-left: 0;
     font-size: var(--udexTypographyHeadingRegularXSFontSize);
     font-family: var(--udexTypographyHeadingRegularXSFontFamily);
     font-weight: var(--udexTypographyHeadingRegularXSFontWeight);
@@ -24,4 +35,14 @@
     display: block;
     margin-top: 20px;
     font-weight: 700;
+}
+
+/* full width, ignore grid */
+div.section .title-banner-wrapper {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
 }
