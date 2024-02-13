@@ -3,8 +3,8 @@ Please always provide the [GitHub issue(s)](../issues) your PR is for, as well a
 Fix #<gh-issue-id>
 
 Test URLs:
-- Before: https://main--hlx-test--urfuwo.hlx.live/blog/2023/11/supply-chain-issues-keeping-ceos-up-at-night
-- After: https://--hlx-test--urfuwo.hlx.live/blog/2023/11/supply-chain-issues-keeping-ceos-up-at-night
+- Before: https://main--hlx-test--urfuwo.hlx.live/
+- After: https://<branch>--hlx-test--urfuwo.hlx.live/
 
 - [ ] New Blocks introduced in this PR
       If yes, please provide details below
