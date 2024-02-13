@@ -6,7 +6,7 @@ import {
 } from '../../scripts/dom-builder.js';
 import ffetch from '../../scripts/ffetch.js';
 
-const ARTICLE_INDEX = '/blog/articles-index.json';
+const ARTICLE_INDEX = '/articles-index.json';
 
 const ARTICLE_FORMATTER = new Intl.DateTimeFormat('default', {
   year: 'numeric',
@@ -26,7 +26,7 @@ function renderCard(card) {
     ),
     span(
       { class: 'cardcontent' },
-      span({ class: 'template' }, card.template.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())),
+      span({ class: 'template' }, card['content-type'].replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())),
       (card['hot-story'] ? span({ class: 'hot' }, 'Hot Story') : ''),
       span(
         { class: 'title' },
