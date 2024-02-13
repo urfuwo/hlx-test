@@ -3,8 +3,8 @@ Please always provide the [GitHub issue(s)](../issues) your PR is for, as well a
 Fix #<gh-issue-id>
 
 Test URLs:
-- Before: https://main--hlx-test--urfuwo.hlx.live/blog/2023/11/supply-chain-issues-keeping-ceos-up-at-night
-- After: https://--hlx-test--urfuwo.hlx.live/blog/2023/11/supply-chain-issues-keeping-ceos-up-at-night
+- Before: https://main--hlx-test--urfuwo.hlx.live/blog/2023/11/idc-marketscape-sap-a-leader-cloud-enabled-sourcing-applications
+- After: https://--hlx-test--urfuwo.hlx.live/blog/2023/11/idc-marketscape-sap-a-leader-cloud-enabled-sourcing-applications
 
 - [ ] New Blocks introduced in this PR
       If yes, please provide details below
