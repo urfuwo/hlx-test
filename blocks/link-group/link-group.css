@@ -41,7 +41,7 @@
 }
 
 .block.link-group.active .icon-slim-arrow-right {
-  transform: rotate(90deg);
+  transform: rotate(-90deg);
 }
 
 .block.link-group strong {
