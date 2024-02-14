@@ -1,0 +1,168 @@
+<html lang="en">
+    <head>
+        <style>
+            :root {
+                --udexGridXSGutters: 16px;
+                --udexGridXSMargins: 24px;
+                --udexGridSGutters: 32px;
+                --udexGridSMargins: 48px;
+                --udexGridMGutters: 48px;
+                --udexGridMMargins: 72px;
+                --udexGridLGutters: 48px;
+                --udexGridLMargins: 72px;
+                --udexGridXLGutters: 48px;
+                --udexGridXLMargins: 84px;
+
+                /* Margin and gutters */
+                --udexGridGutters: var(--udexGridXSGutters);
+                --udexGridMargins: var(--udexGridXSMargins);
+            }
+
+            /* S */
+            @media (width >= 640px) {
+                :root {
+                    --udexGridGutters: var(--udexGridSGutters);
+                    --udexGridMargins: var(--udexGridSMargins);
+                }
+            }
+
+            /* M */
+            @media (width >= 980px) {
+                :root {
+                    --udexGridGutters: var(--udexGridMGutters);
+                    --udexGridMargins: var(--udexGridMMargins);
+                }
+            }
+
+            /* L */
+            @media (width >= 1280px) {
+                :root {
+                    --udexGridGutters: var(--udexGridLGutters);
+                    --udexGridMargins: var(--udexGridLMargins);
+                }
+            }
+
+            /* XL */
+            @media (width >= 1600px) {
+                :root {
+                    --udexGridGutters: var(--udexGridXLGutters);
+                    --udexGridMargins: var(--udexGridXLMargins);
+                }
+            }
+
+            body {
+                margin: 0;
+                display: grid;
+                grid-template-columns: 3fr 6fr 3fr;
+                grid-template-rows: 60px auto auto auto auto;
+                grid-template-areas:
+                    'header header header'
+                    'sidenav hero hero'
+                    'sidenav textbody rightcolumn'
+                    'relatedcontent relatedcontent relatedcontent'
+                    'footer footer footer';
+                grid-area: content;
+                column-gap: var(--udexGridGutters);
+            }
+            main {
+                display: contents;
+            }
+            div.section {
+                display: contents;
+            }
+            header {
+                display: contents;
+            }
+            div.header {
+                grid-area: header;
+                background-color: yellow;
+            }
+            div.sidenav {
+                grid-area: sidenav;
+                background-color: lightgreen;
+            }
+            div.textbody {
+                grid-area: textbody;
+                background-color: lightcoral;
+            }
+            div.hero {
+                grid-area: hero;
+                background-color: lightblue;
+            }
+            div.relatedcontent {
+                grid-area: relatedcontent;
+                background-color: lightskyblue;
+            }
+            footer {
+                grid-area: footer;
+                background-color: yellow;
+            }
+            div.rightcolumn {
+                grid-area: rightcolumn;
+                background-color: orange;
+            }
+
+            @media (width >= 1600px) {
+                body {
+                    grid-template-columns:
+                     /* 100% - 1600px - 2*gutter */
+                     calc((100% - 1600px - var(--udexGridGutters)*2) / 2)
+                     3fr 6fr 3fr
+                     /* 100% - 1600px - 2*gutter */
+                     calc((100% - 1600px - var(--udexGridGutters)*2) / 2);
+                    grid-template-areas:
+                    'header header header header header'
+                    '. sidenav hero hero hero'
+                    '. sidenav textbody rightcolumn .'
+                    '. relatedcontent relatedcontent relatedcontent .'
+                    'footer footer footer footer footer';
+                }
+            }
+
+            @media (width >= 640px) {
+                div.header {
+                    background-color: #ffdd00;
+                }
+            }
+
+            /* M */
+            @media (width >= 980px) {
+                div.header {
+                    background-color: #ffbb00;
+                }
+            }
+
+            /* L */
+            @media (width >= 1280px) {
+                div.header {
+                    background-color: #ff8800;
+                }
+            }
+
+            /* XL */
+            @media (width >= 1600px) {
+                div.header {
+                    background-color: #ff5500;
+                }
+            }
+        </style>
+        <title>L2 Grid Test</title>
+    </head>
+    <body>
+        <header>
+            <div class="header"><span># Header area. It shall cover the entire width. Header header header header header header header header header header header header header header header</span></div>
+            <div class="sidenav"><span># Sidenav</span></div>
+        </header>
+        <main>
+            <div class="section primary-stuff">
+                <div class="hero"><span># Hero area</span></div>
+                <div class="textbody"><span># Textbody area</span></div>
+                <div class="rightcolumn"><span># Right Column area</span></div>
+            </div>
+            <div class="section related-content">
+                <div class="relatedcontent"><span># Related Content area</span></div>
+            </div>
+        </main>
+        <footer><span># Footer area. It shall cover the entire width. Footer footer footer footer footer footer footer footer footer footer footer footer footer footer footer</span></footer>
+    </body>
+</html>
