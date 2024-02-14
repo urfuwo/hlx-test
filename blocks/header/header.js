@@ -181,12 +181,8 @@ function createDropMenu(sections) {
   });
 }
 
-/**
- * decorates the header, mainly the nav
- * @param {Element} block The header block element
- */
-export default async function decorate(block) {
-  // load nav as fragment
+async function generateTopNavigation() {
+// load nav as fragment
   const navMeta = getMetadata('nav');
   const navPath = navMeta ? new URL(navMeta).pathname : '/nav';
   const fragment = await loadFragment(navPath);
@@ -208,17 +204,20 @@ export default async function decorate(block) {
     createDropMenu(navSections);
     addSearchBar(navSections);
   }
-
   nav.setAttribute('aria-expanded', 'false');
   nav.append(getNavBar(nav));
   const actionBar = getActionBar(nav, navSections);
   nav.append(actionBar);
-  block.append(nav);
+  return nav;
+}
 
+async function generateSideNavigation() {
+  const template = getMetadata('template');
+  if (template !== 'article') return null;
   const sideNavMeta = getMetadata('sideNav');
   const sideNavPath = sideNavMeta ? new URL(sideNavMeta).pathname : `/${window.location.pathname.split('/')[1]}/nav`;
   const sideFragment = await loadFragment(sideNavPath);
-  if (!sideFragment) return;
+  if (!sideFragment) return null;
   const sideNav = document.createElement('aside');
   sideNav.id = 'sideNav';
   while (sideFragment.firstElementChild) sideNav.append(sideFragment.firstElementChild);
@@ -237,11 +236,22 @@ export default async function decorate(block) {
     toggleAllNavSections(sideNav);
     sideNav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
   });
+  return sideNav;
+}
 
+/**
+ * decorates the header, mainly the nav
+ * @param {Element} block The header block element
+ */
+export default async function decorate(block) {
+  const nav = await generateTopNavigation();
+  if (nav) block.append(nav);
   document.addEventListener('click', (event) => {
     if (event.target.classList.contains('nav-drop') || event.target.tagName === 'IMG') return;
     toggleAllNavSections(nav);
     nav.setAttribute('aria-expanded', 'false');
   });
-  block.append(sideNav);
+
+  const sideNav = await generateSideNavigation();
+  if (sideNav) block.append(sideNav);
 }

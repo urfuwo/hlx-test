@@ -5,11 +5,14 @@ main .hero-container > div {
 /* XL: full width, ignore grid */
 @media (width >= 1600px) {
   main .hero-container > .hero-wrapper {
-    width: 100vw;
+    /* TODO: workaround for sidenav iteration, to be changed with grid implementation */
+    width: calc(100% - 175px);
     position: relative;
     left: 50%;
     right: 50%;
-    margin-left: -50vw;
+
+    /* TODO: workaround for sidenav iteration, to be changed with grid implementation */
+    margin-left: calc(-50vw + 275px);
     margin-right: -50vw;
   }
 }

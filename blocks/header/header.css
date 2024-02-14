@@ -31,7 +31,8 @@ header {
   }
 }
 
-header :is(a, .text) {
+header nav :is(a, .text),
+header aside :is(a, .text) {
   font-family: var(--navlinks-font-family);
   font-weight: var(--nav-links-font-weight);
   color: var(--nav-text-color);
@@ -502,7 +503,6 @@ header nav .nav-explore {
   background-color: var(--udexColorBlue7);
   height: 3.938rem;
   width: 100%;
-  padding: 0 var(--udexSpacer24);
 }
 
 @media (width < 980px) {

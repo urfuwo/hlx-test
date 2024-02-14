@@ -144,12 +144,6 @@ pre {
   overflow: scroll;
 }
 
-@media (width >= 980px) {
-  main {
-    margin-left: 260px;
-  }
-}
-
 /* missing styles, assumption */
 main pre {
   padding: 1em;

@@ -19,4 +19,16 @@
         width: 755px; /* Option A */
         max-width: 755px;  /* Option A */
     }
+
+    .article main div.section {
+        /* TODO: this is temporary until the grid is implemented */
+        margin-left: 270px;
+    }
+}
+
+@media (width >= 1600px) {
+  .article main div.section {
+    /* TODO: this is temporary until the grid is implemented */
+    margin-left: 360px;
+  }
 }
