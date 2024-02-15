@@ -6,13 +6,13 @@ main .hero-container > div {
 @media (width >= 1600px) {
   main .hero-container > .hero-wrapper {
     /* TODO: workaround for sidenav iteration, to be changed with grid implementation */
-    width: calc(100% - 175px);
+    width: 100%;
     position: relative;
     left: 50%;
     right: 50%;
 
     /* TODO: workaround for sidenav iteration, to be changed with grid implementation */
-    margin-left: calc(-50vw + 275px);
+    margin-left: calc(-50vw + 375px);
     margin-right: -50vw;
   }
 }
