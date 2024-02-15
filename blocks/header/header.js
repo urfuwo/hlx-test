@@ -247,7 +247,7 @@ export default async function decorate(block) {
   const nav = await generateTopNavigation();
   if (nav) block.append(nav);
   document.addEventListener('click', (event) => {
-    if (event.target.classList.contains('nav-drop') || event.target.tagName === 'IMG') return;
+    if (nav.contains(event.target)) return;
     toggleAllNavSections(nav);
     nav.setAttribute('aria-expanded', 'false');
   });
