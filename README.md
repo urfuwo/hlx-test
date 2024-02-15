@@ -75,9 +75,9 @@ export default async function decorate(block) {
 ...
 ```
 
-What is left is to run the build using `npm run build` (notice that the output in [dist](dist) needs to be commited as well). This is only necessary if a new entry-point has been added.
+What is left is to run the build using `npm run build` (notice that the output in [dist](dist) needs to be commited as well and that it is required to have run `npm install` to have all required dependencies installed). This is only necessary if a new entry-point has been added.
 
-Finally, when a new update of the UDEX library is pushed to the CDN, it can be incorporated by updating the link in the [package.json](package.json) 
+Finally, when a new update of the UDEX library is pushed to the CDN, it can be incorporated by updating the link in the [package.json](package.json)
 
 ```
   "dependencies": {
@@ -85,4 +85,4 @@ Finally, when a new update of the UDEX library is pushed to the CDN, it can be i
   }
 ```
 
-pointing it to the new release and running `npm run build`.
+pointing it to the new release and running `npm run build`. For now, the process of updates is manual - i.e., the UDEX team needs to make a new version available on the CDN and then, the url can be updated after this is communicated OOB.
