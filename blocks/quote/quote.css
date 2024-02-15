@@ -1,0 +1,85 @@
+.quote .row {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+}
+
+.quote .row:first-of-type {
+    padding-bottom: var(--udexSpacer24);
+}
+
+.quote .row:nth-of-type(2) {
+    padding-bottom: var(--udexSpacer40);
+}
+
+.quote .row .block {
+    box-sizing: border-box;
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.quote .row .block.qmcolumn {
+    /* fixed-width element within flexbox */
+    flex: 0 0 1.75rem;
+
+    /* DT: Quote/Size/Mark/S, but no height */
+    width: 1.75rem;
+}
+
+.quote .row .block.content {
+    /* DT: Spacer8hor left and right */
+    padding-left: 8px;
+    padding-right: 8px;
+    justify-content: left;
+    color: var(--udexColorGrey8);
+}
+
+.quote .row .closing-quotationmark,
+.quote .row .opening-quotationmark {
+    font-family: var(--udexTypographyDisplayRegularMFontFamily);
+    font-size: var(--udexTypographyDisplayRegularMFontSize);
+    font-weight: var(--udexTypographyDisplayRegularMFontWeight);
+
+    /* line height: 72px, no variable mapping found */
+    line-height: 72px;
+    align-items: flex-start;
+    color: var(--udexColorGrey8);
+}
+
+.quote .row .opening-quotationmark::before {
+    content: '“';
+}
+
+.quote .row .closing-quotationmark::before {
+    content: '”';
+}
+
+.quote .row:first-of-type .content {
+    font-size: var(--udexTypographyBodySFontSize);
+    font-family: var(--udexTypographyBodySFontFamily);
+    font-weight: var(--udexTypographyBodySFontWeight);
+    line-height: var(--udexTypographyBodySLineHeight);
+}
+
+.quote .row:nth-of-type(2) .content {
+    font-size: var(--udexTypographyNavigationRegularMFontFamily);
+    font-family: var(--udexTypographyNavigationRegularMFontFamily);
+    font-weight: var(--udexTypographyNavigationRegularMFontWeight);
+    line-height: var(--udexTypographyNavigationRegularMLineHeight);
+}
+
+/* vertically align quotation marks with quote text */
+.quote .row:first-of-type .content div {
+    margin-top: 8px;
+}
+
+.quote .row .content div p {
+    margin-top: 0;
+}
+
+.quote .row .content p:last-of-type {
+    margin-bottom: 0;
+}
