@@ -31,14 +31,14 @@ export default async function decorate(block) {
         ' •',
       ),
       span(
-        { class: ['media-bleand__date'] },
+        { class: ['media-blend__date'] },
         formatDate(getMetadata('article:published_time')),
-        ' •',
+        getMetadata('article:read_time') ? ' •' : '',
       ),
-      span(
+      getMetadata('article:read_time') ? span(
         { class: ['media-blend__read-time'] },
         getMetadata('article:read_time'),
-      ),
+      ) : '',
     ),
   );
   hero.appendChild(contentSlot);
