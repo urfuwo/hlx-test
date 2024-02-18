@@ -53,16 +53,16 @@
             body {
                 margin: 0;
                 display: grid;
-                grid-template-columns: 3fr 6fr 3fr;
+                grid-template-columns:
+                     1fr;
                 grid-template-rows: 60px 40px auto auto auto auto;
                 grid-template-areas:
-                    'header header header'
-                    'sidenav sidenav sidenav'
-                    'hero hero hero'
-                    'textbody textbody textbody'
-                    'relatedcontent relatedcontent relatedcontent'
-                    'footer footer footer';
-                grid-area: content;
+                    'header'
+                    'sidenav'
+                    'hero'
+                    'widebody'
+                    'relatedcontent'
+                    'footer';
                 column-gap: var(--udexGridGutters);
             }
             main {
@@ -82,10 +82,41 @@
                 grid-area: sidenav;
                 background-color: lightgreen;
             }
-            div.textbody {
-                grid-area: textbody;
-                background-color: lightcoral;
+
+            div.widebody {
+                grid-area: widebody;
+                background-color: white;
             }
+
+            div.widebodyrow {
+                background-color: lightcyan;
+                min-height: 50px;
+                padding-left: var(--udexGridMargins);
+                padding-right: var(--udexGridMargins);
+            }
+            @media (width >= 980px) {
+                div.widebodyrow {
+                    padding-left: var(--udexGridGutters);
+                }
+            }
+
+            div.narrowbodyrow {
+                background-color: lightgrey;
+                min-height: 50px;
+                margin-left: var(--udexGridMargins);
+                margin-right: var(--udexGridMargins);
+            }
+            @media (width >= 980px) {
+                div.narrowbodyrow {
+                    margin-left: var(--udexGridGutters);
+                }
+            }
+            @media (width >= 1600px) {
+                div.narrowbodyrow {
+                    margin-right: max(var(--udexGridLMargins), calc((100vw - 1600px)/2));
+                }
+            }
+
             div.hero {
                 grid-area: hero;
                 background-color: lightblue;
@@ -93,42 +124,51 @@
             div.relatedcontent {
                 grid-area: relatedcontent;
                 background-color: lightskyblue;
+                margin-left: var(--udexGridMargins);
+                margin-right: var(--udexGridMargins);
             }
+            @media (width >= 980px) {
+                div.relatedcontent {
+                    margin: 0;
+                }
+            }
+
             footer {
                 grid-area: footer;
                 background-color: yellow;
             }
 
+            /* M */
             @media (width >= 980px) {
                 body {
-                margin: 0;
-                display: grid;
-                grid-template-columns: 3fr 6fr 3fr;
-                grid-template-rows: 60px auto auto auto auto;
-                grid-template-areas:
-                    'header header header'
-                    'sidenav hero hero'
-                    'sidenav textbody textbody'
-                    'relatedcontent relatedcontent relatedcontent'
-                    'footer footer footer';
-                grid-area: content;
-                column-gap: var(--udexGridGutters);
+                    margin: 0;
+                    display: grid;
+                    grid-template-columns:
+                        var(--udexGridMargins)
+                        253px
+                        var(--udexGridGutters)
+                        1fr
+                        var(--udexGridMargins);
+                    grid-template-rows: 60px auto auto auto;
+                    grid-template-areas:
+                        'header header header header header'
+                        '. sidenav hero hero hero'
+                        '. sidenav widebody widebody widebody'
+                        '. sidenav . relatedcontent .'
+                        'footer footer footer footer footer';
+                    column-gap: 0;
+                }
             }
 
+            /* XL */
             @media (width >= 1600px) {
                 body {
                     grid-template-columns:
-                     /* 100% - 1600px - 2*gutter */
-                     calc((100% - 1600px - var(--udexGridGutters)*2) / 2)
-                     3fr 6fr 3fr
-                     /* 100% - 1600px - 2*gutter */
-                     calc((100% - 1600px - var(--udexGridGutters)*2) / 2);
-                    grid-template-areas:
-                    'header header header header header'
-                    '. sidenav hero hero hero'
-                    '. sidenav textbody textbody .'
-                    '. relatedcontent relatedcontent relatedcontent .'
-                    'footer footer footer footer footer';
+                     minmax(var(--udexGridLMargins), calc((100% - 1600px)/2))
+                     253px
+                     var(--udexGridGutters)
+                     1fr
+                     minmax(var(--udexGridLMargins), calc((100% - 1600px)/2));
                 }
             }
 
@@ -169,7 +209,13 @@
         <main>
             <div class="section primary-stuff">
                 <div class="hero"><span># Hero area</span></div>
-                <div class="textbody"><span># Textbody area</span></div>
+                <div class="widebody">
+                    <div class="narrowbodyrow"><span># Narrow body row. Narrow body row. Narrow body row. Narrow body row. Narrow body row. Narrow body row</span></div>
+                    <div class="widebodyrow"><span># Wide body row. Wide body row. Wide body row. Wide body row. Wide body row. Wide body row. Wide body row.</span></div>
+                    <div class="narrowbodyrow"><span># Narrow body row. Narrow body row. Narrow body row. Narrow body row. Narrow body row. Narrow body row</span></div>
+                    <div class="widebodyrow"><span># Wide body row. Wide body row. Wide body row. Wide body row. Wide body row. Wide body row. Wide body row.</span></div>
+                    <div class="narrowbodyrow"><span># Narrow body row. Narrow body row. Narrow body row. Narrow body row. Narrow body row. Narrow body row</span></div>
+                </div>
             </div>
             <div class="section related-content">
                 <div class="relatedcontent"><span># Related Content area</span></div>
