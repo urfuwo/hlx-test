@@ -53,14 +53,17 @@
             body {
                 margin: 0;
                 display: grid;
-                grid-template-columns: 3fr 6fr 3fr;
+                grid-template-columns:
+                    calc(var(--udexGridMargins) - var(--udexGridGutters))
+                    3fr 6fr 3fr
+                    calc(var(--udexGridMargins) - var(--udexGridGutters));
                 grid-template-rows: 60px auto auto auto auto;
                 grid-template-areas:
-                    'header header header'
-                    'hero hero hero'
-                    'pagenav textbody rightcolumn'
-                    'relatedcontent relatedcontent relatedcontent'
-                    'footer footer footer';
+                    'header header header header header'
+                    'hero hero hero hero hero'
+                    '. pagenav textbody rightcolumn .'
+                    '. relatedcontent relatedcontent relatedcontent .'
+                    'footer footer footer footer footer';
                 grid-area: content;
                 column-gap: var(--udexGridGutters);
             }
@@ -105,11 +108,9 @@
             @media (width >= 1600px) {
                 body {
                     grid-template-columns:
-                     /* 100% - 1600px - 2*gutter */
-                     calc((100% - 1600px - var(--udexGridGutters)*2) / 2)
+                     max(calc(var(--udexGridLMargins)/2), calc((100% - 1600px - var(--udexGridGutters)*2) / 2))
                      3fr 6fr 3fr
-                     /* 100% - 1600px - 2*gutter */
-                     calc((100% - 1600px - var(--udexGridGutters)*2) / 2);
+                     max(calc(var(--udexGridLMargins)/2), calc((100% - 1600px - var(--udexGridGutters)*2) / 2));
                     grid-template-areas:
                     'header header header header header'
                     'hero hero hero hero hero'
