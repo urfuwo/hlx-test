@@ -54,11 +54,12 @@
                 margin: 0;
                 display: grid;
                 grid-template-columns: 3fr 6fr 3fr;
-                grid-template-rows: 60px auto auto auto auto;
+                grid-template-rows: 60px 40px auto auto auto auto;
                 grid-template-areas:
                     'header header header'
-                    'sidenav hero hero'
-                    'sidenav textbody rightcolumn'
+                    'sidenav sidenav sidenav'
+                    'hero hero hero'
+                    'textbody textbody textbody'
                     'relatedcontent relatedcontent relatedcontent'
                     'footer footer footer';
                 grid-area: content;
@@ -97,9 +98,21 @@
                 grid-area: footer;
                 background-color: yellow;
             }
-            div.rightcolumn {
-                grid-area: rightcolumn;
-                background-color: orange;
+
+            @media (width >= 980px) {
+                body {
+                margin: 0;
+                display: grid;
+                grid-template-columns: 3fr 6fr 3fr;
+                grid-template-rows: 60px auto auto auto auto;
+                grid-template-areas:
+                    'header header header'
+                    'sidenav hero hero'
+                    'sidenav textbody textbody'
+                    'relatedcontent relatedcontent relatedcontent'
+                    'footer footer footer';
+                grid-area: content;
+                column-gap: var(--udexGridGutters);
             }
 
             @media (width >= 1600px) {
@@ -113,7 +126,7 @@
                     grid-template-areas:
                     'header header header header header'
                     '. sidenav hero hero hero'
-                    '. sidenav textbody rightcolumn .'
+                    '. sidenav textbody textbody .'
                     '. relatedcontent relatedcontent relatedcontent .'
                     'footer footer footer footer footer';
                 }
@@ -157,7 +170,6 @@
             <div class="section primary-stuff">
                 <div class="hero"><span># Hero area</span></div>
                 <div class="textbody"><span># Textbody area</span></div>
-                <div class="rightcolumn"><span># Right Column area</span></div>
             </div>
             <div class="section related-content">
                 <div class="relatedcontent"><span># Related Content area</span></div>
