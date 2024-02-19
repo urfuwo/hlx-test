@@ -4,19 +4,85 @@
 
 /* Blog paragraph spacing */
 .article p {
-    margin-top: 18px; /* no design, assumption */
-    margin-bottom: 18px; /* no design, assumption */
+  margin-top: 18px; /* no design, assumption */
+  margin-bottom: 18px; /* no design, assumption */
 }
 
 /* Highlight first paragraph of blog pages using increased font size */
-.article main > div:first-child > div.default-content-wrapper:nth-child(2) > p:first-child {
-    font-size: var(--udexTypographyBodyLFontSize); /* no design, assumption */
+.article
+  main
+  > div:first-child
+  > div.default-content-wrapper:nth-child(2)
+  > p:first-child {
+  font-size: var(--udexTypographyBodyLFontSize); /* no design, assumption */
 }
 
 /* Desktop view (--udexGridMMinWidth) */
 @media (width >= 980px) {
-    .article main div.section > div:not(.hero-wrapper, .related-articles-wrapper, .article-cta-banner-wrapper) {
-        width: 755px; /* Option A */
-        max-width: 755px;  /* Option A */
-    }
+  .article
+    main
+    div.section
+    > div:not(
+      .hero-wrapper,
+      .related-articles-wrapper,
+      .article-cta-banner-wrapper
+    ) {
+    width: 755px; /* Option A */
+    max-width: 755px; /* Option A */
+  }
+
+  .article main div.section {
+    /* TODO: this is temporary until the grid is implemented */
+    /* margin-left: 270px; */
+  }
+}
+
+.article.appear {
+  display: grid;
+  /* grid-template-columns: 3fr 6fr 3fr; */
+  grid-template-areas:
+    'header'
+    'sidenav'
+    'main'
+    'info'
+    'footer';
+  column-gap: var(--udexGridGutters);
+}
+
+@media (width >= 980px) {
+  .article.appear {
+    grid-template-columns: 3fr 6fr 3fr;
+    grid-template-areas:
+      'header header header'
+      'sidenav main .'
+      'info info info'
+      'footer footer footer';
+    column-gap: var(--udexGridGutters);
+  }
+}
+
+header nav {
+  grid-area: header;
+}
+
+header aside {
+  grid-area: sidenav;
+}
+
+footer {
+  grid-area: footer;
+}
+
+header,
+main,
+div.header.block {
+  display: contents;
+}
+
+main > .hero-container {
+  grid-area: main;
+}
+
+main > .related-articles-container {
+  grid-area: info;
 }

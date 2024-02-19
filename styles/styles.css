@@ -68,6 +68,12 @@ body {
   display: none;
 }
 
+@media (width < 980px) {
+  body {
+    overflow-x: hidden;
+  }
+}
+
 body.appear {
   display: block;
 }
