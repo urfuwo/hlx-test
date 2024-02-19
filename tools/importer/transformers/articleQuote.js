@@ -18,6 +18,8 @@ function cleanQuoteSource(qSource) {
   let qS = qSource.replace(/[\n\t]/gm, '').replaceAll(/<br>/g, ' ');
   /* remove <cite> elements */
   qS = qS.replace(/<cite>(.*)<\/cite>/gm, '$1');
+  /* wrap entire quote source with a p and a span */
+  qS = `<p><span>${qS}</span></p>`;
   return qS;
 }
 
