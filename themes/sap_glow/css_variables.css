@@ -803,7 +803,7 @@
   --sapTitleColor: hsla(210.909, 36.264%, 17.843%, 1);
   --sapTextColor: hsla(210.909, 36.264%, 17.843%, 1);
   --sapFontSize: 0.875rem;
-  --sapFontFamily: "72", "72full", Arial, Helvetica, sans-serif;
+  --sapFontFamily: "72 Brand Variable", "Arial", "Helvetica", "sans-serif";
   --sapContent_Illustrative_Color20: hsla(201.031, 100%, 80.98%, 1);
   --sapContent_Illustrative_Color19: hsla(201.127, 100%, 86.078%, 1);
   --sapContent_Illustrative_Color18: hsla(200.87, 100%, 90.98%, 1);
