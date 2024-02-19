@@ -1,8 +1,160 @@
-/* variable version */
 @font-face {
   font-family: "72 Brand";
   src: url("../fonts/72BrandVariable_Th-Blk.woff2") format("woff2-variations"),
     url("../fonts/72BrandVariable_Th-Blk.woff") format("woff-variations");
   font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "72";
+  src: url("../fonts/WOFF2/W05-full/72-Black-full.woff2") format("woff2"),
+    url("../fonts/WOFF/W05-full/72-Black-full.woff") format("woff");
+  font-weight: 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "72";
+  src: url("../fonts/WOFF2/W05-full/72-Bold-full.woff2") format("woff2"),
+    url("../fonts/WOFF/W05-full/72-Bold-full.woff") format("woff");
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "72";
+  src: url("../fonts/WOFF2/W05-full/72-ExtraBold-full.woff2") format("woff2"),
+    url("../fonts/WOFF/W05-full/72-ExtraBold-full.woff") format("woff");
+  font-weight: 800;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "72";
+  src: url("../fonts/WOFF2/W05-full/72-ExtraLight-full.woff2") format("woff2"),
+    url("../fonts/WOFF/W05-full/72-ExtraLight-full.woff") format("woff");
+  font-weight: 200;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "72";
+  src: url("../fonts/WOFF2/W05-full/72-Light-full.woff2") format("woff2"),
+    url("../fonts/WOFF/W05-full/72-Light-full.woff") format("woff");
+  font-weight: 300;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "72";
+  src: url("../fonts/WOFF2/W05-full/72-Medium-full.woff2") format("woff2"),
+    url("../fonts/WOFF/W05-full/72-Medium-full.woff") format("woff");
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "72";
+  src: url("../fonts/WOFF2/W05-full/72-Regular-full.woff2") format("woff2"),
+    url("../fonts/WOFF/W05-full/72-Regular-full.woff") format("woff");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "72";
+  src: url("../fonts/WOFF2/W05-full/72-Thin-full.woff2") format("woff2"),
+    url("../fonts/WOFF/W05-full/72-Thin-full.woff") format("woff");
+  font-weight: 100;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "72";
+  src: url("../fonts/WOFF2/W05-full/72-BlackItalic-full.woff2") format("woff2"),
+    url("../fonts/WOFF/W05-full/72-BlackItalic-full.woff") format("woff");
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "72";
+  src: url("../fonts/WOFF2/W05-full/72-BoldItalic-full.woff2") format("woff2"),
+    url("../fonts/WOFF/W05-full/72-BoldItalic-full.woff") format("woff");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "72";
+  src: url("../fonts/WOFF2/W05-full/72-ExtraBoldItalic-full.woff2") format("woff2"),
+    url("../fonts/WOFF/W05-full/72-ExtraBoldItalic-full.woff") format("woff");
+  font-weight: 800;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "72";
+  src: url("../fonts/WOFF2/W05-full/72-ExtraLightItalic-full.woff2") format("woff2"),
+    url("../fonts/WOFF/W05-full/72-ExtraLightItalic-full.woff") format("woff");
+  font-weight: 200;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "72";
+  src: url("../fonts/WOFF2/W05-full/72-LightItalic-full.woff2") format("woff2"),
+    url("../fonts/WOFF/W05-full/72-LightItalic-full.woff") format("woff");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "72";
+  src: url("../fonts/WOFF2/W05-full/72-MediumItalic-full.woff2") format("woff2"),
+    url("../fonts/WOFF/W05-full/72-MediumItalic-full.woff") format("woff");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "72";
+  src: url("../fonts/WOFF2/W05-full/72-RegularItalic-full.woff2") format("woff2"),
+    url("../fonts/WOFF/W05-full/72-RegularItalic-full.woff") format("woff");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "72";
+  src: url("../fonts/WOFF2/W05-full/72-ThinItalic-full.woff2") format("woff2"),
+    url("../fonts/WOFF/W05-full/72-ThinItalic-full.woff") format("woff");
+  font-weight: 100;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "72";
+  src: url("../fonts/WOFF2/W05-full/72-Condensed-full.woff2") format("woff2"),
+    url("../fonts/WOFF/W05-full/72-Condensed-full.woff") format("woff");
+  font-stretch: condensed;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "72";
+  src: url("../fonts/WOFF2/W05-full/72-CondensedBold-full.woff2") format("woff2"),
+    url("../fonts/WOFF/W05-full/72-CondensedBold-full.woff") format("woff");
+  font-stretch: condensed;
+  font-weight: 700;
   font-display: swap;
 }
