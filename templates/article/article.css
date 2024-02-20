@@ -38,6 +38,6 @@ main {
   }
 
   & .related-articles-container {
-    grid-area: info;
+    margin-inline: var(--udexGridMargins);
   }
 }
