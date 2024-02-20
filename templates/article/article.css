@@ -39,10 +39,11 @@
 
 .article.appear {
   display: grid;
-  /* grid-template-columns: 3fr 6fr 3fr; */
+  grid-template-columns: 1fr;
   grid-template-areas:
     'header'
     'sidenav'
+    'hero'
     'main'
     'info'
     'footer';
@@ -54,6 +55,7 @@
     grid-template-columns: 3fr 6fr 3fr;
     grid-template-areas:
       'header header header'
+      'hero hero hero'
       'sidenav main .'
       'info info info'
       'footer footer footer';
@@ -79,10 +81,24 @@ div.header.block {
   display: contents;
 }
 
-main > .hero-container {
+main div.section {
+  display: contents;
+}
+
+main div.section div.hero-wrapper {
+  grid-area: hero;
+}
+
+main div.section.related-articles-container {
+  display: block;
+  grid-area: info;
+}
+
+main div.body-grid-area {
+  display: block;
   grid-area: main;
 }
 
-main > .related-articles-container {
+main div.related-content-grid-area {
   grid-area: info;
 }

@@ -146,6 +146,30 @@ async function loadEager(doc) {
 }
 
 /**
+ * The use of CSS Grids makes certain assumptions that require a (per-template) DOM restructuring
+ * This change will be superseded by GH #116
+ * See templates/<template>/cssgrid.js
+ * @param main
+ * @returns {Promise<void>}
+ */
+async function restructureForCSSGrid(main) {
+  try {
+    const template = toClassName(getMetadata('template'));
+    const templates = Object.keys(TEMPLATE_LIST);
+    if (templates.includes(template)) {
+      const templateName = TEMPLATE_LIST[template];
+      const mod = await import(`../templates/${templateName}/cssgrid.js`);
+      if (mod.default) {
+        await mod.default(main);
+      }
+    }
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('Template CSS Grid decoration failed', error);
+  }
+}
+
+/**
  * Loads everything that doesn't need to be delayed.
  * @param {Element} doc The container element
  */
@@ -159,6 +183,8 @@ async function loadLazy(doc) {
 
   loadHeader(doc.querySelector('header'));
   loadFooter(doc.querySelector('footer'));
+
+  restructureForCSSGrid(main);
 
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
   loadFonts();
