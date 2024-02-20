@@ -8,3 +8,9 @@
   font-stretch: normal;
   font-display: swap;
 }
+
+@font-face {
+  font-family: "72 Brand Variable Fallback";
+  size-adjust: 98.129%;
+  src: local("Arial");
+}
