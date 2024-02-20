@@ -219,8 +219,3 @@ main img {
 main .section {
   padding-bottom: 56px;
 }
-
-main .section > div {
-  margin-left: var(--udexGridMargins);
-  margin-right: var(--udexGridMargins);
-}

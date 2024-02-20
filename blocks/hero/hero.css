@@ -7,13 +7,6 @@ main .hero-container > div {
   main .hero-container > .hero-wrapper {
     /* TODO: workaround for sidenav iteration, to be changed with grid implementation */
     width: 100%;
-    position: relative;
-    left: 50%;
-    right: 50%;
-
-    /* TODO: workaround for sidenav iteration, to be changed with grid implementation */
-    margin-left: calc(-50vw + 375px);
-    margin-right: -50vw;
   }
 }
 

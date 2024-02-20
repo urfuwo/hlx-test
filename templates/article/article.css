@@ -17,72 +17,27 @@
   font-size: var(--udexTypographyBodyLFontSize); /* no design, assumption */
 }
 
-/* Desktop view (--udexGridMMinWidth) */
-@media (width >= 980px) {
-  .article
-    main
-    div.section
-    > div:not(
-      .hero-wrapper,
-      .related-articles-wrapper,
-      .article-cta-banner-wrapper
-    ) {
-    width: 755px; /* Option A */
-    max-width: 755px; /* Option A */
-  }
-
-  .article main div.section {
-    /* TODO: this is temporary until the grid is implemented */
-    /* margin-left: 270px; */
-  }
-}
-
-.article.appear {
-  display: grid;
-  /* grid-template-columns: 3fr 6fr 3fr; */
-  grid-template-areas:
-    'header'
-    'sidenav'
-    'main'
-    'info'
-    'footer';
-  column-gap: var(--udexGridGutters);
-}
-
-@media (width >= 980px) {
-  .article.appear {
+main {
+  & .section:first-child {
+    display: grid;
     grid-template-columns: 3fr 6fr 3fr;
-    grid-template-areas:
-      'header header header'
-      'sidenav main .'
-      'info info info'
-      'footer footer footer';
     column-gap: var(--udexGridGutters);
+
+    & > .hero-wrapper {
+      grid-column: 1 / 4;
+    }
+
+    &
+      > div:not(
+        .hero-wrapper,
+        .related-articles-wrapper,
+        .article-cta-banner-wrapper
+      ) {
+      grid-column: 2 / span 1;
+    }
   }
-}
 
-header nav {
-  grid-area: header;
-}
-
-header aside {
-  grid-area: sidenav;
-}
-
-footer {
-  grid-area: footer;
-}
-
-header,
-main,
-div.header.block {
-  display: contents;
-}
-
-main > .hero-container {
-  grid-area: main;
-}
-
-main > .related-articles-container {
-  grid-area: info;
+  & .related-articles-container {
+    grid-area: info;
+  }
 }
