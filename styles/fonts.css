@@ -1,8 +1,10 @@
 /* variable version */
 @font-face {
-  font-family: "72 Brand";
+  font-family: "72 Brand Variable";
   src: url("../fonts/72BrandVariable_Th-Blk.woff2") format("woff2-variations"),
     url("../fonts/72BrandVariable_Th-Blk.woff") format("woff-variations");
   font-weight: 100 900;
+  font-style: normal;
+  font-stretch: normal;
   font-display: swap;
 }

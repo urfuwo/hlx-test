@@ -8,6 +8,43 @@
  * Heading/Medium: per-element
  * Heading/Regular: default
  */
+
+/* Fall back to Arial for 72 Brand Variable
+ Added to styles.css for early loading */
+
+@font-face {
+  font-family: "72 Brand Variable Fallback";
+  font-style: normal;
+  font-weight: 700;
+  src: local("Arial Bold");
+  ascent-override: 98%;
+  descent-override: 22.94%;
+  line-gap-override: 3.54%;
+  size-adjust: 92.37%;
+}
+
+@font-face {
+  font-family: "72 Brand Variable Fallback";
+  font-style: normal;
+  font-weight: 500;
+  src: local("Arial");
+  ascent-override: 90.58%;
+  descent-override: 21.2%;
+  line-gap-override: 3.27%;
+  size-adjust: 99.94%;
+}
+
+@font-face {
+  font-family: "72 Brand Variable Fallback";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Arial");
+  ascent-override: 90.58%;
+  descent-override: 21.2%;
+  line-gap-override: 3.27%;
+  size-adjust: 99.94%;
+}
+
 :root {
   /* default colors */
   --background-color: var(--udexColorNeutralWhite);
