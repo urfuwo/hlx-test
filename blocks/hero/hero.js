@@ -47,14 +47,13 @@ export default async function decorate(block) {
   const picture = block.querySelector('picture');
   const img = picture.querySelector('img');
   img.classList.add('custom-background-image');
-  img.setAttribute('loading', 'eager');
 
   const additionalContentSlot = div(
     {
       slot: 'additionalContent',
       class: ['hero-banner', 'media-blend__additional-content'],
     },
-    img,
+    picture,
   );
   hero.appendChild(additionalContentSlot);
 
