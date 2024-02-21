@@ -30,22 +30,10 @@
 }
 
 .quote .row .block.content {
-    /* DT: Spacer8hor left and right */
-    padding-left: 8px;
-    padding-right: 8px;
+    /* DT: Spacer16hor left and right */
+    padding-left: 16px;
+    padding-right: 16px;
     justify-content: left;
-    color: var(--udexColorGrey8);
-}
-
-.quote .row .closing-quotationmark,
-.quote .row .opening-quotationmark {
-    font-family: var(--udexTypographyDisplayRegularMFontFamily);
-    font-size: var(--udexTypographyDisplayRegularMFontSize);
-    font-weight: var(--udexTypographyDisplayRegularMFontWeight);
-
-    /* line height: 72px, no variable mapping found */
-    line-height: 72px;
-    align-items: flex-start;
     color: var(--udexColorGrey8);
 }
 
@@ -55,20 +43,6 @@
 
 .quote .row .closing-quotationmark::before {
     content: '”';
-}
-
-.quote .row:first-of-type .content {
-    font-size: var(--udexTypographyBodySFontSize);
-    font-family: var(--udexTypographyBodySFontFamily);
-    font-weight: var(--udexTypographyBodySFontWeight);
-    line-height: var(--udexTypographyBodySLineHeight);
-}
-
-.quote .row:nth-of-type(2) .content {
-    font-size: var(--udexTypographyNavigationRegularMFontFamily);
-    font-family: var(--udexTypographyNavigationRegularMFontFamily);
-    font-weight: var(--udexTypographyNavigationRegularMFontWeight);
-    line-height: var(--udexTypographyNavigationRegularMLineHeight);
 }
 
 /* vertically align quotation marks with quote text */
@@ -82,4 +56,56 @@
 
 .quote .row .content p:last-of-type {
     margin-bottom: 0;
+}
+
+.quote .row:first-of-type .content {
+    font-size: var(--udexTypographyBodyXLFontSize);
+    font-family: var(--udexTypographyBodyXLFontFamily);
+    font-weight: var(--udexTypographyBodyXLFontWeight);
+    line-height: var(--udexTypographyBodyXLLineHeight);
+}
+
+.quote .row:nth-of-type(2) .content {
+    font-size: var(--udexTypographyHeadingRegularXXSFontSize);
+    font-family: var(--udexTypographyHeadingRegularXXSFontFamily);
+    font-weight: var(--udexTypographyHeadingRegularXXSFontWeight);
+    line-height: var(--udexTypographyHeadingRegularXXSLineHeight);
+}
+
+.quote .row .closing-quotationmark,
+.quote .row .opening-quotationmark {
+    font-family: var(--udexTypographyDisplayRegularLFontFamily);
+    font-size: var(--udexTypographyDisplayRegularLFontSize);
+    font-weight: var(--udexTypographyDisplayRegularLFontWeight);
+    line-height: 84px;
+    align-items: flex-start;
+    color: var(--udexColorGrey8);
+}
+
+.quote.small .row:first-of-type .content {
+    font-size: var(--udexTypographyBodySFontSize);
+    font-family: var(--udexTypographyBodySFontFamily);
+    font-weight: var(--udexTypographyBodySFontWeight);
+    line-height: var(--udexTypographyBodySLineHeight);
+}
+
+.quote.small .row:nth-of-type(2) .content {
+    font-size: var(--udexTypographyNavigationRegularMFontFamily);
+    font-family: var(--udexTypographyNavigationRegularMFontFamily);
+    font-weight: var(--udexTypographyNavigationRegularMFontWeight);
+    line-height: var(--udexTypographyNavigationRegularMLineHeight);
+}
+
+.quote.small .row .closing-quotationmark,
+.quote.small .row .opening-quotationmark {
+    font-family: var(--udexTypographyDisplayRegularMFontFamily);
+    font-size: var(--udexTypographyDisplayRegularMFontSize);
+    font-weight: var(--udexTypographyDisplayRegularMFontWeight);
+    line-height: 72px;
+}
+
+.quote.small .row .block.content {
+    /* DT: Spacer8hor left and right */
+    padding-left: 8px;
+    padding-right: 8px;
 }
