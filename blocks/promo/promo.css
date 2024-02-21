@@ -1,0 +1,97 @@
+/* Promo Block */
+.promo {
+  border-radius: var(--udexRadiusL);
+  margin: var(--udexSpacer40) 0;
+  /* color not available in css vars */
+  background-color: hsla(210, 11%, 96%, 1);
+}
+
+.promo.lightblue {
+  background-color: var(--udexColorBlue1);
+}
+
+.promo>div {
+  display: flex;
+  flex-direction: row;
+  padding: var(--udexSpacer24);
+  gap: var(--udexSpacer24);
+}
+
+.promo>div>div:last-child {
+  flex-grow: 1;
+}
+
+
+.promo img {
+  min-width: 120px;
+}
+
+.promo h4 {
+  font-family: var(--udexTypographyEyebrowLFontFamily);
+  font-size: var(--udexTypographyEyebrowLFontSize);
+  font-weight: var(--udexTypographyEyebrowLFontWeight);
+  line-height: var(--udexTypographyEyebrowLLineHeight);
+  text-align: left;
+  text-transform: uppercase;
+  margin: 0;
+  margin-bottom: var(--udexSpacer8);
+  color: hsla(215, 100%, 41%, 1)
+}
+
+.promo h2 {
+  font-family: var(--udexTypographyHeadingMediumXSFontFamily);
+  font-size: var(--udexTypographyHeadingMediumXSFontSize);
+  font-weight: var(--udexTypographyHeadingMediumXSFontWeight);
+  line-height: var(--udexTypographyHeadingMediumXSLineHeight);
+  text-align: left;
+  margin: 0;
+  margin-bottom: var(--udexSpacer8);
+}
+
+.promo p {
+  font-size: var(--udexTypographyBodySFontSize);
+  font-family: var(--udexTypographyBodySFontFamily);
+  font-weight: var(--udexTypographyBodySFontWeight);
+  line-height: var(--udexTypographyBodySLineHeight);
+  text-align: left;
+  margin: 0;
+}
+
+.promo p.button-container {
+  margin: 0;
+  margin-top: var(--udexSpacer24);
+
+}
+
+.promo .button-container {
+  margin: 0;
+}
+
+.promo .button-container a {
+  margin: 0;
+}
+
+.promo .button-container .button {
+  height: 36px;
+  border-radius: 8px;
+  border: 1px solid;
+  font-family: var(--udexTypographyNavigationMediumXLFontFamily);
+  font-weight: var(--udexTypographyNavigationMediumXLFontWeight);
+  font-size: var(--udexTypographyNavigationMediumXLFontSize);
+  text-align: center;
+
+} 
+
+.promo .button-container .button.primary {
+  /* colors not available in css vars */
+  color: hsla(0, 0%, 100%, 1);
+  border-color: hsla(212, 100%, 47%, 1);
+  background-color: hsla(212, 100%, 47%, 1);
+}
+
+.promo .button-container .button.secondary {
+  /* colors not available in css vars */
+  color: hsla(218, 100%, 35%, 1);
+  border-color: hsla(210, 24%, 37%, 1);
+  background-color: hsla(0, 0%, 100%, 1);
+}
