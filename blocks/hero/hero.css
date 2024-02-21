@@ -1,3 +1,21 @@
+udex-hero-banner .hero-banner {
+  width: 100%;
+  container-type: inline-size;
+}
+
+udex-hero-banner .hero-banner h1 {
+  font-family: var(--sapFontFamily);
+  font-weight: var(--udexTypographyFontWeightRegular);
+  line-height: var(--udexTypographyHeadingLineHeight);
+}
+
+udex-hero-banner .hero-banner p {
+  font-size: var(--udexTypographyBodySFontSize);
+  font-family: var(--sapFontFamily);
+  font-weight: var(--udexTypographyFontWeightRegular);
+  line-height: var(--udexTypographyBodyLineHeight);
+}
+
 /* stylelint-disable selector-class-pattern */
 udex-hero-banner {
   container-type: inline-size;
@@ -6,27 +24,8 @@ udex-hero-banner {
   width: 100%;
 }
 
-.hero-banner {
-  width: 100%;
-  container-type: inline-size;
-}
-
-.hero-banner h1 {
-  font-size: var(--sapFontHeader1Size);
-  font-family: var(--sapFontFamily);
-  font-weight: var(--udexTypographyFontWeightRegular);
-  line-height: var(--udexTypographyHeadingLineHeight);
-}
-
-.hero-banner p {
-  font-size: var(--udexTypographyBodySFontSize);
-  font-family: var(--sapFontFamily);
-  font-weight: var(--udexTypographyFontWeightRegular);
-  line-height: var(--udexTypographyBodyLineHeight);
-}
-
 @container (max-width: 270px) {
-  .hero-banner ui5-button:first-of-type {
+  udex-hero-banner .hero-banner ui5-button:first-of-type {
     margin-bottom: 10px;
   }
 }
@@ -34,25 +33,25 @@ udex-hero-banner {
 /* Showcase */
 
 @container (max-width: 340px) {
-  .hero-banner--showcase .hero-banner__buttons {
+  udex-hero-banner .hero-banner--showcase .hero-banner__buttons {
     margin-bottom: 24rem;
   }
 }
 
 @container (max-width: 230px) {
-  .hero-banner--showcase .hero-banner__buttons {
+  udex-hero-banner .hero-banner--showcase .hero-banner__buttons {
     margin-bottom: 16rem;
   }
 }
 
 /* Additional content */
 
-.hero-banner--additional-content p {
+udex-hero-banner .hero-banner--additional-content p {
   width: 60%;
 }
 
 @container (max-width: 400px) {
-  .hero-banner--additional-content p {
+  udex-hero-banner .hero-banner--additional-content p {
     width: 100%;
     margin-bottom: 10rem;
   }
@@ -60,21 +59,21 @@ udex-hero-banner {
 
 /* Image above CTA */
 
-.hero-banner--image-above-cta {
+udex-hero-banner .hero-banner--image-above-cta {
   background-color: var(--udexColorNeutralWhite);
   padding: 2rem;
   border-bottom: 2px solid var(--sapPrimary2, #fff);
 }
 
 @container hero-wrapper (width < 800px) {
-  .hero-banner--image-above-cta {
+  udex-hero-banner .hero-banner--image-above-cta {
     padding: 1rem;
     margin-top: 15.84rem;
   }
 }
 
 @container hero-wrapper (width < 300px) {
-  .hero-banner--image-above-cta {
+  udex-hero-banner .hero-banner--image-above-cta {
     margin-top: 10.75rem;
   }
 }
@@ -146,7 +145,7 @@ udex-hero-banner#media-blend .media-blend__buttons udex-button:first-of-type {
 }
 
 @container (width < 300px) {
-  .media-blend__buttons udex-button:first-of-type {
+  udex-hero-banner .media-blend__buttons udex-button:first-of-type {
     display: block;
     margin-bottom: var(--udexSpacer12, 12px);
   }
