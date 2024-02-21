@@ -8,15 +8,6 @@
   margin-bottom: 18px; /* no design, assumption */
 }
 
-/* Highlight first paragraph of blog pages using increased font size */
-.article
-  main
-  > div:first-child
-  > div.default-content-wrapper:nth-child(2)
-  > p:first-child {
-  font-size: var(--udexTypographyBodyLFontSize); /* no design, assumption */
-}
-
 /* Desktop view (--udexGridMMinWidth) */
 @media (width >= 980px) {
   .article
@@ -40,7 +31,7 @@
 
 .article.appear {
   display: grid;
-  
+
   /* grid-template-columns: 3fr 6fr 3fr; */
   grid-template-areas:
     'header'

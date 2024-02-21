@@ -1,0 +1,17 @@
+/* article intro block styling */
+.article-intro {
+  font-size: var(--udexTypographyBodyMFontSize);
+  font-family: var(--udexTypographyBodyMFontFamily);
+  font-weight: var(--udexTypographyBodyMFontWeight);
+  line-height: var(--udexTypographyBodyMLineHeight);
+}
+
+/* breakpoint M and larger */
+@media (width >= 980px) {
+  .article-intro {
+    font-size: var(--udexTypographyBodyLFontSize);
+    font-family: var(--udexTypographyBodyLFontFamily);
+    font-weight: var(--udexTypographyBodyLFontWeight);
+    line-height: var(--udexTypographyBodyLLineHeight);
+  }
+}
