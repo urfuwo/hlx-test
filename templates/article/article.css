@@ -33,12 +33,14 @@
 
   .article main div.section {
     /* TODO: this is temporary until the grid is implemented */
+    /* stylelint-disable-next-line comment-empty-line-before */
     /* margin-left: 270px; */
   }
 }
 
 .article.appear {
   display: grid;
+  
   /* grid-template-columns: 3fr 6fr 3fr; */
   grid-template-areas:
     'header'
