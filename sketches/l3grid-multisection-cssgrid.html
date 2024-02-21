@@ -1,0 +1,217 @@
+<html lang="en">
+    <head>
+        <style>
+            :root {
+                --udexGridXSGutters: 16px;
+                --udexGridXSMargins: 24px;
+                --udexGridSGutters: 32px;
+                --udexGridSMargins: 48px;
+                --udexGridMGutters: 48px;
+                --udexGridMMargins: 72px;
+                --udexGridLGutters: 48px;
+                --udexGridLMargins: 72px;
+                --udexGridXLGutters: 48px;
+                --udexGridXLMargins: 84px;
+
+                /* Margin and gutters */
+                --udexGridGutters: var(--udexGridXSGutters);
+                --udexGridMargins: var(--udexGridXSMargins);
+            }
+
+            /* S */
+            @media (width >= 640px) {
+                :root {
+                    --udexGridGutters: var(--udexGridSGutters);
+                    --udexGridMargins: var(--udexGridSMargins);
+                }
+            }
+
+            /* M */
+            @media (width >= 980px) {
+                :root {
+                    --udexGridGutters: var(--udexGridMGutters);
+                    --udexGridMargins: var(--udexGridMMargins);
+                }
+            }
+
+            /* L */
+            @media (width >= 1280px) {
+                :root {
+                    --udexGridGutters: var(--udexGridLGutters);
+                    --udexGridMargins: var(--udexGridLMargins);
+                }
+            }
+
+            /* XL */
+            @media (width >= 1600px) {
+                :root {
+                    --udexGridGutters: var(--udexGridXLGutters);
+                    --udexGridMargins: var(--udexGridXLMargins);
+                }
+            }
+
+            body {
+                margin: 0;
+                display: grid;
+                grid-template-columns:
+                    calc(var(--udexGridMargins) - var(--udexGridGutters))
+                    3fr 6fr 3fr
+                    calc(var(--udexGridMargins) - var(--udexGridGutters));
+                grid-template-rows: 60px auto auto auto auto;
+                grid-template-areas:
+                    'header header header header header'
+                    'hero hero hero hero hero'
+                    '. pagenav textbody rightcolumn .'
+                    '. relatedcontent relatedcontent relatedcontent .'
+                    'footer footer footer footer footer';
+                grid-area: content;
+                column-gap: var(--udexGridGutters);
+            }
+            main {
+                display: contents;
+            }
+            header {
+                display: contents;
+            }
+            div.header {
+                grid-area: header;
+                background-color: yellow;
+            }
+            div.section {
+                display: contents;
+            }
+
+            /* Multi-section grid area: the wrapping grid area container */
+            div.textbody-grid-area {
+                display: block;
+                grid-area: textbody;
+                background-color: lightcoral;
+            }
+            div.textbody-container {
+                display: block;
+                padding: 10px;
+            }
+            /* Single-section grid area */
+            div.rightcolumn {
+                grid-area: rightcolumn;
+                background-color: orange;
+            }
+            /* Single-section grid area */
+            div.pagenav {
+                grid-area: pagenav;
+                background-color: lightgreen;
+            }
+            /* Single-section grid area */
+            div.hero {
+                grid-area: hero;
+                background-color: lightblue;
+            }
+            /* Multi-section grid area: the wrapping grid area container */
+            div.related-content-grid-area {
+                grid-area: relatedcontent;
+                background-color: lightskyblue;
+            }
+            div.related-content {
+                display: block;
+                padding: 10px;
+            }
+            /* Single-section grid area */
+            footer {
+                grid-area: footer;
+                background-color: yellow;
+            }
+
+            @media (width >= 1600px) {
+                body {
+                    grid-template-columns:
+                     max(calc(var(--udexGridLMargins)/2), calc((100% - 1600px - var(--udexGridGutters)*2) / 2))
+                     3fr 6fr 3fr
+                     max(calc(var(--udexGridLMargins)/2), calc((100% - 1600px - var(--udexGridGutters)*2) / 2));
+                    grid-template-areas:
+                    'header header header header header'
+                    'hero hero hero hero hero'
+                    '. pagenav textbody rightcolumn .'
+                    '. relatedcontent relatedcontent relatedcontent .'
+                    'footer footer footer footer footer';
+                }
+            }
+
+            @media (width >= 640px) {
+                div.header {
+                    background-color: #ffdd00;
+                }
+            }
+
+            /* M */
+            @media (width >= 980px) {
+                div.header {
+                    background-color: #ffbb00;
+                }
+            }
+
+            /* L */
+            @media (width >= 1280px) {
+                div.header {
+                    background-color: #ff8800;
+                }
+            }
+
+            /* XL */
+            @media (width >= 1600px) {
+                div.header {
+                    background-color: #ff5500;
+                }
+            }
+        </style>
+        <title>L3 Grid Test</title>
+    </head>
+    <body>
+        <!-- Single section grid area -->
+        <header>
+            <div class="header"><span># Header area. It shall cover the entire width. Header header header header header header header header header header header header header header header</span></div>
+        </header>
+        <main>
+            <!-- Single section grid area -->
+            <div class="section hero-container">
+                <div class="hero"><span># Hero single-section area</span></div>
+            </div>
+            <!-- Single section grid area -->
+            <div class="section pagenav-container">
+                <div class="pagenav"><span># Pagenav single-section area</span></div>
+            </div>
+            <!-- Single section grid area -->
+            <div class="section rightcolumn-container">
+                <div class="rightcolumn"><span># Right Column single-section area</span></div>
+            </div>
+            <!-- Multisection grid area: requires a wrapping grid-area container -->
+            <div class="textbody-grid-area">
+                <div class="section textbody-container">
+                    <div class="textbody"><span>Section 1 Textbody area</span></div>
+                    <div class="textbody"><span>Section 1 Second textbody area</span></div>
+                    <div class="textbody"><span>Section 1 A third textbody area</span></div>
+                </div>
+                <div class="section textbody-container">
+                    <div class="textbody"><span>Section 2 Textbody area</span></div>
+                    <div class="textbody"><span>Section 2 Second textbody area</span></div>
+                    <div class="textbody"><span>Section 2 A third textbody area</span></div>
+                </div>
+                <div class="section textbody-container">
+                    <div class="textbody"><span>Section 3 Textbody area</span></div>
+                    <div class="textbody"><span>Section 3 Second textbody area</span></div>
+                    <div class="textbody"><span>Section 3 A third textbody area</span></div>
+                </div>
+            </div>
+            <!-- Multisection grid area: requires a wrapping grid-area container -->
+            <div class="related-content-grid-area">
+                <div class="section related-content">
+                    <div class="relatedcontent"><span># Related Content section 1</span></div>
+                </div>
+                <div class="section related-content">
+                    <div class="relatedcontent"><span># Related Content section 2</span></div>
+                </div>
+            </div>
+        </main>
+        <!-- Single section grid area -->
+        <footer><span># Footer area. It shall cover the entire width. Footer footer footer footer footer footer footer footer footer footer footer footer footer footer footer</span></footer>
+    </body>
+</html>
