@@ -54,7 +54,7 @@ export default async function decorate(block) {
       slot: 'additionalContent',
       class: ['hero-banner', 'media-blend__additional-content'],
     },
-    img,
+    picture,
   );
   hero.appendChild(additionalContentSlot);
 
