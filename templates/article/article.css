@@ -4,74 +4,71 @@
   margin-bottom: 18px; /* no design, assumption */
 }
 
-/* Desktop view (--udexGridMMinWidth) */
-@media (width >= 980px) {
-  .article
-    main
-    div.section
-    > div:not(
-      .hero-wrapper,
-      .related-articles-wrapper,
-      .article-cta-banner-wrapper
-    ) {
-    width: 755px; /* Option A */
-    max-width: 755px; /* Option A */
-  }
-
-  .article main div.section {
-    /* TODO: this is temporary until the grid is implemented */
-    /* stylelint-disable-next-line comment-empty-line-before */
-    /* margin-left: 270px; */
-  }
-}
-
-.article.appear {
+main {
   display: grid;
-
-  /* grid-template-columns: 3fr 6fr 3fr; */
+  grid-auto-flow: row;
   grid-template-areas:
-    'header'
-    'sidenav'
-    'main'
-    'info'
-    'footer';
-  column-gap: var(--udexGridGutters);
-}
+    'hero'
+    'toc'
+    'maincontent'
+    'promo'
+    'relatedinfo';
 
-@media (width >= 980px) {
-  .article.appear {
-    grid-template-columns: 3fr 6fr 3fr;
-    grid-template-areas:
-      'header header header'
-      'sidenav main .'
-      'info info info'
-      'footer footer footer';
-    column-gap: var(--udexGridGutters);
+  @media (width < 980px) {
+    & > :not(.hero-container) {
+      margin-inline: var(--udexGridMargins);
+    }
   }
-}
 
-header nav {
-  grid-area: header;
-}
+  @media (width >= 980px) {
+    /* if page has table of contents it has a 3 column layout */
+    &:has(.toc-container) {
+      grid-template-columns: 3fr 6fr 3fr;
+      grid-template-areas:
+        'hero hero hero'
+        'toc maincontent promo'
+        'relatedinfo relatedinfo relatedinfo';
+    }
 
-header aside {
-  grid-area: sidenav;
-}
+    grid-template-columns: 8fr 4fr;
+    grid-template-areas:
+      'hero hero'
+      'maincontent promo'
+      'relatedinfo relatedinfo';
+  }
 
-footer {
-  grid-area: footer;
-}
+  column-gap: var(--udexGridGutters);
+  margin-block-end: var(--udexSpacer84);
 
-header,
-main,
-div.header.block {
-  display: contents;
-}
+  & > .hero-container {
+    grid-area: hero;
+    margin-block-end: var(--udexSpacer84);
+    max-width: unset;
+  }
 
-main > .hero-container {
-  grid-area: main;
-}
+  & > .toc-container {
+    grid-area: toc;
+    margin-inline-start: var(--udexGridMargins);
+  }
 
-main > .related-articles-container {
-  grid-area: info;
+  & > .article-intro-container {
+    grid-area: maincontent;
+  }
+
+  /* only apply margin to main content if it starts from the first column */
+  &:not(:has(.toc-container)) {
+    & > .article-intro-container {
+      margin-inline-start: var(--udexGridMargins);
+    }
+  }
+
+  & > :nth-last-child(2) {
+    grid-area: promo;
+    margin-inline-end: var(--udexGridMargins);
+  }
+
+  & > .related-articles-container {
+    grid-area: relatedinfo;
+    margin-inline: var(--udexGridMargins);
+  }
 }
