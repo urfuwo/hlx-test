@@ -1,11 +1,10 @@
-/* Promo Block */
 .promo {
   border-radius: var(--udexRadiusL);
   margin: var(--udexSpacer40) 0;
-  /* color not available in css vars */
   background-color: hsla(210, 11%, 96%, 1);
 }
 
+/** Light blue background - info on variant??? */
 .promo.lightblue {
   background-color: var(--udexColorBlue1);
 }
@@ -21,9 +20,9 @@
   flex-grow: 1;
 }
 
-
 .promo img {
   min-width: 120px;
+  max-width: 200px; /** 200px is the max width of the image? */
 }
 
 .promo h4 {
@@ -83,15 +82,14 @@
 } 
 
 .promo .button-container .button.primary {
-  /* colors not available in css vars */
   color: hsla(0, 0%, 100%, 1);
   border-color: hsla(212, 100%, 47%, 1);
   background-color: hsla(212, 100%, 47%, 1);
 }
 
 .promo .button-container .button {
-  /* colors not available in css vars */
   color: hsla(218, 100%, 35%, 1);
   border-color: hsla(210, 24%, 37%, 1);
   background-color: hsla(0, 0%, 100%, 1);
+  overflow: unset;
 }
