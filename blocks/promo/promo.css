@@ -15,7 +15,7 @@
   gap: var(--udexSpacer24);
 }
 
-@media (width <=640px) {
+@media (width <640px) {
   .promo>div {
     flex-direction: column;
   }
