@@ -8,7 +8,7 @@ const transformMoreSection = (main) => {
       const table = WebImporter.DOMUtils.createTable(block, document);
       moreSectionCards.replaceWith(table);
     }
-    moreSection.before(document.createElement('hr'));
+    moreSection.before(document.createElement('hr'), document.createElement('hr'));
   }
 };
 export default transformMoreSection;
