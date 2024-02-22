@@ -18,14 +18,7 @@
     overflow: hidden;
 }
 
-.quote .qmcol {
-    flex: 0 0 1.75rem;
-    width: 1.75rem;
-}
-
 .quote .content {
-    padding-left: 16px;
-    padding-right: 16px;
     justify-content: left;
     color: var(--udexColorGrey8);
 }
@@ -34,22 +27,38 @@
     margin-bottom: var(--udexSpacer24);
 }
 
-.quote .qt .oqm::before {
-    content: '“';
-}
-
-.quote .qt .cqm::before {
-    content: '”';
-}
-
 .quote .qt .content {
     font-size: var(--udexTypographyBodyXLFontSize);
     font-family: var(--udexTypographyBodyXLFontFamily);
     font-weight: var(--udexTypographyBodyXLFontWeight);
     line-height: var(--udexTypographyBodyXLLineHeight);
+}
 
-    /* align quote text with quotation marks */
-    margin-top: 8px;
+.quote .qt .content::before,
+.quote .qt .content::after {
+    display: flex;
+    flex: 0 0 30px;
+    height: 100%;
+    justify-content: center;
+    color: var(--udexColorGrey8);
+    font-family: var(--udexTypographyDisplayRegularLFontFamily);
+    font-size: var(--udexTypographyDisplayRegularLFontSize);
+    font-weight: var(--udexTypographyDisplayRegularLFontWeight);
+    line-height: 84px;
+
+    /* align quotation marks to quote text */
+    position: relative;
+    top: -8px;
+}
+
+.quote .qt .content::before {
+    content: '“';
+    padding-right: 16px;
+}
+
+.quote .qt .content::after {
+    content: '”';
+    padding-left: 16px;
 }
 
 .quote .qs .content {
@@ -57,8 +66,8 @@
     font-family: var(--udexTypographyHeadingRegularXXSFontFamily);
     font-weight: var(--udexTypographyHeadingRegularXXSFontWeight);
     line-height: var(--udexTypographyHeadingRegularXXSLineHeight);
-    padding-left: 44px;
-    padding-right: 44px;
+    padding-left: 46px;
+    padding-right: 46px;
 }
 
 .quote.small .qt .content {
@@ -66,11 +75,26 @@
     font-family: var(--udexTypographyBodySFontFamily);
     font-weight: var(--udexTypographyBodySFontWeight);
     line-height: var(--udexTypographyBodySLineHeight);
-    padding-left: 8px;
-    padding-right: 8px;
+}
 
-    /* align quote text with quotation marks */
-    margin-top: 0;
+.quote.small .qt .content::before,
+.quote.small .qt .content::after {
+    flex: 0 0 1.75rem;
+    font-family: var(--udexTypographyDisplayRegularMFontFamily);
+    font-size: var(--udexTypographyDisplayRegularMFontSize);
+    font-weight: var(--udexTypographyDisplayRegularMFontWeight);
+    line-height: 72px;
+
+    /* align quotation marks to quote text */
+    top: 0;
+}
+
+.quote.small .qt .content::before {
+    padding-right: 8px;
+}
+
+.quote.small .qt .content::after {
+    padding-left: 8px;
 }
 
 .quote.small .qs .content {
@@ -80,22 +104,4 @@
     line-height: var(--udexTypographyNavigationRegularMLineHeight);
     padding-left: 36px;
     padding-right: 36px;
-}
-
-.quote .cqm,
-.quote .oqm {
-    font-family: var(--udexTypographyDisplayRegularLFontFamily);
-    font-size: var(--udexTypographyDisplayRegularLFontSize);
-    font-weight: var(--udexTypographyDisplayRegularLFontWeight);
-    line-height: 84px;
-    align-items: flex-start;
-    color: var(--udexColorGrey8);
-}
-
-.quote.small .cqm,
-.quote.small .oqm {
-    font-family: var(--udexTypographyDisplayRegularMFontFamily);
-    font-size: var(--udexTypographyDisplayRegularMFontSize);
-    font-weight: var(--udexTypographyDisplayRegularMFontWeight);
-    line-height: 72px;
 }
