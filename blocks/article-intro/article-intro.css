@@ -1,4 +1,3 @@
-/* article intro block styling */
 .article-intro {
   font-size: var(--udexTypographyBodyMFontSize);
   font-family: var(--udexTypographyBodyMFontFamily);
@@ -6,7 +5,6 @@
   line-height: var(--udexTypographyBodyMLineHeight);
 }
 
-/* breakpoint M and larger */
 @media (width >= 980px) {
   .article-intro {
     font-size: var(--udexTypographyBodyLFontSize);
