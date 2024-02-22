@@ -1,7 +1,7 @@
 .promo {
   border-radius: var(--udexRadiusL);
   margin: var(--udexSpacer40) 0;
-  background-color: hsla(210, 11%, 96%, 1);
+  background-color: hsla(210deg, 11%, 96%, 100%);
 }
 
 .promo.lightblue {
@@ -14,7 +14,7 @@
   padding: var(--udexSpacer24);
   gap: var(--udexSpacer24);
 
-  @media screen and (max-width: 640px) {
+  @media (max-width: 640px) {
     flex-direction: column;
   }
 }
@@ -37,7 +37,7 @@
   text-transform: uppercase;
   margin: 0;
   margin-bottom: var(--udexSpacer8);
-  color: hsla(215, 100%, 41%, 1)
+  color: hsla(215deg, 100%, 41%, 100%)
 }
 
 .promo h2 {
@@ -81,17 +81,14 @@
   font-weight: var(--udexTypographyNavigationMediumXLFontWeight);
   font-size: var(--udexTypographyNavigationMediumXLFontSize);
   text-align: center;
+  color: hsla(218deg, 100%, 35%, 100%);
+  border-color: hsla(210deg, 24%, 37%, 100%);
+  background-color: hsla(0deg, 0%, 100%, 100%);
+  overflow: unset;
 }
 
 .promo .button-container .button.primary {
-  color: hsla(0, 0%, 100%, 1);
-  border-color: hsla(212, 100%, 47%, 1);
-  background-color: hsla(212, 100%, 47%, 1);
-}
-
-.promo .button-container .button {
-  color: hsla(218, 100%, 35%, 1);
-  border-color: hsla(210, 24%, 37%, 1);
-  background-color: hsla(0, 0%, 100%, 1);
-  overflow: unset;
+  color: hsla(0deg, 0%, 100%, 100%);
+  border-color: hsla(212deg, 100%, 47%, 100%);
+  background-color: hsla(212deg, 100%, 47%, 100%);
 }
