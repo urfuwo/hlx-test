@@ -8,36 +8,71 @@
   margin-bottom: 18px; /* no design, assumption */
 }
 
-/* Highlight first paragraph of blog pages using increased font size */
-.article
-  main
-  > div:first-child
-  > div.default-content-wrapper:nth-child(2)
-  > p:first-child {
-  font-size: var(--udexTypographyBodyLFontSize); /* no design, assumption */
-}
-
 main {
-  & .section:first-child {
-    display: grid;
-    grid-template-columns: 3fr 6fr 3fr;
-    column-gap: var(--udexGridGutters);
+  display: grid;
+  grid-auto-flow: row;
+  grid-template-areas:
+    'hero'
+    'toc'
+    'maincontent'
+    'promo'
+    'relatedinfo';
 
-    & > .hero-wrapper {
-      grid-column: 1 / 4;
-    }
-
-    &
-      > div:not(
-        .hero-wrapper,
-        .related-articles-wrapper,
-        .article-cta-banner-wrapper
-      ) {
-      grid-column: 2 / span 1;
+  @media (width < 980px) {
+    & > :not(.hero-container) {
+      margin-inline: var(--udexGridMargins);
     }
   }
 
-  & .related-articles-container {
+  @media (width >= 980px) {
+    /* if page has table of contents it has a 3 column layout */
+    &:has(.toc-container) {
+      grid-template-columns: 3fr 6fr 3fr;
+      grid-template-areas:
+        'hero hero hero'
+        'toc maincontent promo'
+        'relatedinfo relatedinfo relatedinfo';
+    }
+
+    grid-template-columns: 8fr 4fr;
+    grid-template-areas:
+      'hero hero'
+      'maincontent promo'
+      'relatedinfo relatedinfo';
+  }
+
+  column-gap: var(--udexGridGutters);
+  margin-block-end: var(--udexSpacer84);
+
+  & > .hero-container {
+    grid-area: hero;
+    margin-block-end: var(--udexSpacer84);
+    max-width: unset;
+  }
+
+  & > .toc-container {
+    grid-area: toc;
+    margin-inline-start: var(--udexGridMargins);
+  }
+
+  & > .article-intro-container {
+    grid-area: maincontent;
+  }
+
+  /* only apply margin to main content if it starts from the first column */
+  &:not(:has(.toc-container)) {
+    & > .article-intro-container {
+      margin-inline-start: var(--udexGridMargins);
+    }
+  }
+
+  & > :nth-last-child(2) {
+    grid-area: promo;
+    margin-inline-end: var(--udexGridMargins);
+  }
+
+  & > .related-articles-container {
+    grid-area: relatedinfo;
     margin-inline: var(--udexGridMargins);
   }
 }
