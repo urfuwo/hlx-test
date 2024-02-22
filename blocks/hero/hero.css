@@ -1,3 +1,7 @@
+.section.hero-container {
+  width: 100%;
+}
+
 udex-hero-banner .hero-banner {
   width: 100%;
   container-type: inline-size;
