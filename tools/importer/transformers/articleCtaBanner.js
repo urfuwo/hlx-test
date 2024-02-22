@@ -11,7 +11,8 @@ const createBlogCtaBanner = (main, document) => {
       banner.remove();
       document.querySelector('div#page').append(table);
     } else {
-      const block = [['Promo'], [banner.innerHTML]];
+      const name = banner.classList.contains('alignleft') ? 'Promo (blue)' : 'Promo';
+      const block = [[name], [banner.innerHTML]];
       const table = WebImporter.DOMUtils.createTable(block, document);
       banner.replaceWith(table);
     }
