@@ -3,17 +3,13 @@
     margin-bottom: var(--udexSpacer40);
 }
 
-.quote .row {
+.quote > div {
     display: flex;
     justify-content: center;
     align-items: stretch;
 }
 
-.quote .row:first-of-type {
-    margin-bottom: var(--udexSpacer24);
-}
-
-.quote .row .col {
+.quote .col {
     box-sizing: border-box;
     display: flex;
     flex: 1;
@@ -22,59 +18,72 @@
     overflow: hidden;
 }
 
-.quote .row .col.qmcol {
-    /* fixed-width element within flexbox */
+.quote .qmcol {
     flex: 0 0 1.75rem;
-
-    /* DT: Quote/Size/Mark/S, but no height */
     width: 1.75rem;
 }
 
-.quote .row .col.content {
-    /* DT: Spacer16hor left and right */
+.quote .content {
     padding-left: 16px;
     padding-right: 16px;
     justify-content: left;
     color: var(--udexColorGrey8);
 }
 
-.quote .row .oqm::before {
+.quote .qt {
+    margin-bottom: var(--udexSpacer24);
+}
+
+.quote .qt .oqm::before {
     content: '“';
 }
 
-.quote .row .cqm::before {
+.quote .qt .cqm::before {
     content: '”';
 }
 
-/* vertically align quotation marks with quote text */
-.quote .row:first-of-type .content div {
-    margin-top: 8px;
-}
-
-.quote .row .content div p {
-    margin-top: 0;
-}
-
-.quote .row .content p:last-of-type {
-    margin-bottom: 0;
-}
-
-.quote .row:first-of-type .content {
+.quote .qt .content {
     font-size: var(--udexTypographyBodyXLFontSize);
     font-family: var(--udexTypographyBodyXLFontFamily);
     font-weight: var(--udexTypographyBodyXLFontWeight);
     line-height: var(--udexTypographyBodyXLLineHeight);
+
+    /* align quote text with quotation marks */
+    margin-top: 8px;
 }
 
-.quote .row:nth-of-type(2) .content {
+.quote .qs .content {
     font-size: var(--udexTypographyHeadingRegularXXSFontSize);
     font-family: var(--udexTypographyHeadingRegularXXSFontFamily);
     font-weight: var(--udexTypographyHeadingRegularXXSFontWeight);
     line-height: var(--udexTypographyHeadingRegularXXSLineHeight);
+    padding-left: 44px;
+    padding-right: 44px;
 }
 
-.quote .row .cqm,
-.quote .row .oqm {
+.quote.small .qt .content {
+    font-size: var(--udexTypographyBodySFontSize);
+    font-family: var(--udexTypographyBodySFontFamily);
+    font-weight: var(--udexTypographyBodySFontWeight);
+    line-height: var(--udexTypographyBodySLineHeight);
+    padding-left: 8px;
+    padding-right: 8px;
+
+    /* align quote text with quotation marks */
+    margin-top: 0;
+}
+
+.quote.small .qs .content {
+    font-size: var(--udexTypographyNavigationRegularMFontFamily);
+    font-family: var(--udexTypographyNavigationRegularMFontFamily);
+    font-weight: var(--udexTypographyNavigationRegularMFontWeight);
+    line-height: var(--udexTypographyNavigationRegularMLineHeight);
+    padding-left: 36px;
+    padding-right: 36px;
+}
+
+.quote .cqm,
+.quote .oqm {
     font-family: var(--udexTypographyDisplayRegularLFontFamily);
     font-size: var(--udexTypographyDisplayRegularLFontSize);
     font-weight: var(--udexTypographyDisplayRegularLFontWeight);
@@ -83,29 +92,10 @@
     color: var(--udexColorGrey8);
 }
 
-.quote.small .row:first-of-type .content {
-    font-size: var(--udexTypographyBodySFontSize);
-    font-family: var(--udexTypographyBodySFontFamily);
-    font-weight: var(--udexTypographyBodySFontWeight);
-    line-height: var(--udexTypographyBodySLineHeight);
-}
-
-.quote.small .row:nth-of-type(2) .content {
-    font-size: var(--udexTypographyNavigationRegularMFontFamily);
-    font-family: var(--udexTypographyNavigationRegularMFontFamily);
-    font-weight: var(--udexTypographyNavigationRegularMFontWeight);
-    line-height: var(--udexTypographyNavigationRegularMLineHeight);
-}
-
-.quote.small .row .cqm,
-.quote.small .row .oqm {
+.quote.small .cqm,
+.quote.small .oqm {
     font-family: var(--udexTypographyDisplayRegularMFontFamily);
     font-size: var(--udexTypographyDisplayRegularMFontSize);
     font-weight: var(--udexTypographyDisplayRegularMFontWeight);
     line-height: 72px;
-}
-
-.quote.small .row .col.content {
-    padding-left: 8px;
-    padding-right: 8px;
 }
