@@ -1,3 +1,8 @@
+.quote {
+    margin-top: var(--udexSpacer40);
+    margin-bottom: var(--udexSpacer40);
+}
+
 .quote .row {
     display: flex;
     justify-content: center;
@@ -5,14 +10,10 @@
 }
 
 .quote .row:first-of-type {
-    padding-bottom: var(--udexSpacer24);
+    margin-bottom: var(--udexSpacer24);
 }
 
-.quote .row:nth-of-type(2) {
-    padding-bottom: var(--udexSpacer40);
-}
-
-.quote .row .block {
+.quote .row .col {
     box-sizing: border-box;
     display: flex;
     flex: 1;
@@ -21,7 +22,7 @@
     overflow: hidden;
 }
 
-.quote .row .block.qmcolumn {
+.quote .row .col.qmcol {
     /* fixed-width element within flexbox */
     flex: 0 0 1.75rem;
 
@@ -29,7 +30,7 @@
     width: 1.75rem;
 }
 
-.quote .row .block.content {
+.quote .row .col.content {
     /* DT: Spacer16hor left and right */
     padding-left: 16px;
     padding-right: 16px;
@@ -37,11 +38,11 @@
     color: var(--udexColorGrey8);
 }
 
-.quote .row .opening-quotationmark::before {
+.quote .row .oqm::before {
     content: '“';
 }
 
-.quote .row .closing-quotationmark::before {
+.quote .row .cqm::before {
     content: '”';
 }
 
@@ -72,8 +73,8 @@
     line-height: var(--udexTypographyHeadingRegularXXSLineHeight);
 }
 
-.quote .row .closing-quotationmark,
-.quote .row .opening-quotationmark {
+.quote .row .cqm,
+.quote .row .oqm {
     font-family: var(--udexTypographyDisplayRegularLFontFamily);
     font-size: var(--udexTypographyDisplayRegularLFontSize);
     font-weight: var(--udexTypographyDisplayRegularLFontWeight);
@@ -96,15 +97,15 @@
     line-height: var(--udexTypographyNavigationRegularMLineHeight);
 }
 
-.quote.small .row .closing-quotationmark,
-.quote.small .row .opening-quotationmark {
+.quote.small .row .cqm,
+.quote.small .row .oqm {
     font-family: var(--udexTypographyDisplayRegularMFontFamily);
     font-size: var(--udexTypographyDisplayRegularMFontSize);
     font-weight: var(--udexTypographyDisplayRegularMFontWeight);
     line-height: 72px;
 }
 
-.quote.small .row .block.content {
+.quote.small .row .col.content {
     padding-left: 8px;
     padding-right: 8px;
 }

@@ -7,27 +7,27 @@ export default function decorate(block) {
   const quoteSourceBlock = block.querySelector(':scope > div:nth-of-type(2)');
   block.innerHTML = '';
 
-  const quoteTextContainer = div({ class: 'block content' });
+  const quoteTextContainer = div({ class: 'col content' });
   quoteTextContainer.append(...quoteTextBlock.childNodes);
 
-  const quoteSourceContainer = div({ class: 'block content' });
+  const quoteSourceContainer = div({ class: 'col content' });
   quoteSourceContainer.append(...quoteSourceBlock.childNodes);
 
   // quoteText row
   const qtRow = div(
     { class: 'row' },
-    div({ class: 'block qmcolumn opening-quotationmark' }),
+    div({ class: 'col qmcol oqm' }),
     quoteTextContainer,
-    div({ class: 'block qmcolumn closing-quotationmark' }),
+    div({ class: 'col qmcol cqm' }),
   );
   block.append(qtRow);
 
   // quoteSource row
   const qsRow = div(
     { class: 'row' },
-    div({ class: 'block qmcolumn' }),
+    div({ class: 'col qmcol' }),
     quoteSourceContainer,
-    div({ class: 'block qmcolumn' }),
+    div({ class: 'col qmcol' }),
   );
   block.append(qsRow);
 }
