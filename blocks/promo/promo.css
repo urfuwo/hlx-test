@@ -4,7 +4,6 @@
   background-color: hsla(210, 11%, 96%, 1);
 }
 
-/** Light blue background - info on variant??? */
 .promo.lightblue {
   background-color: var(--udexColorBlue1);
 }
@@ -14,6 +13,10 @@
   flex-direction: row;
   padding: var(--udexSpacer24);
   gap: var(--udexSpacer24);
+
+  @media screen and (max-width: 640px) {
+    flex-direction: column;
+  }
 }
 
 .promo>div>div:last-child {
@@ -22,7 +25,7 @@
 
 .promo img {
   min-width: 120px;
-  max-width: 200px; /** 200px is the max width of the image? */
+  display: block;
 }
 
 .promo h4 {
@@ -78,8 +81,7 @@
   font-weight: var(--udexTypographyNavigationMediumXLFontWeight);
   font-size: var(--udexTypographyNavigationMediumXLFontSize);
   text-align: center;
-
-} 
+}
 
 .promo .button-container .button.primary {
   color: hsla(0, 0%, 100%, 1);
