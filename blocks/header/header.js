@@ -213,7 +213,7 @@ async function generateTopNavigation() {
 
 async function generateSideNavigation() {
   const template = getMetadata('template');
-  if (template !== 'article') return null;
+  if (template !== 'hub') return null;
   const sideNavMeta = getMetadata('sideNav');
   const sideNavPath = sideNavMeta ? new URL(sideNavMeta).pathname : `/${window.location.pathname.split('/')[1]}/nav`;
   const sideFragment = await loadFragment(sideNavPath);
