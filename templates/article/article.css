@@ -4,6 +4,12 @@
   margin-bottom: 18px; /* no design, assumption */
 }
 
+@media (width >= 1600px) {
+  main {
+    --udexGridMargins: 246px;
+  }
+}
+
 main {
   display: grid;
   grid-auto-flow: row;
@@ -74,7 +80,7 @@ main {
 }
 
 /* image and video caption */
-.article p>em {
+.article p > em {
   font-size: var(--udexTypographyBodyXSFontSize);
   font-family: var(--udexTypographyBodyXSFontFamily);
   line-height: var(--udexTypographyBodyXSLineHeight);
