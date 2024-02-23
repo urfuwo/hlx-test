@@ -64,13 +64,14 @@ main {
     margin-inline-start: var(--udexGridMargins);
   }
 
-  & > .article-intro-container {
+  & > :nth-child(3) {
     grid-area: maincontent;
   }
 
   /* only apply margin to main content if it starts from the first column */
   &:not(:has(.toc-container)) {
-    & > .article-intro-container {
+    & > :nth-child(2) {
+      grid-area: maincontent;
       margin-inline-start: var(--udexGridMargins);
     }
   }
@@ -80,7 +81,7 @@ main {
     margin-inline-end: var(--udexGridMargins);
   }
 
-  & > .related-articles-container {
+  & > :last-child {
     grid-area: relatedinfo;
     margin-inline: var(--udexGridMargins);
   }
