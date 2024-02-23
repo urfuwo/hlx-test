@@ -10,10 +10,10 @@ export default function decorate(block) {
       if (div.children.length === 1 && div.querySelector('picture')) div.className = 'cards-card-image';
       else {
         div.className = 'cards-card-body';
-        const h3 = div.querySelector('h4');
-        if (h3.innerText.startsWith('| ')) {
-          h3.innerText = h3.innerText.substring(2);
-          h3.classList.add('sapproduct');
+        const h4 = div.querySelector('h4');
+        if (h4.innerText.startsWith('| ')) {
+          h4.innerText = h4.innerText.slice(2);
+          h4.classList.add('sapproduct');
         }
       }
     });
