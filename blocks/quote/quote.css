@@ -87,8 +87,8 @@
     line-height: var(--udexTypographyBodySLineHeight);
 }
 
-.quote.small .qt ::before,
-.quote.small .qt ::after {
+.quote.small .qt::before,
+.quote.small .qt::after {
     flex: 0 0 1.75rem;
     font-family: var(--udexTypographyDisplayRegularMFontFamily);
     font-size: var(--udexTypographyDisplayRegularMFontSize);
@@ -96,14 +96,14 @@
     line-height: 72px;
 
     /* align quotation marks to quote text */
-    top: 0;
+    top: -8px;
 }
 
-.quote.small .qt ::before {
+.quote.small .qt::before {
     padding-right: 8px;
 }
 
-.quote.small .qt ::after {
+.quote.small .qt::after {
     padding-left: 8px;
 }
 
