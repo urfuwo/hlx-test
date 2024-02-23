@@ -26,6 +26,13 @@ main {
     }
   }
 
+  & > * {
+    transition-property: margin-inline-start, margin-inline-end, margin-inline,
+      margin-block-end;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
+  }
+
   @media (width >= 980px) {
     /* if page has table of contents it has a 3 column layout */
     &:has(.toc-container) {
@@ -55,7 +62,6 @@ main {
   & > .toc-container {
     grid-area: toc;
     margin-inline-start: var(--udexGridMargins);
-    transition: margin-inline-start 0.3s ease-in-out;
   }
 
   & > .article-intro-container {
@@ -66,20 +72,17 @@ main {
   &:not(:has(.toc-container)) {
     & > .article-intro-container {
       margin-inline-start: var(--udexGridMargins);
-      transition: margin-inline-start 0.3s ease-in-out;
     }
   }
 
   & > :nth-last-child(2) {
     grid-area: promo;
     margin-inline-end: var(--udexGridMargins);
-    transition: margin-inline-end 0.3s ease-in-out;
   }
 
   & > .related-articles-container {
     grid-area: relatedinfo;
     margin-inline: var(--udexGridMargins);
-    transition: margin-inline 0.3s ease-in-out;
   }
 }
 
