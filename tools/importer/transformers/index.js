@@ -9,6 +9,7 @@ import articleQuote from './articleQuote.js';
 import articlePageFooter from './articlePageFooter.js';
 import articleContentFooter from './articleContentFooter.js';
 import articleInfo from './articleInfo.js';
+import articlePanel from './articlePanel.js';
 
 export const transformers = [
   metadata,
@@ -18,6 +19,7 @@ export const transformers = [
   articleInfo,
   articleContentFooter,
   articleQuote,
+  articlePanel,
   articlePageFooter,
   authorProfile,
   transformVideo,
