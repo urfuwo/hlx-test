@@ -1,31 +1,135 @@
-.cards > ul {
+.cards ul {
+  --card-height: auto;
+
   list-style: none;
   margin: 0;
+  margin-top: var(--udexSpacer40);
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(278px, 1fr));
-  grid-gap: 16px;
+  grid-template-columns: repeat(1,1fr);
+  grid-gap: var(--udexGridGutters);
 }
 
-.cards > ul > li {
-  border: 1px solid var(--dark-color);
-  background-color: var(--background-color)
+@media (width >= 640px) {
+  .cards ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
-.cards .cards-card-body {
-  margin: 16px;
+@media (width >= 980px) {
+  .cards ul {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
-.cards .cards-card-image {
-  line-height: 0;
+.cards ul>li {
+  border: 1px solid var(--udexColorGrey2);
+  box-shadow: 0 2px 4px rgb(34 54 73 / 20%);
+  background-color: var(--background-color);
+  height: var(--card-height);
+  border-radius: var(--sapTile_BorderCornerRadius);
+  overflow: hidden;
+  position: relative;
+}
+
+.cards ul>li div.cards-card-body {
+  margin: var(--udexSpacer16);
+}
+
+.cards ul>li div.cards-card-image {
+  margin: var(--udexSpacer16);
+  width: 6.25rem;
+  height: 3rem;
+}
+
+.cards ul>li img {
+  width: 6.25rem;
+  height: 3rem;
+}
+
+.cards ul>li h4 {
+  font-style: normal;
+  font-family: var(--udexTypographyBodyXSFontFamily);
+  font-weight: var(--udexTypographyDisplayMediumXSFontWeight);
+  font-size: var(--udexTypographyBodyXSFontSize);
+  line-height: var(--udexTypographyEyebrowMLineHeight);
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--udexColorGrey6);
+  flex: var(--sapContent_ForcedColorAdjust);
+  order: var(--sapShell_BackgroundImageOpacity);
+  flex-grow: var(--sapShell_BackgroundImageOpacity);
+  margin-bottom: var(--udexSpacer8);
+  position: relative;
+}
+
+.cards ul>li h4.sapproduct::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 20px; /* Height of the pseudo-element */
+  width: 6px;  /* Width of the pseudo-element */
+  background: var(--udexColorBlue6);
+  border-top-right-radius: 4px; /* Adjust the border-radius to your preference */
+  border-bottom-right-radius: 4px;
+}
+
+.cards ul>li h4.sapproduct {
+  padding-left: 10px;
+}
+
+.cards ul>li h3 {
+  font-style: normal;
+  font-family: var(--udexTypographyHeadingMediumXXSFontFamily);
+  font-weight: var(--udexTypographyHeadingMediumXXSFontWeight);
+  font-size: var(--udexTypographyHeadingMediumXXSFontSize);
+  line-height: var(--udexTypographyHeadingMediumXXSLineHeight);
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.03em;
+  color: var(--udexColorNeutralBlack);
+  flex: var(--sapContent_ForcedColorAdjust);
+  order: var(--sapShell_BackgroundImageOpacity);
+  flex-grow: var(--sapShell_BackgroundImageOpacity);
+  margin-bottom: var(--udexSpacer8);
+  margin-top: var(--udexSpacer8);
+}
+
+.cards ul>li div.cards-card-body, .cards ul>li div.cards-card-body a  {
+  font-family: var(--udexTypographyBodyXSFontFamily);
+  font-style: normal;
+  text-decoration: none;
+  font-weight: var(--udexTypographyBodyXSFontWeight);
+  font-size: var(--udexTypographyBodyXSFontSize);
+  line-height: var(--udexTypographyBodyXSFontLineHeight);
+  color: var(--udexCoreTextDark);
+  flex: var(--sapContent_ForcedColorAdjust);
+  order: var(--sapShell_BackgroundImageOpacity);
+  align-self: stretch;
+  flex-grow: 0;
+  margin-bottom: 12px;
+}
+
+.cards ul>li p {
+  margin: 0;
+}
+
+.cards ul>li p.button-container a {
+  padding: 6px 0;
+}
+
+.cards ul>li div.cards-card-body p a, .cards ul>li div.cards-card-body p a:hover {
+  background-color: unset;
+  border: none;
+  padding: 0;
+  box-sizing: unset;
+  color: var(--sapLinkColor);
 }
 
 .cards .cards-card-body > *:first-child {
   margin-top: 0;
-}
-
-.cards > ul > li img {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
 }
