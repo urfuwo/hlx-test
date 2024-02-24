@@ -4,6 +4,12 @@
   margin-bottom: 18px; /* no design, assumption */
 }
 
+@media (width >= 1600px) {
+  main {
+    --udexGridMargins: 246px;
+  }
+}
+
 main {
   display: grid;
   grid-auto-flow: row;
@@ -18,6 +24,13 @@ main {
     & > :not(.hero-container) {
       margin-inline: var(--udexGridMargins);
     }
+  }
+
+  & > * {
+    transition-property: margin-inline-start, margin-inline-end, margin-inline,
+      margin-block-end;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
   }
 
   @media (width >= 980px) {
@@ -51,13 +64,14 @@ main {
     margin-inline-start: var(--udexGridMargins);
   }
 
-  & > .article-intro-container {
+  & > :nth-child(3) {
     grid-area: maincontent;
   }
 
   /* only apply margin to main content if it starts from the first column */
   &:not(:has(.toc-container)) {
-    & > .article-intro-container {
+    & > :nth-child(2) {
+      grid-area: maincontent;
       margin-inline-start: var(--udexGridMargins);
     }
   }
@@ -67,8 +81,18 @@ main {
     margin-inline-end: var(--udexGridMargins);
   }
 
-  & > .related-articles-container {
+  & > :last-child {
     grid-area: relatedinfo;
     margin-inline: var(--udexGridMargins);
   }
+}
+
+/* image and video caption */
+.article p > em {
+  font-size: var(--udexTypographyBodyXSFontSize);
+  font-family: var(--udexTypographyBodyXSFontFamily);
+  line-height: var(--udexTypographyBodyXSLineHeight);
+  font-weight: var(--udexTypographyBodyXSFontWeight);
+  font-style: normal;
+  color: var(--udexColorGrey9);
 }
