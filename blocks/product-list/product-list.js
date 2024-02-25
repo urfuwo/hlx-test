@@ -8,18 +8,14 @@ export default function decorate(block) {
     while (row.firstElementChild) li.append(row.firstElementChild);
     [...li.children].forEach((div) => {
       if (div.children.length === 1 && div.querySelector('picture')) div.className = 'cards-card-image';
-      else {
-        div.className = 'cards-card-body';
-        const h4 = div.querySelector('h4');
-        if (h4.innerText.startsWith('| ')) {
-          h4.innerText = h4.innerText.slice(2);
-          h4.classList.add('sapproduct');
-        }
-      }
+      else div.className = 'cards-card-body';
     });
     ul.append(li);
   });
-  ul.querySelectorAll('img').forEach((img) => img.closest('picture').replaceWith(createOptimizedPicture(img.src, img.alt, false, [{ width: '100' }])));
+  ul.querySelectorAll('img').forEach((img) => img.closest('picture')?.replaceWith(createOptimizedPicture(img.src, img.alt, false, [{ width: '100' }])));
+  if (ul.children.length < 3) {
+    ul.classList.add(`cards-length-${ul.children.length}`);
+  }
   block.textContent = '';
   block.append(ul);
 }
