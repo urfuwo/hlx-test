@@ -1,4 +1,4 @@
-.cards ul {
+.product-list ul {
   --card-height: auto;
 
   list-style: none;
@@ -11,30 +11,30 @@
 }
 
 @media (width >= 640px) {
-  .cards ul {
+  .product-list ul {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .cards ul.cards-length-1 {
+  .product-list ul.cards-length-1 {
     grid-template-columns: repeat(1,1fr);
   }
 }
 
 @media (width >= 980px) {
-  .cards ul {
+  .product-list ul {
     grid-template-columns: repeat(3, 1fr);
   }
 
-  .cards ul.cards-length-1 {
+  .product-list ul.cards-length-1 {
     grid-template-columns: repeat(1,1fr);
   }
 
-  .cards ul.cards-length-2 {
+  .product-list ul.cards-length-2 {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-.cards ul>li {
+.product-list ul>li {
   border: 1px solid var(--udexColorGrey2);
   box-shadow: 0 2px 4px rgb(34 54 73 / 20%);
   background-color: var(--background-color);
@@ -46,7 +46,7 @@
   flex-direction: column;
 }
 
-.cards ul>li div.cards-card-body {
+.product-list ul>li div.cards-card-body {
   margin: var(--udexSpacer16);
   display: flex;
   flex-direction: column;
@@ -54,18 +54,18 @@
   height: 100%;
 }
 
-.cards ul>li div.cards-card-image {
+.product-list ul>li div.cards-card-image {
   margin: var(--udexSpacer16);
   width: 6.25rem;
   height: 3rem;
 }
 
-.cards ul>li img {
+.product-list ul>li img {
   width: 6.25rem;
   height: 3rem;
 }
 
-.cards ul>li h4 {
+.product-list ul>li h4 {
   font-style: normal;
   font-family: var(--udexTypographyBodyXSFontFamily);
   font-weight: var(--udexTypographyDisplayMediumXSFontWeight);
@@ -78,11 +78,11 @@
   position: relative;
 }
 
-.cards ul>li h4:has(.icon-sapproduct) {
+.product-list ul>li h4:has(.icon-sapproduct) {
   padding-left: 16px;
 }
 
-.cards ul>li h4 .icon-sapproduct {
+.product-list ul>li h4 .icon-sapproduct {
   position: absolute;
   top: -4px;
   left: 0;
@@ -91,13 +91,13 @@
   padding: 0;
 }
 
-.cards ul>li h4 .icon-sapproduct img {
+.product-list ul>li h4 .icon-sapproduct img {
   height: 20px; 
   width: 6px;  
   padding: 0;
 }
 
-.cards ul>li h3 {
+.product-list ul>li h3 {
   font-style: normal;
   font-family: var(--udexTypographyHeadingMediumXXSFontFamily);
   font-weight: var(--udexTypographyHeadingMediumXXSFontWeight);
@@ -109,7 +109,7 @@
   margin-top: var(--udexSpacer8);
 }
 
-.cards ul>li div.cards-card-body, .cards ul>li div.cards-card-body a  {
+.product-list ul>li div.cards-card-body, .product-list ul>li div.cards-card-body a  {
   font-family: var(--udexTypographyBodyXSFontFamily);
   font-style: normal;
   text-decoration: none;
@@ -119,25 +119,25 @@
   color: var(--udexCoreTextDark);
 }
 
-.cards ul>li p {
+.product-list ul>li p {
   margin: 0;
 }
 
-.cards ul>li p.button-container {
+.product-list ul>li p.button-container {
   margin-top: auto;  
 }
 
-.cards ul>li p.button-container a {
+.product-list ul>li p.button-container a {
   padding: 6px 0;
   margin: 0;
 }
 
-.cards ul>li div.cards-card-body p:nth-last-of-type(2) {
+.product-list ul>li div.cards-card-body p:nth-last-of-type(2) {
   margin-bottom: var(--udexSpacer8);
 }
 
 
-.cards ul>li div.cards-card-body p a, .cards ul>li div.cards-card-body p a:hover {
+.product-list ul>li div.cards-card-body p a, .product-list ul>li div.cards-card-body p a:hover {
   background-color: unset;
   border: none;
   padding: 0;
@@ -145,6 +145,6 @@
   color: var(--sapLinkColor);
 }
 
-.cards .cards-card-body > *:first-child {
+.product-list .cards-card-body > *:first-child {
   margin-top: 0;
 }
