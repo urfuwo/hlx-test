@@ -12,25 +12,27 @@ function createEntry(element) {
 
 export default async function decorate(block) {
   const mainContent = document.querySelector('main > :nth-child(3)');
-  const headers = mainContent.querySelectorAll('h2, h3');
-  const tocElement = document.createElement('div');
-  const h2 = document.createElement('h2');
-  h2.innerText = 'What\'s on this page';
-  tocElement.appendChild(h2);
-  const tocList = document.createElement('ol');
-  headers.forEach((header) => {
-    const entry = createEntry(header);
-    tocList.appendChild(entry);
-  });
-  tocElement.appendChild(tocList);
-  tocElement.classList.add('toc');
-  block.append(tocElement);
+  const headers = mainContent?.querySelectorAll('h2, h3');
+  if (headers.length > 0) {
+    const tocElement = document.createElement('div');
+    const h2 = document.createElement('h2');
+    h2.innerText = 'What\'s on this page';
+    tocElement.appendChild(h2);
+    const tocList = document.createElement('ol');
+    headers.forEach((header) => {
+      const entry = createEntry(header);
+      tocList.appendChild(entry);
+    });
+    tocElement.appendChild(tocList);
+    tocElement.classList.add('toc');
+    block.append(tocElement);
+  }
 }
 
 function setActiveLink() {
   const links = document.querySelectorAll('.toc li');
   links.forEach((link) => {
-    const linkHash = link.querySelector('a').hash;
+    const linkHash = link.querySelector('a')?.hash;
     if (linkHash === window.location.hash) {
       link.classList.add('active');
     } else {

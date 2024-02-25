@@ -19,9 +19,6 @@
         list-style: none;
         padding: 0;
         margin: 0;
-    }
-
-    >ol {
         border-left: 1px solid var(--udexCoreDividerLight);
     }
 
@@ -35,8 +32,8 @@
         text-decoration: none;
         color: var(--udexColorNeutralBlack);
         align-self: center;
+        width: calc(100% - 3rem);
     }
-
 
     .toc-h3 {
         padding-left: 34px;
