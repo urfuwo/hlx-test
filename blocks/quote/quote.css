@@ -23,6 +23,15 @@
     color: var(--udexColorGrey8);
 }
 
+.quote .content p {
+    width: 100%;
+    margin-top: 0;
+}
+
+.quote .content p:last-of-type {
+    margin-bottom: 0;
+}
+
 .quote .qt {
     margin-bottom: var(--udexSpacer24);
 }
@@ -32,11 +41,12 @@
     font-family: var(--udexTypographyBodyXLFontFamily);
     font-weight: var(--udexTypographyBodyXLFontWeight);
     line-height: var(--udexTypographyBodyXLLineHeight);
+    flex-flow: column;
 }
 
-.quote .qt .content::before,
-.quote .qt .content::after {
-    display: flex;
+.quote .qt::before,
+.quote .qt::after {
+    align-self: flex-start;
     flex: 0 0 30px;
     height: 100%;
     justify-content: center;
@@ -51,12 +61,12 @@
     top: -8px;
 }
 
-.quote .qt .content::before {
+.quote .qt::before {
     content: '“';
     padding-right: 16px;
 }
 
-.quote .qt .content::after {
+.quote .qt::after {
     content: '”';
     padding-left: 16px;
 }
@@ -77,8 +87,8 @@
     line-height: var(--udexTypographyBodySLineHeight);
 }
 
-.quote.small .qt .content::before,
-.quote.small .qt .content::after {
+.quote.small .qt::before,
+.quote.small .qt::after {
     flex: 0 0 1.75rem;
     font-family: var(--udexTypographyDisplayRegularMFontFamily);
     font-size: var(--udexTypographyDisplayRegularMFontSize);
@@ -86,14 +96,14 @@
     line-height: 72px;
 
     /* align quotation marks to quote text */
-    top: 0;
+    top: -8px;
 }
 
-.quote.small .qt .content::before {
+.quote.small .qt::before {
     padding-right: 8px;
 }
 
-.quote.small .qt .content::after {
+.quote.small .qt::after {
     padding-left: 8px;
 }
 
