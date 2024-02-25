@@ -47,15 +47,15 @@
 }
 
 .product-list ul>li div.product-list-card-body {
-  margin: var(--udexSpacer16);
+  margin: var(--udexSpacer24);
   display: flex;
   flex-direction: column;
-  margin-bottom: 12px;
   height: 100%;
 }
 
 .product-list ul>li div.product-list-card-image {
-  margin: var(--udexSpacer16);
+  margin: var(--udexSpacer24);
+  margin-bottom: 0;
   width: 6.25rem;
   height: 3rem;
 }
@@ -115,7 +115,7 @@
   text-decoration: none;
   font-weight: var(--udexTypographyBodyXSFontWeight);
   font-size: var(--udexTypographyBodyXSFontSize);
-  line-height: var(--udexTypographyBodyXSFontLineHeight);
+  line-height: var(--udexTypographyBodyXSLineHeight);
   color: var(--udexCoreTextDark);
 }
 
