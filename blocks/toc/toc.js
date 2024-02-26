@@ -1,44 +1,38 @@
-function createEntry(element) {
-  const listEl = document.createElement('li');
-  const spanEl = document.createElement('span');
-  listEl.append(spanEl);
-  const linkEl = document.createElement('a');
-  linkEl.href = `#${element.id}`;
-  linkEl.innerText = element.innerText;
-  linkEl.classList.add(`toc-${element.tagName.toLowerCase()}`);
-  listEl.append(linkEl);
-  return listEl;
-}
-
-export default async function decorate(block) {
-  const mainContent = document.querySelector('main > :nth-child(3)');
-  const headers = mainContent?.querySelectorAll('h2, h3');
-  if (headers.length > 0) {
-    const tocElement = document.createElement('div');
-    const h2 = document.createElement('h2');
-    h2.innerText = 'What\'s on this page';
-    tocElement.appendChild(h2);
-    const tocList = document.createElement('ol');
-    headers.forEach((header) => {
-      const entry = createEntry(header);
-      tocList.appendChild(entry);
-    });
-    tocElement.appendChild(tocList);
-    tocElement.classList.add('toc');
-    block.append(tocElement);
-  }
-}
+import {
+  h2, ol, li, span, a, domEl,
+} from '../../scripts/dom-builder.js';
 
 function setActiveLink() {
   const links = document.querySelectorAll('.toc li');
   links.forEach((link) => {
     const linkHash = link.querySelector('a')?.hash;
     if (linkHash === window.location.hash) {
-      link.classList.add('active');
+      link.setAttribute('aria-current', 'true');
     } else {
-      link.classList.remove('active');
+      link.setAttribute('aria-current', 'false');
     }
   });
 }
-window.addEventListener('load', setActiveLink);
-window.addEventListener('hashchange', setActiveLink);
+
+export default async function decorate(block) {
+  const mainContent = document.querySelector('main > :nth-child(3)');
+  const headers = mainContent?.querySelectorAll('h2, h3');
+  if (headers.length > 0) {
+    const tocElement = domEl('aside', { class: 'toc' }, h2('What\'s on this page'));
+    const tocList = ol();
+    headers.forEach((header) => {
+      const entry = li(
+        span(),
+        a({
+          href: `#${header.id}`,
+          class: `toc-${header.tagName.toLowerCase()}`,
+        }, header.innerText),
+      );
+      tocList.appendChild(entry);
+    });
+    tocElement.appendChild(tocList);
+    block.append(tocElement);
+    window.addEventListener('load', setActiveLink);
+    window.addEventListener('hashchange', setActiveLink);
+  }
+}

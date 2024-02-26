@@ -43,7 +43,7 @@
         display: flex;
         min-height: var(--udexSpacer40);
 
-        &.active {
+        &[aria-current="true"] {
             color: var(--udexColorBlue7);
 
             >span {
