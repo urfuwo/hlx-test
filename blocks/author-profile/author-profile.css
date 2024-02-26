@@ -5,10 +5,7 @@
 .author-profile > div {
   display: flex;
   flex-direction: row;
-  padding-top: var(--udexSpacer20);
-  padding-bottom: var(--udexSpacer20);
-  padding-left: var(--udexSpacer24);
-  padding-right: var(--udexSpacer24);
+  padding: var(--udexSpacer20) var(--udexSpacer24);
   gap: var(--udexSpacer24);
   border: 1px solid var(--udexColorGrey2);
   box-shadow: 0 2px 4px rgb(34 54 73 / 20%);
