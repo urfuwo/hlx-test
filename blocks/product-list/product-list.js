@@ -13,7 +13,7 @@ export default function decorate(block) {
     ul.append(li);
   });
   ul.querySelectorAll('img').forEach((img) => img.closest('picture')?.replaceWith(createOptimizedPicture(img.src, img.alt, false, [{ width: '100' }])));
-  if (ul.children.length < 3) {
+  if (ul.children.length < 4) {
     ul.classList.add(`product-list-length-${ul.children.length}`);
   }
   block.textContent = '';
