@@ -7,6 +7,9 @@
   flex-direction: row;
   padding: var(--udexSpacer24) var(--udexSpacer20);
   gap: var(--udexSpacer24);
+  border: 1px solid var(--udexColorGrey2);
+  box-shadow: 0 2px 4px rgb(34 54 73 / 20%);
+  background-color: var(--background-color);
   height: var(--article-tile-height);
   border-radius: var(--sapTile_BorderCornerRadius);
 }
