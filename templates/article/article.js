@@ -15,9 +15,7 @@ function decorate(doc) {
   restructureArticle(main, '.hero');
   const tocFlag = getMetadata('toc');
   if (tocFlag && tocFlag.content !== 'no' && tocFlag.content !== 'false') {
-    const tocSection = div({ class: 'toc-container' });
-    const tocBlock = div({ class: 'toc' });
-    tocSection.appendChild(tocBlock);
+    const tocSection = div({ class: 'toc-container' }, div({ class: 'toc' }));
     main.insertBefore(tocSection, doc.querySelector('main > :nth-child(2)'));
   }
 }

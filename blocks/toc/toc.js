@@ -1,5 +1,5 @@
 import {
-  h2, ol, li, span, a, domEl,
+  h2, ol, li, span, a, aside,
 } from '../../scripts/dom-builder.js';
 
 function setActiveLink() {
@@ -18,7 +18,7 @@ export default async function decorate(block) {
   const mainContent = document.querySelector('main > :nth-child(3)');
   const headers = mainContent?.querySelectorAll('h2, h3');
   if (headers.length > 0) {
-    const tocElement = domEl('aside', { class: 'toc' }, h2('What\'s on this page'));
+    const tocElement = aside({ class: 'toc' }, h2('What\'s on this page'));
     const tocList = ol();
     headers.forEach((header) => {
       const entry = li(
