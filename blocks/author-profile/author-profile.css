@@ -5,43 +5,31 @@
 .author-profile > div {
   display: flex;
   flex-direction: row;
-  padding: var(--udexSpacer20) var(--udexSpacer24);
+  padding: var(--udexSpacer24) var(--udexSpacer20);
   gap: var(--udexSpacer24);
-  border: 1px solid var(--udexColorGrey2);
-  box-shadow: 0 2px 4px rgb(34 54 73 / 20%);
-  background-color: var(--background-color);
   height: var(--article-tile-height);
   border-radius: var(--sapTile_BorderCornerRadius);
 }
 
 .author-profile .avatar {
-  flex: 0 0 4rem;
-  width: 4rem;
-  height: 4rem;
+  flex: 0 0 5.25rem;
+  width: 5.25rem;
+  height: 5.25rem;
   vertical-align: top;
   border-radius: 50%;
-  background-color: lightgray;
+  border: 1px solid var(--udexColorGrey2);
+}
+
+.author-profile .avatar:hover {
+  border: 1px solid var(--udexColorGrey7);
 }
 
 .author-profile .avatar img {
   object-fit: cover;
-  height: 4rem;
-  width: 4rem;
+  height: 5.25rem;
+  width: 5.25rem;
   vertical-align: top;
   border-radius: 50%;
-}
-
-@media (width >= 980px) {
-  .author-profile .avatar {
-    flex: 0 0 7.5rem;
-    width: 7.5rem;
-    height: 7.5rem;
-  }
-
-  .author-profile .avatar img {
-    height: 120px;
-    width: 120px;
-  }
 }
 
 .author-profile h2 {
