@@ -15,10 +15,10 @@
       },
       {
         "containerId": "tools",
-        "title": "SEO Checker",
-        "id": "seocheck",
+        "title": "Preflight Checker",
+        "id": "preflight",
         "environments": ["dev", "preview", "live"],
-        "event": "seocheck"
+        "event": "preflight"
       }
     ]
   }

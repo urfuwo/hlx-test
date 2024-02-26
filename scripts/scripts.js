@@ -124,7 +124,6 @@ async function loadSAPThemeAndWebComponents() {
 }
 
 function initSidekick() {
-
   const preflightListener = async () => {
     const section = document.createElement('div');
     const wrapper = document.createElement('div');
@@ -140,22 +139,16 @@ function initSidekick() {
     customModal.showModal();
   };
 
-
   const sk = document.querySelector('helix-sidekick');
   if (sk) {
-    sk.addEventListener('custom:seocheck', preflightListener); // TODO change to preflight
+    sk.addEventListener('custom:preflight', preflightListener); // TODO change to preflight
   } else {
     document.addEventListener('sidekick-ready', () => {
       const oAddedSidekick = document.querySelector('helix-sidekick');
-      oAddedSidekick.addEventListener('custom:seocheck', preflightListener);
+      oAddedSidekick.addEventListener('custom:preflight', preflightListener);
     }, { once: true });
   }
 }
-
-
-
-
-
 
 /**
  * Loads everything needed to get to LCP.
