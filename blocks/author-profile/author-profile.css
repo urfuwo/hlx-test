@@ -24,10 +24,9 @@
 }
 
 .author-profile .avatar img {
-  max-height: 64px;
-  max-width: 64px;
-  height: auto;
-  width: auto;
+  object-fit: cover;
+  height: 4rem;
+  width: 4rem;
   vertical-align: top;
   border-radius: 50%;
 }
@@ -40,10 +39,8 @@
   }
 
   .author-profile .avatar img {
-    max-height: 120px;
-    max-width: 120px;
-    height: auto;
-    width: auto;
+    height: 120px;
+    width: 120px;
   }
 }
 
