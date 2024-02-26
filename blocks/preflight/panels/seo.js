@@ -1,4 +1,4 @@
-import { html, signal, useEffect } from '../htm-preact.js';
+import { div } from '../../../scripts/dom-builder.js';
 
 const DEF_ICON = 'purple';
 const DEF_DESC = 'Checking...';
@@ -6,18 +6,18 @@ const pass = 'green';
 const fail = 'red';
 const limbo = 'orange';
 
-const h1Result = signal({ icon: DEF_ICON, title: 'H1 count', description: DEF_DESC });
-const titleResult = signal({ icon: DEF_ICON, title: 'Title size', description: DEF_DESC });
-const canonResult = signal({ icon: DEF_ICON, title: 'Canonical', description: DEF_DESC });
-const descResult = signal({ icon: DEF_ICON, title: 'Meta description', description: DEF_DESC });
-const pubDateResult = signal({ icon: DEF_ICON, title: 'Published Date', description: DEF_DESC });
-const bodyResult = signal({ icon: DEF_ICON, title: 'Body size', description: DEF_DESC });
-const loremResult = signal({ icon: DEF_ICON, title: 'Lorem Ipsum', description: DEF_DESC });
-const linksResult = signal({ icon: DEF_ICON, title: 'Links', description: DEF_DESC });
+let h1Result = { icon: DEF_ICON, title: 'H1 count', description: DEF_DESC };
+let titleResult = { icon: DEF_ICON, title: 'Title size', description: DEF_DESC };
+let canonResult = { icon: DEF_ICON, title: 'Canonical', description: DEF_DESC };
+let descResult = { icon: DEF_ICON, title: 'Meta description', description: DEF_DESC };
+let pubDateResult = { icon: DEF_ICON, title: 'Published Date', description: DEF_DESC };
+let bodyResult = { icon: DEF_ICON, title: 'Body size', description: DEF_DESC };
+let loremResult = { icon: DEF_ICON, title: 'Lorem Ipsum', description: DEF_DESC };
+let linksResult = { icon: DEF_ICON, title: 'Links', description: DEF_DESC };
 
 function checkH1s() {
   const h1s = document.querySelectorAll('h1');
-  const result = { ...h1Result.value };
+  const result = { ...h1Result };
   if (h1s.length === 1) {
     result.icon = pass;
     result.description = 'Only one H1 on the page.';
@@ -29,13 +29,13 @@ function checkH1s() {
       result.description = 'Reason: No H1 on the page.';
     }
   }
-  h1Result.value = result;
+  h1Result = result;
   return result.icon;
 }
 
 async function checkTitle() {
   const titleSize = document.title.replace(/\s/g, '').length;
-  const result = { ...titleResult.value };
+  const result = { ...titleResult };
   if (titleSize < 15) {
     result.icon = fail;
     result.description = 'Reason: Title size is too short.';
@@ -46,13 +46,13 @@ async function checkTitle() {
     result.icon = pass;
     result.description = 'Title size is good.';
   }
-  titleResult.value = result;
+  titleResult = result;
   return result.icon;
 }
 
 async function checkCanon() {
   const canon = document.querySelector("link[rel='canonical']");
-  const result = { ...canonResult.value };
+  const result = { ...canonResult };
   const { href } = canon;
 
   try {
@@ -74,13 +74,13 @@ async function checkCanon() {
     result.icon = limbo;
     result.description = 'Canonical cannot be crawled.';
   }
-  canonResult.value = result;
+  canonResult = result;
   return result.icon;
 }
 
-async function checkDescription() {
+function checkDescription() {
   const metaDesc = document.querySelector('meta[name="description"]');
-  const result = { ...descResult.value };
+  const result = { ...descResult };
   if (!metaDesc) {
     result.icon = fail;
     result.description = 'Reason: No meta description found.';
@@ -97,13 +97,13 @@ async function checkDescription() {
       result.description = 'Meta description is good.';
     }
   }
-  descResult.value = result;
+  descResult = result;
   return result.icon;
 }
 
-async function checkPublishedDate() {
-  const pubDate = document.querySelector('meta[name="publisheddate"]');
-  const result = { ...pubDateResult.value };
+function checkPublishedDate() {
+  const pubDate = document.querySelector('meta[property="article:published_time"]');
+  const result = { ...pubDateResult };
   if (!pubDate) {
     result.icon = fail;
     result.description = 'Reason: No published date metadata found.';
@@ -117,12 +117,12 @@ async function checkPublishedDate() {
       result.description = 'Published date is good.';
     }
   }
-  pubDateResult.value = result;
+  pubDateResult = result;
   return result.icon;
 }
 
 async function checkBody() {
-  const result = { ...bodyResult.value };
+  const result = { ...bodyResult };
   const { length } = document.documentElement.innerText;
 
   if (length > 100) {
@@ -130,14 +130,14 @@ async function checkBody() {
     result.description = 'Body content has a good length.';
   } else {
     result.icon = fail;
-    result.description = 'Reson: Not enough content.';
+    result.description = 'Reason: Not enough content.';
   }
-  bodyResult.value = result;
+  bodyResult = result;
   return result.icon;
 }
 
-async function checkLorem() {
-  const result = { ...loremResult.value };
+function checkLorem() {
+  const result = { ...loremResult };
   const { innerHTML } = document.documentElement;
   if (innerHTML.includes('Lorem ipsum')) {
     result.icon = fail;
@@ -146,12 +146,12 @@ async function checkLorem() {
     result.icon = pass;
     result.description = 'No Lorem ipsum is used on the page.';
   }
-  loremResult.value = result;
+  loremResult = result;
   return result.icon;
 }
 
 async function checkLinks() {
-  const result = { ...linksResult.value };
+  const result = { ...linksResult };
   const links = document.querySelectorAll('a[href^="/"]');
 
   let badLink;
@@ -167,48 +167,49 @@ async function checkLinks() {
     result.icon = pass;
     result.description = 'Links are valid.';
   }
-  linksResult.value = result;
+  linksResult = result;
   return result.icon;
 }
 
-function SeoItem({ icon, title, description }) {
-  return html`
-    <div class=seo-item>
-      <div class="result-icon ${icon}"></div>
-      <div class=seo-item-text>
-        <p class=seo-item-title>${title}</p>
-        <p class=seo-item-description>${description}</p>
-      </div>
-    </div>`;
+function renderSEOItem(icon, title, description) {
+  return div(
+    { class: 'seo-item' },
+    div({ class: `result-icon ${icon}` }),
+    div(
+      { class: 'seo-item-text' },
+      div({ class: 'seo-item-title' }, title),
+      div({ class: 'seo-item-description' }, description),
+    ),
+  );
 }
 
-async function getResults() {
+export async function getSEOResults() {
   checkH1s();
   checkTitle();
-  //await checkCanon();
+  await checkCanon();
   checkDescription();
   checkBody();
   checkLorem();
-  //await checkLinks();
-  //await checkPublishedDate();
+  await checkLinks();
+  checkPublishedDate();
 }
 
-export default function Panel() {
-  useEffect(() => { getResults(); }, []);
-
-  return html`
-      <div class=seo-columns>
-      <div class=seo-column>
-        <${SeoItem} icon=${h1Result.value.icon} title=${h1Result.value.title} description=${h1Result.value.description} />
-        <${SeoItem} icon=${titleResult.value.icon} title=${titleResult.value.title} description=${titleResult.value.description} />
-        <${SeoItem} icon=${pubDateResult.value.icon} title=${pubDateResult.value.title} description=${pubDateResult.value.description} />        
-        <${SeoItem} icon=${descResult.value.icon} title=${descResult.value.title} description=${descResult.value.description} />
-        <${SeoItem} icon=${linksResult.value.icon} title=${linksResult.value.title} description=${linksResult.value.description} />
-      </div>
-      <div class=seo-column>
-        <${SeoItem} icon=${bodyResult.value.icon} title=${bodyResult.value.title} description=${bodyResult.value.description} />
-        <${SeoItem} icon=${loremResult.value.icon} title=${loremResult.value.title} description=${loremResult.value.description} />
-        <${SeoItem} icon=${canonResult.value.icon} title=${canonResult.value.title} description=${canonResult.value.description} />
-      </div>
-    </div>`;
+export function renderSEOPanel() {
+  return div(
+    { class: 'seo-columns' },
+    div(
+      { class: 'seo-column' },
+      renderSEOItem(h1Result.icon, h1Result.title, h1Result.description),
+      renderSEOItem(titleResult.icon, titleResult.title, titleResult.description),
+      renderSEOItem(pubDateResult.icon, pubDateResult.title, pubDateResult.description),
+      renderSEOItem(descResult.icon, descResult.title, descResult.description),
+    ),
+    div(
+      { class: 'seo-column' },
+      renderSEOItem(bodyResult.icon, bodyResult.title, bodyResult.description),
+      renderSEOItem(loremResult.icon, loremResult.title, loremResult.description),
+      renderSEOItem(canonResult.icon, canonResult.title, canonResult.description),
+      renderSEOItem(linksResult.icon, linksResult.title, linksResult.description),
+    ),
+  );
 }

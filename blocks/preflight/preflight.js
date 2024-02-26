@@ -1,43 +1,40 @@
-import { html, render, signal } from './htm-preact.js';
-import {picture, img} from '../../scripts/dom-builder.js'
-import SEO from './panels/seo.js';
+import { div, h3, button } from '../../scripts/dom-builder.js';
+import { getSEOResults, renderSEOPanel } from './panels/seo.js';
 
-const HEADING = 'SAP ContentHub Preflight';
-const IMG_PATH = '/blocks/preflight/img';
-
-const tabs = signal([
+const tabs = [
   // { title: 'General', selected: true },
-  { title: 'SEO', selected: true },
-]);
+  { id: 'seo', title: 'SEO Check Results', selected: true },
+];
 
 function setTab(active) {
-  tabs.value = tabs.value.map((tab) => {
-    const selected = tab.title === active.title;
-    return { ...tab, selected };
+  tabs.forEach((tab) => {
+    tab.selected = tab.title === active.title;
   });
 }
 
-function setPanel(title) {
-  switch (title) {
-    case 'SEO':
-      return html`<${SEO} />`;
+function setPanel(id) {
+  switch (id) {
+    case 'seo':
+      return renderSEOPanel();
     default:
-      return html`<p>No matching panel.</p>`;
+      return '<p>No matching panel.</p>';
   }
 }
 
 function TabButton(props) {
   const id = `tab-${props.idx + 1}`;
   const selected = props.tab.selected === true;
-  return html`
-    <button
-      id=${id}
-      class=preflight-tab-button
-      key=${props.tab.title}
-      aria-selected=${selected}
-      onClick=${() => setTab(props.tab)}>
-      ${props.tab.title}
-    </button>`;
+
+  return button(
+    {
+      id,
+      class: 'preflight-tab-button',
+      key: props.tab.id,
+      'aria-selected': selected,
+      onclick: () => setTab(props.tab),
+    },
+    props.tab.title,
+  );
 }
 
 function TabPanel(props) {
@@ -45,49 +42,37 @@ function TabPanel(props) {
   const labeledBy = `tab-${props.idx + 1}`;
   const selected = props.tab.selected === true;
 
-  return html`
-    <div
-      id=${id}
-      class=preflight-tab-panel
-      aria-labelledby=${labeledBy}
-      key=${props.tab.title}
-      aria-selected=${selected}
-      role="tabpanel">
-      ${setPanel(props.tab.title)}
-    </div>`;
+  return div(
+    {
+      id,
+      class: 'preflight-tab-panel',
+      'aria-labelledby': labeledBy,
+      key: props.tab.id,
+      'aria-selected': selected,
+      role: 'tabpanel',
+    },
+    setPanel(props.tab.id),
+  );
 }
-
-function Preflight() {
-  return html`
-    <div class=preflight-heading>
-      <p id=preflight-title>${HEADING}</p>
-      <div class=preflight-tab-button-group role="tablist" aria-labelledby=preflight-title>
-        ${tabs.value.map((tab, idx) => html`<${TabButton} tab=${tab} idx=${idx} />`)}
-      </div>
-    </div>
-    <div class=preflight-content>
-      ${tabs.value.map((tab, idx) => html`<${TabPanel} tab=${tab} idx=${idx} />`)}
-    </div>
-  `;
-}
-
-// function preloadAssets(el) {
-//   return new Promise((resolve) => {
-//     const bg = img( {src: `${window.hlx.codeBasePath}${IMG_PATH}/preflight-bg.png`} );
-//     const pic = picture({ class: 'bg-img' }, bg);
-//     bg.addEventListener('load', () => {
-//       resolve(pic);
-//       el.insertAdjacentElement('afterbegin', pic);
-
-//       // Lazily load other images
-//     //   const check = createTag('link', { rel: 'preload', as: 'image', href: `${window.hlx.codeBasePath}${IMG_PATH}/check.svg` });
-//     //   const expand = createTag('link', { rel: 'preload', as: 'image', href: `${window.hlx.codeBasePath}${IMG_PATH}/expand.svg` });
-//     //   document.head.append(check, expand);
-//     });
-//   });
-// }
 
 export default async function decorate(el) {
-  //await preloadAssets(el);
-  render(html`<${Preflight} />`, el);
+  // collect panel results
+  await getSEOResults();
+
+  // render panels
+  const preflight = div(
+    { class: 'preflight' },
+    div({ class: 'preflight-heading' }, h3({ id: 'preflight-title' }, 'SAP ContentHub Preflight')),
+    div(
+      {
+        class: 'preflight-tab-button-group',
+        role: 'tablist',
+        'aria-labelledby': 'preflight-title',
+      },
+      ...tabs.map((tab, idx) => TabButton({ tab, idx })),
+    ),
+    div({ class: 'preflight-content' }, ...tabs.map((tab, idx) => TabPanel({ tab, idx }))),
+    div({ class: 'preflight-content' }),
+  );
+  el.replaceWith(preflight);
 }
