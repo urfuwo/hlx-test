@@ -3,6 +3,8 @@
  * Show videos and social posts directly on your page
  * https://www.hlx.live/developer/block-collection/embed
  */
+
+/*
 const loadScript = (url, callback, type) => {
   const head = document.querySelector('head');
   const script = document.createElement('script');
@@ -14,6 +16,7 @@ const loadScript = (url, callback, type) => {
   head.append(script);
   return script;
 };
+*/
 
 const getDefaultEmbed = (url) => `<div style="left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.25%;">
   <iframe src="${url.href}" style="border: 0; top: 0; left: 0; width: 100%; height: 100%; position: absolute;" allowfullscreen=""
