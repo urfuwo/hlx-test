@@ -1,10 +1,13 @@
 import {
+  buildBlock,
+  decorateBlock,
   decorateBlocks,
   decorateButtons,
   decorateIcons,
   decorateSections,
   decorateTemplateAndTheme,
   getMetadata,
+  loadBlock,
   loadBlocks,
   loadCSS,
   loadFooter,
@@ -120,6 +123,33 @@ async function loadSAPThemeAndWebComponents() {
   }
 }
 
+function initSidekick() {
+  const preflightListener = async () => {
+    const section = document.createElement('div');
+    const wrapper = document.createElement('div');
+    section.appendChild(wrapper);
+    const preflightBlock = buildBlock('preflight', '');
+    wrapper.appendChild(preflightBlock);
+    decorateBlock(preflightBlock);
+    await loadBlock(preflightBlock);
+    const { default: getModal } = await import('../blocks/modal/modal.js');
+    const customModal = await getModal('dialog-modal', () => section.innerHTML, (modal) => {
+      modal.querySelector('button[name="close"]')?.addEventListener('click', () => modal.close());
+    });
+    customModal.showModal();
+  };
+
+  const sk = document.querySelector('helix-sidekick');
+  if (sk) {
+    sk.addEventListener('custom:preflight', preflightListener); // TODO change to preflight
+  } else {
+    document.addEventListener('sidekick-ready', () => {
+      const oAddedSidekick = document.querySelector('helix-sidekick');
+      oAddedSidekick.addEventListener('custom:preflight', preflightListener);
+    }, { once: true });
+  }
+}
+
 /**
  * Loads everything needed to get to LCP.
  * @param {Element} doc The container element
@@ -150,6 +180,7 @@ async function loadEager(doc) {
  * @param {Element} doc The container element
  */
 async function loadLazy(doc) {
+  initSidekick();
   const main = doc.querySelector('main');
   await loadBlocks(main);
 
