@@ -46,10 +46,10 @@
 }
 
 .author-profile p {
-  font-size: var(--udexTypographyBodySFontSize);
-  font-family: var(--udexTypographyBodySFontFamily);
-  font-weight: var(--udexTypographyBodySFontWeight);
-  line-height: var(--udexTypographyBodySLineHeight);
+  font-size: var(--udexTypographyBodyXSFontSize);
+  font-family: var(--udexTypographyBodyXSFontFamily);
+  font-weight: var(--udexTypographyBodyXSFontWeight);
+  line-height: var(--udexTypographyBodyXSLineHeight);
   text-align: left;
   margin: 0;
 }
