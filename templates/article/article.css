@@ -13,6 +13,8 @@
 main {
   display: grid;
   grid-auto-flow: row;
+  column-gap: var(--udexGridGutters);
+  margin-block-end: var(--udexSpacer84);
 
   @media (width < 980px) {
     & > :not(.hero-container) {
@@ -28,13 +30,60 @@ main {
   }
 
   @media (width >= 980px) {
+    grid-template-columns: 8fr 4fr;
+    grid-template-rows: repeat(3, auto);
+
+    &
+      > :not(
+        :is(
+            .hero-container,
+            .toc-container,
+            [data-location='sidebar'],
+            [data-location='document-footer']
+          )
+      ) {
+      grid-column: 1 / 2;
+      margin-inline-start: var(--udexGridMargins);
+    }
+
+    & > [data-location='sidebar'] {
+      grid-column: 2 / 3;
+      grid-row: -3 / -2;
+      margin-inline-end: var(--udexGridMargins);
+    }
+
+    & > [data-location='document-footer'] {
+      grid-column: -3 / span 2;
+      margin-inline: var(--udexGridMargins);
+    }
+
     /* if page has table of contents it has a 3 column layout */
     &:has(.toc-container) {
       grid-template-columns: 3fr 6fr 3fr;
-    }
 
-    grid-template-columns: 8fr 4fr;
-    grid-template-rows: repeat(3, auto);
+      & > [data-location='sidebar'] {
+        grid-column: 3 / 4;
+        grid-row: -3 / -2;
+        margin-inline-end: var(--udexGridMargins);
+      }
+
+      & > [data-location='document-footer'] {
+        grid-column: -4 / span 3;
+        margin-inline: var(--udexGridMargins);
+      }
+
+      &
+        > :not(
+          :is(
+              .hero-container,
+              .toc-container,
+              [data-location='sidebar'],
+              [data-location='document-footer']
+            )
+        ) {
+        grid-column: 2 / 3;
+      }
+    }
 
     & > .hero-container {
       margin-block-end: var(--udexSpacer84);
@@ -45,32 +94,7 @@ main {
       grid-column: 1 / 2;
       margin-inline-start: var(--udexGridMargins);
     }
-
-    & > :not(:is(.hero-container, .toc-container)) {
-      grid-column: 2 / 3;
-    }
-
-    /* only apply margin to main content if it starts from the first column */
-    &:not(:has(.toc-container)) {
-      & > :nth-child(2) {
-        margin-inline-start: var(--udexGridMargins);
-      }
-    }
-
-    & > [data-location='sidebar'] {
-      grid-column: 3 / 4;
-      grid-row: -3 / -2;
-      margin-inline-end: var(--udexGridMargins);
-    }
-
-    & > [data-location='document-footer'] {
-      grid-column: -4 / span 3;
-      margin-inline: var(--udexGridMargins);
-    }
   }
-
-  column-gap: var(--udexGridGutters);
-  margin-block-end: var(--udexSpacer84);
 }
 
 /* image and video caption */
