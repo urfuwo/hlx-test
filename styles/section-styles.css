@@ -1,0 +1,46 @@
+.section.background-blue,
+.section.background-blue-1 {
+  background-color: var(--udexColorBlue1);
+}
+
+.section.background-blue-2 {
+  background-color: var(--udexColorBlue2);
+}
+
+.section.background-blue-3 {
+  background-color: var(--udexColorBlue3);
+}
+
+.section.background-pink,
+.section.background-pink-1 {
+  background-color: var(--udexColorPink1);
+}
+
+.section.background-pink-2 {
+  background-color: var(--udexColorPink2);
+}
+
+.section.background-green-1 {
+  background-color: var(--udexColorGreen1);
+}
+
+.section.background-green,
+.section.background-green-2 {
+  background-color: var(--udexColorGreen2);
+}
+
+.section.text-white {
+    color: var(--udexColorNeutralWhite);
+}
+
+.section.text-black {
+    color: var(--udexColorNeutralBlack);
+}
+
+.section.divider-top {
+    margin-top: 5px;
+    box-shadow:
+        0 -2px 0 white,
+        0 -3px 0 var(--udexCoreDividerLight),
+        0 -5px 0 white;
+}
