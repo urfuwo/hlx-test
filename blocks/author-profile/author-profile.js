@@ -11,8 +11,8 @@ const AUTHOR_INDEX = '/authors-index.json';
 const fallbackName = 'Name';
 const fallbackPath = '/author/name';
 const fallbackDescription = 'Author';
-const fallbackLinkAriaLabel = 'Read more';
 const fallbackLinkText = 'See more by this author';
+const fallbackLinkAriaLabel = 'Read more';
 
 const breakpoints = [
   { media: '(min-width: 980px)', width: '2000' },
