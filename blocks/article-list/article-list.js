@@ -14,7 +14,6 @@ const ARTICLE_FORMATTER = new Intl.DateTimeFormat('default', {
   day: 'numeric',
 });
 
-// TODO: change to web component once available
 function renderCard(card) {
   const formattedDate = ARTICLE_FORMATTER.format(new Date(card.publicationDate * 1000));
   const cardAuthorUrl = `/author/${toClassName(card.author).replace('-', '')}`; // TODO look up author URL from index
@@ -83,8 +82,7 @@ export default async function listArticles(block, config = { filter: null, maxEn
     contextFilter = determineContextFilter();
   }
 
-  let articles = await ffetch(ARTICLE_INDEX)
-    .filter(contextFilter);
+  let articles = await ffetch(ARTICLE_INDEX).filter(contextFilter);
 
   if (config.maxEntries !== null) {
     articles = await articles.limit(config.maxEntries);
