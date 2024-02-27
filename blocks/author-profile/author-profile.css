@@ -10,7 +10,6 @@
   border: 1px solid var(--udexColorGrey2);
   box-shadow: 0 2px 4px rgb(34 54 73 / 20%);
   background-color: var(--background-color);
-  height: auto;
   border-radius: var(--sapTile_BorderCornerRadius);
 }
 
