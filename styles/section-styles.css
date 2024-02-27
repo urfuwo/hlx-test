@@ -44,3 +44,9 @@
         0 -3px 0 var(--udexCoreDividerLight),
         0 -5px 0 white;
 }
+
+/* This is a temporary rule to show "wide" body rows */
+.section.row-wide {
+    padding-left: var(--udexGridMargins);
+    margin-left: 0;
+}
