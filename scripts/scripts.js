@@ -105,27 +105,6 @@ async function decorateVideoLinks(main) {
   };
 
   /**
-   * Embeds a SAP DAM video.
-   * @function embedSapDam
-   * @param {URL} url - The URL of the SAP DAM video.
-   * @returns {string} - The HTML for embedding the SAP DAM video.
-   */
-  const embedSapDam = (url) => {
-    const [, , vid] = url.pathname.split('/');
-    const embedHTML = `<div class="video-embed-container">
-        <video class="video-embed-iframe" preload="none">
-          <source src="https://d.dam.sap.com/m/${vid}/hls.m3u8" type="application/x-mpegURL">
-        </video>
-      </div>`;
-    return embedHTML;
-  };
-
-
-
-
-
-
-  /**
    * Configuration for different types of embeds.
    * @typedef {Object} EmbedConfig
    * @property {string[]} match - The list of keywords to match against URLs.
@@ -135,10 +114,6 @@ async function decorateVideoLinks(main) {
     {
       match: ['youtube', 'youtu.be'],
       embed: embedYoutube,
-    },
-    {
-      match: ['d.dam.sap.com'],
-      embed: embedSapDam,
     },
     {
       match: ['linkedin.com'],
