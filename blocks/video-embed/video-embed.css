@@ -11,6 +11,7 @@
   width: 100%;
   aspect-ratio: 16 / 9;
   position: relative;
+  cursor: pointer;
 }
 
 .video-embed .video-embed-placeholder > * {
