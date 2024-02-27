@@ -10,7 +10,7 @@
   border: 1px solid var(--udexColorGrey2);
   box-shadow: 0 2px 4px rgb(34 54 73 / 20%);
   background-color: var(--background-color);
-  height: var(--article-tile-height);
+  height: auto;
   border-radius: var(--sapTile_BorderCornerRadius);
 }
 
@@ -24,7 +24,7 @@
 }
 
 .author-profile .avatar:hover {
-  border: 1px solid var(--udexColorGrey7);
+  border-color: var(--udexColorGrey7);
 }
 
 .author-profile .avatar img {
@@ -55,11 +55,11 @@
 }
 
 .author-profile .link {
+  text-align: left;
   font-size: var(--udexTypographyBodySFontSize);
   font-family: var(--udexTypographyBodySFontFamily);
   font-weight: var(--udexTypographyBodySFontWeight);
   line-height: var(--udexTypographyBodySLineHeight);
-  text-align: left;
   padding-top: var(--udexSpacer4);
   padding-bottom: var(--udexSpacer4);
 }

@@ -8,11 +8,29 @@ import {
 import ffetch from '../../scripts/ffetch.js';
 
 const AUTHOR_INDEX = '/authors-index.json';
+const fallbackDescription = 'Author';
+const fallbackLinkAriaLabel = 'Read more';
+const fallbackLinkText = 'See more by this author';
 
 const breakpoints = [
   { media: '(min-width: 980px)', width: '2000' },
   { width: '750' },
 ];
+
+function extractAuthorDescription(details) {
+  let { description } = details;
+  if (!description) {
+    if (details.title) {
+      description = details.title;
+      if (details.author && details.title.startsWith(`${details.author}, `)) {
+        description = details.title.substring(details.author.length + 2);
+      }
+    } else {
+      description = fallbackDescription;
+    }
+  }
+  return description;
+}
 
 async function getAuthorDetails() {
   // #todo: handle multiple authors
@@ -21,28 +39,23 @@ async function getAuthorDetails() {
   if (!result || result.length < 1) {
     return null;
   }
-  const elem = result[0];
-  if (!elem.description) {
-    elem.description = 'Head of Something';
-  }
-  return elem;
+  const details = result[0];
+  details.description = extractAuthorDescription(details);
+  return details;
 }
 
 export default async function decorate(block) {
   const details = await getAuthorDetails();
-  const authorName = details.author;
-  const authorDescription = details.description;
-  const authorPage = details.path;
-  const authorImage = createOptimizedPicture(details.image, authorName, false, breakpoints);
+  const authorImage = createOptimizedPicture(details.image, details.author, false, breakpoints);
   const authorProfile = div(
     div({ class: 'avatar' }, div(authorImage)),
     div(
       { class: 'details' },
-      h2(authorName),
-      p(authorDescription),
+      h2(details.author),
+      p(details.description),
       p(
         { class: 'link' },
-        a({ href: authorPage, 'aria-label': 'Read more' }, 'See more by this author'),
+        a({ href: details.path, 'aria-label': fallbackLinkAriaLabel }, fallbackLinkText),
         span(
           { class: ['icon', 'icon-link-arrow'] },
           img(
