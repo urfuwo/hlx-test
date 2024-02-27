@@ -12,9 +12,17 @@
  * @param {URL} url - The URL of the YouTube video.
  * @returns {string} - The HTML code for embedding the YouTube video.
  */
-const embedYoutube = (url) => {
+const embedYoutube = (url, autoplay = true) => {
+  const usp = new URLSearchParams(url.search);
+  const suffix = autoplay ? '&muted=1&autoplay=1' : '';
+  let vid = usp.get('v') ? encodeURIComponent(usp.get('v')) : '';
+  const embed = url.pathname;
+  if (url.origin.includes('youtu.be')) {
+    [, vid] = url.pathname.split('/');
+  }
+
   const embedHTML = `<div class="video-embed-container">
-    <iframe src="${url.href}&autoplay=1"
+    <iframe src="https://www.youtube.com${vid ? `/embed/${vid}?rel=0&v=${vid}${suffix}` : embed}"
     class="video-embed-iframe"
     allow="autoplay; fullscreen; picture-in-picture; encrypted-media; accelerometer; gyroscope; picture-in-picture"
     allowfullscreen=""
@@ -35,15 +43,8 @@ const embedYoutube = (url) => {
  * @todo
  */
 const embedSapDam = (url) => {
-  const embedHTML = `<div class="video-embed-container">
-    <iframe src="${url.href}"
-    class="video-embed-iframe"
-    allow="autoplay; fullscreen; picture-in-picture; encrypted-media; accelerometer; gyroscope; picture-in-picture"
-    allowfullscreen=""
-    scrolling="no"
-    title="Content from Youtube"
-    loading="lazy"></iframe>
-    </div>`;
+  const [, , vid] = url.pathname.split('/');
+  const embedHTML = `<sap-video-player><source>https://d.dam.sap.com/m/${vid}/hls.m2u8</source></sap-video-player>`;
   return embedHTML;
 };
 
@@ -55,26 +56,24 @@ const embedSapDam = (url) => {
  * @param {string} source - The source of the video.
  * @param {string} id - The ID of the video.
  */
-const loadEmbed = (block, source, id) => {
+const loadEmbed = (block, link) => {
   if (block.classList.contains('embed-is-loaded')) {
     return;
   }
 
   const EMBEDS_CONFIG = [
     {
-      match: ['youtube'],
+      match: ['youtube', 'youtu.be'],
       embed: embedYoutube,
-      link: `https://www.youtube.com/embed/${id}?rel=0&v=${id}`,
     },
     {
-      match: ['dam'],
+      match: ['d.dam.sap.com'],
       embed: embedSapDam,
-      link: `https://d.dam.sap.com/m/${id}/hls.m2u8`,
     },
   ];
 
-  const config = EMBEDS_CONFIG.find((e) => e.match.some((match) => source.toLowerCase().includes(match)));
-  const url = new URL(config.link);
+  const config = EMBEDS_CONFIG.find((e) => e.match.some((match) => link.toLowerCase().includes(match)));
+  const url = new URL(link);
 
   if (config) {
     block.innerHTML = config.embed(url);
@@ -92,22 +91,10 @@ const loadEmbed = (block, source, id) => {
  * @returns {Object[]} - Array of objects with extracted data.
  */
 const extractVideoData = (block) => {
-  const containers = block.querySelectorAll('.video-embed > div');
-  const videoData = [];
-
-  containers.forEach((container) => {
-    const firstChild = container.querySelector('div:first-child');
-    const secondChild = container.querySelector('div:last-child');
-    if (firstChild && secondChild) {
-      const data = {};
-      const key = firstChild.textContent.trim().replace(/\s+/g, '_').toLowerCase();
-      data[key] = secondChild.textContent.trim();
-      videoData.push(data);
-      container.parentElement.removeChild(container); // Remove the second child div
-    }
-  });
-
-  return videoData;
+  const linkDiv = block.querySelector('.video-embed > div:last-child');
+  const link = linkDiv.textContent.trim();
+  linkDiv.parentElement.removeChild(linkDiv); // Remove the second child div
+  return link;
 };
 
 /**
@@ -117,22 +104,22 @@ const extractVideoData = (block) => {
  * @param {HTMLElement} block - The HTML block fragment.
  */
 export default function decorate(block) {
+  console.log(block);
+
   const placeholder = block.querySelector('picture');
-  const videoData = extractVideoData(block);
-  const { video_id: id } = videoData.find((data) => data.video_id);
-  const { source } = videoData.find((data) => data.source);
+  const link = extractVideoData(block);
 
   if (placeholder) {
     const wrapper = document.createElement('div');
     wrapper.className = 'video-embed-placeholder';
     wrapper.prepend(placeholder);
     block.append(wrapper);
-    placeholder.addEventListener('click', () => loadEmbed(block, source, id));
+    placeholder.addEventListener('click', () => loadEmbed(block, link));
   } else {
     const observer = new IntersectionObserver((entries) => {
       if (entries.some((e) => e.isIntersecting)) {
         observer.disconnect();
-        loadEmbed(block, source, id);
+        loadEmbed(block, link);
       }
     });
     observer.observe(block);

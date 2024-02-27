@@ -12,6 +12,8 @@
   aspect-ratio: 16 / 9;
   position: relative;
   cursor: pointer;
+  background-color: #000;
+  opacity: 40%;
 }
 
 .video-embed .video-embed-placeholder > * {
