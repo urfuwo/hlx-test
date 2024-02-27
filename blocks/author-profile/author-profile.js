@@ -8,6 +8,8 @@ import {
 import ffetch from '../../scripts/ffetch.js';
 
 const AUTHOR_INDEX = '/authors-index.json';
+const fallbackName = 'Name';
+const fallbackPath = '/author/name';
 const fallbackDescription = 'Author';
 const fallbackLinkAriaLabel = 'Read more';
 const fallbackLinkText = 'See more by this author';
@@ -35,20 +37,20 @@ function extractAuthorDescription(details) {
 async function getAuthorDetails() {
   // #todo: handle multiple authors
   const name = getMetadata('author');
-  const result = await ffetch(AUTHOR_INDEX).filter((entry) => entry.author === name).limit(1).all();
-  if (!result || result.length < 1) {
-    return null;
-  }
-  const details = result[0];
+  const result = name
+    ? await ffetch(AUTHOR_INDEX).filter((entry) => entry.author === name).limit(1).all() : null;
+  const details = (!result || result.length < 1)
+    ? { path: fallbackPath, author: fallbackName } : result[0];
   details.description = extractAuthorDescription(details);
   return details;
 }
 
 export default async function decorate(block) {
   const details = await getAuthorDetails();
-  const authorImage = createOptimizedPicture(details.image, details.author, false, breakpoints);
+  const authorImage = details.image
+    ? createOptimizedPicture(details.image, details.author, false, breakpoints) : null;
   const authorProfile = div(
-    div({ class: 'avatar' }, div(authorImage)),
+    div({ class: 'avatar' }, authorImage ? div(authorImage) : div()),
     div(
       { class: 'details' },
       h2(details.author),
