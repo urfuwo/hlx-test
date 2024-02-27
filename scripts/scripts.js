@@ -52,9 +52,6 @@ async function decorateTemplates(main) {
   }
 }
 
-/*
- * @deprecated
- */
 async function decorateVideoLinks(main) {
   const embedYoutube = (url, autoplay = false) => {
     const usp = new URLSearchParams(url.search);
@@ -101,7 +98,7 @@ export async function decorateMain(main, shouldDecorateTemplates = true) {
   }
   decorateSections(main);
   decorateBlocks(main);
-  //decorateVideoLinks(main);
+  decorateVideoLinks(main);
 }
 
 /**
