@@ -1,4 +1,5 @@
 import { div } from '../../scripts/dom-builder.js';
+import { toCamelCase } from '../../scripts/aem.js';
 import listArticles from '../article-list/article-list.js';
 
 function extractFilterAttribues(filterInfo) {
@@ -6,7 +7,7 @@ function extractFilterAttribues(filterInfo) {
   let filterValue = filterInfo?.lastElementChild?.textContent?.toLowerCase();
   if (filterId && filterValue) {
     filterValue = filterValue.replace('*', '');
-    return { name: filterId, value: filterValue.split(',').map((value) => value.trim()) };
+    return { name: toCamelCase(filterId), value: filterValue.split(',').map((value) => value.trim()) };
   }
   return null;
 }
@@ -40,7 +41,7 @@ function createFilter(filterAttributes) {
     const topics = filter(cleanedUpTopics, filterAttributes.topics);
     if (!topics) return false;
     // content types
-    const contentType = filter(entry.contentType?.toLowerCase(), filterAttributes.contentTypes);
+    const contentType = filter(entry['content-type']?.toLowerCase(), filterAttributes.contentTypes);
     if (!contentType) return false;
     // paths
     const path = entry.path?.startsWith(filterAttributes.paths);
