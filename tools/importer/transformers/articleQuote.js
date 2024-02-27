@@ -8,8 +8,8 @@ function cleanQuoteText(qText) {
   qT = `<p>${qT}</p>`;
   /* remove newlines */
   qT = qT.replace(/[\n\t]/gm, '');
-  /* replace all brs with closing / opening paragraphs */
-  qT = qT.replaceAll(/<br>/gm, '</p><p>');
+  /* replace all brs with spaces */
+  qT = qT.replaceAll(/<br>/gm, ' ');
   return qT;
 }
 
