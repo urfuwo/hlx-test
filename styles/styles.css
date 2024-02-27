@@ -257,19 +257,21 @@ main .section {
   padding-bottom: 56px;
 }
 
-.video-embed-container {
-  left: 0;
-  width: 100%;
-  height: 0;
+
+/**
+ * Styles for embedding video content.
+ */
+ .video-embed-container {
   position: relative;
-  padding-bottom: 56.25%;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
 }
 
 .video-embed-iframe {
+  position: absolute;
+  width: 100%;
+  height: 100%;
   border: 0;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  position: absolute;
 }

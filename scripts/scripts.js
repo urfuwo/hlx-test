@@ -55,7 +55,7 @@ async function decorateTemplates(main) {
 /**
  * Embeds supported video players for link elements for supported video hostnames.
  * @async
- * @param {HTMLElement} main - The main HTML fragment containing the video links.
+ * @param {HTMLElement} main - The HTML fragment containing the video links.
  * @returns {Promise<void>} - A Promise that resolves when the video links are decorated.
  */
 async function decorateVideoLinks(main) {
@@ -63,7 +63,7 @@ async function decorateVideoLinks(main) {
    * Embeds a YouTube video.
    * @function embedYoutube
    * @param {URL} url - The URL of the YouTube video.
-   * @param {boolean} [autoplay=false] - Whether to autoplay the video.
+   * @param {boolean} [autoplay=false] - Whether to autoplay the video, defaults to false.
    * @returns {string} - The HTML code for embedding the YouTube video.
    */
   const embedYoutube = (url, autoplay = false) => {
@@ -91,7 +91,7 @@ async function decorateVideoLinks(main) {
    * Embeds a LinkedIn Video.
    * @function embedLinkedIn
    * @param {URL} url - The URL of the LinkedIn video.
-   * @returns {string} - The HTML code for embedding the LinkedIn video.
+   * @returns {string} - The HTML for embedding the LinkedIn video.
    */
   const embedLinkedIn = (url) => {
     const [, , , , vid] = url.pathname.split('/');
@@ -108,13 +108,22 @@ async function decorateVideoLinks(main) {
    * Embeds a SAP DAM video.
    * @function embedSapDam
    * @param {URL} url - The URL of the SAP DAM video.
-   * @returns {string} - The HTML code for embedding the SAP DAM video.
+   * @returns {string} - The HTML for embedding the SAP DAM video.
    */
   const embedSapDam = (url) => {
     const [, , vid] = url.pathname.split('/');
-    const embedHTML = `<sap-video-player><source>https://d.dam.sap.com/m/${vid}/hls.m2u8</source></sap-video-player>`;
+    const embedHTML = `<div class="video-embed-container">
+        <video class="video-embed-iframe" preload="none">
+          <source src="https://d.dam.sap.com/m/${vid}/hls.m3u8" type="application/x-mpegURL">
+        </video>
+      </div>`;
     return embedHTML;
   };
+
+
+
+
+
 
   /**
    * Configuration for different types of embeds.
