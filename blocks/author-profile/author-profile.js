@@ -8,8 +8,8 @@ import {
 import ffetch from '../../scripts/ffetch.js';
 
 const AUTHOR_INDEX = '/authors-index.json';
-const fallbackName = 'Name';
 const fallbackPath = '/author/name';
+const fallbackName = 'Name';
 const fallbackDescription = 'Author';
 const fallbackLinkText = 'See more by this author';
 const fallbackLinkAriaLabel = 'Read more';
