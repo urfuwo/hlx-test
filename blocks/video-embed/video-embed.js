@@ -73,7 +73,7 @@ const loadEmbed = (block, source, id) => {
     },
   ];
 
-  const config = EMBEDS_CONFIG.find(e => e.match.some(match => source.toLowerCase().includes(match)));
+  const config = EMBEDS_CONFIG.find((e) => e.match.some((match) => source.toLowerCase().includes(match)));
   const url = new URL(config.link);
 
   if (config) {
