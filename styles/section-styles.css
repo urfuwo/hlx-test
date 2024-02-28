@@ -20,11 +20,11 @@
   background-color: var(--udexColorPink2);
 }
 
+.section.background-green,
 .section.background-green-1 {
   background-color: var(--udexColorGreen1);
 }
 
-.section.background-green,
 .section.background-green-2 {
   background-color: var(--udexColorGreen2);
 }
