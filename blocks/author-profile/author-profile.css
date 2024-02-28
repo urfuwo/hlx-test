@@ -1,5 +1,5 @@
 .author-profile {
-  padding-top: var(--udexSpacer20);
+  margin-top: var(--udexSpacer20);
 }
 
 .author-profile > div {

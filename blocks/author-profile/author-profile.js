@@ -1,5 +1,5 @@
 import {
-  createOptimizedPicture,
+  createOptimizedPicture, decorateIcons,
   getMetadata,
 } from '../../scripts/aem.js';
 import {
@@ -7,16 +7,8 @@ import {
 } from '../../scripts/dom-builder.js';
 import ffetch from '../../scripts/ffetch.js';
 
-const AUTHOR_INDEX = '/authors-index.json';
-const fallbackPath = '/author/name';
-const fallbackName = 'Name';
-const fallbackDescription = 'Author';
-const fallbackLinkText = 'See more by this author';
-const fallbackLinkAriaLabel = 'Read more';
-
 const breakpoints = [
-  { media: '(min-width: 980px)', width: '2000' },
-  { width: '750' },
+  { width: '120' },
 ];
 
 function extractAuthorDescription(details) {
@@ -28,7 +20,7 @@ function extractAuthorDescription(details) {
         description = details.title.substring(details.author.length + 2);
       }
     } else {
-      description = fallbackDescription;
+      description = 'Author';
     }
   }
   return description;
@@ -38,9 +30,9 @@ async function getAuthorDetails() {
   // #todo: handle multiple authors
   const name = getMetadata('author');
   const result = name
-    ? await ffetch(AUTHOR_INDEX).filter((entry) => entry.author === name).limit(1).all() : null;
+    ? await ffetch('/authors-index.json').filter((entry) => entry.author === name).limit(1).all() : null;
   const details = (!result || result.length < 1)
-    ? { path: fallbackPath, author: fallbackName } : result[0];
+    ? { path: '/author/name', author: 'Name' } : result[0];
   details.description = extractAuthorDescription(details);
   return details;
 }
@@ -57,15 +49,11 @@ export default async function decorate(block) {
       p(details.description),
       p(
         { class: 'link' },
-        a({ href: details.path, 'aria-label': fallbackLinkAriaLabel }, fallbackLinkText),
-        span(
-          { class: ['icon', 'icon-link-arrow'] },
-          img(
-            { src: '/icons/link-arrow.svg' },
-          ),
-        ),
+        a({ href: details.path, 'aria-label': 'Read more' }, 'See more by this author'),
+        span({ class: 'icon icon-link-arrow' }),
       ),
     ),
   );
+  decorateIcons(authorProfile);
   block.append(authorProfile);
 }
