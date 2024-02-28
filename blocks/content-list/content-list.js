@@ -29,23 +29,17 @@ function filter(entry, attributes) {
 
 function createFilter(filterAttributes) {
   return (entry) => {
-    // tags
     const cleanedUpTags = JSON.parse(entry.tags)?.map((tag) => tag.toLowerCase()) || [];
     const tags = filter(cleanedUpTags, filterAttributes.tags);
     if (!tags) return false;
-    // authors
     const authors = filter(entry.author?.toLowerCase(), filterAttributes.authors);
     if (!authors) return false;
-    // topics
     const cleanedUpTopics = JSON.parse(entry.topics)?.map((topic) => topic.toLowerCase()) || [];
     const topics = filter(cleanedUpTopics, filterAttributes.topics);
     if (!topics) return false;
-    // content types
     const contentType = filter(entry['content-type']?.toLowerCase(), filterAttributes.contentTypes);
     if (!contentType) return false;
-    // paths
-    const path = entry.path?.startsWith(filterAttributes.paths);
-    return path;
+    return entry.path?.startsWith(filterAttributes.paths);
   };
 }
 
