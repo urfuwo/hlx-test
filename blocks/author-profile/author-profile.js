@@ -3,7 +3,7 @@ import {
   getMetadata,
 } from '../../scripts/aem.js';
 import {
-  div, h2, p, a, span, img,
+  div, h2, p, a, span,
 } from '../../scripts/dom-builder.js';
 import ffetch from '../../scripts/ffetch.js';
 
