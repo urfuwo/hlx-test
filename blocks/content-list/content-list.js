@@ -5,24 +5,27 @@ import listArticles from '../article-list/article-list.js';
 function extractFilterAttribues(filterInfo) {
   const filterId = filterInfo?.firstElementChild?.textContent?.toLowerCase();
   let filterValue = filterInfo?.lastElementChild?.textContent?.toLowerCase();
-  if (filterId && filterValue) {
+  if (filterId && filterValue && filterValue !== '*') {
     filterValue = filterValue.replace('*', '');
     return { name: toCamelCase(filterId), value: filterValue.split(',').map((value) => value.trim()) };
   }
   return null;
 }
 
-function filter(entry, attributes) {
+function filter(entryField, attributes) {
   if (Array.isArray(attributes)) {
-    if (Array.isArray(entry)) {
-      if (!entry.some((e) => attributes.includes(e))) {
+    if (Array.isArray(entryField)) {
+      if (!entryField.some((e) => attributes.includes(e))) {
         return false;
       }
-    } else if (!attributes.includes(entry)) {
+    } else {
+      return attributes.includes(entryField);
+    }
+  } else if (attributes && Array.isArray(entryField)) {
+    if (!entryField.some((e) => e.includes(attributes))) {
       return false;
     }
-  } else if (attributes && !entry.includes(attributes)) {
-    return false;
+    return entryField.includes(attributes);
   }
   return true;
 }
@@ -34,7 +37,7 @@ function createFilter(filterAttributes) {
     if (!tags) return false;
     const authors = filter(entry.author?.toLowerCase(), filterAttributes.authors);
     if (!authors) return false;
-    const cleanedUpTopics = JSON.parse(entry.topics)?.map((topic) => topic.toLowerCase()) || [];
+    const cleanedUpTopics = JSON.parse(entry.topics)?.[0]?.split(', ').flat() || [];
     const topics = filter(cleanedUpTopics, filterAttributes.topics);
     if (!topics) return false;
     const contentType = filter(entry['content-type']?.toLowerCase(), filterAttributes.contentTypes);
