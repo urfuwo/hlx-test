@@ -11,9 +11,7 @@ function closeOnEscape(e) {
   if (e.code === 'Escape') {
     const nav = document.getElementById('nav');
     const navSections = nav.querySelector('.nav-sections');
-    const navSectionExpanded = navSections.querySelector(
-      '[aria-expanded="true"]',
-    );
+    const navSectionExpanded = navSections.querySelector('[aria-expanded="true"]');
     if (navSectionExpanded && isDesktop.matches) {
       // eslint-disable-next-line no-use-before-define
       toggleAllNavSections(navSections);
@@ -46,20 +44,12 @@ function toggleAllNavSections(sections, expanded = false) {
  * @param {*} forceExpanded Optional param to force nav expand behavior when not null
  */
 function toggleMenu(nav, navSections, forceExpanded = null) {
-  const expanded = forceExpanded !== null
-    ? !forceExpanded
-    : nav.getAttribute('aria-expanded') === 'true';
+  const expanded = forceExpanded !== null ? !forceExpanded : nav.getAttribute('aria-expanded') === 'true';
   const menuButton = nav.querySelector('.burger-menu button');
   document.body.style.overflowY = expanded || isDesktop.matches ? '' : 'hidden';
   nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-  toggleAllNavSections(
-    navSections,
-    expanded || isDesktop.matches ? 'false' : 'true',
-  );
-  menuButton.setAttribute(
-    'aria-label',
-    expanded ? 'Open navigation' : 'Close navigation',
-  );
+  toggleAllNavSections(navSections, expanded || isDesktop.matches ? 'false' : 'true');
+  menuButton.setAttribute('aria-label', expanded ? 'Open navigation' : 'Close navigation');
   menuButton.setAttribute('aria-current', !expanded);
   // enable menu collapse on escape keypress
   if (!expanded || isDesktop.matches) {
@@ -155,7 +145,10 @@ function decorateLogo(nav) {
     ),
   );
   const brandElementsWrapper = navBrand.firstElementChild;
-  if (brandElementsWrapper != null && brandElementsWrapper.classList.contains('default-content-wrapper')) {
+  if (
+    brandElementsWrapper != null
+    && brandElementsWrapper.classList.contains('default-content-wrapper')
+  ) {
     brandElementsWrapper.prepend(brandLogo);
   } else {
     navBrand.prepend(brandLogo);
@@ -182,7 +175,7 @@ function createDropMenu(sections) {
 }
 
 async function generateTopNavigation() {
-// load nav as fragment
+  // load nav as fragment
   const navMeta = getMetadata('nav');
   const navPath = navMeta ? new URL(navMeta).pathname : '/nav';
   const fragment = await loadFragment(navPath);
@@ -213,9 +206,11 @@ async function generateTopNavigation() {
 
 async function generateSideNavigation() {
   const template = getMetadata('template');
-  if (template !== 'hub') return null;
+  if (template !== 'hub-l2') return null;
   const sideNavMeta = getMetadata('sideNav');
-  const sideNavPath = sideNavMeta ? new URL(sideNavMeta).pathname : `/${window.location.pathname.split('/')[1]}/nav`;
+  const sideNavPath = sideNavMeta
+    ? new URL(sideNavMeta).pathname
+    : `/${window.location.pathname.split('/')[1]}/nav`;
   const sideFragment = await loadFragment(sideNavPath);
   if (!sideFragment) return null;
   const sideNav = document.createElement('aside');

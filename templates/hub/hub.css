@@ -1,0 +1,38 @@
+.hub-l2.appear {
+  display: grid;
+  grid-template-columns: 3fr 9fr;
+  grid-template-areas:
+    'header header header'
+    'side-nav main-content main-content'
+    'footer footer footer';
+  column-gap: var(--udexGridGutters);
+
+  & :is(.header) {
+    display: contents;
+  }
+
+  & > header {
+    display: contents;
+
+    & nav {
+      grid-area: header;
+    }
+
+    & aside {
+      grid-area: side-nav;
+    }
+  }
+
+  & > main {
+    display: grid;
+    grid-area: main-content;
+
+    & > :not(.hero-container) {
+      margin-inline-end: var(--udexGridMargins);
+    }
+  }
+
+  & > footer {
+    grid-area: footer;
+  }
+}
