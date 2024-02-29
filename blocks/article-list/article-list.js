@@ -21,7 +21,7 @@ function renderCard(card) {
   const cardElement = li(
     { class: 'card' },
     a(
-      { href: card.path },
+      { href: card.path, 'aria-label': card.title },
       createOptimizedPicture(card.image, card.tile, false, [{ width: '750' }]),
     ),
     span(
