@@ -150,6 +150,8 @@ function decorateLogo(nav) {
     a(
       {
         href: '/',
+        title: 'SAP',
+        'aria-label': 'SAP',
       },
       span({ class: 'icon icon-brand' }),
     ),
