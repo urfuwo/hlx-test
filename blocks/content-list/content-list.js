@@ -1,5 +1,5 @@
-import { div } from '../../scripts/dom-builder.js';
 import { toCamelCase } from '../../scripts/aem.js';
+import { div } from '../../scripts/dom-builder.js';
 import listArticles from '../article-list/article-list.js';
 
 function extractFilterAttribues(filterInfo) {
