@@ -1,5 +1,6 @@
 import { div } from '../../scripts/dom-builder.js';
 import { getMetadata } from '../../scripts/aem.js';
+import { buildArticleSchema } from '../../scripts/schema.js';
 
 function restructureArticle(container, targetClass) {
   const target = container.querySelector(targetClass);
@@ -18,6 +19,8 @@ function decorate(doc) {
     const tocSection = div({ class: 'toc-container' }, div({ class: 'toc' }));
     main.insertBefore(tocSection, doc.querySelector('main > :nth-child(2)'));
   }
+
+  buildArticleSchema();
 }
 
 decorate(document);
