@@ -2,7 +2,7 @@ import { toCamelCase } from '../../scripts/aem.js';
 import { div } from '../../scripts/dom-builder.js';
 import listArticles from '../article-list/article-list.js';
 
-function extractFilterAttribues(filterInfo) {
+function extractFilterAttributes(filterInfo) {
   const filterId = filterInfo?.firstElementChild?.textContent?.toLowerCase();
   let filterValue = filterInfo?.lastElementChild?.textContent?.toLowerCase();
   if (filterId && filterValue && filterValue !== '*') {
@@ -49,11 +49,14 @@ function createFilter(filterAttributes) {
 export default async function decorateBlock(block) {
   const filterAttributes = {};
   Array.from(block.children)?.forEach((childDiv) => {
-    const filterEntry = extractFilterAttribues(childDiv);
+    const filterEntry = extractFilterAttributes(childDiv);
     if (filterEntry) {
       filterAttributes[filterEntry.name] = filterEntry.value;
     }
   });
+  if (!filterAttributes.paths) {
+    filterAttributes.paths = ['/'];
+  }
   const limit = filterAttributes.limit ? parseInt(filterAttributes.limit?.[0], 10) : 3;
   delete filterAttributes.limit;
   const filterFunction = createFilter(filterAttributes);
