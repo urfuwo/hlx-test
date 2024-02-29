@@ -35,16 +35,13 @@ export function buildArticleSchema() {
     publisher: {
       '@type': 'Organization',
       name: 'SAP',
-      url: 'https://news.sap.com/',
+      url: 'https://www.sap.com/',
       '@id': 'https://www.sap.com/#organization',
       logo: {
         '@type': 'ImageObject',
-        inLanguage: getMetadata('og:locale') || 'en',
-        '@id': 'https://news.sap.com/#/schema/logo/image/',
+        '@id': 'https://www.sap.com/#/schema/logo/image/',
+        url: 'https://www.sap.com/dam/application/shared/logos/sap-logo-svg.svg',
         caption: 'SAP',
-      },
-      image: {
-        '@id': 'https://news.sap.com/#/schema/logo/image/',
       },
       sameAs: ['https://twitter.com/SAPNews'],
     },
