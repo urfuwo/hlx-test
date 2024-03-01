@@ -1,19 +1,11 @@
 .hub-l2.appear {
-  display: grid;
-  grid-auto-flow: row;
-  grid-template-rows: 60px auto auto;
-  grid-template-areas:
-    'header'
-    'side-nav'
-    'main-content'
-    'footer';
-
   @media (width >= 980px) {
-    grid-template-columns: min-content 1fr;
-    grid-template-areas:
-      'header header'
-      'side-nav main-content'
-      'footer footer';
+    display: grid;
+    grid-template:
+      'header header' 60px
+      'side-nav main-content' auto
+      'footer footer' auto
+      / min-content 1fr;
   }
 
   @media (width >= 1600px) {
@@ -42,7 +34,8 @@
   }
 
   & > main {
-    display: grid;
+    display: flex;
+    flex-direction: column;
     grid-area: main-content;
 
     & > :not(.hero-container) {
