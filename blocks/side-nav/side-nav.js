@@ -1,11 +1,6 @@
 import { getMetadata } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
 
-/**
- * Toggles all nav sections
- * @param {Element} sections The container element
- * @param {Boolean} expanded Whether the element should be expanded or collapsed
- */
 function toggleAllNavSections(sections, expanded = false) {
   sections
     .querySelectorAll('.nav-sections .default-content-wrapper > ul > li')
@@ -55,10 +50,6 @@ async function generateSideNavigation() {
   return sideNav;
 }
 
-/**
- * decorates the header, mainly the nav
- * @param {Element} block The header block element
- */
 export default async function decorate(block) {
   const sideNav = await generateSideNavigation();
   if (sideNav) block.append(sideNav);
