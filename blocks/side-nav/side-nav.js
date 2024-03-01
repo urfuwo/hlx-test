@@ -22,7 +22,6 @@ function createDropMenu(sections) {
 
 async function generateSideNavigation() {
   const template = getMetadata('template');
-  // only generate side nav for L2 pages
   if (template !== 'hub-l2') return null;
   const sideNavMeta = getMetadata('sideNav');
   const sideNavPath = sideNavMeta
