@@ -659,6 +659,18 @@ async function loadFooter(footer) {
 }
 
 /**
+ * Loads a block named 'footer' into footer
+ * @param footer footer element
+ * @returns {Promise}
+ */
+async function loadSideNav(sideNav) {
+  const sideNavBlock = buildBlock('side-nav', '');
+  sideNav.append(sideNavBlock);
+  decorateBlock(sideNavBlock);
+  return loadBlock(sideNavBlock);
+}
+
+/**
  * Load LCP block and/or wait for LCP in default content.
  * @param {Array} lcpBlocks Array of blocks
  */
@@ -699,6 +711,7 @@ export {
   loadCSS,
   loadFooter,
   loadHeader,
+  loadSideNav,
   loadScript,
   readBlockConfig,
   sampleRUM,

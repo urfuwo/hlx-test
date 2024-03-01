@@ -12,6 +12,7 @@ import {
   loadCSS,
   loadFooter,
   loadHeader,
+  loadSideNav,
   sampleRUM,
   toClassName,
   waitForLCP,
@@ -134,9 +135,13 @@ function initSidekick() {
     decorateBlock(preflightBlock);
     await loadBlock(preflightBlock);
     const { default: getModal } = await import('../blocks/modal/modal.js');
-    const customModal = await getModal('dialog-modal', () => section.innerHTML, (modal) => {
-      modal.querySelector('button[name="close"]')?.addEventListener('click', () => modal.close());
-    });
+    const customModal = await getModal(
+      'dialog-modal',
+      () => section.innerHTML,
+      (modal) => {
+        modal.querySelector('button[name="close"]')?.addEventListener('click', () => modal.close());
+      },
+    );
     customModal.showModal();
   };
 
@@ -144,10 +149,14 @@ function initSidekick() {
   if (sk) {
     sk.addEventListener('custom:preflight', preflightListener); // TODO change to preflight
   } else {
-    document.addEventListener('sidekick-ready', () => {
-      const oAddedSidekick = document.querySelector('helix-sidekick');
-      oAddedSidekick.addEventListener('custom:preflight', preflightListener);
-    }, { once: true });
+    document.addEventListener(
+      'sidekick-ready',
+      () => {
+        const oAddedSidekick = document.querySelector('helix-sidekick');
+        oAddedSidekick.addEventListener('custom:preflight', preflightListener);
+      },
+      { once: true },
+    );
   }
 }
 
@@ -190,6 +199,7 @@ async function loadLazy(doc) {
   if (hash && element) element.scrollIntoView();
 
   loadHeader(doc.querySelector('header'));
+  loadSideNav(doc.querySelector('aside'));
   loadFooter(doc.querySelector('footer'));
 
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);

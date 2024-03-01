@@ -327,7 +327,7 @@ header nav .nav-sections .nav-drop::after {
   }
 
   header nav .nav-sections .nav-drop::after {
-    inset: auto -15px auto auto;
+    inset: 0 0 0 auto;
     transform: rotate(90deg) scale(1.2);
     padding-inline: unset;
   }

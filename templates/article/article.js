@@ -1,18 +1,10 @@
 import { div } from '../../scripts/dom-builder.js';
 import { getMetadata } from '../../scripts/aem.js';
-
-function restructureArticle(container, targetClass) {
-  const target = container.querySelector(targetClass);
-  if (target.nextElementSibling) {
-    const wrapperDiv = div();
-    wrapperDiv.appendChild(target);
-    container.insertBefore(wrapperDiv, container.firstChild);
-  }
-}
+import { containerize } from '../../scripts/utils.js';
 
 function decorate(doc) {
   const main = doc.querySelector('main');
-  restructureArticle(main, '.hero');
+  containerize(main, '.hero');
   const tocFlag = getMetadata('toc');
   if (tocFlag && tocFlag.content !== 'no' && tocFlag.content !== 'false') {
     const tocSection = div({ class: 'toc-container' }, div({ class: 'toc' }));
