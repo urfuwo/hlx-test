@@ -31,7 +31,7 @@ async function generateSideNavigation() {
   const sideNavMeta = getMetadata('sideNav');
   const sideNavPath = sideNavMeta
     ? new URL(sideNavMeta).pathname
-    : `/${window.location.pathname.split('/')[1]}/nav`;
+    : `/${window.location.pathname.split('/')[1]}/sidenav`;
   const sideFragment = await loadFragment(sideNavPath);
   if (!sideFragment) return null;
   const sideNav = document.createElement('aside');

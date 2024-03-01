@@ -206,36 +206,6 @@ async function generateTopNavigation() {
   return nav;
 }
 
-async function generateSideNavigation() {
-  const template = getMetadata('template');
-  if (template !== 'hub') return null;
-  const sideNavMeta = getMetadata('sideNav');
-  const sideNavPath = sideNavMeta
-    ? new URL(sideNavMeta).pathname
-    : `/${window.location.pathname.split('/')[1]}/nav`;
-  const sideFragment = await loadFragment(sideNavPath);
-  if (!sideFragment) return null;
-  const sideNav = document.createElement('aside');
-  sideNav.id = 'sideNav';
-  while (sideFragment.firstElementChild) sideNav.append(sideFragment.firstElementChild);
-  const sideClasses = ['home', 'sections'];
-  sideClasses.forEach((c, i) => {
-    const section = sideNav.children[i];
-    if (section) section.classList.add(`nav-side-${c}`);
-  });
-  const sideSections = sideNav.querySelector('.nav-side-sections');
-  if (sideSections) {
-    createDropMenu(sideSections);
-  }
-  const sideNavHome = sideNav.querySelector('.nav-side-home');
-  sideNavHome.addEventListener('click', () => {
-    const expanded = sideNav.getAttribute('aria-expanded') === 'true';
-    toggleAllNavSections(sideNav);
-    sideNav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-  });
-  return sideNav;
-}
-
 /**
  * decorates the header, mainly the nav
  * @param {Element} block The header block element
@@ -248,7 +218,4 @@ export default async function decorate(block) {
     toggleAllNavSections(nav);
     nav.setAttribute('aria-expanded', 'false');
   });
-
-  const sideNav = await generateSideNavigation();
-  if (sideNav) block.append(sideNav);
 }
