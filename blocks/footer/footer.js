@@ -24,6 +24,7 @@ export default async function decorate(block) {
     img(
       {
         src: '/icons/back-to-top.svg',
+        alt: 'Back to top',
       },
     ),
   );
