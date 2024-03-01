@@ -54,7 +54,20 @@ async function decorateTemplates(main) {
   }
 }
 
+/**
+ * Embeds supported video players for link elements for supported video hostnames.
+ * @async
+ * @param {HTMLElement} main - The HTML fragment containing the video links.
+ * @returns {Promise<void>} - A Promise that resolves when the video links are decorated.
+ */
 async function decorateVideoLinks(main) {
+  /**
+   * Embeds a YouTube video.
+   * @function embedYoutube
+   * @param {URL} url - The URL of the YouTube video.
+   * @param {boolean} [autoplay=false] - Whether to autoplay the video, defaults to false.
+   * @returns {string} - The HTML code for embedding the YouTube video.
+   */
   const embedYoutube = (url, autoplay = false) => {
     const usp = new URLSearchParams(url.search);
     const suffix = autoplay ? '&muted=1&autoplay=1' : '';
@@ -63,26 +76,71 @@ async function decorateVideoLinks(main) {
     if (url.origin.includes('youtu.be')) {
       [, vid] = url.pathname.split('/');
     }
-    const embedHTML = `<div style="left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.25%;">
-        <iframe src="https://www.youtube.com${vid ? `/embed/${vid}?rel=0&v=${vid}${suffix}` : embed}" style="border: 0; top: 0; left: 0; width: 100%; height: 100%; position: absolute;"
-        allow="autoplay; fullscreen; picture-in-picture; encrypted-media; accelerometer; gyroscope; picture-in-picture" allowfullscreen="" scrolling="no" title="Content from Youtube" loading="lazy"></iframe>
+
+    const embedHTML = `<div class="video-embed-container">
+      <iframe src="https://www.youtube.com${vid ? `/embed/${vid}?rel=0&v=${vid}${suffix}` : embed}"
+      class="video-embed-iframe"
+      allow="autoplay; fullscreen; picture-in-picture; encrypted-media; accelerometer; gyroscope; picture-in-picture"
+      allowfullscreen=""
+      scrolling="no"
+      title="Content from Youtube"
+      loading="lazy"></iframe>
       </div>`;
     return embedHTML;
   };
 
-  const videoPs = main.querySelectorAll('p a[href*="youtu"]');
-  videoPs.forEach((a) => {
-    const videoP = a.parentNode;
-    const link = a.href;
-    videoP.textContent = '';
-    const observer = new IntersectionObserver((entries) => {
-      if (entries.some((e) => e.isIntersecting)) {
-        observer.disconnect();
-        videoP.innerHTML = embedYoutube(new URL(link), false);
-        videoP.classList.add('video');
-      }
-    });
-    observer.observe(videoP);
+  /**
+   * Embeds a LinkedIn Video.
+   * @function embedLinkedIn
+   * @param {URL} url - The URL of the LinkedIn video.
+   * @returns {string} - The HTML for embedding the LinkedIn video.
+   */
+  const embedLinkedIn = (url) => {
+    const [, , , , vid] = url.pathname.split('/');
+    const embedHTML = `<div class="video-embed-container">
+      <iframe src="https://www.linkedin.com/embed/feed/update/${vid}?compact=1"
+      class="video-embed-iframe"
+      frameborder="0" allowfullscreen=""
+      title="Embedded LinkedIn Video"></iframe>
+      </div>`;
+    return embedHTML;
+  };
+
+  /**
+   * Configuration for different types of embeds.
+   * @typedef {Object} EmbedConfig
+   * @property {string[]} match - The list of keywords to match against URLs.
+   * @property {Function} embed - The function to call for embedding the content.
+   */
+  const EMBEDS_CONFIG = [
+    {
+      match: ['youtube', 'youtu.be'],
+      embed: embedYoutube,
+    },
+    {
+      match: ['linkedin.com'],
+      embed: embedLinkedIn,
+    },
+  ];
+
+  const videoLinks = main.querySelectorAll('p a');
+
+  videoLinks.forEach((a) => {
+    const p = a.parentNode;
+    const link = new URL(a.href);
+    // eslint-disable-next-line max-len
+    const matchedConfig = EMBEDS_CONFIG.find((config) => config.match.some((keyword) => link.href.includes(keyword)));
+
+    if (matchedConfig) {
+      const observer = new IntersectionObserver((entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          observer.disconnect();
+          p.innerHTML = matchedConfig.embed(link);
+          p.classList.add('video');
+        }
+      });
+      observer.observe(p);
+    }
   });
 }
 
