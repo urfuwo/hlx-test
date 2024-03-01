@@ -62,7 +62,11 @@ export default async function decorateBlock(block) {
   const filterFunction = createFilter(filterAttributes);
 
   const articles = div();
-  listArticles(articles, { filter: filterFunction, maxEntries: limit });
+  listArticles(articles, {
+    filter: filterFunction,
+    maxEntries: limit,
+    sort: ((a, b) => (b.publicationDate.localeCompare(a.publicationDate))),
+  });
 
   block.textContent = '';
   block.append(articles);

@@ -73,7 +73,8 @@ function determineContextFilter() {
   };
 }
 
-export default async function listArticles(block, config = { filter: null, maxEntries: null }) {
+// eslint-disable-next-line max-len
+export default async function listArticles(block, config = { filter: null, maxEntries: null, sort: null }) {
   loadCSS(`${window.hlx.codeBasePath}/blocks/article-list/article-list.css`);
   let contextFilter = config.filter;
   if (!contextFilter) {
@@ -87,6 +88,9 @@ export default async function listArticles(block, config = { filter: null, maxEn
   }
 
   articles = await articles.all();
+  if (config.sort) {
+    articles.sort(config.sort);
+  }
 
   const cardList = ul({ class: 'article-list' });
 
