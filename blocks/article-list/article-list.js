@@ -6,15 +6,12 @@ import {
 } from '../../scripts/dom-builder.js';
 import ffetch from '../../scripts/ffetch.js';
 
-const ARTICLE_INDEX = '/articles-index.json';
-
 const ARTICLE_FORMATTER = new Intl.DateTimeFormat('default', {
   year: 'numeric',
   month: 'long',
   day: 'numeric',
 });
 
-// TODO: change to web component once available
 function renderCard(card) {
   const formattedDate = ARTICLE_FORMATTER.format(new Date(card.publicationDate * 1000));
   const cardAuthorUrl = `/author/${toClassName(card.author).replace('-', '')}`; // TODO look up author URL from index
@@ -83,8 +80,7 @@ export default async function listArticles(block, config = { filter: null, maxEn
     contextFilter = determineContextFilter();
   }
 
-  let articles = await ffetch(ARTICLE_INDEX)
-    .filter(contextFilter);
+  let articles = await ffetch('/articles-index.json').filter(contextFilter);
 
   if (config.maxEntries !== null) {
     articles = await articles.limit(config.maxEntries);
