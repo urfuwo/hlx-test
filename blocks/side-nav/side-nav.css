@@ -56,7 +56,13 @@ aside {
       content: '\203A';
       position: absolute;
       transform: scale(1.4);
-      inset: 0 72px auto auto;
+      inset: 0 calc(var(--nav-margin) + 2%) auto auto;
+    }
+
+    @media (width >=980px) {
+      & .nav-drop::after {
+        inset: 0 0 auto auto;
+      }
     }
 
     & .nav-side-sections {
@@ -184,10 +190,9 @@ aside {
           &::after {
             content: '\203A';
             position: absolute;
-            right: 0;
+            right: calc(var(--nav-margin) + 2%);
             top: 0;
             transform: scale(1.4);
-            padding: 0 var(--nav-margin);
           }
         }
       }
