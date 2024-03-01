@@ -7,22 +7,9 @@ header {
   --nav-text-color: var(--udexColorGrey8);
   --line-separator-color: var(--udexColorGrey2);
   --flyout-menu-color: hsla(209.231deg 36% 21% / 25%);
-  --header-margin: var(--udexSpacer24);
+  --header-margin: var(--udexGridMargins);
   --header-height: 60px;
-  --side-nav-vertical-height: 2.5rem;
   --active-marker-color: var(--udexColorBlue7);
-}
-
-@media (width >= 640px) {
-  header {
-    --header-margin: var(--udexSpacer48);
-  }
-}
-
-@media (width >= 980px) {
-  header {
-    --header-margin: var(--udexSpacer72);
-  }
 }
 
 @media (width >= 1600px) {
