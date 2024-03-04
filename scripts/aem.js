@@ -658,6 +658,13 @@ async function loadFooter(footer) {
   return loadBlock(footerBlock);
 }
 
+async function loadSideNav(sideNav) {
+  const sideNavBlock = buildBlock('side-nav', '');
+  sideNav.append(sideNavBlock);
+  decorateBlock(sideNavBlock);
+  return loadBlock(sideNavBlock);
+}
+
 /**
  * Load LCP block and/or wait for LCP in default content.
  * @param {Array} lcpBlocks Array of blocks
@@ -699,6 +706,7 @@ export {
   loadCSS,
   loadFooter,
   loadHeader,
+  loadSideNav,
   loadScript,
   readBlockConfig,
   sampleRUM,
