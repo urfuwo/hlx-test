@@ -1,23 +1,16 @@
 import { div } from '../../../scripts/dom-builder.js';
 
-const DEF_ICON = 'purple';
+const DEF_ICON = 'orange';
 const DEF_DESC = 'Checking...';
 const pass = 'green';
 const fail = 'red';
 const limbo = 'orange';
 
-let h1Result = { icon: DEF_ICON, title: 'H1 count', description: DEF_DESC };
-let titleResult = { icon: DEF_ICON, title: 'Title size', description: DEF_DESC };
-let canonResult = { icon: DEF_ICON, title: 'Canonical', description: DEF_DESC };
-let descResult = { icon: DEF_ICON, title: 'Meta description', description: DEF_DESC };
-let pubDateResult = { icon: DEF_ICON, title: 'Published Date', description: DEF_DESC };
-let bodyResult = { icon: DEF_ICON, title: 'Body size', description: DEF_DESC };
-let loremResult = { icon: DEF_ICON, title: 'Lorem Ipsum', description: DEF_DESC };
-let linksResult = { icon: DEF_ICON, title: 'Links', description: DEF_DESC };
+const checks = new Map();
 
 function checkH1s() {
   const h1s = document.querySelectorAll('h1');
-  const result = { ...h1Result };
+  const result = { icon: DEF_ICON, title: 'H1 count', description: DEF_DESC };
   if (h1s.length === 1) {
     result.icon = pass;
     result.description = 'Only one H1 on the page.';
@@ -29,13 +22,13 @@ function checkH1s() {
       result.description = 'Reason: No H1 on the page.';
     }
   }
-  h1Result = result;
+  checks.set('h1s', result);
   return result.icon;
 }
 
 async function checkTitle() {
   const titleSize = document.title.replace(/\s/g, '').length;
-  const result = { ...titleResult };
+  const result = { icon: DEF_ICON, title: 'Title size', description: DEF_DESC };
   if (titleSize < 15) {
     result.icon = fail;
     result.description = 'Reason: Title size is too short.';
@@ -46,13 +39,13 @@ async function checkTitle() {
     result.icon = pass;
     result.description = 'Title size is good.';
   }
-  titleResult = result;
+  checks.set('title', result);
   return result.icon;
 }
 
 async function checkCanon() {
   const canon = document.querySelector("link[rel='canonical']");
-  const result = { ...canonResult };
+  const result = { icon: DEF_ICON, title: 'Canonical', description: DEF_DESC };
   const { href } = canon;
 
   try {
@@ -74,13 +67,13 @@ async function checkCanon() {
     result.icon = limbo;
     result.description = 'Canonical cannot be crawled.';
   }
-  canonResult = result;
+  checks.set('canonical', result);
   return result.icon;
 }
 
 function checkDescription() {
   const metaDesc = document.querySelector('meta[name="description"]');
-  const result = { ...descResult };
+  const result = { icon: DEF_ICON, title: 'Meta description', description: DEF_DESC };
   if (!metaDesc) {
     result.icon = fail;
     result.description = 'Reason: No meta description found.';
@@ -97,13 +90,13 @@ function checkDescription() {
       result.description = 'Meta description is good.';
     }
   }
-  descResult = result;
+  checks.set('desc', result);
   return result.icon;
 }
 
 function checkPublishedDate() {
   const pubDate = document.querySelector('meta[property="article:published_time"]');
-  const result = { ...pubDateResult };
+  const result = { icon: DEF_ICON, title: 'Published Date', description: DEF_DESC };
   if (!pubDate) {
     result.icon = fail;
     result.description = 'Reason: No published date metadata found.';
@@ -117,12 +110,12 @@ function checkPublishedDate() {
       result.description = 'Published date is good.';
     }
   }
-  pubDateResult = result;
+  checks.set('pubDate', result);
   return result.icon;
 }
 
 async function checkBody() {
-  const result = { ...bodyResult };
+  const result = { icon: DEF_ICON, title: 'Body size', description: DEF_DESC };
   const { length } = document.documentElement.innerText;
 
   if (length > 100) {
@@ -132,12 +125,12 @@ async function checkBody() {
     result.icon = fail;
     result.description = 'Reason: Not enough content.';
   }
-  bodyResult = result;
+  checks.set('body', result);
   return result.icon;
 }
 
 function checkLorem() {
-  const result = { ...loremResult };
+  const result = { icon: DEF_ICON, title: 'Lorem Ipsum', description: DEF_DESC };
   const { innerHTML } = document.documentElement;
   if (innerHTML.includes('Lorem ipsum')) {
     result.icon = fail;
@@ -146,12 +139,12 @@ function checkLorem() {
     result.icon = pass;
     result.description = 'No Lorem ipsum is used on the page.';
   }
-  loremResult = result;
+  checks.set('lorem', result);
   return result.icon;
 }
 
 async function checkLinks() {
-  const result = { ...linksResult };
+  const result = { icon: DEF_ICON, title: 'Links', description: DEF_DESC };
   const links = document.querySelectorAll('a[href^="/"]');
 
   let badLink;
@@ -167,11 +160,11 @@ async function checkLinks() {
     result.icon = pass;
     result.description = 'Links are valid.';
   }
-  linksResult = result;
+  checks.set('links', result);
   return result.icon;
 }
 
-function renderSEOItem(icon, title, description) {
+function renderSEOItem({ icon, title, description }) {
   return div(
     { class: 'seo-item' },
     div({ class: `result-icon ${icon}` }),
@@ -199,17 +192,17 @@ export function renderSEOPanel() {
     { class: 'seo-columns' },
     div(
       { class: 'seo-column' },
-      renderSEOItem(h1Result.icon, h1Result.title, h1Result.description),
-      renderSEOItem(titleResult.icon, titleResult.title, titleResult.description),
-      renderSEOItem(pubDateResult.icon, pubDateResult.title, pubDateResult.description),
-      renderSEOItem(descResult.icon, descResult.title, descResult.description),
+      renderSEOItem(checks.get('h1s')),
+      renderSEOItem(checks.get('title')),
+      renderSEOItem(checks.get('desc')),
+      renderSEOItem(checks.get('pubDate')),
     ),
     div(
       { class: 'seo-column' },
-      renderSEOItem(bodyResult.icon, bodyResult.title, bodyResult.description),
-      renderSEOItem(loremResult.icon, loremResult.title, loremResult.description),
-      renderSEOItem(canonResult.icon, canonResult.title, canonResult.description),
-      renderSEOItem(linksResult.icon, linksResult.title, linksResult.description),
+      renderSEOItem(checks.get('body')),
+      renderSEOItem(checks.get('lorem')),
+      renderSEOItem(checks.get('canonical')),
+      renderSEOItem(checks.get('links')),
     ),
   );
 }

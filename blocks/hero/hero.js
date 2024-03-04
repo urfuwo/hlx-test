@@ -3,7 +3,7 @@ import {
   div, h1, span, p,
 } from '../../scripts/dom-builder.js';
 import { getMetadata } from '../../scripts/aem.js';
-import formatDate from '../../scripts/utils.js';
+import { formatDate } from '../../scripts/utils.js';
 
 /*
   * Assumption: The last paragraph is the description if it exists and has text

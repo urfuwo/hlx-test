@@ -11,6 +11,7 @@ import {
   loadBlocks,
   loadCSS,
   loadFooter,
+  loadSideNav,
   loadHeader,
   sampleRUM,
   toClassName,
@@ -20,6 +21,7 @@ import {
 const LCP_BLOCKS = ['hero']; // add your LCP blocks to the list
 const TEMPLATE_LIST = {
   article: 'article',
+  'hub-l2': 'hub',
 };
 
 /**
@@ -247,6 +249,7 @@ async function loadLazy(doc) {
   if (hash && element) element.scrollIntoView();
 
   loadHeader(doc.querySelector('header'));
+  loadSideNav(doc.querySelector('aside'));
   loadFooter(doc.querySelector('footer'));
 
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);

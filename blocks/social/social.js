@@ -38,6 +38,7 @@ export default async function decorate(block) {
           a(
             {
               href: config.link || '#',
+              'aria-label': `Link to SAP ${config.name}`,
             },
             span(
               {
@@ -48,6 +49,7 @@ export default async function decorate(block) {
                   'data-icon-name': config.name,
                   loading: 'eager',
                   src: `/icons/${config.name}.svg`,
+                  alt: config.name,
                 },
               ),
             ),

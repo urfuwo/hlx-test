@@ -1,0 +1,59 @@
+.hub-l2.appear {
+  @media (width >= 980px) {
+    display: grid;
+    grid-template:
+      'header header' 60px
+      'side-nav main-content' auto
+      'footer footer' auto
+      / min-content 1fr;
+  }
+
+  @media (width >= 1600px) {
+    & {
+      --udexGridMargins: 246px;
+    }
+  }
+
+  column-gap: var(--udexGridGutters);
+
+  & :is(.header) {
+    display: contents;
+  }
+
+  & > header {
+    grid-area: header;
+  }
+
+  & > aside {
+    grid-area: side-nav;
+
+    @media (width >= 980px) {
+      margin: 0 0 0 var(--udexGridMargins);
+      min-width: 200px;
+    }
+  }
+
+  & > main {
+    display: flex;
+    flex-direction: column;
+    grid-area: main-content;
+
+    & > :not(.hero-container) {
+      margin: 0 var(--udexGridMargins);
+    }
+
+    @media (width >= 980px) {
+      & > :not(.hero-container) {
+        margin: 0 var(--udexGridMargins) 0 0;
+      }
+    }
+  }
+
+  & > footer {
+    grid-area: footer;
+  }
+
+  & > * {
+    transition: margin 0.3s ease-in-out;
+  }
+}
