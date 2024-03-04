@@ -50,8 +50,8 @@ const BASEPATH_MAPPING = [
     basePath: '/news',
   },
   {
-    type: 'sap-tv',
-    basePath: '/news',
+    type: 'video',
+    basePath: '/',
   },
 ];
 

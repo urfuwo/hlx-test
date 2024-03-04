@@ -87,12 +87,17 @@ const createMetadata = (main, document, html, params, urlStr) => {
   }
 
   // add tags, topics, content types etc based on mapping tables
-  const articleContent = document.querySelector('section#main > article.post');
+  const articleContent = document.querySelector('section#main > article.post, section#main > article.sap-tv');
   const types = [...articleContent.classList]
     .filter((className) => className.startsWith('sapn-type-'))
     .map((className) => className.replace('sapn-type-', ''));
-  // eslint-disable-next-line prefer-destructuring
-  if (types?.length > 0) document.arictleType = types[0];
+
+  if (types?.length > 0) {
+    // eslint-disable-next-line prefer-destructuring
+    document.arictleType = types[0];
+  } else if (articleContent.classList.contains('type-sap-tv')) {
+    document.arictleType = 'video';
+  }
 
   if (document.mappingTable) {
     const regionMapping = document.mappingTable.filter(

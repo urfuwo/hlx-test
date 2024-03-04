@@ -7,5 +7,11 @@ const articleInfo = (main, document) => {
     const table = WebImporter.DOMUtils.createTable(block, document);
     fristParagraph.replaceWith(table);
   }
+
+  document.querySelectorAll('section#main > article p.lead').forEach((lead) => {
+    const block = [['Article Intro'], [lead.outerHTML]];
+    const table = WebImporter.DOMUtils.createTable(block, document);
+    lead.replaceWith(table);
+  });
 };
 export default articleInfo;

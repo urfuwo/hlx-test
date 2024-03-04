@@ -8,7 +8,16 @@ const transformMoreSection = (main) => {
       const table = WebImporter.DOMUtils.createTable(block, document);
       moreSectionCards.replaceWith(table);
     }
-    moreSection.before(document.createElement('hr'), document.createElement('hr'));
+
+    // const sidebarMetadata = [['Section Metadata'], ['location', 'document-footer']];
+    // const sidebarMetaTable = WebImporter.DOMUtils.createTable(sidebarMetadata, document);
+    // moreSection.before(document.createElement('hr'), sidebarMetaTable, document.createElement('hr'));
+
+    moreSection.before(document.createElement('hr'));
+
+    const docFooterMetadata = [['Section Metadata'], ['location', 'document-footer']];
+    const docFooterMetaTable = WebImporter.DOMUtils.createTable(docFooterMetadata, document);
+    moreSection.after(docFooterMetaTable);
   }
 };
 export default transformMoreSection;
