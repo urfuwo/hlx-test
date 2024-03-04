@@ -23,7 +23,7 @@ function createDropMenu(sections) {
 async function generateSideNavigation() {
   const template = getMetadata('template');
   if (template !== 'hub-l2') return null;
-  const sideNavMeta = getMetadata('sideNav');
+  const sideNavMeta = getMetadata('sidenav');
   const sideNavPath = sideNavMeta
     ? new URL(sideNavMeta).pathname
     : `/${window.location.pathname.split('/')[1]}/sidenav`;
