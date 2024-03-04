@@ -82,6 +82,7 @@ main {
             )
         ) {
         grid-column: 2 / 3;
+        margin-inline-start: unset;
       }
     }
 
@@ -93,6 +94,7 @@ main {
     & > .toc-container {
       grid-column: 1 / 2;
       margin-inline-start: var(--udexGridMargins);
+      min-width: 18ch;
     }
   }
 }
