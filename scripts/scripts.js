@@ -145,6 +145,34 @@ async function decorateVideoLinks(main) {
 }
 
 /**
+ * Decorates all multi-column sections in a container element.
+ * @param {Element} main The container element
+ */
+function decorateMultiColumnSections(main) {
+  main.querySelectorAll(':scope > div.column-section-1-1, :scope > div.column-section-3-2, :scope > div.column-section-2-3, :scope > div.column-section-2-1, :scope > div.column-section-1-2, :scope > div.column-section-3-1, :scope > div.column-section-1-3').forEach((section) => {
+    const left = document.createElement('div');
+    const right = document.createElement('div');
+    left.classList.add('column-section-left-block', 'column-section-block');
+    right.classList.add('column-section-right-block', 'column-section-block');
+    [...section.children].forEach((e) => {
+      let isLeft = true;
+      for (let i = 1; i < e.classList.length; i += 1) {
+        const variant = e.classList[i];
+        if (variant === 'right-style-wrapper') isLeft = false;
+      }
+      if (isLeft) {
+        left.append(e.cloneNode(true));
+      } else {
+        right.append(e.cloneNode(true));
+      }
+    });
+    section.append(left);
+    section.append(right);
+    section.classList.add('column-section');
+  });
+}
+
+/**
  * Decorates the main element.
  * @param {Element} main The main element
  */
@@ -159,6 +187,7 @@ export async function decorateMain(main, shouldDecorateTemplates = true) {
   decorateSections(main);
   decorateBlocks(main);
   decorateVideoLinks(main);
+  decorateMultiColumnSections(main);
 }
 
 /**

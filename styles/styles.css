@@ -269,3 +269,70 @@ main .section {
   top: 0;
   left: 0;
 }
+
+
+.column-section-block {
+  display: none;
+}
+
+@media (width >= 980px) {
+  .column-section {
+    display: grid;
+    grid-auto-flow: row dense;
+  }
+
+  .column-section-block {
+    display: block;
+    overflow-x: hidden;
+  }
+
+  .column-section > div:not(.column-section-block) {
+    display: none;
+  }
+
+  .column-section-1-1 {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .column-section-3-2 {
+    grid-template-columns: 3fr 2fr;
+  }
+
+  .column-section-2-3 {
+    grid-template-columns: 2fr 3fr;
+  }
+
+  .column-section-2-1 {
+    grid-template-columns: 2fr 1fr;
+  }
+
+  .column-section-1-2 {
+    grid-template-columns: 1fr 2fr;
+  }
+
+  .column-section-3-1 {
+    grid-template-columns: 3fr 1fr;
+  }
+
+  .column-section-1-3 {
+    grid-template-columns: 1fr 3fr;
+  }
+
+  .column-section > div.column-section-left-block {
+    margin-right: 16px;
+    grid-column: 1;
+  }
+
+  .column-section > div.column-section-right-block {
+    margin-left: 16px;
+    grid-column: 2;
+  }
+
+  .column-section > div.column-section-block > *:first-child {
+    margin-top: 0;
+  }
+
+  .column-section > div.column-section-block > div:first-child > *:first-child {
+    margin-top: 0;
+  }
+}
