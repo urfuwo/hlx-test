@@ -658,11 +658,6 @@ async function loadFooter(footer) {
   return loadBlock(footerBlock);
 }
 
-/**
- * Loads a block named 'footer' into footer
- * @param footer footer element
- * @returns {Promise}
- */
 async function loadSideNav(sideNav) {
   const sideNavBlock = buildBlock('side-nav', '');
   sideNav.append(sideNavBlock);
