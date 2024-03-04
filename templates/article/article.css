@@ -1,70 +1,108 @@
-/**
- * Blog, mobile first
- */
-
-/* Blog paragraph spacing */
-.blog p, .feature-article p {
-    margin-top: 18px; /* no design, assumption */
-    margin-bottom: 18px; /* no design, assumption */
+/* Article paragraph spacing */
+.article p {
+  margin-top: 18px; /* no design, assumption */
+  margin-bottom: 18px; /* no design, assumption */
 }
 
-/* Highlight first paragraph of blog pages using increased font size */
-.blog p.blog--highlight, .feature-article p.blog--highlight {
-    font-size: var(--udexTypographyBodyLFontSize); /* no design, assumption */
+@media (width >= 1600px) {
+  main {
+    --udexGridMargins: 246px;
+  }
 }
 
-/* Blog-CTA-Banner */
-.blog .blog-cta-banner {
-    background-color: var(--sapBrandColor);
-    margin: 3rem auto;
-    padding: 2rem;
-}
+main {
+  display: grid;
+  grid-auto-flow: row;
+  column-gap: var(--udexGridGutters);
+  margin-block-end: var(--udexSpacer84);
 
-/* Blog-CTA-Banner elements: text and links */
-.blog .blog-cta-banner p,
-.blog .blog-cta-banner a {
-    color: var(--sapButton_Information_Active_TextColor);
-    font-family: var(--udexTypographyBodyMFontFamily);
-    font-size: var(--udexTypographyBodyMFontSize);
-    font-weight: var(--udexTypographyBodyMFontWeight);
-    line-height: var(--udexTypographyBodyMLineHeight);
-    margin-top: 0;
-}
+  @media (width < 980px) {
+    & > :not(.hero-container) {
+      margin-inline: var(--udexGridMargins);
+    }
+  }
 
-/* Blog-CTA-Banner elements: cta button sizing */
-.blog .blog-cta-banner p.button-container {
-    margin-top: 2rem;
-    margin-bottom: 0;
-}
+  & > * {
+    transition-property: margin-inline-start, margin-inline-end, margin-inline,
+      margin-block-end;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
+  }
 
-/* Blog-CTA-Banner elements: cta button (a element) */
-.blog .blog-cta-banner p.button-container a {
-    border: 1px solid var(--sapButton_Information_Active_TextColor);
-    border-radius: 0;
-    margin: 0;
-}
+  @media (width >= 980px) {
+    grid-template-columns: 8fr 4fr;
+    grid-template-rows: repeat(3, auto);
 
-/* Blog-CTA-Banner elements: cta button (active / hovered a element) */
-.blog .blog-cta-banner p.button-container a:active, .blog .blog-cta-banner p.button-container a:hover {
-    background-color: var(--sapButton_Information_Active_TextColor);
-    color: var(--sapProgress_Value_InformationBackground);
-    text-decoration: none;
-}
-
-
-/* Desktop view (--udexGridMMinWidth) */
-@media (width >= 980px) {
-    .blog main div.section > div:not(.hero-wrapper, .related-articles-wrapper, .blog-cta-banner-wrapper) {
-        width: 755px; /* Option A */
-        max-width: 755px;  /* Option A */
+    &
+      > :not(
+        :is(
+            .hero-container,
+            .toc-container,
+            [data-location='sidebar'],
+            [data-location='document-footer']
+          )
+      ) {
+      grid-column: 1 / 2;
+      margin-inline-start: var(--udexGridMargins);
     }
 
-        /* Blog: desktop view: cta-banner align left */
-    .blog .blog-cta-banner.alignleft {
-        float:left;
-        width: 370px;
-        margin-left: -20px; /* missing design, assumption */
-        margin-top: 0;
-        margin-right: 2rem;
+    & > [data-location='sidebar'] {
+      grid-column: 2 / 3;
+      grid-row: -3 / -2;
+      margin-inline-end: var(--udexGridMargins);
     }
+
+    & > [data-location='document-footer'] {
+      grid-column: -3 / span 2;
+      margin-inline: var(--udexGridMargins);
+    }
+
+    /* if page has table of contents it has a 3 column layout */
+    &:has(.toc-container) {
+      grid-template-columns: 3fr 6fr 3fr;
+
+      & > [data-location='sidebar'] {
+        grid-column: 3 / 4;
+        grid-row: -3 / -2;
+        margin-inline-end: var(--udexGridMargins);
+      }
+
+      & > [data-location='document-footer'] {
+        grid-column: -4 / span 3;
+        margin-inline: var(--udexGridMargins);
+      }
+
+      &
+        > :not(
+          :is(
+              .hero-container,
+              .toc-container,
+              [data-location='sidebar'],
+              [data-location='document-footer']
+            )
+        ) {
+        grid-column: 2 / 3;
+      }
+    }
+
+    & > .hero-container {
+      margin-block-end: var(--udexSpacer84);
+      grid-column: 1 / -1;
+    }
+
+    & > .toc-container {
+      grid-column: 1 / 2;
+      margin-inline-start: var(--udexGridMargins);
+    }
+  }
+}
+
+/* image and video caption */
+.article p > em {
+  font-size: var(--udexTypographyBodyXSFontSize);
+  font-family: var(--udexTypographyBodyXSFontFamily);
+  line-height: var(--udexTypographyBodyXSLineHeight);
+  font-weight: var(--udexTypographyBodyXSFontWeight);
+  font-style: normal;
+  color: var(--udexColorGrey9);
 }

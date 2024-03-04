@@ -150,6 +150,8 @@ function decorateLogo(nav) {
     a(
       {
         href: '/',
+        title: 'SAP',
+        'aria-label': 'SAP',
       },
       span({ class: 'icon icon-brand' }),
     ),
@@ -170,12 +172,19 @@ function decorateLogo(nav) {
   decorateIcons(brandLogo);
 }
 
-/**
- * decorates the header, mainly the nav
- * @param {Element} block The header block element
- */
-export default async function decorate(block) {
-  // load nav as fragment
+function createDropMenu(sections) {
+  sections.querySelectorAll(':scope > .default-content-wrapper > ul > li').forEach((section) => {
+    if (section.querySelector('ul')) section.classList.add('nav-drop', 'text');
+    section.addEventListener('click', () => {
+      const expanded = section.getAttribute('aria-expanded') === 'true';
+      toggleAllNavSections(sections);
+      section.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+    });
+  });
+}
+
+async function generateTopNavigation() {
+// load nav as fragment
   const navMeta = getMetadata('nav');
   const navPath = navMeta ? new URL(navMeta).pathname : '/nav';
   const fragment = await loadFragment(navPath);
@@ -194,22 +203,57 @@ export default async function decorate(block) {
   // generate links
   const navSections = nav.querySelector('.nav-sections');
   if (navSections) {
-    navSections.querySelectorAll(':scope > .default-content-wrapper > ul > li').forEach((navSection) => {
-      // navSection.querySelector('a').setAttribute('class', 'link');
-      if (navSection.querySelector('ul')) navSection.classList.add('nav-drop', 'text');
-
-      navSection.addEventListener('click', () => {
-        const expanded = navSection.getAttribute('aria-expanded') === 'true';
-        toggleAllNavSections(navSections);
-        navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-      });
-    });
+    createDropMenu(navSections);
     addSearchBar(navSections);
   }
-
   nav.setAttribute('aria-expanded', 'false');
   nav.append(getNavBar(nav));
   const actionBar = getActionBar(nav, navSections);
   nav.append(actionBar);
-  block.append(nav);
+  return nav;
+}
+
+async function generateSideNavigation() {
+  const template = getMetadata('template');
+  if (template !== 'hub') return null;
+  const sideNavMeta = getMetadata('sideNav');
+  const sideNavPath = sideNavMeta ? new URL(sideNavMeta).pathname : `/${window.location.pathname.split('/')[1]}/nav`;
+  const sideFragment = await loadFragment(sideNavPath);
+  if (!sideFragment) return null;
+  const sideNav = document.createElement('aside');
+  sideNav.id = 'sideNav';
+  while (sideFragment.firstElementChild) sideNav.append(sideFragment.firstElementChild);
+  const sideClasses = ['home', 'sections'];
+  sideClasses.forEach((c, i) => {
+    const section = sideNav.children[i];
+    if (section) section.classList.add(`nav-side-${c}`);
+  });
+  const sideSections = sideNav.querySelector('.nav-side-sections');
+  if (sideSections) {
+    createDropMenu(sideSections);
+  }
+  const sideNavHome = sideNav.querySelector('.nav-side-home');
+  sideNavHome.addEventListener('click', () => {
+    const expanded = sideNav.getAttribute('aria-expanded') === 'true';
+    toggleAllNavSections(sideNav);
+    sideNav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+  });
+  return sideNav;
+}
+
+/**
+ * decorates the header, mainly the nav
+ * @param {Element} block The header block element
+ */
+export default async function decorate(block) {
+  const nav = await generateTopNavigation();
+  if (nav) block.append(nav);
+  document.addEventListener('click', (event) => {
+    if (nav.contains(event.target)) return;
+    toggleAllNavSections(nav);
+    nav.setAttribute('aria-expanded', 'false');
+  });
+
+  const sideNav = await generateSideNavigation();
+  if (sideNav) block.append(sideNav);
 }

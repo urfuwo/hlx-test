@@ -8,6 +8,43 @@
  * Heading/Medium: per-element
  * Heading/Regular: default
  */
+
+/* Fall back to Arial for 72 Brand Variable
+ Added to styles.css for early loading */
+
+@font-face {
+  font-family: "72 Brand Variable Fallback";
+  font-style: normal;
+  font-weight: 700;
+  src: local("Arial Bold");
+  ascent-override: 98%;
+  descent-override: 22.94%;
+  line-gap-override: 3.54%;
+  size-adjust: 92.37%;
+}
+
+@font-face {
+  font-family: "72 Brand Variable Fallback";
+  font-style: normal;
+  font-weight: 500;
+  src: local("Arial");
+  ascent-override: 90.58%;
+  descent-override: 21.2%;
+  line-gap-override: 3.27%;
+  size-adjust: 99.94%;
+}
+
+@font-face {
+  font-family: "72 Brand Variable Fallback";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Arial");
+  ascent-override: 90.58%;
+  descent-override: 21.2%;
+  line-gap-override: 3.27%;
+  size-adjust: 99.94%;
+}
+
 :root {
   /* default colors */
   --background-color: var(--udexColorNeutralWhite);
@@ -48,6 +85,12 @@
     --udexGridGutters: var(--udexGridXLGutters);
     --udexGridMargins: var(--udexGridXLMargins);
   }
+
+  main .section {
+    max-width: 1600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 body {
@@ -60,6 +103,12 @@ body {
   color: var(--text-color);
   background-color: var(--background-color);
   display: none;
+}
+
+@media (width < 980px) {
+  body {
+    overflow-x: hidden;
+  }
 }
 
 body.appear {
@@ -208,7 +257,21 @@ main .section {
   padding-bottom: 56px;
 }
 
-main .section > div {
-  margin-left: var(--udexGridMargins);
-  margin-right: var(--udexGridMargins);
+
+/**
+ * Styles for embedding video content.
+ */
+ .video-embed-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+}
+
+.video-embed-iframe {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  top: 0;
+  left: 0;
 }

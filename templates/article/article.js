@@ -1,29 +1,26 @@
-import { buildBlock, getMetadata } from '../../scripts/aem.js';
+import { div } from '../../scripts/dom-builder.js';
+import { getMetadata } from '../../scripts/aem.js';
+import { buildArticleSchema } from '../../scripts/schema.js';
 
-/**
- * Highlight the first paragraph of a blog page
- * Only enabled for pages annotated as metadata:template = blog
- * @param main
- */
-function highlightBlogFirstParagraph(main) {
-  if (getMetadata('template') === 'blog') {
-    const firstParagraph = main.querySelector('.hero + p');
-    if (firstParagraph) {
-      firstParagraph.classList.add('blog--highlight');
-    }
+function restructureArticle(container, targetClass) {
+  const target = container.querySelector(targetClass);
+  if (target.nextElementSibling) {
+    const wrapperDiv = div();
+    wrapperDiv.appendChild(target);
+    container.insertBefore(wrapperDiv, container.firstChild);
   }
 }
 
-export default function decorateMain(main) {
-  if (main.children.length !== 0) {
-    highlightBlogFirstParagraph(main);
-
-    const aritcleTags = buildBlock('article-tags', { elems: [] });
-    main.querySelector('div').append(aritcleTags);
-
-    const div = document.createElement('div');
-    const readMore = buildBlock('related-articles', { elems: [] });
-    div.append(readMore);
-    main.append(div);
+function decorate(doc) {
+  const main = doc.querySelector('main');
+  restructureArticle(main, '.hero');
+  const tocFlag = getMetadata('toc');
+  if (tocFlag && tocFlag.content !== 'no' && tocFlag.content !== 'false') {
+    const tocSection = div({ class: 'toc-container' }, div({ class: 'toc' }));
+    main.insertBefore(tocSection, doc.querySelector('main > :nth-child(2)'));
   }
+
+  buildArticleSchema();
 }
+
+decorate(document);

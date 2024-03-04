@@ -6,27 +6,24 @@ import {
 } from '../../scripts/dom-builder.js';
 import ffetch from '../../scripts/ffetch.js';
 
-const ARTICLE_INDEX = '/blog/articles-index.json';
-
 const ARTICLE_FORMATTER = new Intl.DateTimeFormat('default', {
   year: 'numeric',
   month: 'long',
   day: 'numeric',
 });
 
-// TODO: change to web component once available
 function renderCard(card) {
   const formattedDate = ARTICLE_FORMATTER.format(new Date(card.publicationDate * 1000));
   const cardAuthorUrl = `/author/${toClassName(card.author).replace('-', '')}`; // TODO look up author URL from index
   const cardElement = li(
     { class: 'card' },
     a(
-      { href: card.path },
+      { href: card.path, 'aria-label': card.title },
       createOptimizedPicture(card.image, card.tile, false, [{ width: '750' }]),
     ),
     span(
       { class: 'cardcontent' },
-      span({ class: 'template' }, card.template.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())),
+      span({ class: 'template' }, card['content-type'].replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())),
       (card['hot-story'] ? span({ class: 'hot' }, 'Hot Story') : ''),
       span(
         { class: 'title' },
@@ -83,8 +80,7 @@ export default async function listArticles(block, config = { filter: null, maxEn
     contextFilter = determineContextFilter();
   }
 
-  let articles = await ffetch(ARTICLE_INDEX)
-    .filter(contextFilter);
+  let articles = await ffetch('/articles-index.json').filter(contextFilter);
 
   if (config.maxEntries !== null) {
     articles = await articles.limit(config.maxEntries);
