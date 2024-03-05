@@ -40,21 +40,13 @@ const createMetadata = (main, document, html, params, urlStr) => {
     el.src = imgUrl.pathname;
     meta.Image = el;
   }
-  const ogLocale = document.querySelector('[property="og:locale"]');
-  if (ogLocale) {
-    meta['og:locale'] = ogLocale.content;
-  }
-  const ogType = document.querySelector('[property="og:type"]');
-  if (ogType) {
-    meta['og:type'] = ogType.content;
-  }
   const published = document.querySelector('[property="article:published_time"]');
   if (published) {
-    meta['article:published_time'] = published.content;
+    meta['published-time'] = published.content;
   }
   const modified = document.querySelector('[property="article:modified_time"]');
   if (modified) {
-    meta['article:modified_time'] = modified.content;
+    meta['modified-time'] = modified.content;
   }
   const author = document.querySelector('[name="author"]');
   if (author) {
@@ -69,8 +61,8 @@ const createMetadata = (main, document, html, params, urlStr) => {
     const parseInfo = (str) => ({ timestamp: new Date(str.match(/\b\w+ \d{1,2}, \d{4}/)[0]).toISOString(), linkText: str.match(/<a href="[^"]*" title="[^"]*" rel="[^"]*">([^<]*)<\/a>/)[1] });
     const info = parseInfo(entryMeta.innerHTML);
     meta.Author = info.linkText;
-    if (!meta['article:published_time']) {
-      meta['article:published_time'] = info.timestamp;
+    if (!meta['published-time']) {
+      meta['published-time'] = info.timestamp;
     }
     entryMeta.remove();
   }
