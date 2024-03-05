@@ -69,12 +69,23 @@ function determineContextFilter() {
   // for everything else, filter by category
   return (entry) => {
     const category = getCategoryForReadMore();
-    return JSON.parse(entry.tags).includes(category);
+    const tags = JSON.parse(entry.tags);
+    if (Array.isArray(tags) && entry.tags.length > 0) {
+      return tags.includes(category);
+    }
+    return false;
   };
 }
 
 export default async function listArticles(block, config = { filter: null, maxEntries: null }) {
   loadCSS(`${window.hlx.codeBasePath}/blocks/article-list/article-list.css`);
+
+  const links = Array.from(block.querySelectorAll(':scope > div a')).map((link) => new URL(link.href).pathname);
+  if (links.length > 0) {
+    config.filter = (entry) => links.includes(entry.path);
+    config.sorting = (l, r) => links.indexOf(l.path) - links.indexOf(r.path);
+  }
+
   let contextFilter = config.filter;
   if (!contextFilter) {
     contextFilter = determineContextFilter();
@@ -87,6 +98,9 @@ export default async function listArticles(block, config = { filter: null, maxEn
   }
 
   articles = await articles.all();
+  if (config.sorting) {
+    articles = articles.sort(config.sorting);
+  }
 
   const cardList = ul({ class: 'article-list' });
 
