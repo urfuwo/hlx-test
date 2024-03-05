@@ -55,7 +55,7 @@
   .author-profiles:not(.vertical) .author-profile.hor > div {
     border: none;
     box-shadow: none;
-    background: linear-gradient(to bottom, var(--udexColorBlue1) 0%, var(--udexColorBlue1) 110px, var(--udexColorNeutralWhite), 111px);
+    background: linear-gradient(to bottom, var(--udexColorBlue1) 0%, var(--udexColorBlue1) 110px, var(--udexColorNeutralWhite) 111px);
     flex-direction: column;
     align-items: center;
     padding-top: var(--udexSpacer32);
