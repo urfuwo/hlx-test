@@ -95,7 +95,7 @@ function checkDescription() {
 }
 
 function checkPublishedDate() {
-  const pubDate = document.querySelector('meta[property="article:published_time"]');
+  const pubDate = document.querySelector('meta[published-time"]');
   const result = { icon: DEF_ICON, title: 'Published Date', description: DEF_DESC };
   if (!pubDate) {
     result.icon = fail;

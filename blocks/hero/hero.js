@@ -41,11 +41,12 @@ export default async function decorate(block) {
         getMetadata('author'),
         ' •',
       ) : '',
-      getMetadata('article:published_time') ? span(
+      getMetadata('published-time') ? span(
         { class: ['media-blend__date'] },
-        formatDate(getMetadata('article:published_time')),
+        formatDate(getMetadata('published-time')),
         getMetadata('article:read_time') ? ' •' : '',
       ) : '',
+      // TODO this is wrong we don't have read time in metadata
       getMetadata('article:read_time') ? span(
         { class: ['media-blend__read-time'] },
         getMetadata('article:read_time'),
