@@ -157,8 +157,7 @@ function decorateMultiColumnSections(main) {
     [...section.children].forEach((e) => {
       let isLeft = true;
       for (let i = 1; i < e.classList.length; i += 1) {
-        const variant = e.classList[i];
-        if (variant === 'right-style-wrapper') isLeft = false;
+        if (e.classList[i] === 'right-style-wrapper') isLeft = false;
       }
       if (isLeft) {
         left.append(e.cloneNode(true));
