@@ -1,0 +1,86 @@
+.author-profiles {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(1,1fr);
+  grid-gap: var(--udexGridGutters);
+}
+
+/* S: use 2 per row */
+@media (width >= 640px) {
+  .author-profiles:not(.vertical) {
+    grid-template-columns: repeat(2,1fr);
+  }
+}
+
+/* M: use 4 per row */
+@media (width >= 980px) {
+  .author-profiles:not(.vertical) {
+    grid-template-columns: repeat(4,1fr);
+  }
+
+  .author-profiles.elems2:not(.vertical) {
+    grid-template-columns: repeat(2,1fr);
+  }
+
+  .author-profiles.elems3:not(.vertical) {
+    grid-template-columns: repeat(3,1fr);
+  }
+}
+
+/* L and XL: use 3 per row */
+@media (width >= 1280px) {
+  .author-profiles:not(.vertical) {
+    grid-template-columns: repeat(3,1fr);
+  }
+
+  .author-profiles.elems2:not(.vertical) {
+    grid-template-columns: repeat(2,1fr);
+  }
+}
+
+/* Use horizontal view for S, M, L and XL if more than 1 */
+@media (width >= 640px) {
+  .author-profiles:not(.vertical) .author-profile.hor {
+    height: 360px;
+    border: 1px solid var(--udexColorGrey2);
+    box-shadow: 0 2px 4px rgb(34 54 73 / 20%);
+    background-color: var(--background-color);
+    border-radius: var(--sapTile_BorderCornerRadius);
+    overflow: hidden;
+    position: relative;
+  }
+
+  .author-profiles:not(.vertical) .author-profile.hor > div {
+    border: none;
+    box-shadow: none;
+    background: linear-gradient(to bottom, var(--udexColorBlue1) 0%, var(--udexColorBlue1) 110px, var(--udexColorNeutralWhite), 111px);
+    flex-direction: column;
+    align-items: center;
+    padding-top: var(--udexSpacer32);
+  }
+
+  .author-profiles:not(.vertical) .author-profile.hor p {
+    text-align: center;
+  }
+
+  .author-profiles:not(.vertical) .author-profile.hor h2 {
+    text-align: center;
+    font-family: var(--udexTypographyHeadingMediumXXSFontFamily);
+    font-size: var(--udexTypographyHeadingMediumXXSFontSize);
+    font-weight: var(--udexTypographyHeadingMediumXXSFontWeight);
+    line-height: var(--udexTypographyHeadingMediumXXSLineHeight);
+  }
+
+  .author-profiles:not(.vertical) .author-profile.hor .avatar {
+    flex: 0 0 7.5rem;
+    width: 7.5rem;
+    height: 7.5rem;
+  }
+
+  .author-profiles:not(.vertical) .author-profile.hor .avatar img {
+    height: 7.5rem;
+    width: 7.5rem;
+  }
+}
