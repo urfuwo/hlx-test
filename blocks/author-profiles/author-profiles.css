@@ -40,7 +40,7 @@
   }
 }
 
-/* Use horizontal view for S, M, L and XL if more than 1 */
+/* Use horizontal view for S, M, L, XL if more than 1 */
 @media (width >= 640px) {
   .author-profiles:not(.vertical) .author-profile.hor {
     height: 360px;
