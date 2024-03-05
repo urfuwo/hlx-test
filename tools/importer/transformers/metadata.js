@@ -10,6 +10,7 @@ const addToSet = (map, key, value) => {
 };
 
 const mapToMeta = (meta, map) => {
+  // eslint-disable-next-line no-return-assign
   map.entries().forEach((tag) => meta[tag[0]] = [...tag[1]].join(', '));
 };
 
