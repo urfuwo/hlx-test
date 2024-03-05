@@ -81,7 +81,7 @@ export default async function listArticles(block, config = { filter: null, maxEn
   loadCSS(`${window.hlx.codeBasePath}/blocks/article-list/article-list.css`);
 
   const links = Array.from(block.querySelectorAll(':scope > div a')).map((link) => new URL(link.href).pathname);
-  if ([...links].length > 0) {
+  if (links.length > 0) {
     config.filter = (entry) => links.includes(entry.path);
     config.sorting = (l, r) => links.indexOf(l.path) - links.indexOf(r.path);
   }
