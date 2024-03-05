@@ -14,8 +14,6 @@
     }
   }
 
-  column-gap: var(--udexGridGutters);
-
   & :is(.header) {
     display: contents;
   }
@@ -39,12 +37,18 @@
     grid-area: main-content;
 
     & > :not(.hero-container) {
-      margin: 0 var(--udexGridMargins);
+      & > * {
+        margin: 0 var(--udexGridMargins);
+      }
     }
 
     @media (width >= 980px) {
       & > :not(.hero-container) {
-        margin: 0 var(--udexGridMargins) 0 0;
+        padding-inline: var(--udexGridGutters) var(--udexGridMargins);
+
+        & > * {
+          margin: unset;
+        }
       }
     }
   }
