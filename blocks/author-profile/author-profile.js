@@ -8,7 +8,7 @@ import {
 import ffetch from '../../scripts/ffetch.js';
 
 const breakpoints = [
-  { width: '120' },
+  { width: '480' },
 ];
 
 function extractAuthorDescription(entry) {
