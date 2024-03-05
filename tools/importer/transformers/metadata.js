@@ -1,4 +1,18 @@
 /* global WebImporter */
+
+const addToSet = (map, key, value) => {
+  if (!map.has(key)) {
+    map.set(key, new Set());
+  }
+  if (value) {
+    map.get(key).add(value);
+  }
+};
+
+const mapToMeta = (meta, map) => {
+  map.entries().forEach((tag) => meta[tag[0]] = [...tag[1]].join(', '));
+};
+
 // eslint-disable-next-line no-unused-vars
 const createMetadata = (main, document, html, params, urlStr) => {
   const meta = {};
@@ -99,51 +113,62 @@ const createMetadata = (main, document, html, params, urlStr) => {
     document.arictleType = 'video';
   }
 
-  if (document.mappingTable) {
-    const regionMapping = document.mappingTable.filter(
-      (entry) => entry.region === ogLocale.content,
-    );
-    if (articleContent) {
-      const topicsMapping = regionMapping.filter((entry) => entry.type === 'topic');
+  if (document.mappingTable && articleContent) {
+    const tagging = new Map();
+    // TODO currently additional tags are not mapped as they are not present in the mapping table
 
-      // map categories to topics
-      const categories = [...articleContent.classList]
-        .filter((className) => className.startsWith('category-'))
-        .map((className) => className.replace('category-', ''));
-      if (categories?.length > 0) {
-        meta.Topics = [...new Set(
-          topicsMapping
-            .filter((entry) => categories.includes(entry.key))
-            .map((topic) => topic['replacement-tagging'].split('/').pop() || topic.key),
-        ),
-        ].join(', ');
-      }
-
-      // map types to content types
-      const typesMapping = regionMapping.filter((entry) => entry.type === 'type');
-      if (types?.length > 0) {
-        typesMapping
-          .filter((entry) => entry.key === types[0] && entry['additonal-tagging'] !== '')
-          .forEach((typeEntry) => {
-            if (typeEntry['additonal-tagging'].startsWith('content-type')) {
-              meta['Content Type'] = typeEntry['additonal-tagging'].split('/').pop();
-            }
-            if (typeEntry['additonal-tagging'].startsWith('author-name')) {
-              meta.Author += typeEntry['additonal-tagging'].split('/').pop();
-            }
-          });
-      }
-
-      // map tags
-      const tagsMapping = regionMapping.filter((entry) => entry.type === 'tag');
-      const tags = [...articleContent.classList]
-        .filter((className) => className.startsWith('tag-'))
-        .map((className) => className.replace('tag-', ''));
-      if (tags?.length > 0) {
-        meta.Tags = [...new Set(tagsMapping.filter((entry) => tags.includes(entry.key))
-          .map((entry) => entry['replacement-tagging'].split('/').pop() || entry.key))].join(', ');
-      }
+    // map categories to topics
+    const topicsMapping = document.mappingTable.filter((entry) => entry.class === 'topic');
+    const categories = [...articleContent.classList]
+      .filter((className) => className.startsWith('category-'))
+      .map((className) => className.replace('category-', ''));
+    if (categories?.length > 0) {
+      topicsMapping
+        .filter((entry) => categories.includes(entry.path))
+        .forEach((topic) => {
+          if (topic['action:map'].length > 0) {
+            const newTag = topic['action:map'].split('/');
+            addToSet(tagging, newTag[0], newTag[1]);
+          } else {
+            addToSet(tagging, 'topics', topic.path);
+          }
+        });
     }
+
+    // map types to content types
+    const typesMapping = document.mappingTable.filter((entry) => entry.class === 'type');
+    if (types?.length > 0) {
+      typesMapping
+        .filter((entry) => entry.path === types[0])
+        .forEach((typeEntry) => {
+          if (typeEntry['action:map'].length > 0) {
+            const newTag = typeEntry['action:map'].split('/');
+            addToSet(tagging, newTag[0], newTag[1]);
+          } else {
+            addToSet(tagging, 'content-type', typeEntry.path);
+          }
+        });
+    }
+
+    // map tags
+    const tagsMapping = document.mappingTable.filter((entry) => entry.class === 'tag');
+    const tags = [...articleContent.classList]
+      .filter((className) => className.startsWith('tag-'))
+      .map((className) => className.replace('tag-', ''));
+    if (tags?.length > 0) {
+      tagsMapping
+        .filter((entry) => tags.includes(entry.path))
+        .forEach((tag) => {
+          if (tag['action:map'].length > 0) {
+            const newTag = tag['action:map'].split('/');
+            addToSet(tagging, newTag[0], newTag[1]);
+          } else {
+            addToSet(tagging, 'tags', tag.path);
+          }
+        });
+    }
+
+    mapToMeta(meta, tagging);
   }
 
   const block = WebImporter.Blocks.getMetadataBlock(document, meta);
