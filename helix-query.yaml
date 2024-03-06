@@ -4,6 +4,7 @@ indices:
     include:
       - /blog/**
       - /news/**
+      - /videos/**
     exclude:
       - '**/fragments/**'
     target: /articles-index.json
@@ -38,6 +39,9 @@ indices:
       publicationDate:
         select: head > meta[name="published-time"]
         value: parseTimestamp(attribute(el, "content"))
+      robots:
+        select: head > meta[name="robots"]
+        value: attribute(el, "content")
   author:
     include:
       - /author/**
@@ -56,4 +60,7 @@ indices:
         value: attribute(el, "content")
       title:
         select: head > meta[property="og:title"]
+        value: attribute(el, "content")
+      robots:
+        select: head > meta[name="robots"]
         value: attribute(el, "content")
