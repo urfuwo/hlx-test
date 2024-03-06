@@ -1,0 +1,115 @@
+.card {
+  border: 1px solid var(--udexColorGrey2);
+  box-shadow: 0 2px 4px rgb(34 54 73 / 20%);
+  background-color: var(--background-color);
+  height: var(--article-tile-height);
+  border-radius: var(--sapTile_BorderCornerRadius);
+  overflow: hidden;
+  position: relative;
+
+  & img {
+    width: 100%;
+    height: 130px;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  & .cardcontent {
+    display: block;
+    padding: var(--udexSpacer16);
+
+    & .template {
+      font-style: normal;
+      font-family: var(--udexTypographyBodyXSFontFamily);
+      font-weight: var(--udexTypographyDisplayMediumXSFontWeight);
+      font-size: var(--udexTypographyBodyXSFontSize);
+      line-height: var(--udexTypographyEyebrowMLineHeight);
+      display: flex;
+      align-items: center;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      color: var(--udexColorGrey6);
+      flex: var(--sapContent_ForcedColorAdjust);
+      order: var(--sapShell_BackgroundImageOpacity);
+      flex-grow: var(--sapShell_BackgroundImageOpacity);
+      margin-bottom: var(--udexSpacer8);
+    }
+
+    & .hot {
+      position: absolute;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      padding: 4px 8px;
+      gap: 10px;
+      height: var(--udexTypographyHeadingRegularXSLineHeight);
+      right: var(--udexRadiusM);
+      top: var(--udexRadiusM);
+      background: var(--udexColorBlue1);
+      border: 1px solid #0070f2;
+      border-radius: var(--udexRadiusS);
+      font-family: var(--udexTypographyBodyXXSFontFamily);
+      font-weight: var(--udexTypographyBodyXXSFontWeight);
+      font-size: var(--udexGridXSColumns);
+      line-height: var(--udexCoreSizeIconInput);
+      text-align: center;
+      color: var(--udexColorBlue9);
+      flex: var(--sapContent_ForcedColorAdjust);
+      order: 0;
+      flex-grow: 0;
+    }
+
+    & .title {
+      display: block;
+
+      & a {
+        font-family: var(--udexTypographyBodyXXSFontFamily);
+        font-style: normal;
+        text-decoration: none;
+        font-weight: var(--udexTypographyDisplayMediumXSFontWeight);
+        font-size: var(--udexSpacer20);
+        line-height: var(--udexTypographyHeadingRegularXXSLineHeight);
+        color: var(--udexColorNeutralBlack);
+        flex: var(--sapContent_ForcedColorAdjust);
+        order: var(--sapShell_BackgroundImageOpacity);
+        align-self: stretch;
+        flex-grow: 0;
+        margin-bottom: 12px;
+      }
+    }
+
+    & .author {
+      display: block;
+
+      & a {
+        font-family: var(--udexTypographyBodyXSFontFamily);
+        font-style: normal;
+        text-decoration: none;
+        font-weight: var(--udexTypographyDisplayMediumXSFontWeight);
+        font-size: var(--udexTypographyBodyXSFontSize);
+        line-height: var(--udexTypographyEyebrowMLineHeight);
+        color: var(--udexColorNeutralBlack);
+        flex: var(--sapContent_ForcedColorAdjust);
+        order: 0;
+        align-self: stretch;
+        flex-grow: 0;
+      }
+    }
+
+    & .date {
+      display: block;
+      font-family: var(--udexTypographyBodyXXSFontFamily);
+      font-style: normal;
+      font-weight: var(--udexTypographyBodyXXSFontWeight);
+      font-size: var(--udexGridXSColumns);
+      line-height: var(--udexCoreSizeIconInput);
+      color: var(--udexColorGrey6);
+      flex: var(--sapContent_ForcedColorAdjust);
+      order: var(--sapShell_BackgroundImageOpacity);
+      align-self: stretch;
+      flex-grow: 0;
+    }
+  }
+}
