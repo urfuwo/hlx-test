@@ -4,12 +4,12 @@ import { div } from '../../scripts/dom-builder.js';
 import { completeEntry, renderProfile } from '../author-profile/author-profile.js';
 
 async function getAuthorEntries(keys) {
-  const entryFilter = ((entry) => (keys.includes(entry.author) || keys.includes(entry.path)));
+  const entryFilter = ((entry) => (keys.includes(entry.path)));
   const unsortedEntries = await ffetch('/authors-index.json').filter(entryFilter).limit(keys.length).all();
   const sortedEntries = [];
   keys.forEach((key) => {
     // eslint-disable-next-line max-len
-    sortedEntries.push(completeEntry(unsortedEntries.find((entry) => (key === entry.author || key === entry.path))));
+    sortedEntries.push(completeEntry(unsortedEntries.find((entry) => (key === entry.path))));
   });
   return sortedEntries;
 }
@@ -36,7 +36,8 @@ export default async function decorateBlock(block) {
     keys.push(link ? (new URL(link.href).pathname) : para.innerText);
   });
   if (keys.length === 0) {
-    keys.push(block.querySelector(':scope div div').innerText);
+    const link = block.querySelector('a');
+    keys.push(link ? (new URL(link.href).pathname) : block.innerText);
   }
   block.innerHTML = '';
   await addAuthorProfiles(block, keys);
