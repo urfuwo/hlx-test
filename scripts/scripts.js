@@ -149,7 +149,7 @@ async function decorateVideoLinks(main) {
  * @param {Element} main The container element
  */
 function decorateMultiColumnSections(main) {
-  main.querySelectorAll(':scope > div[class^="column-section-"]').forEach((section) => {
+  main.querySelectorAll(':scope > div.column-section-1-1, :scope > div.column-section-3-2, :scope > div.column-section-2-3, :scope > div.column-section-2-1, :scope > div.column-section-1-2, :scope > div.column-section-3-1, :scope > div.column-section-1-3').forEach((section) => {
     const left = document.createElement('div');
     const right = document.createElement('div');
     left.className = 'column-section-left-block column-section-block';
