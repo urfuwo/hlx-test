@@ -50,7 +50,7 @@ const articleSidebar = (main, document) => {
         heading.textContent = bottomEntry.querySelector('a').textContent;
         bottomEntry.querySelector('a').textContent = 'Subscribe now';
         const block = [
-          ['Newsletter'],
+          ['Promo (Newsletter)'],
           [bottomEntry.querySelector('img'), heading, bottomEntry.querySelector('a')],
         ];
         const table = WebImporter.DOMUtils.createTable(block, document);

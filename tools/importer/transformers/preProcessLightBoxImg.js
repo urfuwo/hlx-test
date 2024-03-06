@@ -18,4 +18,11 @@ export default function unwrapLightboxImages(main, document) {
       parent.replaceWith(img);
     }
   });
+
+  main.querySelectorAll('div.entry-content a > img').forEach((lightboxImg) => {
+    const parent = lightboxImg.parentElement;
+    if (parent.tagName === 'A' && parent.href.match(/\.(jpeg|jpg|gif|png|webp)$/) !== null) {
+      parent.replaceWith(lightboxImg);
+    }
+  });
 }
