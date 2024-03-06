@@ -149,24 +149,16 @@ async function decorateVideoLinks(main) {
  * @param {Element} main The container element
  */
 function decorateMultiColumnSections(main) {
-  main.querySelectorAll(':scope > div.column-section-1-1, :scope > div.column-section-3-2, :scope > div.column-section-2-3, :scope > div.column-section-2-1, :scope > div.column-section-1-2, :scope > div.column-section-3-1, :scope > div.column-section-1-3').forEach((section) => {
-    const left = document.createElement('div');
-    const right = document.createElement('div');
-    left.classList.add('column-section-left-block', 'column-section-block');
-    right.classList.add('column-section-right-block', 'column-section-block');
-    [...section.children].forEach((e) => {
-      let isLeft = true;
-      for (let i = 1; i < e.classList.length; i += 1) {
-        if (e.classList[i] === 'right-style-wrapper') isLeft = false;
-      }
-      if (isLeft) {
-        left.append(e.cloneNode(true));
-      } else {
-        right.append(e.cloneNode(true));
-      }
+  main.querySelectorAll(':scope > div[class^="column-section-"]').forEach((section) => {
+    const left = document.createElement('div'), right = document.createElement('div');
+    left.className = 'column-section-left-block column-section-block';
+    right.className = 'column-section-right-block column-section-block';
+
+    Array.from(section.children).forEach((e) => {
+      (e.classList.contains('right-style-wrapper') ? right : left).append(e.cloneNode(true));
     });
-    section.append(left);
-    section.append(right);
+
+    section.append(left, right);
     section.classList.add('column-section');
   });
 }
