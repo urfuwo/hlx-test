@@ -39,11 +39,12 @@
 /* stylelint-disable-next-line block-no-empty */
 @media (width >= 980px) {
   .block.footer .icon-back-to-top {
-    right: max(var(--udexSpacer24), calc(var(--udexGridMargins) - 32px));
+    right: var(--udexSpacer24);
     position: absolute;
     top: var(--udexSpacer24);
     padding-top: 0;
   }
+
 }
 
 /* L */
@@ -55,4 +56,5 @@
   .block.footer .icon-back-to-top {
     padding-top: 0;
   }
+
 }

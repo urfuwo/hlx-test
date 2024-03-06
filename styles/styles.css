@@ -53,16 +53,6 @@
   /* Margin and gutters */
   --udexGridGutters: var(--udexGridXSGutters);
   --udexGridMargins: var(--udexGridXSMargins);
-
-  /* computed grid */
-  --sc: calc((100vw - (var(--udexGridGutters)*11) - (var(--udexGridMargins)*2)) / 12);
-  --sg12c: calc(var(--sc)*12 + var(--udexGridGutters)*11);
-  --sg9c: calc(var(--sc)*9 + var(--udexGridGutters)*8);
-  --sg8c: calc(var(--sc)*8 + var(--udexGridGutters)*7);
-  --sg6c: calc(var(--sc)*6 + var(--udexGridGutters)*5);
-  --sg4c: calc(var(--sc)*4 + var(--udexGridGutters)*3);
-  --sg3c: calc(var(--sc)*3 + var(--udexGridGutters)*2);
-  --sg2c: calc(var(--sc)*2 + var(--udexGridGutters)*1);
 }
 
 /* S */
@@ -93,9 +83,7 @@
 @media (width >= 1600px) {
   :root {
     --udexGridGutters: var(--udexGridXLGutters);
-    --dynMargins: calc((100vw - 1600px)/2);
-    --udexGridMargins: calc(var(--dynMargins) + var(--udexGridXLMargins));
-    --sc: calc((100vw - (var(--udexGridGutters) * 11) - (var(--udexGridMargins) * 2)) / 12);
+    --udexGridMargins: var(--udexGridXLMargins);
   }
 }
 

@@ -4,6 +4,12 @@
   margin-bottom: 18px; /* no design, assumption */
 }
 
+@media (width >= 1600px) {
+  main {
+    --udexGridMargins: 246px;
+  }
+}
+
 main {
   display: grid;
   grid-auto-flow: row;
@@ -43,7 +49,6 @@ main {
     & > [data-location='sidebar'] {
       grid-column: 2 / 3;
       grid-row: -3 / -2;
-      width: var(--sg3c);
       margin-inline-end: var(--udexGridMargins);
     }
 
@@ -59,7 +64,6 @@ main {
       & > [data-location='sidebar'] {
         grid-column: 3 / 4;
         grid-row: -3 / -2;
-        width: var(--sg3c);
         margin-inline-end: var(--udexGridMargins);
       }
 
@@ -103,10 +107,4 @@ main {
   font-weight: var(--udexTypographyBodyXSFontWeight);
   font-style: normal;
   color: var(--udexColorGrey9);
-}
-
-@media (width >= 980px) {
-  .section.toc-container {
-    width: var(--sg3c);
-  }
 }

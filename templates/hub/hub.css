@@ -8,6 +8,12 @@
       / min-content 1fr;
   }
 
+  @media (width >= 1600px) {
+    & {
+      --udexGridMargins: 246px;
+    }
+  }
+
   & :is(.header) {
     display: contents;
   }
@@ -21,12 +27,7 @@
 
     @media (width >= 980px) {
       margin: 0 0 0 var(--udexGridMargins);
-      min-width: var(--sg3c);
-    }
-
-    @media (width >= 1600px) {
-      margin: 0 0 0 var(--udexGridMargins);
-      width: var(--sg3c);
+      min-width: 200px;
     }
   }
 

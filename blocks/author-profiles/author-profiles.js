@@ -17,7 +17,7 @@ async function getAuthorEntries(keys) {
 async function addAuthorProfiles(block, keys) {
   const entries = await getAuthorEntries(keys);
   if (keys.length > 1) {
-    block.classList.add(`elems${Math.min(keys.length, 3)}`);
+    block.classList.add(`elems${keys.length}`);
     entries.forEach((entry) => {
       const profile = div({ class: 'author-profile hor' }, renderProfile(entry));
       block.append(profile);
