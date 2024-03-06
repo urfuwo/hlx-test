@@ -31,7 +31,7 @@ export function buildArticleSchema() {
     },
     headline: getMetadata('og:title'),
     image: getMetadata('og:image'),
-    datePublished: getMetadata('article:published_time'),
+    datePublished: getMetadata('published-time'),
     publisher: {
       '@type': 'Organization',
       name: 'SAP',
@@ -53,7 +53,7 @@ export function buildArticleSchema() {
     inLanguage: getMetadata('og:locale') || 'en',
   };
 
-  if (getMetadata('article:modified_time')) data.dateModified = getMetadata('article:modified_time');
+  if (getMetadata('modified-time')) data.dateModified = getMetadata('modified-time');
   if (getMetadata('author')) {
     data.author = {
       '@type': 'Person',
