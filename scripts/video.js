@@ -55,7 +55,7 @@ const embedVideoJS = (url) => {
   const embedHTML = `
     <link rel="stylesheet" href="/styles/video-js.css">
     <script src="/scripts/video-js.lib.js"></script>
-    <div class="video-embed-container">
+    <div class="video-embed-container video-embed-no-padding">
       <video
         id="video-js"
         class="video-js video-embed-iframe"
@@ -119,4 +119,5 @@ async function decorateVideoLinks(main) {
   });
 }
 
+// eslint-disable-next-line no-restricted-exports
 export { decorateVideoLinks as default };
