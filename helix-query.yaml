@@ -7,6 +7,7 @@ indices:
       - /videos/**
     exclude:
       - '**/fragments/**'
+      - '**/sidenav'
     target: /articles-index.json
     properties:
       title:
@@ -19,7 +20,7 @@ indices:
         select: head > meta[name="display-author"]
         value: attribute(el, "content")
       hot-story:
-        select: head > meta[name="hot-story"]
+        select: head > meta[name="priority"]
         value: attribute(el, "content")
       content-type:
         select: head > meta[name="content-type"]
