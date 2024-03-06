@@ -19,7 +19,7 @@ indices:
       display-author:
         select: head > meta[name="display-author"]
         value: attribute(el, "content")
-      hot-story:
+      priority:
         select: head > meta[name="priority"]
         value: attribute(el, "content")
       content-type:
