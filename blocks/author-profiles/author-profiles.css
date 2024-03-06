@@ -14,29 +14,25 @@
   }
 }
 
-/* M: use 4 per row */
+/* M: use 2 per row */
 @media (width >= 980px) {
   .author-profiles:not(.vertical) {
-    grid-template-columns: repeat(4,1fr);
-  }
-
-  .author-profiles.elems2:not(.vertical) {
     grid-template-columns: repeat(2,1fr);
   }
 
-  .author-profiles.elems3:not(.vertical) {
-    grid-template-columns: repeat(3,1fr);
+  .author-profiles.elems2:not(.vertical) {
+    grid-template-columns: 4fr 4fr 0.75fr;
   }
 }
 
-/* L and XL: use 3 per row */
+/* L and XL: use 3 per row, unless there are two elements */
 @media (width >= 1280px) {
   .author-profiles:not(.vertical) {
     grid-template-columns: repeat(3,1fr);
   }
 
   .author-profiles.elems2:not(.vertical) {
-    grid-template-columns: repeat(2,1fr);
+    grid-template-columns: 4fr 4fr 0.75fr;
   }
 }
 
