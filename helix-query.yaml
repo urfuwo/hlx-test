@@ -4,8 +4,10 @@ indices:
     include:
       - /blog/**
       - /news/**
+      - /videos/**
     exclude:
       - '**/fragments/**'
+      - '**/sidenav'
     target: /articles-index.json
     properties:
       title:
@@ -17,8 +19,8 @@ indices:
       display-author:
         select: head > meta[name="display-author"]
         value: attribute(el, "content")
-      hot-story:
-        select: head > meta[name="hot-story"]
+      priority:
+        select: head > meta[name="priority"]
         value: attribute(el, "content")
       content-type:
         select: head > meta[name="content-type"]
@@ -38,6 +40,9 @@ indices:
       publicationDate:
         select: head > meta[name="published-time"]
         value: parseTimestamp(attribute(el, "content"))
+      robots:
+        select: head > meta[name="robots"]
+        value: attribute(el, "content")
   author:
     include:
       - /author/**
@@ -56,4 +61,7 @@ indices:
         value: attribute(el, "content")
       title:
         select: head > meta[property="og:title"]
+        value: attribute(el, "content")
+      robots:
+        select: head > meta[name="robots"]
         value: attribute(el, "content")
