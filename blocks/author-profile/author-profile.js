@@ -68,7 +68,6 @@ export default async function decorate(block) {
 }
 
 export {
-  decorate,
   renderProfile,
   completeEntry,
 };

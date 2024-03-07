@@ -8,7 +8,6 @@ async function getAuthorEntries(keys) {
   const unsortedEntries = await ffetch('/authors-index.json').filter(entryFilter).limit(keys.length).all();
   const sortedEntries = [];
   keys.forEach((key) => {
-    // eslint-disable-next-line max-len
     sortedEntries.push(completeEntry(unsortedEntries.find((entry) => (key === entry.path))));
   });
   return sortedEntries;
@@ -31,14 +30,9 @@ async function addAuthorProfiles(block, keys) {
 export default async function decorateBlock(block) {
   loadCSS(`${window.hlx.codeBasePath}/blocks/author-profile/author-profile.css`);
   const keys = [];
-  block.querySelectorAll(':scope p').forEach((para) => {
-    const link = para.querySelector('a');
-    keys.push(link ? (new URL(link.href).pathname) : para.innerText);
+  block.querySelectorAll('a').forEach((link) => {
+    keys.push(new URL(link.href).pathname);
   });
-  if (keys.length === 0) {
-    const link = block.querySelector('a');
-    keys.push(link ? (new URL(link.href).pathname) : block.innerText);
-  }
   block.innerHTML = '';
   await addAuthorProfiles(block, keys);
 }
