@@ -9,3 +9,11 @@
   border-top: 1px solid var(--udexColorGrey3);
   margin-bottom: var(--udexSpacer56);
 }
+
+.article-footnote p:first-of-type {
+  margin-top: 0;
+}
+
+.article-footnote p:last-of-type {
+  margin-bottom: 0;
+}

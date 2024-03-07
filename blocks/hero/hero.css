@@ -132,12 +132,14 @@ udex-hero-banner#media-blend .media-blend__info-block {
   margin: var(--udexSpacer12, 12px) 0;
 }
 
-udex-hero-banner#media-blend .media-blend__info-block span {
-  margin: 0 var(--udexSpacer4);
+udex-hero-banner#media-blend .media-blend__info-block span::after {
+  margin: var(--udexSpacer4);
+  content: '•';
 }
 
-udex-hero-banner#media-blend .media-blend__info-block span:first-of-type {
-  margin-left: 0;
+udex-hero-banner#media-blend .media-blend__info-block span:last-of-type::after {
+  margin: 0;
+  content: '';
 }
 
 udex-hero-banner#media-blend .media-blend__buttons {
