@@ -1,4 +1,4 @@
-.card {
+.picture-card {
   border: 1px solid var(--udexColorGrey2);
   box-shadow: 0 2px 4px rgb(34 54 73 / 20%);
   background-color: var(--background-color);
@@ -18,7 +18,7 @@
     display: block;
     padding: var(--udexSpacer16);
 
-    & .template {
+    & .type {
       font-style: normal;
       font-family: var(--udexTypographyBodyXSFontFamily);
       font-weight: var(--udexTypographyDisplayMediumXSFontWeight);
@@ -35,7 +35,7 @@
       margin-bottom: var(--udexSpacer8);
     }
 
-    & .hot {
+    & .label {
       position: absolute;
       box-sizing: border-box;
       display: flex;

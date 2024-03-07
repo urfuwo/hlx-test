@@ -1,13 +1,4 @@
-.read-more h3 {
-  font-size: var(--udexTypographyHeadingRegularLFontSize);
-  font-family: var(--udexTypographyHeadingRegularLFontFamily);
-  font-weight: var(--udexTypographyHeadingRegularLFontWeight);
-  line-height: var(--udexTypographyHeadingRegularLLineHeight);
-
-  --webkit-font-smoothing: antialiased;
-}
-
-.related-articles {
+.content-list {
   & ul {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(278px, 1fr));

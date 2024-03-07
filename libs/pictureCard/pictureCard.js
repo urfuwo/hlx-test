@@ -23,7 +23,7 @@ export default class PictureCard extends Card {
     }
 
     getLabel(){
-        return this.label ? span({ class: 'hot' }, 'Hot Story') : ''
+        return this.label ? span({ class: 'label' }, this.label) : '';
     }
 
     getFormattedDate(){
@@ -32,26 +32,24 @@ export default class PictureCard extends Card {
             month: 'long',
             day: 'numeric',
           });
-        return ARTICLE_FORMATTER.format(new Date(this.date * 1000));
+        const publishedDate =  ARTICLE_FORMATTER.format(new Date(this.date * 1000));
+        return span({ class: 'date' }, publishedDate);
     }
 
     render() {
         return li(
-            { class: 'card' },
+            { class: 'picture-card' },
             a(
               { href: this.path, 'aria-label': this.title },
               this.getOptimizedPicture(),
             ),
             span(
               { class: 'cardcontent' },
-              span(
-                { class: 'template' },
-                this.getType(),
-              ),
+              span({ class: 'type' },this.getType()),
               this.getLabel(),
               span({ class: 'title' }, a({ href: this.path }, this.title)),
               span({ class: 'author' }, a({ href: this.getAuthorUrl() }, span(`${this.author}`))),
-              span({ class: 'date' }, this.getFormattedDate()),
+              this.getFormattedDate(),
             ),
           );
     }

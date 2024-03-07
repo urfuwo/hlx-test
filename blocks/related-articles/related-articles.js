@@ -5,6 +5,7 @@ import PictureCard from '../../libs/pictureCard/pictureCard.js';
 
 function getFilter(pageTags) {
   return (entry) => {
+    if (entry.path === window.location.pathname) return false;
     const entryTags = JSON.parse(entry.tags);
     if (Array.isArray(entryTags) && entryTags.length > 0) {
       return pageTags.some((item) => entryTags.includes(item));
@@ -16,18 +17,21 @@ function getFilter(pageTags) {
 export default async function decorateBlock(block) {
   const pageTags = getMetadata('article:tag').split(',');
   const filter = getFilter(pageTags);
-  const limit = 3; // hardcoded for now
-  const articleStream = await ffetch('/articles-index.json').filter(filter).limit(limit).all();
-
-  const cardList = ul({ class: 'article-list' });
+  const limit = 4; // hardcoded for now
+  const articleStream = await ffetch('/articles-index.json')
+    .filter(filter)
+    .limit(limit)
+    .slice(0, limit - 1)
+    .all();
+  const cardList = ul();
   articleStream.forEach((article) => {
     const {
-      author, 'content-type': type, image, path, title,
+      author, 'content-type': type, image, path, title, publicationDate, priority,
     } = article;
-    const card = new PictureCard(title, type, path, type, author, image, '', '');
+    const label = priority === 'hot-topic' ? 'Hot Story' : '';
+    const card = new PictureCard(title, type, path, type, author, image, label, publicationDate);
     cardList.append(card.render());
   });
 
-  block.textContent = '';
   block.append(cardList);
 }

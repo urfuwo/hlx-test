@@ -1,69 +1,54 @@
-import { toCamelCase } from '../../scripts/aem.js';
-import { div } from '../../scripts/dom-builder.js';
-import listArticles from '../article-list/article-list.js';
+import { readBlockConfig } from '../../scripts/aem.js';
+import ffetch from '../../scripts/ffetch.js';
+import { ul } from '../../scripts/dom-builder.js';
+import PictureCard from '../../libs/pictureCard/pictureCard.js';
 
-function extractFilterAttributes(filterInfo) {
-  const filterId = filterInfo?.firstElementChild?.textContent?.toLowerCase();
-  let filterValue = filterInfo?.lastElementChild?.textContent?.toLowerCase();
-  if (filterId && filterValue && filterValue !== '*') {
-    filterValue = filterValue.replace('*', '');
-    return { name: toCamelCase(filterId), value: filterValue.split(',').map((value) => value.trim()) };
-  }
-  return null;
+function matchTags(entry, config) {
+  return config.tags.some((item) => entry.tags.includes(item.trim()));
 }
 
-function filter(entryField, attributes) {
-  if (Array.isArray(attributes)) {
-    if (Array.isArray(entryField)) {
-      if (!entryField.some((e) => attributes.includes(e))) {
-        return false;
-      }
-    } else {
-      return attributes.includes(entryField);
-    }
-  } else if (attributes && Array.isArray(entryField)) {
-    if (!entryField.some((e) => e.includes(attributes))) {
-      return false;
-    }
-    return entryField.includes(attributes);
-  }
-  return true;
+function matchAuthors(entry, config) {
+  const authors = entry.author.split(',');
+  return config.authors.some((item) => authors.includes(item.trim()));
 }
 
-function createFilter(filterAttributes) {
-  return (entry) => {
-    const cleanedUpTags = JSON.parse(entry.tags)?.map((tag) => tag.toLowerCase()) || [];
-    const tags = filter(cleanedUpTags, filterAttributes.tags);
-    if (!tags) return false;
-    const authors = filter(entry.author?.toLowerCase(), filterAttributes.authors);
-    if (!authors) return false;
-    const cleanedUpTopics = JSON.parse(entry.topics)?.[0]?.split(', ').flat() || [];
-    const topics = filter(cleanedUpTopics, filterAttributes.topics);
-    if (!topics) return false;
-    const contentType = filter(entry['content-type']?.toLowerCase(), filterAttributes.contentTypes);
-    if (!contentType) return false;
-    return entry.path?.startsWith(filterAttributes.paths);
-  };
+function matchTopics(entry, config) {
+  return config.topics.some((item) => entry.topics.includes(item.trim()));
+}
+
+function matchContentType(entry, config) {
+  const contentType = entry['content-type'].split(',');
+  return config['content-type'].some((item) => contentType.includes(item.trim()));
+}
+
+function getFilter(config) {
+  return (entry) => entry.path !== window.location.pathname
+    && matchTags(entry, config)
+    && matchAuthors(entry, config)
+    && matchTopics(entry, config)
+    && matchContentType(entry, config);
 }
 
 export default async function decorateBlock(block) {
-  const filterAttributes = {};
-  Array.from(block.children)?.forEach((childDiv) => {
-    const filterEntry = extractFilterAttributes(childDiv);
-    if (filterEntry) {
-      filterAttributes[filterEntry.name] = filterEntry.value;
-    }
+  const config = Object.fromEntries(
+    Object.entries(readBlockConfig(block)).map(([key, value]) => [key, value.split(',')]),
+  );
+  const filters = getFilter(config);
+  const limits = config.limit ? config.limit[0] : -1;
+  const articleStream = await ffetch('/articles-index.json')
+    .filter(filters)
+    .limit(limits)
+    .slice(0, limits - 1)
+    .all();
+  const cardList = ul();
+  articleStream.forEach((article) => {
+    const {
+      author, 'content-type': type, image, path, title, publicationDate, priority,
+    } = article;
+    const label = priority === 'hot-topic' ? 'Hot Story' : '';
+    const card = new PictureCard(title, type, path, type, author, image, label, publicationDate);
+    cardList.append(card.render());
   });
-  if (!filterAttributes.paths) {
-    filterAttributes.paths = ['/'];
-  }
-  const limit = filterAttributes.limit ? parseInt(filterAttributes.limit?.[0], 10) : 3;
-  delete filterAttributes.limit;
-  const filterFunction = createFilter(filterAttributes);
-
-  const articles = div();
-  listArticles(articles, { filter: filterFunction, maxEntries: limit });
-
   block.textContent = '';
-  block.append(articles);
+  block.append(cardList);
 }
