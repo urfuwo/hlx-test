@@ -72,12 +72,6 @@
       / min-content 1fr;
   }
 
-  @media (width >= 1600px) {
-    & {
-      --udexGridMargins: 246px;
-    }
-  }
-
   & :is(.header) {
     display: contents;
   }
