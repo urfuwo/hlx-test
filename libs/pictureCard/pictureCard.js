@@ -5,13 +5,12 @@ import {
   import { createOptimizedPicture, toClassName, loadCSS } from '../../scripts/aem.js';
 
 export default class PictureCard extends Card {
-    constructor(title, subtitle, path, type, author, image, label, date){
-        super(title, subtitle, path, type);
+    constructor(title, path, type, label, author, image, date){
+        super(title, path, type, label);
         this.author = author;
         this.image = image;
         this.label = label;
         this.date = date;
-        loadCSS(`${window.hlx.codeBasePath}/libs/pictureCard/pictureCard.css`)
     }
 
     getAuthorUrl(){
@@ -20,10 +19,6 @@ export default class PictureCard extends Card {
 
     getOptimizedPicture(){
         return createOptimizedPicture(this.image, this.title, false, [{ width: '750' }]);
-    }
-
-    getLabel(){
-        return this.label ? span({ class: 'label' }, this.label) : '';
     }
 
     getFormattedDate(){
@@ -36,7 +31,11 @@ export default class PictureCard extends Card {
         return span({ class: 'date' }, publishedDate);
     }
 
-    render() {
+    render(excludeStyles) {
+      if(!excludeStyles){
+        loadCSS(`${window.hlx.codeBasePath}/libs/pictureCard/pictureCard.css`)
+      }
+      
         return li(
             { class: 'picture-card' },
             a(

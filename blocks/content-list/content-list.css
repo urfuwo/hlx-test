@@ -21,4 +21,16 @@
       }
     }
   }
+
+  &.text-only {
+    & ul {
+      display: grid;
+      grid-template-columns: repeat(9, 1fr);
+      gap: 1rem;
+
+      & .card {
+        grid-column: span 4;
+      }
+    }
+  }
 }

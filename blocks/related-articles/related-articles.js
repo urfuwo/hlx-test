@@ -29,7 +29,7 @@ export default async function decorateBlock(block) {
       author, 'content-type': type, image, path, title, publicationDate, priority,
     } = article;
     const label = priority === 'hot-topic' ? 'Hot Story' : '';
-    const card = new PictureCard(title, type, path, type, author, image, label, publicationDate);
+    const card = new PictureCard(title, path, type, label, author, image, publicationDate);
     cardList.append(card.render());
   });
 

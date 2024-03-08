@@ -1,11 +1,11 @@
 import {
-    li, a, span,
+    li, a, span, p,
   } from '../../scripts/dom-builder.js';
-
+  import {loadCSS } from '../../scripts/aem.js';
 export default class Card {
-    constructor(title, subtitle, path, type){
+    constructor(title, path, type, label){
         this.title = title;
-        this.subtitle = subtitle;
+        this.label = label;
         this.path = path;
         this.type = type;
     }
@@ -14,21 +14,23 @@ export default class Card {
         return this.type?.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
     }
 
-    render() {
+
+    getLabel(){
+        return this.label ? p({ class: 'label' }, this.label) : '';
+    }
+
+    render(excludeStyles) {
+        if(!excludeStyles){
+            loadCSS(`${window.hlx.codeBasePath}/libs/card/card.css`)
+          }
         return li(
             { class: 'card' },
-            a(
-            { href: this.path, 'aria-label': this.title }
-            ),
-            span(
-            { class: 'cardcontent' },
-            span(
+            p(
                 { class: 'type' },
                 this.getType(),
             ),
-            span({ class: 'title' }, a({ href: this.path}, this.title)),
-            span({ class: 'subtitle' }, this.subtitle),
-            ),
+            p({ class: 'title' }, a({ href: this.path, 'aria-label': this.title}, this.title)),
+            this.getLabel(),
         );
     }
 }
