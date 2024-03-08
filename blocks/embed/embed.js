@@ -6,6 +6,43 @@
  */
 
 /**
+ * Sets consent for video embedding.
+ * @function setConsent
+ * @memberof EmbedBlock
+ * @param {string} value - The value to set consent for.
+ * @param {string} [key='videoConsent'] - The key to store consent under in sessionStorage.
+ */
+const setConsent = (value, key = 'videoConsent') => {
+  if (sessionStorage.getItem(key)) {
+    const currentConsentSet = new Set(sessionStorage.getItem(key).split(','));
+    if (!currentConsentSet.has(value)) {
+      sessionStorage.setItem(key, `${Array.from(currentConsentSet).join(',')},${value}`);
+    }
+  } else {
+    sessionStorage.setItem(key, value);
+  }
+};
+
+/**
+ * Gets consent status for a given source.
+ * @function getConsent
+ * @memberof EmbedBlock
+ * @param {string} source - The source to check consent for.
+ * @param {string} [key='videoConsent'] - The key to retrieve consent from in sessionStorage.
+ * @returns {boolean} - The consent status for the given source.
+ */
+const getConsent = (source, key = 'videoConsent') => {
+  let output = false;
+  if (sessionStorage.getItem(key)) {
+    const consentSet = new Set(sessionStorage.getItem(key).split(','));
+    if (consentSet.has(source)) {
+      output = true;
+    }
+  }
+  return output;
+};
+
+/**
  * Embeds a YouTube video.
  * @function embedYoutube
  * @memberof EmbedBlock
@@ -34,28 +71,6 @@ const embedYoutube = (url, autoplay = true) => {
       loading="lazy"></iframe>
       </div>`;
   return embedHTML;
-};
-
-const setConsent = (value, key = 'videoConsent') => {
-  if (sessionStorage.getItem(key)) {
-    const currentConsentSet = new Set(sessionStorage.getItem(key).split(','));
-    if (!currentConsentSet.has(value)) {
-      sessionStorage.setItem(key, `${Array.from(currentConsentSet).join(',')},${value}`);
-    }
-  } else {
-    sessionStorage.setItem(key, value);
-  }
-};
-
-const getConsent = (source, key = 'videoConsent') => {
-  let output = false;
-  if (sessionStorage.getItem(key)) {
-    const consentSet = new Set(sessionStorage.getItem(key).split(','));
-    if (consentSet.has(source)) {
-      output = true;
-    }
-  }
-  return output;
 };
 
 /**
@@ -167,7 +182,6 @@ const createConsentOverlay = (selector, source) => {
 
   placeholder.querySelector(thisPermaconsentSelector)
     .addEventListener('click', ({ target: { dataset: { service } } }) => {
-      console.log("service:", service);
       setConsent(service);
     });
 };
@@ -232,7 +246,6 @@ export default function decorate(block) {
   }, null);
 
   const hasConsented = getConsent(source);
-  console.log(hasConsented);
 
   if (placeholder && !hasConsented) {
     const wrapper = document.createElement('div');
@@ -243,8 +256,7 @@ export default function decorate(block) {
     wrapper.classList.add(selectorSource);
     createConsentOverlay(`.${selectorSource}`, source);
 
-    document.querySelector(`.${selectorSource}`).addEventListener('click', (event) => {
-      console.log(event.target);
+    document.querySelector(`.${selectorSource}`).addEventListener('click', () => {
       loadEmbed(block, link, poster);
     });
   } else {
