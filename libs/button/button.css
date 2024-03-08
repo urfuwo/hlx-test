@@ -1,0 +1,23 @@
+.button-wrapper {
+  & .button {
+    width: 150px;
+    position: relative;
+    border: 0.0625rem solid var(--udexColorBlue9);
+    color: var(--udexColorBlue9);
+    background: var(--udexColorNeutralWhite);
+    border-radius: 0.5rem;
+    padding: 14px;
+    font-style: normal;
+    font-family: var(--udexTypographyNavigationMediumXLFontFamily);
+    font-weight: var(--udexTypographyNavigationMediumXLFontWeight);
+    font-size: var(--udexTypographyNavigationMediumXLFontSize);
+    line-height: var(--udexTypographyNavigationMediumXLLineHeight);
+
+    &::after {
+      content: '\203A';
+      padding-left: 8px;
+      position: absolute;
+      transform: scale(1.4);
+    }
+  }
+}

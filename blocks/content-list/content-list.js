@@ -3,21 +3,26 @@ import ffetch from '../../scripts/ffetch.js';
 import { ul } from '../../scripts/dom-builder.js';
 import PictureCard from '../../libs/pictureCard/pictureCard.js';
 import Card from '../../libs/card/card.js';
+import Button from '../../libs/button/button.js';
 
 function matchTags(entry, config) {
+  if (!config.tags) return true;
   return config.tags.some((item) => entry.tags.includes(item.trim()));
 }
 
 function matchAuthors(entry, config) {
+  if (!config.authors) return true;
   const authors = entry.author.split(',');
   return config.authors.some((item) => authors.includes(item.trim()));
 }
 
 function matchTopics(entry, config) {
+  if (!config.topics) return true;
   return config.topics.some((item) => entry.topics.includes(item.trim()));
 }
 
 function matchContentType(entry, config) {
+  if (!config['content-type']) return true;
   const contentType = entry['content-type'].split(',');
   return config['content-type'].some((item) => contentType.includes(item.trim()));
 }
@@ -63,16 +68,25 @@ export default async function decorateBlock(block) {
     .limit(limit)
     .slice(0, limit - 1)
     .all();
+  const itemCount = articleStream.length;
+  let viewBtn;
+  if (itemCount > 10 && itemCount < 20) {
+    viewBtn = new Button('Show More');
+  }
   const cardList = ul();
   articleStream.forEach((article) => {
+    let card;
     if (textOnly) {
-      const card = getCard(article);
+      card = getCard(article);
       cardList.append(card.render());
     } else {
-      const card = getPictureCard(article);
+      card = getPictureCard(article);
       cardList.append(card.render());
     }
   });
   block.textContent = '';
   block.append(cardList);
+  if (viewBtn) {
+    block.append(viewBtn.render());
+  }
 }

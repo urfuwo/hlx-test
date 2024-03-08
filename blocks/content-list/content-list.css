@@ -23,13 +23,39 @@
   }
 
   &.text-only {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--udexSpacer16);
+
+    @media (width >= 980px) {
+      & {
+        grid-template-columns: repeat(9, 1fr);
+      }
+    }
+
     & ul {
-      display: grid;
-      grid-template-columns: repeat(9, 1fr);
-      gap: 1rem;
+      display: contents;
 
       & .card {
-        grid-column: span 4;
+        grid-column: 1 / -1;
+
+        @media (width >= 980px) {
+          & {
+            grid-column: span 4;
+          }
+        }
+      }
+    }
+
+    & .button-wrapper {
+      display: flex;
+      justify-content: center;
+      grid-column: span 6;
+
+      @media (width >= 980px) {
+        & {
+          grid-column: span 8;
+        }
       }
     }
   }
