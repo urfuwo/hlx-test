@@ -67,7 +67,7 @@
     display: grid;
     grid-template:
       'header header' 60px
-      'side-nav main-content' auto
+      'main-content main-content' auto
       'footer footer' auto
       / min-content 1fr;
   }
