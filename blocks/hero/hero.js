@@ -23,6 +23,8 @@ export default async function decorate(block) {
   const intro = block.querySelector('h6');
   const heading = block.querySelector('h1');
   const description = getDescription(block);
+  const lastUpdate = getMetadata('modified-time')
+    ? getMetadata('modified-time') : getMetadata('published-time');
   const contentSlot = div(
     {
       slot: 'content',
@@ -39,12 +41,10 @@ export default async function decorate(block) {
       getMetadata('author') ? span(
         { class: ['media-blend__author'] },
         getMetadata('author'),
-        ' •',
       ) : '',
-      getMetadata('published-time') ? span(
+      lastUpdate ? span(
         { class: ['media-blend__date'] },
-        formatDate(getMetadata('published-time')),
-        getMetadata('article:read_time') ? ' •' : '',
+        `Updated on ${formatDate(lastUpdate)}`,
       ) : '',
       // TODO this is wrong we don't have read time in metadata
       getMetadata('article:read_time') ? span(
