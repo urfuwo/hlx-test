@@ -8,6 +8,10 @@
   background-color: var(--udexColorBlue1);
 }
 
+.promo.transparent {
+  background-color: inherit;
+}
+
 .promo>div {
   display: flex;
   flex-direction: row;
