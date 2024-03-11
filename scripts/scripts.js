@@ -72,15 +72,25 @@ function decorateMultiColumnSections(main) {
   });
 }
 
+/**
+ * Decorates image links in a specified container by replacing the picture elements with anchor elements.
+ * @param {Element} main - The container element
+ */
 function decorateImageLinks(main) {
   main.querySelectorAll('p picture').forEach((picture) => {
     const linkElement = picture.nextElementSibling;
     if (linkElement && linkElement.tagName === 'A' && linkElement.href.startsWith('https://www.linkedin.com/posts/')) {
       const linkURL = linkElement.href;
-      const newLink = document.createElement('a');
-      newLink.target = '_blank';
-      newLink.rel = 'noopener';
-      newLink.href = linkURL;
+
+      /**
+       * The new anchor element to replace the picture element.
+       * @type {HTMLAnchorElement}
+       */
+      const newLink = Object.assign(document.createElement('a'), {
+        target: '_blank',
+        rel: 'noopener',
+        href: linkURL
+      });
       while (picture.firstChild) {
         newLink.appendChild(picture.firstChild);
       }
