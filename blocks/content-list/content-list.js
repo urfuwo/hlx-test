@@ -4,6 +4,7 @@ import { ul } from '../../scripts/dom-builder.js';
 import PictureCard from '../../libs/pictureCard/pictureCard.js';
 import Card from '../../libs/card/card.js';
 import Button from '../../libs/button/button.js';
+import { formatDate } from '../../scripts/utils.js';
 
 function matchTags(entry, config) {
   if (!config.tags) return true;
@@ -42,12 +43,7 @@ function getPlaceHolderValue(key, placeholders) {
 function getInfo(article, config) {
   const { info = ['publicationDate'] } = config;
   if (info[0] === 'publicationDate') {
-    const ARTICLE_FORMATTER = new Intl.DateTimeFormat('default', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    });
-    return ARTICLE_FORMATTER.format(new Date(article.publicationDate * 1000));
+    return formatDate(article.publicationDate * 1000);
   }
   if (info[0] === 'author') {
     return article.author;
