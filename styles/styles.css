@@ -335,16 +335,4 @@ main .section {
   .column-section > div.column-section-block > div:first-child > *:first-child {
     margin-top: 0;
   }
-
-  .column-section > div.column-section-block > div:first-child > div:first-child > *:first-child {
-    margin-top: 0;
-  }
-
-  .column-section > div.column-section-block > div:first-child > div:first-child > div:first-child > *:first-child {
-    margin-top: 0;
-  }
-
-  .column-section > div.column-section-block > div:first-child > div:first-child > div:first-child > div:first-child > *:first-child {
-    margin-top: 0;
-  }
 }
