@@ -1,69 +1,109 @@
-import { toCamelCase } from '../../scripts/aem.js';
-import { div } from '../../scripts/dom-builder.js';
-import listArticles from '../article-list/article-list.js';
+import { readBlockConfig, fetchPlaceholders, toCamelCase } from '../../scripts/aem.js';
+import ffetch from '../../scripts/ffetch.js';
+import { ul } from '../../scripts/dom-builder.js';
+import PictureCard from '../../libs/pictureCard/pictureCard.js';
+import Card from '../../libs/card/card.js';
+import Button from '../../libs/button/button.js';
 
-function extractFilterAttributes(filterInfo) {
-  const filterId = filterInfo?.firstElementChild?.textContent?.toLowerCase();
-  let filterValue = filterInfo?.lastElementChild?.textContent?.toLowerCase();
-  if (filterId && filterValue && filterValue !== '*') {
-    filterValue = filterValue.replace('*', '');
-    return { name: toCamelCase(filterId), value: filterValue.split(',').map((value) => value.trim()) };
-  }
-  return null;
+function matchTags(entry, config) {
+  if (!config.tags) return true;
+  return config.tags.some((item) => entry.tags.includes(item.trim()));
 }
 
-function filter(entryField, attributes) {
-  if (Array.isArray(attributes)) {
-    if (Array.isArray(entryField)) {
-      if (!entryField.some((e) => attributes.includes(e))) {
-        return false;
-      }
-    } else {
-      return attributes.includes(entryField);
-    }
-  } else if (attributes && Array.isArray(entryField)) {
-    if (!entryField.some((e) => e.includes(attributes))) {
-      return false;
-    }
-    return entryField.includes(attributes);
-  }
-  return true;
+function matchAuthors(entry, config) {
+  if (!config.authors) return true;
+  const authors = entry.author.split(',');
+  return config.authors.some((item) => authors.includes(item.trim()));
 }
 
-function createFilter(filterAttributes) {
-  return (entry) => {
-    const cleanedUpTags = JSON.parse(entry.tags)?.map((tag) => tag.toLowerCase()) || [];
-    const tags = filter(cleanedUpTags, filterAttributes.tags);
-    if (!tags) return false;
-    const authors = filter(entry.author?.toLowerCase(), filterAttributes.authors);
-    if (!authors) return false;
-    const cleanedUpTopics = JSON.parse(entry.topics)?.[0]?.split(', ').flat() || [];
-    const topics = filter(cleanedUpTopics, filterAttributes.topics);
-    if (!topics) return false;
-    const contentType = filter(entry['content-type']?.toLowerCase(), filterAttributes.contentTypes);
-    if (!contentType) return false;
-    return entry.path?.startsWith(filterAttributes.paths);
-  };
+function matchTopics(entry, config) {
+  if (!config.topics) return true;
+  return config.topics.some((item) => entry.topics.includes(item.trim()));
+}
+
+function matchContentType(entry, config) {
+  if (!config['content-type']) return true;
+  const contentType = entry['content-type'].split(',');
+  return config['content-type'].some((item) => contentType.includes(item.trim()));
+}
+
+function getFilter(config) {
+  return (entry) => matchTags(entry, config)
+    && matchAuthors(entry, config)
+    && matchTopics(entry, config)
+    && matchContentType(entry, config);
+}
+
+function getPlaceHolderValue(key, placeholders) {
+  const value = placeholders[toCamelCase(key)];
+  return value || '';
+}
+
+function getInfo(article, config) {
+  const { info = ['publicationDate'] } = config;
+  if (info[0] === 'publicationDate') {
+    const ARTICLE_FORMATTER = new Intl.DateTimeFormat('default', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
+    return ARTICLE_FORMATTER.format(new Date(article.publicationDate * 1000));
+  }
+  if (info[0] === 'author') {
+    return article.author;
+  }
+  if (info[0] === 'reading-time') {
+    return ''; // TODO - Needs implementation
+  }
+  return '';
+}
+
+function getPictureCard(article, config, placeholders) {
+  const {
+    author, 'content-type': type, image, path, title, priority,
+  } = article;
+  const tagLabel = getPlaceHolderValue(priority, placeholders);
+  const info = getInfo(article, config);
+  return new PictureCard(title, path, type, info, author, image, tagLabel);
+}
+
+function getCard(article, config) {
+  const { 'content-type': type, path, title } = article;
+  const info = getInfo(article, config);
+  return new Card(title, path, type, info);
 }
 
 export default async function decorateBlock(block) {
-  const filterAttributes = {};
-  Array.from(block.children)?.forEach((childDiv) => {
-    const filterEntry = extractFilterAttributes(childDiv);
-    if (filterEntry) {
-      filterAttributes[filterEntry.name] = filterEntry.value;
-    }
-  });
-  if (!filterAttributes.paths) {
-    filterAttributes.paths = ['/'];
+  const textOnly = block.classList.contains('text-only');
+  const config = Object.fromEntries(
+    Object.entries(readBlockConfig(block)).map(([key, value]) => [key, value.split(',')]),
+  );
+  const filter = getFilter(config);
+  const limit = config.limit ? +config.limit[0] + 1 : -1;
+  let articleStream = await ffetch('/articles-index.json')
+    .filter((entry) => entry.path !== window.location.pathname)
+    .filter(filter)
+    .limit(limit)
+    .slice(0, limit - 1)
+    .all();
+  const placeholders = await fetchPlaceholders();
+  const itemCount = articleStream.length;
+  let viewBtn;
+  if (itemCount > 10 && itemCount < 20) {
+    articleStream = articleStream.slice(0, 10); // only show first 10, rest will be paginated
+    viewBtn = new Button('Show More', 'icon-link-arrow');
   }
-  const limit = filterAttributes.limit ? parseInt(filterAttributes.limit?.[0], 10) : 3;
-  delete filterAttributes.limit;
-  const filterFunction = createFilter(filterAttributes);
-
-  const articles = div();
-  listArticles(articles, { filter: filterFunction, maxEntries: limit });
-
+  const cardList = ul();
+  articleStream.forEach((article) => {
+    let card;
+    if (textOnly) {
+      card = getCard(article, config);
+    } else {
+      card = getPictureCard(article, config, placeholders);
+    }
+    cardList.append(card.render());
+  });
   block.textContent = '';
-  block.append(articles);
+  block.append(cardList);
+  if (viewBtn) block.append(viewBtn.render());
 }

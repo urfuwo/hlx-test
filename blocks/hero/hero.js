@@ -3,7 +3,7 @@ import {
   div, h1, span, p,
 } from '../../scripts/dom-builder.js';
 import { getMetadata } from '../../scripts/aem.js';
-import formatDate from '../../scripts/utils.js';
+import { formatDate } from '../../scripts/utils.js';
 
 /*
   * Assumption: The last paragraph is the description if it exists and has text
@@ -23,6 +23,8 @@ export default async function decorate(block) {
   const intro = block.querySelector('h6');
   const heading = block.querySelector('h1');
   const description = getDescription(block);
+  const lastUpdate = getMetadata('modified-time')
+    ? getMetadata('modified-time') : getMetadata('published-time');
   const contentSlot = div(
     {
       slot: 'content',
@@ -39,13 +41,12 @@ export default async function decorate(block) {
       getMetadata('author') ? span(
         { class: ['media-blend__author'] },
         getMetadata('author'),
-        ' •',
       ) : '',
-      getMetadata('article:published_time') ? span(
+      lastUpdate ? span(
         { class: ['media-blend__date'] },
-        formatDate(getMetadata('article:published_time')),
-        getMetadata('article:read_time') ? ' •' : '',
+        `Updated on ${formatDate(lastUpdate)}`,
       ) : '',
+      // TODO this is wrong we don't have read time in metadata
       getMetadata('article:read_time') ? span(
         { class: ['media-blend__read-time'] },
         getMetadata('article:read_time'),

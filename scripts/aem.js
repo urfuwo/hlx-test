@@ -621,6 +621,12 @@ function decorateBlock(block) {
     block.dataset.blockStatus = 'initialized';
     const blockWrapper = block.parentElement;
     blockWrapper.classList.add(`${shortBlockName}-wrapper`);
+    for (let i = 1; i < block.classList.length; i += 1) {
+      const variant = block.classList[i];
+      if (variant === 'block') break;
+      blockWrapper.classList.add(`${variant}-style-wrapper`);
+      blockWrapper.classList.add(`${shortBlockName}-${variant}-wrapper`);
+    }
     const section = block.closest('.section');
     if (section) section.classList.add(`${shortBlockName}-container`);
   }
@@ -656,6 +662,13 @@ async function loadFooter(footer) {
   footer.append(footerBlock);
   decorateBlock(footerBlock);
   return loadBlock(footerBlock);
+}
+
+async function loadSideNav(sideNav) {
+  const sideNavBlock = buildBlock('side-nav', '');
+  sideNav.append(sideNavBlock);
+  decorateBlock(sideNavBlock);
+  return loadBlock(sideNavBlock);
 }
 
 /**
@@ -699,6 +712,7 @@ export {
   loadCSS,
   loadFooter,
   loadHeader,
+  loadSideNav,
   loadScript,
   readBlockConfig,
   sampleRUM,

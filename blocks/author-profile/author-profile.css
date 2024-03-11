@@ -49,6 +49,7 @@
   font-family: var(--udexTypographyBodyXSFontFamily);
   font-weight: var(--udexTypographyBodyXSFontWeight);
   line-height: var(--udexTypographyBodyXSLineHeight);
+  color: var(--udexColorGrey7);
   text-align: left;
   margin: 0;
 }

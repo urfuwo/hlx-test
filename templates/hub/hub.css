@@ -1,0 +1,164 @@
+.hub-l2.appear {
+  @media (width >= 980px) {
+    display: grid;
+    grid-template:
+      'header header' 60px
+      'side-nav main-content' auto
+      'footer footer' auto
+      / min-content 1fr;
+  }
+
+  @media (width >= 1600px) {
+    & {
+      --udexGridMargins: 246px;
+    }
+  }
+
+  & :is(.header) {
+    display: contents;
+  }
+
+  & > header {
+    grid-area: header;
+  }
+
+  & > aside {
+    grid-area: side-nav;
+
+    @media (width >= 980px) {
+      margin: 0 0 0 var(--udexGridMargins);
+      min-width: 200px;
+    }
+  }
+
+  & > main {
+    display: flex;
+    flex-direction: column;
+    grid-area: main-content;
+
+    & > :not(.hero-container) {
+      & > * {
+        margin: 0 var(--udexGridMargins);
+      }
+    }
+
+    @media (width >= 980px) {
+      & > :not(.hero-container) {
+        padding-inline: var(--udexGridGutters) var(--udexGridMargins);
+
+        & > * {
+          margin: unset;
+        }
+      }
+    }
+  }
+
+  & > footer {
+    grid-area: footer;
+  }
+
+  & > * {
+    transition: margin 0.3s ease-in-out;
+  }
+}
+
+
+.section.background-blue,
+.section.background-blue-1 {
+  background-color: var(--udexColorBlue1);
+}
+
+.section.background-blue-2 {
+  background-color: var(--udexColorBlue2);
+}
+
+.section.background-grey,
+.section.background-grey-1 {
+  background-color: var(--udexColorGrey1);
+}
+
+.section.background-grey-2 {
+  background-color: var(--udexColorGrey2);
+}
+
+.section.background-indigo,
+.section.background-indigo-1 {
+  background-color: var(--udexColorIndigo1);
+}
+
+.section.background-indigo-2 {
+  background-color: var(--udexColorIndigo2);
+}
+
+.section.background-pink,
+.section.background-pink-1 {
+  background-color: var(--udexColorPink1);
+}
+
+.section.background-pink-2 {
+  background-color: var(--udexColorPink2);
+}
+
+.section.background-raspberry,
+.section.background-raspberry-1 {
+  background-color: var(--udexColorRaspberry1);
+}
+
+.section.background-raspberry-2 {
+  background-color: var(--udexColorRaspberry2);
+}
+
+.section.background-red,
+.section.background-red-1 {
+  background-color: var(--udexColorRed1);
+}
+
+.section.background-red-2 {
+  background-color: var(--udexColorRed2);
+}
+
+.section.background-mango,
+.section.background-mango-1 {
+  background-color: var(--udexColorMango1);
+}
+
+.section.background-mango-2 {
+  background-color: var(--udexColorMango2);
+}
+
+.section.background-green,
+.section.background-green-1 {
+  background-color: var(--udexColorGreen1);
+}
+
+.section.background-green-2 {
+  background-color: var(--udexColorGreen2);
+}
+
+.section.background-teal,
+.section.background-teal-1 {
+  background-color: var(--udexColorTeal1);
+}
+
+.section.background-teal-2 {
+  background-color: var(--udexColorTeal2);
+}
+
+.section.text-black,
+.section.text-neutral-black {
+  color: var(--udexColorNeutralBlack);
+}
+
+.section.divider-top {
+  margin-top: 5px;
+  box-shadow:
+          0 -2px 0 white,
+          0 -3px 0 var(--udexCoreDividerLight),
+          0 -5px 0 white;
+}
+
+/* This is a temporary rule to show "wide" body rows */
+.section.row-wide {
+  padding-left: var(--udexGridMargins);
+  margin-left: 0;
+}
