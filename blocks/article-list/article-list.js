@@ -1,9 +1,5 @@
 import {
-  createOptimizedPicture,
-  getMetadata,
-  toClassName,
-  loadCSS,
-  fetchPlaceholders,
+  createOptimizedPicture, getMetadata, toClassName, loadCSS, fetchPlaceholders,
 } from '../../scripts/aem.js';
 import {
   ul, li, a, span,
@@ -27,13 +23,16 @@ function renderCard(card) {
     ),
     span(
       { class: 'cardcontent' },
+      span({ class: 'template' }, card['content-type'].replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())),
+      (card['hot-story'] ? span({ class: 'hot' }, 'Hot Story') : ''),
       span(
-        { class: 'template' },
-        card['content-type'].replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase()),
+        { class: 'title' },
+        a({ href: card.path }, card.title),
       ),
-      card['hot-story'] ? span({ class: 'hot' }, 'Hot Story') : '',
-      span({ class: 'title' }, a({ href: card.path }, card.title)),
-      span({ class: 'author' }, a({ href: cardAuthorUrl }, span(`${card.author}`))),
+      span(
+        { class: 'author' },
+        a({ href: cardAuthorUrl }, span(`${card.author}`)),
+      ),
       span({ class: 'date' }, formattedDate),
     ),
   );
@@ -64,9 +63,7 @@ function determineContextFilter() {
   // for tags get filter from URL
   if (window.location.pathname.startsWith('/tags/') > 0) {
     const tag = window.location.pathname.split('/')[2];
-    return (entry) => JSON.parse(entry.tags)
-      .map((t) => toClassName(t))
-      .includes(tag);
+    return (entry) => JSON.parse(entry.tags).map((t) => toClassName(t)).includes(tag);
   }
 
   // for everything else, filter by category
@@ -83,9 +80,7 @@ function determineContextFilter() {
 export default async function listArticles(block, config = { filter: null, maxEntries: null }) {
   loadCSS(`${window.hlx.codeBasePath}/blocks/article-list/article-list.css`);
 
-  const links = Array.from(block.querySelectorAll(':scope > div a')).map(
-    (link) => new URL(link.href).pathname,
-  );
+  const links = Array.from(block.querySelectorAll(':scope > div a')).map((link) => new URL(link.href).pathname);
   if (links.length > 0) {
     config.filter = (entry) => links.includes(entry.path);
     config.sorting = (l, r) => links.indexOf(l.path) - links.indexOf(r.path);
