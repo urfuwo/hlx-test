@@ -78,9 +78,10 @@ const embedYoutube = (url, autoplay = true) => {
  * @function embedLinkedIn
  * @memberof EmbedBlock
  * @param {URL} url - The URL of the LinkedIn video.
+ * @param {boolean} [autoplay=true] - Whether to autoplay the video. Defaults to true.  Current not supported by LinkedIn video
  * @returns {string} - The HTML for embedding the LinkedIn video.
  */
-const embedLinkedIn = (url) => {
+const embedLinkedIn = (url, autoplay = true) => {
   const [, , , , vid] = url.pathname.split('/');
   const embedHTML = `<div class="embed-container">
     <iframe src="https://www.linkedin.com/embed/feed/update/${vid}?compact=1"
@@ -96,9 +97,13 @@ const embedLinkedIn = (url) => {
  * @function embedVideoJS
  * @memberof EmbedBlock
  * @param {URL} url - The URL of the VideoJS video.
+ * @param {boolean} autoplay - Whether autoplay is enabled or not.
  * @returns {string} - The HTML for embedding the VideoJS video.
+ * @todo Validate whether this src URL pattern is really correct for all DGL videos (contact Pete Chamberlin)
+ * @todo Determine whether this is the best place to include the css and js lib file for videoJS
+ * @todo CSS styling pass needed to ensure the VideoJS player is brand compliant
  */
-const embedVideoJS = (url, poster = null) => {
+const embedVideoJS = (url, autoplay = true, poster = null) => {
   // eslint-disable-next-line comma-dangle
   const [, , vid,] = url.pathname.split('/');
   const embedHTML = `
@@ -108,7 +113,7 @@ const embedVideoJS = (url, poster = null) => {
       <video
         id="video-js"
         class="video-js embed-iframe"
-        controls
+        controls ${autoplay ? 'autoplay' : ''}
         preload="auto"
         poster="${poster}"
         data-setup='{}'>
@@ -188,12 +193,14 @@ const createConsentOverlay = (selector, source) => {
 
 /**
  * Loads the appropriate embed based on the source link.
- * @memberof EmbedBlock
  * @function loadEmbed
+ * @memberof EmbedBlock
  * @param {HTMLElement} block - The HTML block element.
  * @param {string} link - The source link of the video.
-*/
-const loadEmbed = (block, link, poster = null) => {
+ * @param {string|null} [poster=null] - The URL of the video poster image. Default is null.
+ * @param {boolean} [autoplay=true] - Whether autoplay is enabled or not. Default is true.
+ */
+const loadEmbed = (block, link, poster = null, autoplay = true) => {
   if (block.classList.contains('embed-is-loaded')) {
     return;
   }
@@ -202,7 +209,7 @@ const loadEmbed = (block, link, poster = null) => {
   const url = new URL(link);
 
   if (config) {
-    block.innerHTML = config.embed(url, poster);
+    block.innerHTML = config.embed(url, autoplay, poster);
     block.classList = `block embed embed-${(config.match[0]).replace(/\./g, '-')}`;
   }
 
@@ -236,9 +243,10 @@ const extractVideoData = (block) => {
 export default function decorate(block) {
   const placeholder = block.querySelector('picture');
   const videoData = extractVideoData(block);
-  const { href: link, poster } = videoData;
+  const { href, poster } = videoData;
+
   const source = EMBEDS_CONFIG.reduce((result, config) => {
-    if (config.match.some((match) => link.toLowerCase().includes(match))) {
+    if (config.match.some((match) => href.toLowerCase().includes(match))) {
       return config.source;
     }
     return result;
@@ -248,22 +256,22 @@ export default function decorate(block) {
 
   if (placeholder && !hasConsented) {
     const wrapper = document.createElement('div');
+    const selectorSource = `embed-source-${source}`;
+
     wrapper.className = 'embed-placeholder';
     wrapper.prepend(placeholder);
     block.append(wrapper);
-    const selectorSource = `embed-source-${source}`;
 
     wrapper.classList.add(selectorSource);
     createConsentOverlay(`.${selectorSource}`, source);
-
     wrapper.addEventListener('click', () => {
-      loadEmbed(block, link, poster);
+      loadEmbed(block, href, poster, true);
     });
   } else {
     const observer = new IntersectionObserver((entries) => {
       if (entries.some((e) => e.isIntersecting)) {
         observer.disconnect();
-        loadEmbed(block, link);
+        loadEmbed(block, href, poster, false);
       }
     });
     observer.observe(block);
