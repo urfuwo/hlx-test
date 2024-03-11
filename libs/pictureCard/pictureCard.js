@@ -5,12 +5,11 @@ import {
   import { createOptimizedPicture, toClassName, loadCSS } from '../../scripts/aem.js';
 
 export default class PictureCard extends Card {
-    constructor(title, path, type, label, author, image, date){
-        super(title, path, type, label);
+    constructor(title, path, type, info, author, image, tagLabel){
+        super(title, path, type, info);
         this.author = author;
         this.image = image;
-        this.label = label;
-        this.date = date;
+        this.tagLabel = tagLabel;
     }
 
     getAuthorUrl(){
@@ -21,14 +20,8 @@ export default class PictureCard extends Card {
         return createOptimizedPicture(this.image, this.title, false, [{ width: '750' }]);
     }
 
-    getFormattedDate(){
-        const ARTICLE_FORMATTER = new Intl.DateTimeFormat('default', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-          });
-        const publishedDate =  ARTICLE_FORMATTER.format(new Date(this.date * 1000));
-        return span({ class: 'date' }, publishedDate);
+    getTagLabel() {
+      return this.tagLabel ? span({ class: 'tag-label' }, this.tagLabel) : '';
     }
 
     render(excludeStyles) {
@@ -44,11 +37,11 @@ export default class PictureCard extends Card {
             ),
             span(
               { class: 'cardcontent' },
+              this.getTagLabel(),
               span({ class: 'type' },this.getType()),
-              this.getLabel(),
               span({ class: 'title' }, a({ href: this.path }, this.title)),
               span({ class: 'author' }, a({ href: this.getAuthorUrl() }, span(`${this.author}`))),
-              this.getFormattedDate(),
+              span({ class: 'info' },this.info),
             ),
           );
     }

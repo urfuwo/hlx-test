@@ -1,9 +1,9 @@
 import { li, a, span, p } from '../../scripts/dom-builder.js';
 import { loadCSS } from '../../scripts/aem.js';
 export default class Card {
-  constructor(title, path, type, label) {
+  constructor(title, path, type, info) {
     this.title = title;
-    this.label = label;
+    this.info = info;
     this.path = path;
     this.type = type;
   }
@@ -15,7 +15,7 @@ export default class Card {
   }
 
   getLabel() {
-    return this.label ? p({ class: 'label' }, this.label) : '';
+    return this.info ? p({ class: 'label' }, this.info) : '';
   }
 
   render(excludeStyles) {

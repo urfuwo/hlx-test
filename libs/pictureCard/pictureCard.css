@@ -1,4 +1,5 @@
 .picture-card {
+  /* TODO: This class is copied from article-list.css and is using wrong variable names and unnecessary rules. It must be refactored */
   border: 1px solid var(--udexColorGrey2);
   box-shadow: 0 2px 4px rgb(34 54 73 / 20%);
   background-color: var(--background-color);
@@ -35,7 +36,7 @@
       margin-bottom: var(--udexSpacer8);
     }
 
-    & .label {
+    & .tag-label {
       position: absolute;
       box-sizing: border-box;
       display: flex;
@@ -98,7 +99,7 @@
       }
     }
 
-    & .date {
+    & .info {
       display: block;
       font-family: var(--udexTypographyBodyXXSFontFamily);
       font-style: normal;

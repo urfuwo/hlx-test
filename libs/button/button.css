@@ -1,23 +1,29 @@
 .button-wrapper {
   & .button {
-    width: 150px;
+    /* width: 150px; */
     position: relative;
-    border: 0.0625rem solid var(--udexColorBlue9);
+    border: 0.0625rem solid var(--udexColorGrey7);
     color: var(--udexColorBlue9);
     background: var(--udexColorNeutralWhite);
     border-radius: 0.5rem;
-    padding: 14px;
+    padding: 14px 28px 14px 14px;
     font-style: normal;
     font-family: var(--udexTypographyNavigationMediumXLFontFamily);
     font-weight: var(--udexTypographyNavigationMediumXLFontWeight);
     font-size: var(--udexTypographyNavigationMediumXLFontSize);
     line-height: var(--udexTypographyNavigationMediumXLLineHeight);
 
-    &::after {
-      content: '\203A';
+    &:hover {
+      background: var(--udexColorGrey2);
+    }
+
+    & span {
       padding-left: 8px;
+      padding-right: 0;
+      top: 10px;
+      color: var(--udexColorBlue9);
       position: absolute;
-      transform: scale(1.4);
+      transform: scale(0.4) rotate(90deg);
     }
   }
 }

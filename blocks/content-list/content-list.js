@@ -28,32 +28,44 @@ function matchContentType(entry, config) {
 }
 
 function getFilter(config) {
-  return (entry) => entry.path !== window.location.pathname
-    && matchTags(entry, config)
+  return (entry) => matchTags(entry, config)
     && matchAuthors(entry, config)
     && matchTopics(entry, config)
     && matchContentType(entry, config);
 }
 
-function getPictureCard(article) {
-  const {
-    author, 'content-type': type, image, path, title, publicationDate, priority,
-  } = article;
-  const label = priority === 'hot-topic' ? 'Hot Story' : '';
-  return new PictureCard(title, path, type, label, author, image, publicationDate);
+function getInfo(article, config) {
+  const { info = ['publicationDate'] } = config;
+  if (info[0] === 'publicationDate') {
+    const ARTICLE_FORMATTER = new Intl.DateTimeFormat('default', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
+    return ARTICLE_FORMATTER.format(new Date(article.publicationDate * 1000));
+  }
+  if (info[0] === 'author') {
+    return article.author;
+  }
+  if (info[0] === 'reading-time') {
+    return ''; // TODO - Needs implementation
+  }
+  return '';
 }
 
-function getCard(article) {
+function getPictureCard(article, config) {
   const {
-    'content-type': type, path, title, publicationDate,
+    author, 'content-type': type, image, path, title, priority,
   } = article;
-  const ARTICLE_FORMATTER = new Intl.DateTimeFormat('default', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
-  const publishedDate = ARTICLE_FORMATTER.format(new Date(publicationDate * 1000));
-  return new Card(title, path, type, publishedDate);
+  const tagLabel = priority === 'hot-topic' ? 'Hot Story' : '';
+  const info = getInfo(article, config);
+  return new PictureCard(title, path, type, info, author, image, tagLabel);
+}
+
+function getCard(article, config) {
+  const { 'content-type': type, path, title } = article;
+  const info = getInfo(article, config);
+  return new Card(title, path, type, info);
 }
 
 export default async function decorateBlock(block) {
@@ -63,7 +75,8 @@ export default async function decorateBlock(block) {
   );
   const filter = getFilter(config);
   const limit = config.limit ? +config.limit[0] + 1 : -1;
-  const articleStream = await ffetch('/articles-index.json')
+  let articleStream = await ffetch('/articles-index.json')
+    .filter((entry) => entry.path !== window.location.pathname)
     .filter(filter)
     .limit(limit)
     .slice(0, limit - 1)
@@ -71,22 +84,20 @@ export default async function decorateBlock(block) {
   const itemCount = articleStream.length;
   let viewBtn;
   if (itemCount > 10 && itemCount < 20) {
-    viewBtn = new Button('Show More');
+    articleStream = articleStream.slice(0, 10); // only show first 10, rest will be paginated
+    viewBtn = new Button('Show More', 'icon-link-arrow');
   }
   const cardList = ul();
   articleStream.forEach((article) => {
     let card;
     if (textOnly) {
-      card = getCard(article);
-      cardList.append(card.render());
+      card = getCard(article, config);
     } else {
-      card = getPictureCard(article);
-      cardList.append(card.render());
+      card = getPictureCard(article, config);
     }
+    cardList.append(card.render());
   });
   block.textContent = '';
   block.append(cardList);
-  if (viewBtn) {
-    block.append(viewBtn.render());
-  }
+  if (viewBtn) block.append(viewBtn.render());
 }
