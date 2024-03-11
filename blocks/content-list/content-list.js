@@ -1,4 +1,4 @@
-import { readBlockConfig } from '../../scripts/aem.js';
+import { readBlockConfig, fetchPlaceholders, toCamelCase } from '../../scripts/aem.js';
 import ffetch from '../../scripts/ffetch.js';
 import { ul } from '../../scripts/dom-builder.js';
 import PictureCard from '../../libs/pictureCard/pictureCard.js';
@@ -34,6 +34,11 @@ function getFilter(config) {
     && matchContentType(entry, config);
 }
 
+function getPlaceHolderValue(key, placeholders) {
+  const value = placeholders[toCamelCase(key)];
+  return value || '';
+}
+
 function getInfo(article, config) {
   const { info = ['publicationDate'] } = config;
   if (info[0] === 'publicationDate') {
@@ -53,11 +58,11 @@ function getInfo(article, config) {
   return '';
 }
 
-function getPictureCard(article, config) {
+function getPictureCard(article, config, placeholders) {
   const {
     author, 'content-type': type, image, path, title, priority,
   } = article;
-  const tagLabel = priority === 'hot-topic' ? 'Hot Story' : '';
+  const tagLabel = getPlaceHolderValue(priority, placeholders);
   const info = getInfo(article, config);
   return new PictureCard(title, path, type, info, author, image, tagLabel);
 }
@@ -81,6 +86,7 @@ export default async function decorateBlock(block) {
     .limit(limit)
     .slice(0, limit - 1)
     .all();
+  const placeholders = await fetchPlaceholders();
   const itemCount = articleStream.length;
   let viewBtn;
   if (itemCount > 10 && itemCount < 20) {
@@ -93,7 +99,7 @@ export default async function decorateBlock(block) {
     if (textOnly) {
       card = getCard(article, config);
     } else {
-      card = getPictureCard(article, config);
+      card = getPictureCard(article, config, placeholders);
     }
     cardList.append(card.render());
   });
