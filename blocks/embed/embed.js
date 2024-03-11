@@ -217,7 +217,6 @@ const loadEmbed = (block, link, poster = null) => {
  * @returns {string} - The source link of the video.
  */
 const extractVideoData = (block) => {
-  console.log(block);
   const linkDiv = block.querySelector('.embed > div:last-child');
   const link = linkDiv.textContent.trim();
   const imageSrc = block.querySelector('.embed picture img').src;
@@ -253,10 +252,11 @@ export default function decorate(block) {
     wrapper.prepend(placeholder);
     block.append(wrapper);
     const selectorSource = `embed-source-${source}`;
+
     wrapper.classList.add(selectorSource);
     createConsentOverlay(`.${selectorSource}`, source);
 
-    document.querySelector(`.${selectorSource}`).addEventListener('click', () => {
+    wrapper.addEventListener('click', () => {
       loadEmbed(block, link, poster);
     });
   } else {
