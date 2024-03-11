@@ -237,7 +237,6 @@ export default function decorate(block) {
     wrapper.className = 'embed-placeholder';
     wrapper.prepend(placeholder);
     block.append(wrapper);
-
     wrapper.classList.add(selectorSource);
 
     createConsentOverlay(`.${selectorSource}`, source);

@@ -72,6 +72,14 @@ function decorateMultiColumnSections(main) {
   });
 }
 
+function decorateLinks(main) {
+  const links = main.querySelectorAll('.default-content-wrapper a');
+  links.forEach((link) => {
+    console.log(link);
+  });
+
+}
+
 /**
  * Decorates the main element.
  * @param {Element} main The main element
@@ -81,6 +89,7 @@ export async function decorateMain(main, shouldDecorateTemplates = true) {
   // hopefully forward compatible button decoration
   decorateButtons(main);
   decorateIcons(main);
+  decorateLinks(main);
   if (shouldDecorateTemplates) {
     await decorateTemplates(main);
   }
