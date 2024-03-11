@@ -17,8 +17,6 @@ import {
   waitForLCP,
 } from './aem.js';
 
-//import decorateVideoLinks from './video.js';
-
 const LCP_BLOCKS = ['hero']; // add your LCP blocks to the list
 const TEMPLATE_LIST = {
   article: 'article',
@@ -68,7 +66,6 @@ export async function decorateMain(main, shouldDecorateTemplates = true) {
   }
   decorateSections(main);
   decorateBlocks(main);
-  //decorateVideoLinks(main);
 }
 
 /**
