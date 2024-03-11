@@ -74,25 +74,6 @@ const embedYoutube = (url, autoplay = true) => {
 };
 
 /**
- * Embeds a LinkedIn Video.
- * @function embedLinkedIn
- * @memberof EmbedBlock
- * @param {URL} url - The URL of the LinkedIn video.
- * @param {boolean} [autoplay=true] - Whether to autoplay the video. Defaults to true.  Current not supported by LinkedIn video
- * @returns {string} - The HTML for embedding the LinkedIn video.
- */
-const embedLinkedIn = (url, autoplay = true) => {
-  const [, , , , vid] = url.pathname.split('/');
-  const embedHTML = `<div class="embed-container">
-    <iframe src="https://www.linkedin.com/embed/feed/update/${vid}?compact=1"
-    class="embed-iframe"
-    frameborder="0" allowfullscreen=""
-    title="Embedded LinkedIn Video"></iframe>
-    </div>`;
-  return embedHTML;
-};
-
-/**
  * Embeds a VideoJS Video.
  * @function embedVideoJS
  * @memberof EmbedBlock
@@ -137,11 +118,6 @@ const EMBEDS_CONFIG = [
     match: ['youtube', 'youtu.be'],
     embed: embedYoutube,
     source: 'YouTube',
-  },
-  {
-    match: ['linkedin.com'],
-    embed: embedLinkedIn,
-    source: 'LinkedIn',
   },
   {
     match: ['d.dam.sap.com'],
@@ -263,6 +239,7 @@ export default function decorate(block) {
     block.append(wrapper);
 
     wrapper.classList.add(selectorSource);
+
     createConsentOverlay(`.${selectorSource}`, source);
     wrapper.addEventListener('click', () => {
       loadEmbed(block, href, poster, true);
