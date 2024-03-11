@@ -8,6 +8,7 @@ export default function preProcessArticleFootnote(main, document) {
     let siblingElement = hrLine.nextElementSibling;
     while (siblingElement) {
       const current = siblingElement;
+      if (current.tagName === 'DIV' && current.classList.contains('cta-banner')) break;
       wrapper.append(current.cloneNode(true));
       siblingElement = current.nextElementSibling;
       current.remove();

@@ -11,7 +11,7 @@ const addToSet = (map, key, value) => {
 
 const mapToMeta = (meta, map) => {
   // eslint-disable-next-line no-return-assign
-  map.entries().forEach((tag) => meta[tag[0]] = [...tag[1]].join(', '));
+  map.entries().forEach((tag) => (meta[tag[0]] = [...tag[1]].join(', ')));
 };
 
 // eslint-disable-next-line no-unused-vars
@@ -42,11 +42,11 @@ const createMetadata = (main, document, html, params, urlStr) => {
   }
   const published = document.querySelector('[property="article:published_time"]');
   if (published) {
-    meta['published-time'] = published.content;
+    meta['Published Time'] = published.content;
   }
   const modified = document.querySelector('[property="article:modified_time"]');
   if (modified) {
-    meta['modified-time'] = modified.content;
+    meta['Modified Time'] = modified.content;
   }
   const author = document.querySelector('[name="author"]');
   if (author) {
@@ -57,17 +57,25 @@ const createMetadata = (main, document, html, params, urlStr) => {
   }
 
   if (!meta.Author) {
-    const entryMeta = document.querySelector('p.entry-meta');
-    const parseInfo = (str) => ({ timestamp: new Date(str.match(/\b\w+ \d{1,2}, \d{4}/)[0]).toISOString(), linkText: str.match(/<a href="[^"]*" title="[^"]*" rel="[^"]*">([^<]*)<\/a>/)[1] });
-    const info = parseInfo(entryMeta.innerHTML);
-    meta.Author = info.linkText;
-    if (!meta['published-time']) {
-      meta['published-time'] = info.timestamp;
+    // author extraction fro video pages
+    const entryMeta = document.querySelector('article.sap-tv div.meta');
+    if (entryMeta) {
+      const parseInfo = (str) => ({
+        timestamp: new Date(str.match(/\b\w+ \d{1,2}, \d{4}/)[0]).toISOString(),
+        linkText: str.match(/<a href="[^"]*" title="[^"]*" rel="[^"]*">([^<]*)<\/a>/)[1],
+      });
+      const info = parseInfo(entryMeta.querySelector('p.entry-meta').innerHTML);
+      meta.Author = info.linkText;
+      if (!meta['Published Time']) {
+        meta['Published Time'] = info.timestamp;
+      }
+      entryMeta.remove();
     }
-    entryMeta.remove();
   }
 
-  const displayAuthor = [...document.querySelectorAll('.c-hero-post__content .c-entry-author a')].map((el) => el.textContent).join(', ');
+  const displayAuthor = [...document.querySelectorAll('.c-hero-post__content .c-entry-author a')]
+    .map((el) => el.textContent)
+    .join(', ');
   if (displayAuthor) {
     meta['Display Author'] = displayAuthor;
   }
@@ -94,21 +102,24 @@ const createMetadata = (main, document, html, params, urlStr) => {
   }
 
   // add tags, topics, content types etc based on mapping tables
-  const articleContent = document.querySelector('section#main > article.post, section#main > article.sap-tv');
-  const types = [...articleContent.classList]
-    .filter((className) => className.startsWith('sapn-type-'))
-    .map((className) => className.replace('sapn-type-', ''));
-
-  if (types?.length > 0) {
-    // eslint-disable-next-line prefer-destructuring
-    document.arictleType = types[0];
-  } else if (articleContent.classList.contains('type-sap-tv')) {
-    document.arictleType = 'video';
-  }
-
+  const articleContent = document.querySelector(
+    'section#main > article.post, section#main > article.sap-tv',
+  );
   if (document.mappingTable && articleContent) {
-    const tagging = new Map();
+    const types = [...articleContent.classList]
+      .filter((className) => className.startsWith('sapn-type-'))
+      .map((className) => className.replace('sapn-type-', ''));
+
+    if (types?.length > 0) {
+      // eslint-disable-next-line prefer-destructuring
+      document.arictleType = types[0];
+    } else if (articleContent.classList.contains('type-sap-tv')) {
+      document.arictleType = 'video';
+      types.push('video');
+    }
+
     // TODO currently additional tags are not mapped as they are not present in the mapping table
+    const tagging = new Map();
 
     // map categories to topics
     const topicsMapping = document.mappingTable.filter((entry) => entry.class === 'topic');
