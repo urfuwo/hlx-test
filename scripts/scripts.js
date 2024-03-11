@@ -72,12 +72,22 @@ function decorateMultiColumnSections(main) {
   });
 }
 
-function decorateLinks(main) {
-  const links = main.querySelectorAll('.default-content-wrapper a');
-  links.forEach((link) => {
-    console.log(link);
+function decorateImageLinks(main) {
+  main.querySelectorAll('p picture').forEach((picture) => {
+    const linkElement = picture.nextElementSibling;
+    if (linkElement && linkElement.tagName === 'A' && linkElement.href.startsWith('https://www.linkedin.com/posts/')) {
+      const linkURL = linkElement.href;
+      const newLink = document.createElement('a');
+      newLink.target = '_blank';
+      newLink.rel = 'noopener';
+      newLink.href = linkURL;
+      while (picture.firstChild) {
+        newLink.appendChild(picture.firstChild);
+      }
+      picture.parentNode.replaceChild(newLink, picture);
+      linkElement.remove();
+    }
   });
-
 }
 
 /**
@@ -89,7 +99,7 @@ export async function decorateMain(main, shouldDecorateTemplates = true) {
   // hopefully forward compatible button decoration
   decorateButtons(main);
   decorateIcons(main);
-  decorateLinks(main);
+  decorateImageLinks(main);
   if (shouldDecorateTemplates) {
     await decorateTemplates(main);
   }
