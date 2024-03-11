@@ -1,6 +1,5 @@
 .button-wrapper {
   & .button {
-    /* width: 150px; */
     position: relative;
     border: 0.0625rem solid var(--udexColorGrey7);
     color: var(--udexColorBlue9);
