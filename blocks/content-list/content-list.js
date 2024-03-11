@@ -35,11 +35,6 @@ function getFilter(config) {
     && matchContentType(entry, config);
 }
 
-function getPlaceHolderValue(key, placeholders) {
-  const value = placeholders[toCamelCase(key)];
-  return value || '';
-}
-
 function getInfo(article, config) {
   const { info = ['publicationDate'] } = config;
   if (info[0] === 'publicationDate') {
@@ -58,7 +53,7 @@ function getPictureCard(article, config, placeholders) {
   const {
     author, 'content-type': type, image, path, title, priority,
   } = article;
-  const tagLabel = getPlaceHolderValue(priority, placeholders);
+  const tagLabel = placeholders[toCamelCase(priority)] || '';
   const info = getInfo(article, config);
   return new PictureCard(title, path, type, info, author, image, tagLabel);
 }

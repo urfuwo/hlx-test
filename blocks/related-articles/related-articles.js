@@ -15,16 +15,11 @@ function getFilter(pageTags) {
   };
 }
 
-function getPlaceHolderValue(key, placeholders) {
-  const value = placeholders[toCamelCase(key)];
-  return value || '';
-}
-
 function getPictureCard(article, placeholders) {
   const {
     author, 'content-type': type, image, path, title, priority,
   } = article;
-  const tagLabel = getPlaceHolderValue(priority, placeholders);
+  const tagLabel = placeholders[toCamelCase(priority)] || '';
   const info = formatDate(article.publicationDate * 1000);
   return new PictureCard(title, path, type, info, author, image, tagLabel);
 }
