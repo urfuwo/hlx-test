@@ -15,14 +15,15 @@ function calculateInitials(name) {
 function decorateMetaInfo() {
   const infoBlockWrapper = div({ class: 'media-blend__info-block' });
 
-  if (getMetadata('author')) {
+  const author = getMetadata('author');
+  if (author) {
     const avatar = document.createElement('udex-avatar');
     avatar.setAttribute('size', 'XS');
-    avatar.setAttribute('initials', calculateInitials(getMetadata('author')));
+    avatar.setAttribute('initials', calculateInitials(author));
     avatar.setAttribute('color-scheme', 'Neutral');
 
-    const author = span({ class: 'media-blend__author' }, getMetadata('author'));
-    infoBlockWrapper.append(avatar, author);
+    const authorEl = span({ class: 'media-blend__author' }, author);
+    infoBlockWrapper.append(avatar, authorEl);
   }
   const lastUpdate = getMetadata('modified-time')
     ? getMetadata('modified-time')
@@ -31,9 +32,10 @@ function decorateMetaInfo() {
     span({ class: 'media-blend__date' }, `Updated on ${formatDate(lastUpdate)}`),
   );
 
-  if (getMetadata('twitter:data2')) {
+  const readingTime = getMetadata('twitter:data2');
+  if (readingTime) {
     infoBlockWrapper.append(
-      span({ class: 'media-blend__read-time' }, getMetadata('twitter:data2')),
+      span({ class: 'media-blend__read-time' }, readingTime),
     );
   }
 
