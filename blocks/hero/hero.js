@@ -5,6 +5,43 @@ import { div, span, p } from '../../scripts/dom-builder.js';
 import { getMetadata } from '../../scripts/aem.js';
 import { formatDate } from '../../scripts/utils.js';
 
+function calculateInitials(name) {
+  const nameParts = name.split(' ');
+  let initials = '';
+  nameParts.forEach((part) => {
+    initials += part.charAt(0).toUpperCase();
+  });
+  return initials;
+}
+
+function decorateMetaInfo() {
+  const infoBlockWrapper = div({ class: 'media-blend__info-block' });
+
+  if (getMetadata('author')) {
+    const avatar = document.createElement('udex-avatar');
+    avatar.setAttribute('size', 'XS');
+    avatar.setAttribute('initials', calculateInitials(getMetadata('author')));
+    avatar.setAttribute('color-scheme', 'Neutral');
+
+    const author = span({ class: 'media-blend__author' }, getMetadata('author'));
+    infoBlockWrapper.append(avatar, author);
+  }
+  const lastUpdate = getMetadata('modified-time')
+    ? getMetadata('modified-time')
+    : getMetadata('published-time');
+  infoBlockWrapper.append(
+    span({ class: 'media-blend__date' }, `Updated on ${formatDate(lastUpdate)}`),
+  );
+
+  if (getMetadata('twitter:data2')) {
+    infoBlockWrapper.append(
+      span({ class: 'media-blend__read-time' }, getMetadata('twitter:data2')),
+    );
+  }
+
+  return infoBlockWrapper;
+}
+
 /**
  * loads and decorates the footer
  * @param {Element} block The footer block element
@@ -68,29 +105,7 @@ export default async function decorate(block) {
   });
   if (block.querySelector(':scope div > div').childElementCount > 0) contentSlot.append(...block.querySelector(':scope div > div').children);
 
-  // TODO add metadata
-  const infoBlockWrapper = div({ class: 'media-blend__info-block' });
-
-  if (getMetadata('author')) {
-    const avatar = document.createElement('udex-avatar');
-    avatar.setAttribute('size', 'XS');
-    avatar.setAttribute('initials', 'UD');
-    avatar.setAttribute('color-scheme', 'Neutral');
-
-    const author = span({ class: 'media-blend__author' }, getMetadata('author'));
-    infoBlockWrapper.append(avatar, author);
-  }
-  const lastUpdate = getMetadata('modified-time')
-    ? getMetadata('modified-time')
-    : getMetadata('published-time');
-  infoBlockWrapper.append(
-    span({ class: 'media-blend__date' }, `Updated on ${formatDate(lastUpdate)}`),
-  );
-
-  if (getMetadata('twitter:data2')) {
-    infoBlockWrapper.append(span({ class: 'media-blend__read-time' }, getMetadata('twitter:data2')));
-  }
-  contentSlot.append(infoBlockWrapper);
+  contentSlot.append(decorateMetaInfo());
 
   if (buttonContainer.childElementCount > 0) contentSlot.append(buttonContainer);
 
