@@ -13,7 +13,7 @@
   aspect-ratio: 16 / 9;
   position: relative;
   background-color: var(--udexColorNeutralBlack);
-  opacity: 40%;
+  opacity: 0.4;
 }
 
 .embed .embed-placeholder > * {
