@@ -1,6 +1,4 @@
 import '@udex/webcomponents/dist/HeroBanner.js';
-import '@udex/webcomponents/dist/Button.js';
-import '@udex/webcomponents/dist/Avatar.js';
 import { div, span, p } from '../../scripts/dom-builder.js';
 import { getMetadata } from '../../scripts/aem.js';
 import { formatDate } from '../../scripts/utils.js';
@@ -105,9 +103,15 @@ export default async function decorate(block) {
   });
   if (block.querySelector(':scope div > div').childElementCount > 0) contentSlot.append(...block.querySelector(':scope div > div').children);
 
+  if (getMetadata('author')) {
+    await import('@udex/webcomponents/dist/Avatar.js');
+  }
   contentSlot.append(decorateMetaInfo());
 
-  if (buttonContainer.childElementCount > 0) contentSlot.append(buttonContainer);
+  if (buttonContainer.childElementCount > 0) {
+    await import('@udex/webcomponents/dist/Button.js');
+    contentSlot.append(buttonContainer);
+  }
 
   block.replaceWith(hero);
 }
