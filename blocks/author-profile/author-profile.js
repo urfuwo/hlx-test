@@ -20,7 +20,7 @@ function extractAuthorDescription(entry) {
         description = entry.title.substring(entry.author.length + 2);
       }
     } else {
-      description = 'Author';
+      description = '';
     }
   }
   return description;
@@ -34,10 +34,11 @@ function completeEntry(entry) {
 
 async function getAuthorEntry(entryFilter) {
   const result = await ffetch('/authors-index.json').filter(entryFilter).limit(1).all();
-  return completeEntry((!result || result.length < 1) ? null : result[0]);
+  return (!result || result.length < 1) ? null : completeEntry(result[0]);
 }
 
 function renderProfile(entry) {
+  if (!entry) return null;
   const authorImage = entry.image
     ? createOptimizedPicture(entry.image, entry.author, false, breakpoints) : null;
   const authorProfile = div(
@@ -62,9 +63,13 @@ export default async function decorate(block) {
   const name = getMetadata('author');
   const entryFilter = ((entry) => entry.author === name);
   const entry = await getAuthorEntry(entryFilter);
-  const authorProfile = await renderProfile(entry);
-  block.classList.add('ver');
-  block.append(authorProfile);
+  if (entry) {
+    const authorProfile = await renderProfile(entry);
+    block.classList.add('ver');
+    block.append(authorProfile);
+  } else {
+    block.parentNode.remove();
+  }
 }
 
 export {
