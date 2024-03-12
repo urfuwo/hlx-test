@@ -1,17 +1,9 @@
-import '@udex/web-components/dist/HeroBanner.js';
-import {
-  div, h1, span, p,
-} from '../../scripts/dom-builder.js';
+import '@udex/webcomponents/dist/HeroBanner.js';
+import '@udex/webcomponents/dist/Button.js';
+import '@udex/webcomponents/dist/Avatar.js';
+import { div, span, p } from '../../scripts/dom-builder.js';
 import { getMetadata } from '../../scripts/aem.js';
 import { formatDate } from '../../scripts/utils.js';
-
-/*
-  * Assumption: The last paragraph is the description if it exists and has text
-*/
-function getDescription(block) {
-  const lastP = block.querySelector('p:last-of-type');
-  return lastP ? lastP.textContent?.trim() : '';
-}
 
 /**
  * loads and decorates the footer
@@ -19,39 +11,15 @@ function getDescription(block) {
  */
 export default async function decorate(block) {
   const hero = document.createElement('udex-hero-banner');
-  hero.setAttribute('id', 'media-blend');
   const intro = block.querySelector('h6');
   const heading = block.querySelector('h1');
-  const description = getDescription(block);
-  const lastUpdate = getMetadata('modified-time')
-    ? getMetadata('modified-time') : getMetadata('published-time');
   const contentSlot = div(
     {
       slot: 'content',
       class: ['hero-banner', 'media-blend__content'],
     },
-    intro ? div(
-      { class: ['media-blend__intro-text'] },
-      block.querySelector('h6')?.textContent,
-    ) : '',
-    heading ? h1(heading?.textContent) : '',
-    description ? p(getDescription(block)) : '',
-    div(
-      { class: ['media-blend__info-block'] },
-      getMetadata('author') ? span(
-        { class: ['media-blend__author'] },
-        getMetadata('author'),
-      ) : '',
-      lastUpdate ? span(
-        { class: ['media-blend__date'] },
-        `Updated on ${formatDate(lastUpdate)}`,
-      ) : '',
-      // TODO this is wrong we don't have read time in metadata
-      getMetadata('article:read_time') ? span(
-        { class: ['media-blend__read-time'] },
-        getMetadata('article:read_time'),
-      ) : '',
-    ),
+    intro ? p({ class: 'media-blend__intro-text' }, block.querySelector('h6')?.textContent) : '',
+    heading,
   );
   hero.appendChild(contentSlot);
 
@@ -71,6 +39,56 @@ export default async function decorate(block) {
     hero.appendChild(additionalContentSlot);
   }
 
-  block.innerHTML = '';
-  block.appendChild(hero);
+  // clean up the block before we get the description
+  intro?.remove();
+  block.querySelectorAll('p').forEach((pEl) => {
+    if (!pEl.textContent.trim()) {
+      pEl.remove();
+    }
+  });
+
+  // convert all buttons to udex-buttons
+  const buttonContainer = div({ class: 'media-blend__buttons' });
+  block.querySelectorAll('p.button-container a').forEach((a) => {
+    const button = document.createElement('udex-button');
+    if (a.parentElement.nodeName === 'STRONG') button.design = 'Primary';
+    if (a.parentElement.nodeName === 'EM') button.design = 'Secondary';
+    button.textContent = a.textContent;
+
+    button.addEventListener('click', () => {
+      window.location.href = a.href;
+    });
+
+    buttonContainer.appendChild(button);
+    a.closest('p').remove();
+  });
+  if (block.querySelector(':scope div > div').childElementCount > 0) contentSlot.append(...block.querySelector(':scope div > div').children);
+
+  // TODO add metadata
+  const infoBlockWrapper = div({ class: 'media-blend__info-block' });
+
+  if (getMetadata('author')) {
+    const avatar = document.createElement('udex-avatar');
+    avatar.setAttribute('size', 'XS');
+    avatar.setAttribute('initials', 'UD');
+    avatar.setAttribute('color-scheme', 'Neutral');
+
+    const author = span({ class: 'media-blend__author' }, getMetadata('author'));
+    infoBlockWrapper.append(avatar, author);
+  }
+  const lastUpdate = getMetadata('modified-time')
+    ? getMetadata('modified-time')
+    : getMetadata('published-time');
+  infoBlockWrapper.append(
+    span({ class: 'media-blend__date' }, `Updated on ${formatDate(lastUpdate)}`),
+  );
+
+  if (getMetadata('twitter:data2')) {
+    infoBlockWrapper.append(span({ class: 'media-blend__read-time' }, getMetadata('twitter:data2')));
+  }
+  contentSlot.append(infoBlockWrapper);
+
+  if (buttonContainer.childElementCount > 0) contentSlot.append(buttonContainer);
+
+  block.replaceWith(hero);
 }
