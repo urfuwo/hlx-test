@@ -55,96 +55,6 @@ async function decorateTemplates(main) {
 }
 
 /**
- * Embeds supported video players for link elements for supported video hostnames.
- * @async
- * @param {HTMLElement} main - The HTML fragment containing the video links.
- * @returns {Promise<void>} - A Promise that resolves when the video links are decorated.
- */
-async function decorateVideoLinks(main) {
-  /**
-   * Embeds a YouTube video.
-   * @function embedYoutube
-   * @param {URL} url - The URL of the YouTube video.
-   * @param {boolean} [autoplay=false] - Whether to autoplay the video, defaults to false.
-   * @returns {string} - The HTML code for embedding the YouTube video.
-   */
-  const embedYoutube = (url, autoplay = false) => {
-    const usp = new URLSearchParams(url.search);
-    const suffix = autoplay ? '&muted=1&autoplay=1' : '';
-    let vid = usp.get('v') ? encodeURIComponent(usp.get('v')) : '';
-    const embed = url.pathname;
-    if (url.origin.includes('youtu.be')) {
-      [, vid] = url.pathname.split('/');
-    }
-
-    const embedHTML = `<div class="video-embed-container">
-      <iframe src="https://www.youtube.com${vid ? `/embed/${vid}?rel=0&v=${vid}${suffix}` : embed}"
-      class="video-embed-iframe"
-      allow="autoplay; fullscreen; picture-in-picture; encrypted-media; accelerometer; gyroscope; picture-in-picture"
-      allowfullscreen=""
-      scrolling="no"
-      title="Content from Youtube"
-      loading="lazy"></iframe>
-      </div>`;
-    return embedHTML;
-  };
-
-  /**
-   * Embeds a LinkedIn Video.
-   * @function embedLinkedIn
-   * @param {URL} url - The URL of the LinkedIn video.
-   * @returns {string} - The HTML for embedding the LinkedIn video.
-   */
-  const embedLinkedIn = (url) => {
-    const [, , , , vid] = url.pathname.split('/');
-    const embedHTML = `<div class="video-embed-container">
-      <iframe src="https://www.linkedin.com/embed/feed/update/${vid}?compact=1"
-      class="video-embed-iframe"
-      frameborder="0" allowfullscreen=""
-      title="Embedded LinkedIn Video"></iframe>
-      </div>`;
-    return embedHTML;
-  };
-
-  /**
-   * Configuration for different types of embeds.
-   * @typedef {Object} EmbedConfig
-   * @property {string[]} match - The list of keywords to match against URLs.
-   * @property {Function} embed - The function to call for embedding the content.
-   */
-  const EMBEDS_CONFIG = [
-    {
-      match: ['youtube', 'youtu.be'],
-      embed: embedYoutube,
-    },
-    {
-      match: ['linkedin.com'],
-      embed: embedLinkedIn,
-    },
-  ];
-
-  const videoLinks = main.querySelectorAll('p a');
-
-  videoLinks.forEach((a) => {
-    const p = a.parentNode;
-    const link = new URL(a.href);
-    // eslint-disable-next-line max-len
-    const matchedConfig = EMBEDS_CONFIG.find((config) => config.match.some((keyword) => link.href.includes(keyword)));
-
-    if (matchedConfig) {
-      const observer = new IntersectionObserver((entries) => {
-        if (entries.some((e) => e.isIntersecting)) {
-          observer.disconnect();
-          p.innerHTML = matchedConfig.embed(link);
-          p.classList.add('video');
-        }
-      });
-      observer.observe(p);
-    }
-  });
-}
-
-/**
  * Decorates all multi-column sections in a container element.
  * @param {Element} main The container element
  */
@@ -165,6 +75,35 @@ function decorateMultiColumnSections(main) {
 }
 
 /**
+ * Decorates image links in a specified container by replacing
+ * the picture elements with anchor elements.
+ * @param {Element} main - The container element
+ */
+function decorateImageLinks(main) {
+  main.querySelectorAll('p picture').forEach((picture) => {
+    const linkElement = picture.nextElementSibling;
+    if (linkElement && linkElement.tagName === 'A' && linkElement.href.startsWith('https://www.linkedin.com/posts/')) {
+      const linkURL = linkElement.href;
+
+      /**
+       * The new anchor element to replace the picture element.
+       * @type {HTMLAnchorElement}
+       */
+      const newLink = Object.assign(document.createElement('a'), {
+        target: '_blank',
+        rel: 'noopener',
+        href: linkURL,
+      });
+      while (picture.firstChild) {
+        newLink.appendChild(picture.firstChild);
+      }
+      picture.parentNode.replaceChild(newLink, picture);
+      linkElement.remove();
+    }
+  });
+}
+
+/**
  * Decorates the main element.
  * @param {Element} main The main element
  */
@@ -173,12 +112,12 @@ export async function decorateMain(main, shouldDecorateTemplates = true) {
   // hopefully forward compatible button decoration
   decorateButtons(main);
   decorateIcons(main);
+  decorateImageLinks(main);
   if (shouldDecorateTemplates) {
     await decorateTemplates(main);
   }
   decorateSections(main);
   decorateBlocks(main);
-  decorateVideoLinks(main);
   decorateMultiColumnSections(main);
 }
 
