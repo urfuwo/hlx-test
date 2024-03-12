@@ -8,7 +8,7 @@ function formatDate(inputDate) {
 
 function containerize(container, targetClass) {
   const target = container.querySelector(targetClass);
-  if (target.nextElementSibling) {
+  if (target && target.nextElementSibling) {
     const wrapperDiv = div();
     wrapperDiv.appendChild(target);
     container.insertBefore(wrapperDiv, container.firstChild);
