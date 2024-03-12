@@ -88,8 +88,8 @@ const embedVideoJS = (url, autoplay = true, poster = null) => {
   // eslint-disable-next-line comma-dangle
   const [, , vid,] = url.pathname.split('/');
   const embedHTML = `
-    <link rel="stylesheet" href="/styles/video-js.css">
-    <script src="/scripts/video-js.lib.js" async></script>
+    <link rel="stylesheet" href="/styles/video-js.min.css">
+    <link rel="stylesheet" href="/styles/videojs-sap.css">
     <div class="embed-container embed-no-padding">
       <video
         id="video-js"
@@ -97,7 +97,7 @@ const embedVideoJS = (url, autoplay = true, poster = null) => {
         controls ${autoplay ? 'autoplay' : ''}
         preload="auto"
         poster="${poster}"
-        data-setup='{}'>
+        data-setup="{}">
         <source src="https://d.dam.sap.com/m/${vid}/hls.m3u8" type="video/mp4"></source>
       </video>
     </div>
@@ -118,11 +118,13 @@ const EMBEDS_CONFIG = [
     match: ['youtube', 'youtu.be'],
     embed: embedYoutube,
     source: 'YouTube',
+    lib: null,
   },
   {
     match: ['d.dam.sap.com'],
     embed: embedVideoJS,
     source: 'SAP',
+    lib: '/scripts/video-js.lib.js',
   },
 ];
 
@@ -190,6 +192,12 @@ const loadEmbed = (block, link, poster = null, autoplay = true) => {
   }
 
   block.classList.add('embed-is-loaded');
+
+  if (config.lib) {
+    const lib = document.createElement('script');
+    lib.src = config.lib;
+    document.body.append(lib);
+  }
 };
 
 /**
