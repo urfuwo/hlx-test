@@ -2,3 +2,4 @@ helix-importer-ui
 libs
 dist
 scripts/video-js.lib.js
+styles/video-js.css
