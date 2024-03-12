@@ -1,3 +1,4 @@
+/* eslint-disable */
 /**
  * @license
  * Video.js 8.3.0 <http://videojs.com/>
@@ -9,7 +10,6 @@
  * Available under Apache License Version 2.0
  * <https://github.com/mozilla/vtt.js/blob/main/LICENSE>
  */
-/* eslint-disable */
 
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
