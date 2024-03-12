@@ -1,7 +1,8 @@
 import { ul } from '../../scripts/dom-builder.js';
-import { getMetadata } from '../../scripts/aem.js';
+import { getMetadata, fetchPlaceholders, toCamelCase } from '../../scripts/aem.js';
 import ffetch from '../../scripts/ffetch.js';
 import PictureCard from '../../libs/pictureCard/pictureCard.js';
+import { formatDate } from '../../scripts/utils.js';
 
 function getFilter(pageTags) {
   return (entry) => {
@@ -14,6 +15,15 @@ function getFilter(pageTags) {
   };
 }
 
+function getPictureCard(article, placeholders) {
+  const {
+    author, 'content-type': type, image, path, title, priority,
+  } = article;
+  const tagLabel = placeholders[toCamelCase(priority)] || '';
+  const info = formatDate(article.publicationDate * 1000);
+  return new PictureCard(title, path, type, info, author, image, tagLabel);
+}
+
 export default async function decorateBlock(block) {
   const pageTags = getMetadata('article:tag').split(',');
   const filter = getFilter(pageTags);
@@ -23,13 +33,10 @@ export default async function decorateBlock(block) {
     .limit(limit)
     .slice(0, limit - 1)
     .all();
+  const placeholders = await fetchPlaceholders();
   const cardList = ul();
   articleStream.forEach((article) => {
-    const {
-      author, 'content-type': type, image, path, title, publicationDate, priority,
-    } = article;
-    const label = priority === 'hot-topic' ? 'Hot Story' : '';
-    const card = new PictureCard(title, path, type, label, author, image, publicationDate);
+    const card = getPictureCard(article, placeholders);
     cardList.append(card.render());
   });
 

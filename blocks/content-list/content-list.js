@@ -4,6 +4,7 @@ import { ul } from '../../scripts/dom-builder.js';
 import PictureCard from '../../libs/pictureCard/pictureCard.js';
 import Card from '../../libs/card/card.js';
 import Button from '../../libs/button/button.js';
+import { formatDate } from '../../scripts/utils.js';
 
 function matchTags(entry, config) {
   if (!config.tags) return true;
@@ -34,20 +35,10 @@ function getFilter(config) {
     && matchContentType(entry, config);
 }
 
-function getPlaceHolderValue(key, placeholders) {
-  const value = placeholders[toCamelCase(key)];
-  return value || '';
-}
-
 function getInfo(article, config) {
   const { info = ['publicationDate'] } = config;
   if (info[0] === 'publicationDate') {
-    const ARTICLE_FORMATTER = new Intl.DateTimeFormat('default', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    });
-    return ARTICLE_FORMATTER.format(new Date(article.publicationDate * 1000));
+    return formatDate(article.publicationDate * 1000);
   }
   if (info[0] === 'author') {
     return article.author;
@@ -62,7 +53,7 @@ function getPictureCard(article, config, placeholders) {
   const {
     author, 'content-type': type, image, path, title, priority,
   } = article;
-  const tagLabel = getPlaceHolderValue(priority, placeholders);
+  const tagLabel = placeholders[toCamelCase(priority)] || '';
   const info = getInfo(article, config);
   return new PictureCard(title, path, type, info, author, image, tagLabel);
 }
