@@ -21,14 +21,18 @@ export default async function decorate(block) {
     intro ? p({ class: 'media-blend__intro-text' }, block.querySelector('h6')?.textContent) : '',
     heading,
   );
-  hero.appendChild(contentSlot);
+  hero.append(contentSlot);
 
-  // fetch optimized image
-  const picture = block.querySelector('picture');
+  // get images for background
+  let picture = block.querySelector(':scope div > div > picture');
   if (picture) {
+    picture.setAttribute('slot', 'backgroundPicture');
     const img = picture.querySelector('img');
     img.classList.add('custom-background-image');
-
+    hero.append(picture);
+  }
+  picture = block.querySelector(':scope div > div picture');
+  if (picture) {
     const additionalContentSlot = div(
       {
         slot: 'additionalContent',
@@ -36,7 +40,7 @@ export default async function decorate(block) {
       },
       picture,
     );
-    hero.appendChild(additionalContentSlot);
+    hero.append(additionalContentSlot);
   }
 
   // clean up the block before we get the description
