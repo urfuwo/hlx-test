@@ -20,8 +20,6 @@
 
     @media (width >= 980px) {
       & > :not(.hero-container) {
-        padding-inline: var(--udexGridGutters) var(--udexGridMargins);
-
         & > * {
           margin: unset;
         }
@@ -47,6 +45,20 @@
       'footer footer' auto
       / min-content 1fr;
   }
+
+  & .section {
+    max-width: 1432px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  & > main {
+    @media (width >= 980px) {
+      & > :not(.hero-container) {
+        padding-inline: var(--udexGridMargins) var(--udexGridMargins);
+      }
+    }
+  }
 }
 
 .hub-l2.appear {
@@ -57,6 +69,14 @@
       'side-nav main-content' auto
       'footer footer' auto
       / min-content 1fr;
+  }
+
+  & > main {
+    @media (width >= 980px) {
+      & > :not(.hero-container) {
+        padding-inline: var(--udexGridGutters) var(--udexGridMargins);
+      }
+    }
   }
 
   @media (width >= 1600px) {
