@@ -89,7 +89,7 @@ const embedVideoJS = (url, autoplay = true, poster = null) => {
   const [, , vid,] = url.pathname.split('/');
   const embedHTML = `
     <link rel="stylesheet" href="/styles/video-js.css">
-    <script src="/scripts/video-js.lib.js"></script>
+    <script src="/scripts/video-js.lib.js" async></script>
     <div class="embed-container embed-no-padding">
       <video
         id="video-js"
