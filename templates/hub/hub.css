@@ -85,20 +85,7 @@
 }
 
 .section.background-blue-7 {
-  color: var(--udexColorNeutralWhite);
   background-color: var(--udexColorBlue7);
-
-  & a:any-link {
-    color: var(--udexColorNeutralWhite);
-  }
-
-  & .card .type{
-    color: var(--udexColorGrey4);
-  }
-
-  & .card .label {
-    color: var(--udexColorGrey4);
-  }
 }
 
 .section.background-grey,
@@ -176,6 +163,23 @@
 .section.text-black,
 .section.text-neutral-black {
   color: var(--udexColorNeutralBlack);
+}
+
+.section.text-white,
+.section.text-neutral-white {
+  color: var(--udexColorNeutralWhite);
+
+  & a:any-link {
+    color: var(--udexColorNeutralWhite);
+  }
+
+  & .card .type{
+    color: var(--udexColorGrey4);
+  }
+
+  & .card .label {
+    color: var(--udexColorGrey4);
+  }
 }
 
 .section.divider-top {
