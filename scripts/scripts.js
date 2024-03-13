@@ -28,6 +28,7 @@ const TEMPLATE_LIST = {
  * load fonts.css and set a session storage flag
  */
 async function loadFonts() {
+  await loadCSS('https://cdn.udex.services.sap.com/dds/design-tokens/v0.36.0/css/sap_glow.css');
   await loadCSS('https://cdn.udex.services.sap.com/dds/design-tokens/v0.36.0/css/font-face.css');
   try {
     if (!window.location.hostname.includes('localhost')) sessionStorage.setItem('fonts-loaded', 'true');
