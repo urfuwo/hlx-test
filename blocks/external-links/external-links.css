@@ -3,35 +3,29 @@
   grid-template-columns: repeat(12, 1fr);
   gap: var(--udexSpacer16) var(--udexSpacer48);
 
-  @media (width >= 980px) {
+  @media (width >=980px) {
     & {
       grid-template-columns: repeat(9, 1fr);
     }
   }
 
-  & > div {
+  &>div {
     grid-column: 1 / -1;
 
-    @media (width >= 980px) {
+    @media (width >=980px) {
       & {
         grid-column: span 4;
       }
     }
 
-    font-family: var(--udexTypographyHeadingMediumXXSFontFamily);
-    font-weight: var(--udexTypographyHeadingMediumXXSFontWeight);
     font-size: var(--udexTypographyHeadingMediumXXSFontSize);
-    line-height: var(--udexTypographyHeadingMediumXXSLineHeight);
 
-    & > .button-container {
+    &>.button-container {
       border-bottom: 1px solid var(--udexColorGrey3);
 
-      & > .button {
+      &>.button {
         position: relative;
-        font-family: var(--udexTypographyBodySFontFamily);
-        font-weight: var(--udexTypographyBodySFontWeight);
         font-size: var(--udexTypographyBodySFontSize);
-        line-height: var(--udexTypographyBodySLineHeight);
         border: unset;
         border-radius: unset;
         padding: unset;

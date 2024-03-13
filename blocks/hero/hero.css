@@ -7,17 +7,8 @@ udex-hero-banner .hero-banner {
   container-type: inline-size;
 }
 
-udex-hero-banner .hero-banner h1 {
-  font-family: var(--sapFontFamily);
-  font-weight: var(--udexTypographyFontWeightRegular);
-  line-height: var(--udexTypographyHeadingLineHeight);
-}
-
 udex-hero-banner .hero-banner p {
   font-size: var(--udexTypographyBodySFontSize);
-  font-family: var(--sapFontFamily);
-  font-weight: var(--udexTypographyFontWeightRegular);
-  line-height: var(--udexTypographyBodyLineHeight);
 }
 
 /* stylelint-disable selector-class-pattern */
@@ -99,19 +90,8 @@ udex-hero-banner .hero-banner--image-above-cta {
 udex-hero-banner .hero-banner .media-blend__intro-text {
   font-family: var(--sapFontFamily);
   font-size: var(--udexTypographyEyebrowMFontSize, 14px);
-  line-height: var(--udexTypographyEyebrowLineHeight, 1.1);
-  font-weight: var(--udexTypographyFontWeightMedium, 500);
   text-transform: uppercase;
   color: var(--udexColorGrey6, #5b738b);
-}
-
-udex-hero-banner .hero-banner .media-blend__content h1 {
-  font-family: var(--sapFontFamily);
-  font-size: var(--udexTypographyHeadingMediumXXLFontSize, 44px);
-  line-height: var(--udexTypographyEyebrowLineHeight, 1.1);
-  font-weight: var(--udexTypographyFontWeightMedium, 500);
-  color: var(--udexColorNeutralBlack, var(--udexColorNeutralBlack));
-  margin: var(--udexSpacer12, 12px) 0;
 }
 
 udex-hero-banner .hero-banner .media-blend__content ui5-rating-indicator {
@@ -121,8 +101,6 @@ udex-hero-banner .hero-banner .media-blend__content ui5-rating-indicator {
 udex-hero-banner .hero-banner .media-blend__content p {
   font-family: var(--sapFontFamily);
   font-size: var(--udexTypographyBodyLFontSize, 20px);
-  line-height: var(--udexTypographyBodyLineHeight, 1.5);
-  font-weight: var(--udexTypographyFontWeightRegular, 400);
   color: var(--udexColorGrey9, #223548);
   margin: var(--udexSpacer12, 12px) 0;
 }
@@ -130,8 +108,6 @@ udex-hero-banner .hero-banner .media-blend__content p {
 udex-hero-banner .hero-banner .media-blend__info-block {
   font-family: var(--sapFontFamily);
   font-size: var(--udexTypographyBodyXSFontSize, 14px);
-  line-height: var(--udexTypographyBodyLineHeight, 1.5);
-  font-weight: var(--udexTypographyFontWeightRegular, 400);
   color: var(--udexColorGrey7, #223548);
   margin: var(--udexSpacer12, 12px) 0;
 }

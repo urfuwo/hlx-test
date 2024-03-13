@@ -47,6 +47,7 @@ function decorateMetaInfo() {
  * @param {Element} block The footer block element
  */
 export default async function decorate(block) {
+  const isMediaBlend = block.classList.contains('media-blend') || getMetadata('template') === 'article';
   const hero = document.createElement('udex-hero-banner');
   const intro = block.querySelector('h6');
   const heading = block.querySelector('h1');
@@ -105,10 +106,12 @@ export default async function decorate(block) {
   });
   if (block.querySelector(':scope div > div').childElementCount > 0) contentSlot.append(...block.querySelector(':scope div > div').children);
 
-  if (getMetadata('author')) {
-    await import('@udex/webcomponents/dist/Avatar.js');
+  if (isMediaBlend) {
+    if (getMetadata('author')) {
+      await import('@udex/webcomponents/dist/Avatar.js');
+    }
+    contentSlot.append(decorateMetaInfo());
   }
-  contentSlot.append(decorateMetaInfo());
 
   if (buttonContainer.childElementCount > 0) {
     await import('@udex/webcomponents/dist/Button.js');

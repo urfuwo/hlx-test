@@ -11,8 +11,6 @@ main .article-tags div.tag-list {
 
 main .article-tags div.tag-list a {
     font-size: var(--udexTypographyBodyXSFontSize);
-    font-weight: var(--udexTypographyBodyXSFontWeight);
-    line-height: var(--udexTypographyBodyXSLineHeight); 
     text-decoration: none;
     text-align: center;
     padding: var(--udexSpacer2) var(--udexSpacer8);

@@ -1,6 +1,6 @@
 main ul.article-list {
   --article-tile-height: auto;
-
+  
   list-style: none;
   margin: 0;
   padding: 0;
@@ -45,10 +45,7 @@ main ul.article-list>li img {
 
 main ul.article-list>li span.cardcontent span.template {
   font-style: normal;
-  font-family: var(--udexTypographyBodyXSFontFamily);
-  font-weight: var(--udexTypographyDisplayMediumXSFontWeight);
   font-size: var(--udexTypographyBodyXSFontSize);
-  line-height: var(--udexTypographyEyebrowMLineHeight);
   display: flex;
   align-items: center;
   letter-spacing: 0.03em;
@@ -75,10 +72,7 @@ main ul.article-list>li span.cardcontent span.hot {
   background: var(--udexColorBlue1);
   border: 1px solid #0070F2;
   border-radius: var(--udexRadiusS);
-  font-family: var(--udexTypographyBodyXXSFontFamily);
-  font-weight: var(--udexTypographyBodyXXSFontWeight);
   font-size: var(--udexGridXSColumns);
-  line-height: var(--udexCoreSizeIconInput);
   text-align: center;
   color: var(--udexColorBlue9);
   flex: var(--sapContent_ForcedColorAdjust);
@@ -91,12 +85,9 @@ main ul.article-list>li span.cardcontent span.title {
 }
 
 main ul.article-list>li span.cardcontent span.title, main ul.article-list>li span.cardcontent span.title a  {
-  font-family: var(--udexTypographyBodyXXSFontFamily);
   font-style: normal;
   text-decoration: none;
-  font-weight: var(--udexTypographyDisplayMediumXSFontWeight);
   font-size: var(--udexSpacer20);
-  line-height: var(--udexTypographyHeadingRegularXXSLineHeight);
   color: var(--udexColorNeutralBlack);
   flex: var(--sapContent_ForcedColorAdjust);
   order: var(--sapShell_BackgroundImageOpacity);
@@ -110,12 +101,9 @@ main ul.article-list>li span.cardcontent span.author {
 }
 
 main ul.article-list>li span.cardcontent span.author, main ul.article-list>li span.cardcontent span.author>a {
-  font-family: var(--udexTypographyBodyXSFontFamily);
   font-style: normal;
   text-decoration: none;
-  font-weight: var(--udexTypographyDisplayMediumXSFontWeight);
   font-size: var(--udexTypographyBodyXSFontSize);
-  line-height: var(--udexTypographyEyebrowMLineHeight);
   color: var(--udexColorNeutralBlack);
   flex: var(--sapContent_ForcedColorAdjust);
   order: 0;
@@ -125,11 +113,8 @@ main ul.article-list>li span.cardcontent span.author, main ul.article-list>li sp
 
 main ul.article-list>li span.cardcontent span.date {
   display: block;
-  font-family: var(--udexTypographyBodyXXSFontFamily);
   font-style: normal;
-  font-weight: var(--udexTypographyBodyXXSFontWeight);
   font-size: var(--udexGridXSColumns);
-  line-height: var(--udexCoreSizeIconInput);
   color: var(--udexColorGrey6);
   flex: var(--sapContent_ForcedColorAdjust);
   order: var(--sapShell_BackgroundImageOpacity);

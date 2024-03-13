@@ -71,10 +71,7 @@
 
 .product-list ul>li h4 {
   font-style: normal;
-  font-family: var(--udexTypographyBodyXSFontFamily);
-  font-weight: var(--udexTypographyDisplayMediumXSFontWeight);
   font-size: var(--udexTypographyBodyXSFontSize);
-  line-height: var(--udexTypographyEyebrowMLineHeight);
   letter-spacing: 0.03em;
   text-transform: uppercase;
   color: var(--udexColorGrey6);
@@ -103,10 +100,7 @@
 
 .product-list ul>li h3 {
   font-style: normal;
-  font-family: var(--udexTypographyHeadingMediumXXSFontFamily);
-  font-weight: var(--udexTypographyHeadingMediumXXSFontWeight);
   font-size: var(--udexTypographyHeadingMediumXXSFontSize);
-  line-height: var(--udexTypographyHeadingMediumXXSLineHeight);
   letter-spacing: 0.03em;
   color: var(--udexColorNeutralBlack);
   margin-bottom: var(--udexSpacer8);
@@ -114,12 +108,9 @@
 }
 
 .product-list ul>li div.product-list-card-body, .product-list ul>li div.product-list-card-body a  {
-  font-family: var(--udexTypographyBodyXSFontFamily);
   font-style: normal;
   text-decoration: none;
-  font-weight: var(--udexTypographyBodyXSFontWeight);
   font-size: var(--udexTypographyBodyXSFontSize);
-  line-height: var(--udexTypographyBodyXSLineHeight);
   color: var(--udexCoreTextDark);
 }
 
