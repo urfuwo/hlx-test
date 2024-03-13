@@ -102,9 +102,6 @@ main {
 /* image and video caption */
 .article p > em {
   font-size: var(--udexTypographyBodyXSFontSize);
-  font-family: var(--udexTypographyBodyXSFontFamily);
-  line-height: var(--udexTypographyBodyXSLineHeight);
-  font-weight: var(--udexTypographyBodyXSFontWeight);
   font-style: normal;
   color: var(--udexColorGrey9);
 }

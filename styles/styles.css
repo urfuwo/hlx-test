@@ -56,7 +56,7 @@
 }
 
 /* S */
-@media (width >= 640px) {
+@media (width >=640px) {
   :root {
     --udexGridGutters: var(--udexGridSGutters);
     --udexGridMargins: var(--udexGridSMargins);
@@ -64,7 +64,7 @@
 }
 
 /* M */
-@media (width >= 980px) {
+@media (width >=980px) {
   :root {
     --udexGridGutters: var(--udexGridMGutters);
     --udexGridMargins: var(--udexGridMMargins);
@@ -72,7 +72,7 @@
 }
 
 /* L */
-@media (width >= 1280px) {
+@media (width >=1280px) {
   :root {
     --udexGridGutters: var(--udexGridLGutters);
     --udexGridMargins: var(--udexGridLMargins);
@@ -80,7 +80,7 @@
 }
 
 /* XL */
-@media (width >= 1600px) {
+@media (width >=1600px) {
   :root {
     --udexGridGutters: var(--udexGridXLGutters);
     --udexGridMargins: var(--udexGridXLMargins);
@@ -88,10 +88,10 @@
 }
 
 body {
-  font-family: var(--udexTypographyBodySFontFamily);
+  font-family: var(--sapFontFamily);
   font-size: var(--udexTypographyBodySFontSize);
-  font-weight: var(--udexTypographyBodySFontWeight);
-  line-height: var(--udexTypographyBodySLineHeight);
+  font-weight: var(--udexTypographyFontWeightRegular);
+  line-height: var(--udexTypographyBodyLineHeight);
   margin: 0;
   padding-left: 0;
   color: var(--text-color);
@@ -118,40 +118,36 @@ h3,
 h4,
 h5,
 h6 {
-  margin-top: 2rem; /* 32px */
-  margin-bottom: 0.5rem; /* 8px */
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
 }
 
 h1 {
-  font-family: var(--udexTypographyHeadingRegularMFontFamily);
   font-size: var(--udexTypographyHeadingRegularMFontSize);
-  font-weight: var(--udexTypographyHeadingRegularMFontWeight);
-  line-height: var(--udexTypographyHeadingRegularMLineHeight);
+  font-weight: var(--udexTypographyFontWeightRegular);
+  line-height: var(--udexTypographyHeadingLineHeight);
 }
 
 h2 {
-  font-family: var(--udexTypographyHeadingRegularSFontFamily);
   font-size: var(--udexTypographyHeadingRegularSFontSize);
-  font-weight: var(--udexTypographyHeadingRegularSFontWeight);
-  line-height: var(--udexTypographyHeadingRegularSLineHeight);
+  font-weight: var(--udexTypographyFontWeightRegular);
+  line-height: var(--udexTypographyHeadingLineHeight);
 }
 
 /* missing design, assumption */
 h3 {
-  font-family: var(--udexTypographyHeadingRegularXSFontFamily);
   font-size: var(--udexTypographyHeadingRegularXSFontSize);
-  font-weight: var(--udexTypographyHeadingRegularXSFontWeight);
-  line-height: var(--udexTypographyHeadingRegularXSLineHeight);
+  font-weight: var(--udexTypographyFontWeightRegular);
+  line-height: var(--udexTypographyHeadingLineHeight);
 }
 
 /* missing styles, assumption */
 h4,
 h5,
 h6 {
-  font-family: var(--udexTypographyHeadingRegularXXSFontFamily);
   font-size: var(--udexTypographyHeadingRegularXXSFontSize);
-  font-weight: var(--udexTypographyHeadingRegularXXSFontWeight);
-  line-height: var(--udexTypographyHeadingRegularXXSLineHeight);
+  font-weight: var(--udexTypographyFontWeightRegular);
+  line-height: var(--udexTypographyHeadingLineHeight);
 }
 
 /* missing styles, assumption */
@@ -255,10 +251,10 @@ main .section {
 /**
  * Styles for embedding video content.
  */
- .video-embed-container {
+.video-embed-container {
   position: relative;
   width: 100%;
-  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  padding-bottom: 56.25%;
 }
 
 .video-embed-iframe {
@@ -270,12 +266,11 @@ main .section {
   left: 0;
 }
 
-
 .column-section-block {
   display: none;
 }
 
-@media (width >= 980px) {
+@media (width >=980px) {
   .column-section {
     display: grid;
     grid-auto-flow: row dense;
@@ -286,7 +281,7 @@ main .section {
     overflow-x: hidden;
   }
 
-  .column-section > div:not(.column-section-block) {
+  .column-section>div:not(.column-section-block) {
     display: none;
   }
 
@@ -318,21 +313,21 @@ main .section {
     grid-template-columns: 1fr 3fr;
   }
 
-  .column-section > div.column-section-left-block {
+  .column-section>div.column-section-left-block {
     margin-right: 16px;
     grid-column: 1;
   }
 
-  .column-section > div.column-section-right-block {
+  .column-section>div.column-section-right-block {
     margin-left: 16px;
     grid-column: 2;
   }
 
-  .column-section > div.column-section-block > *:first-child {
+  .column-section>div.column-section-block>*:first-child {
     margin-top: 0;
   }
 
-  .column-section > div.column-section-block > div:first-child > *:first-child {
+  .column-section>div.column-section-block>div:first-child>*:first-child {
     margin-top: 0;
   }
 

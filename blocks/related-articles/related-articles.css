@@ -1,8 +1,8 @@
 .read-more h3 {
   font-size: var(--udexTypographyHeadingRegularLFontSize);
-  font-family: var(--udexTypographyHeadingRegularLFontFamily);
-  font-weight: var(--udexTypographyHeadingRegularLFontWeight);
-  line-height: var(--udexTypographyHeadingRegularLLineHeight);
+  
+  
+  
 
   --webkit-font-smoothing: antialiased;
 }

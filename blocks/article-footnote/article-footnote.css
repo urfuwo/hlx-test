@@ -1,16 +1,13 @@
 .article-footnote {
   color: var(--udexColorGrey7);
-  font-family: var(--udexTypographyBodyXSFontFamily);
   font-size: var(--udexTypographyBodyXSFontSize);
-  font-weight: var(--udexTypographyBodyXSFontWeight);
-  line-height: var(--udexTypographyBodyXSLineHeight);
   margin-top: 58px;
   padding-top: 10px;
   border-top: 1px solid var(--udexColorGrey3);
   margin-bottom: var(--udexSpacer56);
 }
 
-.article-footnote > div > div:last-of-type {
+.article-footnote>div>div:last-of-type {
   margin-top: var(--udexSpacer16);
 }
 

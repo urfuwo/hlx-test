@@ -25,9 +25,6 @@
     padding-top: 0;
     padding-bottom: 0;
     font-size: var(--udexTypographyHeadingRegularXSFontSize);
-    font-family: var(--udexTypographyHeadingRegularXSFontFamily);
-    font-weight: var(--udexTypographyHeadingRegularXSFontWeight);
-    line-height: var(--udexTypographyHeadingRegularXSLineHeight);
 }
 
 .title-banner h1 strong {

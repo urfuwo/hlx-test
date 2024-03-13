@@ -1,8 +1,5 @@
 aside {
-  --navlinks-font-family: var(--udexTypographyNavigationRegularMFontFamily);
-  --nav-links-font-weight: var(--udexTypographyNavigationRegularMFontWeight);
   --nav-links-font-size: var(--udexTypographyNavigationRegularMFontSize);
-  --nav-links-line-height: var(--udexTypographyNavigationRegularMLineHeight);
   --nav-text-color: var(--udexColorGrey8);
   --line-separator-color: var(--udexColorGrey2);
   --nav-margin: var(--udexGridMargins);
@@ -30,8 +27,6 @@ aside {
     }
 
     & :is(a, .text) {
-      font-family: var(--navlinks-font-family);
-      font-weight: var(--nav-links-font-weight);
       color: var(--nav-text-color);
       font-size: var(--nav-links-font-size);
       text-decoration: none;
@@ -91,10 +86,6 @@ aside {
         gap: 1rem;
         padding: unset;
         position: relative;
-
-        & :is(li, a) {
-          font-weight: var(--udexTypographyNavigationMediumMFontWeight);
-        }
       }
 
       & .nav-drop {
@@ -126,10 +117,6 @@ aside {
           transition:
             opacity 0.3s ease-out,
             transform 0.3s ease-out;
-
-          & a {
-            font-weight: var(--nav-links-font-weight);
-          }
         }
       }
     }
@@ -198,11 +185,8 @@ aside {
       }
 
       & .button {
-        font-family: var(--udexTypographyNavigationMediumXLFontFamily);
-        font-weight: var(--udexTypographyNavigationMediumXLFontWeight);
         color: var(--udexCoreNavigation);
         font-size: var(--udexTypographyNavigationMediumXLFontSize);
-        line-height: var(--udexTypographyNavigationMediumXLLineHeight);
         white-space: nowrap;
         padding: unset;
         margin: unset;

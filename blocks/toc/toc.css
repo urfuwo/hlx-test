@@ -9,10 +9,7 @@
     h2 {
         margin-top: 0;
         margin-bottom: var(--udexSpacer32);
-        font-family: var(--udexTypographyHeadingMediumXXXXSFontFamily);
-        font-size: var(--udexTypographyHeadingMediumXXXXSFontSize);
-        font-weight: var(--udexTypographyHeadingMediumXXXXSFontWeight);
-        line-height: var(--udexTypographyHeadingMediumXXXXSLineHeight);
+        font-size: var(--udexTypographyHeadingMediumXXXXSFontSize);   
     }
 
     ol {
@@ -24,10 +21,7 @@
 
     .toc-h2,
     .toc-h3 {
-        font-family: var(--udexTypographyNavigationMediumMFontFamily);
         font-size: var(--udexTypographyNavigationMediumMFontSize);
-        font-weight: var(--udexTypographyNavigationMediumMFontWeight);
-        line-height: var(--udexTypographyNavigationMediumMLineHeight);
         padding: 8px 16px 8px 30px;
         text-decoration: none;
         color: var(--udexColorNeutralBlack);
