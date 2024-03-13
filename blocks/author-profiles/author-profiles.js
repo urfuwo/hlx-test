@@ -7,23 +7,29 @@ async function getAuthorEntries(keys) {
   const entryFilter = ((entry) => (keys.includes(entry.path)));
   const unsortedEntries = await ffetch('/authors-index.json').filter(entryFilter).limit(keys.length).all();
   const sortedEntries = [];
-  keys.forEach((key) => {
-    sortedEntries.push(completeEntry(unsortedEntries.find((entry) => (key === entry.path))));
-  });
+  if (unsortedEntries) {
+    keys.forEach((key) => {
+      sortedEntries.push(completeEntry(unsortedEntries.find((entry) => (key === entry.path))));
+    });
+  }
   return sortedEntries;
 }
 
 async function addAuthorProfiles(block, keys) {
   const entries = await getAuthorEntries(keys);
-  if (keys.length > 1) {
-    block.classList.add(`elems${keys.length}`);
-    entries.forEach((entry) => {
-      const profile = div({ class: 'author-profile hor' }, renderProfile(entry));
-      block.append(profile);
-    });
+  if (entries && entries.length) {
+    if (keys.length > 1) {
+      block.classList.add(`elems${keys.length}`);
+      entries.forEach((entry) => {
+        const profile = div({ class: 'author-profile hor' }, renderProfile(entry));
+        block.append(profile);
+      });
+    } else {
+      block.classList.add('vertical');
+      block.append(div({ class: 'author-profile' }, renderProfile(entries[0])));
+    }
   } else {
-    block.classList.add('vertical');
-    block.append(div({ class: 'author-profile' }, renderProfile(entries[0])));
+    block.parentNode.remove();
   }
 }
 
