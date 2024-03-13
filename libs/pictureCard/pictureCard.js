@@ -24,13 +24,13 @@ export default class PictureCard extends Card {
       return this.tagLabel ? span({ class: 'tag-label' }, this.tagLabel) : '';
     }
 
-    render(excludeStyles) {
+    render(horizontal, excludeStyles) {
       if(!excludeStyles){
         loadCSS(`${window.hlx.codeBasePath}/libs/pictureCard/pictureCard.css`)
       }
       
         return li(
-            { class: 'picture-card' },
+            { class: `picture-card ${horizontal? 'horizontal': ''}` },
             a(
               { href: this.path, 'aria-label': this.title },
               this.getOptimizedPicture(),
