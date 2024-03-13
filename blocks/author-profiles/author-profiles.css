@@ -62,10 +62,7 @@
 
     & h2 {
       text-align: center;
-      font-family: var(--udexTypographyHeadingMediumXXSFontFamily);
       font-size: var(--udexTypographyHeadingMediumXXSFontSize);
-      font-weight: var(--udexTypographyHeadingMediumXXSFontWeight);
-      line-height: var(--udexTypographyHeadingMediumXXSLineHeight);
     }
 
     & .avatar {

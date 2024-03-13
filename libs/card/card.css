@@ -1,6 +1,4 @@
 .card {
-  font-family: var(--udexTypographyBodyXSFontFamily);
-
   & p {
     margin: 0.25rem;
   }
@@ -12,16 +10,13 @@
 
   & .type {
     font-size: var(--udexTypographyBodyXXSFontSize);
-    line-height: var(--udexTypographyEyebrowSLineHeight);
     letter-spacing: 0.03em;
     text-transform: uppercase;
     color: var(--udexColorGrey7);
   }
 
   & .label {
-    font-weight: var(--udexTypographyDisplayRegularXSFontWeight);
     font-size: var(--udexTypographyBodyXSFontSize);
-    line-height: var(--udexTypographyBodyXSLineHeight);
     color: var(--udexColorGrey7);
   }
 }

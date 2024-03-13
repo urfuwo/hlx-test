@@ -21,10 +21,7 @@
 
     & .type {
       font-style: normal;
-      font-family: var(--udexTypographyBodyXSFontFamily);
-      font-weight: var(--udexTypographyDisplayMediumXSFontWeight);
       font-size: var(--udexTypographyBodyXSFontSize);
-      line-height: var(--udexTypographyEyebrowMLineHeight);
       display: flex;
       align-items: center;
       letter-spacing: 0.03em;
@@ -51,10 +48,7 @@
       background: var(--udexColorBlue1);
       border: 1px solid #0070f2;
       border-radius: var(--udexRadiusS);
-      font-family: var(--udexTypographyBodyXXSFontFamily);
-      font-weight: var(--udexTypographyBodyXXSFontWeight);
       font-size: var(--udexGridXSColumns);
-      line-height: var(--udexCoreSizeIconInput);
       text-align: center;
       color: var(--udexColorBlue9);
       flex: var(--sapContent_ForcedColorAdjust);
@@ -66,12 +60,9 @@
       display: block;
 
       & a {
-        font-family: var(--udexTypographyBodyXXSFontFamily);
         font-style: normal;
         text-decoration: none;
-        font-weight: var(--udexTypographyDisplayMediumXSFontWeight);
         font-size: var(--udexSpacer20);
-        line-height: var(--udexTypographyHeadingRegularXXSLineHeight);
         color: var(--udexColorNeutralBlack);
         flex: var(--sapContent_ForcedColorAdjust);
         order: var(--sapShell_BackgroundImageOpacity);
@@ -85,12 +76,9 @@
       display: block;
 
       & a {
-        font-family: var(--udexTypographyBodyXSFontFamily);
         font-style: normal;
-        text-decoration: none;
-        font-weight: var(--udexTypographyDisplayMediumXSFontWeight);
+        text-decoration: none;        
         font-size: var(--udexTypographyBodyXSFontSize);
-        line-height: var(--udexTypographyEyebrowMLineHeight);
         color: var(--udexColorNeutralBlack);
         flex: var(--sapContent_ForcedColorAdjust);
         order: 0;
@@ -101,11 +89,8 @@
 
     & .info {
       display: block;
-      font-family: var(--udexTypographyBodyXXSFontFamily);
       font-style: normal;
-      font-weight: var(--udexTypographyBodyXXSFontWeight);
       font-size: var(--udexGridXSColumns);
-      line-height: var(--udexCoreSizeIconInput);
       color: var(--udexColorGrey6);
       flex: var(--sapContent_ForcedColorAdjust);
       order: var(--sapShell_BackgroundImageOpacity);
