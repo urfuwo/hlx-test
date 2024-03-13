@@ -22,6 +22,7 @@ const LCP_BLOCKS = ['hero']; // add your LCP blocks to the list
 const TEMPLATE_LIST = {
   article: 'article',
   'hub-l2': 'hub',
+  'hub-l1': 'hub-l1',
 };
 
 /**
@@ -149,19 +150,23 @@ async function decorateVideoLinks(main) {
  * @param {Element} main The container element
  */
 function decorateMultiColumnSections(main) {
-  main.querySelectorAll(':scope > div.column-section-1-1, :scope > div.column-section-3-2, :scope > div.column-section-2-3, :scope > div.column-section-2-1, :scope > div.column-section-1-2, :scope > div.column-section-3-1, :scope > div.column-section-1-3').forEach((section) => {
-    const left = document.createElement('div');
-    const right = document.createElement('div');
-    left.className = 'column-section-left-block column-section-block';
-    right.className = 'column-section-right-block column-section-block';
+  main
+    .querySelectorAll(
+      ':scope > div.column-section-1-1, :scope > div.column-section-3-2, :scope > div.column-section-2-3, :scope > div.column-section-2-1, :scope > div.column-section-1-2, :scope > div.column-section-3-1, :scope > div.column-section-1-3',
+    )
+    .forEach((section) => {
+      const left = document.createElement('div');
+      const right = document.createElement('div');
+      left.className = 'column-section-left-block column-section-block';
+      right.className = 'column-section-right-block column-section-block';
 
-    Array.from(section.children).forEach((e) => {
-      (e.classList.contains('right-style-wrapper') ? right : left).append(e.cloneNode(true));
+      Array.from(section.children).forEach((e) => {
+        (e.classList.contains('right-style-wrapper') ? right : left).append(e);
+      });
+
+      section.append(left, right);
+      section.classList.add('column-section');
     });
-
-    section.append(left, right);
-    section.classList.add('column-section');
-  });
 }
 
 /**
@@ -214,9 +219,13 @@ function initSidekick() {
     decorateBlock(preflightBlock);
     await loadBlock(preflightBlock);
     const { default: getModal } = await import('../blocks/modal/modal.js');
-    const customModal = await getModal('dialog-modal', () => section.innerHTML, (modal) => {
-      modal.querySelector('button[name="close"]')?.addEventListener('click', () => modal.close());
-    });
+    const customModal = await getModal(
+      'dialog-modal',
+      () => section.innerHTML,
+      (modal) => {
+        modal.querySelector('button[name="close"]')?.addEventListener('click', () => modal.close());
+      },
+    );
     customModal.showModal();
   };
 
@@ -224,10 +233,14 @@ function initSidekick() {
   if (sk) {
     sk.addEventListener('custom:preflight', preflightListener); // TODO change to preflight
   } else {
-    document.addEventListener('sidekick-ready', () => {
-      const oAddedSidekick = document.querySelector('helix-sidekick');
-      oAddedSidekick.addEventListener('custom:preflight', preflightListener);
-    }, { once: true });
+    document.addEventListener(
+      'sidekick-ready',
+      () => {
+        const oAddedSidekick = document.querySelector('helix-sidekick');
+        oAddedSidekick.addEventListener('custom:preflight', preflightListener);
+      },
+      { once: true },
+    );
   }
 }
 

@@ -117,13 +117,14 @@
   &.horizontal {
     display: flex;
     flex-direction: row-reverse;
+    max-height: 240px;
 
     & .cardcontent {
       width: 50%;
     }
 
     & .picture {
-      height: 200px;
+      /* height: 200px; */
       padding: var(--udexSpacer16);
     }
 
@@ -132,6 +133,7 @@
       height: 100%;
       object-fit: contain;
       aspect-ratio: unset;
+      border-radius: 12px;
     }
   }
 }
