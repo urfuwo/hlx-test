@@ -1,6 +1,6 @@
 import Card from "../card/card.js";
 import {
-    li, a, span,
+    li, a, span, div,
   } from '../../scripts/dom-builder.js';
   import { createOptimizedPicture, toClassName, loadCSS } from '../../scripts/aem.js';
 
@@ -31,10 +31,10 @@ export default class PictureCard extends Card {
       
         return li(
             { class: `picture-card ${horizontal? 'horizontal': ''}` },
-            a(
+            div({class: 'picture'}, a(
               { href: this.path, 'aria-label': this.title },
               this.getOptimizedPicture(),
-            ),
+            )),
             span(
               { class: 'cardcontent' },
               this.getTagLabel(),
