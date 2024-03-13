@@ -38,9 +38,6 @@
 
 .quote .qt .content {
     font-size: var(--udexTypographyBodyXLFontSize);
-    font-family: var(--udexTypographyBodyXLFontFamily);
-    font-weight: var(--udexTypographyBodyXLFontWeight);
-    line-height: var(--udexTypographyBodyXLLineHeight);
     flex-flow: column;
 }
 
@@ -50,13 +47,9 @@
     flex: 0 0 30px;
     height: 100%;
     justify-content: center;
-    color: var(--udexColorGrey8);
-    font-family: var(--udexTypographyDisplayRegularLFontFamily);
+    color: var(--udexColorGrey8);   
     font-size: var(--udexTypographyDisplayRegularLFontSize);
-    font-weight: var(--udexTypographyDisplayRegularLFontWeight);
     line-height: 84px;
-
-    /* align quotation marks to quote text */
     position: relative;
     top: -8px;
 }
@@ -73,29 +66,19 @@
 
 .quote .qs .content {
     font-size: var(--udexTypographyHeadingRegularXXSFontSize);
-    font-family: var(--udexTypographyHeadingRegularXXSFontFamily);
-    font-weight: var(--udexTypographyHeadingRegularXXSFontWeight);
-    line-height: var(--udexTypographyHeadingRegularXXSLineHeight);
     padding-left: 46px;
     padding-right: 46px;
 }
 
 .quote.small .qt .content {
     font-size: var(--udexTypographyBodySFontSize);
-    font-family: var(--udexTypographyBodySFontFamily);
-    font-weight: var(--udexTypographyBodySFontWeight);
-    line-height: var(--udexTypographyBodySLineHeight);
 }
 
 .quote.small .qt::before,
 .quote.small .qt::after {
-    flex: 0 0 1.75rem;
-    font-family: var(--udexTypographyDisplayRegularMFontFamily);
+    flex: 0 0 1.75rem;   
     font-size: var(--udexTypographyDisplayRegularMFontSize);
-    font-weight: var(--udexTypographyDisplayRegularMFontWeight);
     line-height: 72px;
-
-    /* align quotation marks to quote text */
     top: -8px;
 }
 
@@ -109,9 +92,6 @@
 
 .quote.small .qs .content {
     font-size: var(--udexTypographyNavigationRegularMFontFamily);
-    font-family: var(--udexTypographyNavigationRegularMFontFamily);
-    font-weight: var(--udexTypographyNavigationRegularMFontWeight);
-    line-height: var(--udexTypographyNavigationRegularMLineHeight);
     padding-left: 36px;
     padding-right: 36px;
 }

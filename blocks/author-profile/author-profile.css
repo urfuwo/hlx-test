@@ -35,10 +35,7 @@
 }
 
 .author-profile h2 {
-  font-family: var(--udexTypographyHeadingMediumXSFontFamily);
   font-size: var(--udexTypographyHeadingMediumXSFontSize);
-  font-weight: var(--udexTypographyHeadingMediumXSFontWeight);
-  line-height: var(--udexTypographyHeadingMediumXSLineHeight);
   text-align: left;
   margin: 0;
   margin-bottom: 6px;
@@ -46,9 +43,6 @@
 
 .author-profile p {
   font-size: var(--udexTypographyBodyXSFontSize);
-  font-family: var(--udexTypographyBodyXSFontFamily);
-  font-weight: var(--udexTypographyBodyXSFontWeight);
-  line-height: var(--udexTypographyBodyXSLineHeight);
   color: var(--udexColorGrey7);
   text-align: left;
   margin: 0;
@@ -57,9 +51,6 @@
 .author-profile .link {
   text-align: left;
   font-size: var(--udexTypographyBodySFontSize);
-  font-family: var(--udexTypographyBodySFontFamily);
-  font-weight: var(--udexTypographyBodySFontWeight);
-  line-height: var(--udexTypographyBodySLineHeight);
   padding-top: var(--udexSpacer4);
   padding-bottom: var(--udexSpacer4);
 }

@@ -24,9 +24,6 @@
 .block.link-group ul li {
   padding: 8.5px;
   font-size: var(--udexTypographyBodyXSFontSize);
-  font-family: var(--udexTypographyBodyXSFontFamily);
-  font-weight: var(--udexTypographyBodyXSFontWeight);
-  line-height: var(--udexTypographyBodyXSLineHeight);
   letter-spacing: 0;
   text-align: left;
 }
@@ -47,9 +44,6 @@
 .block.link-group strong {
   padding: 8.5px;
   font-size: var(--udexTypographyHeadingRegularXXXXSFontSize);
-  font-family: var(--udexTypographyHeadingRegularXXXXSFontFamily);
-  font-weight: var(--udexTypographyHeadingRegularXXXXSFontWeight);
-  line-height: var(--udexTypographyHeadingRegularXXXXSLineHeight);
   letter-spacing: 0;
   text-align: left;
 }
@@ -69,7 +63,6 @@
 }
 
 
-/* S */
 /* stylelint-disable-next-line block-no-empty */
 @media (width >= 640px) {
 }
@@ -93,9 +86,6 @@
     padding-bottom: 8.5px;
     padding-left: 8.5px;
     font-size: var(--udexTypographyNavigationMediumXLFontSize);
-    font-family: var(--udexTypographyNavigationMediumXLFontFamily);
-    font-weight: var(--udexTypographyNavigationMediumXLFontWeight);
-    line-height: var(--udexTypographyNavigationMediumXLLineHeight);
   }
 
   .block.link-group > div:first-of-type {
