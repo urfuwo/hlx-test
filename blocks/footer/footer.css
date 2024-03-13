@@ -44,7 +44,6 @@
     top: var(--udexSpacer24);
     padding-top: 0;
   }
-
 }
 
 /* L */
@@ -56,5 +55,4 @@
   .block.footer .icon-back-to-top {
     padding-top: 0;
   }
-
 }

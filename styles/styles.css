@@ -9,6 +9,23 @@
  * Heading/Regular: default
  */
 
+/* stylelint-disable-next-line selector-class-pattern */
+.sapThemeMetaData-Base-baseLib {
+  background-image: url('data:text/plain;utf-8,{"Path":"Base.baseLib.sap_glow.css_variables","Extends":["sap_horizon"]}')
+}
+
+:root {
+  --sapThemeMetaData-Base-baseLib: {
+    "Path": "Base.baseLib.sap_glow.css_variables", "Extends":["sap_horizon"]
+  };
+  --background-color: var(--udexColorNeutralWhite);
+  --text-color: var(--sapShell_TextColor);
+  --udexGridGutters: var(--udexGridXSGutters);
+  --udexGridMargins: var(--udexGridXSMargins);
+  --sapFontFamily: "72 Brand Variable", "72 Brand Variable Fallback", "Arial", "Helvetica", "sans-serif";
+}
+
+
 /* Fall back to Arial for 72 Brand Variable
  Added to styles.css for early loading */
 
@@ -43,16 +60,6 @@
   descent-override: 21.2%;
   line-gap-override: 3.27%;
   size-adjust: 99.94%;
-}
-
-:root {
-  /* default colors */
-  --background-color: var(--udexColorNeutralWhite);
-  --text-color: var(--sapShell_TextColor);
-
-  /* Margin and gutters */
-  --udexGridGutters: var(--udexGridXSGutters);
-  --udexGridMargins: var(--udexGridXSMargins);
 }
 
 /* S */

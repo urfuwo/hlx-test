@@ -28,7 +28,7 @@ const TEMPLATE_LIST = {
  * load fonts.css and set a session storage flag
  */
 async function loadFonts() {
-  await loadCSS(`${window.hlx.codeBasePath}/styles/fonts.css`);
+  await loadCSS('https://cdn.udex.services.sap.com/dds/design-tokens/v0.36.0/css/font-face.css');
   try {
     if (!window.location.hostname.includes('localhost')) sessionStorage.setItem('fonts-loaded', 'true');
   } catch (e) {
@@ -182,25 +182,15 @@ export async function decorateMain(main, shouldDecorateTemplates = true) {
   decorateMultiColumnSections(main);
 }
 
-/**
- * Load the theme and the web components module
- * @returns {Promise<void>}
- */
-async function loadSAPThemeAndWebComponents() {
-  try {
-    const sapTheme = getMetadata('saptheme', document) || 'sap_glow';
-    if (sapTheme) {
-      loadCSS(`/themes/${sapTheme}/css_variables.css`);
-      const head = document.querySelector('head');
-      const ui5ThemeScript = document.createElement('script');
-      ui5ThemeScript.setAttribute('data-ui5-config', '');
-      ui5ThemeScript.setAttribute('type', 'application/json');
-      ui5ThemeScript.textContent = `{"theme": "${sapTheme}"}`;
-      head.append(ui5ThemeScript);
-    }
-  } catch (e) {
-    // eslint-disable-next-line no-console
-    console.error('SAP-Theme loading failed', e);
+function setSAPTheme() {
+  const sapTheme = getMetadata('saptheme', document) || 'sap_glow';
+  if (sapTheme) {
+    const head = document.querySelector('head');
+    const ui5ThemeScript = document.createElement('script');
+    ui5ThemeScript.setAttribute('data-ui5-config', '');
+    ui5ThemeScript.setAttribute('type', 'application/json');
+    ui5ThemeScript.textContent = `{"theme": "${sapTheme}"}`;
+    head.append(ui5ThemeScript);
   }
 }
 
@@ -237,12 +227,12 @@ function initSidekick() {
  */
 async function loadEager(doc) {
   document.documentElement.lang = 'en';
+  setSAPTheme();
   decorateTemplateAndTheme();
   const main = doc.querySelector('main');
   if (main) {
     await decorateMain(main);
-    loadSAPThemeAndWebComponents();
-    document.body.classList.add('appear');
+    document.body.classList.add('appear', 'sapThemeMetaData-Base-baseLib');
     await waitForLCP(LCP_BLOCKS);
   }
 
