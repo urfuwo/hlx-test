@@ -244,3 +244,13 @@ udex-hero-banner .text-black-wrapper,
 udex-hero-banner .text-neutral-black {
   color: var(--udexColorNeutralBlack);
 }
+
+@media (width >= 980px) {
+  .hero-wrapper.fixed-height-large-style-wrapper udex-hero-banner {
+    --udexHeroBannerMinHeight: 550px;
+  }
+
+  .hero-wrapper.fixed-height-small-style-wrapper udex-hero-banner {
+    --udexHeroBannerMinHeight: 450px;
+  }
+}
