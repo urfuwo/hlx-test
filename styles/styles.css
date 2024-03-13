@@ -9,6 +9,22 @@
  * Heading/Regular: default
  */
 
+/* stylelint-disable-next-line selector-class-pattern */
+.sapThemeMetaData-Base-baseLib {
+  background-image: url('data:text/plain;utf-8,{"Path":"Base.baseLib.sap_glow.css_variables","Extends":["sap_horizon"]}')
+}
+
+:root {
+  --sapThemeMetaData-Base-baseLib: {
+    "Path": "Base.baseLib.sap_glow.css_variables", "Extends":["sap_horizon"]
+  };
+  --background-color: var(--udexColorNeutralWhite);
+  --text-color: var(--sapShell_TextColor);
+  --udexGridGutters: var(--udexGridXSGutters);
+  --udexGridMargins: var(--udexGridXSMargins);
+  --sapFontFamily: "72 Brand Variable", "72 Brand Variable Fallback", "Arial", "Helvetica", "sans-serif";
+}
+
 /* Fall back to Arial for 72 Brand Variable
  Added to styles.css for early loading */
 
@@ -43,16 +59,6 @@
   descent-override: 21.2%;
   line-gap-override: 3.27%;
   size-adjust: 99.94%;
-}
-
-:root {
-  /* default colors */
-  --background-color: var(--udexColorNeutralWhite);
-  --text-color: var(--sapShell_TextColor);
-
-  /* Margin and gutters */
-  --udexGridGutters: var(--udexGridXSGutters);
-  --udexGridMargins: var(--udexGridXSMargins);
 }
 
 /* S */
@@ -150,7 +156,6 @@ h6 {
   line-height: var(--udexTypographyHeadingLineHeight);
 }
 
-/* missing styles, assumption */
 p,
 dl,
 ol,
@@ -161,17 +166,14 @@ blockquote {
   margin-bottom: 1em;
 }
 
-/* missing styles, assumption */
 code {
   padding: 0.125em;
 }
 
-/* missing styles, assumption */
 pre {
   overflow: scroll;
 }
 
-/* missing styles, assumption */
 main pre {
   padding: 1em;
   border-radius: 0.25em;
@@ -190,7 +192,6 @@ a:hover {
   text-decoration: underline;
 }
 
-/* missing styles, assumption */
 a.button:any-link,
 button {
   display: inline-block;
@@ -210,7 +211,6 @@ button {
   border-radius: 30px;
 }
 
-/* missing styles, assumption */
 a.button:hover,
 a.button:focus,
 button:hover,
@@ -219,7 +219,6 @@ button:focus {
   cursor: pointer;
 }
 
-/* missing styles, assumption */
 button:disabled,
 button:disabled:hover {
   cursor: unset;
@@ -242,28 +241,8 @@ main img {
   width: 100%;
 }
 
-/* sections: 56px spacing at the bottom */
 main .section {
   padding-bottom: 56px;
-}
-
-
-/**
- * Styles for embedding video content.
- */
-.video-embed-container {
-  position: relative;
-  width: 100%;
-  padding-bottom: 56.25%;
-}
-
-.video-embed-iframe {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border: 0;
-  top: 0;
-  left: 0;
 }
 
 .column-section-block {
