@@ -20,8 +20,9 @@
     padding: var(--udexSpacer16);
 
     & .type {
-      font-style: normal;
       font-size: var(--udexTypographyBodyXSFontSize);
+      font-weight: var(--udexTypographyFontWeightMedium);
+      line-height: var(--udexTypographyEyebrowLineHeight);
       display: flex;
       align-items: center;
       letter-spacing: 0.03em;
@@ -48,7 +49,9 @@
       background: var(--udexColorBlue1);
       border: 1px solid #0070f2;
       border-radius: var(--udexRadiusS);
-      font-size: var(--udexGridXSColumns);
+      font-size: var(--udexTypographyBodyXXSFontSize);
+      font-weight: var(--udexTypographyFontWeightRegular);
+      line-height: var(--udexTypographyHeadingLineHeight);
       text-align: center;
       color: var(--udexColorBlue9);
       flex: var(--sapContent_ForcedColorAdjust);
@@ -62,7 +65,9 @@
       & a {
         font-style: normal;
         text-decoration: none;
-        font-size: var(--udexSpacer20);
+        font-size: var(--udexTypographyHeadingMediumXXSFontSize);
+        font-weight: var(--udexTypographyFontWeightMedium);
+        line-height: var(--udexTypographyHeadingLineHeight);
         color: var(--udexColorNeutralBlack);
         flex: var(--sapContent_ForcedColorAdjust);
         order: var(--sapShell_BackgroundImageOpacity);
@@ -77,25 +82,23 @@
 
       & a {
         font-style: normal;
-        text-decoration: none;        
+        text-decoration: none;
         font-size: var(--udexTypographyBodyXSFontSize);
+        font-weight: var(--udexTypographyFontWeightMedium);
+        line-height: var(--udexTypographyDisplayLineHeight);
         color: var(--udexColorNeutralBlack);
         flex: var(--sapContent_ForcedColorAdjust);
         order: 0;
-        align-self: stretch;
-        flex-grow: 0;
       }
     }
 
     & .info {
       display: block;
-      font-style: normal;
-      font-size: var(--udexGridXSColumns);
+      font-size: var(--udexTypographyNavigationRegularXSFontSize);
+      font-weight: var(--udexTypographyFontWeightRegular);
+      line-height: var(--udexTypographyDisplayLineHeight);
       color: var(--udexColorGrey6);
-      flex: var(--sapContent_ForcedColorAdjust);
       order: var(--sapShell_BackgroundImageOpacity);
-      align-self: stretch;
-      flex-grow: 0;
     }
   }
 }
