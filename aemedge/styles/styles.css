@@ -13,10 +13,10 @@
  Added to styles.css for early loading */
 
 @font-face {
-  font-family: "72 Brand Variable Fallback";
+  font-family: '72 Brand Variable Fallback';
   font-style: normal;
   font-weight: 700;
-  src: local("Arial Bold");
+  src: local('Arial Bold');
   ascent-override: 98%;
   descent-override: 22.94%;
   line-gap-override: 3.54%;
@@ -24,10 +24,10 @@
 }
 
 @font-face {
-  font-family: "72 Brand Variable Fallback";
+  font-family: '72 Brand Variable Fallback';
   font-style: normal;
   font-weight: 500;
-  src: local("Arial");
+  src: local('Arial');
   ascent-override: 90.58%;
   descent-override: 21.2%;
   line-gap-override: 3.27%;
@@ -35,10 +35,10 @@
 }
 
 @font-face {
-  font-family: "72 Brand Variable Fallback";
+  font-family: '72 Brand Variable Fallback';
   font-style: normal;
   font-weight: 400;
-  src: local("Arial");
+  src: local('Arial');
   ascent-override: 90.58%;
   descent-override: 21.2%;
   line-gap-override: 3.27%;
@@ -245,7 +245,6 @@ main .section {
   padding-bottom: 56px;
 }
 
-
 /**
  * Styles for embedding video content.
  */
@@ -272,6 +271,7 @@ main .section {
   .column-section {
     display: grid;
     grid-auto-flow: row dense;
+    column-gap: var(--udexGridGutters);
   }
 
   .column-section-block {
@@ -329,15 +329,30 @@ main .section {
     margin-top: 0;
   }
 
-  .column-section > div.column-section-block > div:first-child > div:first-child > *:first-child {
+  .column-section
+    > div.column-section-block
+    > div:first-child
+    > div:first-child
+    > *:first-child {
     margin-top: 0;
   }
 
-  .column-section > div.column-section-block > div:first-child > div:first-child > div:first-child > *:first-child {
+  .column-section
+    > div.column-section-block
+    > div:first-child
+    > div:first-child
+    > div:first-child
+    > *:first-child {
     margin-top: 0;
   }
 
-  .column-section > div.column-section-block > div:first-child > div:first-child > div:first-child > div:first-child > *:first-child {
+  .column-section
+    > div.column-section-block
+    > div:first-child
+    > div:first-child
+    > div:first-child
+    > div:first-child
+    > *:first-child {
     margin-top: 0;
   }
 }
