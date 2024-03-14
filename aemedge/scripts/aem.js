@@ -419,6 +419,7 @@ function decorateIcon(span, prefix = '', alt = '') {
 function decorateIcons(element, prefix = '') {
   const icons = [...element.querySelectorAll('span.icon')];
   icons.forEach((span) => {
+    if (span.querySelector('img')) return;
     decorateIcon(span, prefix);
   });
 }
