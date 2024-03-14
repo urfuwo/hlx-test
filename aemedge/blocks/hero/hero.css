@@ -15,7 +15,7 @@ udex-hero-banner .hero-banner p {
 udex-hero-banner {
   container-type: inline-size;
   container-name: hero-wrapper;
-  display: inline-block;
+  display: block;
   width: 100%;
 }
 
