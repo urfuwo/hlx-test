@@ -28,7 +28,7 @@ export default async function decorateBlock(block) {
   const pageTags = getMetadata('article:tag').split(',');
   const filter = getFilter(pageTags);
   const limit = 4; // hardcoded for now
-  const articleStream = await ffetch('/articles-index.json')
+  const articleStream = await ffetch(`${window.hlx.codeBasePath}/articles-index.json`)
     .filter(filter)
     .limit(limit)
     .slice(0, limit - 1)

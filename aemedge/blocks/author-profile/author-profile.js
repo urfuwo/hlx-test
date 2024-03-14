@@ -33,7 +33,7 @@ function completeEntry(entry) {
 }
 
 async function getAuthorEntry(entryFilter) {
-  const result = await ffetch('/authors-index.json').filter(entryFilter).limit(1).all();
+  const result = await ffetch(`${window.hlx.codeBasePath}/authors-index.json`).filter(entryFilter).limit(1).all();
   return (!result || result.length < 1) ? null : completeEntry(result[0]);
 }
 

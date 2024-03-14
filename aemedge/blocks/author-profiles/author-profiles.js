@@ -5,7 +5,7 @@ import { completeEntry, renderProfile } from '../author-profile/author-profile.j
 
 async function getAuthorEntries(keys) {
   const entryFilter = ((entry) => (keys.includes(entry.path)));
-  const unsortedEntries = await ffetch('/authors-index.json').filter(entryFilter).limit(keys.length).all();
+  const unsortedEntries = await ffetch(`${window.hlx.codeBasePath}/authors-index.json`).filter(entryFilter).limit(keys.length).all();
   const sortedEntries = [];
   if (unsortedEntries) {
     keys.forEach((key) => {
