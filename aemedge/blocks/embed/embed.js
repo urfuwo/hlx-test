@@ -5,6 +5,8 @@
  * @see {@link https://www.hlx.live/developer/block-collection/embed}
  */
 
+import { loadCSS, loadScript } from '../../scripts/aem.js';
+
 /**
  * Sets consent for video embedding.
  * @function setConsent
@@ -88,8 +90,6 @@ const embedVideoJS = (url, autoplay = true, poster = null) => {
   // eslint-disable-next-line comma-dangle
   const [, , vid,] = url.pathname.split('/');
   const embedHTML = `
-    <link rel="stylesheet" href="/styles/video-js.min.css">
-    <link rel="stylesheet" href="/styles/videojs-sap.css">
     <div class="embed-container embed-no-padding">
       <video
         id="video-js"
@@ -118,13 +118,26 @@ const EMBEDS_CONFIG = [
     match: ['youtube', 'youtu.be'],
     embed: embedYoutube,
     source: 'YouTube',
-    lib: null,
+    resource: [],
   },
   {
     match: ['d.dam.sap.com'],
     embed: embedVideoJS,
     source: 'SAP',
-    lib: '/scripts/video-js.lib.js',
+    resources: [
+      {
+        type: 'script',
+        url: '/scripts/video-js.lib.js',
+      },
+      {
+        type: 'stylesheet',
+        url: '/styles/video-js.min.css',
+      },
+      {
+        type: 'stylesheet',
+        url: '/styles/videojs-sap.css',
+      },
+    ],
   },
 ];
 
@@ -193,10 +206,14 @@ const loadEmbed = (block, link, poster = null, autoplay = true) => {
 
   block.classList.add('embed-is-loaded');
 
-  if (config.lib) {
-    const lib = document.createElement('script');
-    lib.src = config.lib;
-    document.body.append(lib);
+  if (config.resources.length > 0) {
+    config.resource.forEach((resource) => {
+      if (resource.type === 'stylesheet') {
+        loadCSS(resource.url);
+      } else if (resource.type === 'script') {
+        loadScript(resource.url, { defer: '' });
+      }
+    });
   }
 };
 
