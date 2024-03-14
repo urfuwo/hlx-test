@@ -1,0 +1,256 @@
+udex-hero-banner .hero-container {
+  width: 100%;
+}
+
+udex-hero-banner .hero-banner {
+  width: 100%;
+  container-type: inline-size;
+}
+
+udex-hero-banner .hero-banner p {
+  font-size: var(--udexTypographyBodySFontSize);
+}
+
+/* stylelint-disable selector-class-pattern */
+udex-hero-banner {
+  container-type: inline-size;
+  container-name: hero-wrapper;
+  display: inline-block;
+  width: 100%;
+}
+
+@container (max-width: 270px) {
+  udex-hero-banner .hero-banner ui5-button:first-of-type {
+    margin-bottom: 10px;
+  }
+}
+
+/* Showcase */
+
+@container (max-width: 340px) {
+  udex-hero-banner .hero-banner--showcase .hero-banner__buttons {
+    margin-bottom: 24rem;
+  }
+}
+
+@container (max-width: 230px) {
+  udex-hero-banner .hero-banner--showcase .hero-banner__buttons {
+    margin-bottom: 16rem;
+  }
+}
+
+/* Additional content */
+
+udex-hero-banner .hero-banner--additional-content p {
+  width: 60%;
+}
+
+udex-hero-banner .hero-banner.media-blend__additional-content video,
+udex-hero-banner .hero-banner.media-blend__additional-content img {
+  width: 100%;
+  border-radius: var(--udexSpacer16, 16px);
+}
+
+@container (max-width: 400px) {
+  udex-hero-banner .hero-banner--additional-content p {
+    width: 100%;
+    margin-bottom: 10rem;
+  }
+}
+
+/* Image above CTA */
+
+udex-hero-banner .hero-banner--image-above-cta {
+  background-color: var(--udexColorNeutralWhite);
+  padding: 2rem;
+  border-bottom: 2px solid var(--sapPrimary2, #fff);
+}
+
+@container hero-wrapper (width < 800px) {
+  udex-hero-banner .hero-banner--image-above-cta {
+    padding: 1rem;
+    margin-top: 15.84rem;
+  }
+}
+
+@container hero-wrapper (width < 300px) {
+  udex-hero-banner .hero-banner--image-above-cta {
+    margin-top: 10.75rem;
+  }
+}
+
+/* Image removed on vertical layout */
+
+@container hero-wrapper (width < 800px) {
+  udex-hero-banner#image-removed::part(background-image) {
+    display: none;
+  }
+}
+
+udex-hero-banner .hero-banner .media-blend__intro-text {
+  font-family: var(--sapFontFamily);
+  font-size: var(--udexTypographyEyebrowMFontSize, 14px);
+  text-transform: uppercase;
+  color: var(--udexColorGrey6, #5b738b);
+}
+
+udex-hero-banner .hero-banner .media-blend__content ui5-rating-indicator {
+  margin: 0;
+}
+
+udex-hero-banner .hero-banner .media-blend__content p {
+  font-family: var(--sapFontFamily);
+  font-size: var(--udexTypographyBodyLFontSize, 20px);
+  color: var(--udexColorGrey9, #223548);
+  margin: var(--udexSpacer12, 12px) 0;
+}
+
+udex-hero-banner .hero-banner .media-blend__info-block {
+  font-family: var(--sapFontFamily);
+  font-size: var(--udexTypographyBodyXSFontSize, 14px);
+  color: var(--udexColorGrey7, #223548);
+  margin: var(--udexSpacer12, 12px) 0;
+}
+
+udex-hero-banner .hero-banner .media-blend__info-block span::after {
+  margin: var(--udexSpacer4);
+  content: '•';
+}
+
+udex-hero-banner .hero-banner .media-blend__info-block span:first-of-type {
+  margin-left: 10px;
+}
+
+udex-hero-banner .hero-banner .media-blend__info-block span:last-of-type::after {
+  margin: 0;
+  content: '';
+}
+
+udex-hero-banner .hero-banner .media-blend__buttons {
+  margin-top: var(--udexSpacer40, 40px);
+}
+
+udex-hero-banner .hero-banner .media-blend__buttons udex-button:first-of-type {
+  margin-right: var(--udexSpacer16, 16px);
+}
+
+@container (width < 300px) {
+  udex-hero-banner .media-blend__buttons udex-button:first-of-type {
+    display: block;
+    margin-bottom: var(--udexSpacer12, 12px);
+  }
+}
+
+udex-hero-banner .hero-banner .media-blend__additional-content {
+  display: flex;
+  align-items: center;
+}
+
+udex-hero-banner .custom-background-image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: var(--udexHeroBannerBackgroundImageObjectFit, contain);
+  object-position: var(--udexHeroBannerVerticalLayoutBackgroundImageAlignment, bottom right);
+  z-index: var(--udexHeroBannerBackroundImageZIndex, 1);
+}
+
+udex-hero-banner .custom-background-image:dir(rtl) {
+  transform: scaleX(-1);
+}
+
+.hero-wrapper.hero-background-blue-wrapper,
+.hero-wrapper.hero-background-blue-1-wrapper {
+  background-color: var(--udexColorBlue1);
+}
+
+.hero-wrapper.hero-background-blue-2-wrapper {
+  background-color: var(--udexColorBlue2);
+}
+
+.hero-wrapper.hero-background-grey-wrapper,
+.hero-wrapper.hero-background-grey-1-wrapper {
+  background-color: var(--udexColorGrey1);
+}
+
+.hero-wrapper.hero-background-grey-2-wrapper {
+  background-color: var(--udexColorGrey2);
+}
+
+.hero-wrapper.hero-background-indigo-wrapper,
+.hero-wrapper.hero-background-indigo-1-wrapper {
+  background-color: var(--udexColorIndigo1);
+}
+
+.hero-wrapper.hero-background-indigo-2-wrapper {
+  background-color: var(--udexColorIndigo2);
+}
+
+.hero-wrapper.hero-background-pink-wrapper,
+.hero-wrapper.hero-background-pink-1-wrapper {
+  background-color: var(--udexColorPink1);
+}
+
+.hero-wrapper.hero-background-pink-2-wrapper {
+  background-color: var(--udexColorPink2);
+}
+
+.hero-wrapper.hero-background-raspberry-wrapper,
+.hero-wrapper.hero-background-raspberry-1-wrapper {
+  background-color: var(--udexColorRaspberry1);
+}
+
+.hero-wrapper.hero-background-raspberry-2-wrapper {
+  background-color: var(--udexColorRaspberry2);
+}
+
+.hero-wrapper.hero-background-red-wrapper,
+.hero-wrapper.hero-background-red-1-wrapper {
+  background-color: var(--udexColorRed1);
+}
+
+.hero-wrapper.hero-background-red-2-wrapper {
+  background-color: var(--udexColorRed2);
+}
+
+.hero-wrapper.hero-background-mango-wrapper,
+.hero-wrapper.hero-background-mango-1-wrapper {
+  background-color: var(--udexColorMango1);
+}
+
+.hero-wrapper.hero-background-mango-2-wrapper {
+  background-color: var(--udexColorMango2);
+}
+
+.hero-wrapper.hero-background-green-wrapper,
+.hero-wrapper.hero-background-green-1-wrapper {
+  background-color: var(--udexColorGreen1);
+}
+
+.hero-wrapper.hero-background-green-2-wrapper {
+  background-color: var(--udexColorGreen2);
+}
+
+.hero-wrapper.hero-background-teal-wrapper,
+.hero-wrapper.hero-background-teal-1-wrapper {
+  background-color: var(--udexColorTeal1);
+}
+
+.hero-wrapper.hero-background-teal-2-wrapper {
+  background-color: var(--udexColorTeal2);
+}
+
+udex-hero-banner .text-black-wrapper,
+udex-hero-banner .text-neutral-black {
+  color: var(--udexColorNeutralBlack);
+}
+
+@media (width >= 980px) {
+  .hero-wrapper.fixed-height-large-style-wrapper udex-hero-banner {
+    --udexHeroBannerMinHeight: 550px;
+  }
+
+  .hero-wrapper.fixed-height-small-style-wrapper udex-hero-banner {
+    --udexHeroBannerMinHeight: 450px;
+  }
+}

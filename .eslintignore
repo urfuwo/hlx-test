@@ -1,4 +1,3 @@
 helix-importer-ui
-libs
-dist
-scripts/video-js.lib.js
+aemedge/dist
+aemedge/scripts/video-js.lib.js

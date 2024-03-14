@@ -1,4 +1,5 @@
+aemedge/styles/css_variables.css
 /themes/sap_glow/**/*.css
-styles/video-js.css
-styles/video-js.min.css
-styles/videojs-sap.css
+aemedge/styles/video-js.css
+aemedge/styles/video-js.min.css
+aemedge/styles/videojs-sap.css
