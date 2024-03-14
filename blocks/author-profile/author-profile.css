@@ -2,7 +2,7 @@
   margin-top: var(--udexSpacer20);
 }
 
-.author-profile > div {
+.author-profile>div {
   display: flex;
   flex-direction: row;
   padding: var(--udexSpacer24) var(--udexSpacer20);
@@ -48,11 +48,16 @@
   margin: 0;
 }
 
-.author-profile .link {
+.author-profile .link a {
   text-align: left;
   font-size: var(--udexTypographyBodySFontSize);
   padding-top: var(--udexSpacer4);
   padding-bottom: var(--udexSpacer4);
+  text-decoration: none;
+}
+
+.author-profile .link a:hover {
+  text-decoration: underline;
 }
 
 .author-profile .link .icon img {
