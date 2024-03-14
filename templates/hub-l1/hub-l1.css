@@ -35,7 +35,7 @@
 
     @media (width >= 980px) {
       & > :not(.hero-container) {
-        padding-inline: var(--udexGridGutters) var(--udexGridMargins);
+        padding-inline: var(--udexGridMargins);
 
         & > * {
           margin: unset;

@@ -6,11 +6,11 @@ import { formatDate } from '../../scripts/utils.js';
 
 function getPictureCard(article, placeholders) {
   const {
-    author, 'content-type': type, image, path, title, priority,
+    author, 'content-type': type, image, path, title, priority, description,
   } = article;
   const tagLabel = placeholders[toCamelCase(priority)] || '';
   const info = formatDate(article.publicationDate * 1000);
-  return new PictureCard(title, path, type, info, author, image, tagLabel);
+  return new PictureCard(title, path, type, info, author, image, tagLabel, description);
 }
 
 export default async function decorateBlock(block) {

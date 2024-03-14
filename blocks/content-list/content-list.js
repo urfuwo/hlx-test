@@ -1,6 +1,6 @@
 import { readBlockConfig, fetchPlaceholders, toCamelCase } from '../../scripts/aem.js';
 import ffetch from '../../scripts/ffetch.js';
-import { ul } from '../../scripts/dom-builder.js';
+import { ul, h3 } from '../../scripts/dom-builder.js';
 import PictureCard from '../../libs/pictureCard/pictureCard.js';
 import Card from '../../libs/card/card.js';
 import Button from '../../libs/button/button.js';
@@ -69,6 +69,10 @@ export default async function decorateBlock(block) {
   const config = Object.fromEntries(
     Object.entries(readBlockConfig(block)).map(([key, value]) => [key, value.split(',')]),
   );
+  let heading;
+  if ('heading' in config) {
+    heading = h3({ class: 'heading' }, config.heading[0]);
+  }
   const filter = getFilter(config);
   const limit = config.limit ? +config.limit[0] + 1 : -1;
   let articleStream = await ffetch('/articles-index.json')
@@ -95,6 +99,7 @@ export default async function decorateBlock(block) {
     cardList.append(card.render());
   });
   block.textContent = '';
+  if (heading) block.append(heading);
   block.append(cardList);
   if (viewBtn) block.append(viewBtn.render());
 }

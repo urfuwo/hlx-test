@@ -1,15 +1,16 @@
 import Card from "../card/card.js";
 import {
-    li, a, span, div,
+    li, a, span, div, p,
   } from '../../scripts/dom-builder.js';
   import { createOptimizedPicture, toClassName, loadCSS } from '../../scripts/aem.js';
 
 export default class PictureCard extends Card {
-    constructor(title, path, type, info, author, image, tagLabel){
+    constructor(title, path, type, info, author, image, tagLabel, description){
         super(title, path, type, info);
         this.author = author;
         this.image = image;
         this.tagLabel = tagLabel;
+        this.description = description;
     }
 
     getAuthorUrl(){
@@ -22,6 +23,10 @@ export default class PictureCard extends Card {
 
     getTagLabel() {
       return this.tagLabel ? span({ class: 'tag-label' }, this.tagLabel) : '';
+    }
+
+    getDescription() {
+      return (this.description && this.description !== '0') ? p({ class: 'description' }, this.description) : '';
     }
 
     render(horizontal, excludeStyles) {
@@ -40,6 +45,7 @@ export default class PictureCard extends Card {
               this.getTagLabel(),
               span({ class: 'type' },this.getType()),
               span({ class: 'title' }, a({ href: this.path }, this.title)),
+              this.getDescription(),
               span({ class: 'author' }, a({ href: this.getAuthorUrl() }, span(`${this.author}`))),
               span({ class: 'info' },this.info),
             ),
