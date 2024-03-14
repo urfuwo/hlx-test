@@ -46,13 +46,11 @@
 }
 
 :root {
-  /* default colors */
   --background-color: var(--udexColorNeutralWhite);
   --text-color: var(--sapShell_TextColor);
-
-  /* Margin and gutters */
   --udexGridGutters: var(--udexGridXSGutters);
   --udexGridMargins: var(--udexGridXSMargins);
+  --sapFontFamily: "72 Brand Variable", "72 Brand Variable Fallback", "Arial", "Helvetica", "sans-serif";
 }
 
 /* S */
