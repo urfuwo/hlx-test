@@ -228,7 +228,7 @@ header
   aspect-ratio: 1;
   top: 0;
   left: 0;
-  background: url('/icons/bell-6.svg') no-repeat center;
+  background: url('/aemedge/icons/bell-6.svg') no-repeat center;
 }
 
 header nav .nav-sections > .search-bar > .text-box > .search {
@@ -243,7 +243,7 @@ header nav .nav-sections > .search-bar > .text-box > .search > .search-e {
   position: absolute;
   width: 100%;
   aspect-ratio: 1;
-  background: url('/icons/search.svg') no-repeat center;
+  background: url('/aemedge/icons/search.svg') no-repeat center;
 }
 
 header nav .nav-sections > .search-bar .search-box {
