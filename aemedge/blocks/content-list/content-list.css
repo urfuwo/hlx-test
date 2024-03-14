@@ -1,4 +1,8 @@
 .content-list {
+  & .heading {
+    grid-column: 1 / -1;
+  }
+
   & ul {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(278px, 1fr));
@@ -26,6 +30,7 @@
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     gap: var(--udexSpacer16);
+    container-type: inline-size;
 
     @media (width >= 980px) {
       & {
@@ -58,5 +63,11 @@
         }
       }
     }
+  }
+}
+
+@container (240px < width < 480px) {
+  .content-list.text-only ul .card {
+    grid-column: 1 / -1;
   }
 }

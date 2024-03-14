@@ -1,16 +1,13 @@
+import { decorateIcons } from '../../scripts/aem.js';
 import {
-  img, select, option, div,
+  select, option, div, span,
 } from '../../scripts/dom-builder.js';
 
 export default async function decorate(block) {
   const beforeContact = div(
     div(
       { class: ['logo-lang-picker'] },
-      img({
-        src: '/icons/sap-logo.svg',
-        class: ['icon', 'icon-sap'],
-        alt: 'SAP',
-      }),
+      span({ class: 'icon icon-sap-logo' }),
       select(
         { 'aria-label': 'Country Selector' },
         option({ value: 'us' }, 'United States - English'),
@@ -19,4 +16,5 @@ export default async function decorate(block) {
     ),
   );
   block.parentNode.prepend(beforeContact);
+  decorateIcons(block);
 }
