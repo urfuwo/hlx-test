@@ -1,5 +1,6 @@
+import { decorateIcons } from '../../scripts/aem.js';
 import {
-  div, span, img, a,
+  div, span, a,
 } from '../../scripts/dom-builder.js';
 
 const SOCIAL_CONFIGS = [
@@ -44,18 +45,12 @@ export default async function decorate(block) {
               {
                 class: ['icon', `icon-${config.name}`],
               },
-              img(
-                {
-                  'data-icon-name': config.name,
-                  loading: 'eager',
-                  src: `/icons/${config.name}.svg`,
-                  alt: config.name,
-                },
-              ),
             ),
           ),
         ),
       ));
     });
   }
+
+  if (block.closest('main')) decorateIcons(block);
 }

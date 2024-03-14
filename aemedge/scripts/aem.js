@@ -419,6 +419,7 @@ function decorateIcon(span, prefix = '', alt = '') {
 function decorateIcons(element, prefix = '') {
   const icons = [...element.querySelectorAll('span.icon')];
   icons.forEach((span) => {
+    if (span.querySelector('img')) return;
     decorateIcon(span, prefix);
   });
 }
@@ -665,6 +666,7 @@ async function loadFooter(footer) {
 }
 
 async function loadSideNav(sideNav) {
+  if (sideNav === null) return null;
   const sideNavBlock = buildBlock('side-nav', '');
   sideNav.append(sideNavBlock);
   decorateBlock(sideNavBlock);
