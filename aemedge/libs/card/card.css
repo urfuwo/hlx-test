@@ -1,0 +1,22 @@
+.card {
+  & p {
+    margin: 0.25rem;
+  }
+
+  & .title {
+    text-wrap: wrap;
+    white-space: wrap;
+  }
+
+  & .type {
+    font-size: var(--udexTypographyBodyXXSFontSize);
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--udexColorGrey7);
+  }
+
+  & .label {
+    font-size: var(--udexTypographyBodyXSFontSize);
+    color: var(--udexColorGrey7);
+  }
+}
