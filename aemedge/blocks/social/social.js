@@ -51,5 +51,6 @@ export default async function decorate(block) {
       ));
     });
   }
-  decorateIcons(block);
+
+  if (block.closest('main')) decorateIcons(block);
 }
