@@ -268,10 +268,17 @@ main .section {
   display: none;
 }
 
+main .section.column-section {
+  padding-top: var(--udexSpacer56);
+  padding-bottom: var(--udexSpacer40);
+}
+
 @media (width >=980px) {
-  .column-section {
+  main .section.column-section {
     display: grid;
     grid-auto-flow: row dense;
+    padding-top: var(--udexSpacer64);
+    padding-bottom: var(--udexSpacer48);
   }
 
   .column-section-block {
@@ -339,5 +346,12 @@ main .section {
 
   .column-section > div.column-section-block > div:first-child > div:first-child > div:first-child > div:first-child > *:first-child {
     margin-top: 0;
+  }
+}
+
+@media (width >=1280px) {
+  main .section.column-section {
+    padding-top: var(--udexSpacer84);
+    padding-bottom: var(--udexSpacer56);
   }
 }
