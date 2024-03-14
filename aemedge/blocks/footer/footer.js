@@ -1,6 +1,6 @@
-import { getMetadata } from '../../scripts/aem.js';
+import { decorateIcons, getMetadata } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
-import { img, span } from '../../scripts/dom-builder.js';
+import { span } from '../../scripts/dom-builder.js';
 
 /**
  * loads and decorates the footer
@@ -21,12 +21,6 @@ export default async function decorate(block) {
     {
       class: ['icon', 'icon-back-to-top'],
     },
-    img(
-      {
-        src: '/icons/back-to-top.svg',
-        alt: 'Back to top',
-      },
-    ),
   );
 
   backToTop.addEventListener('click', () => {
@@ -34,5 +28,6 @@ export default async function decorate(block) {
   });
 
   footer.append(backToTop);
+  decorateIcons(footer);
   block.append(footer);
 }
