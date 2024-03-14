@@ -1,6 +1,8 @@
 /* header and nav layout */
 header {
   --nav-links-font-size: var(--udexTypographyNavigationRegularMFontSize);
+  --nav-links-font-weight: var(--udexTypographyFontWeightRegular);
+  --nav-links-line-height: var(--udexTypographyNavigationLineHeight);
   --nav-text-color: var(--udexColorGrey8);
   --line-separator-color: var(--udexColorGrey2);
   --flyout-menu-color: hsla(209.231deg 36% 21% / 25%);
@@ -108,8 +110,10 @@ header nav .nav-brand .site-label {
   display: inline;
   position: relative;
   color: var(--udexColorGrey8);
+  font-weight: var(--udexTypographyFontWeightBold);
   font-size: var(--udexTypographyNavigationBoldXLFontSize);
-  letter-spacing: var(--navigation-bold-XL-letter-spacing);  
+  letter-spacing: var(--navigation-bold-XL-letter-spacing);
+  line-height: var(--udexTypographyNavigationLineHeight);
   white-space: nowrap;
   top: -9px;
 }
@@ -228,7 +232,7 @@ header
   aspect-ratio: 1;
   top: 0;
   left: 0;
-  background: url('/icons/bell-6.svg') no-repeat center;
+  background: url('/aemedge/icons/bell-6.svg') no-repeat center;
 }
 
 header nav .nav-sections > .search-bar > .text-box > .search {
@@ -243,7 +247,7 @@ header nav .nav-sections > .search-bar > .text-box > .search > .search-e {
   position: absolute;
   width: 100%;
   aspect-ratio: 1;
-  background: url('/icons/search.svg') no-repeat center;
+  background: url('/aemedge/icons/search.svg') no-repeat center;
 }
 
 header nav .nav-sections > .search-bar .search-box {
@@ -351,7 +355,7 @@ header nav .nav-sections .nav-drop::after {
     align-items: flex-start;
     text-wrap: wrap;
     border: unset;
-    
+    font-weight: var(--udexTypographyFontWeightBold);
   }
 
   header nav .nav-sections .nav-drop > ul > li > ul {
