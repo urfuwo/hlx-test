@@ -3,8 +3,66 @@
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(278px, 1fr));
-  grid-gap: 16px;
+  /* XS one per row */
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: var(--udexGridGutters);
+}
+
+/* S - 1/2 per row */
+@media (width >= 640px) {
+  body.hub-l1 .cards:not(.elems1):not(.grid-3-column):not(.grid-4-column):not(.grid-6-column):not(.grid-9-column):not(.grid-10-column) > ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  body.hub-l1 .cards.grid-3-column > ul, .hub-l1 .cards.grid-4-column > ul, .hub-l1 .cards.grid-6-column > ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* M - 2/3 per row */
+@media (width >= 980px) {
+  body:not(.hub-l1) .cards:not(.elems1):not(.grid-3-column):not(.grid-4-column):not(.grid-6-column):not(.grid-9-column):not(.grid-10-column) > ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  body:not(.hub-l1) .cards.grid-3-column > ul, .cards.grid-4-column > ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  body.hub-l1 .cards:not(.elems1):not(.elems2):not(.grid-3-column):not(.grid-4-column):not(.grid-6-column):not(.grid-9-column):not(.grid-10-column) > ul {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  body.hub-l1 .cards.grid-3-column > ul, .hub-l1 .cards.grid-4-column > ul {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* L and XL - 3/4 per row */
+@media (width >= 1280px) {
+  body:not(.hub-l1) .cards:not(.elems1):not(.elems2):not(.grid-3-column):not(.grid-4-column):not(.grid-6-column):not(.grid-9-column):not(.grid-10-column) > ul {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  body:not(.hub-l1) .cards.grid-3-column > ul {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  body:not(.hub-l1) .cards.grid-4-column > ul {
+    grid-template-columns: [leftcol] 4fr [rightcol] 4fr 0.75fr;
+  }
+
+  body:not(.hub-l1) .cards.grid-4-column > ul > li:nth-child(odd) {
+    grid-column: leftcol;
+  }
+
+  body.hub-l1 .cards:not(.elems1):not(.elems2):not(.elems3):not(.grid-3-column):not(.grid-4-column):not(.grid-6-column):not(.grid-9-column):not(.grid-10-column) > ul {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  body.hub-l1 .cards.grid-3-column > ul {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 .cards > ul > li {
@@ -24,7 +82,7 @@
   margin-top: 0;
 }
 
-.cards > ul > li img {
+.cards:not(.icons) > ul > li img {
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
