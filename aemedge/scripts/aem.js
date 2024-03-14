@@ -666,6 +666,7 @@ async function loadFooter(footer) {
 }
 
 async function loadSideNav(sideNav) {
+  if (sideNav === null) return null;
   const sideNavBlock = buildBlock('side-nav', '');
   sideNav.append(sideNavBlock);
   decorateBlock(sideNavBlock);
