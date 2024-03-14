@@ -6,9 +6,7 @@ export default async function decorate(block) {
     let dynamicHeadline = '';
     if (block.classList.contains('author')) {
       const author = getMetadata('author');
-      if (author) {
-        dynamicHeadline = h1('Articles by ', strong(author));
-      }
+      dynamicHeadline = author ? h1('Articles by ', strong(author)) : h1('No articles');
     } else if ((block.classList.contains('tags') && window.location.pathname.includes('/tags/')) || (block.classList.contains('topics') && window.location.pathname.includes('/topics/'))) {
       const key = window.location.pathname.split('/').pop();
       const prefix = block.classList.contains('tags') ? 'tag/' : 'topic/';
@@ -17,7 +15,7 @@ export default async function decorate(block) {
       dynamicHeadline = h1('Articles for ', strong(title));
     }
     if (dynamicHeadline) {
-      block.prepend(dynamicHeadline);
+      block.append(dynamicHeadline);
     }
   }
 }
