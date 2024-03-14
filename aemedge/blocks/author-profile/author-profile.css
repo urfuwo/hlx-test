@@ -48,7 +48,7 @@
   margin: 0;
 }
 
-.author-profile .link {
+.author-profile .link a {
   text-align: left;
   font-size: var(--udexTypographyBodySFontSize);
   padding-top: var(--udexSpacer4);
