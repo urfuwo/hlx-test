@@ -11,7 +11,7 @@ import { loadCSS } from '../../scripts/aem.js';
  * @returns {Promise<HTMLElement>} The <dialog> element, after loading css
  */
 export default async function getModal(modalId, createContent, addEventListeners) {
-  await loadCSS('/blocks/modal/modal.css');
+  await loadCSS(`${window.hlx.codeBasePath}/blocks/modal/modal.css`);
 
   let dialogElement = document.getElementById(modalId);
   if (!dialogElement) {

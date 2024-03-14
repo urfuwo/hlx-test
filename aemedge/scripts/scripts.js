@@ -43,7 +43,7 @@ async function decorateTemplates(main) {
     if (templates.includes(template)) {
       const templateName = TEMPLATE_LIST[template];
       loadCSS(`${window.hlx.codeBasePath}/templates/${templateName}/${templateName}.css`);
-      const mod = await import(`../templates/${templateName}/${templateName}.js`);
+      const mod = await import(`${window.hlx.codeBasePath}/templates/${templateName}/${templateName}.js`);
       if (mod.default) {
         await mod.default(main);
       }
@@ -203,7 +203,7 @@ function initSidekick() {
     wrapper.appendChild(preflightBlock);
     decorateBlock(preflightBlock);
     await loadBlock(preflightBlock);
-    const { default: getModal } = await import('../blocks/modal/modal.js');
+    const { default: getModal } = await import(`${window.hlx.codeBasePath}/blocks/modal/modal.js`);
     const customModal = await getModal('dialog-modal', () => section.innerHTML, (modal) => {
       modal.querySelector('button[name="close"]')?.addEventListener('click', () => modal.close());
     });

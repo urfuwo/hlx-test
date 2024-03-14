@@ -24,12 +24,12 @@ export default class Button {
           'aria-label': this.label,
         },
         this.label,
-        this.getIcon()
-      )
+        this.getIcon(),
+      ),
     );
-    if(this.icon){
-      decorateIcons(btn)
+    if (this.icon) {
+      decorateIcons(btn);
     }
-    return btn
+    return btn;
   }
 }

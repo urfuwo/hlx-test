@@ -13,6 +13,10 @@
       --udexGridMargins: 246px;
     }
   }
+  
+  & > * {
+    transition: margin 0.3s ease-in-out;
+  }
 
   & :is(.header) {
     display: contents;
@@ -55,10 +59,6 @@
 
   & > footer {
     grid-area: footer;
-  }
-
-  & > * {
-    transition: margin 0.3s ease-in-out;
   }
 }
 
