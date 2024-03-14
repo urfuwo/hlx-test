@@ -118,7 +118,7 @@ const EMBEDS_CONFIG = [
     match: ['youtube', 'youtu.be'],
     embed: embedYoutube,
     source: 'YouTube',
-    resource: [],
+    resources: [],
   },
   {
     match: ['d.dam.sap.com'],
