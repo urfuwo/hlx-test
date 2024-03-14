@@ -40,14 +40,14 @@
     flex-direction: column;
     grid-area: main-content;
 
-    & > :not(.hero-container) {
+    & > :not(.hero-container):not(.title-banner-container) {
       & > * {
         margin: 0 var(--udexGridMargins);
       }
     }
 
     @media (width >= 980px) {
-      & > :not(.hero-container) {
+      & > :not(.hero-container):not(.title-banner-container) {
         padding-inline: var(--udexGridGutters) var(--udexGridMargins);
 
         & > * {
