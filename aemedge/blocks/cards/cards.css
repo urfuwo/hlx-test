@@ -8,7 +8,7 @@
   grid-gap: var(--udexGridGutters);
 }
 
-/* S - 1/2 per row */
+/* S - 1 or 2 per row */
 @media (width >= 640px) {
   body.hub-l1 .cards:not(.elems1):not(.grid-3-column):not(.grid-4-column):not(.grid-6-column):not(.grid-9-column):not(.grid-10-column) > ul {
     grid-template-columns: repeat(2, 1fr);
@@ -19,7 +19,7 @@
   }
 }
 
-/* M - 2/3 per row */
+/* M - 2 or 3 per row */
 @media (width >= 980px) {
   body:not(.hub-l1) .cards:not(.elems1):not(.grid-3-column):not(.grid-4-column):not(.grid-6-column):not(.grid-9-column):not(.grid-10-column) > ul {
     grid-template-columns: repeat(2, 1fr);
@@ -38,7 +38,7 @@
   }
 }
 
-/* L and XL - 3/4 per row */
+/* L and XL - 3 or 4 per row */
 @media (width >= 1280px) {
   body:not(.hub-l1) .cards:not(.elems1):not(.elems2):not(.grid-3-column):not(.grid-4-column):not(.grid-6-column):not(.grid-9-column):not(.grid-10-column) > ul {
     grid-template-columns: repeat(3, 1fr);
