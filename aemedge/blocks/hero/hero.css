@@ -263,6 +263,6 @@ udex-hero-banner .text-neutral-black {
   --udexHeroBannerBackgroundImageObjectFit: cover;
 }
 
-.hero-container:has(.hero-dock-to-next-wrapper) {
+.hero-container:has(.hero-no-bottom-space-wrapper) {
   padding-bottom: 0;
 }
