@@ -95,7 +95,7 @@ udex-hero-banner .hero-banner .media-blend__intro-text {
 }
 
 udex-hero-banner .hero-banner.media-blend__content {
-  margin-left: calc(var(--udexGridMargins) - var(--udexSpacer16));
+  margin-left: calc(var(--udexGridMargins) - 22px);
 }
 
 udex-hero-banner .hero-banner .media-blend__content ui5-rating-indicator {
