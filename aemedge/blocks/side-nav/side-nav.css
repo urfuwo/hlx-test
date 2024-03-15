@@ -31,7 +31,6 @@ aside {
     & :is(a, .text) {
       color: var(--nav-text-color);
       font-size: var(--nav-links-font-size);
-      font-family: var(--navlinks-font-family);
       font-weight: var(--nav-links-font-weight);
       text-decoration: none;
       cursor: pointer;
