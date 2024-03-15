@@ -276,7 +276,6 @@ main .section.column-section {
   main .section.column-section {
     display: grid;
     grid-auto-flow: row dense;
-
     padding-top: var(--udexSpacer64);
     padding-bottom: var(--udexSpacer48);
     column-gap: var(--udexGridGutters);
