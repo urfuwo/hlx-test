@@ -83,6 +83,10 @@
 
     & .cardcontent {
       order: -1;
+
+      & .description {
+        color: black;
+      }
     }
 
     & .picture {
