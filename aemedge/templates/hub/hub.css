@@ -69,18 +69,38 @@
 
 .hub-l2.appear {
   grid-template:
-    'header header' 60px
-    'side-nav main-content' auto
-    'footer footer' auto
-    / min-content 1fr;
+    'header' 60px
+    'main-content' auto
+    'footer' auto
+    / 1fr;
 
   & > main {
     @media (width >= 980px) {
       & > :not(.hero-container, .title-banner-container) {
-        padding-inline: var(--udexGridGutters) var(--udexGridMargins);
+        padding-inline: var(--udexGridMargins);
 
         & > * {
           margin: unset;
+        }
+      }
+    }
+  }
+
+  &:has(aside) {
+    grid-template:
+      'header header' 60px
+      'side-nav main-content' auto
+      'footer footer' auto
+      / min-content 1fr;
+
+    & > main {
+      @media (width >= 980px) {
+        & > :not(.hero-container, .title-banner-container) {
+          padding-inline: var(--udexGridGutters) var(--udexGridMargins);
+
+          & > * {
+            margin: unset;
+          }
         }
       }
     }
@@ -185,7 +205,7 @@
     color: var(--udexColorNeutralWhite);
   }
 
-  & .card .type{
+  & .card .type {
     color: var(--udexColorGrey4);
   }
 
