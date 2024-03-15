@@ -16,7 +16,7 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
-  body.hub-l1 .cards.grid-3-column > ul, .hub-l1 .cards.grid-4-column > ul, .hub-l1 .cards.grid-6-column > ul {
+  body.hub-l1 .cards.grid-3-column > ul, body.hub-l1 .cards.grid-4-column > ul, body.hub-l1 .cards.grid-6-column > ul {
     grid-template-columns: repeat(2, 1fr);
   }
 }
@@ -27,7 +27,7 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
-  body:not(.hub-l1) .cards.grid-3-column > ul, .cards.grid-4-column > ul {
+  body:not(.hub-l1) .cards.grid-3-column > ul, body:not(.hub-l1) .cards.grid-4-column > ul {
     grid-template-columns: repeat(2, 1fr);
   }
 
@@ -35,7 +35,7 @@
     grid-template-columns: repeat(3, 1fr);
   }
 
-  body.hub-l1 .cards.grid-3-column > ul, .hub-l1 .cards.grid-4-column > ul {
+  body.hub-l1 .cards.grid-3-column > ul, body.hub-l1 .cards.grid-4-column > ul {
     grid-template-columns: repeat(3, 1fr);
   }
 }
@@ -75,6 +75,12 @@
   line-height: 0;
 }
 
+.cards:not(.icons) > ul > li img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
 .cards.icons .cards-card-image {
   margin-left: 16px;
 }
@@ -86,10 +92,4 @@
 
 .cards .cards-card-body > *:first-child {
   margin-top: 0;
-}
-
-.cards:not(.icons) > ul > li img {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
 }
