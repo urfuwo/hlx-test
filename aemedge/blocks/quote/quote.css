@@ -1,0 +1,97 @@
+.quote {
+    margin-top: var(--udexSpacer40);
+    margin-bottom: var(--udexSpacer40);
+}
+
+.quote > div {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+}
+
+.quote .col {
+    box-sizing: border-box;
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.quote .content {
+    justify-content: left;
+    color: var(--udexColorGrey8);
+}
+
+.quote .content p {
+    width: 100%;
+    margin-top: 0;
+}
+
+.quote .content p:last-of-type {
+    margin-bottom: 0;
+}
+
+.quote .qt {
+    margin-bottom: var(--udexSpacer24);
+}
+
+.quote .qt .content {
+    font-size: var(--udexTypographyBodyXLFontSize);
+    flex-flow: column;
+}
+
+.quote .qt::before,
+.quote .qt::after {
+    align-self: flex-start;
+    flex: 0 0 30px;
+    height: 100%;
+    justify-content: center;
+    color: var(--udexColorGrey8);   
+    font-size: var(--udexTypographyDisplayRegularLFontSize);
+    line-height: 84px;
+    position: relative;
+    top: -8px;
+}
+
+.quote .qt::before {
+    content: '“';
+    padding-right: 16px;
+}
+
+.quote .qt::after {
+    content: '”';
+    padding-left: 16px;
+}
+
+.quote .qs .content {
+    font-size: var(--udexTypographyHeadingRegularXXSFontSize);
+    padding-left: 46px;
+    padding-right: 46px;
+}
+
+.quote.small .qt .content {
+    font-size: var(--udexTypographyBodySFontSize);
+}
+
+.quote.small .qt::before,
+.quote.small .qt::after {
+    flex: 0 0 1.75rem;   
+    font-size: var(--udexTypographyDisplayRegularMFontSize);
+    line-height: 72px;
+    top: -8px;
+}
+
+.quote.small .qt::before {
+    padding-right: 8px;
+}
+
+.quote.small .qt::after {
+    padding-left: 8px;
+}
+
+.quote.small .qs .content {
+    font-size: var(--udexTypographyNavigationRegularMFontFamily);
+    padding-left: 36px;
+    padding-right: 36px;
+}

@@ -1,0 +1,123 @@
+main ul.article-list {
+  --article-tile-height: auto;
+  
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(1,1fr);
+  grid-gap: var(--udexGridGutters);
+}
+
+@media (width >= 640px) {
+  main ul.article-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (width >= 980px) {
+  main ul.article-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+main ul.article-list>li {
+  border: 1px solid var(--udexColorGrey2);
+  box-shadow: 0 2px 4px rgb(34 54 73 / 20%);
+  background-color: var(--background-color);
+  height: var(--article-tile-height);
+  border-radius: var(--sapTile_BorderCornerRadius);
+  overflow: hidden;
+  position: relative;
+}
+
+main ul.article-list>li span.cardcontent {
+  display: block;
+  padding: var(--udexSpacer16);
+}
+
+main ul.article-list>li img {
+  width: 100%;
+  height: 130px;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+main ul.article-list>li span.cardcontent span.template {
+  font-style: normal;
+  font-size: var(--udexTypographyBodyXSFontSize);
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--udexColorGrey6);
+  flex: var(--sapContent_ForcedColorAdjust);
+  order: var(--sapShell_BackgroundImageOpacity);
+  flex-grow: var(--sapShell_BackgroundImageOpacity);
+  margin-bottom: var(--udexSpacer8);
+}
+
+main ul.article-list>li span.cardcontent span.hot {
+  position: absolute;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 8px;
+  gap: 10px;
+  height: var(--udexTypographyHeadingRegularXSLineHeight);
+  right: var(--udexRadiusM);
+  top: var(--udexRadiusM);
+  background: var(--udexColorBlue1);
+  border: 1px solid #0070F2;
+  border-radius: var(--udexRadiusS);
+  font-size: var(--udexGridXSColumns);
+  text-align: center;
+  color: var(--udexColorBlue9);
+  flex: var(--sapContent_ForcedColorAdjust);
+  order: 0;
+  flex-grow: 0;
+}
+
+main ul.article-list>li span.cardcontent span.title {
+  display: block;
+}
+
+main ul.article-list>li span.cardcontent span.title, main ul.article-list>li span.cardcontent span.title a  {
+  font-style: normal;
+  text-decoration: none;
+  font-size: var(--udexSpacer20);
+  color: var(--udexColorNeutralBlack);
+  flex: var(--sapContent_ForcedColorAdjust);
+  order: var(--sapShell_BackgroundImageOpacity);
+  align-self: stretch;
+  flex-grow: 0;
+  margin-bottom: 12px;
+}
+
+main ul.article-list>li span.cardcontent span.author {
+  display: block;
+}
+
+main ul.article-list>li span.cardcontent span.author, main ul.article-list>li span.cardcontent span.author>a {
+  font-style: normal;
+  text-decoration: none;
+  font-size: var(--udexTypographyBodyXSFontSize);
+  color: var(--udexColorNeutralBlack);
+  flex: var(--sapContent_ForcedColorAdjust);
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+main ul.article-list>li span.cardcontent span.date {
+  display: block;
+  font-style: normal;
+  font-size: var(--udexGridXSColumns);
+  color: var(--udexColorGrey6);
+  flex: var(--sapContent_ForcedColorAdjust);
+  order: var(--sapShell_BackgroundImageOpacity);
+  align-self: stretch;
+  flex-grow: 0;
+}

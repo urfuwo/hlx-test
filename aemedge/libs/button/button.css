@@ -1,0 +1,25 @@
+.button-wrapper {
+  & .button {
+    position: relative;
+    border: 0.0625rem solid var(--udexColorGrey7);
+    color: var(--udexColorBlue9);
+    background: var(--udexColorNeutralWhite);
+    border-radius: 0.5rem;
+    padding: 14px 28px 14px 14px;
+    font-style: normal;
+    font-size: var(--udexTypographyNavigationMediumXLFontSize);
+
+    &:hover {
+      background: var(--udexColorGrey2);
+    }
+
+    & span {
+      padding-left: 8px;
+      padding-right: 0;
+      top: 10px;
+      color: var(--udexColorBlue9);
+      position: absolute;
+      transform: scale(0.4) rotate(90deg);
+    }
+  }
+}

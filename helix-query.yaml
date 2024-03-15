@@ -4,9 +4,11 @@ indices:
     include:
       - /blog/**
       - /news/**
+      - /videos/**
     exclude:
       - '**/fragments/**'
-    target: /articles-index.json
+      - '**/sidenav'
+    target: /aemedge/articles-index.json
     properties:
       title:
         select: head > meta[property="og:title"]
@@ -17,8 +19,8 @@ indices:
       display-author:
         select: head > meta[name="display-author"]
         value: attribute(el, "content")
-      hot-story:
-        select: head > meta[name="hot-story"]
+      priority:
+        select: head > meta[name="priority"]
         value: attribute(el, "content")
       content-type:
         select: head > meta[name="content-type"]
@@ -33,17 +35,26 @@ indices:
         select: head > meta[property="og:image"]
         value: attribute(el, "content")
       lastModified:
-        select: head > meta[property="article:modified_time"]
+        select: head > meta[name="modified-time"]
         value: parseTimestamp(attribute(el, "content"))
       publicationDate:
-        select: head > meta[property="article:published_time"]
+        select: head > meta[name="published-time"]
         value: parseTimestamp(attribute(el, "content"))
+      template:
+        select: head > meta[name="template"]
+        value: attribute(el, "content")
+      robots:
+        select: head > meta[name="robots"]
+        value: attribute(el, "content")
+      description:
+        select: head > meta[name="description"]
+        value: attribute(el, "content")
   author:
     include:
       - /author/**
     exclude:
       - '**/fragments/**'
-    target: /authors-index.json
+    target: /aemedge/authors-index.json
     properties:
       author:
         select: head > meta[name="author"]
@@ -56,4 +67,7 @@ indices:
         value: attribute(el, "content")
       title:
         select: head > meta[property="og:title"]
+        value: attribute(el, "content")
+      robots:
+        select: head > meta[name="robots"]
         value: attribute(el, "content")

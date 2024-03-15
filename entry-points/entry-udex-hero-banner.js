@@ -1,1 +1,1 @@
-import '@udex/web-components/dist/HeroBanner.js';
+import '@udex/webcomponents/dist/HeroBanner.js';
