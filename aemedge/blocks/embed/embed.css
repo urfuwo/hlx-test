@@ -9,7 +9,8 @@
 
 .embed .embed-placeholder {
   cursor: pointer;
-  width: 100%;
+  max-width: 75%;
+  margin: auto;
   aspect-ratio: 16 / 9;
   position: relative;
   background-color: var(--udexColorNeutralBlack);
