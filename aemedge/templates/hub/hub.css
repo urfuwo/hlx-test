@@ -96,6 +96,10 @@
   background-color: var(--udexColorBlue2);
 }
 
+.section.background-blue-7 {
+  background-color: var(--udexColorBlue7);
+}
+
 .section.background-grey,
 .section.background-grey-1 {
   background-color: var(--udexColorGrey1);
@@ -171,6 +175,23 @@
 .section.text-black,
 .section.text-neutral-black {
   color: var(--udexColorNeutralBlack);
+}
+
+.section.text-white,
+.section.text-neutral-white {
+  color: var(--udexColorNeutralWhite);
+
+  & a:any-link {
+    color: var(--udexColorNeutralWhite);
+  }
+
+  & .card .type{
+    color: var(--udexColorGrey4);
+  }
+
+  & .card .label {
+    color: var(--udexColorGrey4);
+  }
 }
 
 .section.divider-top {
