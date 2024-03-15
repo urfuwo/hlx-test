@@ -1,11 +1,7 @@
-.hub-l2.appear {
+.hub-l2.appear,
+.hub-l1.appear {
   @media (width >= 980px) {
     display: grid;
-    grid-template:
-      'header header' 60px
-      'side-nav main-content' auto
-      'footer footer' auto
-      / min-content 1fr;
   }
 
   @media (width >= 1600px) {
@@ -13,7 +9,7 @@
       --udexGridMargins: 246px;
     }
   }
-  
+
   & > * {
     transition: margin 0.3s ease-in-out;
   }
@@ -40,19 +36,9 @@
     flex-direction: column;
     grid-area: main-content;
 
-    & > :not(.hero-container):not(.title-banner-container) {
+    & > :not(.hero-container, .title-banner-container) {
       & > * {
         margin: 0 var(--udexGridMargins);
-      }
-    }
-
-    @media (width >= 980px) {
-      & > :not(.hero-container):not(.title-banner-container) {
-        padding-inline: var(--udexGridGutters) var(--udexGridMargins);
-
-        & > * {
-          margin: unset;
-        }
       }
     }
   }
@@ -62,6 +48,64 @@
   }
 }
 
+.hub-l1.appear {
+  grid-template-areas:
+    'header'
+    'main-content'
+    'footer';
+
+  & > main {
+    @media (width >= 980px) {
+      & > :not(.hero-container) {
+        padding-inline: var(--udexGridMargins);
+
+        & > * {
+          margin: unset;
+        }
+      }
+    }
+  }
+}
+
+.hub-l2.appear {
+  grid-template:
+    'header' 60px
+    'main-content' auto
+    'footer' auto
+    / 1fr;
+
+  & > main {
+    @media (width >= 980px) {
+      & > :not(.hero-container, .title-banner-container) {
+        padding-inline: var(--udexGridMargins);
+
+        & > * {
+          margin: unset;
+        }
+      }
+    }
+  }
+
+  &:has(aside) {
+    grid-template:
+      'header header' 60px
+      'side-nav main-content' auto
+      'footer footer' auto
+      / min-content 1fr;
+
+    & > main {
+      @media (width >= 980px) {
+        & > :not(.hero-container, .title-banner-container) {
+          padding-inline: var(--udexGridGutters) var(--udexGridMargins);
+
+          & > * {
+            margin: unset;
+          }
+        }
+      }
+    }
+  }
+}
 
 .section.background-blue,
 .section.background-blue-1 {
@@ -70,6 +114,10 @@
 
 .section.background-blue-2 {
   background-color: var(--udexColorBlue2);
+}
+
+.section.background-blue-7 {
+  background-color: var(--udexColorBlue7);
 }
 
 .section.background-grey,
@@ -149,12 +197,29 @@
   color: var(--udexColorNeutralBlack);
 }
 
+.section.text-white,
+.section.text-neutral-white {
+  color: var(--udexColorNeutralWhite);
+
+  & a:any-link {
+    color: var(--udexColorNeutralWhite);
+  }
+
+  & .card .type {
+    color: var(--udexColorGrey4);
+  }
+
+  & .card .label {
+    color: var(--udexColorGrey4);
+  }
+}
+
 .section.divider-top {
   margin-top: 5px;
   box-shadow:
-          0 -2px 0 white,
-          0 -3px 0 var(--udexCoreDividerLight),
-          0 -5px 0 white;
+    0 -2px 0 white,
+    0 -3px 0 var(--udexCoreDividerLight),
+    0 -5px 0 white;
 }
 
 /* This is a temporary rule to show "wide" body rows */

@@ -22,6 +22,7 @@ const LCP_BLOCKS = ['hero']; // add your LCP blocks to the list
 const TEMPLATE_LIST = {
   article: 'article',
   'hub-l2': 'hub',
+  'hub-l1': 'hub',
 };
 
 /**

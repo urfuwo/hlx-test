@@ -9,7 +9,7 @@
     }
   }
 
-  &>div {
+  & > div {
     grid-column: 1 / -1;
 
     @media (width >=980px) {
@@ -19,13 +19,16 @@
     }
 
     font-size: var(--udexTypographyHeadingMediumXXSFontSize);
+    font-weight: var(--udexTypographyFontWeightMedium);
+    line-height: var(--udexTypographyHeadingLineHeight);
 
-    &>.button-container {
+    & > .button-container {
       border-bottom: 1px solid var(--udexColorGrey3);
 
-      &>.button {
+      & > .button {
         position: relative;
         font-size: var(--udexTypographyBodySFontSize);
+        font-weight: var(--udexTypographyFontWeightRegular);
         border: unset;
         border-radius: unset;
         padding: unset;

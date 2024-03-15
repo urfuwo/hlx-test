@@ -10,6 +10,7 @@
 
   & .type {
     font-size: var(--udexTypographyBodyXXSFontSize);
+    line-height: var(--udexTypographyEyebrowLineHeight);
     letter-spacing: 0.03em;
     text-transform: uppercase;
     color: var(--udexColorGrey7);
@@ -17,6 +18,7 @@
 
   & .label {
     font-size: var(--udexTypographyBodyXSFontSize);
+    line-height: var(--udexTypographyBodyLineHeight);
     color: var(--udexColorGrey7);
   }
 }
