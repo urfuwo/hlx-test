@@ -28,12 +28,13 @@ function decorateMetaInfo() {
   const lastUpdate = getMetadata('modified-time')
     ? getMetadata('modified-time')
     : getMetadata('published-time');
-  const lastUpdatePrefix = getMetadata('lastupdateprefix')
-    ? getMetadata('lastupdateprefix').trim()
-    : 'Updated on';
-  infoBlockWrapper.append(
-    span({ class: 'media-blend__date' }, `${lastUpdatePrefix} ${formatDate(lastUpdate)}`),
-  );
+  if (lastUpdate) {
+    const path = window.location.pathname.split('/');
+    const lastUpdatePrefix = (path && path.length > 0 && path[1] === 'news') ? 'Published on' : 'Updated on';
+    infoBlockWrapper.append(
+      span({ class: 'media-blend__date' }, `${lastUpdatePrefix} ${formatDate(lastUpdate)}`),
+    );
+  }
 
   const readingTime = getMetadata('twitter:data2');
   if (readingTime) {
