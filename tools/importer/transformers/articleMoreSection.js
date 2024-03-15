@@ -9,10 +9,6 @@ const transformMoreSection = (main) => {
       moreSectionCards.replaceWith(table);
     }
 
-    // const sidebarMetadata = [['Section Metadata'], ['location', 'document-footer']];
-    // const sidebarMetaTable = WebImporter.DOMUtils.createTable(sidebarMetadata, document);
-    // moreSection.before(document.createElement('hr'), sidebarMetaTable, document.createElement('hr'));
-
     moreSection.before(document.createElement('hr'));
 
     const docFooterMetadata = [['Section Metadata'], ['location', 'document-footer']];

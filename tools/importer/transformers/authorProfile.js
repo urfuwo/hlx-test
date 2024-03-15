@@ -12,7 +12,7 @@ const authorProfile = (main, document, html) => {
       profileEL.replaceWith(table);
     } else {
       const h1 = document.createElement('h1');
-      h1.innerHTML = document._AUTHOR_H1.innerHTML.replace(/<br>(.*)/g, '<b>$1</b>');
+      h1.innerHTML = document.authorProfileH1.innerHTML.replace(/<br>(.*)/g, '<b>$1</b>');
       const block = [['Title Banner (author)'], [h1]];
       const table = WebImporter.DOMUtils.createTable(block, document);
       document.querySelector('body').prepend(table);

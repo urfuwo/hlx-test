@@ -1,4 +1,5 @@
 /* global WebImporter */
+// eslint-disable-next-line no-unused-vars
 export default function transformVideo(main, document, html) {
   const videos = document.querySelectorAll('div.flex-video, figure.is-provider-youtube, section[data-inpsyde-embed="youtube"]');
   videos.forEach((video) => {

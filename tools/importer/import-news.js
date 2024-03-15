@@ -12,7 +12,7 @@
 /* global WebImporter */
 /* eslint-disable class-methods-use-this */
 
-import { preTransformers, transformers } from './transformers/index.js';
+import { preTransformers, transformers } from './transformers/index-news.js';
 
 const PROJECT_BASE_URL = 'https://main--hlx-test--urfuwo.hlx.page';
 
