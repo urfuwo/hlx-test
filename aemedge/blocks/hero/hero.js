@@ -28,9 +28,12 @@ function decorateMetaInfo() {
   const lastUpdate = getMetadata('modified-time')
     ? getMetadata('modified-time')
     : getMetadata('published-time');
-  infoBlockWrapper.append(
-    span({ class: 'media-blend__date' }, `Updated on ${formatDate(lastUpdate)}`),
-  );
+  if (lastUpdate) {
+    const lastUpdatePrefix = (window.location.pathname.startsWith('/news/')) ? 'Published on' : 'Updated on';
+    infoBlockWrapper.append(
+      span({ class: 'media-blend__date' }, `${lastUpdatePrefix} ${formatDate(lastUpdate)}`),
+    );
+  }
 
   const readingTime = getMetadata('twitter:data2');
   if (readingTime) {
