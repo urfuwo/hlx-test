@@ -4,6 +4,7 @@
   margin-top: var(--udexSpacer40);
   padding: 0;
   display: grid;
+
   /* XS one per row */
   grid-template-columns: repeat(1, 1fr);
   grid-gap: var(--udexGridGutters);
@@ -11,7 +12,7 @@
 
 /* S - 1 or 2 per row */
 @media (width >= 640px) {
-  body.hub-l1 .cards:not(.elems1):not(.grid-3-column):not(.grid-4-column):not(.grid-6-column):not(.grid-9-column):not(.grid-10-column) > ul {
+  body.hub-l1 .cards:not(.elems1, .grid-3-column, .grid-4-column, .grid-6-column, .grid-9-column, .grid-10-column) > ul {
     grid-template-columns: repeat(2, 1fr);
   }
 
@@ -22,7 +23,7 @@
 
 /* M - 2 or 3 per row */
 @media (width >= 980px) {
-  body:not(.hub-l1) .cards:not(.elems1):not(.grid-3-column):not(.grid-4-column):not(.grid-6-column):not(.grid-9-column):not(.grid-10-column) > ul {
+  body:not(.hub-l1) .cards:not(.elems1, .grid-3-column, .grid-4-column, .grid-6-column, .grid-9-column, .grid-10-column) > ul {
     grid-template-columns: repeat(2, 1fr);
   }
 
@@ -30,7 +31,7 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
-  body.hub-l1 .cards:not(.elems1):not(.elems2):not(.grid-3-column):not(.grid-4-column):not(.grid-6-column):not(.grid-9-column):not(.grid-10-column) > ul {
+  body.hub-l1 .cards:not(.elems1, .elems2, .grid-3-column, .grid-4-column, .grid-6-column, .grid-9-column, .grid-10-column) > ul {
     grid-template-columns: repeat(3, 1fr);
   }
 
@@ -41,7 +42,7 @@
 
 /* L and XL - 3 or 4 per row */
 @media (width >= 1280px) {
-  body:not(.hub-l1) .cards:not(.elems1):not(.elems2):not(.grid-3-column):not(.grid-4-column):not(.grid-6-column):not(.grid-9-column):not(.grid-10-column) > ul {
+  body:not(.hub-l1) .cards:not(.elems1, .elems2, .grid-3-column, .grid-4-column, .grid-6-column, .grid-9-column, .grid-10-column) > ul {
     grid-template-columns: repeat(3, 1fr);
   }
 
@@ -57,7 +58,7 @@
     grid-column: leftcol;
   }
 
-  body.hub-l1 .cards:not(.elems1):not(.elems2):not(.elems3):not(.grid-3-column):not(.grid-4-column):not(.grid-6-column):not(.grid-9-column):not(.grid-10-column) > ul {
+  body.hub-l1 .cards:not(.elems1, .elems2, .elems3, .grid-3-column, .grid-4-column, .grid-6-column, .grid-9-column, .grid-10-column) > ul {
     grid-template-columns: repeat(4, 1fr);
   }
 
