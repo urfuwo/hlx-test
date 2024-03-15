@@ -1,6 +1,7 @@
 .cards > ul {
   list-style: none;
   margin: 0;
+  margin-top: var(--udexSpacer40);
   padding: 0;
   display: grid;
   /* XS one per row */
@@ -65,17 +66,21 @@
   }
 }
 
-.cards > ul > li {
-  border: 1px solid var(--dark-color);
-  background-color: var(--background-color)
-}
-
 .cards .cards-card-body {
   margin: 16px;
 }
 
 .cards .cards-card-image {
   line-height: 0;
+}
+
+.cards.icons .cards-card-image {
+  margin-left: 16px;
+}
+
+.cards.icons .cards-card-image img {
+  width: 64px;
+  aspect-ratio: 1;
 }
 
 .cards .cards-card-body > *:first-child {
