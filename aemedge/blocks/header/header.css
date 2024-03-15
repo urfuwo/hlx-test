@@ -1,6 +1,8 @@
 /* header and nav layout */
 header {
   --nav-links-font-size: var(--udexTypographyNavigationRegularMFontSize);
+  --nav-links-font-weight: var(--udexTypographyFontWeightRegular);
+  --nav-links-line-height: var(--udexTypographyNavigationLineHeight);
   --nav-text-color: var(--udexColorGrey8);
   --line-separator-color: var(--udexColorGrey2);
   --flyout-menu-color: hsla(209.231deg 36% 21% / 25%);
@@ -108,8 +110,10 @@ header nav .nav-brand .site-label {
   display: inline;
   position: relative;
   color: var(--udexColorGrey8);
+  font-weight: var(--udexTypographyFontWeightBold);
   font-size: var(--udexTypographyNavigationBoldXLFontSize);
-  letter-spacing: var(--navigation-bold-XL-letter-spacing);  
+  letter-spacing: var(--navigation-bold-XL-letter-spacing);
+  line-height: var(--udexTypographyNavigationLineHeight);
   white-space: nowrap;
   top: -9px;
 }
@@ -351,7 +355,7 @@ header nav .nav-sections .nav-drop::after {
     align-items: flex-start;
     text-wrap: wrap;
     border: unset;
-    
+    font-weight: var(--udexTypographyFontWeightBold);
   }
 
   header nav .nav-sections .nav-drop > ul > li > ul {
