@@ -29,8 +29,7 @@ function decorateMetaInfo() {
     ? getMetadata('modified-time')
     : getMetadata('published-time');
   if (lastUpdate) {
-    const path = window.location.pathname.split('/');
-    const lastUpdatePrefix = (path && path.length > 0 && path[1] === 'news') ? 'Published on' : 'Updated on';
+    const lastUpdatePrefix = (window.location.pathname.startsWith('/news/')) ? 'Published on' : 'Updated on';
     infoBlockWrapper.append(
       span({ class: 'media-blend__date' }, `${lastUpdatePrefix} ${formatDate(lastUpdate)}`),
     );
