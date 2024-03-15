@@ -109,7 +109,7 @@ header nav .nav-brand .site-label {
   position: relative;
   color: var(--udexColorGrey8);
   font-size: var(--udexTypographyNavigationBoldXLFontSize);
-  letter-spacing: var(--navigation-bold-XL-letter-spacing);  
+  letter-spacing: var(--navigation-bold-XL-letter-spacing);
   white-space: nowrap;
   top: -9px;
 }
@@ -321,6 +321,7 @@ header nav .nav-sections .nav-drop::after {
     flex-direction: row;
     margin: 0;
     align-self: flex-start;
+    align-items: baseline;
     justify-content: flex-start;
     display: inline-flex;
     gap: 24px;
@@ -351,7 +352,6 @@ header nav .nav-sections .nav-drop::after {
     align-items: flex-start;
     text-wrap: wrap;
     border: unset;
-    
   }
 
   header nav .nav-sections .nav-drop > ul > li > ul {
