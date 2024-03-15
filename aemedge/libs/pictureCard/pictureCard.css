@@ -1,9 +1,7 @@
 .picture-card {
-  /* TODO: This class is copied from article-list.css and is using wrong variable names and unnecessary rules. It must be refactored */
   border: 1px solid var(--udexColorGrey2);
   box-shadow: 0 2px 4px rgb(34 54 73 / 20%);
   background-color: var(--background-color);
-  height: var(--article-tile-height);
   border-radius: var(--sapTile_BorderCornerRadius);
   overflow: hidden;
   position: relative;
@@ -11,8 +9,11 @@
   & img {
     width: 100%;
     height: 130px;
-    aspect-ratio: 4 / 3;
     object-fit: cover;
+  }
+
+  & a {
+    text-decoration: none;
   }
 
   & .cardcontent {
@@ -20,55 +21,37 @@
     padding: var(--udexSpacer16);
 
     & .type {
-      font-style: normal;
       font-size: var(--udexTypographyBodyXSFontSize);
+      font-weight: var(--udexTypographyFontWeightMedium);
+      line-height: var(--udexTypographyEyebrowLineHeight);
       display: flex;
-      align-items: center;
       letter-spacing: 0.03em;
       text-transform: uppercase;
       color: var(--udexColorGrey6);
-      flex: var(--sapContent_ForcedColorAdjust);
-      order: var(--sapShell_BackgroundImageOpacity);
-      flex-grow: var(--sapShell_BackgroundImageOpacity);
       margin-bottom: var(--udexSpacer8);
     }
 
     & .tag-label {
       position: absolute;
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-      padding: 4px 8px;
-      gap: 10px;
-      height: var(--udexTypographyHeadingRegularXSLineHeight);
-      right: var(--udexRadiusM);
-      top: var(--udexRadiusM);
+      padding: var(--udexSpacer4) var(--udexSpacer8);
+      inset: var(--udexSpacer8) var(--udexSpacer8) auto auto;
       background: var(--udexColorBlue1);
-      border: 1px solid #0070f2;
+      border: 1px solid var(--sapInformationBorderColor);
       border-radius: var(--udexRadiusS);
-      font-size: var(--udexGridXSColumns);
-      text-align: center;
+      font-size: var(--udexTypographyBodyXXSFontSize);
+      font-weight: var(--udexTypographyFontWeightRegular);
+      line-height: var(--udexTypographyHeadingLineHeight);
       color: var(--udexColorBlue9);
-      flex: var(--sapContent_ForcedColorAdjust);
-      order: 0;
-      flex-grow: 0;
     }
 
     & .title {
       display: block;
 
       & a {
-        font-style: normal;
-        text-decoration: none;
-        font-size: var(--udexSpacer20);
+        font-size: var(--udexTypographyHeadingMediumXXSFontSize);
+        font-weight: var(--udexTypographyFontWeightMedium);
+        line-height: var(--udexTypographyHeadingLineHeight);
         color: var(--udexColorNeutralBlack);
-        flex: var(--sapContent_ForcedColorAdjust);
-        order: var(--sapShell_BackgroundImageOpacity);
-        align-self: stretch;
-        flex-grow: 0;
-        margin-bottom: 12px;
       }
     }
 
@@ -76,26 +59,43 @@
       display: block;
 
       & a {
-        font-style: normal;
-        text-decoration: none;        
         font-size: var(--udexTypographyBodyXSFontSize);
+        font-weight: var(--udexTypographyFontWeightMedium);
+        line-height: var(--udexTypographyDisplayLineHeight);
         color: var(--udexColorNeutralBlack);
-        flex: var(--sapContent_ForcedColorAdjust);
-        order: 0;
-        align-self: stretch;
-        flex-grow: 0;
       }
     }
 
     & .info {
       display: block;
-      font-style: normal;
-      font-size: var(--udexGridXSColumns);
+      font-size: var(--udexTypographyNavigationRegularXSFontSize);
+      font-weight: var(--udexTypographyFontWeightRegular);
+      line-height: var(--udexTypographyDisplayLineHeight);
       color: var(--udexColorGrey6);
-      flex: var(--sapContent_ForcedColorAdjust);
       order: var(--sapShell_BackgroundImageOpacity);
-      align-self: stretch;
-      flex-grow: 0;
+    }
+  }
+
+  &.horizontal {
+    display: grid;
+    grid-template-columns: subgrid;
+    grid-column: 1 / -1;
+
+    & .cardcontent {
+      order: -1;
+    }
+
+    & .picture {
+      order: 1;
+      padding: var(--udexSpacer16);
+    }
+
+    & img {
+      max-width: 100%;
+      height: 100%;
+      object-fit: cover;
+      aspect-ratio: unset;
+      border-radius: 12px;
     }
   }
 }

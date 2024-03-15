@@ -1,5 +1,7 @@
 aside {
   --nav-links-font-size: var(--udexTypographyNavigationRegularMFontSize);
+  --nav-links-font-weight: var(--udexTypographyFontWeightRegular);
+  --nav-links-line-height: var(--udexTypographyNavigationLineHeight);
   --nav-text-color: var(--udexColorGrey8);
   --line-separator-color: var(--udexColorGrey2);
   --nav-margin: var(--udexGridMargins);
@@ -29,6 +31,7 @@ aside {
     & :is(a, .text) {
       color: var(--nav-text-color);
       font-size: var(--nav-links-font-size);
+      font-weight: var(--nav-links-font-weight);
       text-decoration: none;
       cursor: pointer;
     }
@@ -86,6 +89,10 @@ aside {
         gap: 1rem;
         padding: unset;
         position: relative;
+
+        & :is(li, a) {
+          font-weight: var(--udexTypographyFontWeightMedium);
+        }
       }
 
       & .nav-drop {
@@ -117,6 +124,10 @@ aside {
           transition:
             opacity 0.3s ease-out,
             transform 0.3s ease-out;
+
+          & a {
+            font-weight: var(--nav-links-font-weight);
+          }
         }
       }
     }
@@ -172,6 +183,9 @@ aside {
       & p {
         position: relative;
         margin: unset;
+        font-size: var(--udexTypographyNavigationMediumXLFontSize);
+        font-weight: var(--udexTypographyFontWeightMedium);
+        line-height: var(--nav-links-line-height);
 
         @media (width < 980px) {
           &::after {
@@ -187,6 +201,8 @@ aside {
       & .button {
         color: var(--udexCoreNavigation);
         font-size: var(--udexTypographyNavigationMediumXLFontSize);
+        font-weight: var(--udexTypographyFontWeightMedium);
+        line-height: var(--nav-links-line-height);
         white-space: nowrap;
         padding: unset;
         margin: unset;
