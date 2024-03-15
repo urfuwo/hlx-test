@@ -87,6 +87,8 @@
   }
 
   &:has(aside) {
+    --hero-margin: 0;
+
     grid-template:
       'header header' 60px
       'side-nav main-content' auto

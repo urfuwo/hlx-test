@@ -50,7 +50,9 @@
   --text-color: var(--sapShell_TextColor);
   --udexGridGutters: var(--udexGridXSGutters);
   --udexGridMargins: var(--udexGridXSMargins);
-  --sapFontFamily: "72 Brand Variable", "72 Brand Variable Fallback", "Arial", "Helvetica", "sans-serif";
+  --sapFontFamily: '72 Brand Variable', '72 Brand Variable Fallback', 'Arial',
+    'Helvetica', 'sans-serif';
+  --hero-margin: var(--udexGridMargins);
 }
 
 /* S */
@@ -82,6 +84,7 @@
   :root {
     --udexGridGutters: var(--udexGridXLGutters);
     --udexGridMargins: var(--udexGridXLMargins);
+    --hero-margin: 246px;
   }
 }
 
@@ -286,7 +289,7 @@ main .section.column-section {
     overflow-x: hidden;
   }
 
-  .column-section>div:not(.column-section-block) {
+  .column-section > div:not(.column-section-block) {
     display: none;
   }
 
@@ -318,21 +321,21 @@ main .section.column-section {
     grid-template-columns: 1fr 3fr;
   }
 
-  .column-section>div.column-section-left-block {
+  .column-section > div.column-section-left-block {
     margin-right: 16px;
     grid-column: 1;
   }
 
-  .column-section>div.column-section-right-block {
+  .column-section > div.column-section-right-block {
     margin-left: 16px;
     grid-column: 2;
   }
 
-  .column-section>div.column-section-block>*:first-child {
+  .column-section > div.column-section-block > *:first-child {
     margin-top: 0;
   }
 
-  .column-section>div.column-section-block>div:first-child>*:first-child {
+  .column-section > div.column-section-block > div:first-child > *:first-child {
     margin-top: 0;
   }
 
