@@ -325,6 +325,7 @@ header nav .nav-sections .nav-drop::after {
     flex-direction: row;
     margin: 0;
     align-self: flex-start;
+    align-items: baseline;
     justify-content: flex-start;
     display: inline-flex;
     gap: 24px;
