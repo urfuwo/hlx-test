@@ -6,7 +6,8 @@ function decorate(doc) {
   const main = doc.querySelector('main');
   containerize(main, '.hero');
   const template = getMetadata('template');
-  if (template === 'hub-l2') main.parentNode.insertBefore(aside(), main);
+  const showSideNav = getMetadata('sidenav') !== 'false';
+  if (template === 'hub-l2' && showSideNav) main.parentNode.insertBefore(aside(), main);
 }
 
 decorate(document);
