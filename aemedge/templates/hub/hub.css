@@ -87,6 +87,8 @@
   }
 
   &:has(aside) {
+    --hero-margin: 0;
+
     grid-template:
       'header header' 60px
       'side-nav main-content' auto
@@ -220,10 +222,4 @@
     0 -2px 0 white,
     0 -3px 0 var(--udexCoreDividerLight),
     0 -5px 0 white;
-}
-
-/* This is a temporary rule to show "wide" body rows */
-.section.row-wide {
-  padding-left: var(--udexGridMargins);
-  margin-left: 0;
 }
