@@ -3,6 +3,7 @@ import ffetch from '../../scripts/ffetch.js';
 import { ul } from '../../scripts/dom-builder.js';
 import PictureCard from '../../libs/pictureCard/pictureCard.js';
 import { formatDate } from '../../scripts/utils.js';
+import { asEntry } from '../author-profile/author-profile.js';
 
 function getPictureCard(article, placeholders) {
   const {
@@ -10,7 +11,7 @@ function getPictureCard(article, placeholders) {
   } = article;
   const tagLabel = placeholders[toCamelCase(priority)] || '';
   const info = formatDate(article.publicationDate * 1000);
-  return new PictureCard(title, path, type, info, author, image, tagLabel, description);
+  return new PictureCard(title, path, type, info, asEntry(author), image, tagLabel, description);
 }
 
 export default async function decorateBlock(block) {

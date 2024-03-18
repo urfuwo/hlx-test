@@ -5,6 +5,8 @@ import PictureCard from '../../libs/pictureCard/pictureCard.js';
 import Card from '../../libs/card/card.js';
 import Button from '../../libs/button/button.js';
 import { formatDate } from '../../scripts/utils.js';
+import { getAuthorEntries } from '../author-profiles/author-profiles.js';
+import { asEntry } from '../author-profile/author-profile.js';
 
 function matchTags(entry, config) {
   if (!config.tags) return true;
@@ -49,19 +51,29 @@ function getInfo(article, config) {
   return '';
 }
 
-function getPictureCard(article, config, placeholders) {
+function getPictureCard(article, config, placeholders, authorEntry) {
   const {
-    author, 'content-type': type, image, path, title, priority,
+    'content-type': type, image, path, title, priority,
   } = article;
   const tagLabel = placeholders[toCamelCase(priority)] || '';
   const info = getInfo(article, config);
-  return new PictureCard(title, path, type, info, author, image, tagLabel);
+  return new PictureCard(title, path, type, info, authorEntry, image, tagLabel);
 }
 
 function getCard(article, config) {
   const { 'content-type': type, path, title } = article;
   const info = getInfo(article, config);
   return new Card(title, path, type, info);
+}
+
+async function allAuthorEntries(articles) {
+  const authorSet = new Set();
+  articles.forEach((article) => { authorSet.add(article.author); });
+  return getAuthorEntries(Array.from(authorSet));
+}
+
+function articleAuthEntry(authEntries, article) {
+  return authEntries.find((e) => e.author === article.author) || asEntry(article.author);
 }
 
 export default async function decorateBlock(block) {
@@ -88,13 +100,14 @@ export default async function decorateBlock(block) {
     articleStream = articleStream.slice(0, 10); // only show first 10, rest will be paginated
     viewBtn = new Button('Show More', 'icon-link-arrow');
   }
+  const authEntries = await allAuthorEntries(articleStream);
   const cardList = ul();
   articleStream.forEach((article) => {
     let card;
     if (textOnly) {
       card = getCard(article, config);
     } else {
-      card = getPictureCard(article, config, placeholders);
+      card = getPictureCard(article, config, placeholders, articleAuthEntry(authEntries, article));
     }
     cardList.append(card.render());
   });

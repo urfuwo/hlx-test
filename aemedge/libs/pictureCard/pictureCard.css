@@ -74,6 +74,34 @@
       color: var(--udexColorGrey6);
       order: var(--sapShell_BackgroundImageOpacity);
     }
+
+    & .author-profile {
+      margin-top: var(--udexSpacer12);
+      margin-bottom: var(--udexSpacer12);
+      display: block;
+
+      & > div {
+        border: none;
+        box-shadow: none;
+        padding: 0;
+        gap: var(--udexSpacer16);
+      }
+
+      & .author {
+        font-size: var(--udexTypographyNavigationRegularXSFontSize);
+      }
+
+      & .avatar {
+        flex: 0 0 2rem;
+        width: 2rem;
+        height: 2rem;
+
+        & img {
+          width: 2rem;
+          height: 2rem;
+        }
+      }
+    }
   }
 
   &.horizontal {

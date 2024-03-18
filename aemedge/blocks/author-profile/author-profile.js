@@ -1,6 +1,7 @@
 import {
   createOptimizedPicture, decorateIcons,
   getMetadata,
+  toClassName,
 } from '../../scripts/aem.js';
 import {
   div, h2, p, a, span,
@@ -37,23 +38,35 @@ async function getAuthorEntry(entryFilter) {
   return (!result || result.length < 1) ? null : completeEntry(result[0]);
 }
 
-function renderProfile(entry) {
+function asEntry(authorName) {
+  return { author: authorName, path: `/author/${toClassName(authorName).replace('-', '')}` };
+}
+
+function renderProfile(entry, asAvatar = false) {
   if (!entry) return null;
   const authorImage = entry.image
     ? createOptimizedPicture(entry.image, entry.author, false, breakpoints) : null;
-  const authorProfile = div(
-    div({ class: 'avatar' }, authorImage ? div(authorImage) : div()),
-    div(
-      { class: 'details' },
-      h2(entry.author),
-      p(entry.description),
-      p(
-        { class: 'link' },
-        a({ href: entry.path, 'aria-label': 'Read more' }, 'See more by this author'),
-        span({ class: 'icon icon-link-arrow' }),
+  const authorProfile = asAvatar
+    ? div(
+      div({ class: 'avatar' }, authorImage ? div(authorImage) : div()),
+      div(
+        span({ class: 'author' }, a({ href: entry.path }, span(`${entry.author}`))),
+        span({ class: 'info' }, entry.description),
       ),
-    ),
-  );
+    )
+    : div(
+      div({ class: 'avatar' }, authorImage ? div(authorImage) : div()),
+      div(
+        { class: 'details' },
+        h2(entry.author),
+        p(entry.description),
+        p(
+          { class: 'link' },
+          a({ href: entry.path, 'aria-label': 'Read more' }, 'See more by this author'),
+          span({ class: 'icon icon-link-arrow' }),
+        ),
+      ),
+    );
   decorateIcons(authorProfile);
   return authorProfile;
 }
@@ -75,4 +88,5 @@ export default async function decorate(block) {
 export {
   renderProfile,
   completeEntry,
+  asEntry,
 };

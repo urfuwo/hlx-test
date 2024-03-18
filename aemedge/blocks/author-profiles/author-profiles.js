@@ -4,12 +4,14 @@ import { div } from '../../scripts/dom-builder.js';
 import { completeEntry, renderProfile } from '../author-profile/author-profile.js';
 
 async function getAuthorEntries(keys) {
-  const entryFilter = ((entry) => (keys.includes(entry.path)));
+  const entryFilter = ((entry) => (keys.includes(entry.path) || keys.includes(entry.author)));
   const unsortedEntries = await ffetch(`${window.hlx.codeBasePath}/authors-index.json`).filter(entryFilter).limit(keys.length).all();
   const sortedEntries = [];
   if (unsortedEntries) {
     keys.forEach((key) => {
-      sortedEntries.push(completeEntry(unsortedEntries.find((entry) => (key === entry.path))));
+      sortedEntries.push(completeEntry(unsortedEntries.find(
+        (entry) => (key === entry.path) || key.includes(entry.author),
+      )));
     });
   }
   return sortedEntries;
@@ -42,3 +44,7 @@ export default async function decorateBlock(block) {
   block.innerHTML = '';
   await addAuthorProfiles(block, keys);
 }
+
+export {
+  getAuthorEntries,
+};
