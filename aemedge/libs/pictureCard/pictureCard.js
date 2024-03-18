@@ -3,7 +3,7 @@ import {
   li, a, span, div, p,
 } from '../../scripts/dom-builder.js';
 import { createOptimizedPicture, toClassName, loadCSS } from '../../scripts/aem.js';
-import { renderProfile } from '../profile/profile.js';
+import { renderProfile } from '../../scripts/profile.js';
 
 export default class PictureCard extends Card {
   constructor(title, path, type, info, authorEntry, image, tagLabel, description) {
