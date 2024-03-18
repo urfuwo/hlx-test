@@ -21,7 +21,7 @@
 
     @media (width >= 980px) {
       & {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(4, 1fr);
       }
     }
   }
@@ -62,6 +62,15 @@
           grid-column: span 8;
         }
       }
+    }
+  }
+}
+
+body.hub-l2 .content-list ul {
+  @media (width >= 980px) {
+    & {
+      /* Restrict columns to 3 when sidebar is present, i.e. L2 pages */
+      grid-template-columns: repeat(3, 1fr);
     }
   }
 }
