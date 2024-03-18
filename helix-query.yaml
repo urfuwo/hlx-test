@@ -5,6 +5,7 @@ indices:
       - /blog/**
       - /news/**
       - /videos/**
+      - /resources/**
     exclude:
       - '**/fragments/**'
       - '**/sidenav'
