@@ -1,21 +1,6 @@
 import { loadCSS } from '../../scripts/aem.js';
-import ffetch from '../../scripts/ffetch.js';
 import { div } from '../../scripts/dom-builder.js';
-import { completeEntry, renderProfile } from '../author-profile/author-profile.js';
-
-async function getAuthorEntries(keys) {
-  const entryFilter = ((entry) => (keys.includes(entry.path) || keys.includes(entry.author)));
-  const unsortedEntries = await ffetch(`${window.hlx.codeBasePath}/authors-index.json`).filter(entryFilter).limit(keys.length).all();
-  const sortedEntries = [];
-  if (unsortedEntries) {
-    keys.forEach((key) => {
-      sortedEntries.push(completeEntry(unsortedEntries.find(
-        (entry) => (key === entry.path) || key.includes(entry.author),
-      )));
-    });
-  }
-  return sortedEntries;
-}
+import { renderProfile, getAuthorEntries } from '../../libs/profile/profile.js';
 
 async function addAuthorProfiles(block, keys) {
   const entries = await getAuthorEntries(keys);
@@ -44,7 +29,3 @@ export default async function decorateBlock(block) {
   block.innerHTML = '';
   await addAuthorProfiles(block, keys);
 }
-
-export {
-  getAuthorEntries,
-};

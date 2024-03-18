@@ -5,8 +5,7 @@ import PictureCard from '../../libs/pictureCard/pictureCard.js';
 import Card from '../../libs/card/card.js';
 import Button from '../../libs/button/button.js';
 import { formatDate } from '../../scripts/utils.js';
-import { getAuthorEntries } from '../author-profiles/author-profiles.js';
-import { asEntry } from '../author-profile/author-profile.js';
+import { getAuthorEntries, asEntry } from '../../libs/profile/profile.js';
 
 function matchTags(entry, config) {
   if (!config.tags) return true;

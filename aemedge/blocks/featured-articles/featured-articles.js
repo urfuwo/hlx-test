@@ -3,7 +3,7 @@ import ffetch from '../../scripts/ffetch.js';
 import { ul } from '../../scripts/dom-builder.js';
 import PictureCard from '../../libs/pictureCard/pictureCard.js';
 import { formatDate } from '../../scripts/utils.js';
-import { asEntry } from '../author-profile/author-profile.js';
+import { asEntry } from '../../libs/profile/profile.js';
 
 function getPictureCard(article, placeholders) {
   const {
