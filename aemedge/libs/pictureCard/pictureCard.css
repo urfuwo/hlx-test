@@ -1,7 +1,6 @@
 .picture-card {
   --card-image-height: 130px;
 
-  border: 1px solid var(--udexColorGrey2);
   box-shadow: 0 2px 4px rgb(34 54 73 / 20%);
   background-color: var(--background-color);
   border-radius: var(--sapTile_BorderCornerRadius);
@@ -116,6 +115,7 @@
 
       @media (width < 640px) {
         height: var(--card-image-height);
+        border-radius: unset;
       }
     }
   }
