@@ -1,8 +1,8 @@
-import { createOptimizedPicture, decorateIcons, toClassName } from '../../scripts/aem.js';
+import { createOptimizedPicture, decorateIcons, toClassName } from './aem.js';
 import {
   div, h2, p, a, span,
-} from '../../scripts/dom-builder.js';
-import ffetch from '../../scripts/ffetch.js';
+} from './dom-builder.js';
+import ffetch from './ffetch.js';
 
 const breakpoints = [
   { width: '480' },

@@ -1,6 +1,6 @@
 import { loadCSS } from '../../scripts/aem.js';
 import { div } from '../../scripts/dom-builder.js';
-import { renderProfile, getAuthorEntries } from '../../libs/profile/profile.js';
+import { renderProfile, getAuthorEntries } from '../../scripts/profile.js';
 
 async function addAuthorProfiles(block, keys) {
   const entries = await getAuthorEntries(keys);

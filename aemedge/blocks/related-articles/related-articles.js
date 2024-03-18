@@ -3,7 +3,7 @@ import { getMetadata, fetchPlaceholders, toCamelCase } from '../../scripts/aem.j
 import ffetch from '../../scripts/ffetch.js';
 import PictureCard from '../../libs/pictureCard/pictureCard.js';
 import { formatDate } from '../../scripts/utils.js';
-import { asEntry } from '../../libs/profile/profile.js';
+import { asEntry } from '../../scripts/profile.js';
 
 function getFilter(pageTags) {
   return (entry) => {

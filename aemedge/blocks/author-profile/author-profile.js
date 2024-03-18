@@ -1,6 +1,6 @@
 import { getMetadata } from '../../scripts/aem.js';
 import ffetch from '../../scripts/ffetch.js';
-import { renderProfile, completeEntry } from '../../libs/profile/profile.js';
+import { renderProfile, completeEntry } from '../../scripts/profile.js';
 
 async function getAuthorEntry(entryFilter) {
   const result = await ffetch(`${window.hlx.codeBasePath}/authors-index.json`).filter(entryFilter).limit(1).all();
