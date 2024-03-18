@@ -15,13 +15,20 @@ export default function decorate(block) {
     li.append(cardDiv);
     if (block.classList.contains('tiles') && cardDiv.children.length > 0) {
       const lastDiv = cardDiv.children[cardDiv.children.length - 1];
+      let cardLink = null;
       if (lastDiv.children.length === 1 && lastDiv.children[0].tagName === 'A') {
-        const cardLink = lastDiv.children[0];
-        lastDiv.className = 'cards-card-link';
+        [cardLink] = lastDiv.children;
+      } else if (lastDiv.children.length === 1 && lastDiv.children[0].tagName === 'P' && lastDiv.children[0].children.length === 1 && lastDiv.children[0].children[0].tagName === 'A') {
+        [cardLink] = lastDiv.children[0].children;
+      }
+      if (cardLink !== null) {
+        const linkDiv = document.createElement('div');
+        linkDiv.className = 'cards-card-link';
+        linkDiv.append(cardLink);
         cardDiv.removeChild(lastDiv);
         cardLink.innerHTML = '';
         cardLink.append(cardDiv);
-        li.append(lastDiv);
+        li.append(linkDiv);
       }
     }
     ul.append(li);
