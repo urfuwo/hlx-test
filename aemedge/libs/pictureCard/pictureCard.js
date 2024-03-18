@@ -3,11 +3,12 @@ import {
   li, a, span, div, p,
 } from '../../scripts/dom-builder.js';
 import { createOptimizedPicture, toClassName, loadCSS } from '../../scripts/aem.js';
+import { renderProfile } from '../profile/profile.js';
 
 export default class PictureCard extends Card {
-  constructor(title, path, type, info, author, image, tagLabel, description) {
+  constructor(title, path, type, info, authorEntry, image, tagLabel, description) {
     super(title, path, type, info);
-    this.author = author;
+    this.authorEntry = authorEntry;
     this.image = image;
     this.tagLabel = tagLabel;
     this.description = description;
@@ -48,7 +49,12 @@ export default class PictureCard extends Card {
         span({ class: 'type' }, this.getType()),
         span({ class: 'title' }, a({ href: this.path }, this.title)),
         this.getDescription(horizontal),
-        span({ class: 'author' }, a({ href: this.getAuthorUrl() }, span(`${this.author}`))),
+        this.authorEntry?.image
+          ? span({ class: 'author-profile' }, renderProfile(this.authorEntry, true))
+          : span(
+            { class: 'author' },
+            a({ href: this.authorEntry.path }, span(`${this.authorEntry.author}`)),
+          ),
         span({ class: 'info' }, this.info),
       ),
     );
