@@ -95,7 +95,7 @@ udex-hero-banner .hero-banner .media-blend__intro-text {
 }
 
 udex-hero-banner .hero-banner.media-blend__content {
-  margin-left: calc(var(--hero-margin) - 22px);
+  margin-left: calc(var(--hero-margin--left) - 22px);
 }
 
 udex-hero-banner .hero-banner .media-blend__content ui5-rating-indicator {
@@ -151,7 +151,7 @@ udex-hero-banner .hero-banner .media-blend__buttons udex-button:first-of-type {
 udex-hero-banner .hero-banner.media-blend__additional-content {
   display: flex;
   align-items: center;
-  margin-right: calc(var(--hero-margin) - var(--udexSpacer8));
+  margin-right: calc(var(--hero-margin--right) - var(--udexSpacer8));
 }
 
 udex-hero-banner .custom-background-image {
