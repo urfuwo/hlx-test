@@ -25,8 +25,10 @@ export default class PictureCard extends Card {
     return this.tagLabel ? span({ class: 'tag-label' }, this.tagLabel) : '';
   }
 
-  getDescription() {
-    return (this.description && this.description !== '0') ? p({ class: 'description' }, this.description) : '';
+  getDescription(horizontal) {
+    return horizontal && this.description && this.description !== '0'
+      ? p({ class: 'description' }, this.description)
+      : '';
   }
 
   render(horizontal, excludeStyles) {
@@ -36,16 +38,16 @@ export default class PictureCard extends Card {
 
     return li(
       { class: `picture-card ${horizontal ? 'horizontal' : ''}` },
-      div({ class: 'picture' }, a(
-        { href: this.path, 'aria-label': this.title },
-        this.getOptimizedPicture(),
-      )),
+      div(
+        { class: 'picture' },
+        a({ href: this.path, 'aria-label': this.title }, this.getOptimizedPicture()),
+      ),
       span(
         { class: 'cardcontent' },
         this.getTagLabel(),
         span({ class: 'type' }, this.getType()),
         span({ class: 'title' }, a({ href: this.path }, this.title)),
-        this.getDescription(),
+        this.getDescription(horizontal),
         span({ class: 'author' }, a({ href: this.getAuthorUrl() }, span(`${this.author}`))),
         span({ class: 'info' }, this.info),
       ),
