@@ -1,4 +1,4 @@
-import metadata from './metadata-news.js';
+import metadata from './metadata-insights.js';
 import articlePromo from './articlePromo.js';
 import articleHero from './articleHero.js';
 import articleVideoHero from './articleVideoHero.js';
@@ -14,6 +14,8 @@ import articleContentFooter from './articleContentFooter.js';
 import articleIntro from './articleIntro.js';
 import articlePanel from './articlePanel.js';
 import articleSidebar from './articleSidebar.js';
+import articleAccordion from './articleAccordion.js';
+import articleTable from './articleTable.js';
 
 export const transformers = [
   metadata,
@@ -22,6 +24,8 @@ export const transformers = [
   articlePromo,
   articleIntro,
   articleQuote,
+  articleAccordion,
+  articleTable,
   articlePanel,
   articleSidebar,
   articleContentFooter,

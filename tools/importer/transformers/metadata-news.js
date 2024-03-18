@@ -112,9 +112,9 @@ const createMetadata = (main, document, html, params, urlStr) => {
 
     if (types?.length > 0) {
       // eslint-disable-next-line prefer-destructuring
-      document.arictleType = types[0];
+      document.articleType = types[0];
     } else if (articleContent.classList.contains('type-sap-tv')) {
-      document.arictleType = 'video';
+      document.articleType = 'video';
       types.push('video');
     }
 

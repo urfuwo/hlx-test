@@ -83,9 +83,26 @@ function handleQuoteType3(main, document) {
   });
 }
 
+/* Insights Quote https://www.sap.com/insights/viewpoints/giving-ai-a-moral-compass.html */
+function handleInsightsQuote(main, document) {
+  main.querySelectorAll('span.doubleQuote').forEach((quoteTextElem) => {
+    const quoteWrapper = quoteTextElem.closest('div');
+    const quote = [[quoteTextElem.textContent]];
+
+    const qSource = quoteWrapper.querySelector('i')?.textContent;
+    if (qSource) {
+      quote.push([qSource]);
+    }
+
+    const table = WebImporter.DOMUtils.createTable([['Quote'], ...quote], document);
+    quoteWrapper.replaceWith(table);
+  });
+}
+
 const transformQuote = (main, document) => {
   handleQuoteType1(main, document);
   handleQuoteType2(main, document);
   handleQuoteType3(main, document);
+  handleInsightsQuote(main, document);
 };
 export default transformQuote;

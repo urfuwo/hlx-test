@@ -1,12 +1,12 @@
 /* global WebImporter */
 const transformHero = (main, document) => {
-  const hero = document.querySelector('.c-hero');
-  if (hero) {
+  const heroNews = document.querySelector('.c-hero');
+  if (heroNews) {
     // clean up hero stuff
-    hero.querySelectorAll('.social-share-list, .c-post-type, .c-entry-meta').forEach((el) => el.remove());
+    heroNews.querySelectorAll('.social-share-list, .c-post-type, .c-entry-meta').forEach((el) => el.remove());
 
     // map hero content
-    const content = hero.querySelector('article');
+    const content = heroNews.querySelector('article');
 
     // unwrap hero image
     const heroImage = content.querySelector('a.c-post-link-wrapper img');
@@ -16,7 +16,14 @@ const transformHero = (main, document) => {
 
     const block = [['Hero'], [content.innerHTML]];
     const table = WebImporter.DOMUtils.createTable(block, document);
-    hero.replaceWith(table);
+    heroNews.replaceWith(table);
+  }
+
+  const heroInsights = document.querySelector('.heroSpaceProductCategory');
+  if (heroInsights) {
+    const block = [['Hero'], [heroInsights.innerHTML]];
+    const table = WebImporter.DOMUtils.createTable(block, document);
+    heroInsights.replaceWith(table);
   }
 };
 export default transformHero;
