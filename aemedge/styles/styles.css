@@ -52,7 +52,8 @@
   --udexGridMargins: var(--udexGridXSMargins);
   --sapFontFamily: '72 Brand Variable', '72 Brand Variable Fallback', 'Arial',
     'Helvetica', 'sans-serif';
-  --hero-margin: var(--udexGridMargins);
+  --hero-margin--left: var(--udexGridMargins);
+  --hero-margin--right: var(--udexGridMargins);
 }
 
 /* S */
@@ -84,7 +85,8 @@
   :root {
     --udexGridGutters: var(--udexGridXLGutters);
     --udexGridMargins: var(--udexGridXLMargins);
-    --hero-margin: 246px;
+    --hero-margin--left: 246px;
+    --hero-margin--right: 246px;
   }
 }
 

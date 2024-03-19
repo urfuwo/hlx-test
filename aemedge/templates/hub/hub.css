@@ -87,7 +87,8 @@
   }
 
   &:has(aside) {
-    --hero-margin: 0;
+    --hero-margin--left: 0;
+    --hero-margin--right: 0;
 
     grid-template:
       'header header' 60px
@@ -96,6 +97,12 @@
       / min-content 1fr;
 
     & > main {
+      @media (width >= 640px) {
+        & > * {
+          --hero-margin--left: 48px;
+        }
+      }
+
       @media (width >= 980px) {
         & > :not(.hero-container, .title-banner-container) {
           padding-inline: var(--udexGridGutters) var(--udexGridMargins);
