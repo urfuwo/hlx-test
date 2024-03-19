@@ -69,18 +69,40 @@
 
 .hub-l2.appear {
   grid-template:
-    'header header' 60px
-    'side-nav main-content' auto
-    'footer footer' auto
-    / min-content 1fr;
+    'header' 60px
+    'main-content' auto
+    'footer' auto
+    / 1fr;
 
   & > main {
     @media (width >= 980px) {
       & > :not(.hero-container, .title-banner-container) {
-        padding-inline: var(--udexGridGutters) var(--udexGridMargins);
+        padding-inline: var(--udexGridMargins);
 
         & > * {
           margin: unset;
+        }
+      }
+    }
+  }
+
+  &:has(aside) {
+    --hero-margin: 0;
+
+    grid-template:
+      'header header' 60px
+      'side-nav main-content' auto
+      'footer footer' auto
+      / min-content 1fr;
+
+    & > main {
+      @media (width >= 980px) {
+        & > :not(.hero-container, .title-banner-container) {
+          padding-inline: var(--udexGridGutters) var(--udexGridMargins);
+
+          & > * {
+            margin: unset;
+          }
         }
       }
     }
@@ -94,6 +116,10 @@
 
 .section.background-blue-2 {
   background-color: var(--udexColorBlue2);
+}
+
+.section.background-blue-7 {
+  background-color: var(--udexColorBlue7);
 }
 
 .section.background-grey,
@@ -173,16 +199,27 @@
   color: var(--udexColorNeutralBlack);
 }
 
+.section.text-white,
+.section.text-neutral-white {
+  color: var(--udexColorNeutralWhite);
+
+  & a:any-link {
+    color: var(--udexColorNeutralWhite);
+  }
+
+  & .card .type {
+    color: var(--udexColorGrey4);
+  }
+
+  & .card .label {
+    color: var(--udexColorGrey4);
+  }
+}
+
 .section.divider-top {
   margin-top: 5px;
   box-shadow:
     0 -2px 0 white,
     0 -3px 0 var(--udexCoreDividerLight),
     0 -5px 0 white;
-}
-
-/* This is a temporary rule to show "wide" body rows */
-.section.row-wide {
-  padding-left: var(--udexGridMargins);
-  margin-left: 0;
 }
