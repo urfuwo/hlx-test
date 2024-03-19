@@ -12,57 +12,29 @@
 
 /* S - 1 or 2 per row */
 @media (width >= 640px) {
-  body.hub-l1 .cards:not(.elems1, .grid-3-column, .grid-4-column, .grid-6-column, .grid-9-column, .grid-10-column) > ul {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  body.hub-l1 .cards.grid-3-column > ul, body.hub-l1 .cards.grid-4-column > ul, body.hub-l1 .cards.grid-6-column > ul {
+  body.hub-l1 .cards:not(.elems1) > ul {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
 /* M - 2 or 3 per row */
 @media (width >= 980px) {
-  body:not(.hub-l1) .cards:not(.elems1, .grid-3-column, .grid-4-column, .grid-6-column, .grid-9-column, .grid-10-column) > ul {
+  body:not(.hub-l1) .cards:not(.elems1) > ul {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  body:not(.hub-l1) .cards.grid-3-column > ul, body:not(.hub-l1) .cards.grid-4-column > ul {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  body.hub-l1 .cards:not(.elems1, .elems2, .grid-3-column, .grid-4-column, .grid-6-column, .grid-9-column, .grid-10-column) > ul {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  body.hub-l1 .cards.grid-3-column > ul, body.hub-l1 .cards.grid-4-column > ul {
+  body.hub-l1 .cards:not(.elems1, .elems2) > ul {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
 /* L and XL - 3 or 4 per row */
 @media (width >= 1280px) {
-  body:not(.hub-l1) .cards:not(.elems1, .elems2, .grid-3-column, .grid-4-column, .grid-6-column, .grid-9-column, .grid-10-column) > ul {
+  body:not(.hub-l1) .cards:not(.elems1, .elems2) > ul {
     grid-template-columns: repeat(3, 1fr);
   }
 
-  body:not(.hub-l1) .cards.grid-3-column > ul {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  body:not(.hub-l1) .cards.grid-4-column > ul {
-    grid-template-columns: [leftcol] 4fr [rightcol] 4fr 0.75fr;
-  }
-
-  body:not(.hub-l1) .cards.grid-4-column > ul > li:nth-child(odd) {
-    grid-column: leftcol;
-  }
-
-  body.hub-l1 .cards:not(.elems1, .elems2, .elems3, .grid-3-column, .grid-4-column, .grid-6-column, .grid-9-column, .grid-10-column) > ul {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  body.hub-l1 .cards.grid-3-column > ul {
+  body.hub-l1 .cards:not(.elems1, .elems2, .elems3) > ul {
     grid-template-columns: repeat(4, 1fr);
   }
 }
@@ -78,7 +50,7 @@
 .cards:not(.icons) > ul > li img {
   width: 100%;
   aspect-ratio: 4 / 3;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .cards.icons .cards-card-image {
@@ -118,7 +90,8 @@
 
 .cards.tiles .cards-card-image img {
   width: 24px;
-  aspect-ratio: 1;
+  height: 24px;
+  object-fit: contain;
 }
 
 .cards .cards-card-link {
@@ -144,23 +117,32 @@
 }
 
 @media (width >= 980px) {
-  .cards.tiles > ul {
+  .cards.tiles:not(.elems9plus) > ul {
     grid-row-gap: var(--udexSpacer40);
   }
 
-  .cards.tiles > ul > li .cards-card {
+  .cards.tiles:not(.elems9plus) > ul > li .cards-card {
     font-size: var(--udexTypographyHeadingMediumXXSFontSize);
     padding: var(--udexSpacer24, 24px)  var(--udexSpacer20, 20px);
     height: 100px;
     display: block;
   }
 
-  .cards.tiles .cards-card-image img {
+  .cards.tiles:not(.elems9plus) .cards-card-image img {
     width: 40px;
+    height: 40px;
   }
 
-  .cards.tiles .cards-card-body {
+  .cards.tiles:not(.elems9plus) .cards-card-body {
     margin: 16px 0;
+  }
+
+  body.hub-l1 .cards.tiles.elems9plus > ul {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  body:not(.hub-l1) .cards.tiles.elems9plus > ul {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
