@@ -40,15 +40,18 @@ export default class PictureCard extends Card {
     return li(
       { class: `picture-card ${horizontal ? 'horizontal' : ''}` },
       div(
-        { class: 'picture' },
-        a({ href: this.path, 'aria-label': this.title }, this.getOptimizedPicture()),
-      ),
-      span(
-        { class: 'cardcontent' },
-        this.getTagLabel(),
-        span({ class: 'type' }, this.getType()),
-        span({ class: 'title' }, a({ href: this.path }, this.title)),
-        this.getDescription(horizontal),
+        { class: 'top' },
+        div(
+          { class: 'picture' },
+          a({ href: this.path, 'aria-label': this.title }, this.getOptimizedPicture()),
+        ),
+        span(
+          { class: 'cardcontent' },
+          this.getTagLabel(),
+          span({ class: 'type' }, this.getType()),
+          span({ class: 'title' }, a({ href: this.path }, this.title)),
+          this.getDescription(horizontal),
+        ),
       ),
       div(
         { class: 'info-block' },
