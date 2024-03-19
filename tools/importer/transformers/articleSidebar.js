@@ -51,11 +51,16 @@ const articleSidebar = (main, document) => {
       if (bottomEntry.querySelector('a[href*="sap-news-center-newsletter"]')) {
         // move last element (newsletter) to the end of the page
         const heading = document.createElement('h3');
-        heading.textContent = bottomEntry.querySelector('a').textContent;
-        bottomEntry.querySelector('a').textContent = 'Subscribe now';
+        const button = bottomEntry.querySelector('a');
+        heading.textContent = button.textContent;
+
+        const strong = document.createElement('strong');
+        button.textContent = 'Subscribe now';
+        strong.append(button);
+
         const block = [
           ['Promo (Newsletter)'],
-          [bottomEntry.querySelector('img'), heading, bottomEntry.querySelector('a')],
+          [bottomEntry.querySelector('img'), heading, strong],
         ];
         const table = WebImporter.DOMUtils.createTable(block, document);
         bottomEntry.remove();
