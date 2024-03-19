@@ -16,18 +16,28 @@ export default function decorate(block) {
     if (block.classList.contains('tiles') && cardDiv.children.length > 0) {
       const lastDiv = cardDiv.children[cardDiv.children.length - 1];
       let cardLink = null;
-      if (lastDiv.children.length === 1 && lastDiv.children[0].tagName === 'A') {
-        [cardLink] = lastDiv.children;
-      } else if (lastDiv.children.length === 1 && lastDiv.children[0].tagName === 'P' && lastDiv.children[0].children.length === 1 && lastDiv.children[0].children[0].tagName === 'A') {
-        [cardLink] = lastDiv.children[0].children;
+      let current = lastDiv;
+      while (current.children.length > 0) {
+        [current] = current.children;
+        if (current.tagName === 'A') {
+          cardLink = current;
+          break;
+        }
       }
       if (cardLink !== null) {
+        const linkParent = cardLink.parentNode;
+        const linkContent = cardLink.childNodes;
+        [...linkContent].forEach((node) => {
+          linkParent.insertBefore(node, cardLink);
+        });
+        linkParent.removeChild(cardLink);
+        linkParent.normalize();
+        const linkElement = document.createElement('a');
+        linkElement.href = cardLink.href;
+        linkElement.append(cardDiv);
         const linkDiv = document.createElement('div');
         linkDiv.className = 'cards-card-link';
-        linkDiv.append(cardLink);
-        cardDiv.removeChild(lastDiv);
-        cardLink.innerHTML = '';
-        cardLink.append(cardDiv);
+        linkDiv.append(linkElement);
         li.append(linkDiv);
       }
     }
@@ -36,5 +46,8 @@ export default function decorate(block) {
   ul.querySelectorAll('img').forEach((img) => img.closest('picture').replaceWith(createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }])));
   block.textContent = '';
   block.classList.add(`elems${ul.children.length}`);
+  if (ul.children.length > 8) {
+    block.classList.add('elems9plus');
+  }
   block.append(ul);
 }
