@@ -28,6 +28,23 @@
   padding-top: var(--udexSpacer40);
 }
 
+.block.footer a {
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.block.footer a:hover {
+  color: var(--sapLink_Hover_Color);
+}
+
+footer .block.link-group p {
+  margin: 0;
+}
+
+footer .block.link-group p strong {
+  font-weight: var(--udexTypographyFontWeightMedium);
+}
+
 /* S */
 @media (width >= 640px) {
   .block.footer > div {
@@ -45,6 +62,9 @@
     padding-top: 0;
   }
 
+  .block.footer .block.link-group > div:first-of-type > div {
+    padding-bottom: 11.5px;
+  }
 }
 
 /* L */
@@ -56,5 +76,4 @@
   .block.footer .icon-back-to-top {
     padding-top: 0;
   }
-
 }
