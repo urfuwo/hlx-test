@@ -191,39 +191,55 @@ a:hover {
   text-decoration: underline;
 }
 
-/* missing styles, assumption */
-a.button:any-link,
-button {
-  display: inline-block;
-  box-sizing: border-box;
-  text-decoration: none;
-  border: 2px solid transparent;
-  padding: 5px 30px;
-  text-align: center;
-  font-style: normal;
-  font-weight: 600;
-  cursor: pointer;
-  color: var(--background-color);
-  margin: 16px 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  border-radius: 30px;
-}
+.button-container {
+  strong, em {
+    display: block;
+  }
 
-/* missing styles, assumption */
-a.button:hover,
-a.button:focus,
-button:hover,
-button:focus {
-  background-color: var(--sapHoverColor);
-  cursor: pointer;
-}
+  .button {
+    position: relative;
+    text-decoration: none;
+    color: var(--udexColorBlue9);
+    border-radius: 0.5rem;
+    font-style: normal;
+    font-size: var(--udexTypographyNavigationMediumXLFontSize);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-height: 36px;
+    padding: 9px 10px;
+    
+    &:any-link, button {
+      border-radius: 0.5rem;
+      border: .0625rem solid transparent;
+      font-weight: normal;
+    } 
 
-/* missing styles, assumption */
-button:disabled,
-button:disabled:hover {
-  cursor: unset;
+    &.primary {
+      color: var(--udexColorNeutralWhite);
+      border-color: var(--udexColorBlue7);
+      background-color: var(--udexColorBlue7);
+
+      &:hover {
+        color: var(--udexColorNeutralWhite);
+        border-color: var(--udexColorBlue9);
+        background-color: var(--udexColorBlue9);
+      }
+    }
+
+    &.secondary {
+      color: var(--udexColorBlue9);
+      border-color: var(--udexColorGrey7);
+      background: var(--udexColorNeutralWhite);
+      font-style: italic;
+
+      &:hover {
+        color: var(--udexColorBlue9);
+        border-color: var(--udexColorGrey7);
+        background-color: var(--udexColorGrey2);
+      }
+    }
+  }
 }
 
 main img {
