@@ -34,12 +34,15 @@
 .promo p {
   font-size: var(--udexTypographyBodySFontSize);
   text-align: left;
-  margin: 0;
+  
+  p.button-container + p {
+    margin-top: 0;
+  }
 }
 
 .promo.block {
   p:not(.button-container) {
-    margin-bottom: 20px;
+    margin-bottom: 0;
   }
 }
 

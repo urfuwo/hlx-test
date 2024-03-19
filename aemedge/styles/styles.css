@@ -195,6 +195,7 @@ a:hover {
   strong, em {
     display: block;
   }
+  & +p {margin-top: 0;}
 
   .button {
     position: relative;
