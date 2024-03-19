@@ -49,16 +49,16 @@ export default class PictureCard extends Card {
         span({ class: 'type' }, this.getType()),
         span({ class: 'title' }, a({ href: this.path }, this.title)),
         this.getDescription(horizontal),
-        div(
-          { class: 'info-block' },
-          this.authorEntry?.image && this.authorEntry?.hasAvatar
-            ? span({ class: 'author-profile' }, renderProfile(this.authorEntry, true))
-            : span(
-              { class: 'author' },
-              a({ href: this.authorEntry.path }, span(`${this.authorEntry.author}`)),
-            ),
-          span({ class: 'info' }, this.info),
-        ),
+      ),
+      div(
+        { class: 'info-block' },
+        this.authorEntry?.image && this.authorEntry?.hasAvatar
+          ? div({ class: 'author-profile' }, renderProfile(this.authorEntry, true))
+          : span(
+            { class: 'author' },
+            a({ href: this.authorEntry.path }, span(`${this.authorEntry.author}`)),
+          ),
+        div({ class: 'info' }, this.info),
       ),
     );
   }
