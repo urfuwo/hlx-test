@@ -231,7 +231,6 @@ a:hover {
       color: var(--udexColorBlue9);
       border-color: var(--udexColorGrey7);
       background: var(--udexColorNeutralWhite);
-      font-style: italic;
 
       &:hover {
         color: var(--udexColorBlue9);
