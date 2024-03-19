@@ -3,7 +3,11 @@ const promoHelper = (img, headline, button) => {
   const heading = document.createElement('h3');
   heading.textContent = headline;
   button.textContent = 'Learn more';
-  const block = [['Promo'], [img, heading, button]];
+
+  const strong = document.createElement('strong');
+  strong.append(button);
+
+  const block = [['Promo'], [img, heading, strong]];
   return WebImporter.DOMUtils.createTable(block, document);
 };
 
