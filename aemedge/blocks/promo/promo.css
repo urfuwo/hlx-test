@@ -32,8 +32,10 @@
   margin: 0;
 }
 
-.promo>div>div:last-child {
-  flex-grow: 1;
+.promo.block {
+  p:not(.button-container) {
+    margin-bottom: 20px;
+  }
 }
 
 .promo>div>div:nth-child(3) {
@@ -68,47 +70,67 @@
   margin-bottom: var(--udexSpacer8);
 }
 
-.promo div>p a,
-.promo .button-container .button {
-  height: 36px;
-  border-radius: 8px;
-  border: 1px solid;
-  text-align: center;
-  color: var(--udexColorBlue9);
-  border-color: var(--udexColorGrey7);
-  background-color: var(--udexCoreBase);
-  overflow: unset;
-}
+.button-container {
+  strong, em {
+    display: block;
+  }
 
+  .button {
+    position: relative;
+    color: var(--udexColorBlue9);
+    border-radius: 0.5rem;
+    font-style: normal;
+    font-size: var(--udexTypographyNavigationMediumXLFontSize);
 
-.promo div>p a,
-.promo .button-container .button.primary {
-  color: var(--udexCoreBase);
-  border-color: var(--udexColorBlue7);
-  background-color: var(--udexColorBlue7);
-  height: auto;
-}
+    &:any-link {
+      border-radius: 0.5rem;
+      padding: 0;
+      border: .0625rem solid transparent;
+      font-weight: normal;
 
-.promo p.button-container {
-  margin: 0;
-  margin-top: var(--udexSpacer24);
-}
+      &.no-margin {
+        margin: 0 !important;
+      }
+    }
 
-.promo p.button-container.no-margin {
-  margin: 0;
-}
+    &.small {
+      min-height: 25px;
+      padding: 5px 10px;
+    }
 
-.promo .button-container {
-  margin: 0;
-}
+    &.medium {
+      min-height: 36px;
+      padding: 9px 10px;
+    }
 
-.promo .button-container a {
-  margin: 0;
-}
+    &.large {
+      min-height: 42px;
+      padding: 14px 28px 14px 14px;
+    }
 
-.promo div>p:not(.button-container) a {
-  padding: 5px 30px;
-  text-decoration: none;
-  display: inline-block;
-  font-style: italic;
+    &.primary {
+      color: var(--udexColorNeutralWhite);
+      border-color: var(--udexColorBlue7);
+      background-color: var(--udexColorBlue7);
+
+      &:hover {
+        color: var(--udexColorNeutralWhite);
+        border-color: var(--udexColorBlue9);
+        background-color: var(--udexColorBlue9);
+      }
+    }
+
+    &.secondary {
+      color: var(--udexColorBlue9);
+      border-color: var(--udexColorGrey7);
+      background: var(--udexColorNeutralWhite);
+      font-style: italic;
+
+      &:hover {
+        color: var(--udexColorBlue9);
+        border-color: var(--udexColorGrey7);
+        background-color: var(--udexColorGrey2);
+      }
+    }
+  }
 }

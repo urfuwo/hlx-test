@@ -1,7 +1,7 @@
-import { loadCSS } from '../../scripts/aem.js';
+// import { loadCSS } from '../../scripts/aem.js';
 
 export default async function decorate(block) {
-  loadCSS(`${window.hlx.codeBasePath}/libs/button/button.css`);
+  // loadCSS(`${window.hlx.codeBasePath}/libs/button/button.css`);
 
   const blockChildren = block.querySelectorAll('div + div p');
   const arrElemsWithButtons = Array.from(blockChildren).filter((childElem) => Boolean(childElem.querySelector('a')));
