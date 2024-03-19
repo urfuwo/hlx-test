@@ -55,6 +55,11 @@
   padding-right: var(--udexSpacer16);
 }
 
+.block.contact .icon img {
+  height: 1.125rem;
+  width: 1.125rem;
+}
+
 /* S */
 @media (width >=640px) {
   .block.contact {
