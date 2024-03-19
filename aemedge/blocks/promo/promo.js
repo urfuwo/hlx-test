@@ -11,11 +11,16 @@ export default async function decorate(block) {
       elem.classList.remove('button-wrapper');
       elem.classList.add('button-container');
       const btnClasses = ['button', 'medium', 'no-margin'];
-      elem.firstChild?.firstChild?.classList?.add(...btnClasses);
-      if (elem.firstChild.tagName === 'EM') {
-        elem.firstChild?.firstChild?.classList?.add('secondary');
+      if (elem.firstChild?.tagName === 'A') {
+        const anchorButtonClasses = [...btnClasses, 'primary'];
+        elem.firstChild?.classList?.add(...anchorButtonClasses);
       } else {
-        elem.firstChild?.firstChild?.classList?.add('primary');
+        elem.firstChild?.firstChild?.classList?.add(...btnClasses);
+        if (elem.firstChild.tagName === 'EM') {
+          elem.firstChild?.firstChild?.classList?.add('secondary');
+        } else {
+          elem.firstChild?.firstChild?.classList?.add('primary');
+        }
       }
     }
   });

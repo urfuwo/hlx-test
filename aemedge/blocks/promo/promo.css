@@ -11,9 +11,19 @@
 .promo>div {
   display: flex;
   align-items: flex-start;
+  justify-content: space-between;
   flex-direction: row;
   padding: var(--udexSpacer24);
   gap: var(--udexSpacer24);
+}
+
+.promo>div :nth-child(1),
+.promo>div :nth-child(3) {
+  flex-grow: 1;
+}
+
+.promo>div :nth-child(2) {
+  flex-grow: 2;
 }
 
 .promo>div h3 {
