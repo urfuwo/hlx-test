@@ -12,7 +12,7 @@
 /* Fall back to Arial for 72 Brand Variable
  Added to styles.css for early loading */
 
-@font-face {
+ @font-face {
   font-family: '72 Brand Variable Fallback';
   font-style: normal;
   font-weight: 700;
@@ -197,9 +197,24 @@ a:hover {
   strong, em {
     display: block;
   }
-  & +p {margin-top: 0;}
 
-  .button {
+  & + p {
+    margin-top: 0;
+  }
+
+  a.button {
+    color: var(--udexColorNeutralWhite);
+    border-color: var(--udexColorBlue7);
+    background-color: var(--udexColorBlue7);
+  }
+
+  a.button:hover {
+    color: var(--udexColorNeutralWhite);
+    border-color: var(--udexColorBlue9);
+    background-color: var(--udexColorBlue9);
+  }
+  
+ .button {
     position: relative;
     text-decoration: none;
     color: var(--udexColorBlue9);
