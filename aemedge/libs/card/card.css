@@ -9,7 +9,7 @@
   }
 
   & .type {
-    font-size: var(--udexTypographyBodyXXSFontSize);
+    font-size: var(--udexTypographyEyebrowSFontSize);
     line-height: var(--udexTypographyEyebrowLineHeight);
     letter-spacing: 0.03em;
     text-transform: uppercase;
