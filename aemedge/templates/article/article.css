@@ -44,6 +44,7 @@ main {
       ) {
       grid-column: 1 / 2;
       margin-inline-start: var(--udexGridMargins);
+      padding-block-end: 56px;
     }
 
     & > [data-location='sidebar'] {
@@ -55,6 +56,7 @@ main {
     & > [data-location='document-footer'] {
       grid-column: -3 / span 2;
       margin-inline: var(--udexGridMargins);
+      padding-block-end: 84px;
     }
 
     /* if page has table of contents it has a 3 column layout */
