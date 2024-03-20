@@ -1,6 +1,6 @@
 import '@udex/webcomponents/dist/HeroBanner.js';
 import { div, span, p } from '../../scripts/dom-builder.js';
-import { getMetadata } from '../../scripts/aem.js';
+import { fetchPlaceholders, getMetadata, toCamelCase } from '../../scripts/aem.js';
 import { formatDate } from '../../scripts/utils.js';
 
 function calculateInitials(name) {
@@ -45,6 +45,17 @@ function decorateMetaInfo() {
   return infoBlockWrapper;
 }
 
+async function replacePlaceholderText(elem) {
+  if (elem && (elem.innerText.includes('[page]') || elem.innerText.includes('[author]'))) {
+    const ph = await fetchPlaceholders();
+    const adaptedPath = toCamelCase(window.location.pathname
+      .replace('tags', 'tag').replace('topics', 'topic').substring(1));
+    elem.innerHTML = elem.innerHTML.replace('[page]', ph[adaptedPath] ? ph[adaptedPath] : '');
+    elem.innerHTML = elem.innerHTML.replace('[author]', getMetadata('author') || '');
+  }
+  return elem;
+}
+
 /**
  * loads and decorates the footer
  * @param {Element} block The footer block element
@@ -60,7 +71,7 @@ export default async function decorate(block) {
       class: ['hero-banner', 'media-blend__content'],
     },
     intro ? p({ class: 'media-blend__intro-text' }, block.querySelector('h6')?.textContent) : '',
-    heading,
+    await replacePlaceholderText(heading),
   );
   hero.append(contentSlot);
 
