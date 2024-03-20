@@ -47,33 +47,24 @@ export default class PictureCard extends Card {
       { class: 'picture' },
       a({ href: this.path, 'aria-label': this.title }, this.getOptimizedPicture()),
     );
-    const infoBlockElementList = [
+    const cardContentBlock = span(
+      { class: 'cardcontent' },
+      this.getTagLabel(),
+      span({ class: 'type' }, this.getType()),
+      span({ class: 'title' }, a({ href: this.path }, this.title)),
+      this.getDescription(horizontal),
+    );
+    const infoBlock = div(
+      { class: 'infoblock' },
       this.getAvatarElement(this.authorEntry),
       div({ class: 'info' }, this.info),
-    ];
-    const cardContentBlock = horizontal
-      ? span(
-        { class: 'cardcontent' },
-        this.getTagLabel(),
-        span({ class: 'type' }, this.getType()),
-        span({ class: 'title' }, a({ href: this.path }, this.title)),
-        this.getDescription(horizontal),
-        ...infoBlockElementList,
-      )
-      : span(
-        { class: 'cardcontent' },
-        this.getTagLabel(),
-        span({ class: 'type' }, this.getType()),
-        span({ class: 'title' }, a({ href: this.path }, this.title)),
-        this.getDescription(horizontal),
-      );
+    );
 
-    return horizontal
-      ? li({ class: 'picture-card horizontal' }, pictureBlock, cardContentBlock)
-      : li(
-        { class: 'picture-card' },
-        div({ class: 'vert-top' }, pictureBlock, cardContentBlock),
-        div({ class: 'vert-infoblock' }, ...infoBlockElementList),
-      );
+    return li(
+      { class: `picture-card ${horizontal ? 'horizontal' : ''}` },
+      pictureBlock,
+      cardContentBlock,
+      infoBlock,
+    );
   }
 }

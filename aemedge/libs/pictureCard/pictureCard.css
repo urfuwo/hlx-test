@@ -1,7 +1,6 @@
 .picture-card {
   --card-image-height: 130px;
 
-  display: grid;
   box-shadow: 0 2px 4px rgb(34 54 73 / 20%);
   background-color: var(--background-color);
   border-radius: var(--sapTile_BorderCornerRadius);
@@ -20,10 +19,10 @@
 
   & .cardcontent {
     display: block;
-    padding: var(--udexSpacer16) var(--udexSpacer16) 0 var(--udexSpacer16);
+    padding: var(--udexSpacer16);
 
     & .type {
-      font-size: var(--udexTypographyBodyXSFontSize);
+      font-size: var(--udexTypographyEyebrowSFontSize);
       font-weight: var(--udexTypographyFontWeightMedium);
       line-height: var(--udexTypographyEyebrowLineHeight);
       display: flex;
@@ -57,15 +56,9 @@
       }
     }
 
-    & .info {
-      display: block;
-      font-size: var(--udexTypographyNavigationRegularXSFontSize);
-      font-weight: var(--udexTypographyFontWeightRegular);
-      line-height: var(--udexTypographyDisplayLineHeight);
-      color: var(--udexColorGrey6);
-    }
-
     & .author {
+      display: block;
+
       & a {
         font-size: var(--udexTypographyBodyXSFontSize);
         font-weight: var(--udexTypographyFontWeightMedium);
@@ -73,57 +66,13 @@
         color: var(--udexColorNeutralBlack);
       }
     }
-  }
-
-  & .vert-infoblock {
-    padding: var(--udexSpacer16);
-    align-self: end;
-
-    & .author {
-      display: block;
-
-      & a {
-        font-size: var(--udexTypographyNavigationMediumMFontSize);
-        font-weight: var(--udexTypographyFontWeightMedium);
-        line-height: var(--udexTypographyDisplayLineHeight);
-        color: var(--udexColorNeutralBlack);
-      }
-    }
 
     & .info {
       display: block;
-      font-size: var(--udexTypographyBodyXSFontSize);
+      font-size: var(--udexTypographyNavigationRegularXSFontSize);
       font-weight: var(--udexTypographyFontWeightRegular);
       line-height: var(--udexTypographyDisplayLineHeight);
       color: var(--udexColorGrey6);
-    }
-
-    & .author-profile {
-      margin-top: var(--udexSpacer12);
-      margin-bottom: var(--udexSpacer12);
-      display: block;
-
-      & > div {
-        border: none;
-        box-shadow: none;
-        padding: 0;
-        gap: var(--udexSpacer16);
-      }
-
-      & .author {
-        font-size: var(--udexTypographyNavigationRegularXSFontSize);
-      }
-
-      & .avatar {
-        flex: 0 0 2rem;
-        width: 2rem;
-        height: 2rem;
-
-        & img {
-          width: 2rem;
-          height: 2rem;
-        }
-      }
     }
   }
 
@@ -138,7 +87,7 @@
 
     & .cardcontent {
       order: -1;
-      padding: var(--udexSpacer16);
+      padding: var(--udexSpacer16) var(--udexSpacer16) 0 var(--udexSpacer16);
 
       & .description {
         color: black;
@@ -151,10 +100,33 @@
 
     & .picture {
       order: 1;
+      grid-row: span 2;
       padding: var(--udexSpacer16);
 
       @media (width < 640px) {
         padding: unset;
+      }
+    }
+
+    & .infoblock {
+      order: 1;
+      padding: 0 var(--udexSpacer16) var(--udexSpacer16) var(--udexSpacer16);
+
+      & .info {
+        display: block;
+        font-size: var(--udexTypographyNavigationRegularXSFontSize);
+        font-weight: var(--udexTypographyFontWeightRegular);
+        line-height: var(--udexTypographyDisplayLineHeight);
+        color: var(--udexColorGrey6);
+      }
+
+      & .author {
+        & a {
+          font-size: var(--udexTypographyBodyXSFontSize);
+          font-weight: var(--udexTypographyFontWeightMedium);
+          line-height: var(--udexTypographyDisplayLineHeight);
+          color: var(--udexColorNeutralBlack);
+        }
       }
     }
 
