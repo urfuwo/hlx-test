@@ -1,8 +1,6 @@
-/*
- * Table Block
- * Recreate a table
- * https://www.hlx.live/developer/block-collection/table
- */
+import {
+  thead, tbody, table, tr,
+} from '../../scripts/dom-builder.js';
 
 function buildCell(rowIndex) {
   const cell = rowIndex ? document.createElement('td') : document.createElement('th');
@@ -11,26 +9,26 @@ function buildCell(rowIndex) {
 }
 
 export default async function decorate(block) {
-  const table = document.createElement('table');
-  const thead = document.createElement('thead');
-  const tbody = document.createElement('tbody');
+  const tableEl = table();
+  const theadEl = thead();
+  const tbodyEl = tbody();
 
   const header = !block.classList.contains('no-header');
   if (header) {
-    table.append(thead);
+    tableEl.append(theadEl);
   }
-  table.append(tbody);
+  tableEl.append(tbodyEl);
 
   [...block.children].forEach((child, i) => {
-    const row = document.createElement('tr');
-    if (header && i === 0) thead.append(row);
-    else tbody.append(row);
+    const trEl = tr();
+    if (header && i === 0) theadEl.append(trEl);
+    else tbodyEl.append(trEl);
     [...child.children].forEach((col) => {
       const cell = buildCell(header ? i : i + 1);
       cell.innerHTML = col.innerHTML;
-      row.append(cell);
+      trEl.append(cell);
     });
   });
   block.innerHTML = '';
-  block.append(table);
+  block.append(tableEl);
 }
