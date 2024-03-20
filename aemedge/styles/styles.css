@@ -12,11 +12,11 @@
 /* Fall back to Arial for 72 Brand Variable
  Added to styles.css for early loading */
 
- @font-face {
-  font-family: "72 Brand Variable Fallback";
+@font-face {
+  font-family: '72 Brand Variable Fallback';
   font-style: normal;
   font-weight: 700;
-  src: local("Arial Bold");
+  src: local('Arial Bold');
   ascent-override: 98%;
   descent-override: 22.94%;
   line-gap-override: 3.54%;
@@ -24,10 +24,10 @@
 }
 
 @font-face {
-  font-family: "72 Brand Variable Fallback";
+  font-family: '72 Brand Variable Fallback';
   font-style: normal;
   font-weight: 500;
-  src: local("Arial");
+  src: local('Arial');
   ascent-override: 90.58%;
   descent-override: 21.2%;
   line-gap-override: 3.27%;
@@ -35,10 +35,10 @@
 }
 
 @font-face {
-  font-family: "72 Brand Variable Fallback";
+  font-family: '72 Brand Variable Fallback';
   font-style: normal;
   font-weight: 400;
-  src: local("Arial");
+  src: local('Arial');
   ascent-override: 90.58%;
   descent-override: 21.2%;
   line-gap-override: 3.27%;
@@ -50,8 +50,8 @@
   --text-color: var(--sapShell_TextColor);
   --udexGridGutters: var(--udexGridXSGutters);
   --udexGridMargins: var(--udexGridXSMargins);
-  --sapFontFamily: "72 Brand Variable", "72 Brand Variable Fallback", "Arial",
-    "Helvetica", "sans-serif";
+  --sapFontFamily: '72 Brand Variable', '72 Brand Variable Fallback', 'Arial',
+    'Helvetica', 'sans-serif';
   --hero-margin--left: var(--udexGridMargins);
   --hero-margin--right: var(--udexGridMargins);
 }
@@ -194,21 +194,11 @@ a:hover {
 }
 
 .button-container {
-  strong,
-  em {
+  strong, em {
     display: block;
   }
+  & +p {margin-top: 0;}
 
-  & + p {
-    margin-top: 0;
-  }
-
-  a.button {
-    color: var(--udexColorNeutralWhite);
-    border-color: var(--udexColorBlue7);
-    background-color: var(--udexColorBlue7);
-  }
-  
   .button {
     position: relative;
     text-decoration: none;
@@ -221,13 +211,12 @@ a:hover {
     text-overflow: ellipsis;
     min-height: 36px;
     padding: 9px 10px;
-
-    &:any-link,
-    button {
+    
+    &:any-link, button {
       border-radius: 0.5rem;
-      border: 0.0625rem solid transparent;
+      border: .0625rem solid transparent;
       font-weight: normal;
-    }
+    } 
 
     &.primary {
       color: var(--udexColorNeutralWhite);
