@@ -2,11 +2,11 @@
 
 const articleIntro = (main, document) => {
   // news
-  const fristParagraph = main.querySelector('.entry-content > p');
-  if (fristParagraph?.classList.contains('has-large-font-size')) {
-    const block = [['Article Intro'], [fristParagraph.outerHTML]];
+  const firstParagraph = main.querySelector('.entry-content > p');
+  if (firstParagraph?.classList.contains('has-large-font-size')) {
+    const block = [['Article Intro'], [firstParagraph.outerHTML]];
     const table = WebImporter.DOMUtils.createTable(block, document);
-    fristParagraph.replaceWith(table);
+    firstParagraph.replaceWith(table);
   }
 
   const firstLead = main.querySelector('section#main > article p.lead');
