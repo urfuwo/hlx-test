@@ -175,6 +175,10 @@ udex-hero-banner .custom-background-image:dir(rtl) {
   background-color: var(--udexColorBlue1);
 }
 
+.hero-wrapper.hero-background-blue-7-wrapper {
+  background-color: var(--udexColorBlue7);
+}
+
 .hero-wrapper.hero-background-blue-2-wrapper {
   background-color: var(--udexColorBlue2);
 }
@@ -252,6 +256,9 @@ udex-hero-banner .custom-background-image:dir(rtl) {
 }
 
 .hero-wrapper.hero-text-white-wrapper {
+  & udex-hero-banner .hero-banner .media-blend__intro-text {
+    color: var(--udexColorNeutralWhite);
+  }
   color: var(--udexColorNeutralWhite);
 }
 
