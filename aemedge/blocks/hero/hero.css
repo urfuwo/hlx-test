@@ -277,3 +277,7 @@ udex-hero-banner .text-neutral-black {
 .hero-container:has(.hero-no-bottom-space-wrapper) {
   padding-bottom: 0;
 }
+
+.section.hero-container {
+  padding-bottom: unset;
+}
