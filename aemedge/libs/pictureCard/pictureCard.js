@@ -2,7 +2,7 @@ import Card from '../card/card.js';
 import {
   li, a, span, div, p,
 } from '../../scripts/dom-builder.js';
-import { createOptimizedPicture, toClassName, loadCSS } from '../../scripts/aem.js';
+import { createOptimizedPicture, loadCSS } from '../../scripts/aem.js';
 import { renderProfile } from '../../scripts/profile.js';
 
 export default class PictureCard extends Card {
@@ -12,10 +12,6 @@ export default class PictureCard extends Card {
     this.image = image;
     this.tagLabel = tagLabel;
     this.description = description;
-  }
-
-  getAuthorUrl() {
-    return `/author/${toClassName(this.author).replace('-', '')}`;
   }
 
   getOptimizedPicture() {
@@ -32,37 +28,52 @@ export default class PictureCard extends Card {
       : '';
   }
 
+  getAvatarElement(authorEntry) {
+    return authorEntry?.image
+      && (new URL(this.authorEntry.image).pathname !== '/default-meta-image.png') && authorEntry?.hasAvatar
+      ? div({ class: 'author-profile' }, renderProfile(this.authorEntry, true))
+      : span(
+        { class: 'author' },
+        a({ href: this.authorEntry.path }, span(`${this.authorEntry.author}`)),
+      );
+  }
+
   render(horizontal, excludeStyles) {
     if (!excludeStyles) {
       loadCSS(`${window.hlx.codeBasePath}/libs/pictureCard/pictureCard.css`);
     }
 
-    return li(
-      { class: `picture-card ${horizontal ? 'horizontal' : ''}` },
-      div(
-        { class: 'top' },
-        div(
-          { class: 'picture' },
-          a({ href: this.path, 'aria-label': this.title }, this.getOptimizedPicture()),
-        ),
-        span(
-          { class: 'cardcontent' },
-          this.getTagLabel(),
-          span({ class: 'type' }, this.getType()),
-          span({ class: 'title' }, a({ href: this.path }, this.title)),
-          this.getDescription(horizontal),
-        ),
-      ),
-      div(
-        { class: 'info-block' },
-        this.authorEntry?.image && this.authorEntry?.hasAvatar
-          ? div({ class: 'author-profile' }, renderProfile(this.authorEntry, true))
-          : span(
-            { class: 'author' },
-            a({ href: this.authorEntry.path }, span(`${this.authorEntry.author}`)),
-          ),
-        div({ class: 'info' }, this.info),
-      ),
+    const pictureBlock = div(
+      { class: 'picture' },
+      a({ href: this.path, 'aria-label': this.title }, this.getOptimizedPicture()),
     );
+    const infoBlockElementList = [
+      this.getAvatarElement(this.authorEntry),
+      div({ class: 'info' }, this.info),
+    ];
+    const cardContentBlock = horizontal
+      ? span(
+        { class: 'cardcontent' },
+        this.getTagLabel(),
+        span({ class: 'type' }, this.getType()),
+        span({ class: 'title' }, a({ href: this.path }, this.title)),
+        this.getDescription(horizontal),
+        ...infoBlockElementList,
+      )
+      : span(
+        { class: 'cardcontent' },
+        this.getTagLabel(),
+        span({ class: 'type' }, this.getType()),
+        span({ class: 'title' }, a({ href: this.path }, this.title)),
+        this.getDescription(horizontal),
+      );
+
+    return horizontal
+      ? li({ class: 'picture-card horizontal' }, pictureBlock, cardContentBlock)
+      : li(
+        { class: 'picture-card' },
+        div({ class: 'vert-top' }, pictureBlock, cardContentBlock),
+        div({ class: 'vert-infoblock' }, ...infoBlockElementList),
+      );
   }
 }

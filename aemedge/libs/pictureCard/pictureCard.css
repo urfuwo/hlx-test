@@ -56,9 +56,26 @@
         color: var(--udexColorNeutralBlack);
       }
     }
+
+    & .info {
+      display: block;
+      font-size: var(--udexTypographyNavigationRegularXSFontSize);
+      font-weight: var(--udexTypographyFontWeightRegular);
+      line-height: var(--udexTypographyDisplayLineHeight);
+      color: var(--udexColorGrey6);
+    }
+
+    & .author {
+      & a {
+        font-size: var(--udexTypographyBodyXSFontSize);
+        font-weight: var(--udexTypographyFontWeightMedium);
+        line-height: var(--udexTypographyDisplayLineHeight);
+        color: var(--udexColorNeutralBlack);
+      }
+    }
   }
 
-  & .info-block {
+  & .vert-infoblock {
     padding: var(--udexSpacer16);
     align-self: end;
 
@@ -121,6 +138,7 @@
 
     & .cardcontent {
       order: -1;
+      padding: var(--udexSpacer16);
 
       & .description {
         color: black;
