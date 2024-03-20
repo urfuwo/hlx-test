@@ -1,4 +1,197 @@
+/*
+ * SAP root styles using theme design tokens (see themes/sap_glow/css_variables.css)
+ * Currently implements three breakpoints:
+ * - min:0px (mobile first, default)
+ * - min:640px (--udexGridSMinWidth)
+ * - min:980px (--udexGridMMinWidth)
+ * - min:1600px (--udexGridXLMinWidth)
+ * Heading/Medium: per-element
+ * Heading/Regular: default
+ */
 
+/* Fall back to Arial for 72 Brand Variable
+ Added to styles.css for early loading */
+
+ @font-face {
+  font-family: '72 Brand Variable Fallback';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Arial Bold');
+  ascent-override: 98%;
+  descent-override: 22.94%;
+  line-gap-override: 3.54%;
+  size-adjust: 92.37%;
+}
+
+@font-face {
+  font-family: '72 Brand Variable Fallback';
+  font-style: normal;
+  font-weight: 500;
+  src: local('Arial');
+  ascent-override: 90.58%;
+  descent-override: 21.2%;
+  line-gap-override: 3.27%;
+  size-adjust: 99.94%;
+}
+
+@font-face {
+  font-family: '72 Brand Variable Fallback';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Arial');
+  ascent-override: 90.58%;
+  descent-override: 21.2%;
+  line-gap-override: 3.27%;
+  size-adjust: 99.94%;
+}
+
+:root {
+  --background-color: var(--udexColorNeutralWhite);
+  --text-color: var(--sapShell_TextColor);
+  --udexGridGutters: var(--udexGridXSGutters);
+  --udexGridMargins: var(--udexGridXSMargins);
+  --sapFontFamily: '72 Brand Variable', '72 Brand Variable Fallback', 'Arial',
+    'Helvetica', 'sans-serif';
+  --hero-margin--left: var(--udexGridMargins);
+  --hero-margin--right: var(--udexGridMargins);
+}
+
+/* S */
+@media (width >=640px) {
+  :root {
+    --udexGridGutters: var(--udexGridSGutters);
+    --udexGridMargins: var(--udexGridSMargins);
+  }
+}
+
+/* M */
+@media (width >=980px) {
+  :root {
+    --udexGridGutters: var(--udexGridMGutters);
+    --udexGridMargins: var(--udexGridMMargins);
+  }
+}
+
+/* L */
+@media (width >=1280px) {
+  :root {
+    --udexGridGutters: var(--udexGridLGutters);
+    --udexGridMargins: var(--udexGridLMargins);
+  }
+}
+
+/* XL */
+@media (width >=1600px) {
+  :root {
+    --udexGridGutters: var(--udexGridXLGutters);
+    --udexGridMargins: var(--udexGridXLMargins);
+    --hero-margin--left: 246px;
+    --hero-margin--right: 246px;
+  }
+}
+
+body {
+  font-family: var(--sapFontFamily);
+  font-size: var(--udexTypographyBodySFontSize);
+  font-weight: var(--udexTypographyFontWeightRegular);
+  line-height: var(--udexTypographyBodyLineHeight);
+  margin: 0;
+  padding-left: 0;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  display: none;
+}
+
+@media (width < 980px) {
+  body {
+    overflow-x: hidden;
+  }
+}
+
+body.appear {
+  display: block;
+}
+
+header {
+  height: 60px;
+}
+
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+h1 {
+  font-size: var(--udexTypographyHeadingRegularMFontSize);
+  font-weight: var(--udexTypographyFontWeightRegular);
+  line-height: var(--udexTypographyHeadingLineHeight);
+}
+
+h2 {
+  font-size: var(--udexTypographyHeadingRegularSFontSize);
+  font-weight: var(--udexTypographyFontWeightRegular);
+  line-height: var(--udexTypographyHeadingLineHeight);
+}
+
+/* missing design, assumption */
+h3 {
+  font-size: var(--udexTypographyHeadingRegularXSFontSize);
+  font-weight: var(--udexTypographyFontWeightRegular);
+  line-height: var(--udexTypographyHeadingLineHeight);
+}
+
+/* missing styles, assumption */
+h4,
+h5,
+h6 {
+  font-size: var(--udexTypographyHeadingRegularXXSFontSize);
+  font-weight: var(--udexTypographyFontWeightRegular);
+  line-height: var(--udexTypographyHeadingLineHeight);
+}
+
+/* missing styles, assumption */
+p,
+dl,
+ol,
+ul,
+pre,
+blockquote {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+/* missing styles, assumption */
+code {
+  padding: 0.125em;
+}
+
+/* missing styles, assumption */
+pre {
+  overflow: scroll;
+}
+
+/* missing styles, assumption */
+main pre {
+  padding: 1em;
+  border-radius: 0.25em;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+a:any-link {
+  color: var(--udexColorBlue7);
+  text-decoration: underline;
+}
+
+a:hover {
+  color: var(--udexColorBlue9);
+  cursor: pointer;
+  text-decoration: underline;
+}
 
 .button-container {
   strong, em {
@@ -6,20 +199,19 @@
   }
   & +p {margin-top: 0;}
 
-
   a.button {
     color: var(--udexColorNeutralWhite);
     border-color: var(--udexColorBlue7);
     background-color: var(--udexColorBlue7);
   }
-
+  
   a.button:hover {
     color: var(--udexColorNeutralWhite);
     border-color: var(--udexColorBlue9);
     background-color: var(--udexColorBlue9);
   }
-  
- .button {
+
+  .button {
     position: relative;
     text-decoration: none;
     color: var(--udexColorBlue9);
