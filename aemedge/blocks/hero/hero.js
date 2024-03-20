@@ -45,12 +45,11 @@ function decorateMetaInfo() {
   return infoBlockWrapper;
 }
 
-async function replacePlaceholderText(elem) {
+function replacePlaceholderText(elem, placeholder) {
   if (elem && (elem.innerText.includes('[page]') || elem.innerText.includes('[author]'))) {
-    const ph = await fetchPlaceholders();
     const adaptedPath = toCamelCase(window.location.pathname
       .replace('tags', 'tag').replace('topics', 'topic').substring(1));
-    elem.innerHTML = elem.innerHTML.replace('[page]', ph[adaptedPath] ? ph[adaptedPath] : '');
+    elem.innerHTML = elem.innerHTML.replace('[page]', placeholder[adaptedPath] ? placeholder[adaptedPath] : '');
     elem.innerHTML = elem.innerHTML.replace('[author]', getMetadata('author') || '');
   }
   return elem;
@@ -61,17 +60,27 @@ async function replacePlaceholderText(elem) {
  * @param {Element} block The footer block element
  */
 export default async function decorate(block) {
-  const isMediaBlend = block.classList.contains('media-blend') || getMetadata('template') === 'article';
+  const isArticle = getMetadata('template') === 'article';
+  const isMediaBlend = block.classList.contains('media-blend') || isArticle;
+  const placeholder = await fetchPlaceholders();
+
+  // extract block content
   const hero = document.createElement('udex-hero-banner');
-  const intro = block.querySelector('h6');
   const heading = block.querySelector('h1');
+  const eyebrow = block.querySelector('h6');
+  let eyebrowText = eyebrow?.textContent;
+  if (!eyebrowText && isArticle) { // if no eyebrow text is set, use the content type for articles
+    const placeholderText = placeholder[toCamelCase(`content-type/${getMetadata('content-type')}`)];
+    eyebrowText = placeholderText || getMetadata('content-type');
+  }
+
   const contentSlot = div(
     {
       slot: 'content',
       class: ['hero-banner', 'media-blend__content'],
     },
-    intro ? p({ class: 'media-blend__intro-text' }, block.querySelector('h6')?.textContent) : '',
-    await replacePlaceholderText(heading),
+    eyebrowText ? p({ class: 'media-blend__intro-text' }, eyebrowText) : '',
+    replacePlaceholderText(heading, placeholder),
   );
   hero.append(contentSlot);
 
@@ -96,7 +105,7 @@ export default async function decorate(block) {
   }
 
   // clean up the block before we get the description
-  intro?.remove();
+  eyebrow?.remove();
   block.querySelectorAll('p').forEach((pEl) => {
     if (!pEl.textContent.trim()) {
       pEl.remove();
