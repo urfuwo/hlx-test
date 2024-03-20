@@ -11,7 +11,7 @@ import {
  * @param {string} path The path to the fragment
  * @returns {HTMLElement} The root element of the fragment
  */
-export async function loadFragment(path) {
+async function loadFragment(path) {
   if (path && path.startsWith('/') && path.includes('/fragments/')) {
     const resp = await fetch(`${path}.plain.html`);
     if (resp.ok) {
@@ -86,7 +86,7 @@ function convertFragmentLinksToFragments(block) {
   });
 }
 
-export default async function decorate(block) {
+export default function decorate(block) {
   const cols = [...block.firstElementChild.children];
   block.classList.add(`columns-${cols.length}-cols`);
 
