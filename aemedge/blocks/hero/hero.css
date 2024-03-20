@@ -259,6 +259,7 @@ udex-hero-banner .custom-background-image:dir(rtl) {
   & udex-hero-banner .hero-banner .media-blend__intro-text {
     color: var(--udexColorNeutralWhite);
   }
+
   color: var(--udexColorNeutralWhite);
 }
 
