@@ -22,7 +22,7 @@
     padding: var(--udexSpacer16);
 
     & .type {
-      font-size: var(--udexTypographyBodyXSFontSize);
+      font-size: var(--udexTypographyEyebrowSFontSize);
       font-weight: var(--udexTypographyFontWeightMedium);
       line-height: var(--udexTypographyEyebrowLineHeight);
       display: flex;

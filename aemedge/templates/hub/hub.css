@@ -214,12 +214,14 @@
     color: var(--udexColorNeutralWhite);
   }
 
-  & .card .type {
-    color: var(--udexColorGrey4);
-  }
+  & .card {
+    & .type {
+      color: var(--udexColorGrey3);
+    }
 
-  & .card .label {
-    color: var(--udexColorGrey4);
+    & .label {
+      color: var(--udexColorGrey3);
+    }
   }
 }
 
