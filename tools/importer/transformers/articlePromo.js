@@ -11,6 +11,12 @@ const articlePromo = (main, document) => {
       wrapper.append(a);
     });
 
+    banner.querySelectorAll('.cta-banner__title').forEach((title) => {
+      const wrapper = document.createElement('h3');
+      title.parentElement.append(wrapper);
+      wrapper.append(title);
+    });
+
     if (NEWSLETTER_FILTER.test(banner.textContent)) {
       const block = [['Promo (Newsletter)'], [banner.innerHTML]];
       const table = WebImporter.DOMUtils.createTable(block, document);
