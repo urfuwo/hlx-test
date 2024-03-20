@@ -29,8 +29,7 @@ function getPictureCard(article, placeholders) {
 export default async function decorateBlock(block) {
   const pageTags = getMetadata('article:tag')
     .split(',')
-    .map((tag) => tag.trim())
-    .map((tag) => toClassName(tag));
+    .map((tag) => toClassName(tag.trim()));
   const filter = getFilter(pageTags);
   const limit = 4; // hardcoded for now
   const articleStream = await ffetch(`${window.hlx.codeBasePath}/articles-index.json`)
