@@ -32,3 +32,16 @@
     order: unset;
   }
 }
+
+.columns > div > div > .section {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.columns > div > div > .section:first-of-type {
+  padding-top: 0;
+}
+
+.columns > div > div > .section:last-of-type {
+  padding-bottom: 0;
+}
