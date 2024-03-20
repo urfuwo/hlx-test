@@ -21,6 +21,23 @@ const transformMoreSection = (main) => {
   main.querySelectorAll('div.section').forEach((readMoreWrapper) => {
     if (readMoreWrapper.querySelector('h2')?.textContent.indexOf('Further reading') > -1) {
       const container = document.createElement('div');
+
+      // get social and author profile in here first
+      const socialHeading = document.createElement('h2');
+      socialHeading.textContent = 'Share on social media';
+      const socialTable = WebImporter.DOMUtils.createTable([['Social']], document);
+      container.append(socialHeading, socialTable);
+
+      const tagsHeading = document.createElement('h2');
+      tagsHeading.textContent = 'Explore related content by tags';
+
+      const tagTable = WebImporter.DOMUtils.createTable([['Article Tags']], document);
+      container.append(tagsHeading, tagTable);
+
+      const authorProfileTable = WebImporter.DOMUtils.createTable([['Author Profile']], document);
+      container.append(authorProfileTable);
+
+      // append related articles
       container.append(document.createElement('hr'), readMoreWrapper.querySelector('h2'));
 
       const block = [['Related Articles']];

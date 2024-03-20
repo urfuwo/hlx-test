@@ -98,8 +98,8 @@ async function transformDOM(document, url, html, params) {
 async function generateDocumentPath(document, url, html, params) {
   // let newUrl = new URL(url).pathname.replace(/\.html$/, '').replace(/\/$/, ''),
   const newUrl = new URL(url);
-  if (document.arictleType) {
-    const type = BASEPATH_MAPPING.find((mapping) => mapping.type === document.arictleType);
+  if (document.articleType) {
+    const type = BASEPATH_MAPPING.find((mapping) => mapping.type === document.articleType);
     if (type) {
       newUrl.pathname = `/${type.basePath}${newUrl.pathname}`;
     }

@@ -55,7 +55,9 @@ const createMetadata = (main, document, html, params, urlStr) => {
         authors.push(authorEL.textContent);
       });
       if (authors.length > 0) {
-        meta.Author = authors.join(', ');
+        meta['Display Author'] = authors.join(', ');
+        // eslint-disable-next-line prefer-destructuring
+        meta.Author = authors[0];
       }
       sectionWrapper.remove();
     }

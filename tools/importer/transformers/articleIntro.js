@@ -23,11 +23,12 @@ const articleIntro = (main, document) => {
   });
 
   // insights
-  const insightsLead = main.querySelector('div.Section__headline--Ui63m h2, div.Section__sectionContentIsFirst--YvGqK h3, div.Section__sectionContentIsFirst--YvGqK h4');
-  if (insightsLead) {
-    const block = [['Article Intro'], [insightsLead.outerHTML]];
-    const table = WebImporter.DOMUtils.createTable(block, document);
-    insightsLead.replaceWith(table);
-  }
+  // const insightsLead = main.querySelector('div.Section__headline--Ui63m h2,
+  // div.Section__sectionContentIsFirst--YvGqK h3, div.Section__sectionContentIsFirst--YvGqK h4');
+  // if (insightsLead) {
+  //   const block = [['Article Intro'], [insightsLead.outerHTML]];
+  //   const table = WebImporter.DOMUtils.createTable(block, document);
+  //   insightsLead.replaceWith(table);
+  // }
 };
 export default articleIntro;

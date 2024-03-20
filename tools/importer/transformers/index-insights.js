@@ -13,7 +13,6 @@ import articlePageFooter from './articlePageFooter.js';
 import articleContentFooter from './articleContentFooter.js';
 import articleIntro from './articleIntro.js';
 import articlePanel from './articlePanel.js';
-import articleSidebar from './articleSidebar.js';
 import articleAccordion from './articleAccordion.js';
 import articleTable from './articleTable.js';
 
@@ -27,7 +26,6 @@ export const transformers = [
   articleAccordion,
   articleTable,
   articlePanel,
-  articleSidebar,
   articleContentFooter,
   articlePageFooter,
   articleMoreSection,
