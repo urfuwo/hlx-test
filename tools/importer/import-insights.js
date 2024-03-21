@@ -34,11 +34,21 @@ async function transformDOM(document, url, html, params) {
     'header',
     'footer',
     'component',
+    'noscript',
     'ds-secondary-navigation',
     'nav.accessibility',
     'div.nojs',
     'div.trialsKeys',
+    'div.secondaryNavigation',
+    'div.parBreadCrumb',
+    'div.ReactModalPortal',
+    'div.lightboxI18nContainer',
     'div.notificationBannerWrapper',
+    'div[data-component="ContactUs"]',
+    'div[data-component="PageRating"]',
+    'div#bPopup-container',
+    'div#consent_blackbar',
+    'div#teconsent',
   ]);
 
   transformers.forEach((fn) => fn.call(this, main, document, params, url));
