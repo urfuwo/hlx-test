@@ -201,18 +201,24 @@
 
 .section.text-white,
 .section.text-neutral-white {
-  color: var(--udexColorNeutralWhite);
-
-  & a:any-link {
-    color: var(--udexColorNeutralWhite);
-  }
-
   & .card .type {
     color: var(--udexColorGrey4);
   }
 
   & .card .label {
     color: var(--udexColorGrey4);
+  }
+}
+
+.section.background-dark {
+  color: var(--udexColorNeutralWhite);
+
+  & a:any-link {
+    color: var(--udexColorNeutralWhite);
+
+    &:hover {
+      color: var(--udexColorBlue3);
+    }
   }
 }
 

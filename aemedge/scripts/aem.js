@@ -468,6 +468,9 @@ function decorateSections(main) {
               const styleKey = `--udexColor${capitalize(style.replace('background-', ''))}`;
               const styleValue = styleProperties.getPropertyValue(styleKey);
               section.style.backgroundColor = styleValue;
+              const colorRange = +styleKey.at(styleKey.length - 1);
+              const backgroundClass = colorRange > 5 ? 'background-dark' : 'background-light';
+              section.classList.add(backgroundClass);
             }
             section.classList.add(style);
           });
