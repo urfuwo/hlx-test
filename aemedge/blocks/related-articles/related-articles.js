@@ -1,5 +1,7 @@
 import { ul } from '../../scripts/dom-builder.js';
-import { getMetadata, fetchPlaceholders, toCamelCase } from '../../scripts/aem.js';
+import {
+  getMetadata, fetchPlaceholders, toCamelCase, toClassName,
+} from '../../scripts/aem.js';
 import ffetch from '../../scripts/ffetch.js';
 import PictureCard from '../../libs/pictureCard/pictureCard.js';
 import { formatDate } from '../../scripts/utils.js';
@@ -26,7 +28,9 @@ function getPictureCard(article, placeholders) {
 }
 
 export default async function decorateBlock(block) {
-  const pageTags = getMetadata('article:tag').split(',');
+  const pageTags = getMetadata('article:tag')
+    .split(',')
+    .map((tag) => toClassName(tag.trim()));
   const filter = getFilter(pageTags);
   const limit = 4; // hardcoded for now
   const articleStream = await ffetch(`${window.hlx.codeBasePath}/articles-index.json`)

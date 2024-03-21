@@ -29,6 +29,7 @@ export default class PictureCard extends Card {
   }
 
   getAvatarElement(authorEntry) {
+    if (!authorEntry) { return ''; }
     return authorEntry?.image
       && (new URL(this.authorEntry.image).pathname !== '/default-meta-image.png')
       ? div({ class: 'author-profile' }, renderProfile(this.authorEntry, true))

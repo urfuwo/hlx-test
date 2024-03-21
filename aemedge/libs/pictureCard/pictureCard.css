@@ -1,6 +1,9 @@
 .picture-card {
   --card-image-height: 130px;
 
+  display: grid;
+  grid-auto-rows: max-content max-content auto;
+  align-items: self-start;
   box-shadow: 0 2px 4px rgb(34 54 73 / 20%);
   background-color: var(--background-color);
   border-radius: var(--sapTile_BorderCornerRadius);
@@ -19,7 +22,7 @@
 
   & .cardcontent {
     display: block;
-    padding: var(--udexSpacer16);
+    padding: var(--udexSpacer16) var(--udexSpacer16) 0 var(--udexSpacer16);
 
     & .type {
       font-size: var(--udexTypographyEyebrowSFontSize);
@@ -55,6 +58,11 @@
         color: var(--udexColorNeutralBlack);
       }
     }
+  }
+
+  & .infoblock {
+    align-self: end;
+    padding: 0 var(--udexSpacer16) var(--udexSpacer16) var(--udexSpacer16);
 
     & .author {
       display: block;
@@ -67,12 +75,62 @@
       }
     }
 
+    & .details {
+      display: block;
+      font-size: var(--udexTypographyNavigationRegularXSFontSize);
+      font-weight: var(--udexTypographyFontWeightRegular);
+      line-height: var(--udexTypographyDisplayLineHeight);
+      color: var(--udexColorGrey6);
+    }
+
     & .info {
       display: block;
       font-size: var(--udexTypographyNavigationRegularXSFontSize);
       font-weight: var(--udexTypographyFontWeightRegular);
       line-height: var(--udexTypographyDisplayLineHeight);
       color: var(--udexColorGrey6);
+    }
+
+    & .author-profile {
+      display: block;
+      margin-top: 0;
+
+      & > div {
+        border: none;
+        box-shadow: none;
+        padding: 0;
+        gap: var(--udexSpacer16);
+      }
+
+      & .avatar {
+        flex: 0 0 2rem;
+        width: 2rem;
+        height: 2rem;
+
+        & img {
+          width: 2rem;
+          height: 2rem;
+        }
+      }
+
+      & .author {
+        font-size: var(--udexTypographyNavigationRegularXSFontSize);
+      }
+
+      /* if there's no details line following the author name, center this vertically */
+      & .author:only-of-type {
+        display: inline-block;
+      }
+    }
+
+    /* spacing above info line, if author-profile is shown */
+    & .author-profile + .info {
+      margin-top: var(--udexSpacer12);
+    }
+
+    /* don't show the info line if the user has an avatar */
+    & .author-profile:has(.avatar) + .info {
+      display: none;
     }
   }
 

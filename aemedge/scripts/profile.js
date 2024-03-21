@@ -24,7 +24,9 @@ function extractAuthorDescription(entry) {
 }
 
 function asEntry(authorName) {
-  return { author: authorName, path: `/author/${toClassName(authorName).replace('-', '')}` };
+  return (authorName === '0')
+    ? null
+    : { author: authorName, path: `/author/${toClassName(authorName).replace('-', '')}` };
 }
 
 function completeEntry(entry) {
@@ -55,8 +57,9 @@ function renderProfile(entry, asAvatar = false) {
     ? div(
       div({ class: 'avatar' }, authorImage ? div(authorImage) : div()),
       div(
+        { class: 'author-info' },
         span({ class: 'author' }, a({ href: entry.path }, span(`${entry.author}`))),
-        span({ class: 'info' }, entry.description),
+        entry.description ? span({ class: 'details' }, entry.description) : '',
       ),
     )
     : div(
