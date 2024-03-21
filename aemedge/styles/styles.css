@@ -202,15 +202,19 @@ a:hover {
 }
 
 .button-container {
-  strong, em {
+  strong,
+  em {
     display: block;
   }
-  & +p {margin-top: 0;}
+
+  & + p {
+    margin-top: 0;
+  }
 
   .button {
     position: relative;
     text-decoration: none;
-    color: var(--udexColorBlue9);
+    color: var(--udexColorBlue7);
     border-radius: 0.5rem;
     font-style: normal;
     font-size: var(--udexTypographyNavigationMediumXLFontSize);
@@ -219,12 +223,24 @@ a:hover {
     text-overflow: ellipsis;
     min-height: 36px;
     padding: 9px 10px;
-    
-    &:any-link, button {
+
+    &:not(.primary, .secondary)::after {
+      content: '\203A';
+      position: absolute;
+      padding-inline: var(--udexSpacer4);
+      transform: scale(1.3);
+    }
+
+    &:hover {
+      color: var(--udexColorBlue9);
+    }
+
+    &:any-link,
+    button {
       border-radius: 0.5rem;
-      border: .0625rem solid transparent;
+      border: 0.0625rem solid transparent;
       font-weight: normal;
-    } 
+    }
 
     &.primary {
       color: var(--udexColorNeutralWhite);
@@ -267,11 +283,6 @@ main img {
 .icon img {
   height: 100%;
   width: 100%;
-}
-
-/* sections: 56px spacing at the bottom */
-main .section {
-  padding-bottom: 56px;
 }
 
 /**
