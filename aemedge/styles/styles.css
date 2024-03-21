@@ -269,10 +269,6 @@ main img {
   width: 100%;
 }
 
-/* sections: 56px spacing at the bottom */
-main .section {
-  padding-bottom: 56px;
-}
 
 /**
  * Styles for embedding video content.
