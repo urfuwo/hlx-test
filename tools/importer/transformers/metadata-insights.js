@@ -81,6 +81,16 @@ const createMetadata = (main, document, html, params, urlStr) => {
     }
   }
 
+  // TODO remove once we have real dates
+  const randomDate = new Date(2024, 2, Math.floor(Math.random() * 18) + 1);
+  const randomTime = Math.floor(Math.random() * 24 * 60 * 60 * 1000); // Random time in milliseconds
+  randomDate.setMilliseconds(randomTime);
+  meta['Published Time'] = randomDate.toISOString();
+  meta['Modified Time'] = randomDate.toISOString();
+
+  // TODO remove once we know what will happen with tags
+  meta.Tags = meta.Topic;
+
   const block = WebImporter.Blocks.getMetadataBlock(document, meta);
   block.id = 'metadata';
   main.append(block);
