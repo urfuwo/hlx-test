@@ -43,11 +43,11 @@
     }
 
     & > :not(:last-child, .hero-container) {
-      padding-block-end: 56px;
+      padding-block-end: var(--udexSpacer56);
     }
 
     & > :last-child {
-      padding-block-end: 84px;
+      padding-block-end: var(--udexSpacer84);
     }
   }
 
@@ -75,7 +75,13 @@
   }
 
   & .button-container:not(:only-child):has(> a) {
-    margin-block-end: 56px;
+    padding-block-end: var(--udexSpacer56);
+    margin-block-end: 0;
+
+    & + h2 {
+      padding-block-start: var(--udexSpacer56);
+      margin-block-start: 0;
+    }
   }
 }
 
