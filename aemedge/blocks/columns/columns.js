@@ -53,9 +53,9 @@ async function replaceLinkWithFragment(block, col, link) {
     if (fragmentSection) {
       block.closest('.section').classList.add(...fragmentSection.classList);
       let linkParent = link.parentNode;
-      if (linkParent.childNodes.length === 1) {
-        while (linkParent.parentNode !== col && linkParent.childNodes.length === 1) {
-          linkParent = linkParent.parent;
+      if (linkParent.childNodes.length === 1 && linkParent.tagName !== 'DIV') {
+        while (linkParent.parentNode !== col && linkParent.parentNode.Name !== 'DIV' && linkParent.childNodes.length === 1) {
+          linkParent = linkParent.parentNode;
         }
         linkParent.replaceWith(...fragment.childNodes);
       } else {
