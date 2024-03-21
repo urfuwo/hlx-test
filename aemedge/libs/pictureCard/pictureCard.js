@@ -44,28 +44,24 @@ export default class PictureCard extends Card {
       loadCSS(`${window.hlx.codeBasePath}/libs/pictureCard/pictureCard.css`);
     }
 
-    const pictureBlock = div(
-      { class: 'picture' },
-      a({ href: this.path, 'aria-label': this.title }, this.getOptimizedPicture()),
-    );
-    const cardContentBlock = span(
-      { class: 'cardcontent' },
-      this.getTagLabel(),
-      span({ class: 'type' }, this.getType()),
-      span({ class: 'title' }, a({ href: this.path }, this.title)),
-      this.getDescription(horizontal),
-    );
-    const infoBlock = div(
-      { class: 'infoblock' },
-      this.getAvatarElement(this.authorEntry),
-      div({ class: 'info' }, this.info),
-    );
-
     return li(
       { class: `picture-card ${horizontal ? 'horizontal' : ''}` },
-      pictureBlock,
-      cardContentBlock,
-      infoBlock,
+      div(
+        { class: 'picture' },
+        a({ href: this.path, 'aria-label': this.title }, this.getOptimizedPicture()),
+      ),
+      span(
+        { class: 'cardcontent' },
+        this.getTagLabel(),
+        span({ class: 'type' }, this.getType()),
+        span({ class: 'title' }, a({ href: this.path }, this.title)),
+        this.getDescription(horizontal),
+      ),
+      div(
+        { class: 'infoblock' },
+        this.getAvatarElement(this.authorEntry),
+        div({ class: 'info' }, this.info),
+      ),
     );
   }
 }
