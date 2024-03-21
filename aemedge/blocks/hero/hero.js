@@ -71,7 +71,7 @@ export default async function decorate(block) {
   let eyebrowText = eyebrow?.textContent;
   if (!eyebrowText && isArticle) { // if no eyebrow text is set, use the content type for articles
     const placeholderText = placeholder[toCamelCase(`content-type/${getMetadata('content-type')}`)];
-    eyebrowText = placeholderText || getMetadata('content-type');
+    eyebrowText = placeholderText || toCamelCase(getMetadata('content-type'));
   }
 
   const contentSlot = div(
