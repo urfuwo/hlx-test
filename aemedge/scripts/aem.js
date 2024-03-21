@@ -191,6 +191,12 @@ function toCamelCase(name) {
   return toClassName(name).replace(/-([a-z])/g, (g) => g[1].toUpperCase());
 }
 
+function capitalize(name) {
+  return toClassName(name)
+    .replace(/-(\w)/g, (_, letter) => letter.toUpperCase())
+    .replace(/^\w/, (firstLetter) => firstLetter.toUpperCase());
+}
+
 /**
  * Extracts the config from a block.
  * @param {Element} block The block element
@@ -429,6 +435,7 @@ function decorateIcons(element, prefix = '') {
  * @param {Element} main The container element
  */
 function decorateSections(main) {
+  const styleProperties = getComputedStyle(document.body);
   main.querySelectorAll(':scope > div').forEach((section) => {
     const wrappers = [];
     let defaultContent = false;
@@ -456,7 +463,14 @@ function decorateSections(main) {
             .split(',')
             .filter((style) => style)
             .map((style) => toClassName(style.trim()));
-          styles.forEach((style) => section.classList.add(style));
+          styles.forEach((style) => {
+            if (style.startsWith('background-')) {
+              const styleKey = `--udexColor${capitalize(style.replace('background-', ''))}`;
+              const styleValue = styleProperties.getPropertyValue(styleKey);
+              section.style.backgroundColor = styleValue;
+            }
+            section.classList.add(style);
+          });
         } else {
           section.dataset[toCamelCase(key)] = meta[key];
         }
