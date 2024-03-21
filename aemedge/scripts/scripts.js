@@ -105,7 +105,9 @@ function decorateImageLinks(main) {
 }
 
 /**
- * Decorates fragment links
+ * Decorates fragment links, replacing them with a placeholder,
+ * which is processed later in decorateFragments.
+ * This separate step ensures that the fragment links do not become buttons in decorateButtons
  * @param {Element} main The container element
  */
 function decorateFragmentLinks(main) {
@@ -122,7 +124,7 @@ function decorateFragmentLinks(main) {
 }
 
 /**
- * Placeholder for decorateFragments method, since it's already used in decorateMain
+ * Declare the decorateFragments method, since it's already used in decorateMain
  */
 let decorateFragments;
 
@@ -175,6 +177,10 @@ export async function loadFragment(path) {
   return null;
 }
 
+/**
+ * Replace a link placeholder with a corresponding fragment, loaded asynchronously.
+ * @param {Element} link The link placeholder, which has the URL in its innerHTML
+ */
 async function replaceLinkPlaceHolderWithFragment(link) {
   const path = link.innerHTML;
   const fragment = await loadFragment(path);
