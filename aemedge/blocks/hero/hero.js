@@ -70,8 +70,9 @@ export default async function decorate(block) {
   const eyebrow = block.querySelector('h6');
   let eyebrowText = eyebrow?.textContent;
   if (!eyebrowText && isArticle) { // if no eyebrow text is set, use the content type for articles
-    const placeholderText = placeholder[toCamelCase(`content-type/${getMetadata('content-type')}`)];
-    eyebrowText = placeholderText || toCamelCase(getMetadata('content-type'));
+    const contentType = getMetadata('content-type').split(',')[0].trim();
+    const placeholderText = placeholder[toCamelCase(`content-type/${contentType}`)];
+    eyebrowText = placeholderText || toCamelCase(contentType);
   }
 
   const contentSlot = div(
