@@ -17,6 +17,13 @@ export default class PictureCard extends Card {
     return `/author/${toClassName(this.author).replace('-', '')}`;
   }
 
+  getAuthor() {
+    if (this.author && this.author !== '0') {
+      return span({ class: 'author' }, a({ href: this.getAuthorUrl() }, span(`${this.author}`)));
+    }
+    return '';
+  }
+
   getOptimizedPicture() {
     return createOptimizedPicture(this.image, this.title, false, [{ width: '750' }]);
   }
@@ -48,7 +55,7 @@ export default class PictureCard extends Card {
         span({ class: 'type' }, this.getType()),
         span({ class: 'title' }, a({ href: this.path }, this.title)),
         this.getDescription(horizontal),
-        span({ class: 'author' }, a({ href: this.getAuthorUrl() }, span(`${this.author}`))),
+        this.getAuthor(),
         span({ class: 'info' }, this.info),
       ),
     );
