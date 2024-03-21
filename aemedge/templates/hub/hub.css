@@ -73,6 +73,10 @@
       }
     }
   }
+
+  & .button-container:not(:only-child):has(> a) {
+    margin-block-end: 56px;
+  }
 }
 
 .hub-l2.appear {
