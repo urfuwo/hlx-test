@@ -1,6 +1,6 @@
 import '@udex/webcomponents/dist/HeroBanner.js';
 import { div, span, p } from '../../scripts/dom-builder.js';
-import { getMetadata } from '../../scripts/aem.js';
+import { fetchPlaceholders, getMetadata, toCamelCase } from '../../scripts/aem.js';
 import { formatDate } from '../../scripts/utils.js';
 
 function calculateInitials(name) {
@@ -45,28 +45,54 @@ function decorateMetaInfo() {
   return infoBlockWrapper;
 }
 
+function replacePlaceholderText(elem, placeholder) {
+  if (elem && (elem.innerText.includes('[page]') || elem.innerText.includes('[author]'))) {
+    const adaptedPath = toCamelCase(window.location.pathname
+      .replace('tags', 'tag').replace('topics', 'topic').substring(1));
+    elem.innerHTML = elem.innerHTML.replace('[page]', placeholder[adaptedPath] ? placeholder[adaptedPath] : '');
+    elem.innerHTML = elem.innerHTML.replace('[author]', getMetadata('author') || '');
+  }
+  return elem;
+}
+
 /**
  * loads and decorates the footer
  * @param {Element} block The footer block element
  */
 export default async function decorate(block) {
-  const isMediaBlend = block.classList.contains('media-blend') || getMetadata('template') === 'article';
+  const isArticle = getMetadata('template') === 'article';
+  const isMediaBlend = isArticle || block.classList.contains('media-blend');
+  const placeholder = await fetchPlaceholders();
+
+  // extract block content
   const hero = document.createElement('udex-hero-banner');
-  const intro = block.querySelector('h6');
   const heading = block.querySelector('h1');
+  const eyebrow = block.querySelector('h6');
+  let eyebrowText = eyebrow?.textContent;
+  if (!eyebrowText && isArticle) { // if no eyebrow text is set, use the content type for articles
+    const contentType = getMetadata('content-type').split(',')[0].trim();
+    const placeholderText = placeholder[toCamelCase(`content-type/${contentType}`)];
+    eyebrowText = placeholderText || toCamelCase(contentType);
+  }
+
   const contentSlot = div(
     {
       slot: 'content',
       class: ['hero-banner', 'media-blend__content'],
     },
-    intro ? p({ class: 'media-blend__intro-text' }, block.querySelector('h6')?.textContent) : '',
-    heading,
+    eyebrowText ? p({ class: 'media-blend__intro-text' }, eyebrowText) : '',
+    replacePlaceholderText(heading, placeholder),
   );
   hero.append(contentSlot);
 
   // get images for background
   let picture = block.querySelector(':scope div > div > picture');
   if (picture) {
+    if (block.classList.contains('full-background-image')) {
+      picture.querySelectorAll('source[type="image/webp"]').forEach((source) => {
+        source.srcset = source.srcset.replaceAll('format=webply', 'format=webpll');
+      });
+    }
     picture.setAttribute('slot', 'backgroundPicture');
     const img = picture.querySelector('img');
     img.classList.add('custom-background-image');
@@ -85,7 +111,7 @@ export default async function decorate(block) {
   }
 
   // clean up the block before we get the description
-  intro?.remove();
+  eyebrow?.remove();
   block.querySelectorAll('p').forEach((pEl) => {
     if (!pEl.textContent.trim()) {
       pEl.remove();

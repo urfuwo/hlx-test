@@ -19,6 +19,10 @@
   margin: 6px;
 }
 
+.block.social > div:first-of-type > div {
+  margin-left: 0;
+}
+
 .block.social .icon {
   display: flex;
   width: 16px;

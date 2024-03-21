@@ -11,7 +11,6 @@ export default async function decorate(block) {
       select(
         { 'aria-label': 'Country Selector' },
         option({ value: 'us' }, 'United States - English'),
-        option({ value: 'cn' }, '中文 - Chinese'),
       ),
     ),
   );

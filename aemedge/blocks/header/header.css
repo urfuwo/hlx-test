@@ -47,6 +47,7 @@ header nav {
   z-index: 100;
   height: var(--header-height);
   background: var(--udexColorGrey1);
+  text-wrap: nowrap;
 }
 
 header nav .default-content-wrapper {
@@ -135,6 +136,7 @@ header nav .nav-bar {
 
 header nav[aria-expanded='true'] .nav-bar {
   margin: 0;
+  margin-top: var(--header-height);
 
   /* transform with translateX breaks fixed position of Explore SAP
   Hence using margin  */
@@ -191,7 +193,7 @@ header nav .nav-sections > .search-bar > .text-box {
   align-self: stretch;
   flex-wrap: nowrap;
   flex-shrink: 0;
-  gap: var(--udexGridSColumns);
+  gap: 8px;
   position: relative;
   padding: 9px 12px;
   background: var(--udexCoreSurfaceLight);
@@ -292,14 +294,16 @@ header nav .nav-sections .nav-drop::after {
   }
 
   header nav .nav-sections .nav-drop {
-    display: block;
+    display: flex;
     position: relative;
+    justify-content: center;
   }
 
   header nav .nav-sections .nav-drop::after {
-    inset: 0 0 0 auto;
+    inset: 30px -22px 0 auto;
     transform: rotate(90deg) scale(1.2);
     padding-inline: unset;
+    padding-right: 24px;
   }
 
   header nav .nav-sections .nav-drop[aria-expanded='true']::after {
@@ -338,7 +342,6 @@ header nav .nav-sections .nav-drop::after {
     gap: 8px 48px;
     padding: 32px 48px 48px;
     top: calc(100% + 0.05rem);
-    left: -25dvw;
     background: var(--udexColorNeutralWhite);
     box-shadow: 0 10px 30px 0 var(--flyout-menu-color);
     border-radius: 0.25rem;
