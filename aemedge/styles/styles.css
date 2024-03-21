@@ -410,3 +410,17 @@ main .section.column-section {
     padding-bottom: var(--udexSpacer56);
   }
 }
+
+/* Embedded sections within blocks */
+.block .section {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.block .section:first-of-type {
+  padding-top: 0;
+}
+
+.block .section:last-of-type {
+  padding-bottom: 0;
+}
