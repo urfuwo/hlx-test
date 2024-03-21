@@ -44,7 +44,9 @@ async function decorateTemplates(main) {
     if (templates.includes(template)) {
       const templateName = TEMPLATE_LIST[template];
       loadCSS(`${window.hlx.codeBasePath}/templates/${templateName}/${templateName}.css`);
-      const mod = await import(`${window.hlx.codeBasePath}/templates/${templateName}/${templateName}.js`);
+      const mod = await import(
+        `${window.hlx.codeBasePath}/templates/${templateName}/${templateName}.js`
+      );
       if (mod.default) {
         await mod.default(main);
       }
@@ -56,26 +58,6 @@ async function decorateTemplates(main) {
 }
 
 /**
- * Decorates all multi-column sections in a container element.
- * @param {Element} main The container element
- */
-function decorateMultiColumnSections(main) {
-  main.querySelectorAll(':scope > div.column-section-1-1, :scope > div.column-section-3-2, :scope > div.column-section-2-3, :scope > div.column-section-2-1, :scope > div.column-section-1-2, :scope > div.column-section-3-1, :scope > div.column-section-1-3').forEach((section) => {
-    const left = document.createElement('div');
-    const right = document.createElement('div');
-    left.className = 'column-section-left-block column-section-block';
-    right.className = 'column-section-right-block column-section-block';
-
-    Array.from(section.children).forEach((e) => {
-      (e.classList.contains('right-style-wrapper') ? right : left).append(e.cloneNode(true));
-    });
-
-    section.append(left, right);
-    section.classList.add('column-section');
-  });
-}
-
-/**
  * Decorates image links in a specified container by replacing
  * the picture elements with anchor elements.
  * @param {Element} main - The container element
@@ -83,7 +65,11 @@ function decorateMultiColumnSections(main) {
 function decorateImageLinks(main) {
   main.querySelectorAll('p picture').forEach((picture) => {
     const linkElement = picture.nextElementSibling;
-    if (linkElement && linkElement.tagName === 'A' && linkElement.href.startsWith('https://www.linkedin.com/posts/')) {
+    if (
+      linkElement
+      && linkElement.tagName === 'A'
+      && linkElement.href.startsWith('https://www.linkedin.com/posts/')
+    ) {
       const linkURL = linkElement.href;
 
       /**
@@ -119,7 +105,6 @@ export async function decorateMain(main, shouldDecorateTemplates = true) {
   }
   decorateSections(main);
   decorateBlocks(main);
-  decorateMultiColumnSections(main);
 }
 
 function setSAPTheme() {
@@ -144,9 +129,13 @@ function initSidekick() {
     decorateBlock(preflightBlock);
     await loadBlock(preflightBlock);
     const { default: getModal } = await import(`${window.hlx.codeBasePath}/blocks/modal/modal.js`);
-    const customModal = await getModal('dialog-modal', () => section.innerHTML, (modal) => {
-      modal.querySelector('button[name="close"]')?.addEventListener('click', () => modal.close());
-    });
+    const customModal = await getModal(
+      'dialog-modal',
+      () => section.innerHTML,
+      (modal) => {
+        modal.querySelector('button[name="close"]')?.addEventListener('click', () => modal.close());
+      },
+    );
     customModal.showModal();
   };
 
@@ -154,10 +143,14 @@ function initSidekick() {
   if (sk) {
     sk.addEventListener('custom:preflight', preflightListener); // TODO change to preflight
   } else {
-    document.addEventListener('sidekick-ready', () => {
-      const oAddedSidekick = document.querySelector('helix-sidekick');
-      oAddedSidekick.addEventListener('custom:preflight', preflightListener);
-    }, { once: true });
+    document.addEventListener(
+      'sidekick-ready',
+      () => {
+        const oAddedSidekick = document.querySelector('helix-sidekick');
+        oAddedSidekick.addEventListener('custom:preflight', preflightListener);
+      },
+      { once: true },
+    );
   }
 }
 

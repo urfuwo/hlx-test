@@ -321,15 +321,6 @@ main .section.column-section {
     column-gap: var(--udexGridGutters);
   }
 
-  .column-section-block {
-    display: block;
-    overflow-x: hidden;
-  }
-
-  .column-section > div:not(.column-section-block) {
-    display: none;
-  }
-
   .column-section-1-1 {
     grid-template-columns: 1fr 1fr;
   }
@@ -368,41 +359,6 @@ main .section.column-section {
     grid-column: 2;
   }
 
-  .column-section > div.column-section-block > *:first-child {
-    margin-top: 0;
-  }
-
-  .column-section > div.column-section-block > div:first-child > *:first-child {
-    margin-top: 0;
-  }
-
-  .column-section
-    > div.column-section-block
-    > div:first-child
-    > div:first-child
-    > *:first-child {
-    margin-top: 0;
-  }
-
-  .column-section
-    > div.column-section-block
-    > div:first-child
-    > div:first-child
-    > div:first-child
-    > *:first-child {
-    margin-top: 0;
-  }
-
-  .column-section
-    > div.column-section-block
-    > div:first-child
-    > div:first-child
-    > div:first-child
-    > div:first-child
-    > *:first-child {
-    margin-top: 0;
-  }
-}
 
 @media (width >=1280px) {
   main .section.column-section {

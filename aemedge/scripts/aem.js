@@ -514,8 +514,10 @@ function decorateSections(main) {
               const colorRange = +styleKey.at(styleKey.length - 1);
               const backgroundClass = colorRange > 5 ? 'background-dark' : 'background-light';
               section.classList.add(backgroundClass);
+            } else {
+              section.classList.add(style);
             }
-            section.classList.add(style);
+            if (style.startsWith('column-section')) section.classList.add('column-section');
           });
         } else {
           section.dataset[toCamelCase(key)] = meta[key];
