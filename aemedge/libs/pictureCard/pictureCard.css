@@ -89,7 +89,7 @@
       order: -1;
 
       & .description {
-        color: black;
+        color: var(--udexColorNeutralBlack);
 
         @media (width < 640px) {
           display: none;

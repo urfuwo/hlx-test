@@ -410,3 +410,25 @@ main .section.column-section {
     padding-bottom: var(--udexSpacer56);
   }
 }
+
+.eyebrow {
+  color: var(--udexColorGrey7);
+}
+
+.section {
+  &.background-dark {
+    color: var(--udexColorNeutralWhite);
+
+    & a:any-link {
+      color: var(--udexColorNeutralWhite);
+
+      &:hover {
+        color: var(--udexColorBlue3);
+      }
+    }
+
+    .eyebrow {
+      color: var(--udexColorGrey3);
+    }
+  }
+}
