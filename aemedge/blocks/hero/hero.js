@@ -61,7 +61,7 @@ function replacePlaceholderText(elem, placeholder) {
  */
 export default async function decorate(block) {
   const isArticle = getMetadata('template') === 'article';
-  const isMediaBlend = block.classList.contains('media-blend') || isArticle;
+  const isMediaBlend = isArticle || block.classList.contains('media-blend');
   const placeholder = await fetchPlaceholders();
 
   // extract block content
