@@ -87,6 +87,11 @@ export default async function decorate(block) {
   // get images for background
   let picture = block.querySelector(':scope div > div > picture');
   if (picture) {
+    if (block.classList.contains('full-background-image')) {
+      picture.querySelectorAll('source[type="image/webp"]').forEach((source) => {
+        source.srcset = source.srcset.replaceAll('format=webply', 'format=webpll');
+      });
+    }
     picture.setAttribute('slot', 'backgroundPicture');
     const img = picture.querySelector('img');
     img.classList.add('custom-background-image');
