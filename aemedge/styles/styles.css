@@ -412,15 +412,15 @@ main .section.column-section {
 }
 
 /* Embedded sections within blocks */
-.block .section {
+.fragment-container .section {
   padding-left: 0;
   padding-right: 0;
 }
 
-.block .section:first-of-type {
+.fragment-container .section:first-of-type {
   padding-top: 0;
 }
 
-.block .section:last-of-type {
+.fragment-container .section:last-of-type {
   padding-bottom: 0;
 }

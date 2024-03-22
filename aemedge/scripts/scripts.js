@@ -192,6 +192,7 @@ async function replaceLinkPlaceHolderWithFragment(link) {
       while (nodeToReplace.parentNode.tagName !== 'DIV' && nodeToReplace.childNodes.length === 1) {
         nodeToReplace = nodeToReplace.parentNode;
       }
+      nodeToReplace.parentNode.classList.add('fragment-container');
       nodeToReplace.replaceWith(...fragment.childNodes);
     }
   }
