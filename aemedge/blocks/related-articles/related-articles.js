@@ -23,7 +23,7 @@ function getPictureCard(article, placeholders) {
     author, 'content-type': type, image, path, title, priority,
   } = article;
   const tagLabel = placeholders[toCamelCase(priority)] || '';
-  const info = formatDate(article.publicationDate * 1000);
+  const info = `Updated on ${formatDate(article.publicationDate * 1000)}`;
   return new PictureCard(title, path, type, info, asEntry(author), image, tagLabel);
 }
 

@@ -39,7 +39,7 @@ function getFilter(config) {
 function getInfo(article, config) {
   const { info = ['publicationDate'] } = config;
   if (info[0] === 'publicationDate') {
-    return formatDate(article.publicationDate * 1000);
+    return `Updated on ${formatDate(article.publicationDate * 1000)}`;
   }
   if (info[0] === 'author') {
     return article.author;
