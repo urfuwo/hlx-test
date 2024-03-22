@@ -224,7 +224,7 @@ a:hover {
     min-height: 36px;
     padding: 9px 10px;
 
-    &:not(.primary, .secondary)::after {
+    &:is(a):not(.primary, .secondary)::after {
       content: '\203A';
       position: absolute;
       padding-inline: var(--udexSpacer4);
