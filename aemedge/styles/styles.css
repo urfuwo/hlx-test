@@ -201,7 +201,7 @@ a:hover {
   text-decoration: underline;
 }
 
-.button-container {
+main .button-container {
   strong,
   em {
     display: block;
