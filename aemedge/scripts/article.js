@@ -56,6 +56,5 @@ function authorEntry(article, authorEntries) {
 export {
   allAuthorEntries,
   authorEntry,
-  completeEntry,
   getAuthorEntries,
 };

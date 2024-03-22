@@ -30,3 +30,7 @@ export default async function decorateBlock(block) {
   block.innerHTML = '';
   await addAuthorProfiles(block, keys);
 }
+
+export {
+  addAuthorProfiles,
+};
