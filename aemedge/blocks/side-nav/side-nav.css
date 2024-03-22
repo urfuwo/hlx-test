@@ -92,6 +92,7 @@ aside {
 
         & :is(li, a) {
           font-weight: var(--udexTypographyFontWeightMedium);
+          font-size: var(--nav-links-font-size);
         }
       }
 
