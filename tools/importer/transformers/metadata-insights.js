@@ -70,8 +70,8 @@ const createMetadata = (main, document, html, params, urlStr) => {
       document.articleFolder = data['Content Type Category action:mapped'];
 
       const tagging = new Map();
-      addToSet(tagging, 'Topic', data['Umbrella action:mapped'], 'topic');
-      addToSet(tagging, 'Topic', data['Umbrella action:mapped 2'], 'topic');
+      addToSet(tagging, 'Topics', data['Umbrella action:mapped'], 'topic');
+      addToSet(tagging, 'Topics', data['Umbrella action:mapped 2'], 'topic');
       addToSet(tagging, 'Industry', data['Industry 1 action:mapped'], 'industry');
       addToSet(tagging, 'Industry', data['Industry 2 action:mapped'], 'industry');
       addToSet(tagging, 'Content Type', data['Content Type action:mapped'], 'content-type');
@@ -89,7 +89,7 @@ const createMetadata = (main, document, html, params, urlStr) => {
   meta['Modified Time'] = randomDate.toISOString();
 
   // TODO remove once we know what will happen with tags
-  meta.Tags = meta.Topic;
+  meta.Tags = meta.Topics;
 
   const block = WebImporter.Blocks.getMetadataBlock(document, meta);
   block.id = 'metadata';
