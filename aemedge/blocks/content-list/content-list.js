@@ -5,7 +5,7 @@ import PictureCard from '../../libs/pictureCard/pictureCard.js';
 import Card from '../../libs/card/card.js';
 import Button from '../../libs/button/button.js';
 import { formatDate } from '../../scripts/utils.js';
-import { getAuthorEntries, asEntry } from '../../scripts/profile.js';
+import { allAuthorEntries, authorEntry } from '../../scripts/article.js';
 
 function matchTags(entry, config) {
   if (!config.tags) return true;
@@ -50,29 +50,19 @@ function getInfo(article, config) {
   return '';
 }
 
-function getPictureCard(article, config, placeholders, authorEntry) {
+function getPictureCard(article, config, placeholders, authEntry) {
   const {
     'content-type': type, image, path, title, priority,
   } = article;
   const tagLabel = placeholders[toCamelCase(priority)] || '';
   const info = getInfo(article, config);
-  return new PictureCard(title, path, type, info, authorEntry, image, tagLabel);
+  return new PictureCard(title, path, type, info, authEntry, image, tagLabel);
 }
 
 function getCard(article, config) {
   const { 'content-type': type, path, title } = article;
   const info = getInfo(article, config);
   return new Card(title, path, type, info);
-}
-
-async function allAuthorEntries(articles) {
-  const authorSet = new Set();
-  articles.forEach((article) => { authorSet.add(article.author); });
-  return getAuthorEntries(Array.from(authorSet));
-}
-
-function articleAuthEntry(authEntries, article) {
-  return authEntries.find((e) => e.author === article.author) || asEntry(article.author);
 }
 
 export default async function decorateBlock(block) {
@@ -106,7 +96,7 @@ export default async function decorateBlock(block) {
     if (textOnly) {
       card = getCard(article, config);
     } else {
-      card = getPictureCard(article, config, placeholders, articleAuthEntry(authEntries, article));
+      card = getPictureCard(article, config, placeholders, authorEntry(article, authEntries));
     }
     cardList.append(card.render());
   });

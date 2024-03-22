@@ -1,10 +1,12 @@
 import { getMetadata } from '../../scripts/aem.js';
 import ffetch from '../../scripts/ffetch.js';
-import { renderProfile, completeEntry } from '../../scripts/profile.js';
+import { renderProfile } from '../../scripts/profile.js';
+import { completeEntry } from '../../scripts/article.js';
 
 async function getAuthorEntry(entryFilter) {
-  const result = await ffetch(`${window.hlx.codeBasePath}/authors-index.json`).filter(entryFilter).limit(1).all();
-  return (!result || result.length < 1) ? null : completeEntry(result[0]);
+  const resultStream = await ffetch(`${window.hlx.codeBasePath}/authors-index.json`).filter(entryFilter).limit(1).all();
+  const result = (!resultStream) ? { path: '/author/name', author: 'Name' } : resultStream[0];
+  return completeEntry(result);
 }
 
 export default async function decorate(block) {

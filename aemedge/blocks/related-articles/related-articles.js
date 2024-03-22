@@ -5,7 +5,7 @@ import {
 import ffetch from '../../scripts/ffetch.js';
 import PictureCard from '../../libs/pictureCard/pictureCard.js';
 import { formatDate } from '../../scripts/utils.js';
-import { asEntry } from '../../scripts/profile.js';
+import { allAuthorEntries, authorEntry } from '../../scripts/article.js';
 
 function getFilter(pageTags) {
   return (entry) => {
@@ -18,13 +18,13 @@ function getFilter(pageTags) {
   };
 }
 
-function getPictureCard(article, placeholders) {
+function getPictureCard(article, placeholders, authEntry) {
   const {
-    author, 'content-type': type, image, path, title, priority,
+    'content-type': type, image, path, title, priority,
   } = article;
   const tagLabel = placeholders[toCamelCase(priority)] || '';
   const info = `Updated on ${formatDate(article.publicationDate * 1000)}`;
-  return new PictureCard(title, path, type, info, asEntry(author), image, tagLabel);
+  return new PictureCard(title, path, type, info, authEntry, image, tagLabel);
 }
 
 export default async function decorateBlock(block) {
@@ -39,9 +39,10 @@ export default async function decorateBlock(block) {
     .slice(0, limit - 1)
     .all();
   const placeholders = await fetchPlaceholders();
+  const authEntries = await allAuthorEntries(articleStream);
   const cardList = ul();
   articleStream.forEach((article) => {
-    const card = getPictureCard(article, placeholders);
+    const card = getPictureCard(article, placeholders, authorEntry(article, authEntries));
     cardList.append(card.render());
   });
 

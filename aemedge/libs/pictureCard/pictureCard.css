@@ -135,7 +135,6 @@
   }
 
   &.horizontal {
-    display: grid;
     grid-template-columns: subgrid;
     grid-column: 1 / -1;
 
@@ -144,7 +143,7 @@
     }
 
     & .cardcontent {
-      order: -1;
+      order: 1;
       padding: var(--udexSpacer16) var(--udexSpacer16) 0 var(--udexSpacer16);
 
       & .description {
@@ -157,7 +156,7 @@
     }
 
     & .picture {
-      order: 1;
+      order: 2;
       grid-row: span 2;
       padding: var(--udexSpacer16);
 
@@ -167,7 +166,7 @@
     }
 
     & .infoblock {
-      order: 1;
+      order: 3;
       padding: 0 var(--udexSpacer16) var(--udexSpacer16) var(--udexSpacer16);
 
       & .info {

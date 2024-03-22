@@ -1,53 +1,11 @@
-import { createOptimizedPicture, decorateIcons, toClassName } from './aem.js';
+import { createOptimizedPicture, decorateIcons } from './aem.js';
 import {
   div, h2, p, a, span,
 } from './dom-builder.js';
-import ffetch from './ffetch.js';
 
 const breakpoints = [
   { width: '480' },
 ];
-
-function extractAuthorDescription(entry) {
-  let { description } = entry;
-  if (!description) {
-    if (entry.title) {
-      description = entry.title;
-      if (entry.author && entry.title.startsWith(`${entry.author}, `)) {
-        description = entry.title.substring(entry.author.length + 2);
-      }
-    } else {
-      description = '';
-    }
-  }
-  return description;
-}
-
-function asEntry(authorName) {
-  return (authorName === '0')
-    ? null
-    : { author: authorName, path: `/author/${toClassName(authorName).replace('-', '')}` };
-}
-
-function completeEntry(entry) {
-  const result = (!entry) ? { path: '/author/name', author: 'Name' } : entry;
-  result.description = extractAuthorDescription(result);
-  return result;
-}
-
-async function getAuthorEntries(keys) {
-  const entryFilter = ((entry) => (keys.includes(entry.path) || keys.includes(entry.author)));
-  const unsortedEntries = await ffetch(`${window.hlx.codeBasePath}/authors-index.json`).filter(entryFilter).limit(keys.length).all();
-  const sortedEntries = [];
-  if (unsortedEntries) {
-    keys.forEach((key) => {
-      sortedEntries.push(completeEntry(unsortedEntries.find(
-        (entry) => (key === entry.path) || key.includes(entry.author),
-      )));
-    });
-  }
-  return sortedEntries;
-}
 
 function renderProfile(entry, asAvatar = false) {
   if (!entry) return null;
@@ -80,8 +38,6 @@ function renderProfile(entry, asAvatar = false) {
 }
 
 export {
-  asEntry,
-  completeEntry,
+  // eslint-disable-next-line import/prefer-default-export
   renderProfile,
-  getAuthorEntries,
 };
