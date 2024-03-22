@@ -43,11 +43,11 @@
     }
 
     & > :not(:last-child, .hero-container) {
-      padding-block-end: 56px;
+      padding-block-end: var(--udexSpacer56);
     }
 
     & > :last-child {
-      padding-block-end: 84px;
+      padding-block-end: var(--udexSpacer84);
     }
   }
 
@@ -71,6 +71,20 @@
           margin: unset;
         }
       }
+    }
+  }
+
+  & .button-container:has(> a) {
+    margin-block: 0;
+    padding-block-start: var(--udexSpacer24);
+
+    &:not(:only-child) {
+      padding-block: var(--udexSpacer24) var(--udexSpacer56);
+    }
+
+    & + h2 {
+      padding-block-start: var(--udexSpacer56);
+      margin-block-start: 0;
     }
   }
 }
