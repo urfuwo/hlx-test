@@ -24,7 +24,7 @@ export default class Card {
     return li(
       { class: 'card' },
       p({ class: 'type eyebrow' }, this.getType()),
-      p({ class: 'title' }, a({ href: this.path, 'aria-label': this.title }, this.title)),
+      p({ class: 'title link' }, a({ href: this.path, 'aria-label': this.title }, this.title)),
       this.getLabel(),
     );
   }
