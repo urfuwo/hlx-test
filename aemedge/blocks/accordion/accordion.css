@@ -1,0 +1,48 @@
+.accordion p {
+  margin: 0
+}
+
+.accordion details {
+  border-bottom: 1px solid var(--udexColorGrey3);
+  width: 100%
+}
+
+.accordion details summary {
+  position: relative;
+  padding: var(--udexSpacer12) var(--udexSpacer12) var(--udexSpacer12) var(--udexSpacer8);
+  cursor: pointer;
+  list-style: none;
+  overflow: auto;
+  display: inline-flex;
+  align-items: center;
+  font-size: var(--udexTypographyHeadingMediumXXXSFontSize);
+  font-weight: var(--udexTypographyFontWeightMedium);
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.accordion .accordion-arrow {
+  box-sizing: border-box;
+  display: inline-block;
+
+  /* Helps ensure icon and text are aligned properly */
+  line-height: var(--udexTypographyHeadingMediumXXXSFontSize);
+  width: 42px;
+  height: 42px;
+
+  /* Icon image should be 18px x 18px */
+  padding: calc((42px - 18px) / 2);
+  margin-right: var(--udexSpacer12);
+}
+
+.accordion details[open] .accordion-arrow {
+  transform: rotate(90deg);
+}
+
+.accordion details summary::-webkit-details-marker {
+  display: none;
+}
+
+.accordion details .accordion-item-body {
+  padding: var(--udexSpacer12) var(--udexSpacer16);
+}
