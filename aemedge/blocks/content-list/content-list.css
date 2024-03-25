@@ -7,12 +7,12 @@
   & ul {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(278px, 1fr));
+    grid-template-rows: auto auto auto;
     grid-gap: var(--udexGridGutters);
     list-style: none;
     margin: 0;
     padding: 0;
-
-    --article-tile-height: auto;
+    height: var(--card-tile-height);
 
     @media (width >= 640px) {
       & {

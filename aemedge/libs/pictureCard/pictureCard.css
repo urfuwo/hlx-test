@@ -2,13 +2,15 @@
   --card-image-height: 130px;
 
   display: grid;
-  grid-auto-rows: max-content max-content auto;
-  align-items: self-start;
+  grid-template-rows: subgrid;
+  grid-row: 1 / -1;
+  gap: 0;
   box-shadow: 0 2px 4px rgb(34 54 73 / 20%);
   background-color: var(--background-color);
   border-radius: var(--sapTile_BorderCornerRadius);
   overflow: hidden;
   position: relative;
+  /* height: 360px; */
 
   & img {
     width: 100%;
@@ -22,7 +24,7 @@
 
   & .cardcontent {
     display: block;
-    padding: var(--udexSpacer16) var(--udexSpacer16) 0 var(--udexSpacer16);
+    padding: var(--udexSpacer16);
 
     & .type {
       font-size: var(--udexTypographyEyebrowSFontSize);
@@ -58,10 +60,28 @@
         color: var(--udexColorNeutralBlack);
       }
     }
+
+    & .author {
+      display: block;
+
+      & a {
+        font-size: var(--udexTypographyBodyXSFontSize);
+        font-weight: var(--udexTypographyFontWeightMedium);
+        line-height: var(--udexTypographyDisplayLineHeight);
+        color: var(--udexColorNeutralBlack);
+      }
+    }
+
+    & .info {
+      display: block;
+      font-size: var(--udexTypographyNavigationRegularXSFontSize);
+      font-weight: var(--udexTypographyFontWeightRegular);
+      line-height: var(--udexTypographyDisplayLineHeight);
+      color: var(--udexColorGrey6);
+    }
   }
 
   & .infoblock {
-    align-self: end;
     padding: 0 var(--udexSpacer16) var(--udexSpacer16) var(--udexSpacer16);
 
     & .author {
@@ -136,15 +156,16 @@
 
   &.horizontal {
     grid-template-columns: subgrid;
+    grid-template-rows: unset;
     grid-column: 1 / -1;
+    grid-row: unset;
 
     @media (width < 640px) {
       display: block;
     }
 
     & .cardcontent {
-      order: 1;
-      padding: var(--udexSpacer16) var(--udexSpacer16) 0 var(--udexSpacer16);
+      order: -1;
 
       & .description {
         color: black;
@@ -156,9 +177,9 @@
     }
 
     & .picture {
-      order: 2;
-      grid-row: span 2;
+      order: 1;
       padding: var(--udexSpacer16);
+      grid-row: span 2;
 
       @media (width < 640px) {
         padding: unset;
@@ -201,11 +222,3 @@
     }
   }
 }
-
-@media (width > 640px) {
-  .picture-card:not(.horizontal) {
-    min-height: 360px;
-    max-height: 360px;
-  }
-}
-
