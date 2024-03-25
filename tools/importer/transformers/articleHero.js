@@ -1,5 +1,6 @@
 /* global WebImporter */
 const transformHero = (main, document) => {
+  // news hero
   const heroNews = document.querySelector('.c-hero');
   if (heroNews) {
     // clean up hero stuff
@@ -19,6 +20,7 @@ const transformHero = (main, document) => {
     heroNews.replaceWith(table);
   }
 
+  // insights hero
   const heroInsights = document.querySelector('.heroSpaceProductCategory');
   if (heroInsights) {
     const block = [['Hero'], [heroInsights.innerHTML]];

@@ -44,6 +44,7 @@ async function transformDOM(document, url, html, params) {
     'div.ReactModalPortal',
     'div.lightboxI18nContainer',
     'div.notificationBannerWrapper',
+    'div.pageAnalytics-block',
     'div[data-component="ContactUs"]',
     'div[data-component="PageRating"]',
     'div#bPopup-container',
