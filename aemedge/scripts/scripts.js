@@ -4,9 +4,9 @@ import {
   decorateBlocks,
   decorateButtons,
   decorateIcons,
-  decorateSections,
   decorateTemplateAndTheme,
   getMetadata,
+  readBlockConfig,
   loadBlock,
   loadBlocks,
   loadCSS,
@@ -15,6 +15,7 @@ import {
   loadHeader,
   sampleRUM,
   toClassName,
+  toCamelCase,
   waitForLCP,
 } from './aem.js';
 
@@ -86,6 +87,67 @@ function decorateImageLinks(main) {
       }
       picture.parentNode.replaceChild(newLink, picture);
       linkElement.remove();
+    }
+  });
+}
+
+function capitalize(name) {
+  return toClassName(name)
+    .replace(/-(\w)/g, (_, letter) => letter.toUpperCase())
+    .replace(/^\w/, (firstLetter) => firstLetter.toUpperCase());
+}
+
+/**
+ * Decorates all sections in a container element.
+ * @param {Element} main The container element
+ */
+function decorateSections(main) {
+  const styleProperties = getComputedStyle(document.body);
+  main.querySelectorAll(':scope > div').forEach((section) => {
+    const wrappers = [];
+    let defaultContent = false;
+    [...section.children].forEach((e) => {
+      if (e.tagName === 'DIV' || !defaultContent) {
+        const wrapper = document.createElement('div');
+        wrappers.push(wrapper);
+        defaultContent = e.tagName !== 'DIV';
+        if (defaultContent) wrapper.classList.add('default-content-wrapper');
+      }
+      wrappers[wrappers.length - 1].append(e);
+    });
+    wrappers.forEach((wrapper) => section.append(wrapper));
+    section.classList.add('section');
+    section.dataset.sectionStatus = 'initialized';
+    section.style.display = 'none';
+
+    // Process section metadata
+    const sectionMeta = section.querySelector('div.section-metadata');
+    if (sectionMeta) {
+      const meta = readBlockConfig(sectionMeta);
+      Object.keys(meta).forEach((key) => {
+        if (key === 'style') {
+          const styles = meta.style
+            .split(',')
+            .filter((style) => style)
+            .map((style) => toClassName(style.trim()));
+          styles.forEach((style) => {
+            if (style.startsWith('background-')) {
+              const styleKey = `--udexColor${capitalize(style.replace('background-', ''))}`;
+              const styleValue = styleProperties.getPropertyValue(styleKey);
+              section.style.backgroundColor = styleValue;
+              const colorRange = +styleKey.at(styleKey.length - 1);
+              const backgroundClass = colorRange > 5 ? 'background-dark' : 'background-light';
+              section.classList.add(backgroundClass);
+            } else {
+              section.classList.add(style);
+            }
+            if (style.startsWith('column-section')) section.classList.add('column-section');
+          });
+        } else {
+          section.dataset[toCamelCase(key)] = meta[key];
+        }
+      });
+      sectionMeta.parentNode.remove();
     }
   });
 }
