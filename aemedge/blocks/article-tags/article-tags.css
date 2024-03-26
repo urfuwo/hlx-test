@@ -21,6 +21,6 @@ main .article-tags div.tag-list a {
 }
 
 main .article-tags div.tag-list a:hover {
-    background-color: var(--udexColorNeutral);
-    border: 1px solid var(--udexColorGrey2);
+    background-color: var(--udexColorGrey3);
+    border: 1px solid var(--udexColorGrey3);
 }
