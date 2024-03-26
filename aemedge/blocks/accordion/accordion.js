@@ -24,7 +24,7 @@ export default function decorate(block) {
     );
 
     // decorate accordion item body
-    const body = !hasWrapper(row.children[1]) ? p(...row.children[1]) : row.children[1];
+    const body = !hasWrapper(row.children[1]) ? p(row.children[1]) : row.children[1];
     body.className = 'accordion-item-body';
 
     // decorate accordion item
@@ -34,7 +34,7 @@ export default function decorate(block) {
       summary,
       body,
     );
-    decorateIcons(details);
     row.replaceWith(details);
   });
+  decorateIcons(block);
 }
