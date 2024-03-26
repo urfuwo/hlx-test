@@ -19,7 +19,10 @@ export default class PictureCard extends Card {
 
   getAuthor() {
     if (this.author && this.author !== '0') {
-      return span({ class: 'author' }, a({ href: this.getAuthorUrl() }, span(`${this.author}`)));
+      return span(
+        { class: 'author text' },
+        a({ href: this.getAuthorUrl() }, span(`${this.author}`)),
+      );
     }
     return '';
   }
@@ -53,7 +56,7 @@ export default class PictureCard extends Card {
         { class: 'cardcontent' },
         this.getTagLabel(),
         span({ class: 'type' }, this.getType()),
-        span({ class: 'title' }, a({ href: this.path }, this.title)),
+        span({ class: 'title text' }, a({ href: this.path }, this.title)),
         this.getDescription(horizontal),
         this.getAuthor(),
         span({ class: 'info' }, this.info),
