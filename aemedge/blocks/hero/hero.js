@@ -1,6 +1,8 @@
 import '@udex/webcomponents/dist/HeroBanner.js';
-import { div, span, p } from '../../scripts/dom-builder.js';
-import { fetchPlaceholders, getMetadata, toCamelCase } from '../../scripts/aem.js';
+import { div, span, a } from '../../scripts/dom-builder.js';
+import {
+  fetchPlaceholders, getMetadata, toCamelCase, toClassName,
+} from '../../scripts/aem.js';
 import { formatDate } from '../../scripts/utils.js';
 
 function calculateInitials(name) {
@@ -22,7 +24,8 @@ function decorateMetaInfo() {
     avatar.setAttribute('initials', calculateInitials(author));
     avatar.setAttribute('color-scheme', 'Neutral');
 
-    const authorEl = span({ class: 'media-blend__author' }, author);
+    const authorUrl = `/author/${toClassName(author).replace('-', '')}`;
+    const authorEl = a({ class: 'media-blend__author', href: authorUrl }, author);
     infoBlockWrapper.append(avatar, authorEl);
   }
   const lastUpdate = getMetadata('modified-time')
@@ -56,8 +59,8 @@ function replacePlaceholderText(elem, placeholder) {
 }
 
 /**
- * loads and decorates the footer
- * @param {Element} block The footer block element
+ * loads and decorates the hero
+ * @param {Element} block The hero block element
  */
 export default async function decorate(block) {
   const isArticle = getMetadata('template') === 'article';
@@ -69,10 +72,28 @@ export default async function decorate(block) {
   const heading = block.querySelector('h1');
   const eyebrow = block.querySelector('h6');
   let eyebrowText = eyebrow?.textContent;
-  if (!eyebrowText && isArticle) { // if no eyebrow text is set, use the content type for articles
-    const contentType = getMetadata('content-type').split(',')[0].trim();
+  const contentType = getMetadata('content-type').split(',')[0].trim();
+
+  if (!eyebrowText && isArticle) {
+    // if no eyebrow text is set, use the content type for articles
     const placeholderText = placeholder[toCamelCase(`content-type/${contentType}`)];
     eyebrowText = placeholderText || toCamelCase(contentType);
+  }
+
+  const eyebrowArrow = span({ class: 'eyebrow-arrow' });
+  let newEyebrow;
+  if (eyebrow?.firstElementChild?.tagName.toLowerCase() === 'a') {
+    // If author has added a custom link, add arrow and appropriate classes for styling
+    newEyebrow = eyebrow.firstElementChild;
+    newEyebrow.insertBefore(eyebrowArrow, newEyebrow.firstChild);
+    newEyebrow.className = 'media-blend__intro-text';
+  } else if (isArticle) {
+    // If article, add link to parent topics page, and add arrow and appropriate classes for styling
+    const eyebrowUrl = `/topics/${toClassName(contentType)}`;
+    newEyebrow = eyebrowText ? a({ class: 'media-blend__intro-text', href: eyebrowUrl }, eyebrowArrow, eyebrowText) : '';
+  } else {
+    // Else display simple span or nothing
+    newEyebrow = eyebrowText ? span({ class: 'media-blend__intro-text' }, eyebrowText) : '';
   }
 
   const contentSlot = div(
@@ -80,7 +101,7 @@ export default async function decorate(block) {
       slot: 'content',
       class: ['hero-banner', 'media-blend__content'],
     },
-    eyebrowText ? p({ class: 'media-blend__intro-text' }, eyebrowText) : '',
+    newEyebrow,
     replacePlaceholderText(heading, placeholder),
   );
   hero.append(contentSlot);
@@ -118,20 +139,29 @@ export default async function decorate(block) {
     }
   });
 
+  // Add Primary tag
+  const tagContainer = div({ class: 'media-blend__tags' });
+  const firstTagText = getMetadata('article:tag').split(',')[0].trim();
+  if (firstTagText) {
+    const tagText = placeholder[toCamelCase(`tag/${firstTagText}`)] || firstTagText;
+    const tag = a({ href: `/topics/${toClassName(tagText.trim())}` }, tagText.trim());
+    tagContainer.append(tag);
+  }
+
   // convert all buttons to udex-buttons
   const buttonContainer = div({ class: 'media-blend__buttons' });
-  block.querySelectorAll('p.button-container a').forEach((a) => {
+  block.querySelectorAll('p.button-container a').forEach((anchor) => {
     const button = document.createElement('udex-button');
-    if (a.parentElement.nodeName === 'STRONG') button.design = 'Primary';
-    if (a.parentElement.nodeName === 'EM') button.design = 'Secondary';
-    button.textContent = a.textContent;
+    if (anchor.parentElement.nodeName === 'STRONG') button.design = 'Primary';
+    if (anchor.parentElement.nodeName === 'EM') button.design = 'Secondary';
+    button.textContent = anchor.textContent;
 
     button.addEventListener('click', () => {
-      window.location.href = a.href;
+      window.location.href = anchor.href;
     });
 
     buttonContainer.appendChild(button);
-    a.closest('p').remove();
+    anchor.closest('p').remove();
   });
   if (block.querySelector(':scope div > div').childElementCount > 0) contentSlot.append(...block.querySelector(':scope div > div').children);
 
@@ -140,6 +170,10 @@ export default async function decorate(block) {
       await import('@udex/webcomponents/dist/Avatar.js');
     }
     contentSlot.append(decorateMetaInfo());
+  }
+
+  if (tagContainer.children.length > 0) {
+    contentSlot.append(tagContainer);
   }
 
   if (buttonContainer.childElementCount > 0) {
