@@ -24,14 +24,16 @@
 .accordion .accordion-arrow {
   box-sizing: border-box;
   display: inline-block;
+  transform: rotate(0deg);
+  transition: transform .3s ease;
 
   /* Helps ensure icon and text are aligned properly */
   line-height: var(--udexTypographyHeadingMediumXXXSFontSize);
   width: 42px;
   height: 42px;
 
-  /* Icon image should be 18px x 18px */
-  padding: calc((42px - 18px) / 2);
+  /* Icon image should be 18px x 18px. Set padding to (42px - 18px) / 2 = 12px */
+  padding: var(--udexSpacer12);
   margin-right: var(--udexSpacer12);
 }
 
