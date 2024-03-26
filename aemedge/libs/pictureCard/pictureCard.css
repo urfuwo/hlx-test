@@ -3,14 +3,13 @@
 
   display: grid;
   grid-template-rows: subgrid;
-  grid-row: 1 / -1;
+  grid-row: span 3;
   gap: 0;
   box-shadow: 0 2px 4px rgb(34 54 73 / 20%);
   background-color: var(--background-color);
   border-radius: var(--sapTile_BorderCornerRadius);
   overflow: hidden;
   position: relative;
-  /* height: 360px; */
 
   & img {
     width: 100%;
