@@ -45,9 +45,7 @@ async function decorateTemplates(main) {
     if (templates.includes(template)) {
       const templateName = TEMPLATE_LIST[template];
       loadCSS(`${window.hlx.codeBasePath}/templates/${templateName}/${templateName}.css`);
-      const mod = await import(
-        `${window.hlx.codeBasePath}/templates/${templateName}/${templateName}.js`
-      );
+      const mod = await import(`${window.hlx.codeBasePath}/templates/${templateName}/${templateName}.js`);
       if (mod.default) {
         await mod.default(main);
       }
@@ -56,39 +54,6 @@ async function decorateTemplates(main) {
     // eslint-disable-next-line no-console
     console.error('Template decoration failed', error);
   }
-}
-
-/**
- * Decorates image links in a specified container by replacing
- * the picture elements with anchor elements.
- * @param {Element} main - The container element
- */
-function decorateImageLinks(main) {
-  main.querySelectorAll('p picture').forEach((picture) => {
-    const linkElement = picture.nextElementSibling;
-    if (
-      linkElement
-      && linkElement.tagName === 'A'
-      && linkElement.href.startsWith('https://www.linkedin.com/posts/')
-    ) {
-      const linkURL = linkElement.href;
-
-      /**
-       * The new anchor element to replace the picture element.
-       * @type {HTMLAnchorElement}
-       */
-      const newLink = Object.assign(document.createElement('a'), {
-        target: '_blank',
-        rel: 'noopener',
-        href: linkURL,
-      });
-      while (picture.firstChild) {
-        newLink.appendChild(picture.firstChild);
-      }
-      picture.parentNode.replaceChild(newLink, picture);
-      linkElement.remove();
-    }
-  });
 }
 
 function capitalize(name) {
@@ -153,6 +118,35 @@ function decorateSections(main) {
 }
 
 /**
+ * Decorates image links in a specified container by replacing
+ * the picture elements with anchor elements.
+ * @param {Element} main - The container element
+ */
+function decorateImageLinks(main) {
+  main.querySelectorAll('p picture').forEach((picture) => {
+    const linkElement = picture.nextElementSibling;
+    if (linkElement && linkElement.tagName === 'A' && linkElement.href.startsWith('https://www.linkedin.com/posts/')) {
+      const linkURL = linkElement.href;
+
+      /**
+       * The new anchor element to replace the picture element.
+       * @type {HTMLAnchorElement}
+       */
+      const newLink = Object.assign(document.createElement('a'), {
+        target: '_blank',
+        rel: 'noopener',
+        href: linkURL,
+      });
+      while (picture.firstChild) {
+        newLink.appendChild(picture.firstChild);
+      }
+      picture.parentNode.replaceChild(newLink, picture);
+      linkElement.remove();
+    }
+  });
+}
+
+/**
  * Decorates the main element.
  * @param {Element} main The main element
  */
@@ -191,13 +185,9 @@ function initSidekick() {
     decorateBlock(preflightBlock);
     await loadBlock(preflightBlock);
     const { default: getModal } = await import(`${window.hlx.codeBasePath}/blocks/modal/modal.js`);
-    const customModal = await getModal(
-      'dialog-modal',
-      () => section.innerHTML,
-      (modal) => {
-        modal.querySelector('button[name="close"]')?.addEventListener('click', () => modal.close());
-      },
-    );
+    const customModal = await getModal('dialog-modal', () => section.innerHTML, (modal) => {
+      modal.querySelector('button[name="close"]')?.addEventListener('click', () => modal.close());
+    });
     customModal.showModal();
   };
 
@@ -205,14 +195,10 @@ function initSidekick() {
   if (sk) {
     sk.addEventListener('custom:preflight', preflightListener); // TODO change to preflight
   } else {
-    document.addEventListener(
-      'sidekick-ready',
-      () => {
-        const oAddedSidekick = document.querySelector('helix-sidekick');
-        oAddedSidekick.addEventListener('custom:preflight', preflightListener);
-      },
-      { once: true },
-    );
+    document.addEventListener('sidekick-ready', () => {
+      const oAddedSidekick = document.querySelector('helix-sidekick');
+      oAddedSidekick.addEventListener('custom:preflight', preflightListener);
+    }, { once: true });
   }
 }
 
