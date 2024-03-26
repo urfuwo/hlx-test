@@ -1,6 +1,4 @@
-import {
-  li, a, p,
-} from '../../scripts/dom-builder.js';
+import { li, a, p } from '../../scripts/dom-builder.js';
 import { loadCSS } from '../../scripts/aem.js';
 
 export default class Card {
@@ -16,7 +14,7 @@ export default class Card {
   }
 
   getLabel() {
-    return this.info ? p({ class: 'label' }, this.info) : '';
+    return this.info ? p({ class: 'label eyebrow' }, this.info) : '';
   }
 
   render(excludeStyles) {
@@ -25,8 +23,8 @@ export default class Card {
     }
     return li(
       { class: 'card' },
-      p({ class: 'type' }, this.getType()),
-      p({ class: 'title' }, a({ href: this.path, 'aria-label': this.title }, this.title)),
+      p({ class: 'type eyebrow' }, this.getType()),
+      p({ class: 'title link' }, a({ href: this.path, 'aria-label': this.title }, this.title)),
       this.getLabel(),
     );
   }

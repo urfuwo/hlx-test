@@ -4,9 +4,9 @@ import {
   decorateBlocks,
   decorateButtons,
   decorateIcons,
-  decorateSections,
   decorateTemplateAndTheme,
   getMetadata,
+  readBlockConfig,
   loadBlock,
   loadBlocks,
   loadCSS,
@@ -15,6 +15,7 @@ import {
   loadHeader,
   sampleRUM,
   toClassName,
+  toCamelCase,
   waitForLCP,
 } from './aem.js';
 
@@ -55,23 +56,64 @@ async function decorateTemplates(main) {
   }
 }
 
+function capitalize(name) {
+  return toClassName(name)
+    .replace(/-(\w)/g, (_, letter) => letter.toUpperCase())
+    .replace(/^\w/, (firstLetter) => firstLetter.toUpperCase());
+}
+
 /**
- * Decorates all multi-column sections in a container element.
+ * Decorates all sections in a container element.
  * @param {Element} main The container element
  */
-function decorateMultiColumnSections(main) {
-  main.querySelectorAll(':scope > div.column-section-1-1, :scope > div.column-section-3-2, :scope > div.column-section-2-3, :scope > div.column-section-2-1, :scope > div.column-section-1-2, :scope > div.column-section-3-1, :scope > div.column-section-1-3').forEach((section) => {
-    const left = document.createElement('div');
-    const right = document.createElement('div');
-    left.className = 'column-section-left-block column-section-block';
-    right.className = 'column-section-right-block column-section-block';
-
-    Array.from(section.children).forEach((e) => {
-      (e.classList.contains('right-style-wrapper') ? right : left).append(e.cloneNode(true));
+function decorateSections(main) {
+  const styleProperties = getComputedStyle(document.body);
+  main.querySelectorAll(':scope > div').forEach((section) => {
+    const wrappers = [];
+    let defaultContent = false;
+    [...section.children].forEach((e) => {
+      if (e.tagName === 'DIV' || !defaultContent) {
+        const wrapper = document.createElement('div');
+        wrappers.push(wrapper);
+        defaultContent = e.tagName !== 'DIV';
+        if (defaultContent) wrapper.classList.add('default-content-wrapper');
+      }
+      wrappers[wrappers.length - 1].append(e);
     });
+    wrappers.forEach((wrapper) => section.append(wrapper));
+    section.classList.add('section');
+    section.dataset.sectionStatus = 'initialized';
+    section.style.display = 'none';
 
-    section.append(left, right);
-    section.classList.add('column-section');
+    // Process section metadata
+    const sectionMeta = section.querySelector('div.section-metadata');
+    if (sectionMeta) {
+      const meta = readBlockConfig(sectionMeta);
+      Object.keys(meta).forEach((key) => {
+        if (key === 'style') {
+          const styles = meta.style
+            .split(',')
+            .filter((style) => style)
+            .map((style) => toClassName(style.trim()));
+          styles.forEach((style) => {
+            if (style.startsWith('background-')) {
+              const styleKey = `--udexColor${capitalize(style.replace('background-', ''))}`;
+              const styleValue = styleProperties.getPropertyValue(styleKey);
+              section.style.backgroundColor = styleValue;
+              const colorRange = +styleKey.at(styleKey.length - 1);
+              const backgroundClass = colorRange > 5 ? 'background-dark' : 'background-light';
+              section.classList.add(backgroundClass);
+            } else {
+              section.classList.add(style);
+            }
+            if (style.startsWith('column-section')) section.classList.add('column-section');
+          });
+        } else {
+          section.dataset[toCamelCase(key)] = meta[key];
+        }
+      });
+      sectionMeta.parentNode.remove();
+    }
   });
 }
 
@@ -119,7 +161,6 @@ export async function decorateMain(main, shouldDecorateTemplates = true) {
   }
   decorateSections(main);
   decorateBlocks(main);
-  decorateMultiColumnSections(main);
 }
 
 function setSAPTheme() {
