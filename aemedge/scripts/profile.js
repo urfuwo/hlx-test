@@ -3,14 +3,13 @@ import {
   div, h2, p, a, span,
 } from './dom-builder.js';
 
-const breakpoints = [
-  { width: '480' },
-];
+const breakpoints = [{ width: '480' }];
 
 function renderProfile(entry, asAvatar = false) {
   if (!entry) return null;
   const authorImage = entry.image
-    ? createOptimizedPicture(entry.image, entry.author, false, breakpoints) : null;
+    ? createOptimizedPicture(entry.image, entry.author, false, breakpoints)
+    : null;
   const authorProfile = asAvatar
     ? div(
       div({ class: 'avatar' }, authorImage ? div(authorImage) : div()),

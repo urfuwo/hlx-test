@@ -1,7 +1,7 @@
 import { loadCSS } from '../../scripts/aem.js';
 import { div } from '../../scripts/dom-builder.js';
-import { renderProfile } from '../../scripts/profile.js';
 import { getAuthorEntries } from '../../scripts/article.js';
+import Avatar from '../../libs/avatar/avatar.js';
 
 async function addAuthorProfiles(block, keys) {
   const entries = await getAuthorEntries(keys);
@@ -9,12 +9,19 @@ async function addAuthorProfiles(block, keys) {
     if (keys.length > 1) {
       block.classList.add(`elems${keys.length}`);
       entries.forEach((entry) => {
-        const profile = div({ class: 'author-profile hor' }, renderProfile(entry));
+        const avatar = new Avatar(entry.title, entry.description, entry.path, entry.image);
+        const profile = div({ class: 'author-profile hor' }, avatar.renderDetails('big'));
         block.append(profile);
       });
     } else {
       block.classList.add('vertical');
-      block.append(div({ class: 'author-profile' }, renderProfile(entries[0])));
+      const avatar = new Avatar(
+        entries[0].title,
+        entries[0].description,
+        entries[0].path,
+        entries[0].image,
+      );
+      block.append(div({ class: 'author-profile' }, avatar.renderDetails()));
     }
   } else {
     block.parentNode.remove();
@@ -31,6 +38,4 @@ export default async function decorateBlock(block) {
   await addAuthorProfiles(block, keys);
 }
 
-export {
-  addAuthorProfiles,
-};
+export { addAuthorProfiles };

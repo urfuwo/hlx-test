@@ -4,6 +4,7 @@ import {
 } from '../../scripts/dom-builder.js';
 import { createOptimizedPicture, loadCSS } from '../../scripts/aem.js';
 import { renderProfile } from '../../scripts/profile.js';
+import Avatar from '../avatar/avatar.js';
 
 export default class PictureCard extends Card {
   constructor(title, path, type, info, authorEntry, image, tagLabel, description) {
@@ -29,12 +30,22 @@ export default class PictureCard extends Card {
   }
 
   getAvatarElement(authorEntry) {
-    if (!authorEntry) { return ''; }
+    if (!authorEntry) {
+      return '';
+    }
     return authorEntry?.image
-      && (new URL(this.authorEntry.image).pathname !== '/default-meta-image.png')
-      ? div({ class: 'author-profile' }, renderProfile(this.authorEntry, true))
-      : span(
-        { class: 'author' },
+      && new URL(this.authorEntry.image).pathname !== '/default-meta-image.png'
+      ? div(
+        { class: 'author-profile' },
+        new Avatar(
+          this.authorEntry.author,
+          this.authorEntry.description,
+          this.authorEntry.path,
+          this.authorEntry.image,
+        ).render('small'),
+      )
+      : div(
+        { class: 'author subtitle' },
         a({ href: this.authorEntry.path }, span(`${this.authorEntry.author}`)),
       );
   }
@@ -54,7 +65,7 @@ export default class PictureCard extends Card {
         { class: 'cardcontent' },
         this.getTagLabel(),
         span({ class: 'type' }, this.getType()),
-        span({ class: 'title' }, a({ href: this.path }, this.title)),
+        span({ class: 'title text' }, a({ href: this.path }, this.title)),
         this.getDescription(horizontal),
       ),
       div(

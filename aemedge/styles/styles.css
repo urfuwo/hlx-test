@@ -191,6 +191,22 @@ main pre {
   white-space: pre;
 }
 
+.subtitle {
+  & a {
+    font-size: var(--udexTypographyBodyXSFontSize);
+    font-weight: var(--udexTypographyFontWeightMedium);
+    line-height: var(--udexTypographyDisplayLineHeight);
+    color: var(--udexColorNeutralBlack) !important;
+  }
+}
+
+.info {
+  font-size: var(--udexTypographyNavigationRegularXSFontSize);
+  font-weight: var(--udexTypographyFontWeightRegular);
+  line-height: var(--udexTypographyDisplayLineHeight);
+  color: var(--udexColorGrey6);
+}
+
 a:any-link {
   color: var(--udexColorBlue7);
   text-decoration: underline;

@@ -22,7 +22,6 @@
   }
 
   & .cardcontent {
-    display: block;
     padding: var(--udexSpacer16);
 
     & .type {
@@ -50,8 +49,6 @@
     }
 
     & .title {
-      display: block;
-
       & a {
         font-size: var(--udexTypographyHeadingMediumXXSFontSize);
         font-weight: var(--udexTypographyFontWeightMedium);
@@ -60,53 +57,16 @@
     }
 
     & .author {
-      display: block;
-
       & a {
         font-size: var(--udexTypographyBodyXSFontSize);
         font-weight: var(--udexTypographyFontWeightMedium);
         line-height: var(--udexTypographyDisplayLineHeight);
       }
-    }
-
-    & .info {
-      display: block;
-      font-size: var(--udexTypographyNavigationRegularXSFontSize);
-      font-weight: var(--udexTypographyFontWeightRegular);
-      line-height: var(--udexTypographyDisplayLineHeight);
-      color: var(--udexColorGrey6);
     }
   }
 
   & .infoblock {
     padding: 0 var(--udexSpacer16) var(--udexSpacer16) var(--udexSpacer16);
-
-    & .author {
-      display: block;
-
-      & a {
-        font-size: var(--udexTypographyBodyXSFontSize);
-        font-weight: var(--udexTypographyFontWeightMedium);
-        line-height: var(--udexTypographyDisplayLineHeight);
-        color: var(--udexColorNeutralBlack);
-      }
-    }
-
-    & .details {
-      display: block;
-      font-size: var(--udexTypographyNavigationRegularXSFontSize);
-      font-weight: var(--udexTypographyFontWeightRegular);
-      line-height: var(--udexTypographyDisplayLineHeight);
-      color: var(--udexColorGrey6);
-    }
-
-    & .info {
-      display: block;
-      font-size: var(--udexTypographyNavigationRegularXSFontSize);
-      font-weight: var(--udexTypographyFontWeightRegular);
-      line-height: var(--udexTypographyDisplayLineHeight);
-      color: var(--udexColorGrey6);
-    }
 
     & .author-profile {
       display: block;
@@ -117,17 +77,6 @@
         box-shadow: none;
         padding: 0;
         gap: var(--udexSpacer16);
-      }
-
-      & .avatar {
-        flex: 0 0 2rem;
-        width: 2rem;
-        height: 2rem;
-
-        & img {
-          width: 2rem;
-          height: 2rem;
-        }
       }
 
       & .author {
@@ -186,23 +135,6 @@
     & .infoblock {
       order: 3;
       padding: 0 var(--udexSpacer16) var(--udexSpacer16) var(--udexSpacer16);
-
-      & .info {
-        display: block;
-        font-size: var(--udexTypographyNavigationRegularXSFontSize);
-        font-weight: var(--udexTypographyFontWeightRegular);
-        line-height: var(--udexTypographyDisplayLineHeight);
-        color: var(--udexColorGrey6);
-      }
-
-      & .author {
-        & a {
-          font-size: var(--udexTypographyBodyXSFontSize);
-          font-weight: var(--udexTypographyFontWeightMedium);
-          line-height: var(--udexTypographyDisplayLineHeight);
-          color: var(--udexColorNeutralBlack);
-        }
-      }
     }
 
     & img {
