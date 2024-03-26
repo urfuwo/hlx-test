@@ -355,4 +355,37 @@ async function loadPage() {
   loadDelayed();
 }
 
+async function initDataLayer() {
+  window.adobeDataLayer = [];
+  window.adobeDataLayer.push({
+    event: 'globalDL',
+    site: {
+      country: 'glo',
+      name: 'www',
+    },
+    user: {
+      type: 'visitor',
+      loginStatus: 'no',
+    },
+  });
+  const relpath = window.location.pathname.substring(1);
+  window.adobeDataLayer.push({
+    event: 'pageView',
+    page: {
+      country: 'glo',
+      language: 'en',
+      name: window.location.pathname,
+      section: relpath.indexOf('/') > 0 ? relpath.substring(0, relpath.indexOf('/')) : relpath,
+      url: window.location.href,
+      referrer: document.referrer,
+      title: document.querySelector('title').textContent.replace(/[\n\t]/gm, ''),
+    },
+    user: {
+      type: 'visitor',
+      loginStatus: 'no',
+    },
+  });
+}
+
+initDataLayer();
 loadPage();
