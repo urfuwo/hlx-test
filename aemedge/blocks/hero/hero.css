@@ -155,6 +155,7 @@ udex-hero-banner .hero-banner.media-blend__additional-content {
 }
 
 udex-hero-banner .custom-background-image {
+  display: none;
   position: absolute;
   width: 100%;
   height: 100%;
@@ -168,6 +169,12 @@ udex-hero-banner .custom-background-image {
 
 udex-hero-banner .custom-background-image:dir(rtl) {
   transform: scaleX(-1);
+}
+
+@container hero-wrapper (width >= 640px) {
+  udex-hero-banner .custom-background-image {
+    display: block
+  }
 }
 
 .hero-wrapper.hero-background-blue-wrapper,
@@ -284,6 +291,10 @@ udex-hero-banner .text-neutral-black {
 
 .hero-wrapper.full-background-image-style-wrapper udex-hero-banner {
   --udexHeroBannerBackgroundImageObjectFit: cover;
+
+  .custom-background-image {
+    display: block
+  }
 }
 
 .hero-container:has(.hero-no-bottom-space-wrapper) {
