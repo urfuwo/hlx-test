@@ -14,6 +14,7 @@ import articleContentFooter from './articleContentFooter.js';
 import articleIntro from './articleIntro.js';
 import articlePanel from './articlePanel.js';
 import articleSidebar from './articleSidebar.js';
+import transformLightboxImages from './articleLightboxImages.js';
 
 export const transformers = [
   metadata,
@@ -28,6 +29,7 @@ export const transformers = [
   articlePageFooter,
   articleMoreSection,
   authorProfile,
+  transformLightboxImages,
   transformVideo,
 ];
 
