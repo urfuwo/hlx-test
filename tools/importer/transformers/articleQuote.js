@@ -15,7 +15,7 @@ function cleanQuoteText(qText) {
 
 function cleanQuoteSource(qSource) {
   /* remove newlines, replace brs with whitespace */
-  let qS = qSource.replace(/[\n\t]/gm, '').replaceAll(/<br>/g, ' ');
+  let qS = qSource.replace(/[\n\t]/gm, '').replaceAll(/<br>/g, ' ').replaceAll('– ', ' ');
   /* remove <cite> elements */
   qS = qS.replace(/<cite>(.*)<\/cite>/gm, '$1');
   /* wrap entire quote source with a p and a span */
@@ -83,19 +83,35 @@ function handleQuoteType3(main, document) {
   });
 }
 
-/* Insights Quote https://www.sap.com/insights/viewpoints/giving-ai-a-moral-compass.html */
-function handleInsightsQuote(main, document) {
+function handleInsightsQuotes(main, document) {
+  /* Insights Quote https://www.sap.com/insights/viewpoints/giving-ai-a-moral-compass.html */
   main.querySelectorAll('span.doubleQuote').forEach((quoteTextElem) => {
     const quoteWrapper = quoteTextElem.closest('div');
     const quote = [[quoteTextElem.textContent]];
 
     const qSource = quoteWrapper.querySelector('i')?.textContent;
     if (qSource) {
-      quote.push([qSource]);
+      quote.push([cleanQuoteSource(qSource)]);
     }
 
     const table = WebImporter.DOMUtils.createTable([['Quote'], ...quote], document);
     quoteWrapper.replaceWith(table);
+  });
+
+  /* Insights Quote https://www.sap.com/insights/viewpoints/the-business-value-of-sustainability-is-here.html */
+  main.querySelectorAll('.TextStandard__callout--qI8L9').forEach((quoteTextElem) => {
+    const quoteWrapper = quoteTextElem.parentNode;
+    const quote = [[quoteTextElem.textContent]];
+
+    const qSourceDiv = quoteWrapper.querySelector('.fontBook');
+    if (qSourceDiv && qSourceDiv.childElementCount === 1) {
+      quote.push([cleanQuoteSource(qSourceDiv.textContent)]);
+    }
+
+    const table = WebImporter.DOMUtils.createTable([['Quote'], ...quote], document);
+    if (quote.length > 1) {
+      quoteWrapper.replaceWith(table);
+    }
   });
 }
 
@@ -103,6 +119,6 @@ const transformQuote = (main, document) => {
   handleQuoteType1(main, document);
   handleQuoteType2(main, document);
   handleQuoteType3(main, document);
-  handleInsightsQuote(main, document);
+  handleInsightsQuotes(main, document);
 };
 export default transformQuote;
