@@ -14,10 +14,8 @@ const articleAccordion = (main, document) => {
       const [entryTitle, entryContent] = entries[0];
 
       // if we have page hash links only we used the toc block
-
       const links = [...entryContent.querySelectorAll('a')];
       const pageHashLinksOnly = links.every((link) => link.hash && link.hash.startsWith('#') && link.pathname === document.originalURL.pathname);
-
       if (pageHashLinksOnly) {
         const metaData = main.querySelector('table#metadata');
         const row = metaData.insertRow();
