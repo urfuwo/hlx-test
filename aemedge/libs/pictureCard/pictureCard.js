@@ -2,29 +2,16 @@ import Card from '../card/card.js';
 import {
   li, a, span, div, p,
 } from '../../scripts/dom-builder.js';
-import { createOptimizedPicture, toClassName, loadCSS } from '../../scripts/aem.js';
+import { createOptimizedPicture, loadCSS } from '../../scripts/aem.js';
+import Avatar from '../avatar/avatar.js';
 
 export default class PictureCard extends Card {
-  constructor(title, path, type, info, author, image, tagLabel, description) {
+  constructor(title, path, type, info, authorEntry, image, tagLabel, description) {
     super(title, path, type, info);
-    this.author = author;
+    this.authorEntry = authorEntry;
     this.image = image;
     this.tagLabel = tagLabel;
     this.description = description;
-  }
-
-  getAuthorUrl() {
-    return `/author/${toClassName(this.author).replace('-', '')}`;
-  }
-
-  getAuthor() {
-    if (this.author && this.author !== '0') {
-      return span(
-        { class: 'author text' },
-        a({ href: this.getAuthorUrl() }, span(`${this.author}`)),
-      );
-    }
-    return '';
   }
 
   getOptimizedPicture() {
@@ -41,6 +28,27 @@ export default class PictureCard extends Card {
       : '';
   }
 
+  getAvatarElement(authorEntry) {
+    if (!authorEntry) {
+      return '';
+    }
+    return authorEntry?.image
+      && new URL(this.authorEntry.image).pathname !== '/default-meta-image.png'
+      ? div(
+        { class: 'author-profile' },
+        new Avatar(
+          this.authorEntry.author,
+          this.authorEntry.description,
+          this.authorEntry.path,
+          this.authorEntry.image,
+        ).render('small'),
+      )
+      : div(
+        { class: 'author subtitle' },
+        a({ href: this.authorEntry.path }, span(`${this.authorEntry.author}`)),
+      );
+  }
+
   render(horizontal, excludeStyles) {
     if (!excludeStyles) {
       loadCSS(`${window.hlx.codeBasePath}/libs/pictureCard/pictureCard.css`);
@@ -52,14 +60,17 @@ export default class PictureCard extends Card {
         { class: 'picture' },
         a({ href: this.path, 'aria-label': this.title }, this.getOptimizedPicture()),
       ),
-      span(
+      div(
         { class: 'cardcontent' },
         this.getTagLabel(),
-        span({ class: 'type' }, this.getType()),
-        span({ class: 'title text' }, a({ href: this.path }, this.title)),
+        div({ class: 'type' }, this.getType()),
+        div({ class: 'title text' }, a({ href: this.path }, this.title)),
         this.getDescription(horizontal),
-        this.getAuthor(),
-        span({ class: 'info' }, this.info),
+      ),
+      div(
+        { class: 'infoblock' },
+        this.getAvatarElement(this.authorEntry),
+        div({ class: 'info' }, this.info),
       ),
     );
   }

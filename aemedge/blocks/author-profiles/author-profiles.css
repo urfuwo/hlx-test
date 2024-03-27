@@ -3,21 +3,21 @@
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(1,1fr);
+  grid-template-columns: repeat(1, 1fr);
   grid-gap: var(--udexGridGutters);
 }
 
 /* S: use 2 per row */
 @media (width >= 640px) {
   .author-profiles:not(.vertical) {
-    grid-template-columns: repeat(2,1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 /* M: use 2 per row */
 @media (width >= 980px) {
   .author-profiles:not(.vertical) {
-    grid-template-columns: repeat(2,1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .author-profiles.elems2:not(.vertical) {
@@ -28,7 +28,7 @@
 /* L and XL: use 3 per row, unless there are two elements */
 @media (width >= 1280px) {
   .author-profiles:not(.vertical) {
-    grid-template-columns: repeat(3,1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 
   .author-profiles.elems2:not(.vertical) {
@@ -50,7 +50,12 @@
     & > div {
       border: none;
       box-shadow: none;
-      background: linear-gradient(to bottom, var(--udexColorBlue1) 0%, var(--udexColorBlue1) 110px, var(--udexColorNeutralWhite) 111px);
+      background: linear-gradient(
+        to bottom,
+        var(--udexColorBlue1) 0%,
+        var(--udexColorBlue1) 110px,
+        var(--udexColorNeutralWhite) 111px
+      );
       flex-direction: column;
       align-items: center;
       padding-top: var(--udexSpacer32);
@@ -63,17 +68,6 @@
     & h2 {
       text-align: center;
       font-size: var(--udexTypographyHeadingMediumXXSFontSize);
-    }
-
-    & .avatar {
-      flex: 0 0 7.5rem;
-      width: 7.5rem;
-      height: 7.5rem;
-
-      & img {
-        height: 7.5rem;
-        width: 7.5rem;
-      }
     }
   }
 }

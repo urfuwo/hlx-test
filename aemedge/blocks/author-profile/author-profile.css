@@ -2,9 +2,8 @@
   margin-top: var(--udexSpacer20);
 }
 
-.author-profile>div {
+.author-profile > div {
   display: flex;
-  flex-direction: row;
   padding: var(--udexSpacer24) var(--udexSpacer20);
   gap: var(--udexSpacer24);
   border: 1px solid var(--udexColorGrey2);
@@ -13,43 +12,7 @@
   border-radius: var(--sapTile_BorderCornerRadius);
 }
 
-.author-profile .avatar {
-  flex: 0 0 5.25rem;
-  width: 5.25rem;
-  height: 5.25rem;
-  vertical-align: top;
-  border-radius: 50%;
-  border: 1px solid var(--udexColorGrey2);
-}
-
-.author-profile .avatar:hover {
-  border-color: var(--udexColorGrey7);
-}
-
-.author-profile .avatar img {
-  object-fit: cover;
-  height: 5.25rem;
-  width: 5.25rem;
-  vertical-align: top;
-  border-radius: 50%;
-}
-
-.author-profile h2 {
-  font-size: var(--udexTypographyHeadingMediumXSFontSize);
-  text-align: left;
-  margin: 0;
-  margin-bottom: 6px;
-}
-
-.author-profile p {
-  font-size: var(--udexTypographyBodyXSFontSize);
-  color: var(--udexColorGrey7);
-  text-align: left;
-  margin: 0;
-}
-
 .author-profile .link a {
-  text-align: left;
   font-size: var(--udexTypographyBodySFontSize);
   padding-top: var(--udexSpacer4);
   padding-bottom: var(--udexSpacer4);

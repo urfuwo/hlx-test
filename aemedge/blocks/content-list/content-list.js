@@ -5,6 +5,7 @@ import PictureCard from '../../libs/pictureCard/pictureCard.js';
 import Card from '../../libs/card/card.js';
 import Button from '../../libs/button/button.js';
 import { formatDate } from '../../scripts/utils.js';
+import { allAuthorEntries, authorEntry } from '../../scripts/article.js';
 
 function matchTags(entry, config) {
   if (!config.tags) return true;
@@ -38,7 +39,7 @@ function getFilter(config) {
 function getInfo(article, config) {
   const { info = ['publicationDate'] } = config;
   if (info[0] === 'publicationDate') {
-    return formatDate(article.publicationDate * 1000);
+    return `Updated on ${formatDate(article.publicationDate * 1000)}`;
   }
   if (info[0] === 'author') {
     return article.author;
@@ -49,13 +50,13 @@ function getInfo(article, config) {
   return '';
 }
 
-function getPictureCard(article, config, placeholders) {
+function getPictureCard(article, config, placeholders, authEntry) {
   const {
-    author, 'content-type': type, image, path, title, priority,
+    'content-type': type, image, path, title, priority,
   } = article;
   const tagLabel = placeholders[toCamelCase(priority)] || '';
   const info = getInfo(article, config);
-  return new PictureCard(title, path, type, info, author, image, tagLabel);
+  return new PictureCard(title, path, type, info, authEntry, image, tagLabel);
 }
 
 function getCard(article, config) {
@@ -88,13 +89,14 @@ export default async function decorateBlock(block) {
     articleStream = articleStream.slice(0, 10); // only show first 10, rest will be paginated
     viewBtn = new Button('Show More', 'icon-link-arrow');
   }
-  const cardList = ul();
+  const authEntries = await allAuthorEntries(articleStream);
+  const cardList = ul({ class: 'card-items' });
   articleStream.forEach((article) => {
     let card;
     if (textOnly) {
       card = getCard(article, config);
     } else {
-      card = getPictureCard(article, config, placeholders);
+      card = getPictureCard(article, config, placeholders, authorEntry(article, authEntries));
     }
     cardList.append(card.render());
   });
