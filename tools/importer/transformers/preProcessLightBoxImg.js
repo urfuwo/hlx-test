@@ -6,22 +6,30 @@
 export default function unwrapLightboxImages(main, document) {
   main.querySelectorAll('figure.wp-block-image').forEach((figure) => {
     const caption = figure.querySelector('figcaption');
-    if (caption) {
-      const captionWrapper = document.createElement('em');
-      captionWrapper.textContent = caption.textContent;
-      figure.after(captionWrapper);
-      caption.remove();
-    }
+    const captionText = caption.textContent;
+    const captionWrapper = document.createElement('figcaption');
+    const captionTextElem = document.createElement('em');
+    captionTextElem.textContent = captionText;
+    captionWrapper.appendChild(captionTextElem);
+
     const img = figure.querySelector('img');
     const parent = img?.parentElement;
-    if (parent.tagName === 'A' && parent.href.match(/\.(jpeg|jpg|gif|png|webp)$/) !== null) {
+    if (
+      parent.tagName === 'A'
+      && parent.href.match(/\.(jpeg|jpg|gif|png|webp)$/) !== null
+    ) {
       parent.replaceWith(img);
+      figure.appendChild(captionWrapper);
+      caption.remove();
     }
   });
 
   main.querySelectorAll('div.entry-content a > img').forEach((lightboxImg) => {
     const parent = lightboxImg.parentElement;
-    if (parent.tagName === 'A' && parent.href.match(/\.(jpeg|jpg|gif|png|webp)$/) !== null) {
+    if (
+      parent.tagName === 'A'
+      && parent.href.match(/\.(jpeg|jpg|gif|png|webp)$/) !== null
+    ) {
       parent.replaceWith(lightboxImg);
     }
   });
