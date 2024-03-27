@@ -65,7 +65,7 @@ const createMetadata = (main, document, html, params, urlStr) => {
 
   // get tagging from mapping table
   if (document.mappingTable) {
-    const data = document.mappingTable.find((n) => n.URL === document.originalURL);
+    const data = document.mappingTable.find((n) => n.URL === document.originalURL.toString());
     if (data) {
       document.articleFolder = data['Content Type Category action:mapped'];
 
@@ -87,9 +87,6 @@ const createMetadata = (main, document, html, params, urlStr) => {
   randomDate.setMilliseconds(randomTime);
   meta['Published Time'] = randomDate.toISOString();
   meta['Modified Time'] = randomDate.toISOString();
-
-  // TODO remove once we know what will happen with tags
-  meta.Tags = meta.Topics;
 
   const block = WebImporter.Blocks.getMetadataBlock(document, meta);
   block.id = 'metadata';

@@ -45,6 +45,7 @@ async function transformDOM(document, url, html, params) {
     'div.lightboxI18nContainer',
     'div.notificationBannerWrapper',
     'div.pageAnalytics-block',
+    'div.ShareLinks__root--DOpMR',
     'div[data-component="ContactUs"]',
     'div[data-component="PageRating"]',
     'div#bPopup-container',
@@ -108,7 +109,7 @@ export default {
   }) => {
     await loadImportMappings(document);
 
-    document.originalURL = params.originalURL;
+    document.originalURL = new URL(params.originalURL);
 
     return [
       {
