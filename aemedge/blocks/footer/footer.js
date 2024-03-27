@@ -1,5 +1,5 @@
 import { decorateIcons, getMetadata } from '../../scripts/aem.js';
-import { loadFragment } from '../fragment/fragment.js';
+import { loadFragment } from '../../scripts/scripts.js';
 import { span } from '../../scripts/dom-builder.js';
 
 /**
