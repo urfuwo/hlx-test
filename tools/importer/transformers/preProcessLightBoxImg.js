@@ -6,13 +6,14 @@
 export default function unwrapLightboxImages(main, document) {
   main.querySelectorAll('figure.wp-block-image').forEach((figure) => {
     const caption = figure.querySelector('figcaption');
-
-    const captionText = caption.textContent;
-    const captionWrapper = document.createElement('figcaption');
-    const captionTextElem = document.createElement('em');
-    captionTextElem.textContent = captionText;
-    captionWrapper.appendChild(captionTextElem);
-
+    let captionWrapper;
+    if (caption) {
+      const captionText = caption.textContent;
+      captionWrapper = document.createElement('figcaption');
+      const captionTextElem = document.createElement('em');
+      captionTextElem.textContent = captionText;
+      captionWrapper.appendChild(captionTextElem);
+    }
     const img = figure.querySelector('img');
     const parent = img?.parentElement;
     if (
@@ -20,8 +21,10 @@ export default function unwrapLightboxImages(main, document) {
       && parent.href.match(/\.(jpeg|jpg|gif|png|webp)$/) !== null
     ) {
       parent.replaceWith(img);
-      figure.appendChild(captionWrapper);
-      caption.remove();
+      if (captionWrapper) {
+        figure.appendChild(captionWrapper);
+        caption.remove();
+      }
     }
   });
 
