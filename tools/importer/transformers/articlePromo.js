@@ -57,10 +57,8 @@ const articlePromo = (main, document) => {
       const newsletterFragmentLink = document.createElement('a');
       newsletterFragmentLink.href = 'https://main--hlx-test--urfuwo.hlx.page/fragments/insights/newsletter-subscription';
       newsletterFragmentLink.textContent = newsletterFragmentLink.href;
-      const block = [['Fragment'], [newsletterFragmentLink]];
-      const table = WebImporter.DOMUtils.createTable(block, document);
       newsletterWrapper.remove();
-      document.querySelector('div#page').append(table);
+      document.querySelector('div#page').append(newsletterFragmentLink);
     }
   });
 };
