@@ -4,9 +4,9 @@ import {
   decorateBlocks,
   decorateButtons,
   decorateIcons,
-  decorateSections,
   decorateTemplateAndTheme,
   getMetadata,
+  readBlockConfig,
   loadBlock,
   loadBlocks,
   loadCSS,
@@ -15,6 +15,7 @@ import {
   loadHeader,
   sampleRUM,
   toClassName,
+  toCamelCase,
   waitForLCP,
 } from './aem.js';
 
@@ -55,23 +56,64 @@ async function decorateTemplates(main) {
   }
 }
 
+function capitalize(name) {
+  return toClassName(name)
+    .replace(/-(\w)/g, (_, letter) => letter.toUpperCase())
+    .replace(/^\w/, (firstLetter) => firstLetter.toUpperCase());
+}
+
 /**
- * Decorates all multi-column sections in a container element.
+ * Decorates all sections in a container element.
  * @param {Element} main The container element
  */
-function decorateMultiColumnSections(main) {
-  main.querySelectorAll(':scope > div.column-section-1-1, :scope > div.column-section-3-2, :scope > div.column-section-2-3, :scope > div.column-section-2-1, :scope > div.column-section-1-2, :scope > div.column-section-3-1, :scope > div.column-section-1-3').forEach((section) => {
-    const left = document.createElement('div');
-    const right = document.createElement('div');
-    left.className = 'column-section-left-block column-section-block';
-    right.className = 'column-section-right-block column-section-block';
-
-    Array.from(section.children).forEach((e) => {
-      (e.classList.contains('right-style-wrapper') ? right : left).append(e.cloneNode(true));
+function decorateSections(main) {
+  const styleProperties = getComputedStyle(document.body);
+  main.querySelectorAll(':scope > div').forEach((section) => {
+    const wrappers = [];
+    let defaultContent = false;
+    [...section.children].forEach((e) => {
+      if (e.tagName === 'DIV' || !defaultContent) {
+        const wrapper = document.createElement('div');
+        wrappers.push(wrapper);
+        defaultContent = e.tagName !== 'DIV';
+        if (defaultContent) wrapper.classList.add('default-content-wrapper');
+      }
+      wrappers[wrappers.length - 1].append(e);
     });
+    wrappers.forEach((wrapper) => section.append(wrapper));
+    section.classList.add('section');
+    section.dataset.sectionStatus = 'initialized';
+    section.style.display = 'none';
 
-    section.append(left, right);
-    section.classList.add('column-section');
+    // Process section metadata
+    const sectionMeta = section.querySelector('div.section-metadata');
+    if (sectionMeta) {
+      const meta = readBlockConfig(sectionMeta);
+      Object.keys(meta).forEach((key) => {
+        if (key === 'style') {
+          const styles = meta.style
+            .split(',')
+            .filter((style) => style)
+            .map((style) => toClassName(style.trim()));
+          styles.forEach((style) => {
+            if (style.startsWith('background-')) {
+              const styleKey = `--udexColor${capitalize(style.replace('background-', ''))}`;
+              const styleValue = styleProperties.getPropertyValue(styleKey);
+              section.style.backgroundColor = styleValue;
+              const colorRange = +styleKey.at(styleKey.length - 1);
+              const backgroundClass = colorRange > 5 ? 'background-dark' : 'background-light';
+              section.classList.add(backgroundClass);
+            } else {
+              section.classList.add(style);
+            }
+            if (style.startsWith('column-section')) section.classList.add('column-section');
+          });
+        } else {
+          section.dataset[toCamelCase(key)] = meta[key];
+        }
+      });
+      sectionMeta.parentNode.remove();
+    }
   });
 }
 
@@ -105,12 +147,37 @@ function decorateImageLinks(main) {
 }
 
 /**
+ * Decorates fragment links, replacing them with a placeholder,
+ * which is processed later in decorateFragments.
+ * This separate step ensures that the fragment links do not become buttons in decorateButtons
+ * @param {Element} main The container element
+ */
+function decorateFragmentLinks(main) {
+  const links = main.querySelectorAll('a');
+  [...links].forEach((link) => {
+    const path = link.getAttribute('href');
+    if (path && path.startsWith('/') && path.includes('/fragments/')) {
+      const fragmentLinkPlaceHolder = document.createElement('span');
+      fragmentLinkPlaceHolder.className = 'fragment-link';
+      fragmentLinkPlaceHolder.innerHTML = path;
+      link.replaceWith(fragmentLinkPlaceHolder);
+    }
+  });
+}
+
+/**
+ * Declare the decorateFragments method, since it's already used in decorateMain
+ */
+let decorateFragments;
+
+/**
  * Decorates the main element.
  * @param {Element} main The main element
  */
 // eslint-disable-next-line import/prefer-default-export
 export async function decorateMain(main, shouldDecorateTemplates = true) {
   // hopefully forward compatible button decoration
+  decorateFragmentLinks(main);
   decorateButtons(main);
   decorateIcons(main);
   decorateImageLinks(main);
@@ -119,8 +186,69 @@ export async function decorateMain(main, shouldDecorateTemplates = true) {
   }
   decorateSections(main);
   decorateBlocks(main);
-  decorateMultiColumnSections(main);
+  decorateFragments(main);
 }
+
+/**
+ * Loads a fragment.
+ * @param {string} path The path to the fragment
+ * @returns {HTMLElement} The root element of the fragment
+ */
+export async function loadFragment(path) {
+  if (path && path.startsWith('/')) {
+    const resp = await fetch(`${path}.plain.html`);
+    if (resp.ok) {
+      const main = document.createElement('main');
+      main.innerHTML = await resp.text();
+
+      // reset base path for media to fragment base
+      const resetAttributeBase = (tag, attr) => {
+        main.querySelectorAll(`${tag}[${attr}^="./media_"]`).forEach((elem) => {
+          elem[attr] = new URL(elem.getAttribute(attr), new URL(path, window.location)).href;
+        });
+      };
+      resetAttributeBase('img', 'src');
+      resetAttributeBase('source', 'srcset');
+
+      await decorateMain(main, false);
+      await loadBlocks(main);
+      return main;
+    }
+  }
+  return null;
+}
+
+/**
+ * Replace a link placeholder with a corresponding fragment, loaded asynchronously.
+ * @param {Element} link The link placeholder, which has the URL in its innerHTML
+ */
+async function replaceLinkPlaceHolderWithFragment(link) {
+  const path = link.innerHTML;
+  const fragment = await loadFragment(path);
+  if (fragment) {
+    const fragmentSection = fragment.querySelector(':scope .section');
+    if (fragmentSection) {
+      link.closest('.section').classList.add(...fragmentSection.classList);
+      let nodeToReplace = link;
+      while (nodeToReplace.parentNode.tagName !== 'DIV' && nodeToReplace.childNodes.length === 1) {
+        nodeToReplace = nodeToReplace.parentNode;
+      }
+      nodeToReplace.parentNode.classList.add('fragment-container');
+      nodeToReplace.replaceWith(...fragment.childNodes);
+    }
+  }
+}
+
+/**
+ * Decorates fragments
+ * @param {Element} main The container element
+ */
+decorateFragments = function decorateFragmentsFunction(main) {
+  const links = main.querySelectorAll('span.fragment-link');
+  [...links].forEach(async (link) => {
+    replaceLinkPlaceHolderWithFragment(link);
+  });
+};
 
 function setSAPTheme() {
   const sapTheme = getMetadata('saptheme', document) || 'sap_glow';

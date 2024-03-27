@@ -41,6 +41,14 @@
         margin: 0 var(--udexGridMargins);
       }
     }
+
+    & > :not(:last-child, .hero-container) {
+      padding-block-end: var(--udexSpacer56);
+    }
+
+    & > :last-child {
+      padding-block-end: var(--udexSpacer84);
+    }
   }
 
   & > footer {
@@ -65,6 +73,20 @@
       }
     }
   }
+
+  & .button-container:has(> a) {
+    margin-block: 0;
+    padding-block-start: var(--udexSpacer24);
+
+    &:not(:only-child) {
+      padding-block: var(--udexSpacer24) var(--udexSpacer56);
+    }
+
+    & + h2 {
+      padding-block-start: var(--udexSpacer56);
+      margin-block-start: 0;
+    }
+  }
 }
 
 .hub-l2.appear {
@@ -76,6 +98,10 @@
 
   & > main {
     @media (width >= 980px) {
+      & .hero-container {
+        margin-block-end: 84px;
+      }
+
       & > :not(.hero-container, .title-banner-container) {
         padding-inline: var(--udexGridMargins);
 
@@ -87,7 +113,8 @@
   }
 
   &:has(aside) {
-    --hero-margin: 0;
+    --hero-margin--left: 0;
+    --hero-margin--right: 0;
 
     grid-template:
       'header header' 60px
@@ -96,6 +123,12 @@
       / min-content 1fr;
 
     & > main {
+      @media (width >= 640px) {
+        & > * {
+          --hero-margin--left: 48px;
+        }
+      }
+
       @media (width >= 980px) {
         & > :not(.hero-container, .title-banner-container) {
           padding-inline: var(--udexGridGutters) var(--udexGridMargins);
@@ -107,119 +140,4 @@
       }
     }
   }
-}
-
-.section.background-blue,
-.section.background-blue-1 {
-  background-color: var(--udexColorBlue1);
-}
-
-.section.background-blue-2 {
-  background-color: var(--udexColorBlue2);
-}
-
-.section.background-blue-7 {
-  background-color: var(--udexColorBlue7);
-}
-
-.section.background-grey,
-.section.background-grey-1 {
-  background-color: var(--udexColorGrey1);
-}
-
-.section.background-grey-2 {
-  background-color: var(--udexColorGrey2);
-}
-
-.section.background-indigo,
-.section.background-indigo-1 {
-  background-color: var(--udexColorIndigo1);
-}
-
-.section.background-indigo-2 {
-  background-color: var(--udexColorIndigo2);
-}
-
-.section.background-pink,
-.section.background-pink-1 {
-  background-color: var(--udexColorPink1);
-}
-
-.section.background-pink-2 {
-  background-color: var(--udexColorPink2);
-}
-
-.section.background-raspberry,
-.section.background-raspberry-1 {
-  background-color: var(--udexColorRaspberry1);
-}
-
-.section.background-raspberry-2 {
-  background-color: var(--udexColorRaspberry2);
-}
-
-.section.background-red,
-.section.background-red-1 {
-  background-color: var(--udexColorRed1);
-}
-
-.section.background-red-2 {
-  background-color: var(--udexColorRed2);
-}
-
-.section.background-mango,
-.section.background-mango-1 {
-  background-color: var(--udexColorMango1);
-}
-
-.section.background-mango-2 {
-  background-color: var(--udexColorMango2);
-}
-
-.section.background-green,
-.section.background-green-1 {
-  background-color: var(--udexColorGreen1);
-}
-
-.section.background-green-2 {
-  background-color: var(--udexColorGreen2);
-}
-
-.section.background-teal,
-.section.background-teal-1 {
-  background-color: var(--udexColorTeal1);
-}
-
-.section.background-teal-2 {
-  background-color: var(--udexColorTeal2);
-}
-
-.section.text-black,
-.section.text-neutral-black {
-  color: var(--udexColorNeutralBlack);
-}
-
-.section.text-white,
-.section.text-neutral-white {
-  color: var(--udexColorNeutralWhite);
-
-  & a:any-link {
-    color: var(--udexColorNeutralWhite);
-  }
-
-  & .card .type {
-    color: var(--udexColorGrey4);
-  }
-
-  & .card .label {
-    color: var(--udexColorGrey4);
-  }
-}
-
-.section.divider-top {
-  margin-top: 5px;
-  box-shadow:
-    0 -2px 0 white,
-    0 -3px 0 var(--udexCoreDividerLight),
-    0 -5px 0 white;
 }
