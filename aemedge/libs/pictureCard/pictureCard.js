@@ -60,11 +60,11 @@ export default class PictureCard extends Card {
         { class: 'picture' },
         a({ href: this.path, 'aria-label': this.title }, this.getOptimizedPicture()),
       ),
-      span(
+      div(
         { class: 'cardcontent' },
         this.getTagLabel(),
-        span({ class: 'type' }, this.getType()),
-        span({ class: 'title text' }, a({ href: this.path }, this.title)),
+        div({ class: 'type' }, this.getType()),
+        div({ class: 'title text' }, a({ href: this.path }, this.title)),
         this.getDescription(horizontal),
       ),
       div(

@@ -19,7 +19,6 @@
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     gap: var(--udexSpacer16);
-    container-type: inline-size;
 
     @media (width >= 980px) {
       & {
