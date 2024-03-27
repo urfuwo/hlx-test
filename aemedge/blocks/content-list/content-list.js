@@ -90,7 +90,7 @@ export default async function decorateBlock(block) {
     viewBtn = new Button('Show More', 'icon-link-arrow');
   }
   const authEntries = await allAuthorEntries(articleStream);
-  const cardList = ul();
+  const cardList = ul({ class: 'card-items' });
   articleStream.forEach((article) => {
     let card;
     if (textOnly) {

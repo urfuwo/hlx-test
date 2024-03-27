@@ -1,4 +1,6 @@
 .content-list {
+  container: content-list / inline-size;
+
   & .heading {
     grid-column: 1 / -1;
     margin: unset;
@@ -7,23 +9,10 @@
   & ul {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(278px, 1fr));
-    grid-auto-rows: 115px 90px 70px;
     gap: var(--udexGridGutters);
     list-style: none;
     margin: 0;
     padding: 0;
-
-    @media (width >= 640px) {
-      & {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (width >= 980px) {
-      & {
-        grid-template-columns: repeat(4, 1fr);
-      }
-    }
   }
 
   &.text-only {
@@ -75,8 +64,22 @@ body.hub-l2 .content-list ul {
   }
 }
 
-@container (240px < width < 480px) {
+@container content-list (240px < width < 480px) {
   .content-list.text-only ul .card {
     grid-column: 1 / -1;
+  }
+}
+
+@container content-list (width >= 640px) {
+  .content-list ul {
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 115px 100px 100px;
+  }
+}
+
+@container content-list (width >= 980px) {
+  .content-list ul {
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 115px 100px 60px;
   }
 }
