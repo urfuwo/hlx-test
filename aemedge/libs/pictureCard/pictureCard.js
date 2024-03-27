@@ -3,7 +3,6 @@ import {
   li, a, span, div, p,
 } from '../../scripts/dom-builder.js';
 import { createOptimizedPicture, loadCSS } from '../../scripts/aem.js';
-import { renderProfile } from '../../scripts/profile.js';
 import Avatar from '../avatar/avatar.js';
 
 export default class PictureCard extends Card {
