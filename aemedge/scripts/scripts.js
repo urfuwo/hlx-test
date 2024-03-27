@@ -147,12 +147,37 @@ function decorateImageLinks(main) {
 }
 
 /**
+ * Decorates fragment links, replacing them with a placeholder,
+ * which is processed later in decorateFragments.
+ * This separate step ensures that the fragment links do not become buttons in decorateButtons
+ * @param {Element} main The container element
+ */
+function decorateFragmentLinks(main) {
+  const links = main.querySelectorAll('a');
+  [...links].forEach((link) => {
+    const path = link.getAttribute('href');
+    if (path && path.startsWith('/') && path.includes('/fragments/')) {
+      const fragmentLinkPlaceHolder = document.createElement('span');
+      fragmentLinkPlaceHolder.className = 'fragment-link';
+      fragmentLinkPlaceHolder.innerHTML = path;
+      link.replaceWith(fragmentLinkPlaceHolder);
+    }
+  });
+}
+
+/**
+ * Declare the decorateFragments method, since it's already used in decorateMain
+ */
+let decorateFragments;
+
+/**
  * Decorates the main element.
  * @param {Element} main The main element
  */
 // eslint-disable-next-line import/prefer-default-export
 export async function decorateMain(main, shouldDecorateTemplates = true) {
   // hopefully forward compatible button decoration
+  decorateFragmentLinks(main);
   decorateButtons(main);
   decorateIcons(main);
   decorateImageLinks(main);
@@ -161,7 +186,69 @@ export async function decorateMain(main, shouldDecorateTemplates = true) {
   }
   decorateSections(main);
   decorateBlocks(main);
+  decorateFragments(main);
 }
+
+/**
+ * Loads a fragment.
+ * @param {string} path The path to the fragment
+ * @returns {HTMLElement} The root element of the fragment
+ */
+export async function loadFragment(path) {
+  if (path && path.startsWith('/')) {
+    const resp = await fetch(`${path}.plain.html`);
+    if (resp.ok) {
+      const main = document.createElement('main');
+      main.innerHTML = await resp.text();
+
+      // reset base path for media to fragment base
+      const resetAttributeBase = (tag, attr) => {
+        main.querySelectorAll(`${tag}[${attr}^="./media_"]`).forEach((elem) => {
+          elem[attr] = new URL(elem.getAttribute(attr), new URL(path, window.location)).href;
+        });
+      };
+      resetAttributeBase('img', 'src');
+      resetAttributeBase('source', 'srcset');
+
+      await decorateMain(main, false);
+      await loadBlocks(main);
+      return main;
+    }
+  }
+  return null;
+}
+
+/**
+ * Replace a link placeholder with a corresponding fragment, loaded asynchronously.
+ * @param {Element} link The link placeholder, which has the URL in its innerHTML
+ */
+async function replaceLinkPlaceHolderWithFragment(link) {
+  const path = link.innerHTML;
+  const fragment = await loadFragment(path);
+  if (fragment) {
+    const fragmentSection = fragment.querySelector(':scope .section');
+    if (fragmentSection) {
+      link.closest('.section').classList.add(...fragmentSection.classList);
+      let nodeToReplace = link;
+      while (nodeToReplace.parentNode.tagName !== 'DIV' && nodeToReplace.childNodes.length === 1) {
+        nodeToReplace = nodeToReplace.parentNode;
+      }
+      nodeToReplace.parentNode.classList.add('fragment-container');
+      nodeToReplace.replaceWith(...fragment.childNodes);
+    }
+  }
+}
+
+/**
+ * Decorates fragments
+ * @param {Element} main The container element
+ */
+decorateFragments = function decorateFragmentsFunction(main) {
+  const links = main.querySelectorAll('span.fragment-link');
+  [...links].forEach(async (link) => {
+    replaceLinkPlaceHolderWithFragment(link);
+  });
+};
 
 function setSAPTheme() {
   const sapTheme = getMetadata('saptheme', document) || 'sap_glow';

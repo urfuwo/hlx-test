@@ -422,3 +422,17 @@ main .section {
     }
   }
 }
+
+/* Embedded sections within blocks */
+.fragment-container .section {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.fragment-container .section:first-of-type {
+  padding-top: 0;
+}
+
+.fragment-container .section:last-of-type {
+  padding-bottom: 0;
+}
