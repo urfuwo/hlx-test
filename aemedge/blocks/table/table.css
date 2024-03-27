@@ -1,51 +1,64 @@
 .table {
-    width: 100%;
-    overflow-x: auto;
-  }
-  
-  .table table {
-    width: 100%;
-    max-width: 100%;
-    border-collapse: collapse;
-    font-size: var(--udexTypographyBodySFontSize);
-  }
-  
-  .table table thead tr,
-  .table table tbody tr{
-    border-bottom: var(--sapList_BorderWidth) solid var(--sapList_GroupHeaderBorderColor);
-  }
-  
-  .table table tbody tr {
-    background-color: var(--sapList_GroupHeaderBackground);
-  }
-  
-  .table table th {
-    color: var(--sapList_HeaderTextColor);
-    font-weight: var(--udexTypographyFontWeightBold);
-  }
-  
-  .table table th,
-  .table table td {
-    padding: 8px;
-    text-align: left;
+  width: 100%;
+  overflow-x: auto;
+  background-color: var(--sapList_TableGroupHeaderBackground);
+  color: var(--sapList_TableGroupHeaderTextColor);
+}
 
-    & p {
-      margin: 0;
-    }
+.table table {
+  width: 100%;
+  max-width: 100%;
+  border-collapse: collapse;
+  font-size: var(--udexTypographyBodySFontSize);
+}
+
+.table table tr {
+  box-sizing: border-box;
+  border-bottom: var(--sapList_BorderWidth) solid var(--sapList_TableGroupHeaderBorderColor);
+}
+
+.table table tbody tr {
+  height: 40px;
+}
+
+.table table thead tr {
+  height: 42px;
+}
+
+.table table th {
+  font-size: var(--udexTypographyNavigationMediumXLFontSize);
+  font-weight: var(--udexTypographyFontWeightMedium);
+  padding: var(--udexSpacer12) var(--udexSpacer16);
+}
+
+.table table td {
+  font-size: var(--udexTypographyBodySFontSize);
+  padding: var(--udexSpacer8) var(--udexSpacer16);
+}
+
+.table table th,
+.table table td {
+  text-align: left;
+  color: var(--sapList_HeaderTextColor);
+  line-height: var(--udexTypographyDisplayLineHeight);
+
+  & p {
+    margin: 0;
   }
-  
-  /* no header variant */
-  .table.no-header table tbody tr {
-    border-top: var(--sapList_BorderWidth) solid var(--sapList_GroupHeaderBorderColor);
-  }
-  
-  /* striped variant */
-  .table.striped tbody tr:nth-child(odd) {
-    background-color: var(--sapList_GroupAlternatingHeaderBackground);
-  }
-  
-  /* bordered variant */
-  .table.bordered table th,
-  .table.bordered table td {
-    border: var(--sapList_BorderWidth) solid var(--sapList_GroupHeaderBorderColor);
-  }
+}
+
+/* no header variant */
+.table.no-header table tbody tr {
+  border-top: var(--sapList_BorderWidth) solid var(--sapList_TableGroupHeaderBorderColor);
+}
+
+/* striped variant */
+.table.striped tbody tr:nth-child(odd) {
+  background-color: var(--sapList_GroupAlternatingHeaderBackground);
+}
+
+/* bordered variant */
+.table.bordered table th,
+.table.bordered table td {
+  border: var(--sapList_BorderWidth) solid var(--sapList_TableGroupHeaderBorderColor);
+}
