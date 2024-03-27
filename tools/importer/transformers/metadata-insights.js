@@ -43,7 +43,8 @@ const createMetadata = (main, document, html, params, urlStr) => {
   if (img && img.content) {
     const el = document.createElement('img');
     const imgUrl = new URL(img.content);
-    el.src = imgUrl.toString();
+    // eslint-disable-next-line prefer-destructuring
+    el.src = imgUrl.toString().split('?')[0];
     meta.Image = el;
   }
 

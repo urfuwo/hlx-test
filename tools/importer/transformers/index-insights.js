@@ -12,6 +12,7 @@ import articleIntro from './articleIntro.js';
 import articlePanel from './articlePanel.js';
 import articleAccordion from './articleAccordion.js';
 import articleTable from './articleTable.js';
+import cleanUpImgSrc from './preProcessInsightsImgs.js';
 
 export const transformers = [
   metadata,
@@ -31,5 +32,5 @@ export const transformers = [
 ];
 
 export const preTransformers = [
-  // nothing yet
+  cleanUpImgSrc,
 ];
