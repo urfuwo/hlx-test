@@ -77,7 +77,7 @@ async function generateDocumentPath(document, url, html, params) {
 }
 
 async function loadImportMappings(document) {
-  const mappingTable = await fetch(`${PROJECT_BASE_URL}/draft/mhaack/insights-mapped-final.json?limit=1000`).then((res) => res.json());
+  const mappingTable = await fetch(`${PROJECT_BASE_URL}/draft/mhaack/insights-mapped-final-032824.json?limit=1000`).then((res) => res.json());
   if (mappingTable) {
     document.mappingTable = mappingTable.data;
   }

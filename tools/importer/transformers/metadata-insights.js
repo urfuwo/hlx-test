@@ -3,7 +3,7 @@
 const addToSet = (map, key, value, prefix) => {
   let v = value;
   if (prefix && value.toLowerCase().startsWith(prefix.toLowerCase())) {
-    v = value.substring(prefix.length + 1);
+    v = value.split('/').pop().trim();
   }
 
   if (!map.has(key)) {
@@ -53,12 +53,10 @@ const createMetadata = (main, document, html, params, urlStr) => {
     if (sectionWrapper.querySelector('h2')?.textContent.indexOf('Meet the Author') > -1) {
       const authors = [];
       sectionWrapper.querySelectorAll('.Headline__xs--v8bKJ').forEach((authorEL) => {
-        authors.push(authorEL.textContent);
+        authors.push(authorEL.textContent.trim());
       });
       if (authors.length > 0) {
-        meta['Display Author'] = authors.join(', ');
-        // eslint-disable-next-line prefer-destructuring
-        meta.Author = authors[0];
+        meta.Author = authors.join(', ');
       }
       sectionWrapper.remove();
     }
@@ -71,23 +69,25 @@ const createMetadata = (main, document, html, params, urlStr) => {
       document.articleFolder = data['Content Type Category action:mapped'];
 
       const tagging = new Map();
-      addToSet(tagging, 'Topics', data['Umbrella action:mapped'], 'topic');
-      addToSet(tagging, 'Topics', data['Umbrella action:mapped 2'], 'topic');
-      addToSet(tagging, 'Industry', data['Industry 1 action:mapped'], 'industry');
-      addToSet(tagging, 'Industry', data['Industry 2 action:mapped'], 'industry');
-      addToSet(tagging, 'Content Type', data['Content Type action:mapped'], 'content-type');
-      addToSet(tagging, 'Content Type', data['Content Type action:mapped 2'], 'content-type');
-      addToSet(tagging, 'Customer Lifecycle Map Stages', data['Customer Lifecycle Map Stages action:mapped'], 'clm-stage');
+      addToSet(tagging, 'topic', data['Umbrella action:mapped'], 'topic');
+      addToSet(tagging, 'topic', data['Umbrella action:mapped 2'], 'topic');
+      addToSet(tagging, 'industry', data['Industry 1 action:mapped'], 'industry');
+      addToSet(tagging, 'industry', data['Industry 2 action:mapped'], 'industry');
+      addToSet(tagging, 'content-type', data['Content Type action:mapped'], 'content-type');
+      addToSet(tagging, 'content-type', data['Content Type action:mapped 2'], 'content-type');
+      addToSet(tagging, 'clm-stage', data['Customer Lifecycle Map Stages action:mapped'], 'stage');
       mapToMeta(meta, tagging);
+
+      if (data['Original Publish Date'] && !Number.isNaN(+data['Original Publish Date'])) {
+        const date = new Date(Math.round((+data['Original Publish Date'] - (1 + 25567 + 1)) * 86400 * 1000));
+        meta['Published Time'] = date.toISOString();
+      }
+      if (data['Last Updated Date'] && !Number.isNaN(+data['Last Updated Date'])) {
+        const date = new Date(Math.round((+data['Last Updated Date'] - (1 + 25567 + 1)) * 86400 * 1000));
+        meta['Modified Time'] = date.toISOString();
+      }
     }
   }
-
-  // TODO remove once we have real dates
-  const randomDate = new Date(2024, 2, Math.floor(Math.random() * 18) + 1);
-  const randomTime = Math.floor(Math.random() * 24 * 60 * 60 * 1000); // Random time in milliseconds
-  randomDate.setMilliseconds(randomTime);
-  meta['Published Time'] = randomDate.toISOString();
-  meta['Modified Time'] = randomDate.toISOString();
 
   const block = WebImporter.Blocks.getMetadataBlock(document, meta);
   block.id = 'metadata';
