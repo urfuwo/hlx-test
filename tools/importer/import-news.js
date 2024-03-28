@@ -111,7 +111,7 @@ async function generateDocumentPath(document, url, html, params) {
 async function loadImportMappings(document) {
   const mappingTable = await fetch(`${PROJECT_BASE_URL}/draft/mhaack/sap-news-taglist-final-031824.json?limit=1000`).then((res) => res.json());
   if (mappingTable) {
-    document.mappingTable = mappingTable.data;
+    document.mappingTable = mappingTable;
   }
 }
 

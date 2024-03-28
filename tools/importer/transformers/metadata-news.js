@@ -122,12 +122,11 @@ const createMetadata = (main, document, html, params, urlStr) => {
     const tagging = new Map();
 
     // map categories to topics
-    const topicsMapping = document.mappingTable.filter((entry) => entry.class === 'topic');
     const categories = [...articleContent.classList]
       .filter((className) => className.startsWith('category-'))
       .map((className) => className.replace('category-', ''));
     if (categories?.length > 0) {
-      topicsMapping
+      document.mappingTable.topic.data
         .filter((entry) => categories.includes(entry.path))
         .forEach((topic) => {
           if (topic['action:map'].length > 0) {
@@ -140,9 +139,8 @@ const createMetadata = (main, document, html, params, urlStr) => {
     }
 
     // map types to content types
-    const typesMapping = document.mappingTable.filter((entry) => entry.class === 'type');
     if (types?.length > 0) {
-      typesMapping
+      document.mappingTable.type.data
         .filter((entry) => entry.path === types[0])
         .forEach((typeEntry) => {
           if (typeEntry['action:map'].length > 0) {
@@ -155,19 +153,18 @@ const createMetadata = (main, document, html, params, urlStr) => {
     }
 
     // map tags
-    const tagsMapping = document.mappingTable.filter((entry) => entry.class === 'tag');
     const tags = [...articleContent.classList]
       .filter((className) => className.startsWith('tag-'))
       .map((className) => className.replace('tag-', ''));
     if (tags?.length > 0) {
-      tagsMapping
+      document.mappingTable.tag.data
         .filter((entry) => tags.includes(entry.path))
         .forEach((tag) => {
           if (tag['action:map'].length > 0) {
             const newTag = tag['action:map'].split('/');
             addToSet(tagging, newTag[0], newTag[1]);
           } else {
-            addToSet(tagging, 'tags', tag.path);
+            addToSet(tagging, 'news-tag', tag.path);
           }
         });
     }
