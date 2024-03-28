@@ -33,7 +33,7 @@
 .table table td {
   font-size: var(--udexTypographyBodySFontSize);
   padding: var(--udexSpacer8) var(--udexSpacer16);
-  color: var(--udexColorGrey7);
+  color: var(--udexColorGrey8);
 }
 
 .table table th,
