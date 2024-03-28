@@ -10,7 +10,6 @@
   border-radius: var(--sapTile_BorderCornerRadius);
   overflow: hidden;
   position: relative;
-  container: picture-card-c / inline-size;
 
   & img {
     width: 100%;
@@ -50,6 +49,12 @@
     }
 
     & .title {
+      display: -webkit-box;
+      -webkit-line-clamp: 5;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-wrap: pretty;
+
       & a {
         font-size: var(--udexTypographyHeadingMediumXXSFontSize);
         font-weight: var(--udexTypographyFontWeightMedium);
@@ -67,8 +72,7 @@
   }
 
   & .infoblock {
-    padding: 0 var(--udexSpacer16) var(--udexSpacer16) var(--udexSpacer16);
-    align-self: end;
+    padding: var(--udexSpacer16);
 
     & .author-profile {
       display: block;

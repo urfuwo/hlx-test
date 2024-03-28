@@ -41,6 +41,10 @@
 }
 
 .avatar-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
   & .title {
     & a {
       font-size: var(--udexTypographyBodyXSFontSize);
@@ -48,6 +52,13 @@
       line-height: var(--udexTypographyDisplayLineHeight);
       color: var(--udexColorNeutralBlack);
     }
+  }
+
+  & .description {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 }
 
