@@ -167,7 +167,7 @@ export default async function decorate(block) {
 
   // Add Primary tag
   const tagContainer = div({ class: 'media-blend__tags' });
-  const firstTagText = getMetadata('article:tag').split(',')[0].trim();
+  const firstTagText = getMetadata('topic').split(',')[0].trim();
   if (firstTagText) {
     const tagText = placeholder[toCamelCase(`tag/${firstTagText}`)] || firstTagText;
     const tag = a({ href: `/topics/${toClassName(tagText.trim())}` }, tagText.trim());
