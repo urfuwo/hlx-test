@@ -78,6 +78,13 @@ function replacePlaceholderText(elem, placeholder) {
   return elem;
 }
 
+function buildEyebrow(content) {
+  return p(
+    { class: 'media-blend__intro-text' },
+    content,
+  );
+}
+
 /**
  * loads and decorates the hero
  * @param {Element} block The hero block element
@@ -97,27 +104,22 @@ export default async function decorate(block) {
   if (!eyebrowText && isArticle) {
     // if no eyebrow text is set, use the content type for articles
     const placeholderText = placeholder[toCamelCase(`content-type/${contentType}`)];
-    eyebrowText = placeholderText || toCamelCase(contentType);
+    eyebrowText = placeholderText || contentType.replace('-', ' ');
   }
 
   const eyebrowArrow = span({ class: 'eyebrow-arrow' });
-  let newEyebrow;
+  let newEyebrow = '';
   if (eyebrow?.firstElementChild?.tagName.toLowerCase() === 'a') {
     // If author has added a custom link, add arrow and appropriate classes for styling
-    newEyebrow = eyebrow.firstElementChild;
-    newEyebrow.insertBefore(eyebrowArrow, newEyebrow.firstChild);
-    newEyebrow.className = 'media-blend__intro-text';
-  } else if (isArticle) {
+    const content = eyebrow.firstElementChild;
+    content.insertBefore(eyebrowArrow, content.firstChild);
+    newEyebrow = buildEyebrow(content);
+  } else if (eyebrowText && isArticle) {
     // If article, add link to parent topics page, and add arrow and appropriate classes for styling
-    const eyebrowUrl = `/topics/${toClassName(contentType)}`;
-    newEyebrow = eyebrowText
-      ? p(
-        a({ class: 'media-blend__intro-text', href: eyebrowUrl }, eyebrowArrow, eyebrowText),
-      )
-      : '';
-  } else {
+    newEyebrow = buildEyebrow(a({ href: `/topics/${toClassName(contentType)}` }, eyebrowArrow, eyebrowText));
+  } else if (eyebrowText) {
     // Else display simple span or nothing
-    newEyebrow = eyebrowText ? p({ class: 'media-blend__intro-text' }, eyebrowText) : '';
+    newEyebrow = buildEyebrow(eyebrowText);
   }
 
   const contentSlot = div(
