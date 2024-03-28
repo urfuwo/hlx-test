@@ -91,17 +91,6 @@ udex-hero-banner .hero-banner .media-blend__tags {
   margin: var(--udexSpacer20) 0;
 }
 
-udex-hero-banner .hero-banner .media-blend__tags a {
-  font-size: var(--udexTypographyBodyXSFontSize);
-  text-decoration: none;
-  text-align: center;
-  padding: var(--udexSpacer2) var(--udexSpacer8);
-  background-color: var(--udexColorGrey2);
-  color: var(--udexColorGrey9);
-  border-radius: var(--udexRadiusS);
-  border: 1px solid var(--udexColorGrey2);
-}
-
 udex-hero-banner .hero-banner .media-blend__intro-text {
   font-family: var(--sapFontFamily);
   font-size: var(--udexTypographyEyebrowMFontSize, 14px);
@@ -137,11 +126,6 @@ udex-hero-banner .hero-banner .media-blend__intro-text a {
   &:active {
     color: var(--udexColorGrey10);
   }
-}
-
-udex-hero-banner .hero-banner .media-blend__tags a:hover {
-  background-color: var(--udexColorGrey3);
-  border: 1px solid var(--udexColorGrey3);
 }
 
 udex-hero-banner .hero-banner.media-blend__content {

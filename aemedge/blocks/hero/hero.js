@@ -6,6 +6,7 @@ import {
   fetchPlaceholders, getMetadata, toCamelCase, toClassName,
 } from '../../scripts/aem.js';
 import { formatDate, removeAuthorsSuffixes } from '../../scripts/utils.js';
+import Tag from '../../libs/tag/tag.js';
 
 function calculateInitials(name) {
   const nameParts = name.split(' ');
@@ -169,9 +170,7 @@ export default async function decorate(block) {
   const tagContainer = div({ class: 'media-blend__tags' });
   const firstTagText = getMetadata('topic').split(',')[0].trim();
   if (firstTagText) {
-    const tagText = placeholder[toCamelCase(`tag/${firstTagText}`)] || firstTagText;
-    const tag = a({ href: `/topics/${toClassName(tagText.trim())}` }, tagText.trim());
-    tagContainer.append(tag);
+    tagContainer.append(new Tag(firstTagText, placeholder).render());
   }
 
   // convert all buttons to udex-buttons

@@ -8,19 +8,3 @@ main .article-tags div.tag-list {
     gap: 0.5rem;
     margin-bottom: 1rem;
 }
-
-main .article-tags div.tag-list a {
-    font-size: var(--udexTypographyBodyXSFontSize);
-    text-decoration: none;
-    text-align: center;
-    padding: var(--udexSpacer2) var(--udexSpacer8);
-    background-color: var(--udexColorGrey2);
-    color: var(--udexColorGrey9);
-    border-radius: var(--udexRadiusS);
-    border: 1px solid var(--udexColorGrey2);
-}
-
-main .article-tags div.tag-list a:hover {
-    background-color: var(--udexColorGrey3);
-    border: 1px solid var(--udexColorGrey3);
-}
