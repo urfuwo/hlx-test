@@ -5,8 +5,9 @@ import {
 import {
   fetchPlaceholders, getMetadata, toCamelCase, toClassName,
 } from '../../scripts/aem.js';
-import { buildAuthorUrl, formatDate, removeAuthorsSuffixes } from '../../scripts/utils.js';
+import { formatDate } from '../../scripts/utils.js';
 import Tag from '../../libs/tag/tag.js';
+import { buildAuthorUrl, removeAuthorsSuffixes } from '../../scripts/article.js';
 
 function calculateInitials(name) {
   const nameParts = name.split(' ');

@@ -42,10 +42,14 @@ async function allAuthorEntries(articleStream) {
   return getAuthorEntries(Array.from(authorSet));
 }
 
+function buildAuthorUrl(author) {
+  return `/author/${toClassName(author.trim()).replaceAll('-', '')}`;
+}
+
 function asEntry(authorName) {
   return (authorName === '0')
     ? null
-    : { author: authorName, path: `/author/${toClassName(authorName).replace('-', '')}` };
+    : { author: authorName, path: buildAuthorUrl(authorName) };
 }
 
 /* AuthorEntry for the given article, or else fallback */
@@ -53,8 +57,32 @@ function authorEntry(article, authorEntries) {
   return authorEntries.find((e) => e.author === article.author) || asEntry(article.author);
 }
 
+const defaultSuffixes = ['PhD', 'Ph.D.'];
+function removeAuthorsSuffixes(authors, suffixes = defaultSuffixes) {
+  if (!authors) {
+    return '';
+  }
+  let authorsWithoutSuffixes = authors;
+  suffixes.forEach((suffix) => {
+    /**
+     * Jane Doe, PhD,
+     * Jane Doe, PhD{eol}
+     * Jane Doe PhD,
+     * Jane Doe PhD{eol}
+     * Jane Doe, Ph.D.,
+     * Jane Doe, Ph.D.{eol}
+     * Jane Doe Ph.D.,
+     * Jane Doe Ph.D.{eol}
+     */
+    authorsWithoutSuffixes = authorsWithoutSuffixes.replaceAll(new RegExp(`,*\\s*${suffix}(?=,|$)`, 'g'), '');
+  });
+  return authorsWithoutSuffixes;
+}
+
 export {
   allAuthorEntries,
   authorEntry,
   getAuthorEntries,
+  buildAuthorUrl,
+  removeAuthorsSuffixes,
 };
