@@ -77,7 +77,7 @@ const createMetadata = (main, document, html, params, urlStr) => {
       addToSet(tagging, 'Industry', data['Industry 2 action:mapped'], 'industry');
       addToSet(tagging, 'Content Type', data['Content Type action:mapped'], 'content-type');
       addToSet(tagging, 'Content Type', data['Content Type action:mapped 2'], 'content-type');
-      addToSet(tagging, 'Customer Lifecycle Map Stages', data['Customer Lifecycle Map Stages action:mapped'], 'stage');
+      addToSet(tagging, 'Customer Lifecycle Map Stages', data['Customer Lifecycle Map Stages action:mapped'], 'clm-stage');
       mapToMeta(meta, tagging);
     }
   }
