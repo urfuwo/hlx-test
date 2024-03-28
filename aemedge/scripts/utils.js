@@ -32,7 +32,7 @@ function removeAuthorsSuffixes(authors, suffixes = defaultSuffixes) {
      * Jane Doe Ph.D.,
      * Jane Doe Ph.D.{eol}
      */
-    authorsWithoutSuffixes = authorsWithoutSuffixes.replace(new RegExp(`,*\\s*${suffix}(?=,|$)`), '');
+    authorsWithoutSuffixes = authorsWithoutSuffixes.replaceAll(new RegExp(`,*\\s*${suffix}(?=,|$)`, 'g'), '');
   });
   return authorsWithoutSuffixes;
 }
