@@ -54,6 +54,7 @@
     'Helvetica', 'sans-serif';
   --hero-margin--left: var(--udexGridMargins);
   --hero-margin--right: var(--udexGridMargins);
+  --card-tile-height: 360px;
 }
 
 /* S */
@@ -188,6 +189,22 @@ main pre {
   border-radius: 0.25em;
   overflow-x: auto;
   white-space: pre;
+}
+
+.subtitle {
+  & a {
+    font-size: var(--udexTypographyBodyXSFontSize);
+    font-weight: var(--udexTypographyFontWeightMedium);
+    line-height: var(--udexTypographyDisplayLineHeight);
+    color: var(--udexColorNeutralBlack) !important;
+  }
+}
+
+.info {
+  font-size: var(--udexTypographyNavigationRegularXSFontSize);
+  font-weight: var(--udexTypographyFontWeightRegular);
+  line-height: var(--udexTypographyDisplayLineHeight);
+  color: var(--udexColorGrey6);
 }
 
 a:any-link {

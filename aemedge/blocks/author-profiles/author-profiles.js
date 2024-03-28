@@ -1,19 +1,7 @@
 import { loadCSS } from '../../scripts/aem.js';
-import ffetch from '../../scripts/ffetch.js';
 import { div } from '../../scripts/dom-builder.js';
-import { completeEntry, renderProfile } from '../author-profile/author-profile.js';
-
-async function getAuthorEntries(keys) {
-  const entryFilter = ((entry) => (keys.includes(entry.path)));
-  const unsortedEntries = await ffetch(`${window.hlx.codeBasePath}/authors-index.json`).filter(entryFilter).limit(keys.length).all();
-  const sortedEntries = [];
-  if (unsortedEntries) {
-    keys.forEach((key) => {
-      sortedEntries.push(completeEntry(unsortedEntries.find((entry) => (key === entry.path))));
-    });
-  }
-  return sortedEntries;
-}
+import { getAuthorEntries } from '../../scripts/article.js';
+import Avatar from '../../libs/avatar/avatar.js';
 
 async function addAuthorProfiles(block, keys) {
   const entries = await getAuthorEntries(keys);
@@ -21,12 +9,19 @@ async function addAuthorProfiles(block, keys) {
     if (keys.length > 1) {
       block.classList.add(`elems${keys.length}`);
       entries.forEach((entry) => {
-        const profile = div({ class: 'author-profile hor' }, renderProfile(entry));
+        const avatar = new Avatar(entry.title, entry.description, entry.path, entry.image);
+        const profile = div({ class: 'author-profile hor' }, avatar.renderDetails('big'));
         block.append(profile);
       });
     } else {
       block.classList.add('vertical');
-      block.append(div({ class: 'author-profile' }, renderProfile(entries[0])));
+      const avatar = new Avatar(
+        entries[0].title,
+        entries[0].description,
+        entries[0].path,
+        entries[0].image,
+      );
+      block.append(div({ class: 'author-profile' }, avatar.renderDetails()));
     }
   } else {
     block.parentNode.remove();
@@ -42,3 +37,5 @@ export default async function decorateBlock(block) {
   block.innerHTML = '';
   await addAuthorProfiles(block, keys);
 }
+
+export { addAuthorProfiles };
