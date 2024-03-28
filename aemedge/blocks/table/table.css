@@ -1,8 +1,7 @@
 .table {
   width: 100%;
   overflow-x: auto;
-  background-color: var(--sapList_TableGroupHeaderBackground);
-  color: var(--sapList_TableGroupHeaderTextColor);
+  background-color: var(--udexColorNeutralWhite);
 }
 
 .table table {
@@ -13,7 +12,7 @@
 
 .table table tr {
   box-sizing: border-box;
-  border-bottom: var(--sapList_BorderWidth) solid var(--sapList_TableGroupHeaderBorderColor);
+  border-bottom: var(--sapList_BorderWidth) solid var(--udexColorGrey4);
 }
 
 .table table tbody tr {
@@ -28,17 +27,18 @@
   font-size: var(--udexTypographyNavigationMediumXLFontSize);
   font-weight: var(--udexTypographyFontWeightMedium);
   padding: var(--udexSpacer12) var(--udexSpacer16);
+  color: var(--udexColorGrey9);
 }
 
 .table table td {
   font-size: var(--udexTypographyBodySFontSize);
   padding: var(--udexSpacer8) var(--udexSpacer16);
+  color: var(--udexColorGrey7);
 }
 
 .table table th,
 .table table td {
   text-align: left;
-  color: var(--sapList_HeaderTextColor);
   line-height: var(--udexTypographyDisplayLineHeight);
 
   & p {
@@ -48,16 +48,16 @@
 
 /* no header variant */
 .table.no-header table tbody tr {
-  border-top: var(--sapList_BorderWidth) solid var(--sapList_TableGroupHeaderBorderColor);
+  border-top: var(--sapList_BorderWidth) solid var(--udexColorGrey4);
 }
 
 /* striped variant */
 .table.striped tbody tr:nth-child(odd) {
-  background-color: var(--sapList_GroupAlternatingHeaderBackground);
+  background-color: var(--udexColorGrey4);
 }
 
 /* bordered variant */
 .table.bordered table th,
 .table.bordered table td {
-  border: var(--sapList_BorderWidth) solid var(--sapList_TableGroupHeaderBorderColor);
+  border: var(--sapList_BorderWidth) solid var(--udexColorGrey4);
 }
