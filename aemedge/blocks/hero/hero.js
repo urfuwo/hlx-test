@@ -5,7 +5,7 @@ import {
 import {
   fetchPlaceholders, getMetadata, toCamelCase, toClassName,
 } from '../../scripts/aem.js';
-import { formatDate, removeAuthorsSuffixes } from '../../scripts/utils.js';
+import { buildAuthorUrl, formatDate, removeAuthorsSuffixes } from '../../scripts/utils.js';
 import Tag from '../../libs/tag/tag.js';
 
 function calculateInitials(name) {
@@ -18,8 +18,7 @@ function calculateInitials(name) {
 }
 
 function buildAuthorEl(author) {
-  const authorUrl = `/author/${toClassName(author.trim()).replaceAll('-', '')}`;
-  return a({ class: 'media-blend__author', href: authorUrl }, author.trim());
+  return a({ class: 'media-blend__author', href: buildAuthorUrl(author) }, author.trim());
 }
 
 function decorateMetaInfo() {

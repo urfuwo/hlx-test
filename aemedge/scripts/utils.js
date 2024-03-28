@@ -1,4 +1,5 @@
 import { div } from './dom-builder.js';
+import { toClassName } from './aem.js';
 
 function formatDate(inputDate) {
   const options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -37,4 +38,10 @@ function removeAuthorsSuffixes(authors, suffixes = defaultSuffixes) {
   return authorsWithoutSuffixes;
 }
 
-export { formatDate, containerize, removeAuthorsSuffixes };
+function buildAuthorUrl(author) {
+  return `/author/${toClassName(author.trim()).replaceAll('-', '')}`;
+}
+
+export {
+  formatDate, containerize, removeAuthorsSuffixes, buildAuthorUrl,
+};
