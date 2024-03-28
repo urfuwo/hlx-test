@@ -5,7 +5,7 @@ import {
 import {
   fetchPlaceholders, getMetadata, toCamelCase, toClassName,
 } from '../../scripts/aem.js';
-import { formatDate } from '../../scripts/utils.js';
+import { formatDate, removeAuthorsSuffixes } from '../../scripts/utils.js';
 
 function calculateInitials(name) {
   const nameParts = name.split(' ');
@@ -24,7 +24,7 @@ function buildAuthorEl(author) {
 function decorateMetaInfo() {
   const infoBlockWrapper = span({ class: 'media-blend__info-block' });
 
-  const authors = getMetadata('author').split(',');
+  const authors = removeAuthorsSuffixes(getMetadata('author')).split(',');
   const authorEl = span({ class: 'media-blend__authors' });
   if (authors.length > 0) {
     if (authors.length === 1 && !!authors[0]) {
