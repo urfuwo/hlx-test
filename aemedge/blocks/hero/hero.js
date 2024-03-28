@@ -1,5 +1,7 @@
 import '@udex/webcomponents/dist/HeroBanner.js';
-import { div, span, a } from '../../scripts/dom-builder.js';
+import {
+  a, div, p, span,
+} from '../../scripts/dom-builder.js';
 import {
   fetchPlaceholders, getMetadata, toCamelCase, toClassName,
 } from '../../scripts/aem.js';
@@ -14,20 +16,38 @@ function calculateInitials(name) {
   return initials;
 }
 
+function buildAuthorEl(author) {
+  const authorUrl = `/author/${toClassName(author.trim()).replaceAll('-', '')}`;
+  return a({ class: 'media-blend__author', href: authorUrl }, author.trim());
+}
+
 function decorateMetaInfo() {
-  const infoBlockWrapper = div({ class: 'media-blend__info-block' });
+  const infoBlockWrapper = span({ class: 'media-blend__info-block' });
 
-  const author = getMetadata('author');
-  if (author) {
-    const avatar = document.createElement('udex-avatar');
-    avatar.setAttribute('size', 'XS');
-    avatar.setAttribute('initials', calculateInitials(author));
-    avatar.setAttribute('color-scheme', 'Neutral');
+  const authors = getMetadata('author').split(',');
+  const authorEl = span({ class: 'media-blend__authors' });
+  if (authors.length > 0) {
+    if (authors.length === 1 && !!authors[0]) {
+      const avatar = document.createElement('udex-avatar');
+      avatar.setAttribute('size', 'XS');
+      avatar.setAttribute('initials', calculateInitials(authors[0]));
+      avatar.setAttribute('color-scheme', 'Neutral');
 
-    const authorUrl = `/author/${toClassName(author).replace('-', '')}`;
-    const authorEl = a({ class: 'media-blend__author', href: authorUrl }, author);
-    infoBlockWrapper.append(avatar, authorEl);
+      infoBlockWrapper.append(avatar);
+      authorEl.append(buildAuthorEl(authors[0]));
+    } else {
+      authors.forEach((author) => {
+        if (author) {
+          authorEl.append(buildAuthorEl(author));
+        }
+      });
+    }
   }
+
+  if (authorEl.children.length > 0) {
+    infoBlockWrapper.append(authorEl);
+  }
+
   const lastUpdate = getMetadata('modified-time')
     ? getMetadata('modified-time')
     : getMetadata('published-time');
@@ -90,10 +110,14 @@ export default async function decorate(block) {
   } else if (isArticle) {
     // If article, add link to parent topics page, and add arrow and appropriate classes for styling
     const eyebrowUrl = `/topics/${toClassName(contentType)}`;
-    newEyebrow = eyebrowText ? a({ class: 'media-blend__intro-text', href: eyebrowUrl }, eyebrowArrow, eyebrowText) : '';
+    newEyebrow = eyebrowText
+      ? p(
+        a({ class: 'media-blend__intro-text', href: eyebrowUrl }, eyebrowArrow, eyebrowText),
+      )
+      : '';
   } else {
     // Else display simple span or nothing
-    newEyebrow = eyebrowText ? span({ class: 'media-blend__intro-text' }, eyebrowText) : '';
+    newEyebrow = eyebrowText ? p({ class: 'media-blend__intro-text' }, eyebrowText) : '';
   }
 
   const contentSlot = div(

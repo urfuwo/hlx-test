@@ -163,18 +163,28 @@ udex-hero-banner .hero-banner .media-blend__info-block {
   margin: var(--udexSpacer12, 12px) 0;
 }
 
-udex-hero-banner .hero-banner .media-blend__info-block span::after {
-  margin: var(--udexSpacer4);
+udex-hero-banner .hero-banner .media-blend__info-block > a::after,
+udex-hero-banner .hero-banner .media-blend__info-block > span::after {
+  margin-right: var(--udexSpacer8);
+  margin-left: var(--udexSpacer8);
   content: '•';
 }
 
-udex-hero-banner .hero-banner .media-blend__info-block a:first-of-type,
-udex-hero-banner .hero-banner .media-blend__info-block span:first-of-type {
-  margin-left: 10px;
+udex-hero-banner .hero-banner .media-blend__info-block > :first-child {
+  margin-right: 10px;
 }
 
 udex-hero-banner .hero-banner .media-blend__author {
   color: var(--udexColorGrey7);
+}
+
+udex-hero-banner .hero-banner .media-blend__author:not(:last-child) {
+  &::after {
+    content: ",";
+
+    /* Use margin rather than space to avoid underline between items */
+    margin-right: var(--udexSpacer4);
+  }
 }
 
 udex-hero-banner .hero-banner a.media-blend__author {
