@@ -21,7 +21,7 @@ async function addAuthorProfiles(block, keys) {
         entries[0].path,
         entries[0].image,
       );
-      block.append(div({ class: 'author-profile' }, avatar.renderDetails()));
+      block.append(div({ class: 'author-profile' }, avatar.renderDetails('big')));
     }
   } else {
     block.parentNode.remove();

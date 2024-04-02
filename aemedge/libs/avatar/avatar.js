@@ -22,6 +22,7 @@ export default class Avatar {
       loadCSS(`${window.hlx.codeBasePath}/libs/avatar/avatar.css`);
     }
     const element = div(
+      { class: 'avatar-wrapper' },
       div({ class: `avatar ${size}` }, this.image ? div(this.getOptimizedPicture()) : div()),
       div(
         { class: 'avatar-info' },
@@ -37,6 +38,7 @@ export default class Avatar {
       loadCSS(`${window.hlx.codeBasePath}/libs/avatar/avatar.css`);
     }
     const element = div(
+      { class: 'avatar-wrapper' },
       div({ class: `avatar ${size}` }, this.image ? div(this.getOptimizedPicture()) : div()),
       div(
         { class: 'avatar-details' },
