@@ -64,16 +64,6 @@ function removeAuthorsSuffixes(authors, suffixes = defaultSuffixes) {
   }
   let authorsWithoutSuffixes = authors;
   suffixes.forEach((suffix) => {
-    /**
-     * Jane Doe, PhD,
-     * Jane Doe, PhD{eol}
-     * Jane Doe PhD,
-     * Jane Doe PhD{eol}
-     * Jane Doe, Ph.D.,
-     * Jane Doe, Ph.D.{eol}
-     * Jane Doe Ph.D.,
-     * Jane Doe Ph.D.{eol}
-     */
     authorsWithoutSuffixes = authorsWithoutSuffixes.replaceAll(new RegExp(`,*\\s*${suffix}(?=,|$)`, 'g'), '');
   });
   return authorsWithoutSuffixes;
