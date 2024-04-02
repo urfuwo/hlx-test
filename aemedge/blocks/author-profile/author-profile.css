@@ -2,16 +2,6 @@
   margin-top: var(--udexSpacer20);
 }
 
-.author-profile > div {
-  display: flex;
-  padding: var(--udexSpacer24) var(--udexSpacer20);
-  gap: var(--udexSpacer24);
-  border: 1px solid var(--udexColorGrey2);
-  box-shadow: 0 2px 4px rgb(34 54 73 / 20%);
-  background-color: var(--background-color);
-  border-radius: var(--sapTile_BorderCornerRadius);
-}
-
 .author-profile .link a {
   font-size: var(--udexTypographyBodySFontSize);
   padding-top: var(--udexSpacer4);
