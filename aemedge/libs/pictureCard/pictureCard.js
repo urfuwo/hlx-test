@@ -32,7 +32,6 @@ export default class PictureCard extends Card {
     if (!authorEntry) {
       return '';
     }
-    loadCSS(`${window.hlx.codeBasePath}/blocks/author-profile/author-profile.css`);
     return authorEntry?.image
       && new URL(this.authorEntry.image).pathname !== '/default-meta-image.png'
       ? div(
