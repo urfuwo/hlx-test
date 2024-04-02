@@ -6,6 +6,7 @@ indices:
       - /news/**
       - /videos/**
       - /resources/**
+      - /design/**
     exclude:
       - '**/fragments/**'
       - '**/sidenav'
