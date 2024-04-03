@@ -39,4 +39,5 @@ function decorate(doc) {
   buildArticleSchema();
 }
 
+// Comment
 decorate(document);
