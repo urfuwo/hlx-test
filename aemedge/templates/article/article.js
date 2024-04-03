@@ -17,22 +17,23 @@ function decorate(doc) {
   pictures.forEach((pictureEl) => {
     const parent = pictureEl.parentElement;
     const { nextElementSibling } = parent;
-    const isCaption = nextElementSibling?.tagName.toLowerCase() === 'p'
-      && nextElementSibling.firstElementChild?.tagName.toLowerCase() === 'em';
+    const isCaption = nextElementSibling?.tagName === 'P'
+      && nextElementSibling.firstElementChild?.tagName === 'EM';
 
-    if (isCaption) {
-      const container = domEl(
-        'figure',
-        { class: 'picture-container' },
-        pictureEl,
-        domEl(
-          'figcaption',
-          { class: 'picture-caption' },
-          nextElementSibling.firstElementChild,
-        ),
-      );
-      parent.append(container);
+    const container = domEl(
+      'figure',
+      { class: 'picture-container' },
+      pictureEl,
+      domEl(
+        'figcaption',
+        { class: 'picture-caption' },
+        isCaption ? nextElementSibling.firstElementChild : '',
+      ),
+    );
+    if (!nextElementSibling.hasChildNodes()) {
+      nextElementSibling.remove();
     }
+    parent.append(container);
   });
 
   buildArticleSchema();
