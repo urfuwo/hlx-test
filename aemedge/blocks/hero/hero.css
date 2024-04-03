@@ -58,6 +58,17 @@ udex-hero-banner .hero-banner.media-blend__additional-content img {
   }
 }
 
+/* Avatar image */
+
+udex-hero-banner .hero-banner udex-avatar img {
+  object-fit: cover;
+}
+
+udex-hero-banner .hero-banner udex-avatar[size="XS"] img {
+  height: 2rem;
+  width: 2rem;
+}
+
 /* Image above CTA */
 
 udex-hero-banner .hero-banner--image-above-cta {
