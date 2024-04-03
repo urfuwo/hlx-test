@@ -1,0 +1,8 @@
+version: 1
+auto-generated: true
+sitemaps:
+  default:
+    origin: https://www-qa.sap.com
+    source: /aemedge/articles-index.json
+    destination: /sitemap.xml
+    lastmod: YYYY-MM-DD
