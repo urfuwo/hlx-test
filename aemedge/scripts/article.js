@@ -1,4 +1,4 @@
-import { toClassName } from './aem.js';
+import { getMetadata, toClassName } from './aem.js';
 import ffetch from './ffetch.js';
 
 function completeEntry(entry) {
@@ -69,10 +69,15 @@ function removeAuthorsSuffixes(authors, suffixes = defaultSuffixes) {
   return authorsWithoutSuffixes;
 }
 
+function getAuthorNames() {
+  return removeAuthorsSuffixes(getMetadata('author')).split(',').map((e) => e.trim());
+}
+
 export {
   allAuthorEntries,
   authorEntry,
   getAuthorEntries,
   buildAuthorUrl,
   removeAuthorsSuffixes,
+  getAuthorNames,
 };

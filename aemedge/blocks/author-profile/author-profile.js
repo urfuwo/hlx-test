@@ -1,12 +1,11 @@
-import { getMetadata } from '../../scripts/aem.js';
 import { addAuthorProfiles } from '../author-profiles/author-profiles.js';
+import { getAuthorNames } from '../../scripts/article.js';
 
 export default async function decorate(block) {
-  const authorList = getMetadata('author');
-  const keys = authorList ? authorList.split(',').map((e) => e.trim()) : [authorList];
+  const keys = getAuthorNames();
   if (keys && keys.length > 0) {
     block.classList.add('author-profiles');
     block.classList.remove('author-profile');
-    addAuthorProfiles(block, keys);
+    await addAuthorProfiles(block, keys);
   }
 }
