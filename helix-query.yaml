@@ -36,6 +36,9 @@ indices:
       image:
         select: head > meta[property="og:image"]
         value: attribute(el, "content")
+      lastModified:
+        select: none
+        value: headers["last-modified"]
       publicationDate:
         select: head > meta[name="published-time"]
         value: parseTimestamp(attribute(el, "content"))
@@ -70,3 +73,6 @@ indices:
       robots:
         select: head > meta[name="robots"]
         value: attribute(el, "content")
+      lastModified:
+        select: none
+        value: headers["last-modified"]
