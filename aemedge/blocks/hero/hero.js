@@ -19,13 +19,15 @@ function calculateInitials(name) {
 }
 
 function buildAuthorEl(author) {
-  return a({ class: 'media-blend__author', href: buildAuthorUrl(author) }, author.trim());
+  return a({ class: 'media-blend__author', href: buildAuthorUrl(author) }, author);
 }
 
 function decorateMetaInfo() {
   const infoBlockWrapper = span({ class: 'media-blend__info-block' });
 
-  const authors = removeAuthorsSuffixes(getMetadata('author')).split(',');
+  const authors = removeAuthorsSuffixes(getMetadata('author'))
+    .split(',')
+    .map((author) => author.trim());
   const authorEl = span({ class: 'media-blend__authors' });
   if (authors.length > 0) {
     if (authors.length === 1 && !!authors[0]) {
