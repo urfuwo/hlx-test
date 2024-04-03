@@ -87,11 +87,45 @@ udex-hero-banner .hero-banner--image-above-cta {
   }
 }
 
+udex-hero-banner .hero-banner .media-blend__tags {
+  margin: var(--udexSpacer20) 0;
+}
+
 udex-hero-banner .hero-banner .media-blend__intro-text {
   font-family: var(--sapFontFamily);
   font-size: var(--udexTypographyEyebrowMFontSize, 14px);
+  font-weight: var(--udexTypographyFontWeightMedium);
   text-transform: uppercase;
   color: var(--udexColorGrey6, #5b738b);
+  text-decoration: none;
+
+  .eyebrow-arrow {
+    display: inline-block;
+    height: 10px;
+    width: 6px;
+    margin: 0 var(--udexSpacer8);
+
+    /* Use mask in order to be able to adjust SVG colour */
+    mask: url("/aemedge/icons/slim-arrow-left.svg") center no-repeat;
+    background-color: currentcolor;
+  }
+}
+
+udex-hero-banner .hero-banner .media-blend__intro-text a {
+  color: inherit;
+  text-decoration: inherit;
+
+  &:visited {
+    color: var(--udexColorGrey9);
+  }
+
+  &:hover {
+    color: var(--udexColorGrey8);
+  }
+
+  &:active {
+    color: var(--udexColorGrey10);
+  }
 }
 
 udex-hero-banner .hero-banner.media-blend__content {
@@ -116,13 +150,41 @@ udex-hero-banner .hero-banner .media-blend__info-block {
   margin: var(--udexSpacer12, 12px) 0;
 }
 
-udex-hero-banner .hero-banner .media-blend__info-block span::after {
-  margin: var(--udexSpacer4);
+udex-hero-banner .hero-banner .media-blend__info-block .media-blend__authors::after {
+  margin-right: var(--udexSpacer8);
+  margin-left: var(--udexSpacer8);
   content: '•';
 }
 
-udex-hero-banner .hero-banner .media-blend__info-block span:first-of-type {
-  margin-left: 10px;
+udex-hero-banner .hero-banner .media-blend__info-block > :not(.media-blend__authors) {
+  margin-right: 10px;
+}
+
+udex-hero-banner .hero-banner .media-blend__author {
+  color: var(--udexColorGrey7);
+}
+
+udex-hero-banner .hero-banner .media-blend__author:not(:last-child) {
+  &::after {
+    content: ",";
+
+    /* Use margin rather than space to avoid underline between items */
+    margin-right: var(--udexSpacer4);
+  }
+}
+
+udex-hero-banner .hero-banner a.media-blend__author {
+  &:visited {
+    color: var(--udexColorGrey10);
+  }
+
+  &:hover {
+    color: var(--udexColorGrey9);
+  }
+
+  &:active {
+    color: var(--udexColorGrey11);
+  }
 }
 
 udex-hero-banner
@@ -267,8 +329,41 @@ udex-hero-banner .custom-background-image:dir(rtl) {
 }
 
 .hero-wrapper.hero-text-white-wrapper {
-  & udex-hero-banner .hero-banner .media-blend__intro-text {
+  udex-hero-banner .hero-banner .media-blend__intro-text {
     color: var(--udexColorNeutralWhite);
+  }
+
+  udex-hero-banner .hero-banner .media-blend__intro-text a {
+    &:visited {
+      color: var(--udexColorBlue4);
+    }
+
+    &:hover {
+      color: var(--udexColorBlue3);
+    }
+
+    &:active {
+      color: var(--udexColorBlue5);
+    }
+  }
+
+  udex-hero-banner .hero-banner .media-blend__info-block,
+  udex-hero-banner .hero-banner .media-blend__author {
+    color: var(--udexColorGrey3);
+  }
+
+  udex-hero-banner .hero-banner a.media-blend__author {
+    &:visited {
+      color: var(--udexColorGrey2);
+    }
+
+    &:hover {
+      color: var(--udexColorGrey1);
+    }
+
+    &:active {
+      color: var(--udexColorGrey3);
+    }
   }
 
   color: var(--udexColorNeutralWhite);
