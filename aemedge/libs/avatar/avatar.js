@@ -13,7 +13,7 @@ export default class Avatar {
     this.image = image;
   }
 
-  getOptimizedPicture() {
+  getImage() {
     return this.image ? createOptimizedPicture(this.image, this.title, false, breakpoints) : null;
   }
 
@@ -23,7 +23,7 @@ export default class Avatar {
     }
     const element = div(
       { class: 'avatar-wrapper' },
-      div({ class: `avatar ${size}` }, this.image ? div(this.getOptimizedPicture()) : div()),
+      div({ class: `avatar ${size}` }, this.image ? div(this.getImage()) : div()),
       div(
         { class: 'avatar-info' },
         div({ class: 'title' }, a({ href: this.path }, div(`${this.title}`))),
@@ -39,7 +39,7 @@ export default class Avatar {
     }
     const element = div(
       { class: 'avatar-wrapper' },
-      div({ class: `avatar ${size}` }, this.image ? div(this.getOptimizedPicture()) : div()),
+      div({ class: `avatar ${size}` }, this.image ? div(this.getImage()) : div()),
       div(
         { class: 'avatar-details' },
         h2(this.title),
