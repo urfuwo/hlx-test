@@ -13,7 +13,7 @@ function decorate(doc) {
   }
 
   // Wrap images and captions in common container for sizing
-  const pictures = doc.querySelectorAll('p > picture');
+  const pictures = doc.querySelectorAll('main > div > p > picture');
   pictures.forEach((pictureEl) => {
     const parent = pictureEl.parentElement;
     const { nextElementSibling } = parent;
