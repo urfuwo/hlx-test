@@ -8,14 +8,15 @@ async function addAuthorProfiles(block, keys) {
   if (entries && entries.length) {
     if (keys.length > 1) {
       block.classList.add(`elems${keys.length}`);
-      entries.forEach((entry) => {
-        const avatar = new Avatar(entry.title, entry.description, entry.path, entry.image);
+      entries.forEach((e) => {
+        const avatar = new Avatar(e.author, e.title, e.description, e.path, e.image);
         const profile = div({ class: 'author-profile hor' }, avatar.renderDetails('big'));
         block.append(profile);
       });
     } else {
       block.classList.add('vertical');
       const avatar = new Avatar(
+        entries[0].author,
         entries[0].title,
         entries[0].description,
         entries[0].path,
