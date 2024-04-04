@@ -29,10 +29,8 @@ async function loadAdobeDC() {
   };
   const envType = getEnvType();
   if (envType && adobeTagsSrc[envType]) {
-    if (envType !== 'dev' || ((new URLSearchParams(window.location.search)).get('tr')) != null) {
-      await loadScript(adobeTagsSrc[envType], {});
-      await sendBeacon();
-    }
+    await loadScript(adobeTagsSrc[envType], {});
+    await sendBeacon();
   }
 }
 
