@@ -17,19 +17,24 @@ export default class Avatar {
     return this.image ? createOptimizedPicture(this.image, this.title, false, breakpoints) : null;
   }
 
-  render(size, excludeStyles) {
+  render(size, excludeStyles, imageOnly) {
     if (!excludeStyles) {
       loadCSS(`${window.hlx.codeBasePath}/libs/avatar/avatar.css`);
     }
-    const element = div(
-      { class: 'avatar-wrapper' },
-      div({ class: `avatar ${size}` }, this.image ? div(this.getOptimizedPicture()) : div()),
-      div(
-        { class: 'avatar-info' },
-        div({ class: 'title' }, a({ href: this.path }, div(`${this.title}`))),
-        this.description ? div({ class: 'description info' }, this.description) : '',
-      ),
-    );
+    let element;
+    if (imageOnly) {
+      element = div({ class: `avatar ${size}` }, this.image ? div(this.getOptimizedPicture()) : div());
+    } else {
+      element = div(
+        { class: 'avatar-wrapper' },
+        div({ class: `avatar ${size}` }, this.image ? div(this.getOptimizedPicture()) : div()),
+        div(
+          { class: 'avatar-info' },
+          div({ class: 'title' }, a({ href: this.path }, div(`${this.title}`))),
+          this.description ? div({ class: 'description info' }, this.description) : '',
+        ),
+      );
+    }
     return element;
   }
 

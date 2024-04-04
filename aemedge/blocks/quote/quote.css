@@ -1,44 +1,87 @@
 .quote {
     margin-top: var(--udexSpacer40);
     margin-bottom: var(--udexSpacer40);
+    display: grid;
+    grid-template: "avatar" min-content "qt" min-content "qs" min-content "link" min-content / 1fr;
 }
 
 .quote > div {
-    display: flex;
-    justify-content: center;
-    align-items: stretch;
-}
-
-.quote .col {
-    box-sizing: border-box;
-    display: flex;
-    flex: 1;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-}
-
-.quote .content {
-    justify-content: left;
-    color: var(--udexColorGrey8);
+    display: inline-flex;
 }
 
 .quote .content p {
-    width: 100%;
-    margin-top: 0;
-}
-
-.quote .content p:last-of-type {
-    margin-bottom: 0;
+    margin: 0;
 }
 
 .quote .qt {
+    grid-area: qt;
+}
+
+.quote .qs {
+    grid-area: qs;
+}
+
+.quote .qt:not(:last-child),
+.quote .qs:not(:last-child) {
     margin-bottom: var(--udexSpacer24);
+}
+
+.quote .quote-link {
+    grid-area: link;
+
+    a {
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+    }
+
+    a:visited {
+        color: var(--udexColorBlue10);
+        text-decoration: underline;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    a:active {
+        color: var(--udexColorBlue11);
+        text-decoration: underline;
+    }
+
+    a::after {
+        box-sizing: border-box;
+        content: "";
+        display: inline-block;
+        height: 1em;
+        width: 1em;
+        margin-left: 4px;
+
+        /* Use mask in order to be able to adjust SVG colour */
+        mask: url("/aemedge/icons/slim-arrow-right.svg") center no-repeat;
+        background-color: currentcolor;
+    }
+}
+
+.quote .avatar {
+    justify-self: center;
+    margin-right: var(--udexSpacer24);
+    margin-bottom: var(--udexSpacer20);
+    grid-area: avatar;
+    border: 0;
+
+    &:hover {
+        border: 0;
+    }
 }
 
 .quote .qt .content {
     font-size: var(--udexTypographyBodyXLFontSize);
     flex-flow: column;
+}
+
+.quote .qs .content {
+    font-size: var(--udexTypographyHeadingRegularXXSFontSize);
 }
 
 .quote .qt::before,
@@ -47,7 +90,6 @@
     flex: 0 0 30px;
     height: 100%;
     justify-content: center;
-    color: var(--udexColorGrey8);   
     font-size: var(--udexTypographyDisplayRegularLFontSize);
     line-height: 84px;
     position: relative;
@@ -64,10 +106,10 @@
     padding-left: 16px;
 }
 
+.quote .quote-link,
 .quote .qs .content {
-    font-size: var(--udexTypographyHeadingRegularXXSFontSize);
-    padding-left: 46px;
-    padding-right: 46px;
+    margin-left: 46px;
+    margin-right: 46px;
 }
 
 .quote.small .qt .content {
@@ -76,7 +118,7 @@
 
 .quote.small .qt::before,
 .quote.small .qt::after {
-    flex: 0 0 1.75rem;   
+    flex: 0 0 1.75rem;
     font-size: var(--udexTypographyDisplayRegularMFontSize);
     line-height: 72px;
     top: -8px;
@@ -90,8 +132,43 @@
     padding-left: 8px;
 }
 
+.quote.small .quote-link,
 .quote.small .qs .content {
-    font-size: var(--udexTypographyNavigationRegularMFontFamily);
-    padding-left: 36px;
-    padding-right: 36px;
+    margin-left: 36px;
+    margin-right: 36px;
+}
+
+.quote.small .qs .content {
+    font-size: var(--udexTypographyNavigationRegularMFontSize);
+}
+
+.quote.small .avatar {
+    margin-right: var(--udexSpacer16);
+}
+
+@media (width >= 640px) {
+    .quote {
+        grid-template: "avatar qt" min-content "avatar qs" min-content "avatar link" min-content / min-content 1fr;
+
+        &.avatar-right {
+            grid-template-columns: 1fr min-content;
+            grid-template-areas:
+            "qt avatar"
+            "qs avatar"
+            "link avatar";
+
+            .avatar {
+                margin-left: var(--udexSpacer24);
+                margin-right: 0;
+            }
+        }
+    }
+}
+
+.section.quote-container.background-light,
+.section.quote-container.background-dark {
+    .quote {
+        margin-top: var(--udexSpacer56);
+        margin-bottom: var(--udexSpacer56);
+    }
 }

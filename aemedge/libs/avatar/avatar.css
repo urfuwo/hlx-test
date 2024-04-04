@@ -48,6 +48,17 @@
       width: 7.5rem;
     }
   }
+
+  &.medium {
+    flex: 0 0 4rem;
+    width: 4rem;
+    height: 4rem;
+
+    & img {
+      height: 4rem;
+      width: 4rem;
+    }
+  }
 }
 
 .avatar-info {
