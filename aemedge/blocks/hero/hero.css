@@ -161,6 +161,10 @@ udex-hero-banner .hero-banner .media-blend__content p {
   margin: var(--udexSpacer12, 12px) 0;
 }
 
+udex-hero-banner .hero-banner.media-blend__content :is(h2, h3) + p {
+  margin-block: 0;
+}
+
 udex-hero-banner .hero-banner .media-blend__info-block {
   font-family: var(--sapFontFamily);
   font-size: var(--udexTypographyBodyXSFontSize, 14px);
@@ -311,6 +315,23 @@ udex-hero-banner .text-neutral-black {
 
   .hero-wrapper.fixed-height-small-style-wrapper udex-hero-banner {
     --udexHeroBannerMinHeight: 450px;
+  }
+}
+
+.hero-justify-wrapper udex-hero-banner {
+  h1 {
+    margin-top: 0;
+    margin-bottom: auto;
+    padding-bottom: var(--udexSpacer20);
+  }
+
+  h1 + * {
+    margin-top: auto;
+  }
+
+  .media-blend__content {
+    display: flex;
+    flex-direction: column;
   }
 }
 
