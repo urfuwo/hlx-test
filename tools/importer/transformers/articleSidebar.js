@@ -16,14 +16,22 @@ const articleSidebar = (main, document) => {
     'section#main > aside div.related-content-container',
   );
   if (sidebarElements) {
-    let contentEntryPoints = [...document.querySelectorAll('section#main > article > div.entry-content > h2, section#main > article > div.entry-content > h3')];
+    const entryContentDiv = document.querySelector(
+      'section#main > article > div.entry-content',
+    );
+    let contentEntryPoints = [
+      ...entryContentDiv.querySelectorAll('h3'),
+      ...entryContentDiv.querySelectorAll('h2'),
+    ];
     if (contentEntryPoints?.length === 0) {
       // if the document has no headings, use paragraphs as entry points
-      contentEntryPoints = [...document.querySelectorAll('section#main > article > div.entry-content > p')];
+      contentEntryPoints = [...entryContentDiv.querySelectorAll('p')];
     }
 
     // move first promo before the first heading in the text
-    const firstEntry = sidebarElements.querySelector('ul[data-position="top"] > li');
+    const firstEntry = sidebarElements.querySelector(
+      'ul[data-position="top"] > li',
+    );
     if (firstEntry) {
       contentEntryPoints[0].before(
         promoHelper(
@@ -35,7 +43,9 @@ const articleSidebar = (main, document) => {
     }
 
     // move second promo somewhere in the middle of the text
-    const middleEntry = sidebarElements.querySelector('ul[data-position="middle"] > li');
+    const middleEntry = sidebarElements.querySelector(
+      'ul[data-position="middle"] > li',
+    );
     if (middleEntry) {
       contentEntryPoints[Math.floor(contentEntryPoints.length / 2)].after(
         promoHelper(
@@ -46,7 +56,9 @@ const articleSidebar = (main, document) => {
       );
     }
 
-    const bottomEntry = sidebarElements.querySelector('ul[data-position="bottom"] > li');
+    const bottomEntry = sidebarElements.querySelector(
+      'ul[data-position="bottom"] > li',
+    );
     if (bottomEntry) {
       if (bottomEntry.querySelector('a[href*="sap-news-center-newsletter"]')) {
         // move last element (newsletter) to the end of the page
