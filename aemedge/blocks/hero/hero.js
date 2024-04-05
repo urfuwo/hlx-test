@@ -26,8 +26,7 @@ function buildAuthorEl(author) {
 function addAuthorAvatarImg(authorName, avatar) {
   return getAuthorEntries([authorName]).then((authorEntries) => {
     if (authorEntries && authorEntries.length > 0) {
-      const ae = authorEntries[0];
-      const picture = new Avatar(ae.title, ae.description, ae.path, ae.image).getImage();
+      const picture = Avatar.fromAuthorEntry(authorEntries[0]).getImage();
       avatar.append(picture.querySelector('img')); /* default slot */
     }
   });

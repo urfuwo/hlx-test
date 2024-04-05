@@ -38,6 +38,7 @@ export default class PictureCard extends Card {
         { class: 'author-profile' },
         new Avatar(
           this.authorEntry.author,
+          this.authorEntry.title,
           this.authorEntry.description,
           this.authorEntry.path,
           this.authorEntry.image,

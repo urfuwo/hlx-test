@@ -55,7 +55,7 @@
   flex-direction: column;
   justify-content: center;
 
-  & .title {
+  & .name {
     & a {
       font-size: var(--udexTypographyBodyXSFontSize);
       font-weight: var(--udexTypographyFontWeightMedium);
