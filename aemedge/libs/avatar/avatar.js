@@ -31,7 +31,7 @@ export default class Avatar {
       div({ class: `avatar ${size}` }, this.image ? div(this.getImage()) : div()),
       div(
         { class: 'avatar-info' },
-        div({ class: 'name' }, a({ href: this.path }, div(`${this.name}`))),
+        div({ class: 'name' }, this.path ? a({ href: this.path }, div(`${this.name}`)) : this.name),
         this.description ? div({ class: 'description info' }, this.description) : '',
       ),
     );
@@ -49,11 +49,11 @@ export default class Avatar {
         { class: 'avatar-details' },
         h2(this.name),
         p(this.description),
-        p(
+        this.path ? p(
           { class: 'link' },
           a({ href: this.path, 'aria-label': 'Read more' }, 'See more by this author'),
           span({ class: 'icon icon-link-arrow' }),
-        ),
+        ) : '',
       ),
     );
     decorateIcons(element);

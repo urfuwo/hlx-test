@@ -1,26 +1,13 @@
 import { loadCSS } from '../../scripts/aem.js';
-import { div } from '../../scripts/dom-builder.js';
-import Avatar from '../../libs/avatar/avatar.js';
 import { getAuthorEntries } from '../../scripts/article.js';
+import Profiles from '../../libs/profiles/profiles.js';
 
 async function addAuthorProfiles(block, keys) {
   const entries = await getAuthorEntries(keys);
   if (entries && entries.length) {
-    if (keys.length > 1) {
-      block.classList.add(`elems${keys.length}`);
-      entries.forEach((authorEntry) => {
-        block.append(div(
-          { class: 'author-profile hor' },
-          Avatar.fromAuthorEntry(authorEntry).renderDetails('big'),
-        ));
-      });
-    } else {
-      block.classList.add('vertical');
-      block.append(div(
-        { class: 'author-profile' },
-        Avatar.fromAuthorEntry(entries[0]).renderDetails('big'),
-      ));
-    }
+    const profiles = new Profiles(entries, 'author').render();
+    profiles.classList.add(...block.classList);
+    block.replaceWith(profiles);
   } else {
     block.parentNode.remove();
   }
