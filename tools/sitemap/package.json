@@ -1,0 +1,15 @@
+{
+  "name": "sitemap-generator",
+  "version": "1.0.0",
+  "description": "Node utility to generate sitemap for Hub pages",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Adobe",
+  "license": "ISC",
+  "dependencies": {
+    "fast-xml-parser": "^4.3.6"
+  }
+}
