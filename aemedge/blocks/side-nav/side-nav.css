@@ -36,6 +36,10 @@ aside {
       cursor: pointer;
     }
 
+    & :is(a).current {
+      color: var(--udexColorBlue7);
+    }
+
     & :is(a):hover {
       color: var(--sapLink_Hover_Color);
     }
@@ -207,6 +211,14 @@ aside {
         white-space: nowrap;
         padding: unset;
         margin: unset;
+
+        &:is(a).current {
+          color: var(--udexColorBlue7);
+        }
+
+        &:is(a):hover {
+          color: var(--sapLink_Hover_Color);
+        }
       }
     }
   }
