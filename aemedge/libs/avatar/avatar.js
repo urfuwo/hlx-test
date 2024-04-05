@@ -6,16 +6,16 @@ import {
 const breakpoints = [{ width: '480' }];
 
 export default class Avatar {
-  static fromAuthorEntry(ae) {
-    return new Avatar(ae.author, ae.title, ae.description, ae.path, ae.image);
-  }
-
   constructor(name, title, description, path, image) {
     this.name = name;
     this.title = title;
     this.description = description;
     this.path = path;
     this.image = image;
+  }
+
+  static fromAuthorEntry(ae) {
+    return new Avatar(ae.author, ae.title, ae.description, ae.path, ae.image);
   }
 
   getImage() {
