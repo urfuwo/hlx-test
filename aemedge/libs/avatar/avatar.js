@@ -21,21 +21,18 @@ export default class Avatar {
     if (!excludeStyles) {
       loadCSS(`${window.hlx.codeBasePath}/libs/avatar/avatar.css`);
     }
-    let element;
     if (imageOnly) {
-      element = div({ class: `avatar ${size}` }, this.image ? div(this.getOptimizedPicture()) : div());
-    } else {
-      element = div(
-        { class: 'avatar-wrapper' },
-        div({ class: `avatar ${size}` }, this.image ? div(this.getOptimizedPicture()) : div()),
-        div(
-          { class: 'avatar-info' },
-          div({ class: 'title' }, a({ href: this.path }, div(`${this.title}`))),
-          this.description ? div({ class: 'description info' }, this.description) : '',
-        ),
-      );
+      return div({ class: `avatar ${size}` }, this.image ? div(this.getOptimizedPicture()) : div());
     }
-    return element;
+    return div(
+      { class: 'avatar-wrapper' },
+      div({ class: `avatar ${size}` }, this.image ? div(this.getOptimizedPicture()) : div()),
+      div(
+        { class: 'avatar-info' },
+        div({ class: 'title' }, a({ href: this.path }, div(`${this.title}`))),
+        this.description ? div({ class: 'description info' }, this.description) : '',
+      ),
+    );
   }
 
   renderDetails(size, excludeStyles) {

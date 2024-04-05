@@ -14,8 +14,8 @@ export default async function decorate(block) {
     qsContent.classList.add('col', 'content');
     qsContent.parentNode.classList.add('qs');
     if (isNotArticle) {
-      const author = removeAuthorsSuffixes(qsContent.textContent).split(',')[0].trim();
-      const authorEntry = (await getAuthorEntries([author]))[0];
+      const [author] = removeAuthorsSuffixes(qsContent.textContent).split(',');
+      const [authorEntry] = await getAuthorEntries([author.trim()]);
       if (authorEntry) {
         const avatar = new Avatar(authorEntry.title, null, authorEntry.path, authorEntry.image);
         block.insertBefore(avatar.render(isSmall ? 'medium' : 'big', false, true), qtContent.parentNode);
@@ -25,8 +25,7 @@ export default async function decorate(block) {
   if (linkContent && isNotArticle) {
     // Unwrap link from button container added by aem.js
     const link = linkContent.querySelector('a');
-    link.classList = [];
-    link.classList.add('col', 'content');
+    link.classList = ['col', 'content'];
     linkContent.parentNode.classList.add('quote-link');
     linkContent.parentNode.replaceChild(link, linkContent);
   } else if (linkContent) {
