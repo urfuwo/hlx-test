@@ -6,11 +6,16 @@ import {
 const breakpoints = [{ width: '480' }];
 
 export default class Avatar {
-  constructor(title, description, path, image) {
+  constructor(name, title, description, path, image) {
+    this.name = name;
     this.title = title;
     this.description = description;
     this.path = path;
     this.image = image;
+  }
+
+  static fromAuthorEntry(ae) {
+    return new Avatar(ae.author, ae.title, ae.description, ae.path, ae.image);
   }
 
   getImage() {
@@ -26,7 +31,7 @@ export default class Avatar {
       div({ class: `avatar ${size}` }, this.image ? div(this.getImage()) : div()),
       div(
         { class: 'avatar-info' },
-        div({ class: 'title' }, a({ href: this.path }, div(`${this.title}`))),
+        div({ class: 'name' }, a({ href: this.path }, div(`${this.name}`))),
         this.description ? div({ class: 'description info' }, this.description) : '',
       ),
     );
@@ -42,7 +47,7 @@ export default class Avatar {
       div({ class: `avatar ${size}` }, this.image ? div(this.getImage()) : div()),
       div(
         { class: 'avatar-details' },
-        h2(this.title),
+        h2(this.name),
         p(this.description),
         p(
           { class: 'link' },

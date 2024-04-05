@@ -36,12 +36,7 @@ export default class PictureCard extends Card {
       && new URL(this.authorEntry.image).pathname !== '/default-meta-image.png'
       ? div(
         { class: 'author-profile' },
-        new Avatar(
-          this.authorEntry.author,
-          this.authorEntry.description,
-          this.authorEntry.path,
-          this.authorEntry.image,
-        ).render('small'),
+        Avatar.fromAuthorEntry(authorEntry).render('small'),
       )
       : div(
         { class: 'author subtitle' },
