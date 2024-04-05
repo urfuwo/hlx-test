@@ -8,7 +8,7 @@ function formatDate(inputDate) {
 
 function containerize(container, targetClass) {
   const target = container.querySelector(targetClass);
-  if (target && target.nextElementSibling && !target.nextElementSibling.classList.contains('section-metadata')) {
+  if (target && target.nextElementSibling) {
     const sectionMetadata = target.parentElement.querySelector(':scope > .section-metadata');
     const wrapperDiv = div({}, target, sectionMetadata || '');
     container.insertBefore(wrapperDiv, container.firstChild);
