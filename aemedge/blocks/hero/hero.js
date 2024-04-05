@@ -23,11 +23,10 @@ function buildAuthorEl(author) {
   return a({ class: 'media-blend__author', href: buildAuthorUrl(author) }, author);
 }
 
-function addAuthorAvatarImg(authorName, avatar) {
+function addAuthorAvatarImage(authorName, avatar) {
   return getAuthorEntries([authorName]).then((authorEntries) => {
     if (authorEntries && authorEntries.length > 0) {
-      const ae = authorEntries[0];
-      const picture = new Avatar(ae.title, ae.description, ae.path, ae.image).getImage();
+      const picture = Avatar.fromAuthorEntry(authorEntries[0]).getImage();
       avatar.append(picture.querySelector('img')); /* default slot */
     }
   });
@@ -44,7 +43,7 @@ function decorateMetaInfo() {
       avatar.setAttribute('size', 'XS');
       avatar.setAttribute('initials', calculateInitials(authorNames[0]));
       avatar.setAttribute('color-scheme', 'Neutral');
-      addAuthorAvatarImg(authorNames[0], avatar);
+      addAuthorAvatarImage(authorNames[0], avatar);
       infoBlockWrapper.append(avatar);
       authorEl.append(buildAuthorEl(authorNames[0]));
     } else {
