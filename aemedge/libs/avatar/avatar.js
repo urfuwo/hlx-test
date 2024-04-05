@@ -14,6 +14,10 @@ export default class Avatar {
     this.image = image;
   }
 
+  static fromAuthorEntry(ae) {
+    return new Avatar(ae.author, ae.title, ae.description, ae.path, ae.image);
+  }
+
   getImage() {
     return this.image ? createOptimizedPicture(this.image, this.title, false, breakpoints) : null;
   }

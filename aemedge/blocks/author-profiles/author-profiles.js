@@ -8,21 +8,18 @@ async function addAuthorProfiles(block, keys) {
   if (entries && entries.length) {
     if (keys.length > 1) {
       block.classList.add(`elems${keys.length}`);
-      entries.forEach((e) => {
-        const avatar = new Avatar(e.author, e.title, e.description, e.path, e.image);
-        const profile = div({ class: 'author-profile hor' }, avatar.renderDetails('big'));
-        block.append(profile);
+      entries.forEach((authorEntry) => {
+        block.append(div(
+          { class: 'author-profile hor' },
+          Avatar.fromAuthorEntry(authorEntry).renderDetails('big'),
+        ));
       });
     } else {
       block.classList.add('vertical');
-      const avatar = new Avatar(
-        entries[0].author,
-        entries[0].title,
-        entries[0].description,
-        entries[0].path,
-        entries[0].image,
-      );
-      block.append(div({ class: 'author-profile' }, avatar.renderDetails('big')));
+      block.append(div(
+        { class: 'author-profile' },
+        Avatar.fromAuthorEntry(entries[0]).renderDetails('big'),
+      ));
     }
   } else {
     block.parentNode.remove();
