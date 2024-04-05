@@ -50,7 +50,7 @@ async function generateSideNavigation() {
   sideNav.querySelectorAll('.default-content-wrapper a').forEach((link) => {
     const href = new URL(link.href);
     if (window.location.pathname === href.pathname) {
-      link.classList.add('current');
+      link.setAttribute('aria-current', 'page');
     }
   });
   return sideNav;

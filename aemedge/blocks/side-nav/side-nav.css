@@ -36,7 +36,7 @@ aside {
       cursor: pointer;
     }
 
-    & :is(a).current {
+    & :is(a)[aria-current="page"] {
       color: var(--udexColorBlue7);
     }
 
@@ -212,7 +212,7 @@ aside {
         padding: unset;
         margin: unset;
 
-        &:is(a).current {
+        &:is(a)[aria-current="page"] {
           color: var(--udexColorBlue7);
         }
 
