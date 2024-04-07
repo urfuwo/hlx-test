@@ -103,8 +103,33 @@ main {
 }
 
 /* image and video caption */
-.article p > em {
+.article p > em,
+.article .picture-caption > em {
   font-size: var(--udexTypographyBodyXSFontSize);
   font-style: normal;
   color: var(--udexColorGrey9);
+}
+
+.article p .picture-container {
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+
+  picture {
+    display: block;
+
+    img {
+      display: block;
+    }
+  }
+
+  .picture-caption {
+    margin-top: var(--udexSpacer20);
+    width: 0;
+    min-width: 100%;
+
+    em {
+      display: inline-block;
+    }
+  }
 }

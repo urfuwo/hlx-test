@@ -47,6 +47,12 @@ async function generateSideNavigation() {
     toggleAllNavSections(sideNav);
     sideNav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
   });
+  sideNav.querySelectorAll('.default-content-wrapper a').forEach((link) => {
+    const href = new URL(link.href);
+    if (window.location.pathname === href.pathname) {
+      link.setAttribute('aria-current', 'page');
+    }
+  });
   return sideNav;
 }
 

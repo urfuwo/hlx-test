@@ -7,7 +7,8 @@ import {
 } from '../../scripts/aem.js';
 import { formatDate } from '../../scripts/utils.js';
 import Tag from '../../libs/tag/tag.js';
-import { buildAuthorUrl, removeAuthorsSuffixes } from '../../scripts/article.js';
+import { buildAuthorUrl, getAuthorEntries, getAuthorNames } from '../../scripts/article.js';
+import Avatar from '../../libs/avatar/avatar.js';
 
 function calculateInitials(name) {
   const nameParts = name.split(' ');
@@ -22,24 +23,31 @@ function buildAuthorEl(author) {
   return a({ class: 'media-blend__author', href: buildAuthorUrl(author) }, author);
 }
 
+function addAuthorAvatarImage(authorName, avatar) {
+  return getAuthorEntries([authorName]).then((authorEntries) => {
+    if (authorEntries && authorEntries.length > 0) {
+      const picture = Avatar.fromAuthorEntry(authorEntries[0]).getImage();
+      avatar.append(picture.querySelector('img')); /* default slot */
+    }
+  });
+}
+
 function decorateMetaInfo() {
   const infoBlockWrapper = span({ class: 'media-blend__info-block' });
 
-  const authors = removeAuthorsSuffixes(getMetadata('author'))
-    .split(',')
-    .map((author) => author.trim());
+  const authorNames = getAuthorNames();
   const authorEl = span({ class: 'media-blend__authors' });
-  if (authors.length > 0) {
-    if (authors.length === 1 && !!authors[0]) {
+  if (authorNames.length > 0) {
+    if (authorNames.length === 1 && !!authorNames[0]) {
       const avatar = document.createElement('udex-avatar');
       avatar.setAttribute('size', 'XS');
-      avatar.setAttribute('initials', calculateInitials(authors[0]));
+      avatar.setAttribute('initials', calculateInitials(authorNames[0]));
       avatar.setAttribute('color-scheme', 'Neutral');
-
+      addAuthorAvatarImage(authorNames[0], avatar);
       infoBlockWrapper.append(avatar);
-      authorEl.append(buildAuthorEl(authors[0]));
+      authorEl.append(buildAuthorEl(authorNames[0]));
     } else {
-      authors.forEach((author) => {
+      authorNames.forEach((author) => {
         if (author) {
           authorEl.append(buildAuthorEl(author));
         }

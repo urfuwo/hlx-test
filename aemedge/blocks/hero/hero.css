@@ -5,6 +5,16 @@ udex-hero-banner .hero-container {
 udex-hero-banner .hero-banner {
   width: 100%;
   container-type: inline-size;
+
+  h1 {
+    font-size: var(--udexTypographyHeadingMediumLFontSize);
+    font-weight: var(--udexTypographyFontWeightMedium);
+  }
+
+  h2 {
+    font-size: var(--udexTypographyHeadingMediumMFontSize);
+    font-weight: var(--udexTypographyFontWeightMedium);
+  }
 }
 
 udex-hero-banner .hero-banner p {
@@ -56,6 +66,14 @@ udex-hero-banner .hero-banner.media-blend__additional-content img {
     width: 100%;
     margin-bottom: 10rem;
   }
+}
+
+/* Avatar image */
+
+udex-hero-banner .hero-banner udex-avatar[size="XS"] img {
+  object-fit: cover;
+  height: 2rem;
+  width: 2rem;
 }
 
 /* Image above CTA */
@@ -141,6 +159,10 @@ udex-hero-banner .hero-banner .media-blend__content p {
   font-size: var(--udexTypographyBodyLFontSize, 20px);
   color: var(--udexColorGrey9, #223548);
   margin: var(--udexSpacer12, 12px) 0;
+}
+
+udex-hero-banner .hero-banner.media-blend__content :is(h2, h3) + p {
+  margin-block: 0;
 }
 
 udex-hero-banner .hero-banner .media-blend__info-block {
@@ -239,96 +261,8 @@ udex-hero-banner .custom-background-image:dir(rtl) {
   }
 }
 
-.hero-wrapper.hero-background-blue-wrapper,
-.hero-wrapper.hero-background-blue-1-wrapper {
-  background-color: var(--udexColorBlue1);
-}
-
-.hero-wrapper.hero-background-blue-2-wrapper {
-  background-color: var(--udexColorBlue2);
-}
-
-.hero-wrapper.hero-background-blue-7-wrapper {
-  background-color: var(--udexColorBlue7);
-}
-
-.hero-wrapper.hero-background-grey-wrapper,
-.hero-wrapper.hero-background-grey-1-wrapper {
-  background-color: var(--udexColorGrey1);
-}
-
-.hero-wrapper.hero-background-grey-2-wrapper {
-  background-color: var(--udexColorGrey2);
-}
-
-.hero-wrapper.hero-background-indigo-wrapper,
-.hero-wrapper.hero-background-indigo-1-wrapper {
-  background-color: var(--udexColorIndigo1);
-}
-
-.hero-wrapper.hero-background-indigo-2-wrapper {
-  background-color: var(--udexColorIndigo2);
-}
-
-.hero-wrapper.hero-background-indigo-9-wrapper {
-  background-color: var(--udexColorIndigo9);
-}
-
-.hero-wrapper.hero-background-pink-wrapper,
-.hero-wrapper.hero-background-pink-1-wrapper {
-  background-color: var(--udexColorPink1);
-}
-
-.hero-wrapper.hero-background-pink-2-wrapper {
-  background-color: var(--udexColorPink2);
-}
-
-.hero-wrapper.hero-background-raspberry-wrapper,
-.hero-wrapper.hero-background-raspberry-1-wrapper {
-  background-color: var(--udexColorRaspberry1);
-}
-
-.hero-wrapper.hero-background-raspberry-2-wrapper {
-  background-color: var(--udexColorRaspberry2);
-}
-
-.hero-wrapper.hero-background-red-wrapper,
-.hero-wrapper.hero-background-red-1-wrapper {
-  background-color: var(--udexColorRed1);
-}
-
-.hero-wrapper.hero-background-red-2-wrapper {
-  background-color: var(--udexColorRed2);
-}
-
-.hero-wrapper.hero-background-mango-wrapper,
-.hero-wrapper.hero-background-mango-1-wrapper {
-  background-color: var(--udexColorMango1);
-}
-
-.hero-wrapper.hero-background-mango-2-wrapper {
-  background-color: var(--udexColorMango2);
-}
-
-.hero-wrapper.hero-background-green-wrapper,
-.hero-wrapper.hero-background-green-1-wrapper {
-  background-color: var(--udexColorGreen1);
-}
-
-.hero-wrapper.hero-background-green-2-wrapper {
-  background-color: var(--udexColorGreen2);
-}
-
-.hero-wrapper.hero-background-teal-wrapper,
-.hero-wrapper.hero-background-teal-1-wrapper {
-  background-color: var(--udexColorTeal1);
-}
-
-.hero-wrapper.hero-background-teal-2-wrapper {
-  background-color: var(--udexColorTeal2);
-}
-
-.hero-wrapper.hero-text-white-wrapper {
+.hero-wrapper.hero-text-white-wrapper,
+.background-dark .hero-wrapper {
   udex-hero-banner .hero-banner .media-blend__intro-text {
     color: var(--udexColorNeutralWhite);
   }
@@ -381,6 +315,23 @@ udex-hero-banner .text-neutral-black {
 
   .hero-wrapper.fixed-height-small-style-wrapper udex-hero-banner {
     --udexHeroBannerMinHeight: 450px;
+  }
+}
+
+.hero-justify-wrapper udex-hero-banner {
+  h1 {
+    margin-top: 0;
+    margin-bottom: auto;
+    padding-bottom: var(--udexSpacer20);
+  }
+
+  h1 + * {
+    margin-top: auto;
+  }
+
+  .media-blend__content {
+    display: flex;
+    flex-direction: column;
   }
 }
 
