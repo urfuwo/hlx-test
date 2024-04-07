@@ -82,3 +82,10 @@ body.hub-l2 .content-list ul {
     grid-auto-rows: 115px 100px 60px;
   }
 }
+
+.section.background-light,
+.section.background-dark {
+  .content-list:first-child {
+    margin-top: var(--udexSpacer56);
+  }
+}
