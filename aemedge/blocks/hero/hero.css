@@ -18,27 +18,50 @@ udex-hero-banner {
   display: block;
   width: 100%;
 
-  --udexHeroBannerContentPaddingVertical: 0;
-  --udexHeroBannerSlotMaxWidth: calc(50% - 2 * var(--udexHeroBannerContentPaddingHorizontal));
+  --udexHeroBannerContentPaddingVertical: var(--udexSpacer40);
+  --udexHeroBannerSlotMaxWidth: calc(100% - 2 * var(--udexHeroBannerContentPaddingHorizontal));
 
-  padding-block: var(--udexSpacer40);
+  &:has(.media-blend__additional-content) {
+    --udexHeroBannerContentPaddingVertical: 0;
+    --udexHeroBannerSlotMaxWidth: calc(50% - 2 * var(--udexHeroBannerContentPaddingHorizontal));
+
+    .media-blend__content {
+      padding-block-start: 40px;
+    }
+
+    .media-blend__additional-content {
+      padding-block-end: 40px;
+    }
+  }
 
   @media (width >= 640px) {
     --udexHeroBannerContentPaddingVertical: var(--udexSpacer40);
 
-    padding-block: 0;
+    &:has(.media-blend__additional-content) {
+      --udexHeroBannerContentPaddingVertical: var(--udexSpacer40);
 
-    .hero-banner.media-blend__additional-content {
-      padding-block-start: 0;
+      .media-blend__content {
+        padding-block-start: 0;
+      }
+
+      .media-blend__additional-content {
+        padding-block-end: 0;
+      }
     }
   }
 
   @media (width >= 980px) {
     --udexHeroBannerContentPaddingVertical: var(--udexSpacer48);
+    --udexHeroBannerSlotMaxWidth: 540px;
+  }
+
+  @media (width >= 1300px) {
+    --udexHeroBannerSlotMaxWidth: 753px;
   }
 
   @media (width >= 1600px) {
     --udexHeroBannerContentPaddingVertical: var(--udexSpacer56);
+    --udexHeroBannerSlotMaxWidth: 936px;
   }
 
   .hero-banner.media-blend__additional-content {
@@ -47,6 +70,7 @@ udex-hero-banner {
     align-items: center;
     margin-inline-end: calc(var(--hero-margin--right) - 22px);
   }
+
 }
 
 /* Additional content */
