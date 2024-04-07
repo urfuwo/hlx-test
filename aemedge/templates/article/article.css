@@ -38,7 +38,6 @@ main {
         :is(
             .hero-container,
             .toc-container,
-            .quote-container,
             [data-location='sidebar'],
             [data-location='document-footer']
           )

@@ -17,8 +17,8 @@ export default async function decorate(block) {
       const [author] = removeAuthorsSuffixes(qsContent.textContent).split(',');
       const [authorEntry] = await getAuthorEntries([author.trim()]);
       if (authorEntry) {
-        const avatar = new Avatar(authorEntry.title, null, authorEntry.path, authorEntry.image);
-        block.insertBefore(avatar.render(isSmall ? 'medium' : 'big', false, true), qtContent.parentNode);
+        const avatar = Avatar.fromAuthorEntry(authorEntry).render(isSmall ? 'medium' : 'big', false, true);
+        block.insertBefore(avatar, qtContent.parentNode);
       }
     }
   }

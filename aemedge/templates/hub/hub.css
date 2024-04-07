@@ -42,7 +42,7 @@
       }
     }
 
-    & > :not(:last-child, .hero-container, .quote-container) {
+    & > :not(:last-child, .hero-container) {
       padding-block-end: var(--udexSpacer56);
     }
 

@@ -5,8 +5,17 @@
     grid-template: "avatar" min-content "qt" min-content "qs" min-content "link" min-content / 1fr;
 }
 
+.quote-wrapper:last-child .quote {
+    margin-bottom: 0;
+}
+
 .quote > div {
-    display: inline-flex;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.quote .content {
+    flex-basis: 100%;
 }
 
 .quote .content p {
@@ -167,8 +176,12 @@
 
 .section.quote-container.background-light,
 .section.quote-container.background-dark {
-    .quote {
-        margin-top: var(--udexSpacer56);
+    .quote-wrapper .quote {
         margin-bottom: var(--udexSpacer56);
+        margin-top: var(--udexSpacer56);
+    }
+
+    .quote-wrapper:last-child .quote {
+        margin-bottom: 0;
     }
 }

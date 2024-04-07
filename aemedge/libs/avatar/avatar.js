@@ -27,7 +27,7 @@ export default class Avatar {
       loadCSS(`${window.hlx.codeBasePath}/libs/avatar/avatar.css`);
     }
     if (imageOnly) {
-      return div({ class: `avatar ${size}` }, this.image ? div(this.getOptimizedPicture()) : div());
+      return div({ class: `avatar ${size}` }, this.image ? div(this.getImage()) : div());
     }
     return div(
       { class: 'avatar-wrapper' },
