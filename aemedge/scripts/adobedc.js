@@ -23,4 +23,5 @@ async function loadAdobeDC() {
   }
 }
 
+window.console.log(`#L1: AdobeDC loading at ${Date.now() - window.adobeDCStart}ms...`);
 await loadAdobeDC();
