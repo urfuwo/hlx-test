@@ -5,6 +5,8 @@ const { createWriteStream } = require('fs');
 const { resolve } = require('path');
 const { parser } = require('stream-json/Parser');
 const { streamArray } = require('stream-json/streamers/StreamArray');
+const { streamValues } = require('stream-json/streamers/StreamValues');
+const { disassembler } = require('stream-json/Disassembler');
 const { pick } = require('stream-json/filters/Pick');
 const { createGzip } = require('zlib');
 const { SitemapStream, streamToPromise } = require('sitemap');
@@ -18,6 +20,32 @@ const formatDate = (value) => {
     console.error(error);
     return '';
   }
+};
+
+const collectTopics = async () => {
+  const response = await fetch(
+    'https://main--hlx-test--urfuwo.hlx.page/aemedge/articles-index.json',
+  );
+  const responseStream = new ReadableWebToNodeStream(response.body);
+  const topicSet = new Set();
+  const pipeline = chain([
+    responseStream,
+    parser(),
+    pick({ filter: 'data' }),
+    streamArray(),
+    (data) => {
+      const { value } = data;
+      return JSON.parse(value.topics);
+    },
+    (data) => {
+      data.split(',').forEach((entry) => {
+        topicSet.add(entry.trim());
+      });
+    },
+  ]);
+  pipeline.on('finish', () => {
+    console.log('topic set', topicSet);
+  });
 };
 
 const writeSiteMap = async () => {
@@ -52,4 +80,6 @@ const writeSiteMap = async () => {
   pipeline.on('error', (e) => e.code === 'EPIPE' || console.error(e));
 };
 
-writeSiteMap();
+// writeSiteMap();
+
+collectTopics();
