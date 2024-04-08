@@ -1,0 +1,109 @@
+.link-list {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--udexSpacer16) var(--udexSpacer48);
+  
+  @media (width >= 980px) {
+    & {
+      grid-template-columns: repeat(9, 1fr);
+    }
+  }
+  
+  & > div {
+    grid-column: 1 / -1;
+    
+    @media (width >= 980px) {
+      & {
+        grid-column: span 3;
+      }
+    }
+    
+    & p {
+      margin: 0;
+      padding: 0;
+    }
+    
+    /* Image + Headline */
+    & > div:nth-child(1) {
+      /* Headline (in `p`) */
+      & p {
+        font-size: var(--udexTypographyHeadingMediumXXSFontSize);
+        font-weight: var(--udexTypographyFontWeightMedium);
+        line-height: var(--udexTypographyHeadingLineHeight);
+      }
+      
+      /* Image */
+      & picture {
+        display: block;
+        margin-bottom: var(--udexSpacer20);
+      }
+      
+      & img {
+        display: block;
+        width: 100%;
+      }
+    }
+    
+    /* Link + Icon */
+    & > div:nth-child(2) {
+      margin-top: var(--udexSpacer20);
+      
+      & p {
+        align-items: center;
+        display: flex;
+        
+        /* Icons */
+        & .icon {
+          display: flex;
+          width: auto;
+          
+          & svg {
+            fill: var(--udexColorBlue7);
+          }
+        }
+        
+        /* :hover over `p` */
+        &:hover {
+          & .icon {
+            & svg path {
+              fill: var(--udexColorBlue9);
+            }
+          }
+        }
+        
+        & .icon-slim-arrow-right {
+          height: 12px;
+        }
+        
+        & .icon-play-icon {
+          height: 16px;
+        }
+        
+        /* Link */
+        & a {
+          color: var(--udexColorBlue7);
+          font-size: var(--udexTypographyNavigationMediumXLFontSize);
+          font-style: normal;
+          text-decoration: none;
+          white-space: nowrap;
+          
+          &:hover,
+          &:focus,
+          &:active {
+            color: var(--udexColorBlue9);
+          }
+        }
+        
+        /* Link + Icon */
+        & a:first-child {
+          margin-right: var(--udexSpacer8);
+        }
+        
+        /* Icon + Link */
+        & .icon:first-child {
+          margin-right: var(--udexSpacer8);
+        }
+      }
+    }
+  }
+}
