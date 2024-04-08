@@ -344,6 +344,11 @@ async function loadLazy(doc) {
  * without impacting the user experience.
  */
 function loadDelayed() {
+  window.setTimeout(
+    () => import('./adobedc.js'),
+    250,
+  );
+  window.console.log(`#L2: AdobeDC load scheduled at ${Date.now() - window.adobeDCStart}ms`);
   // eslint-disable-next-line import/no-cycle
   window.setTimeout(
     () => import('./delayed.js'),
@@ -352,28 +357,10 @@ function loadDelayed() {
   // load anything that can be postponed to the latest here
 }
 
-async function scheduleAdobeDCLoad(start) {
-  // eslint-disable-next-line import/no-cycle
-  window.setTimeout(
-    () => import('./adobedc.js'),
-    250,
-  );
-  window.console.log(`# AdobeDC load scheduled at ${Date.now() - start}ms`);
-}
-
-async function sendAdobeDCBeacon(start, stl = null) {
-  window.adobeDataLayer.push({
-    event: stl ? 'stlBeaconReady' : 'stBeaconReady',
-  });
-  window.console.log(`Beacon sent at ${Date.now() - start}ms`);
-}
-
 async function loadPage() {
-  const start = Date.now();
+  window.adobeDCStart = Date.now();
   await loadEager(document);
-  await scheduleAdobeDCLoad(start);
   await loadLazy(document);
-  await sendAdobeDCBeacon(start);
   loadDelayed();
 }
 
@@ -383,7 +370,7 @@ async function initDataLayer() {
     event: 'globalDL',
     site: {
       country: 'glo',
-      name: 'l1',
+      name: 'l2',
     },
     user: {
       type: 'visitor',
