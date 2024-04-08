@@ -46,12 +46,10 @@
   justify-content: center;
 
   & .name {
-    & a {
-      font-size: var(--udexTypographyBodyXSFontSize);
-      font-weight: var(--udexTypographyFontWeightMedium);
-      line-height: var(--udexTypographyDisplayLineHeight);
-      color: var(--udexColorNeutralBlack);
-    }
+    font-size: var(--udexTypographyBodyXSFontSize);
+    font-weight: var(--udexTypographyFontWeightMedium);
+    line-height: var(--udexTypographyDisplayLineHeight);
+    color: var(--udexColorNeutralBlack);
   }
 
   & .description {

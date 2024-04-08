@@ -31,7 +31,7 @@ export default class Avatar {
       div({ class: `avatar ${size}` }, this.image ? div(this.getImage()) : div()),
       div(
         { class: 'avatar-info' },
-        div({ class: 'name' }, a({ href: this.path }, div(`${this.name}`))),
+        div({ class: 'name' }, div(`${this.name}`)),
         this.description ? div({ class: 'description info' }, this.description) : '',
       ),
     );
