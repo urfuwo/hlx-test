@@ -383,7 +383,7 @@ async function initDataLayer() {
     event: 'globalDL',
     site: {
       country: 'glo',
-      name: 'l1',
+      name: 'alx:l1',
     },
     user: {
       type: 'visitor',
