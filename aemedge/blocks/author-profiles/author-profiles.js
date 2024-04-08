@@ -1,13 +1,19 @@
 import { loadCSS } from '../../scripts/aem.js';
 import { getAuthorEntries } from '../../scripts/article.js';
-import Profiles from '../../libs/profiles/profiles.js';
+import Profile from '../../libs/profile/profile.js';
 
 async function addAuthorProfiles(block, keys) {
   const entries = await getAuthorEntries(keys);
   if (entries && entries.length) {
-    const profiles = new Profiles(entries, 'author').render();
-    profiles.classList.add(...block.classList);
-    block.replaceWith(profiles);
+    const multipleProfiles = keys.length > 1;
+    entries.forEach((authorEntry) => {
+      block.append(Profile.fromAuthorEntry(authorEntry).render(false, multipleProfiles));
+    });
+    if (multipleProfiles) {
+      block.classList.add(`elems${keys.length}`);
+    } else {
+      block.classList.add('vertical');
+    }
   } else {
     block.parentNode.remove();
   }
