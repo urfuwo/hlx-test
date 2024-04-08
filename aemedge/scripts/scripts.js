@@ -362,7 +362,7 @@ async function initDataLayer() {
     event: 'globalDL',
     site: {
       country: 'glo',
-      name: 'sap',
+      name: 'alx:ref',
     },
     user: {
       type: 'visitor',
