@@ -352,16 +352,16 @@ function loadDelayed() {
   // load anything that can be postponed to the latest here
 }
 
-async function scheduleAdobeDCLoad(start) {
-  // eslint-disable-next-line import/no-cycle
+async function scheduleAdobeDCLoad() {
+  const delayMs = 250;
   window.setTimeout(
     () => import('./adobedc.js'),
     250,
   );
-  window.console.log(`#L1: AdobeDC load scheduled at ${Date.now() - window.adobeDCStart}ms`);
+  window.console.log(`#L1: AdobeDC load scheduled at ${Date.now() - window.adobeDCStart}ms, delayed by ${delayMs}`);
 }
 
-async function sendAdobeDCBeacon(start, stl = null) {
+async function sendAdobeDCBeacon(stl = null) {
   window.adobeDataLayer.push({
     event: stl ? 'stlBeaconReady' : 'stBeaconReady',
   });
