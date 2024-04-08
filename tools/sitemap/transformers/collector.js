@@ -9,10 +9,9 @@ class Collector extends Transform {
 
   _transform(chunk, encoding, callback) {
     chunk.split(',').forEach((entry) => {
-      //   console.log(entry);
       this.collection.add(entry.trim());
+      this.push(entry.trim());
     });
-    this.push(chunk);
 
     callback();
   }
@@ -26,7 +25,6 @@ class Collector extends Transform {
   }
 
   getCollection() {
-    console.log('this is called ');
     return this.collection;
   }
 }

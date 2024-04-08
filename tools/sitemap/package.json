@@ -9,6 +9,7 @@
   "author": "Adobe",
   "license": "ISC",
   "dependencies": {
+    "async": "^3.2.5",
     "axios": "^1.6.8",
     "fast-xml-parser": "^4.3.6",
     "readable-web-to-node-stream": "^3.0.2",
