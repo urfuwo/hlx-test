@@ -344,11 +344,12 @@ async function loadLazy(doc) {
  * without impacting the user experience.
  */
 function loadDelayed() {
+  const delayMs = 750;
   window.setTimeout(
     () => import('./adobedc.js'),
-    750,
+    delayMs,
   );
-  window.console.log(`#L2: AdobeDC load scheduled at ${Date.now() - window.adobeDCStart}ms, delayed by 500ms`);
+  window.console.log(`#L2: AdobeDC load scheduled at ${Date.now() - window.adobeDCStart}ms, delayed by ${delayMs}`);
   // eslint-disable-next-line import/no-cycle
   window.setTimeout(
     () => import('./delayed.js'),
