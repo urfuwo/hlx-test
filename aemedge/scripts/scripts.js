@@ -350,6 +350,7 @@ function loadDelayed() {
 }
 
 async function loadPage() {
+  window.adobeDCStart = Date.now();
   await loadEager(document);
   await loadLazy(document);
   loadDelayed();
