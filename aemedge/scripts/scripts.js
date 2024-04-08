@@ -344,7 +344,7 @@ async function loadLazy(doc) {
  * without impacting the user experience.
  */
 function loadDelayed() {
-  const delayMs = 2000;
+  const delayMs = 2500;
   window.setTimeout(
     () => import('./adobedc.js'),
     delayMs,
