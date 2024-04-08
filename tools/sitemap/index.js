@@ -1,28 +1,55 @@
-#!/usr/bin/env node
+/* eslint-disable no-console */
+/* eslint-disable import/extensions */
+/* eslint-disable import/no-extraneous-dependencies */
+const { createWriteStream } = require('fs');
+const { resolve } = require('path');
+const { parser } = require('stream-json/Parser');
+const { streamArray } = require('stream-json/streamers/StreamArray');
+const { pick } = require('stream-json/filters/Pick');
+const { createGzip } = require('zlib');
+const { SitemapStream, streamToPromise } = require('sitemap');
+const { chain } = require('stream-chain');
+const { ReadableWebToNodeStream } = require('readable-web-to-node-stream');
 
-import { XMLParser, XMLBuilder, XMLValidator } from 'fast-xml-parser';
-import { readFileSync } from 'fs';
-import path from 'path';
-
-const sitemapPath = path.join(process.cwd(), '../../sitemap_index.xml');
-const xmlFile = readFileSync(sitemapPath, 'utf8');
-const parser = new XMLParser();
-const json = parser.parse(xmlFile);
-
-// console.log(JSON.stringify(json));
-
-const buildSiteMapEntry = (loc, lastMod) => ({ loc, lastMod });
-
-const buildSitemap = () => {
-  const array = ['loc1', 'loc2', 'loc3'];
-  const urls = array.map((e) => buildSiteMapEntry(e, 'lastmod'));
-  const builder = new XMLBuilder({
-    arrayNodeName: 'url',
-  });
-  const siteMap = `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  ${builder.build(urls)}
-  </urlset>`;
-  console.log(siteMap);
+const formatDate = (value) => {
+  try {
+    return new Date(value * 1000).toISOString().split('T')[0];
+  } catch (error) {
+    console.error(error);
+    return '';
+  }
 };
 
-buildSitemap();
+const writeSiteMap = async () => {
+  const response = await fetch(
+    'https://main--hlx-test--urfuwo.hlx.page/aemedge/authors-index.json',
+  );
+  const responseStream = new ReadableWebToNodeStream(response.body);
+  const sitemap = new SitemapStream({ hostname: 'http://qa-sap.com' });
+  const siteMapPath = resolve('../../', 'sitemap.xml');
+  const writeStream = createWriteStream(siteMapPath);
+  sitemap.pipe(writeStream);
+  sitemap.pipe(createGzip());
+  const pipeline = chain([
+    responseStream,
+    parser(),
+    pick({ filter: 'data' }),
+    streamArray(),
+    (data) => {
+      const { value } = data;
+      sitemap.write({
+        url: value.path,
+        lastmod: formatDate(value.lastModified),
+        changefreq: 'weekly',
+      });
+      return value;
+    },
+  ]);
+  pipeline.on('data', (data) => console.debug('writing entry', data.path));
+  pipeline.on('finish', () => {
+    console.log('sitemap generated successfully at', siteMapPath);
+  });
+  pipeline.on('error', (e) => e.code === 'EPIPE' || console.error(e));
+};
+
+writeSiteMap();

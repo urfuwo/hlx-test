@@ -3,13 +3,27 @@
   "version": "1.0.0",
   "description": "Node utility to generate sitemap for Hub pages",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Adobe",
   "license": "ISC",
   "dependencies": {
-    "fast-xml-parser": "^4.3.6"
+    "axios": "^1.6.8",
+    "fast-xml-parser": "^4.3.6",
+    "readable-web-to-node-stream": "^3.0.2",
+    "sitemap": "^7.1.1",
+    "stream-chain": "^2.2.5",
+    "stream-json": "^1.8.0",
+    "through2": "^4.0.2",
+    "through2-map": "^3.0.0",
+    "zlib": "^1.0.5"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-n": "^16.6.2",
+    "eslint-plugin-promise": "^6.1.1"
   }
 }
