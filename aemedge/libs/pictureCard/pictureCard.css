@@ -21,6 +21,12 @@
     text-decoration: none;
   }
 
+  & .author.subtitle {
+    font-size: var(--udexTypographyBodyXSFontSize);
+    font-weight: var(--udexTypographyFontWeightMedium);
+    line-height: var(--udexTypographyDisplayLineHeight);
+  }
+
   & .cardcontent {
     padding: var(--udexSpacer16);
 
@@ -59,14 +65,6 @@
         font-size: var(--udexTypographyHeadingMediumXXSFontSize);
         font-weight: var(--udexTypographyFontWeightMedium);
         line-height: var(--udexTypographyHeadingLineHeight);
-      }
-    }
-
-    & .author {
-      & a {
-        font-size: var(--udexTypographyBodyXSFontSize);
-        font-weight: var(--udexTypographyFontWeightMedium);
-        line-height: var(--udexTypographyDisplayLineHeight);
       }
     }
   }
