@@ -24,7 +24,7 @@ async function loadAdobeDC() {
   };
   const envType = getEnvType();
   if (envType && adobeTagsSrc[envType]) {
-    await loadScript(adobeTagsSrc[envType], {});
+    await loadScript(adobeTagsSrc[envType], { defer: '' });
     window.console.log(`#L2: AdobeDC loaded at ${Date.now() - window.adobeDCStart}ms`);
     await sendAdobeDCBeacon();
     window.console.log(`#L2: Beacon sent at ${Date.now() - window.adobeDCStart}ms`);
