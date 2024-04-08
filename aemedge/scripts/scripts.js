@@ -370,7 +370,7 @@ async function initDataLayer() {
     event: 'globalDL',
     site: {
       country: 'glo',
-      name: 'l2',
+      name: 'alx:l2',
     },
     user: {
       type: 'visitor',
