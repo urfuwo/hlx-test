@@ -6,7 +6,6 @@
   box-shadow: 0 2px 4px rgb(34 54 73 / 20%);
   background-color: var(--background-color);
   border-radius: var(--sapTile_BorderCornerRadius);
-  overflow: hidden;
   position: relative;
 
   & a {
@@ -119,15 +118,16 @@
   &.horizontal {
     grid-template-columns: subgrid;
     grid-column: 1 / -1;
-    grid-row: unset;
 
     & a {
-      grid-template-columns: 3fr 2fr;
+      grid-template-columns: subgrid;
       grid-template-rows: unset;
       grid-column: 1 / -1;
+      overflow: unset; /* Safari bug */
 
       @media (width < 640px) {
         display: block;
+        overflow: hidden;
       }
 
       & .cardcontent {
