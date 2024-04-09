@@ -12,6 +12,8 @@
     "async": "^3.2.5",
     "axios": "^1.6.8",
     "fast-xml-parser": "^4.3.6",
+    "log4js": "^6.9.1",
+    "pino": "^8.20.0",
     "readable-web-to-node-stream": "^3.0.2",
     "sitemap": "^7.1.1",
     "stream-chain": "^2.2.5",
