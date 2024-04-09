@@ -49,11 +49,11 @@ export default class Avatar {
         { class: 'avatar-details' },
         h2(this.name),
         p(this.description),
-        p(
+        this.path ? p(
           { class: 'link' },
           a({ href: this.path, 'aria-label': 'Read more' }, 'See more by this author'),
           span({ class: 'icon icon-link-arrow' }),
-        ),
+        ) : '',
       ),
     );
     decorateIcons(element);
