@@ -22,11 +22,14 @@ export default class Avatar {
     return this.image ? createOptimizedPicture(this.image, this.title, false, breakpoints) : null;
   }
 
-  render(size, excludeStyles) {
+  render(size, excludeStyles, imageOnly) {
     if (!excludeStyles) {
       loadCSS(`${window.hlx.codeBasePath}/libs/avatar/avatar.css`);
     }
-    const element = div(
+    if (imageOnly) {
+      return div({ class: `avatar ${size}` }, this.image ? div(this.getImage()) : div());
+    }
+    return div(
       { class: 'avatar-wrapper' },
       div({ class: `avatar ${size}` }, this.image ? div(this.getImage()) : div()),
       div(
@@ -35,7 +38,6 @@ export default class Avatar {
         this.description ? div({ class: 'description info' }, this.description) : '',
       ),
     );
-    return element;
   }
 
   renderDetails(size, excludeStyles) {
