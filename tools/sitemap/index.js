@@ -21,7 +21,7 @@ const formatDate = (value) => {
   try {
     return new Date(value * 1000).toISOString().split('T')[0];
   } catch (error) {
-    logger.error(error);
+    logger.error('error while parsing date {}', error);
     return '';
   }
 };
@@ -41,6 +41,8 @@ const getSiteMapStream = (siteMapPath) => {
   return sitemap;
 };
 
+const getPipeline = (readStream, functions) => chain([readStream, parser(), pick({ filter: 'data' }), streamArray(), ...functions]);
+
 const collectTopics = async () => {
   const response = await fetch(
     'https://main--hlx-test--urfuwo.hlx.page/aemedge/articles-index.json',
@@ -48,11 +50,7 @@ const collectTopics = async () => {
   const responseStream = new ReadableWebToNodeStream(response.body);
   const siteMapPath = resolve('../../', 'sitemap-topics.xml');
   const collector = new Collector();
-  const pipeline = chain([
-    responseStream,
-    parser(),
-    pick({ filter: 'data' }),
-    streamArray(),
+  const pipeline = getPipeline(responseStream, [
     (data) => {
       const { value } = data;
       return JSON.parse(value.topics);
@@ -82,11 +80,7 @@ const writeSiteMap = async () => {
   const responseStream = new ReadableWebToNodeStream(response.body);
   const siteMapPath = resolve('../../', 'sitemap-authors.xml');
   const sitemap = getSiteMapStream(siteMapPath);
-  const pipeline = chain([
-    responseStream,
-    parser(),
-    pick({ filter: 'data' }),
-    streamArray(),
+  const pipeline = getPipeline(responseStream, [
     (data) => {
       const { value } = data;
       sitemap.write({
@@ -106,6 +100,6 @@ const writeSiteMap = async () => {
   pipeline.on('error', (e) => e.code === 'EPIPE' || logger.error(e));
 };
 
-async.parallel([collectTopics, writeSiteMap], (err, results) => {
-  logger.info(results);
+async.parallel([writeSiteMap, collectTopics], () => {
+  logger.info('All operations completed successfully');
 });
