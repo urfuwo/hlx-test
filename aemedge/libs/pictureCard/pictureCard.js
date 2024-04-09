@@ -40,7 +40,7 @@ export default class PictureCard extends Card {
       )
       : div(
         { class: 'author subtitle' },
-        a({ href: this.authorEntry.path }, span(`${this.authorEntry.author}`)),
+        span(`${this.authorEntry.author}`),
       );
   }
 
