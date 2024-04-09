@@ -10,6 +10,13 @@ function getEnvType(hostname = window.location.hostname) {
   return fqdnToEnvType[hostname] || 'dev';
 }
 
+async function sendAdobeDCBeacon(stl = null) {
+  window.adobeDataLayer.push({
+    event: stl ? 'stlBeaconReady' : 'stBeaconReady',
+  });
+  window.console.log(`#L1: Beacon sent at ${Date.now() - window.adobeDCStart}ms`);
+}
+
 async function loadAdobeDC() {
   const adobeTagsSrc = {
     dev: 'https://assets.adobedtm.com/ccc66c06b30b/6fa889b263e0/launch-3318725e3375-development.min.js',
@@ -25,3 +32,4 @@ async function loadAdobeDC() {
 
 window.console.log(`#L1: AdobeDC loading at ${Date.now() - window.adobeDCStart}ms...`);
 await loadAdobeDC();
+await sendAdobeDCBeacon();

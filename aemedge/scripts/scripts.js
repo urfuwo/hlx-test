@@ -358,14 +358,7 @@ async function scheduleAdobeDCLoad() {
     () => import('./adobedc.js'),
     250,
   );
-  window.console.log(`#L1: AdobeDC load scheduled at ${Date.now() - window.adobeDCStart}ms, delayed by ${delayMs}`);
-}
-
-async function sendAdobeDCBeacon(stl = null) {
-  window.adobeDataLayer.push({
-    event: stl ? 'stlBeaconReady' : 'stBeaconReady',
-  });
-  window.console.log(`#L1: Beacon sent at ${Date.now() - window.adobeDCStart}ms`);
+  window.console.log(`#L1: AdobeDC load scheduled at ${Date.now() - window.adobeDCStart}ms, delayed by ${delayMs}ms`);
 }
 
 async function loadPage() {
@@ -373,7 +366,6 @@ async function loadPage() {
   await loadEager(document);
   await scheduleAdobeDCLoad();
   await loadLazy(document);
-  await sendAdobeDCBeacon();
   loadDelayed();
 }
 
