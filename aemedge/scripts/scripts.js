@@ -353,7 +353,7 @@ function loadDelayed() {
 }
 
 async function scheduleAdobeDCLoad() {
-  const delayMs = 2500;
+  const delayMs = 100;
   window.setTimeout(
     () => import('./adobedc.js'),
     delayMs,
