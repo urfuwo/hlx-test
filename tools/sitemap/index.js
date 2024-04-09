@@ -4,7 +4,6 @@ const { createReadStream, createWriteStream } = require('fs');
 const { resolve } = require('path');
 const { parser } = require('stream-json/Parser');
 const { streamArray } = require('stream-json/streamers/StreamArray');
-const { streamValues } = require('stream-json/streamers/StreamValues');
 const { pick } = require('stream-json/filters/Pick');
 const { createGzip } = require('zlib');
 const { SitemapStream, streamToPromise, xmlLint } = require('sitemap');
@@ -12,7 +11,7 @@ const { chain } = require('stream-chain');
 const { ReadableWebToNodeStream } = require('readable-web-to-node-stream');
 const async = require('async');
 const log4js = require('log4js');
-const { Collector } = require('./transformers/collector.js');
+const { DeDuplicator } = require('./transformers/deDuplicator.js');
 
 const logger = log4js.getLogger();
 logger.level = 'debug';
@@ -28,7 +27,7 @@ const formatDate = (value) => {
 
 const validateXml = (siteMapPath) => {
   xmlLint(createReadStream(siteMapPath)).then(
-    () => logger.info('sitemap xml is valid'),
+    () => logger.info('sitemap valid:', siteMapPath),
     ([err, stderr]) => logger.error('sitemap xml is invalid', stderr),
   );
 };
@@ -43,34 +42,45 @@ const getSiteMapStream = (siteMapPath) => {
 
 const getPipeline = (readStream, functions) => chain([readStream, parser(), pick({ filter: 'data' }), streamArray(), ...functions]);
 
-const collectTopics = async () => {
-  const response = await fetch(
-    'https://main--hlx-test--urfuwo.hlx.page/aemedge/articles-index.json',
-  );
+const buildSiteMap = async (url, siteMapName) => {
+  const response = await fetch(url);
   const responseStream = new ReadableWebToNodeStream(response.body);
-  const siteMapPath = resolve('../../', 'sitemap-topics.xml');
-  const collector = new Collector();
+  const siteMapPath = resolve('../../', `sitemap-${siteMapName}.xml`);
+  const deDuplicator = new DeDuplicator();
+  const siteMap = getSiteMapStream(siteMapPath);
   const pipeline = getPipeline(responseStream, [
     (data) => {
       const { value } = data;
-      return JSON.parse(value.topics);
+      return JSON.parse(value[siteMapName]);
     },
-    collector,
+    deDuplicator,
+    (data) => ({ url: `/${siteMapName}/${data}`, changefreq: 'weekly' }),
+    siteMap,
   ]);
-  pipeline.on('data', () => {});
-  pipeline.on('finish', () => {
-    const topics = collector.getCollection();
-    const siteMap = getSiteMapStream(siteMapPath);
-    topics.forEach((value) => {
-      siteMap.write({
-        url: `/topics/${value}`,
-        changefreq: 'weekly',
-      });
-    });
-    siteMap.end();
+  streamToPromise(pipeline).then((sm) => {
     logger.info('sitemap generated successfully at', siteMapPath);
     validateXml(siteMapPath);
   });
+  pipeline.on(
+    'error',
+    (e) => e.code === 'EPIPE' || logger.error('error occurred while streaming data', e),
+  );
+};
+
+const buildTopicsSiteMap = async () => {
+  try {
+    buildSiteMap('https://main--hlx-test--urfuwo.hlx.page/aemedge/articles-index.json', 'topics');
+  } catch (error) {
+    logger.error('error while generating sitemap for topics', error);
+  }
+};
+
+const buildTagsSiteMap = async () => {
+  try {
+    buildSiteMap('https://main--hlx-test--urfuwo.hlx.page/aemedge/articles-index.json', 'tags');
+  } catch (error) {
+    logger.error('error while generating sitemap for tags', error);
+  }
 };
 
 const writeSiteMap = async () => {
@@ -83,23 +93,17 @@ const writeSiteMap = async () => {
   const pipeline = getPipeline(responseStream, [
     (data) => {
       const { value } = data;
-      sitemap.write({
-        url: value.path,
-        lastmod: formatDate(value.lastModified),
-        changefreq: 'weekly',
-      });
-      return value;
+      return { url: value.path, changefreq: 'weekly', lastmod: formatDate(value.lastModified) };
     },
+    sitemap,
   ]);
-  pipeline.on('data', (data) => logger.debug('writing entry', data.path));
-  pipeline.on('finish', () => {
-    sitemap.end();
+  streamToPromise(pipeline).then((sm) => {
     logger.info('sitemap generated successfully at', siteMapPath);
     validateXml(siteMapPath);
   });
   pipeline.on('error', (e) => e.code === 'EPIPE' || logger.error(e));
 };
 
-async.parallel([writeSiteMap, collectTopics], () => {
+async.parallel([writeSiteMap, buildTopicsSiteMap, buildTagsSiteMap], () => {
   logger.info('All operations completed successfully');
 });
