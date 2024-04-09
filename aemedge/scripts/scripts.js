@@ -356,7 +356,7 @@ async function scheduleAdobeDCLoad() {
   const delayMs = 3000;
   window.setTimeout(
     () => import('./adobedc.js'),
-    250,
+    delayMs,
   );
   window.console.log(`#L1: AdobeDC load scheduled at ${Date.now() - window.adobeDCStart}ms, delayed by ${delayMs}ms`);
 }
