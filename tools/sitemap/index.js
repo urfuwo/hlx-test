@@ -1,18 +1,22 @@
-/* eslint-disable import/extensions */
 /* eslint-disable import/no-extraneous-dependencies */
-const { createReadStream, createWriteStream } = require('fs');
-const { resolve } = require('path');
-const { parser } = require('stream-json/Parser');
-const { streamArray } = require('stream-json/streamers/StreamArray');
-const { pick } = require('stream-json/filters/Pick');
-const { createGzip } = require('zlib');
-const { SitemapStream, streamToPromise, xmlLint } = require('sitemap');
-const { chain } = require('stream-chain');
-const { ReadableWebToNodeStream } = require('readable-web-to-node-stream');
-const async = require('async');
-const log4js = require('log4js');
-const { DeDuplicator } = require('./transformers/deDuplicator.js');
 
+import { createReadStream, createWriteStream } from 'fs';
+import { resolve } from 'path';
+import { createGzip } from 'zlib';
+import async from 'async';
+import chainFunction from 'stream-chain';
+import parserFunction from 'stream-json/Parser.js';
+import streamArrayFunction from 'stream-json/streamers/StreamArray.js';
+import pickFunction from 'stream-json/filters/Pick.js';
+import { SitemapStream, streamToPromise, xmlLint } from 'sitemap';
+import { ReadableWebToNodeStream } from 'readable-web-to-node-stream';
+import log4js from 'log4js';
+import DeDuplicator from './transformers/deDuplicator.js';
+
+const { chain } = chainFunction;
+const { parser } = parserFunction;
+const { pick } = pickFunction;
+const { streamArray } = streamArrayFunction;
 const logger = log4js.getLogger();
 logger.level = 'debug';
 
@@ -40,7 +44,7 @@ const getSiteMapStream = (siteMapPath) => {
   return sitemap;
 };
 
-const getPipeline = (readStream, functions) => chain([readStream, parser(), pick({ filter: 'data' }), streamArray(), ...functions]);
+const initialisePipeline = (readStream, functions) => chain([readStream, parser(), pick({ filter: 'data' }), streamArray(), ...functions]);
 
 const buildSiteMap = async (url, siteMapName) => {
   const response = await fetch(url);
@@ -48,7 +52,7 @@ const buildSiteMap = async (url, siteMapName) => {
   const siteMapPath = resolve('../../', `sitemap-${siteMapName}.xml`);
   const deDuplicator = new DeDuplicator();
   const siteMap = getSiteMapStream(siteMapPath);
-  const pipeline = getPipeline(responseStream, [
+  const pipeline = initialisePipeline(responseStream, [
     (data) => {
       const { value } = data;
       return JSON.parse(value[siteMapName]);
@@ -88,9 +92,9 @@ const writeSiteMap = async () => {
     'https://main--hlx-test--urfuwo.hlx.page/aemedge/authors-index.json',
   );
   const responseStream = new ReadableWebToNodeStream(response.body);
-  const siteMapPath = resolve('../../', 'sitemap-authors.xml');
+  const siteMapPath = resolve('../../', 'sitemap-pages.xml');
   const sitemap = getSiteMapStream(siteMapPath);
-  const pipeline = getPipeline(responseStream, [
+  const pipeline = initialisePipeline(responseStream, [
     (data) => {
       const { value } = data;
       return { url: value.path, changefreq: 'weekly', lastmod: formatDate(value.lastModified) };

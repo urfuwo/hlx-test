@@ -8,6 +8,7 @@
   },
   "author": "Adobe",
   "license": "ISC",
+  "type": "module",
   "dependencies": {
     "async": "^3.2.5",
     "axios": "^1.6.8",

@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
-const { Transform } = require('stream');
+import { Transform } from 'stream';
 
-class DeDuplicator extends Transform {
+export default class DeDuplicator extends Transform {
   constructor(options) {
     super({ ...options, objectMode: true });
     this.seenElements = new Set(); // To track seen elements
@@ -18,7 +18,3 @@ class DeDuplicator extends Transform {
     callback();
   }
 }
-
-module.exports = {
-  DeDuplicator,
-};
