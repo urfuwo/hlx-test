@@ -269,17 +269,69 @@ main .button-container {
         border-color: var(--udexColorBlue9);
         background-color: var(--udexColorBlue9);
       }
+
+      &:active {
+        color: var(--udexColorBlue9);
+        border-color: var(--udexColorBlue9);
+        background-color: var(--udexColorNeutralWhite);
+      }
     }
 
     &.secondary {
       color: var(--udexColorBlue9);
       border-color: var(--udexColorGrey7);
-      background: var(--udexColorNeutralWhite);
+      background-color: var(--udexColorNeutralWhite);
 
       &:hover {
         color: var(--udexColorBlue9);
         border-color: var(--udexColorGrey7);
         background-color: var(--udexColorGrey2);
+      }
+
+      &:active {
+        color: var(--udexColorBlue9);
+        border-color: var(--udexColorBlue9);
+        background-color: var(--udexColorNeutralWhite);
+      }
+    }
+  }
+}
+
+main .background-dark .button-container {
+  .button {
+    &.primary {
+      color: var(--udexColorBlue8);
+      border-color: var(--udexColorNeutralWhite);
+      background-color: var(--udexColorNeutralWhite);
+
+      &:hover {
+        color: var(--udexColorBlue9);
+        border-color: var(--udexColorGrey3);
+        background-color: var(--udexColorGrey3);
+      }
+
+      &:active {
+        color: var(--udexColorBlue10);
+        border-color: var(--udexColorGrey4);
+        background-color: var(--udexColorGrey4);
+      }
+    }
+
+    &.secondary {
+      color: var(--udexColorNeutralWhite);
+      border-color: var(--udexColorNeutralWhite);
+      background-color: hsl(0deg 0% 0% / 0%);
+
+      &:hover {
+        color: var(--udexColorNeutralWhite);
+        border-color: var(--udexColorNeutralWhite);
+        background-color: hsl(0deg 100% 100% / 20%);
+      }
+
+      &:active {
+        color: var(--udexColorBlue10);
+        border-color: var(--udexColorBlue10);
+        background-color: var(--udexColorGrey4);
       }
     }
   }
@@ -435,4 +487,69 @@ main .section {
 
 .fragment-container .section:last-of-type {
   padding-bottom: 0;
+}
+
+.hero-text-white-wrapper,
+.background-dark {
+  --_ui5-v1-23-0-rc-4_button_border_radius: .5rem;
+
+  udex-button {
+    --udex-button-color-primary-standard-default-background: var(--udexColorNeutralWhite);
+    --udex-button-color-primary-standard-default-border: var(--udexColorNeutralWhite);
+    --udex-button-color-primary-standard-default-text-and-icon: var(--udexColorBlue8);
+    --udex-button-color-primary-standard-hover-background: var(--udexColorGrey3);
+    --udex-button-color-primary-standard-hover-border: var(--udexColorGrey3);
+    --udex-button-color-primary-standard-hover-text-and-icon: var(--udexColorBlue9);
+    --udex-button-color-primary-standard-active-background: var(--udexColorGrey4);
+    --udex-button-color-primary-standard-active-border: var(--udexColorGrey4);
+    --udex-button-color-primary-standard-active-text-and-icon: var(--udexColorBlue10);
+    --udex-button-color-secondary-standard-default-background:  hsl(0deg 0% 0% / 0%);
+    --udex-button-color-secondary-standard-default-border: var(--udexColorNeutralWhite);
+    --udex-button-color-secondary-standard-default-text-and-icon: var(--udexColorNeutralWhite);
+    --udex-button-color-secondary-standard-hover-background: hsl(0deg 100% 100% / 20%);
+    --udex-button-color-secondary-standard-hover-border: var(--udexColorNeutralWhite);
+    --udex-button-color-secondary-standard-hover-text-and-icon: var(--udexColorNeutralWhite);
+    --udex-button-color-secondary-standard-active-background: var(--udexColorGrey4);
+    --udex-button-color-secondary-standard-active-border: var(--udexColorBlue10);
+    --udex-button-color-secondary-standard-active-text-and-icon: var(--udexColorBlue10);
+  }
+}
+
+.author-profiles,
+.profiles {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: var(--udexGridGutters);
+}
+
+/* S: use 2 per row */
+@media (width >= 640px) {
+  :is(.author-profiles,.profiles):not(.vertical) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* M: use 2 per row */
+@media (width >= 980px) {
+  :is(.author-profiles,.profiles):not(.vertical) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  :is(.author-profiles,.profiles).elems2:not(.vertical) {
+    grid-template-columns: 4fr 4fr 0.75fr;
+  }
+}
+
+/* L and XL: use 3 per row, unless there are two elements */
+@media (width >= 1280px) {
+  :is(.author-profiles,.profiles):not(.vertical) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  :is(.author-profiles,.profiles).elems2:not(.vertical) {
+    grid-template-columns: 4fr 4fr 0.75fr;
+  }
 }
