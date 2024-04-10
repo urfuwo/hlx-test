@@ -22,15 +22,15 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
       - name: Install dependencies
         working-directory: ./tools/sitemap
         run: npm install
       - name: Run scripts and commit changes
         working-directory: ./tools/sitemap
         run: |
-          node create.js
-          git add ../../sitemap-hub.xml
+          node index.js
+          git add ../../sitemap-pages.xml ../../sitemap-tags.xml ../../sitemap-topics.xml
           timestamp=$(date -u)
-          git commit -m "Update generated sitemap-hub.xml file" || exit 0
+          git commit -m "Update sitemap files" || exit 0
           git push
