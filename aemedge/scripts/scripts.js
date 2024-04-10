@@ -299,9 +299,15 @@ async function loadEager(doc) {
   decorateTemplateAndTheme();
   const main = doc.querySelector('main');
   if (main) {
-    await decorateMain(main);
-    document.body.classList.add('appear');
-    await waitForLCP(LCP_BLOCKS);
+    // show the LCP block in a dedicated frame to reduce TBT
+    await new Promise((resolve) => {
+      window.requestAnimationFrame(async () => {
+        await decorateMain(main);
+        document.body.classList.add('appear');
+        await waitForLCP(LCP_BLOCKS);
+        resolve();
+      });
+    });
   }
 
   try {
