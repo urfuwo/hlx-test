@@ -29,10 +29,10 @@ async function loadAdobeDC() {
   };
   const envType = getEnvType();
   if (envType && adobeTagsSrc[envType]) {
-    if (envType !== 'dev' || ((new URLSearchParams(window.location.search)).get('tr')) != null) {
-      await loadScript(adobeTagsSrc[envType], {});
-      await sendBeacon();
-    }
+    await loadScript(adobeTagsSrc[envType], {});
+    window.console.log(`#Ref: AdobeDC loaded at ${Date.now() - window.adobeDCStart}ms`);
+    await sendBeacon();
+    window.console.log(`#Ref: Beacon sent at ${Date.now() - window.adobeDCStart}ms`);
   }
 }
 

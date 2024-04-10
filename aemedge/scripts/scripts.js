@@ -350,6 +350,7 @@ function loadDelayed() {
 }
 
 async function loadPage() {
+  window.adobeDCStart = Date.now();
   await loadEager(document);
   await loadLazy(document);
   loadDelayed();
@@ -362,7 +363,7 @@ async function initDataLayer() {
     event: 'globalDL',
     site: {
       country: 'glo',
-      name: 'sap',
+      name: 'alx:ref',
     },
     user: {
       type: 'visitor',
