@@ -23,7 +23,7 @@ function buildAuthorEl(author) {
   return a({ class: 'media-blend__author', href: buildAuthorUrl(author) }, author);
 }
 
-function addAuthorAvatarImg(authorName, avatar) {
+function addAuthorAvatarImage(authorName, avatar) {
   return getAuthorEntries([authorName]).then((authorEntries) => {
     if (authorEntries && authorEntries.length > 0) {
       const picture = Avatar.fromAuthorEntry(authorEntries[0]).getImage();
@@ -43,7 +43,7 @@ function decorateMetaInfo() {
       avatar.setAttribute('size', 'XS');
       avatar.setAttribute('initials', calculateInitials(authorNames[0]));
       avatar.setAttribute('color-scheme', 'Neutral');
-      addAuthorAvatarImg(authorNames[0], avatar);
+      addAuthorAvatarImage(authorNames[0], avatar);
       infoBlockWrapper.append(avatar);
       authorEl.append(buildAuthorEl(authorNames[0]));
     } else {
