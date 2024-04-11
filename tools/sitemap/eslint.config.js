@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import styleGuide from 'eslint-config-standard';
 
 export default [

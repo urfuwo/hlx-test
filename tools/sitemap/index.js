@@ -37,29 +37,10 @@ const addHttpsPrefix = (url) => {
   return `https://${url}`;
 };
 
-const convertToCamelCase = (inputString) => {
-  const camelCased = inputString.replace(/-([a-z])/g, (_, letter) => letter.toUpperCase());
-  return camelCased.replace(/-/g, '');
-};
-
-const getNewsItem = (item, lang) => ({
-  url: item.path,
-  news: {
-    publication: {
-      name: item.author,
-      language: lang,
-    },
-    genres: item['content-type'],
-    publication_date: formatDate(item.lastModified),
-    title: item.title,
-    keywords: item.topics,
-  },
-});
-
 const validateXml = (siteMapPath) => {
   xmlLint(createReadStream(siteMapPath)).then(
     () => logger.info('sitemap valid:', siteMapPath),
-    ([err, stderr]) => logger.error('sitemap xml is invalid', stderr),
+    ([err, stderr]) => logger.error('sitemap xml is invalid', stderr, err),
   );
 };
 
@@ -71,24 +52,23 @@ const getSiteMapStream = (siteMapPath, domain) => {
   return sitemap;
 };
 
-const initialisePipeline = (readStream, functions) => chain([readStream, parser(), pick({ filter: 'data' }), streamArray(), ...functions]);
-
-const buildSiteMap = async (siteMapName, domain, url) => {
+const buildSiteMap = async (domain, url, sitemapName, transformers) => {
   const response = await fetch(url);
   const responseStream = new ReadableWebToNodeStream(response.body);
-  const siteMapPath = resolve('../../', 'aemedge', `sitemap-${siteMapName}.xml`);
-  const deDuplicator = new DeDuplicator();
-  const siteMap = getSiteMapStream(siteMapPath, domain);
-  const pipeline = initialisePipeline(responseStream, [
-    (data) => {
-      const { value } = data;
-      return JSON.parse(value[siteMapName]);
-    },
-    deDuplicator,
-    (data) => ({ url: `/${siteMapName}/${data}`, changefreq: 'weekly' }),
-    siteMap,
+  const siteMapPath = resolve('../../', 'aemedge', `sitemap-${sitemapName}.xml`);
+  const sitemap = getSiteMapStream(siteMapPath, domain);
+  const pipeline = chain([
+    responseStream,
+    parser(),
+    pick({ filter: 'data' }),
+    streamArray(),
+    ...transformers,
+    sitemap,
   ]);
   streamToPromise(pipeline).then((sm) => {
+    if (logger.level === 'debug') {
+      logger.info('sitemap generated', sm.toString());
+    }
     logger.info('sitemap generated successfully at', siteMapPath);
     validateXml(siteMapPath);
   });
@@ -100,8 +80,17 @@ const buildSiteMap = async (siteMapName, domain, url) => {
 
 const buildTopicsSiteMap = async (config) => {
   const { domain, 'index.endpoint': endpoint, 'article.index.path': indexPath } = config;
+  const deDuplicator = new DeDuplicator();
   try {
-    buildSiteMap('topics', domain, `${endpoint}${indexPath}`);
+    const transformers = [
+      (data) => {
+        const { value } = data;
+        return JSON.parse(value.topics);
+      },
+      deDuplicator,
+      (data) => ({ url: `/topics/${data}`, changefreq: 'weekly' }),
+    ];
+    buildSiteMap(domain, `${endpoint}${indexPath}`, 'topics', transformers);
   } catch (error) {
     logger.error('error while generating sitemap for topics', error);
   }
@@ -109,8 +98,17 @@ const buildTopicsSiteMap = async (config) => {
 
 const buildTagsSiteMap = async (config) => {
   const { domain, 'index.endpoint': endpoint, 'article.index.path': indexPath } = config;
+  const deDuplicator = new DeDuplicator();
   try {
-    buildSiteMap('tags', domain, `${endpoint}${indexPath}`);
+    const transformers = [
+      (data) => {
+        const { value } = data;
+        return JSON.parse(value.tags);
+      },
+      deDuplicator,
+      (data) => ({ url: `/tags/${data}`, changefreq: 'weekly' }),
+    ];
+    buildSiteMap(domain, `${endpoint}${indexPath}`, 'tags', transformers);
   } catch (error) {
     logger.error('error while generating sitemap for tags', error);
   }
@@ -124,43 +122,20 @@ const buildPagesSiteMap = async (config) => {
     'sitemap.page.templates': pageTemplates,
   } = config;
   const templates = pageTemplates.split(',');
-  const response = await fetch(`${endpoint}${indexPath}`);
-  const responseStream = new ReadableWebToNodeStream(response.body);
-  const siteMapPath = resolve('../../', 'aemedge', 'sitemap-pages.xml');
-  const sitemap = getSiteMapStream(siteMapPath, domain);
   const filter = new Filter((data) => templates.includes(data.value.template));
-  const pipeline = initialisePipeline(responseStream, [
-    filter,
-    (data) => {
-      const { value } = data;
-      return { url: value.path, changefreq: 'weekly', lastmod: formatDate(value.lastModified) };
-    },
-    sitemap,
-  ]);
-  streamToPromise(pipeline).then((sm) => {
-    logger.info('sitemap generated successfully at', siteMapPath);
-    validateXml(siteMapPath);
+  const mappingFn = (data) => ({
+    url: data.path,
+    changefreq: 'weekly',
+    lastmod: formatDate(data.lastModified),
   });
-  pipeline.on('error', (e) => e.code === 'EPIPE' || logger.error(e));
-};
-
-const generateSiteMap = async (config, filter, index, sitemapName, mappingfn) => {
-  const { domain, 'index.endpoint': endpoint } = config;
-  const indexPath = config[index];
-  const response = await fetch(`${endpoint}${indexPath}`);
-  const responseStream = new ReadableWebToNodeStream(response.body);
-  const siteMapPath = resolve('../../', 'aemedge', `sitemap-${sitemapName}.xml`);
-  const sitemap = getSiteMapStream(siteMapPath, domain);
-  const pipeline = initialisePipeline(responseStream, [
-    filter,
-    (data) => mappingfn(data.value),
-    sitemap,
-  ]);
-  streamToPromise(pipeline).then((sm) => {
-    logger.info('sitemap generated successfully at', siteMapPath);
-    validateXml(siteMapPath);
-  });
-  pipeline.on('error', (e) => e.code === 'EPIPE' || logger.error(e));
+  try {
+    buildSiteMap(domain, `${endpoint}${indexPath}`, 'pages', [
+      filter,
+      (data) => mappingFn(data.value),
+    ]);
+  } catch (error) {
+    logger.error('error while generating sitemap for pages', error);
+  }
 };
 
 const buildNewsSitemap = (config) => {
@@ -184,7 +159,11 @@ const buildNewsSitemap = (config) => {
     return newsItem;
   };
   try {
-    generateSiteMap(config, filter, 'article.index.path', 'news', mappingFn);
+    const { domain, 'index.endpoint': endpoint, 'article.index.path': indexPath } = config;
+    buildSiteMap(domain, `${endpoint}${indexPath}`, 'news', [
+      filter,
+      (data) => mappingFn(data.value),
+    ]);
   } catch (error) {
     logger.error('error while generating sitemap for news', error);
   }
@@ -197,9 +176,9 @@ const buildNewsSitemap = (config) => {
     callback(null, config);
   };
 
-  const response = await fetch('https://main--hlx-test--urfuwo.hlx.page/aemedge/config.json');
-  const configResponse = await response.json();
   try {
+    const response = await fetch('https://main--hlx-test--urfuwo.hlx.page/aemedge/config.json');
+    const configResponse = await response.json();
     const config = await async.reduce(configResponse.data, {}, configAccumulator);
     const taskQueue = async.cargoQueue(
       (tasks, callback) => {
@@ -212,10 +191,10 @@ const buildNewsSitemap = (config) => {
       4,
     );
 
-    taskQueue.push({ name: 'writeSiteMap' }, buildPagesSiteMap);
     taskQueue.push({ name: 'buildTopicsSiteMap' }, buildTopicsSiteMap);
     taskQueue.push({ name: 'buildTagsSiteMap' }, buildTagsSiteMap);
     taskQueue.push({ name: 'buildNewsSitemap' }, buildNewsSitemap);
+    taskQueue.push({ name: 'buildPagesSiteMap' }, buildPagesSiteMap);
   } catch (err) {
     logger.error('sitemap generation aborted', err);
   }

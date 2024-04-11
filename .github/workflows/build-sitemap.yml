@@ -1,10 +1,12 @@
-name: Regenerate the Sitemaps
+name: Generate the Sitemaps
 
 on:
-  repository_dispatch:
-    types:
-      - resource-published
-  workflow_dispatch:
+  schedule:
+    # every day at 00:00
+    - cron:  '0 0 * * *'
+  push:
+    branches: 
+      - main
 
 jobs:
   build-sitemap:
@@ -13,8 +15,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       - run: |
-          echo "Status: ${{ github.event.client_payload.status }}"
-          echo "Path: ${{ github.event.client_payload.path }}"
+          echo "Checking out git repo"
       - name: Configure git
         run: |
           git config --local user.email "action@github.com"
@@ -30,7 +31,7 @@ jobs:
         working-directory: ./tools/sitemap
         run: |
           node index.js
-          git add ../../sitemap-pages.xml ../../sitemap-tags.xml ../../sitemap-topics.xml
+          git add ../../sitemap-news.xml ../../sitemap-pages.xml ../../sitemap-tags.xml ../../sitemap-topics.xml
           timestamp=$(date -u)
           git commit -m "Update sitemap files" || exit 0
           git push
