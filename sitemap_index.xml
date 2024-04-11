@@ -6,4 +6,16 @@
     <sitemap>
         <loc>https://www-qa.sap.com/sitemap-authors.xml</loc>
     </sitemap>
+    <sitemap>
+        <loc>https://www-qa.sap.com/sitemap-news.xml</loc>
+    </sitemap>
+    <sitemap>
+        <loc>https://www-qa.sap.com/sitemap-pages.xml</loc>
+    </sitemap>
+    <sitemap>
+        <loc>https://www-qa.sap.com/sitemap-tags.xml</loc>
+    </sitemap>
+    <sitemap>
+        <loc>https://www-qa.sap.com/sitemap-topics.xml</loc>
+    </sitemap>
 </sitemapindex>
