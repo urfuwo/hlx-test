@@ -24,9 +24,16 @@ const formatDate = (value) => {
   try {
     return new Date(value * 1000).toISOString().split('T')[0];
   } catch (error) {
-    logger.error('error while parsing date {}', error);
+    logger.error('error while parsing date', value, error);
     return '';
   }
+};
+
+const addHttpsPrefix = (url) => {
+  if (url.startsWith('https://')) {
+    return url;
+  }
+  return `https://${url}`;
 };
 
 const validateXml = (siteMapPath) => {
@@ -36,8 +43,8 @@ const validateXml = (siteMapPath) => {
   );
 };
 
-const getSiteMapStream = (siteMapPath) => {
-  const sitemap = new SitemapStream({ hostname: 'http://qa-sap.com' });
+const getSiteMapStream = (siteMapPath, domain) => {
+  const sitemap = new SitemapStream({ hostname: addHttpsPrefix(domain) });
   const writeStream = createWriteStream(siteMapPath);
   sitemap.pipe(writeStream);
   sitemap.pipe(createGzip());
@@ -46,12 +53,12 @@ const getSiteMapStream = (siteMapPath) => {
 
 const initialisePipeline = (readStream, functions) => chain([readStream, parser(), pick({ filter: 'data' }), streamArray(), ...functions]);
 
-const buildSiteMap = async (url, siteMapName) => {
+const buildSiteMap = async (siteMapName, domain, url) => {
   const response = await fetch(url);
   const responseStream = new ReadableWebToNodeStream(response.body);
   const siteMapPath = resolve('../../', `sitemap-${siteMapName}.xml`);
   const deDuplicator = new DeDuplicator();
-  const siteMap = getSiteMapStream(siteMapPath);
+  const siteMap = getSiteMapStream(siteMapPath, domain);
   const pipeline = initialisePipeline(responseStream, [
     (data) => {
       const { value } = data;
@@ -71,29 +78,30 @@ const buildSiteMap = async (url, siteMapName) => {
   );
 };
 
-const buildTopicsSiteMap = async () => {
+const buildTopicsSiteMap = async (config) => {
+  const { domain, 'index.endpoint': endpoint, 'article.index.path': indexPath } = config;
   try {
-    buildSiteMap('https://main--hlx-test--urfuwo.hlx.page/aemedge/articles-index.json', 'topics');
+    buildSiteMap('topics', domain, `${endpoint}${indexPath}`);
   } catch (error) {
     logger.error('error while generating sitemap for topics', error);
   }
 };
 
-const buildTagsSiteMap = async () => {
+const buildTagsSiteMap = async (config) => {
+  const { domain, 'index.endpoint': endpoint, 'article.index.path': indexPath } = config;
   try {
-    buildSiteMap('https://main--hlx-test--urfuwo.hlx.page/aemedge/articles-index.json', 'tags');
+    buildSiteMap('tags', domain, `${endpoint}${indexPath}`);
   } catch (error) {
     logger.error('error while generating sitemap for tags', error);
   }
 };
 
-const writeSiteMap = async () => {
-  const response = await fetch(
-    'https://main--hlx-test--urfuwo.hlx.page/aemedge/authors-index.json',
-  );
+const writeSiteMap = async (config) => {
+  const { domain, 'index.endpoint': endpoint, 'author.index.path': indexPath } = config;
+  const response = await fetch(`${endpoint}${indexPath}`);
   const responseStream = new ReadableWebToNodeStream(response.body);
   const siteMapPath = resolve('../../', 'sitemap-pages.xml');
-  const sitemap = getSiteMapStream(siteMapPath);
+  const sitemap = getSiteMapStream(siteMapPath, domain);
   const pipeline = initialisePipeline(responseStream, [
     (data) => {
       const { value } = data;
@@ -108,6 +116,32 @@ const writeSiteMap = async () => {
   pipeline.on('error', (e) => e.code === 'EPIPE' || logger.error(e));
 };
 
-async.parallel([writeSiteMap, buildTopicsSiteMap, buildTagsSiteMap], () => {
-  logger.info('All operations completed successfully');
-});
+(async () => {
+  const configAccumulator = (config, data, callback) => {
+    const { Key: key, Value: value } = data;
+    config[key] = value;
+    callback(null, config);
+  };
+
+  const response = await fetch('https://main--hlx-test--urfuwo.hlx.page/aemedge/config.json');
+  const configResponse = await response.json();
+  try {
+    const config = await async.reduce(configResponse.data, {}, configAccumulator);
+    const taskQueue = async.cargoQueue(
+      (tasks, callback) => {
+        for (let i = 0; i < tasks.length; i += 1) {
+          logger.info(`executing ${tasks[i].name}`);
+        }
+        callback(config);
+      },
+      3,
+      3,
+    );
+
+    taskQueue.push({ name: 'writeSiteMap' }, writeSiteMap);
+    taskQueue.push({ name: 'buildTopicsSiteMap' }, buildTopicsSiteMap);
+    taskQueue.push({ name: 'buildTagsSiteMap' }, buildTagsSiteMap);
+  } catch (err) {
+    logger.error('sitemap generation aborted', err);
+  }
+})();
