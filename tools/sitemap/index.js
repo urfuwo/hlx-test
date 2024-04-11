@@ -12,6 +12,7 @@ import { SitemapStream, streamToPromise, xmlLint } from 'sitemap';
 import { ReadableWebToNodeStream } from 'readable-web-to-node-stream';
 import log4js from 'log4js';
 import DeDuplicator from './transformers/deDuplicator.js';
+import Filter from './transformers/filter.js';
 
 const { chain } = chainFunction;
 const { parser } = parserFunction;
@@ -36,6 +37,25 @@ const addHttpsPrefix = (url) => {
   return `https://${url}`;
 };
 
+const convertToCamelCase = (inputString) => {
+  const camelCased = inputString.replace(/-([a-z])/g, (_, letter) => letter.toUpperCase());
+  return camelCased.replace(/-/g, '');
+};
+
+const getNewsItem = (item, lang) => ({
+  url: item.path,
+  news: {
+    publication: {
+      name: item.author,
+      language: lang,
+    },
+    genres: item['content-type'],
+    publication_date: formatDate(item.lastModified),
+    title: item.title,
+    keywords: item.topics,
+  },
+});
+
 const validateXml = (siteMapPath) => {
   xmlLint(createReadStream(siteMapPath)).then(
     () => logger.info('sitemap valid:', siteMapPath),
@@ -56,7 +76,7 @@ const initialisePipeline = (readStream, functions) => chain([readStream, parser(
 const buildSiteMap = async (siteMapName, domain, url) => {
   const response = await fetch(url);
   const responseStream = new ReadableWebToNodeStream(response.body);
-  const siteMapPath = resolve('../../', `sitemap-${siteMapName}.xml`);
+  const siteMapPath = resolve('../../', 'aemedge', `sitemap-${siteMapName}.xml`);
   const deDuplicator = new DeDuplicator();
   const siteMap = getSiteMapStream(siteMapPath, domain);
   const pipeline = initialisePipeline(responseStream, [
@@ -96,13 +116,21 @@ const buildTagsSiteMap = async (config) => {
   }
 };
 
-const writeSiteMap = async (config) => {
-  const { domain, 'index.endpoint': endpoint, 'author.index.path': indexPath } = config;
+const buildPagesSiteMap = async (config) => {
+  const {
+    domain,
+    'index.endpoint': endpoint,
+    'query.index.path': indexPath,
+    'sitemap.page.templates': pageTemplates,
+  } = config;
+  const templates = pageTemplates.split(',');
   const response = await fetch(`${endpoint}${indexPath}`);
   const responseStream = new ReadableWebToNodeStream(response.body);
-  const siteMapPath = resolve('../../', 'sitemap-pages.xml');
+  const siteMapPath = resolve('../../', 'aemedge', 'sitemap-pages.xml');
   const sitemap = getSiteMapStream(siteMapPath, domain);
+  const filter = new Filter((data) => templates.includes(data.value.template));
   const pipeline = initialisePipeline(responseStream, [
+    filter,
     (data) => {
       const { value } = data;
       return { url: value.path, changefreq: 'weekly', lastmod: formatDate(value.lastModified) };
@@ -114,6 +142,52 @@ const writeSiteMap = async (config) => {
     validateXml(siteMapPath);
   });
   pipeline.on('error', (e) => e.code === 'EPIPE' || logger.error(e));
+};
+
+const generateSiteMap = async (config, filter, index, sitemapName, mappingfn) => {
+  const { domain, 'index.endpoint': endpoint } = config;
+  const indexPath = config[index];
+  const response = await fetch(`${endpoint}${indexPath}`);
+  const responseStream = new ReadableWebToNodeStream(response.body);
+  const siteMapPath = resolve('../../', 'aemedge', `sitemap-${sitemapName}.xml`);
+  const sitemap = getSiteMapStream(siteMapPath, domain);
+  const pipeline = initialisePipeline(responseStream, [
+    filter,
+    (data) => mappingfn(data.value),
+    sitemap,
+  ]);
+  streamToPromise(pipeline).then((sm) => {
+    logger.info('sitemap generated successfully at', siteMapPath);
+    validateXml(siteMapPath);
+  });
+  pipeline.on('error', (e) => e.code === 'EPIPE' || logger.error(e));
+};
+
+const buildNewsSitemap = (config) => {
+  const filter = new Filter((data) => data.value.path.startsWith('/news/'));
+  const mappingFn = (item) => {
+    const newsItem = {
+      url: item.path,
+      news: {
+        publication: {
+          name: item.author,
+          language: 'en',
+        },
+        publication_date: formatDate(item.lastModified),
+        title: item.title,
+        keywords: JSON.parse(item.topics)[0],
+      },
+    };
+    const contentType = item['content-type'].split(',');
+    if (contentType.includes('press-release')) newsItem.genres = 'PressRelease';
+    if (contentType.includes('blog')) newsItem.genres = 'Blog';
+    return newsItem;
+  };
+  try {
+    generateSiteMap(config, filter, 'article.index.path', 'news', mappingFn);
+  } catch (error) {
+    logger.error('error while generating sitemap for news', error);
+  }
 };
 
 (async () => {
@@ -134,13 +208,14 @@ const writeSiteMap = async (config) => {
         }
         callback(config);
       },
-      3,
-      3,
+      4,
+      4,
     );
 
-    taskQueue.push({ name: 'writeSiteMap' }, writeSiteMap);
+    taskQueue.push({ name: 'writeSiteMap' }, buildPagesSiteMap);
     taskQueue.push({ name: 'buildTopicsSiteMap' }, buildTopicsSiteMap);
     taskQueue.push({ name: 'buildTagsSiteMap' }, buildTagsSiteMap);
+    taskQueue.push({ name: 'buildNewsSitemap' }, buildNewsSitemap);
   } catch (err) {
     logger.error('sitemap generation aborted', err);
   }
