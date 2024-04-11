@@ -1,6 +1,4 @@
 .picture-card {
-  --card-image-height: 130px;
-
   display: grid;
   grid-template-rows: subgrid;
   grid-row: span 3;
@@ -8,152 +6,169 @@
   box-shadow: 0 2px 4px rgb(34 54 73 / 20%);
   background-color: var(--background-color);
   border-radius: var(--sapTile_BorderCornerRadius);
-  overflow: hidden;
   position: relative;
-
-  & img {
-    width: 100%;
-    height: var(--card-image-height);
-    object-fit: cover;
-  }
 
   & a {
     text-decoration: none;
-  }
 
-  & .author.subtitle {
-    font-size: var(--udexTypographyBodyXSFontSize);
-    font-weight: var(--udexTypographyFontWeightMedium);
-    line-height: var(--udexTypographyDisplayLineHeight);
-  }
+    --card-image-height: 130px;
 
-  & .cardcontent {
-    padding: var(--udexSpacer16);
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-row: span 3;
+    gap: 0;
+    box-shadow: 0 2px 4px rgb(34 54 73 / 20%);
+    background-color: var(--background-color);
+    border-radius: var(--sapTile_BorderCornerRadius);
+    overflow: hidden;
+    position: relative;
 
-    & .type {
-      font-size: var(--udexTypographyEyebrowSFontSize);
+    & img {
+      width: 100%;
+      height: var(--card-image-height);
+      object-fit: cover;
+    }
+
+    & .author.subtitle {
+      font-size: var(--udexTypographyBodyXSFontSize);
       font-weight: var(--udexTypographyFontWeightMedium);
-      line-height: var(--udexTypographyEyebrowLineHeight);
-      display: flex;
-      letter-spacing: 0.03em;
-      text-transform: uppercase;
-      color: var(--udexColorGrey6);
-      margin-bottom: var(--udexSpacer8);
+      line-height: var(--udexTypographyDisplayLineHeight);
+      color: var(--text-color);
     }
 
-    & .tag-label {
-      position: absolute;
-      padding: var(--udexSpacer4) var(--udexSpacer8);
-      inset: var(--udexSpacer8) var(--udexSpacer8) auto auto;
-      background: var(--udexColorBlue1);
-      border: 1px solid var(--sapInformationBorderColor);
-      border-radius: var(--udexRadiusS);
-      font-size: var(--udexTypographyBodyXXSFontSize);
-      font-weight: var(--udexTypographyFontWeightRegular);
-      line-height: var(--udexTypographyHeadingLineHeight);
-      color: var(--udexColorBlue9);
-    }
+    & .cardcontent {
+      padding: var(--udexSpacer16);
 
-    & .title {
-      display: -webkit-box;
-      -webkit-line-clamp: 5;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      text-wrap: pretty;
+      & .type {
+        font-size: var(--udexTypographyEyebrowSFontSize);
+        font-weight: var(--udexTypographyFontWeightMedium);
+        line-height: var(--udexTypographyEyebrowLineHeight);
+        display: flex;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+        color: var(--udexColorGrey6);
+        margin-bottom: var(--udexSpacer8);
+      }
 
-      & a {
+      & .tag-label {
+        position: absolute;
+        padding: var(--udexSpacer4) var(--udexSpacer8);
+        inset: var(--udexSpacer8) var(--udexSpacer8) auto auto;
+        background: var(--udexColorBlue1);
+        border: 1px solid var(--sapInformationBorderColor);
+        border-radius: var(--udexRadiusS);
+        font-size: var(--udexTypographyBodyXXSFontSize);
+        font-weight: var(--udexTypographyFontWeightRegular);
+        line-height: var(--udexTypographyHeadingLineHeight);
+        color: var(--udexColorBlue9);
+      }
+
+      & .title {
+        display: -webkit-box;
+        -webkit-line-clamp: 5;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-wrap: pretty;
+
         font-size: var(--udexTypographyHeadingMediumXXSFontSize);
         font-weight: var(--udexTypographyFontWeightMedium);
         line-height: var(--udexTypographyHeadingLineHeight);
       }
     }
-  }
 
-  & .infoblock {
-    padding: var(--udexSpacer16);
+    & .infoblock {
+      padding: var(--udexSpacer16);
 
-    & .author-profile {
-      display: block;
-      margin-top: 0;
+      & .author-profile {
+        display: block;
+        margin-top: 0;
 
-      & > div {
-        border: none;
-        box-shadow: none;
-        padding: 0;
-        gap: var(--udexSpacer16);
+        & > div {
+          border: none;
+          box-shadow: none;
+          padding: 0;
+          gap: var(--udexSpacer16);
+        }
+
+        & .author {
+          font-size: var(--udexTypographyNavigationRegularXSFontSize);
+        }
+
+        /* if there's no details line following the author name, center this vertically */
+
+        & .author:only-of-type {
+          display: inline-block;
+        }
       }
 
-      & .author {
-        font-size: var(--udexTypographyNavigationRegularXSFontSize);
+      /* spacing above info line, if author-profile is shown */
+
+      & .author-profile + .info {
+        margin-top: var(--udexSpacer12);
       }
 
-      /* if there's no details line following the author name, center this vertically */
-      & .author:only-of-type {
-        display: inline-block;
+      /* don't show the info line if the user has an avatar */
+
+      & .author-profile:has(.avatar) + .info {
+        display: none;
       }
-    }
-
-    /* spacing above info line, if author-profile is shown */
-    & .author-profile + .info {
-      margin-top: var(--udexSpacer12);
-    }
-
-    /* don't show the info line if the user has an avatar */
-    & .author-profile:has(.avatar) + .info {
-      display: none;
     }
   }
 
   &.horizontal {
     grid-template-columns: subgrid;
-    grid-template-rows: unset;
     grid-column: 1 / -1;
-    grid-row: unset;
-    container: unset;
-    overflow: unset;
 
-    @media (width < 640px) {
-      display: block;
-    }
-
-    & .cardcontent {
-      order: -1;
-
-      & .description {
-        color: var(--udexColorNeutralBlack);
-
-        @media (width < 640px) {
-          display: none;
-        }
-      }
-    }
-
-    & .picture {
-      order: 1;
-      padding: var(--udexSpacer16);
-      grid-row: span 2;
+    & a {
+      grid-template-columns: subgrid;
+      grid-template-rows: unset;
+      grid-column: 1 / -1;
+      overflow: unset; /* Safari bug */
 
       @media (width < 640px) {
-        padding: unset;
+        display: block;
+        overflow: hidden;
       }
 
-      & img {
-        max-width: 100%;
-        height: 100%;
-        object-fit: cover;
-        aspect-ratio: unset;
-        border-radius: 12px;
+      & .cardcontent {
+        order: -1;
 
-        @media (width < 640px) {
-          height: var(--card-image-height);
-          border-radius: unset;
+        & .description {
+          color: var(--udexColorNeutralBlack);
+
+          @media (width < 640px) {
+            display: none;
+          }
         }
       }
-    }
 
-    & .infoblock {
-      order: 3;
-      padding: 0 var(--udexSpacer16) var(--udexSpacer16) var(--udexSpacer16);
+      & .picture {
+        order: 1;
+        padding: var(--udexSpacer16);
+        grid-row: span 2;
+
+        @media (width < 640px) {
+          padding: unset;
+        }
+
+        & img {
+          max-width: 100%;
+          height: 100%;
+          object-fit: cover;
+          aspect-ratio: unset;
+          border-radius: 12px;
+
+          @media (width < 640px) {
+            height: var(--card-image-height);
+            border-radius: unset;
+          }
+        }
+      }
+
+      & .infoblock {
+        order: 3;
+        padding: 0 var(--udexSpacer16) var(--udexSpacer16) var(--udexSpacer16);
+      }
     }
   }
 }
