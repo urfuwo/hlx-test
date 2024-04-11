@@ -56,7 +56,7 @@ const getSiteMapStream = (siteMapPath, domain) => {
 const buildSiteMap = async (domain, url, sitemapName, transformers) => {
   const response = await fetch(url);
   const responseStream = new ReadableWebToNodeStream(response.body);
-  const siteMapPath = resolve('../../', 'aemedge', `sitemap-${sitemapName}.xml`);
+  const siteMapPath = resolve('../../', 'aemedge', `sitemap-${sitemapName}.xml.gz`);
   const sitemap = getSiteMapStream(siteMapPath, domain);
   const pipeline = chain([
     responseStream,

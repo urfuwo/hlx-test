@@ -7,15 +7,15 @@
         <loc>https://www-qa.sap.com/sitemap-authors.xml</loc>
     </sitemap>
     <sitemap>
-        <loc>https://www-qa.sap.com/sitemap-news.xml</loc>
+        <loc>https://www-qa.sap.com/sitemap-news.xml.gz</loc>
     </sitemap>
     <sitemap>
-        <loc>https://www-qa.sap.com/sitemap-pages.xml</loc>
+        <loc>https://www-qa.sap.com/sitemap-pages.xml.gz</loc>
     </sitemap>
     <sitemap>
-        <loc>https://www-qa.sap.com/sitemap-tags.xml</loc>
+        <loc>https://www-qa.sap.com/sitemap-tags.xml.gz</loc>
     </sitemap>
     <sitemap>
-        <loc>https://www-qa.sap.com/sitemap-topics.xml</loc>
+        <loc>https://www-qa.sap.com/sitemap-topics.xml.gz</loc>
     </sitemap>
 </sitemapindex>
