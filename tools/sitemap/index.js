@@ -20,7 +20,7 @@ const { parser } = parserFunction;
 const { pick } = pickFunction;
 const { streamArray } = streamArrayFunction;
 const logger = log4js.getLogger();
-logger.level = 'debug';
+logger.level = 'info';
 
 const formatDate = (value) => {
   try {
