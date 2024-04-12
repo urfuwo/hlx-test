@@ -98,8 +98,8 @@
 
   & > main {
     @media (width >= 980px) {
-      & .hero-container {
-        margin-block-end: 84px;
+      & .hero-container + .section {
+        padding-block-start: 84px;
       }
 
       & > :not(.hero-container, .title-banner-container) {
