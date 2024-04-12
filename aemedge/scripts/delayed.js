@@ -16,7 +16,7 @@ function getEnvType(hostname = window.location.hostname) {
 }
 
 function getScope(path = window.location.pathname) {
-  const fullScopePrefixes = ['/events/', '/podcasts/', '/research/', '/resources/', '/videos/'];
+  const fullScopePrefixes = ['/research/', '/resources/', '/videos/'];
   return fullScopePrefixes.some((prefix) => path.startsWith(prefix)) ? 'full' : 'mvp';
 }
 
