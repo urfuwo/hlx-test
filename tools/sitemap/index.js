@@ -68,7 +68,7 @@ const buildSiteMap = async (domain, url, sitemapName, transformers) => {
   ]);
   streamToPromise(pipeline).then((sm) => {
     if (logger.level === 'debug') {
-      logger.info('sitemap generated', sm.toString());
+      logger.debug('sitemap generated', sm.toString());
     }
     logger.info('sitemap generated successfully at', siteMapPath);
     validateXml(siteMapPath);
