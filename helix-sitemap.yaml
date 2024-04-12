@@ -4,10 +4,9 @@ sitemaps:
   articles:
     origin: https://www-qa.sap.com
     source: /aemedge/articles-index.json
-    destination: /sitemap-articles.xml
+    destination: /aemedge/sitemap-articles.xml
     lastmod: YYYY-MM-DD
   authors:
     origin: https://www-qa.sap.com
     source: /aemedge/authors-index.json
-    destination: /sitemap-authors.xml
-    lastmod: YYYY-MM-DD
+    destination: /aemedge/sitemap-authors.xml
