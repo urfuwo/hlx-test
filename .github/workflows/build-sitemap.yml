@@ -31,7 +31,7 @@ jobs:
         working-directory: ./tools/sitemap
         run: |
           node index.js
-          git add ../../sitemap-news.xml ../../sitemap-pages.xml ../../sitemap-tags.xml ../../sitemap-topics.xml
+          git add ../../aemedge/sitemap-news.xml ../../aemedge/sitemap-pages.xml ../../aemedge/sitemap-tags.xml ../../aemedge/sitemap-topics.xml
           timestamp=$(date -u)
           git commit -m "Update sitemap files" || exit 0
           git push

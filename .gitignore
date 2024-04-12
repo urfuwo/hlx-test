@@ -2,9 +2,6 @@
 coverage/*
 logs/*
 node_modules/*
-sitemap.xml
-sitemap-*.xml
-sitemap-*.xml.gz
 
 data
 helix-importer-ui
