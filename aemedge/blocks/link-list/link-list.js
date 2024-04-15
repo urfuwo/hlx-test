@@ -1,3 +1,5 @@
+import { span } from '../../scripts/dom-builder.js';
+
 /**
  * Link List Block
  */
@@ -11,11 +13,14 @@ function moveLinkTextNodeToSpan(link) {
   Array.from(link.childNodes)
     .forEach((node) => {
       if (node.nodeType === Node.TEXT_NODE && node.textContent.trim().length > 0) {
-        const span = document.createElement('span');
-        span.classList.add('button-text');
+        const spanElement = span(
+          {
+            class: ['button-text'],
+          },
+        );
         const textNode = node.cloneNode(true);
-        span.appendChild(textNode);
-        link.replaceChild(span, node);
+        spanElement.appendChild(textNode);
+        link.replaceChild(spanElement, node);
       }
     });
 }
