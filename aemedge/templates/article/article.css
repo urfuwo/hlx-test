@@ -53,6 +53,10 @@ main {
       margin-inline-end: var(--udexGridMargins);
     }
 
+    & > .hero-container ~ [data-location='sidebar']  {
+      margin-block-start: var(--udexSpacer84);
+    }
+
     & > [data-location='document-footer'] {
       grid-column: -3 / span 2;
       margin-inline: var(--udexGridMargins);
@@ -89,8 +93,11 @@ main {
     }
 
     & > .hero-container {
-      margin-block-end: var(--udexSpacer84);
       grid-column: 1 / -1;
+    }
+
+    & > .hero-container + .section {
+      padding-block-start: var(--udexSpacer84);
     }
 
     & > .toc-container {

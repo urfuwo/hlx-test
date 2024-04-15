@@ -54,11 +54,15 @@
   }
 }
 
-body.hub-l2 .content-list ul {
+body.hub-l2 .content-list {
   @media (width >= 980px) {
-    & {
+    ul {
       /* Restrict columns to 3 when sidebar is present, i.e. L2 pages */
       grid-template-columns: repeat(3, 1fr);
+    }
+
+    &.wide ul {
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 }
@@ -74,11 +78,26 @@ body.hub-l2 .content-list ul {
     grid-template-columns: repeat(3, 1fr);
     grid-auto-rows: 115px 80px 90px;
   }
+
+  .content-list.wide ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @container content-list (width >= 980px) {
   .content-list ul {
     grid-template-columns: repeat(4, 1fr);
     grid-auto-rows: 115px 80px 70px;
+  }
+
+  .content-list.wide ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.section.background-light,
+.section.background-dark {
+  .content-list:first-child {
+    margin-top: var(--udexSpacer56);
   }
 }

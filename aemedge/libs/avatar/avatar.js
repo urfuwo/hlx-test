@@ -6,31 +6,38 @@ import {
 const breakpoints = [{ width: '480' }];
 
 export default class Avatar {
-  constructor(title, description, path, image) {
+  constructor(name, title, description, path, image) {
+    this.name = name;
     this.title = title;
     this.description = description;
     this.path = path;
     this.image = image;
   }
 
+  static fromAuthorEntry(ae) {
+    return new Avatar(ae.author, ae.title, ae.description, ae.path, ae.image);
+  }
+
   getImage() {
     return this.image ? createOptimizedPicture(this.image, this.title, false, breakpoints) : null;
   }
 
-  render(size, excludeStyles) {
+  render(size, excludeStyles, imageOnly) {
     if (!excludeStyles) {
       loadCSS(`${window.hlx.codeBasePath}/libs/avatar/avatar.css`);
     }
-    const element = div(
+    if (imageOnly) {
+      return div({ class: `avatar ${size}` }, this.image ? div(this.getImage()) : div());
+    }
+    return div(
       { class: 'avatar-wrapper' },
       div({ class: `avatar ${size}` }, this.image ? div(this.getImage()) : div()),
       div(
         { class: 'avatar-info' },
-        div({ class: 'title' }, a({ href: this.path }, div(`${this.title}`))),
+        div({ class: 'name' }, div(`${this.name}`)),
         this.description ? div({ class: 'description info' }, this.description) : '',
       ),
     );
-    return element;
   }
 
   renderDetails(size, excludeStyles) {
@@ -42,13 +49,13 @@ export default class Avatar {
       div({ class: `avatar ${size}` }, this.image ? div(this.getImage()) : div()),
       div(
         { class: 'avatar-details' },
-        h2(this.title),
+        h2(this.name),
         p(this.description),
-        p(
+        this.path ? p(
           { class: 'link' },
           a({ href: this.path, 'aria-label': 'Read more' }, 'See more by this author'),
           span({ class: 'icon icon-link-arrow' }),
-        ),
+        ) : '',
       ),
     );
     decorateIcons(element);
