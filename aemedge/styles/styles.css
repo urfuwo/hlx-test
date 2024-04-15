@@ -555,7 +555,7 @@ main .section {
 }
 
 .section.additional-reading {
-  padding: var(--udexSpacer20) var(--udexSpacer24);
+  padding: var(--udexSpacer24) var(--udexSpacer20);
   border-radius: var(--udexSpacer8);
   margin-block-end: var(--udexSpacer56);
 
