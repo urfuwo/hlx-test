@@ -623,7 +623,7 @@ async function loadBlock(block) {
             }
           } catch (error) {
             // eslint-disable-next-line no-console
-            console.log(`failed to load module for ${blockName}`, error);
+            console.error(`Failed to load module for ${blockName}`, error);
           }
           resolve();
         })();
@@ -718,6 +718,21 @@ async function loadSideNav(sideNav) {
 }
 
 /**
+ * Load `main-nav` block (Design Portal)
+ * @param mainNav
+ * @returns {Promise<Element|null>}
+ */
+async function loadMainNav(mainNav) {
+  if (mainNav === null) {
+    return null;
+  }
+  const mainNavBlock = buildBlock('main-nav', '');
+  mainNav.append(mainNavBlock);
+  decorateBlock(mainNavBlock);
+  return loadBlock(mainNavBlock);
+}
+
+/**
  * Load LCP block and/or wait for LCP in default content.
  * @param {Array} lcpBlocks Array of blocks
  */
@@ -759,6 +774,7 @@ export {
   loadFooter,
   loadHeader,
   loadSideNav,
+  loadMainNav,
   loadScript,
   readBlockConfig,
   sampleRUM,
