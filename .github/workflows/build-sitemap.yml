@@ -20,22 +20,28 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
+
       - name: Install dependencies
         working-directory: ./tools/sitemap
         run: npm install
+
       - name: Install xmllint tool
         run: |
           sudo apt-get update
           sudo apt-get install -y libxml2-utils
+
       - name: Run scripts and commit changes
         working-directory: ./tools/sitemap
         run: |
           node index.js
-          git add ../../aemedge/sitemap-news.xml.gz ../../aemedge/sitemap-pages.xml.gz ../../aemedge/sitemap-tags.xml.gz ../../aemedge/sitemap-topics.xml.gz
-          timestamp=$(date -u)
-          git commit -m "Update sitemap files" || exit 0
-          git push
+      
+      - name: Commit and push changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          file_pattern: 'sitemap-*.xml.gz'
+          commit_message: "Update sitemap files"    
