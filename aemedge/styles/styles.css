@@ -235,28 +235,53 @@ main .button-container {
     border-radius: 0.5rem;
     font-style: normal;
     font-size: var(--udexTypographyNavigationMediumXLFontSize);
+    line-height: var(--udexTypographyNavigationLineHeight);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     min-height: 36px;
     padding: 9px 10px;
 
-    &:is(a):not(.primary, .secondary)::after {
-      content: '\203A';
-      position: absolute;
-      padding-inline: var(--udexSpacer4);
-      transform: scale(1.3);
-    }
-
-    &:hover {
-      color: var(--udexColorBlue9);
-    }
-
     &:any-link,
     button {
       border-radius: 0.5rem;
       border: 0.0625rem solid transparent;
       font-weight: normal;
+    }
+
+    &:is(a):not(.primary, .secondary) {
+      display: inline-flex;
+      align-items: center;
+      padding: 0;
+      min-height: 0;
+
+      &:visited {
+        color: var(--udexColorBlue10);
+        text-decoration: underline;
+      }
+
+      &:hover {
+        color: var(--udexColorBlue9);
+        text-decoration: underline;
+      }
+
+      &:active {
+        color: var(--udexColorBlue11);
+        text-decoration: underline;
+      }
+
+      &::after {
+        box-sizing: border-box;
+        content: "";
+        display: inline-block;
+        height: 1em;
+        width: 1em;
+        margin-left: 4px;
+
+        /* Use mask in order to be able to adjust SVG colour */
+        mask: url("/aemedge/icons/slim-arrow-right.svg") center no-repeat;
+        background-color: currentcolor;
+      }
     }
 
     &.primary {
@@ -297,8 +322,8 @@ main .button-container {
   }
 }
 
-main .background-dark .button-container {
-  .button {
+main .section.background-dark .button-container {
+  :is(.button) {
     &.primary {
       color: var(--udexColorBlue8);
       border-color: var(--udexColorNeutralWhite);
