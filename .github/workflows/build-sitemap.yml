@@ -27,6 +27,10 @@ jobs:
       - name: Install dependencies
         working-directory: ./tools/sitemap
         run: npm install
+      - name: Install xmllint tool
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libxml2-utils
       - name: Run scripts and commit changes
         working-directory: ./tools/sitemap
         run: |
