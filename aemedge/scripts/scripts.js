@@ -11,6 +11,8 @@ import {
   loadBlocks,
   loadCSS,
   loadSideNav,
+  loadMainNav,
+  loadHeader,
   sampleRUM,
   toClassName,
   toCamelCase,
@@ -22,6 +24,7 @@ const TEMPLATE_LIST = {
   article: 'article',
   'hub-l2': 'hub',
   'hub-l1': 'hub',
+  designportal: 'designportal',
 };
 
 /**
@@ -355,6 +358,7 @@ async function loadLazy(doc) {
 
   loadHeader(doc.querySelector('header'));
   loadSideNav(doc.querySelector('aside'));
+  loadMainNav(doc.querySelector('nav'));
   loadFooter(doc.querySelector('footer'));
 
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
