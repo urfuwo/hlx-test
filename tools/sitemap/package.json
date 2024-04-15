@@ -15,8 +15,7 @@
     "readable-web-to-node-stream": "^3.0.2",
     "sitemap": "^7.1.1",
     "stream-chain": "^2.2.5",
-    "stream-json": "^1.8.0",
-    "zlib": "^1.0.5"
+    "stream-json": "^1.8.0"
   },
   "devDependencies": {
     "eslint": "^8.57.0",
