@@ -1,24 +1,26 @@
 /* Uses common styles */
 
-@container content-list (width >= 640px) {
-    ul {
-        grid-template-columns: repeat(3, 1fr);
-        grid-auto-rows: 115px 80px 90px;
+.content-list {
+    @container content-list (width >= 640px) {
+        ul {
+            grid-template-columns: repeat(3, 1fr);
+            grid-auto-rows: 115px 80px 90px;
+        }
+
+        &.wide ul {
+            grid-template-columns: repeat(2, 1fr);
+        }
     }
 
-    &.wide ul {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
+    @container content-list (width >= 980px) {
+        ul {
+            grid-template-columns: repeat(4, 1fr);
+            grid-auto-rows: 115px 80px 70px;
+        }
 
-@container content-list (width >= 980px) {
-    ul {
-        grid-template-columns: repeat(4, 1fr);
-        grid-auto-rows: 115px 80px 70px;
-    }
-
-    &.wide ul {
-        grid-template-columns: repeat(2, 1fr);
+        &.wide ul {
+            grid-template-columns: repeat(2, 1fr);
+        }
     }
 }
 
