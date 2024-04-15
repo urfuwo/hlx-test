@@ -57,8 +57,9 @@
           display: flex;
           width: auto;
           
-          & svg {
-            fill: var(--udexColorBlue7);
+          & img {
+            /* --udexColorBlue7 */
+            filter: brightness(0) saturate(100%) invert(34%) sepia(98%) saturate(4614%) hue-rotate(202deg) brightness(99%) contrast(103%);
           }
         }
         
@@ -98,8 +99,9 @@
             color: var(--udexColorBlue9);
             
             & .icon {
-              & svg path {
-                fill: var(--udexColorBlue9);
+              & img {
+                /* --udexColorBlue9 */
+                filter: brightness(0) saturate(100%) invert(16%) sepia(88%) saturate(2645%) hue-rotate(212deg) brightness(97%) contrast(107%);
               }
             }
           }
