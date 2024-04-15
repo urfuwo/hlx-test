@@ -11,6 +11,8 @@ import {
   loadBlocks,
   loadCSS,
   loadSideNav,
+  loadMainNav,
+  loadHeader,
   sampleRUM,
   toClassName,
   toCamelCase,
