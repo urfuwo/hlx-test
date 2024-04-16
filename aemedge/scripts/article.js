@@ -52,9 +52,13 @@ function asEntry(authorName) {
     : { author: authorName, path: buildAuthorUrl(authorName) };
 }
 
+function authorEntryFromAuthor(author, authorEntries) {
+  return authorEntries.find((e) => e.author === author) || asEntry(author);
+}
+
 /* AuthorEntry for the given article, or else fallback */
 function authorEntry(article, authorEntries) {
-  return authorEntries.find((e) => e.author === article.author) || asEntry(article.author);
+  return authorEntryFromAuthor(article.author, authorEntries);
 }
 
 const defaultSuffixes = ['PhD', 'Ph.D.'];
@@ -76,6 +80,7 @@ function getAuthorNames() {
 export {
   allAuthorEntries,
   authorEntry,
+  authorEntryFromAuthor,
   getAuthorEntries,
   buildAuthorUrl,
   removeAuthorsSuffixes,

@@ -24,4 +24,17 @@ function containerize(container, targetClass) {
   }
 }
 
-export { formatDate, containerize };
+/**
+ * Fetch pages from specified paths and parse into queryable document objects
+ * @param paths {string[]}
+ * @returns {Promise<Document[]>}
+ */
+async function fetchPages(paths) {
+  return (await Promise.all(
+    (await Promise.all(
+      paths.map((path) => fetch(path)),
+    )).map((res) => res.text()),
+  )).map((text) => new DOMParser().parseFromString(text, 'text/html'));
+}
+
+export { formatDate, containerize, fetchPages };
