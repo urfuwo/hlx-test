@@ -54,7 +54,7 @@
     }
 }
 
-.fast-facts-items {
+.fast-facts__items {
     display: grid;
     grid-template-columns: 1fr;
     grid-gap: var(--udexSpacer40) var(--udexGridGutters);
@@ -64,7 +64,7 @@
     justify-items: center;
 }
 
-.fast-facts-item {
+.fast-facts__item {
     text-align: center;
     width: 60%;
 
@@ -73,22 +73,22 @@
     }
 }
 
-.fast-facts-item__fact {
+.fast-facts__item__fact {
     font-weight: var(--udexTypographyFontWeightBold);
     color: var(--fast-facts-display-color);
 }
 
-.fast-facts-item__fact-main {
+.fast-facts__item__fact-main {
     font-size: var(--udexTypographyDisplayBoldXSFontSize);
     line-height: var(--udexTypographyDisplayLineHeight);
 }
 
-.fast-facts-item__fact-unit {
+.fast-facts__item__fact-unit {
     font-size: var(--udexTypographyHeadingBoldMFontSize);
     line-height: var(--udexTypographyHeadingLineHeight);
 }
 
-.fast-facts-item__details {
+.fast-facts__item__details {
     text-align: center;
 
     :not(:last-child) {
@@ -96,7 +96,7 @@
     }
 }
 
-.fast-facts-item__eyebrow {
+.fast-facts__item__eyebrow {
     font-weight: var(--udexTypographyFontWeightMedium);
     font-size: var(--udexTypographyEyebrowSFontSize);
     line-height: var(--udexTypographyEyebrowLineHeight);
@@ -104,29 +104,29 @@
     text-transform: uppercase;
 }
 
-.fast-facts-item__headline {
+.fast-facts__item__headline {
     font-weight: var(--udexTypographyFontWeightMedium);
     font-size: var(--udexTypographyHeadingMediumXXSFontSize);
     line-height: var(--udexTypographyHeadingLineHeight);
     color: var(--udexColorNeutralBlack);
 }
 
-.fast-facts-item__text {
+.fast-facts__item__text {
     font-size: var(--udexTypographyBodySFontSize);
     line-height: var(--udexTypographyBodyLineHeight);
     color: var(--udexColorGrey8);
 }
 
-.fast-facts-item__link {
+.fast-facts__item__link {
     margin: 0;
     text-align: left;
 }
 
 @media (width >= 640px) {
-    .fast-facts-items.even-count {
+    .fast-facts__items.even-count {
         grid-template-columns: repeat(2, 1fr);
 
-        .fast-facts-item {
+        .fast-facts__item {
             width: 100%;
         }
     }
