@@ -257,7 +257,6 @@ main .button-container {
 
       &:visited {
         color: var(--udexColorBlue10);
-        text-decoration: underline;
       }
 
       &:hover {
@@ -274,9 +273,9 @@ main .button-container {
         box-sizing: border-box;
         content: "";
         display: inline-block;
-        height: 1em;
-        width: 1em;
-        margin-left: 4px;
+        height: 1rem;
+        width: 1rem;
+        margin-left: var(--udexSpacer4);
 
         /* Use mask in order to be able to adjust SVG colour */
         mask: url("/aemedge/icons/slim-arrow-right.svg") center no-repeat;
