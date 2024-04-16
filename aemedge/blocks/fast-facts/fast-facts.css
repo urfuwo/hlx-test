@@ -71,6 +71,11 @@
     > *:not(:last-child) {
         margin-block-end: var(--udexSpacer20);
     }
+
+    .fast-facts__item__link {
+        margin: 0;
+        text-align: left;
+    }
 }
 
 .fast-facts__item__fact {
@@ -115,11 +120,6 @@
     font-size: var(--udexTypographyBodySFontSize);
     line-height: var(--udexTypographyBodyLineHeight);
     color: var(--udexColorGrey8);
-}
-
-.fast-facts__item__link {
-    margin: 0;
-    text-align: left;
 }
 
 @media (width >= 640px) {
