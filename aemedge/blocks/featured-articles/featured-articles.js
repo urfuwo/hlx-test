@@ -24,6 +24,7 @@ export default async function decorateBlock(block) {
   const links = Array.from(block.querySelectorAll('a')).map((link) => new URL(link.href).pathname);
   if (links.length > 0) {
     const articles = await fetchPages(links);
+    articles.sort((a, b) => new Date(getMetadata('published-time', b)) - new Date(getMetadata('published-time', a)));
     const placeholders = await fetchPlaceholders();
     const authEntries = await allAuthorEntries(articles);
     const cardList = ul();
