@@ -35,7 +35,6 @@
    * Main Navigation, not part of the grid
    */
   & > nav {
-    top: var(--headerHeight);
     z-index: 10;
   }
   
