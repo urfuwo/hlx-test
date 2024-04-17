@@ -1,16 +1,21 @@
 import {
-  h2, ol, li, span, a, aside, div,
+  h2, ol, li, span, a, aside, div, button,
 } from '../../scripts/dom-builder.js';
 import { fetchPlaceholders, getMetadata, toCamelCase } from '../../scripts/aem.js';
 
 function setActiveLink() {
+  const selected = document.querySelector('.toc .toc__selected');
+  const selectedLabel = selected.querySelector('span');
+  selected.setAttribute('aria-expanded', 'false');
+
   const links = document.querySelectorAll('.toc li');
   links.forEach((link) => {
     const anchor = link.querySelector('a');
     const linkHash = anchor?.hash;
-    const isH3 = anchor?.classList.contains('toc-h3');
+    const isH3 = anchor?.classList.contains('toc__h3-link');
     const linkMatch = linkHash === window.location.hash;
     if (linkMatch) {
+      selectedLabel.innerHTML = anchor.innerText;
       link.setAttribute('aria-current', 'true');
       if (isH3) {
         link.closest('.toc__list-item.parent').setAttribute('aria-expanded', 'true');
@@ -27,14 +32,14 @@ function setActiveLink() {
 function buildListItemLink(header) {
   return a({
     href: `#${header.id}`,
-    class: `toc-${header.tagName.toLowerCase()}`,
+    class: `toc__${header.tagName.toLowerCase()}-link`,
   }, header.innerText);
 }
 
 function buildListItemContent(header) {
   return div(
     { class: 'toc__list-item__content' },
-    span(),
+    span({ class: 'toc__list-item__spacer' }),
     buildListItemLink(header),
   );
 }
@@ -57,7 +62,7 @@ function buildListItem(header, subheaders) {
 }
 
 function buildList(headers) {
-  const tocList = ol({ class: 'toc__list' });
+  const tocList = ol({ class: 'toc__list', id: 'toc' });
   let currentParentHeader;
   let subheaders = [];
   headers.forEach((header, index) => {
@@ -78,6 +83,17 @@ function buildList(headers) {
   return tocList;
 }
 
+function addClickHandlerToSelectedItem(selected) {
+  selected.addEventListener('click', () => {
+    const listHidden = selected.getAttribute('aria-expanded') === 'false';
+    if (listHidden) {
+      selected.setAttribute('aria-expanded', 'true');
+    } else {
+      selected.setAttribute('aria-expanded', 'false');
+    }
+  });
+}
+
 export default async function decorate(block) {
   const mainContent = document.querySelectorAll(
     'main > .section:not(.hero-container, .toc-container, .section[data-location="sidebar"], .section[data-location="document-footer"]) .default-content-wrapper',
@@ -88,13 +104,21 @@ export default async function decorate(block) {
   }, []) : [];
   if (headers.length > 0) {
     const placeholders = await fetchPlaceholders();
+    const heading = getMetadata('toc-heading') || placeholders[toCamelCase('toc-heading')];
+    const selected = button({
+      class: 'toc__selected', 'aria-expanded': 'false', 'aria-haspopup': 'true', 'aria-controls': 'toc', 'aria-label': 'Table of Contents',
+    }, span(heading));
     const tocElement = aside(
-      { class: 'toc' },
-      h2(getMetadata('toc-heading') || placeholders[toCamelCase('toc-heading')]),
+      {
+        class: 'toc', role: 'navigation', 'aria-label': 'In page',
+      },
+      h2(heading),
+      selected,
       buildList(headers),
     );
     block.append(tocElement);
     setActiveLink();
+    addClickHandlerToSelectedItem(selected);
     window.addEventListener('hashchange', setActiveLink);
   }
 }
