@@ -1,0 +1,98 @@
+.designportal.appear {
+  --headerHeight: 60px;
+  
+  grid-template:
+    'content' auto
+    'footer' auto
+    / 1fr;
+  padding-top: var(--headerHeight);
+  
+  @media (width >= 980px) {
+    display: grid;
+  }
+  
+  @media (width >= 1600px) {
+    & {
+      --udexGridMargins: 246px;
+    }
+  }
+  
+  & > * {
+    transition: margin 0.3s ease-in-out;
+  }
+  
+  /* Master Header */
+  & > header {
+    /* grid-area: header; */
+    background: var(--udexColorGrey1);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 20;
+  }
+  
+  /**
+   * Main Navigation, not part of the grid
+   */
+  & > nav {
+    top: var(--headerHeight);
+    z-index: 10;
+  }
+  
+  /* Main Content */
+  & > main {
+    display: flex;
+    flex-direction: column;
+    grid-area: content;
+    
+    /* S */
+    @media (width >= 640px) {
+      & > * {
+        /* --udexGridXLGutters */
+        --hero-margin--left: 48px;
+      }
+    }
+    
+    & > :not(.hero-container, .title-banner-container) {
+      & > * {
+        margin: 0 var(--udexGridMargins);
+      }
+    }
+    
+    /* M */
+    @media (width >= 980px) {
+      margin: 0 0 0 var(--udexGridMargins);
+      
+      & .hero-container + .section {
+        padding-block-start: 84px;
+      }
+      
+      & > :not(.hero-container, .title-banner-container) {
+        /* padding-inline: var(--udexGridMargins); */
+        padding-inline: var(--udexGridGutters) var(--udexGridMargins);
+        
+        & > * {
+          margin: unset;
+        }
+      }
+    }
+    
+    & > :not(:last-child, .hero-container) {
+      padding-block-end: var(--udexSpacer56);
+    }
+    
+    & > :last-child {
+      padding-block-end: var(--udexSpacer84);
+    }
+  }
+  
+  /* Page Footer */
+  & > footer {
+    grid-area: footer;
+    
+    /* M */
+    @media (width >= 980px) {
+      margin: 0 0 0 var(--udexGridXLGutters);
+    }
+  }
+}
