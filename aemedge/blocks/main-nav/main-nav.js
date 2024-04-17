@@ -44,7 +44,7 @@ function addNavLevelClasses(list) {
    */
   if (list.tagName === 'UL') {
     const level = calculateDepth(list) + 1;
-    list.classList.add(`nav-main-level-${level}`);
+    list.classList.add(`main-nav-level-${level}`);
   }
 
   /**
@@ -54,6 +54,31 @@ function addNavLevelClasses(list) {
     .forEach((child) => {
       addNavLevelClasses(child);
     });
+}
+
+/**
+ * Set the current page link as active.
+ * @description
+ * The current page link is determined by comparing the `href` attribute of each link with
+ * the current pathname.
+ * The comparison is done without the trailing slash to ensure uniformity.
+ * @param navMain {Element} The main navigation element.
+ */
+function setCurrentPageLink(navMain) {
+  const path = window.location.pathname.replace(/\/$/, '');
+  const links = navMain.querySelectorAll('a');
+
+  links.forEach((link) => {
+    // Remove trailing slash from the href attribute
+    const href = link.getAttribute('href')
+      .replace(/\/$/, '');
+
+    if (href === path) {
+      link.setAttribute('aria-current', 'page');
+    } else {
+      link.removeAttribute('aria-current');
+    }
+  });
 }
 
 /**
@@ -96,7 +121,7 @@ async function generateMainNavigation() {
   classes.forEach((c, i) => {
     const section = mainNav.children[i];
     if (section) {
-      section.classList.add(`nav-${c}`);
+      section.classList.add(`main-nav-${c}`);
     }
   });
 
@@ -106,6 +131,9 @@ async function generateMainNavigation() {
 export default async function decorate(block) {
   await loadCSS(`${window.hlx.codeBasePath}/styles/helpers/visually-hidden.css`);
   const mainNav = await generateMainNavigation();
+
+  setCurrentPageLink(mainNav);
+
   if (mainNav) {
     block.append(mainNav);
   }
