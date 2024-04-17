@@ -1,7 +1,11 @@
 import { ul } from '../../scripts/dom-builder.js';
 import Card from '../../libs/card/card.js';
+import { loadCSS } from '../../scripts/aem.js';
 
 export default async function decorate(block) {
+  loadCSS(`${window.hlx.codeBasePath}/styles/card-list.css`);
+  block.classList.add('card-list', 'card-list--text');
+
   const cardList = ul({ class: 'card-items' });
   [...block.children].forEach((row) => {
     const eyebrow = row.querySelector('h6')?.textContent || '';

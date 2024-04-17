@@ -1,6 +1,10 @@
-/* Uses common styles */
-
 .content-list {
+    ul {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(278px, 1fr));
+        gap: var(--udexGridGutters);
+    }
+
     @container content-list (width >= 640px) {
         ul {
             grid-template-columns: repeat(3, 1fr);
@@ -22,6 +26,18 @@
             grid-template-columns: repeat(2, 1fr);
         }
     }
+
+    &.text-only .button-wrapper {
+        display: flex;
+        justify-content: center;
+        grid-column: span 6;
+
+        @media (width >= 980px) {
+            & {
+                grid-column: span 8;
+            }
+        }
+    }
 }
 
 body.hub-l2 .content-list {
@@ -35,4 +51,8 @@ body.hub-l2 .content-list {
             grid-template-columns: repeat(2, 1fr);
         }
     }
+}
+
+.content-list-wrapper:not(:last-child) {
+    margin-bottom: var(--udexSpacer56);
 }

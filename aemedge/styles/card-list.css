@@ -1,0 +1,46 @@
+/* stylelint-disable selector-class-pattern */
+
+.card-list {
+    container: content-list / inline-size;
+
+    & .heading {
+        grid-column: 1 / -1;
+        margin: unset;
+    }
+
+    & ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+}
+
+.card-list--text {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--udexSpacer16);
+
+    @media (width >= 980px) {
+        & {
+            grid-template-columns: repeat(9, 1fr);
+        }
+    }
+
+    & ul {
+        display: contents;
+
+        & .card {
+            grid-column: 1 / -1;
+
+            @media (width >= 980px) {
+                & {
+                    grid-column: span 4;
+                }
+            }
+
+            @container content-list (240px < width < 480px) {
+                grid-column: 1 / -1;
+            }
+        }
+    }
+}
