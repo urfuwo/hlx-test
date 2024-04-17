@@ -107,7 +107,7 @@ main {
     }
   }
 
-  [data-location="sidebar"] :is(.content-list, .article-collection) {
+  [data-location="sidebar"] .card-list {
     ul .card {
       grid-column: 1 / -1;
     }
