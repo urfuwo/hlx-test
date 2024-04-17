@@ -13,13 +13,13 @@ function setActiveLink() {
     if (linkMatch) {
       link.setAttribute('aria-current', 'true');
       if (isH3) {
-        link.closest('.toc__list-item.parent').classList.add('expanded');
+        link.closest('.toc__list-item.parent').setAttribute('aria-expanded', 'true');
       } else if (link.classList.contains('parent')) {
-        link.classList.add('expanded');
+        link.setAttribute('aria-expanded', 'true');
       }
     } else {
       link.setAttribute('aria-current', 'false');
-      link.classList.remove('expanded');
+      link.setAttribute('aria-expanded', 'false');
     }
   });
 }

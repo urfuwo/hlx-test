@@ -31,7 +31,7 @@ main {
 
   @media (width >= 980px) {
     grid-template-columns: 8fr 4fr;
-    grid-template-rows: repeat(3, auto);
+    grid-template-rows: repeat(99, auto);
 
     &
       > :not(
@@ -69,7 +69,7 @@ main {
 
       & > [data-location='sidebar'] {
         grid-column: 3 / 4;
-        grid-row: -3 / -2;
+        grid-row: 2 / -2;
         margin-inline-end: var(--udexGridMargins);
       }
 
@@ -102,6 +102,7 @@ main {
 
     & > .toc-container {
       grid-column: 1 / 2;
+      grid-row: 2 / -2;
       margin-inline-start: var(--udexGridMargins);
       min-width: 18ch;
     }

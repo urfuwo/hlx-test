@@ -93,7 +93,7 @@
       transform: rotate(0deg);
     }
 
-    &.expanded {
+    &[aria-expanded='true'] {
       .toc__list {
         display: block;
       }
@@ -104,11 +104,17 @@
     }
   }
 
-  &:is(.expanded, [aria-current='true']) > .toc__list-item__content {
+  &:is([aria-current='true']) > .toc__list-item__content {
+    .toc-h2,
+    .toc-h3 {
+      margin-inline-start: 12px;
+    }
+  }
+
+  &:is([aria-expanded='true'], [aria-current='true']) > .toc__list-item__content {
     .toc-h2,
     .toc-h3 {
       color: var(--udexColorBlue7);
-      margin-inline-start: 12px;
     }
   }
 }
