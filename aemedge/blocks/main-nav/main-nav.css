@@ -1,0 +1,63 @@
+/**
+ * Main Navigation (Design Portal)
+ * @description
+ * - The main navigation is fixed to the top of the viewport.
+ * - The corresponding `top` margin is set to the height of the header.
+ * @see designportal.css
+ */
+body {
+  --main-nav-width: 56px;
+  
+  & > nav {
+    background: var(--udexCoreBase);
+    box-shadow: var(--sapContent_Shadow1);
+    display: none;
+    height: 100vh;
+    overflow: hidden;
+    padding: 24px 8px 8px;
+    position: fixed;
+    width: var(--main-nav-width);
+    
+    /* M */
+    @media (width >= 980px) {
+      display: block;
+    }
+  }
+}
+
+#main-nav {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: space-between;
+  
+  ul {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: var(--udexGridXSGutters);
+    margin: 0;
+    padding: 0;
+  }
+  
+  li {
+    list-style: none;
+    text-align: center;
+    width: auto;
+    
+    a {
+      display: block;
+      text-decoration: none;
+      
+      &:hover,
+      &:focus,
+      &:active {
+        text-decoration: none;
+      }
+      
+      span {
+        display: block;
+      }
+    }
+  }
+}
