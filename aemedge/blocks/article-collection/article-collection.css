@@ -1,5 +1,5 @@
 .article-collection {
-    container: content-list / inline-size;
+    container: article-collection / inline-size;
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     gap: var(--udexSpacer16);
@@ -19,7 +19,7 @@
                 }
             }
 
-            @container content-list (240px < width < 480px) {
+            @container article-collection (240px < width < 480px) {
                 grid-column: 1 / -1;
             }
         }
