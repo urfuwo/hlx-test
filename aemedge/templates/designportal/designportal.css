@@ -17,10 +17,6 @@
     }
   }
   
-  & > * {
-    transition: margin 0.3s ease-in-out;
-  }
-  
   /* Master Header */
   & > header {
     /* grid-area: header; */

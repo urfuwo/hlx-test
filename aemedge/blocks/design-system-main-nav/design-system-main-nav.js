@@ -11,7 +11,7 @@ function wrapLinkTextNodeWithSpan(link) {
     .forEach((node) => {
       if (node.nodeType === Node.TEXT_NODE && node.textContent.trim().length > 0) {
         const span = document.createElement('span');
-        span.classList.add('nav-main-link-label', 'visually-hidden');
+        span.classList.add('link-label', 'visually-hidden');
         const textNode = node.cloneNode(true);
         span.appendChild(textNode);
         link.replaceChild(span, node);
@@ -82,6 +82,35 @@ function setCurrentPageLink(navMain) {
 }
 
 /**
+ * Set the expanded state of the main navigation.
+ * @param mainNavWrapper {Element}
+ */
+function setExpandedState(mainNavWrapper) {
+  mainNavWrapper.setAttribute('aria-expanded', 'false');
+  const linksLevel1 = mainNavWrapper.querySelectorAll('.main-nav-level-1 a');
+  const linkLabels = mainNavWrapper.querySelectorAll('.link-label');
+  let isExpanded = false;
+
+  function toggleExpanded() {
+    isExpanded = !isExpanded;
+    mainNavWrapper.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+    linkLabels.forEach((label) => {
+      label.classList.toggle('visually-hidden');
+    });
+  }
+
+  // Mouse events for the wrapper
+  mainNavWrapper.addEventListener('mouseover', toggleExpanded);
+  mainNavWrapper.addEventListener('mouseout', toggleExpanded);
+
+  // Keyboard events for the links
+  linksLevel1.forEach((link) => {
+    link.addEventListener('focus', toggleExpanded);
+    link.addEventListener('blur', toggleExpanded);
+  });
+}
+
+/**
  * Generate the main navigation
  */
 async function generateMainNavigation() {
@@ -93,8 +122,6 @@ async function generateMainNavigation() {
     'main-navigation',
     'utility',
   ];
-
-  mainNav.id = 'main-nav';
 
   /**
    * Iterate through the sections and decorating them.
@@ -128,13 +155,20 @@ async function generateMainNavigation() {
   return mainNav;
 }
 
+/**
+ * Decorate the main navigation block.
+ * @param block
+ * @returns {Promise<void>}
+ */
 export default async function decorate(block) {
   await loadCSS(`${window.hlx.codeBasePath}/styles/helpers/visually-hidden.css`);
   const mainNav = await generateMainNavigation();
-
-  setCurrentPageLink(mainNav);
+  const mainNavWrapper = document.querySelector('.design-system-main-nav-wrapper');
 
   if (mainNav) {
     block.append(mainNav);
   }
+
+  setCurrentPageLink(mainNav);
+  setExpandedState(mainNavWrapper);
 }
