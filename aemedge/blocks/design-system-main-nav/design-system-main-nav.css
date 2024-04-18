@@ -3,12 +3,14 @@
  */
 :root {
   --main-nav-width: 56px;
+  --main-nav-width-expanded: 217px;
+  --main-nav-transition: width 0.3s ease;
   --main-nav-link-color-visited-hover: #DCF3FF;
   --main-nav-link-color-visited: #DEE2E5;
   --main-nav-link-color-pressed: #DEE2E5;
 }
 
-.main-nav-wrapper {
+.design-system-main-nav-wrapper {
   background: var(--udexCoreBase);
   bottom: 0;
   box-shadow: var(--sapContent_Shadow1);
@@ -18,27 +20,32 @@
   padding: 24px 8px 8px;
   position: fixed;
   top: var(--headerHeight);
+  transition: var(--main-nav-transition) !important;
   width: var(--main-nav-width);
   
   /* M */
   @media (width >= 980px) {
     display: block;
   }
+  
+  &:hover,
+  &[aria-expanded="true"] {
+    width: var(--main-nav-width-expanded);
+  }
 }
 
 /* Block */
-.main-nav {
+.design-system-main-nav {
   height: 100%;
-}
-
-#main-nav {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  justify-content: space-between;
+  
+  nav {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+  }
   
   ul {
-    align-items: center;
     display: flex;
     flex-direction: column;
     gap: var(--udexGridXSGutters);
@@ -48,13 +55,16 @@
   
   li {
     list-style: none;
-    text-align: center;
     width: auto;
     
     a {
+      align-items: center;
       border-radius: var(--udexRadiusM);
-      display: block;
+      display: flex;
+      gap: 0;
+      justify-content: flex-start;
       text-decoration: none;
+      white-space: nowrap;
       
       /* Keep the order: LoVeHAte: `:link`, `:visited`, `:hover`, `:focus`, `:active` */
       &:visited {
@@ -73,17 +83,23 @@
         background: var(--sapButton_Neutral_Hover_Background);
       }
       
+      /* Pressed state */
       &:active {
         background: var(--main-nav-link-color-pressed);
       }
       
       span {
-        display: block;
+        display: inline-block;
       }
       
       .icon {
         height: var(--udexCoreSizeIconSemantic);
-        padding: 10px 12px;
+        margin: 10px 12px;
+        width: var(--udexCoreSizeIconSemantic);
+      }
+      
+      img {
+        height: var(--udexCoreSizeIconSemantic);
         width: var(--udexCoreSizeIconSemantic);
       }
       
