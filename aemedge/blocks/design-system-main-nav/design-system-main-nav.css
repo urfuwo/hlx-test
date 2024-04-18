@@ -4,16 +4,7 @@
   --main-nav-transition: width 0.3s ease;
   --main-nav-width: 56px;
   --main-nav-width-expanded: 217px;
-  
-  * {
-    box-sizing: border-box;
-    
-    &::before,
-    &::after {
-      box-sizing: border-box;
-    }
-  }
-  
+
   background: var(--udexCoreBase);
   bottom: 0;
   box-shadow: var(--sapContent_Shadow1);
