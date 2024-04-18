@@ -182,7 +182,7 @@ button.toc__selected {
     }
   }
 
-  .toc__list-item&[aria-current='true'] > .toc__list-item__content {
+  .toc__list-item[aria-current='true'] > .toc__list-item__content {
     .toc__list-item__spacer {
       display: inline-block;
       width: 3px;
