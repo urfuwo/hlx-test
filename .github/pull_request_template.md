@@ -3,11 +3,11 @@ Please always provide the [GitHub issue(s)](../issues) your PR is for, as well a
 Fix #<gh-issue-id>
 
 Test URLs:
-Content Hub:
+**Content Hub:**
 Before: https://main--hlx-test--urfuwo.hlx.live/blog/2023/11/idc-marketscape-sap-a-leader-cloud-enabled-sourcing-applications
 After: https://<branch>--hlx-test--urfuwo.hlx.live/blog/2023/11/idc-marketscape-sap-a-leader-cloud-enabled-sourcing-applications
 
-Design system:
+**Design system:**
 Before: https://main--hlx-test--urfuwo.hlx.live/design-system/fiori-design-web/button
 After: https://<branch>--hlx-test--urfuwo.hlx.live/design-system/fiori-design-web/button
 
