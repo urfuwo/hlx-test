@@ -9,6 +9,15 @@
  * Heading/Regular: default
  */
 
+* {
+  box-sizing: border-box;
+  
+  &::before,
+  &::after {
+    box-sizing: border-box;
+  }
+}
+
 /* Fall back to Arial for 72 Brand Variable
  Added to styles.css for early loading */
 
