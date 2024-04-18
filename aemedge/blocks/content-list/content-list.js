@@ -1,6 +1,4 @@
-import {
-  readBlockConfig, fetchPlaceholders, toCamelCase, loadCSS,
-} from '../../scripts/aem.js';
+import { readBlockConfig, fetchPlaceholders, toCamelCase } from '../../scripts/aem.js';
 import ffetch from '../../scripts/ffetch.js';
 import { ul, h3 } from '../../scripts/dom-builder.js';
 import PictureCard from '../../libs/pictureCard/pictureCard.js';
@@ -68,11 +66,7 @@ function getCard(article, config) {
 }
 
 export default async function decorateBlock(block) {
-  loadCSS(`${window.hlx.codeBasePath}/styles/card-list.css`);
-
   const textOnly = block.classList.contains('text-only');
-  block.classList.add('card-list', textOnly ? 'card-list--text' : null);
-
   const config = Object.fromEntries(
     Object.entries(readBlockConfig(block)).map(([key, value]) => [key, value.split(',')]),
   );
