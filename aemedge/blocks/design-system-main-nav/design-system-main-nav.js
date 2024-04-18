@@ -86,27 +86,51 @@ function setCurrentPageLink(navMain) {
  * @param mainNavWrapper {Element}
  */
 function setExpandedState(mainNavWrapper) {
-  mainNavWrapper.setAttribute('aria-expanded', 'false');
   const linksLevel1 = mainNavWrapper.querySelectorAll('.main-nav-level-1 a');
   const linkLabels = mainNavWrapper.querySelectorAll('.link-label');
   let isExpanded = false;
 
-  function toggleExpanded() {
-    isExpanded = !isExpanded;
-    mainNavWrapper.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+  /**
+   * Update the visual state of the main navigation and its labels.
+   * @param expand
+   */
+  function updateVisualState(expand) {
+    mainNavWrapper.setAttribute('aria-expanded', expand ? 'true' : 'false');
     linkLabels.forEach((label) => {
-      label.classList.toggle('visually-hidden');
+      if (expand) {
+        label.classList.remove('visually-hidden');
+      } else {
+        label.classList.add('visually-hidden');
+      }
     });
   }
 
-  // Mouse events for the wrapper
-  mainNavWrapper.addEventListener('mouseover', toggleExpanded);
-  mainNavWrapper.addEventListener('mouseout', toggleExpanded);
+  /**
+   * Handle the interaction events (generic for mouse and focus events).
+   * 1. Check if mouseout/blur is going to an element outside the nav wrapper.
+   * 2. On mouseover/focus within the nav, keep the nav expanded.
+   * @param event {Event}
+   */
+  function handleInteraction(event) {
+    if (event.type === 'mouseout' || event.type === 'blur') {
+      if (!mainNavWrapper.contains(event.relatedTarget)) {
+        isExpanded = false;
+        updateVisualState(isExpanded);
+      }
+    } else {
+      isExpanded = true;
+      updateVisualState(isExpanded);
+    }
+  }
 
-  // Keyboard events for the links
+  // Mouse events
+  mainNavWrapper.addEventListener('mouseover', handleInteraction);
+  mainNavWrapper.addEventListener('mouseout', handleInteraction);
+
+  // Keyboard events
   linksLevel1.forEach((link) => {
-    link.addEventListener('focus', toggleExpanded);
-    link.addEventListener('blur', toggleExpanded);
+    link.addEventListener('focus', handleInteraction);
+    link.addEventListener('blur', handleInteraction);
   });
 }
 
