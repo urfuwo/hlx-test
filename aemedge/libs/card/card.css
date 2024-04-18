@@ -11,6 +11,7 @@
   & .type {
     font-size: var(--udexTypographyEyebrowSFontSize);
     line-height: var(--udexTypographyEyebrowLineHeight);
+    font-weight: var(--udexTypographyFontWeightMedium);
     letter-spacing: 0.03em;
     text-transform: uppercase;
   }
