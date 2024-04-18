@@ -1,19 +1,5 @@
 /* global WebImporter */
 
-const addToSet = (map, key, value) => {
-  if (!map.has(key)) {
-    map.set(key, new Set());
-  }
-  if (value) {
-    map.get(key).add(value);
-  }
-};
-
-const mapToMeta = (meta, map) => {
-  // eslint-disable-next-line no-return-assign
-  map.entries().forEach((tag) => (meta[tag[0]] = [...tag[1]].join(', ')));
-};
-
 // eslint-disable-next-line no-unused-vars
 const createMetadata = (main, document, html, params, urlStr) => {
   const meta = {};
@@ -48,10 +34,7 @@ const createMetadata = (main, document, html, params, urlStr) => {
   if (modified) {
     meta['Modified Time'] = modified.content;
   }
-  const author = document.querySelector('[name="author"]');
-  if (author) {
-    meta.Author = author.content;
-  }
+
   if (meta.Title && html.originalURL.indexOf('/author') > 0) {
     meta.Author = meta.Title.replace(/[^a-zA-Z\s]+.*/, '').trim();
   }
@@ -73,11 +56,15 @@ const createMetadata = (main, document, html, params, urlStr) => {
     }
   }
 
-  const displayAuthor = [...document.querySelectorAll('.c-hero-post__content .c-entry-author a')]
+  if (meta.Title && html.originalURL.indexOf('/author') > 0) {
+    meta.Author = meta.Title.replace(/[^a-zA-Z\s]+.*/, '').trim();
+  }
+
+  const author = [...document.querySelectorAll('.c-hero-post__content .c-entry-author a')]
     .map((el) => el.textContent)
     .join(', ');
-  if (displayAuthor) {
-    meta['Display Author'] = displayAuthor;
+  if (author) {
+    meta.Author = author;
   }
 
   const hotStory = document.querySelector('.c-hero-post__content .c-entry-hot-story');
@@ -119,7 +106,7 @@ const createMetadata = (main, document, html, params, urlStr) => {
     }
 
     // TODO currently additional tags are not mapped as they are not present in the mapping table
-    const tagging = new Map();
+    const tagging = new Set();
 
     // map categories to topics
     const categories = [...articleContent.classList]
@@ -130,10 +117,9 @@ const createMetadata = (main, document, html, params, urlStr) => {
         .filter((entry) => categories.includes(entry.path))
         .forEach((topic) => {
           if (topic['action:map'].length > 0) {
-            const newTag = topic['action:map'].split('/');
-            addToSet(tagging, newTag[0], newTag[1]);
+            tagging.add(topic['action:map']);
           } else {
-            addToSet(tagging, 'topics', topic.path);
+            tagging.add(`topics/${topic.path}`);
           }
         });
     }
@@ -144,10 +130,9 @@ const createMetadata = (main, document, html, params, urlStr) => {
         .filter((entry) => entry.path === types[0])
         .forEach((typeEntry) => {
           if (typeEntry['action:map'].length > 0) {
-            const newTag = typeEntry['action:map'].split('/');
-            addToSet(tagging, newTag[0], newTag[1]);
+            tagging.add(typeEntry['action:map']);
           } else {
-            addToSet(tagging, 'content-type', typeEntry.path);
+            tagging.add(`content-type/${typeEntry.path}`);
           }
         });
     }
@@ -161,15 +146,14 @@ const createMetadata = (main, document, html, params, urlStr) => {
         .filter((entry) => tags.includes(entry.path))
         .forEach((tag) => {
           if (tag['action:map'].length > 0) {
-            const newTag = tag['action:map'].split('/');
-            addToSet(tagging, newTag[0], newTag[1]);
+            tagging.add(tag['action:map']);
           } else {
-            addToSet(tagging, 'news-tag', tag.path);
+            tagging.add(`news-tag/${tag.path}`);
           }
         });
     }
 
-    mapToMeta(meta, tagging);
+    meta.Tags = [...tagging].join(', ');
   }
 
   const block = WebImporter.Blocks.getMetadataBlock(document, meta);
