@@ -10,9 +10,7 @@ import {
   loadBlock,
   loadBlocks,
   loadCSS,
-  loadFooter,
   loadSideNav,
-  loadHeader,
   sampleRUM,
   toClassName,
   toCamelCase,
@@ -312,6 +310,34 @@ async function loadEager(doc) {
   } catch (e) {
     // do nothing
   }
+}
+
+function isDesignSystemSite() {
+  return document.body.classList.contains('design-system');
+}
+
+/**
+ * Loads a block named 'header' into header
+ * @param {Element} header header element
+ * @returns {Promise}
+ */
+async function loadHeader(header) {
+  const headerBlock = buildBlock((isDesignSystemSite()) ? 'design-system-header' : 'header', '');
+  header.append(headerBlock);
+  decorateBlock(headerBlock);
+  return loadBlock(headerBlock);
+}
+
+/**
+ * Loads a block named 'footer' into footer
+ * @param footer footer element
+ * @returns {Promise}
+ */
+async function loadFooter(footer) {
+  const footerBlock = buildBlock(isDesignSystemSite() ? 'design-system-footer' : 'footer', '');
+  footer.append(footerBlock);
+  decorateBlock(footerBlock);
+  return loadBlock(footerBlock);
 }
 
 /**
