@@ -11,7 +11,6 @@ import {
   loadBlocks,
   loadCSS,
   loadSideNav,
-  loadHeader,
   sampleRUM,
   toClassName,
   toCamelCase,
@@ -190,21 +189,6 @@ export async function decorateMain(main, shouldDecorateTemplates = true) {
 }
 
 /**
- * Load a block named `design-system-main-nav` block (Design Portal)
- * @param mainNav
- * @returns {Promise<Element|null>}
- */
-async function loadMainNav(mainNav) {
-  if (mainNav === null) {
-    return null;
-  }
-  const mainNavBlock = buildBlock('design-system-main-nav', '');
-  mainNav.append(mainNavBlock);
-  decorateBlock(mainNavBlock);
-  return loadBlock(mainNavBlock);
-}
-
-/**
  * Loads a fragment.
  * @param {string} path The path to the fragment
  * @returns {HTMLElement} The root element of the fragment
@@ -355,6 +339,21 @@ async function loadFooter(footer) {
   footer.append(footerBlock);
   decorateBlock(footerBlock);
   return loadBlock(footerBlock);
+}
+
+/**
+ * Load a block named `design-system-main-nav` block (Design Portal)
+ * @param mainNav
+ * @returns {Promise<Element|null>}
+ */
+async function loadMainNav(mainNav) {
+  if (mainNav === null) {
+    return null;
+  }
+  const mainNavBlock = buildBlock('design-system-main-nav', '');
+  mainNav.append(mainNavBlock);
+  decorateBlock(mainNavBlock);
+  return loadBlock(mainNavBlock);
 }
 
 /**
