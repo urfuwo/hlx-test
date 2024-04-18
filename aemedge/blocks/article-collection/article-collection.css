@@ -4,11 +4,6 @@
     grid-template-columns: repeat(12, 1fr);
     gap: var(--udexSpacer16);
 
-    & .heading {
-        grid-column: 1 / -1;
-        margin: unset;
-    }
-
     & ul {
         list-style: none;
         margin: 0;
