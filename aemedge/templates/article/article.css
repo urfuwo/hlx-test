@@ -106,6 +106,12 @@ main {
       min-width: 18ch;
     }
   }
+
+  [data-location="sidebar"] :is(.content-list, .article-collection) {
+    ul .card {
+      grid-column: 1 / -1;
+    }
+  }
 }
 
 /* image and video caption */
