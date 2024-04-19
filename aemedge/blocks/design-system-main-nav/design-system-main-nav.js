@@ -89,6 +89,7 @@ function setExpandedState(mainNavWrapper) {
   const linksLevel1 = mainNavWrapper.querySelectorAll('.main-nav-level-1 a');
   const linkLabels = mainNavWrapper.querySelectorAll('.link-label');
   let isExpanded = false;
+  let isMouseInside = false;
 
   /**
    * Update the visual state of the main navigation and its labels.
@@ -97,41 +98,87 @@ function setExpandedState(mainNavWrapper) {
   function updateVisualState(expand) {
     mainNavWrapper.setAttribute('aria-expanded', expand ? 'true' : 'false');
     linkLabels.forEach((label) => {
-      if (expand) {
-        label.classList.remove('visually-hidden');
-      } else {
-        label.classList.add('visually-hidden');
-      }
+      label.classList.toggle('visually-hidden', !expand);
     });
   }
 
   /**
-   * Handle the interaction events (generic for mouse and focus events).
+   * General interaction handler for mouse and keyboard events.
    * 1. Check if mouseout/blur is going to an element outside the nav wrapper.
    * 2. On mouseover/focus within the nav, keep the nav expanded.
    * @param event {Event}
    */
   function handleInteraction(event) {
-    if (event.type === 'mouseout' || event.type === 'blur') {
-      if (!mainNavWrapper.contains(event.relatedTarget)) {
-        isExpanded = false;
-        updateVisualState(isExpanded);
+    switch (event.type) {
+      case 'mouseover':
+        isMouseInside = true;
+        isExpanded = true;
+        updateVisualState(true);
+        break;
+      case 'focus':
+        isExpanded = true;
+        updateVisualState(true);
+        break;
+      case 'mouseout':
+        isMouseInside = false;
+        if (!mainNavWrapper.contains(event.relatedTarget)) {
+          // Delay to ensure that focus can return or another mouseover can occur
+          setTimeout(() => {
+            if (!isExpanded) {
+              updateVisualState(false);
+            }
+          }, 100);
+        }
+        break;
+      case 'blur':
+        if (!mainNavWrapper.contains(event.relatedTarget) && !isMouseInside) {
+          isExpanded = false;
+          updateVisualState(false);
+        }
+        break;
+      default:
+        break;
+    }
+  }
+
+  /**
+   * Prevent the default click behavior when the nav wrapper is expanded and clicked on.
+   * Ensure the nav stays expanded unless a link is specifically clicked.
+   * @param event {Event} The click event.
+   */
+  function handleNavClick(event) {
+    if (event.target === mainNavWrapper) {
+      event.preventDefault();
+      event.stopPropagation();
+      if (!isExpanded) {
+        isExpanded = true;
+        updateVisualState(true);
       }
-    } else {
-      isExpanded = true;
-      updateVisualState(isExpanded);
+    }
+  }
+
+  function handleEscapeKey(event) {
+    if (isMouseInside) {
+      return;
+    }
+    if (event.key === 'Escape' || event.keyCode === 27) {
+      isExpanded = false;
+      updateVisualState(false);
     }
   }
 
   // Mouse events
   mainNavWrapper.addEventListener('mouseover', handleInteraction);
   mainNavWrapper.addEventListener('mouseout', handleInteraction);
+  mainNavWrapper.addEventListener('click', handleNavClick, true);
 
   // Keyboard events
   linksLevel1.forEach((link) => {
     link.addEventListener('focus', handleInteraction);
     link.addEventListener('blur', handleInteraction);
   });
+
+  document.addEventListener('keydown', handleEscapeKey);
 }
 
 /**
