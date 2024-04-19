@@ -1,48 +1,51 @@
 .block.footer {
-  display: flex;
   background: var(--udexCoreSurfaceHigher);
-  padding-top: var(--udexSpacer48);
-  padding-bottom: var(--udexSpacer40);
-}
-
-.block.footer > div {
   display: flex;
-  position: relative;
-  flex-direction: column;
-  width: 100%;
-  padding-inline: var(--udexGridMargins);
+  padding-bottom: var(--udexSpacer40);
+  padding-top: var(--udexSpacer48);
+  
+  > div {
+    display: flex;
+    flex-direction: column;
+    padding-inline: var(--udexGridMargins);
+    position: relative;
+    width: 100%;
+  }
+  
+  .contact-container {
+    flex: 1;
+  }
+  
+  .link-group-container {
+    flex: 2;
+  }
+  
+  .icon-back-to-top {
+    cursor: pointer;
+    height: 32px;
+    margin-top: var(--udexSpacer40);
+    position: static;
+    width: 32px;
+  }
+  
+  a {
+    color: var(--text-color);
+    text-decoration: none;
+    
+    &:hover {
+      color: var(--sapLink_Hover_Color);
+    }
+  }
 }
 
-.block.footer .contact-container {
-  flex: 1;
-}
-
-.block.footer .link-group-container {
-  flex: 2;
-}
-
-.block.footer .icon-back-to-top {
-  position: static;
-  height: 32px;
-  width: 32px;
-  padding-top: var(--udexSpacer40);
-}
-
-.block.footer a {
-  color: var(--text-color);
-  text-decoration: none;
-}
-
-.block.footer a:hover {
-  color: var(--sapLink_Hover_Color);
-}
-
-footer .block.link-group p {
-  margin: 0;
-}
-
-footer .block.link-group p strong {
-  font-weight: var(--udexTypographyFontWeightMedium);
+footer {
+  .block.link-group p {
+    margin: 0;
+    
+    strong {
+      font-weight: var(--udexTypographyFontWeightMedium);
+    }
+  }
 }
 
 /* S */
@@ -53,27 +56,30 @@ footer .block.link-group p strong {
 }
 
 /* M */
-/* stylelint-disable-next-line block-no-empty */
 @media (width >= 980px) {
-  .block.footer .icon-back-to-top {
-    right: var(--udexSpacer24);
-    position: absolute;
-    top: var(--udexSpacer24);
-    padding-top: 0;
-  }
-
-  .block.footer .block.link-group > div:first-of-type > div {
-    padding-bottom: 11.5px;
+  .block.footer {
+    .icon-back-to-top {
+      padding-top: 0;
+      position: absolute;
+      right: var(--udexSpacer24);
+      top: var(--udexSpacer24);
+    }
+    
+    .block.link-group > div:first-of-type > div {
+      padding-bottom: 11.5px;
+    }
   }
 }
 
 /* L */
 @media (width >= 1280px) {
-  .block.footer > div {
-    flex-direction: row;
-  }
-
-  .block.footer .icon-back-to-top {
-    padding-top: 0;
+  .block.footer {
+    > div {
+      flex-direction: row;
+    }
+    
+    .icon-back-to-top {
+      margin-top: 0;
+    }
   }
 }
