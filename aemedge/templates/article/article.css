@@ -51,7 +51,7 @@ main {
 
     & > [data-location='sidebar'] {
       grid-column: 2 / 3;
-      grid-row: -3 / -2;
+      grid-row: 2 / -2;
     }
 
     & > .hero-container ~ [data-location='sidebar']  {
