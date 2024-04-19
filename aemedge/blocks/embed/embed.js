@@ -34,6 +34,9 @@ const setConsent = (value, key = 'videoConsent') => {
  * @returns {boolean} - The consent status for the given source.
  */
 const getConsent = (source, key = 'videoConsent') => {
+  if (source === 'Figma') {
+    return true;
+  }
   let output = false;
   if (sessionStorage.getItem(key)) {
     const consentSet = new Set(sessionStorage.getItem(key).split(','));
@@ -43,6 +46,16 @@ const getConsent = (source, key = 'videoConsent') => {
   }
   return output;
 };
+
+const embedFigma = (url) => `<div class="figma-embed-container">
+      <iframe 
+      src="https://www.figma.com/embed?embed_host=share&url=${encodeURIComponent(url)}"
+       style="border: 1px solid rgba(0, 0, 0, 0.1);"
+        width="800" 
+        height="450"
+        allowfullscreen
+      ></iframe>
+      </div>`;
 
 /**
  * Embeds a YouTube video.
@@ -118,6 +131,12 @@ const EMBEDS_CONFIG = [
     match: ['youtube', 'youtu.be'],
     embed: embedYoutube,
     source: 'YouTube',
+    resources: [],
+  },
+  {
+    match: ['figma.com'],
+    embed: embedFigma,
+    source: 'Figma',
     resources: [],
   },
   {
