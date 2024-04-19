@@ -91,7 +91,7 @@
 
 .hub-l2.appear {
   grid-template:
-    'header' 60px
+    'header' 120px
     'main-content' auto
     'footer' auto
     / 1fr;
@@ -117,7 +117,7 @@
     --hero-margin--right: 0;
 
     grid-template:
-      'header header' 60px
+      'header header' 120px
       'side-nav main-content' auto
       'footer footer' auto
       / min-content 1fr;

@@ -539,6 +539,31 @@ header {
       }
     }
   }
+
+  & #nav-secondary {
+    display: flex;
+    z-index: 100;
+    height: var(--header-height);
+    background: var(--udexColorGrey1);
+    text-wrap: nowrap;
+
+    & .nav-secondary-title {
+      padding-inline-start: var(--header-margin);
+
+      & p {
+        font-size: var(--udexTypographyNavigationMediumXLFontSize);
+        font-weight: var(--udexTypographyFontWeightMedium);
+        line-height: var(--nav-links-line-height);
+      }
+    }
+
+    & .nav-secondary-tabs {
+      & > .default-content-wrapper > ul {
+        display: flex;
+        gap: var(--udexSpacer20);
+      }
+    }
+  }
 }
 
 @media (width >= 980px) {
