@@ -3,10 +3,17 @@ import {
 } from '../../scripts/dom-builder.js';
 import { fetchPlaceholders, getMetadata, toCamelCase } from '../../scripts/aem.js';
 
+function collapse(collapsable) {
+  collapsable.setAttribute('aria-expanded', 'false');
+}
+
+function expand(expandable) {
+  expandable.setAttribute('aria-expanded', 'true');
+}
+
 function setActiveLink() {
   const selected = document.querySelector('.toc .toc__selected');
   const selectedLabel = selected.querySelector('span');
-  selected.setAttribute('aria-expanded', 'false');
 
   const links = document.querySelectorAll('.toc li');
   links.forEach((link) => {
@@ -18,13 +25,13 @@ function setActiveLink() {
       selectedLabel.innerHTML = anchor.innerText;
       link.setAttribute('aria-current', 'true');
       if (isH3) {
-        link.closest('.toc__list-item.parent').setAttribute('aria-expanded', 'true');
+        expand(link.closest('.toc__list-item.parent'));
       } else if (link.classList.contains('parent')) {
-        link.setAttribute('aria-expanded', 'true');
+        expand(link);
       }
     } else {
       link.setAttribute('aria-current', 'false');
-      link.setAttribute('aria-expanded', 'false');
+      collapse(link);
     }
   });
 }
@@ -87,9 +94,36 @@ function addClickHandlerToSelectedItem(selected) {
   selected.addEventListener('click', () => {
     const listHidden = selected.getAttribute('aria-expanded') === 'false';
     if (listHidden) {
-      selected.setAttribute('aria-expanded', 'true');
+      expand(selected);
     } else {
-      selected.setAttribute('aria-expanded', 'false');
+      collapse(selected);
+    }
+  });
+}
+
+function addClickHandlerToDocument(tocElement, selected) {
+  document.addEventListener('click', (event) => {
+    const isClickInsideTOC = tocElement.contains(event.target);
+    if (!isClickInsideTOC) {
+      collapse(selected);
+    }
+  });
+}
+
+function addEscKeyHandler(tocElement, selected) {
+  tocElement.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' || event.key === 'Esc') {
+      collapse(selected);
+    }
+  });
+}
+
+function addFocusOutHandler(tocElement, selected) {
+  tocElement.addEventListener('focusout', (event) => {
+    const leavingParent = !tocElement.contains(event.relatedTarget);
+
+    if (leavingParent) {
+      collapse(selected);
     }
   });
 }
@@ -117,8 +151,13 @@ export default async function decorate(block) {
       buildList(headers),
     );
     block.append(tocElement);
-    setActiveLink();
+
+    setActiveLink(selected);
     addClickHandlerToSelectedItem(selected);
+    addClickHandlerToDocument(tocElement, selected);
+    addEscKeyHandler(tocElement, selected);
+    addFocusOutHandler(tocElement, selected);
+
     window.addEventListener('hashchange', setActiveLink);
   }
 }
