@@ -12,17 +12,42 @@
 
 /* eslint-disable no-restricted-syntax,  no-await-in-loop */
 
-async function* request(url, context) {
+async function* request(url, context, cacheKey) {
   const { chunkSize, sheetName, fetch } = context;
+
+  if (cacheKey) {
+    window[cacheKey] = window[cacheKey] || {};
+  }
+
   for (let offset = 0, total = Infinity; offset < total; offset += chunkSize) {
     const params = new URLSearchParams(`offset=${offset}&limit=${chunkSize}`);
     if (sheetName) params.append('sheet', sheetName);
+    const requestPath = `${url}?${params.toString()}`;
+
+    if (cacheKey && window[cacheKey][requestPath]) {
+      context.total = window[cacheKey].total;
+      for (const entry of window[cacheKey][requestPath]) {
+        yield entry;
+      }
+    }
+
     const resp = await fetch(`${url}?${params.toString()}`);
     if (resp.ok) {
       const json = await resp.json();
+
       total = json.total;
       context.total = total;
-      for (const entry of json.data) yield entry;
+
+      const { data } = json;
+
+      if (cacheKey) {
+        window[cacheKey].total = total;
+        window[cacheKey][requestPath] = data;
+      }
+
+      for (const entry of data) {
+        yield entry;
+      }
     } else {
       return;
     }
@@ -162,7 +187,7 @@ function assignOperations(generator, context) {
   return generator;
 }
 
-export default function ffetch(url) {
+export default function ffetch(url, cacheKey) {
   let chunkSize = 255;
   const fetch = (...rest) => window.fetch.apply(null, rest);
   const parseHtml = (html) => new window.DOMParser().parseFromString(html, 'text/html');
@@ -175,7 +200,7 @@ export default function ffetch(url) {
   } catch (e) { /* ignore */ }
 
   const context = { chunkSize, fetch, parseHtml };
-  const generator = request(url, context);
+  const generator = request(url, context, cacheKey);
 
   return assignOperations(generator, context);
 }

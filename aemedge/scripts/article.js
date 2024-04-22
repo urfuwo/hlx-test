@@ -20,7 +20,7 @@ function completeEntry(entry) {
 
 async function getAuthorEntries(keys) {
   const entryFilter = ((entry) => (keys.includes(entry.path) || keys.includes(entry.author)));
-  const unsortedEntries = await ffetch(`${window.hlx.codeBasePath}/authors-index.json`).filter(entryFilter).limit(keys.length).all();
+  const unsortedEntries = await ffetch(`${window.hlx.codeBasePath}/authors-index.json`, 'sapContentHubAuthorEntries').filter(entryFilter).limit(keys.length).all();
   const sortedEntries = [];
   if (unsortedEntries) {
     keys.forEach((key) => {

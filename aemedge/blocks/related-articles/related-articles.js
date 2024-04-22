@@ -33,7 +33,7 @@ export default async function decorateBlock(block) {
     .map((tag) => toClassName(tag.trim()));
   const filter = getFilter(pageTags);
   const limit = 4; // hardcoded for now
-  const articleStream = await ffetch(`${window.hlx.codeBasePath}/articles-index.json`)
+  const articleStream = await ffetch(`${window.hlx.codeBasePath}/articles-index.json`, 'sapContentHubArticles')
     .filter(filter)
     .limit(limit)
     .slice(0, limit - 1)
