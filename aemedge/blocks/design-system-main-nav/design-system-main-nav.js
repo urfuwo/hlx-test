@@ -129,6 +129,8 @@ function setExpandedState(mainNavWrapper) {
             }
           }, 100);
         }
+        isExpanded = false;
+        updateVisualState(false);
         break;
       case 'blur':
         if (!mainNavWrapper.contains(event.relatedTarget) && !isMouseInside) {

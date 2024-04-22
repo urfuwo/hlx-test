@@ -8,6 +8,7 @@
   --main-nav-link-color-visited-hover: #DCF3FF;
   --main-nav-link-color-visited: #DEE2E5;
   --main-nav-link-color-pressed: #DEE2E5;
+  --main-nav-utility-section-border-color: #A8B3BD;
 }
 
 .design-system-main-nav-wrapper {
@@ -60,7 +61,10 @@
     a {
       align-items: center;
       border-radius: var(--udexRadiusM);
+      color: var(--udexColorNeutralBlack);
       display: flex;
+      font-size: var(--udexTypographyBodyXSFontSize);
+      font-weight: var(--udexTypographyFontWeightMedium);
       gap: 0;
       justify-content: flex-start;
       text-decoration: none;
@@ -74,6 +78,7 @@
       &:hover,
       &:focus,
       &:active {
+        color: var(--udexColorNeutralBlack);
         outline: none;
         text-decoration: none;
       }
@@ -107,6 +112,7 @@
       &[aria-current="page"] {
         background: var(--sapList_SelectionBackgroundColor);
         border-left: 3px solid var(--sapTile_Interactive_BorderColor);
+        color: var(--udexColorNeutralBlack);
         
         &:hover,
         &:focus {
@@ -114,5 +120,11 @@
         }
       }
     }
+  }
+  
+  /* Utility section */
+  .main-nav-utility {
+    border-top: 1px solid var(--main-nav-utility-section-border-color);
+    padding-top: var(--udexGridXSMargins);
   }
 }
