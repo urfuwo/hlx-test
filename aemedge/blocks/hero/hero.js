@@ -118,10 +118,9 @@ export default async function decorate(block) {
   let eyebrowText = eyebrow?.textContent;
   const contentTypeTag = tags[toCamelCase(getContentType())];
 
-  // TODO tag translation
   if (!eyebrowText && isArticle) {
     // if no eyebrow text is set, use the content type for articles
-    eyebrowText = contentTypeTag?.label || getContentType().split('/')[1].replace('-', ' ');
+    eyebrowText = contentTypeTag?.label || getContentType()?.split('/')[1].replace('-', ' ');
   }
 
   const eyebrowArrow = span({ class: 'eyebrow-arrow' });
