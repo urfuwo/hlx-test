@@ -1,17 +1,21 @@
-import { loadCSS, toCamelCase, toClassName } from '../../scripts/aem.js';
+import { loadCSS } from '../../scripts/aem.js';
 import { a } from '../../scripts/dom-builder.js';
 
 export default class Tag {
-  tagText;
+  tag;
 
-  constructor(tag, placeholders = []) {
-    this.tagText = (placeholders[toCamelCase(`tag/${tag}`)] || tag).trim();
+  constructor(tag) {
+    this.tag = tag;
   }
 
   render(excludeStyles) {
     if (!excludeStyles) {
       loadCSS(`${window.hlx.codeBasePath}/libs/tag/tag.css`);
     }
-    return a({ class: 'tag', href: `/tags/${toClassName(this.tagText)}` }, this.tagText);
+    let tagHref = this.tag['topic-path'];
+    if (document.location.pathname.startsWith('/news/') && this.tag['news-path']) {
+      tagHref = this.tag['news-path'];
+    }
+    return a({ class: 'tag', href: tagHref }, this.tag.label);
   }
 }
