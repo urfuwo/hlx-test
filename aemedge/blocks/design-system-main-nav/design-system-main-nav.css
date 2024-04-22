@@ -67,6 +67,7 @@
       font-weight: var(--udexTypographyFontWeightMedium);
       gap: 0;
       justify-content: flex-start;
+      position: relative;
       text-decoration: none;
       white-space: nowrap;
       
@@ -111,12 +112,22 @@
       /* Active/Current state */
       &[aria-current="page"] {
         background: var(--sapList_SelectionBackgroundColor);
-        border-left: 3px solid var(--sapTile_Interactive_BorderColor);
         color: var(--udexColorNeutralBlack);
-        
+        overflow: hidden;
+      
         &:hover,
         &:focus {
           background: var(--main-nav-link-color-visited-hover);
+        }
+        
+        &::before {
+          background: var(--sapTile_Interactive_BorderColor);
+          content: "";
+          height: 100%;
+          left: 0;
+          position: absolute;
+          top: 0;
+          width: 3px;
         }
       }
     }
