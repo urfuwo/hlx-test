@@ -29,27 +29,27 @@ async function* request(url, context, cacheKey) {
       for (const entry of window[cacheKey][requestPath]) {
         yield entry;
       }
-    }
-
-    const resp = await fetch(`${url}?${params.toString()}`);
-    if (resp.ok) {
-      const json = await resp.json();
-
-      total = json.total;
-      context.total = total;
-
-      const { data } = json;
-
-      if (cacheKey) {
-        window[cacheKey].total = total;
-        window[cacheKey][requestPath] = data;
-      }
-
-      for (const entry of data) {
-        yield entry;
-      }
     } else {
-      return;
+      const resp = await fetch(`${url}?${params.toString()}`);
+      if (resp.ok) {
+        const json = await resp.json();
+
+        total = json.total;
+        context.total = total;
+
+        const { data } = json;
+
+        if (cacheKey) {
+          window[cacheKey].total = total;
+          window[cacheKey][requestPath] = data;
+        }
+
+        for (const entry of data) {
+          yield entry;
+        }
+      } else {
+        return;
+      }
     }
   }
 }
