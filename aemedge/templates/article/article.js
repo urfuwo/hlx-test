@@ -7,7 +7,7 @@ function decorate(doc) {
   const main = doc.querySelector('main');
   containerize(main, '.hero');
   const tocFlag = getMetadata('toc');
-  if (tocFlag && tocFlag.content !== 'no' && tocFlag.content !== 'false') {
+  if (tocFlag && tocFlag !== 'no' && tocFlag !== 'false') {
     const tocSection = div({ class: 'toc-container' }, div({ class: 'toc' }));
     main.insertBefore(tocSection, doc.querySelector('main > :nth-child(2)'));
   }

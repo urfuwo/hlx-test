@@ -42,20 +42,11 @@ indices:
       author:
         select: head > meta[name="author"]
         value: attribute(el, "content")
-      display-author:
-        select: head > meta[name="display-author"]
-        value: attribute(el, "content")
       priority:
         select: head > meta[name="priority"]
         value: attribute(el, "content")
-      content-type:
-        select: head > meta[name="content-type"]
-        value: attribute(el, "content")
       tags:
         select: head > meta[property="article:tag"]
-        values: attribute(el, "content")
-      topics:
-        select: head > meta[name="topics"]
         values: attribute(el, "content")
       image:
         select: head > meta[property="og:image"]

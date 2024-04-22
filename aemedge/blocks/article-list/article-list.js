@@ -91,7 +91,7 @@ export default async function listArticles(block, config = { filter: null, maxEn
     contextFilter = determineContextFilter();
   }
 
-  let articles = await ffetch(`${window.hlx.codeBasePath}/articles-index.json`).filter(contextFilter);
+  let articles = await ffetch(`${window.hlx.codeBasePath}/articles-index.json`, 'sapContentHubArticles').filter(contextFilter);
 
   if (config.maxEntries !== null) {
     articles = await articles.limit(config.maxEntries);

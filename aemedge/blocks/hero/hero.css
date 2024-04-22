@@ -288,7 +288,7 @@ udex-hero-banner .custom-background-image:dir(rtl) {
   transform: scaleX(-1);
 }
 
-@container hero-wrapper (width >= 640px) {
+@media (width >= 640px) {
   udex-hero-banner .custom-background-image {
     display: block
   }
