@@ -30,11 +30,11 @@ function containerize(container, targetClass) {
  * @returns {Promise<Document[]>}
  */
 async function fetchPages(paths) {
-  return (await Promise.all(
-    (await Promise.all(
-      paths.map((path) => fetch(path)),
-    )).map((res) => res.text()),
-  )).map((text) => new DOMParser().parseFromString(text, 'text/html'));
+  return Promise.all(
+    paths.map((path) => fetch(path)
+      .then((res) => res.text())
+      .then((text) => new DOMParser().parseFromString(text, 'text/html'))),
+  );
 }
 
 export { formatDate, containerize, fetchPages };
