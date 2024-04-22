@@ -6,16 +6,17 @@ import { createOptimizedPicture, loadCSS } from '../../scripts/aem.js';
 import Avatar from '../avatar/avatar.js';
 
 export default class PictureCard extends Card {
-  constructor(title, path, type, info, authorEntry, image, tagLabel, description) {
+  constructor(title, path, type, info, authorEntry, image, tagLabel, description, eager) {
     super(title, path, type, info);
     this.authorEntry = authorEntry;
     this.image = image;
     this.tagLabel = tagLabel;
     this.description = description;
+    this.eager = eager;
   }
 
   getOptimizedPicture() {
-    return createOptimizedPicture(this.image, this.title, false, [{ width: '750' }]);
+    return createOptimizedPicture(this.image, this.title, this.eager, [{ width: '750' }]);
   }
 
   getTagLabel() {

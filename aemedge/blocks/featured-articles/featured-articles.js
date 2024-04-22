@@ -4,7 +4,7 @@ import PictureCard from '../../libs/pictureCard/pictureCard.js';
 import { formatDate, fetchPages } from '../../scripts/utils.js';
 import { allAuthorEntries, authorEntryFromAuthor } from '../../scripts/article.js';
 
-function getPictureCard(article, placeholders, authEntry) {
+function getPictureCard(article, placeholders, authEntry, eager) {
   const tagLabel = placeholders[toCamelCase(getMetadata('priority', article))] || '';
   const info = `Updated on ${formatDate(getMetadata('published-time', article))}`;
   return new PictureCard(
@@ -16,6 +16,7 @@ function getPictureCard(article, placeholders, authEntry) {
     getMetadata('og:image', article),
     tagLabel,
     getMetadata('og:description', article),
+    eager,
   );
 }
 
@@ -28,8 +29,8 @@ export default async function decorateBlock(block) {
     const placeholders = await fetchPlaceholders();
     const authEntries = await allAuthorEntries(articles);
     const cardList = ul();
-    Array.from(articles).forEach((article) => {
-      const card = getPictureCard(article, placeholders, authorEntryFromAuthor(getMetadata('author', article), authEntries));
+    Array.from(articles).forEach((article, index) => {
+      const card = getPictureCard(article, placeholders, authorEntryFromAuthor(getMetadata('author', article), authEntries), index === 0);
       cardList.append(card.render(horizontal));
     });
     block.append(cardList);
