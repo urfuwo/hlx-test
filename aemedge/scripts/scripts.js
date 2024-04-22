@@ -65,13 +65,16 @@ async function waitForLCP(lcpBlocks) {
   if (hasLCPBlock) await loadBlock(block);
 
   document.body.style.display = null;
-  const lcpCandidates = document.querySelectorAll('main img');
-  const lcpCandidate = Array
-    .from(lcpCandidates)
-    .find((candidate) => !!getComputedStyle(candidate).display && getComputedStyle(candidate).display !== 'none');
+  const lcpCandidate = document.querySelector('main img');
 
   await new Promise((resolve) => {
-    if (lcpCandidate && !lcpCandidate.complete) {
+    const computedStyle = getComputedStyle(lcpCandidate);
+    if (
+      lcpCandidate
+      && !lcpCandidate.complete
+      && !!computedStyle.display
+      && computedStyle.display !== 'none'
+    ) {
       lcpCandidate.setAttribute('loading', 'eager');
       lcpCandidate.addEventListener('load', resolve);
       lcpCandidate.addEventListener('error', resolve);
