@@ -14,7 +14,6 @@ import {
   sampleRUM,
   toClassName,
   toCamelCase,
-  waitForLCP,
 } from './aem.js';
 
 const LCP_BLOCKS = ['hero']; // add your LCP blocks to the list
@@ -58,6 +57,31 @@ function capitalize(name) {
   return toClassName(name)
     .replace(/-(\w)/g, (_, letter) => letter.toUpperCase())
     .replace(/^\w/, (firstLetter) => firstLetter.toUpperCase());
+}
+
+async function waitForLCP(lcpBlocks) {
+  const block = document.querySelector('.block');
+  const hasLCPBlock = block && lcpBlocks.includes(block.dataset.blockName);
+  if (hasLCPBlock) await loadBlock(block);
+
+  document.body.style.display = null;
+  const lcpCandidate = document.querySelector('main img');
+
+  await new Promise((resolve) => {
+    const computedStyle = getComputedStyle(lcpCandidate);
+    if (
+      lcpCandidate
+      && !lcpCandidate.complete
+      && !!computedStyle.display
+      && computedStyle.display !== 'none'
+    ) {
+      lcpCandidate.setAttribute('loading', 'eager');
+      lcpCandidate.addEventListener('load', resolve);
+      lcpCandidate.addEventListener('error', resolve);
+    } else {
+      resolve();
+    }
+  });
 }
 
 /**

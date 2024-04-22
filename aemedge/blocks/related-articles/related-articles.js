@@ -32,7 +32,7 @@ export default async function decorateBlock(block) {
   const pageTags = getMetadata('article:tag').split(', ');
   const filter = getFilter(pageTags);
   const limit = 4;
-  const articles = await ffetch(`${window.hlx.codeBasePath}/articles-index.json`)
+  const articles = await ffetch(`${window.hlx.codeBasePath}/articles-index.json`, 'sapContentHubArticles')
     .filter(filter)
     .limit(limit)
     .slice(0, limit - 1)

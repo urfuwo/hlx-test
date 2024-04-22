@@ -25,6 +25,19 @@ function containerize(container, targetClass) {
   }
 }
 
+/**
+ * Fetch pages from specified paths and parse into queryable document objects
+ * @param paths {string[]}
+ * @returns {Promise<Document[]>}
+ */
+async function fetchPages(paths) {
+  return Promise.all(
+    paths.map((path) => fetch(path)
+      .then((res) => res.text())
+      .then((text) => new DOMParser().parseFromString(text, 'text/html'))),
+  );
+}
+
 async function fetchTagList(prefix = 'default') {
   window.tags = window.tags || {};
   if (!window.tags[prefix]) {
@@ -62,5 +75,5 @@ function getContentType() {
 }
 
 export {
-  formatDate, containerize, fetchTagList, getContentType,
+  formatDate, containerize, fetchPages, fetchTagList, getContentType,
 };
