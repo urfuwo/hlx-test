@@ -3,9 +3,9 @@ import {
   a, div, p, span,
 } from '../../scripts/dom-builder.js';
 import {
-  fetchPlaceholders, getMetadata, toCamelCase, toClassName,
+  fetchPlaceholders, getMetadata, toCamelCase,
 } from '../../scripts/aem.js';
-import { formatDate } from '../../scripts/utils.js';
+import { fetchTagList, formatDate, getContentType } from '../../scripts/utils.js';
 import Tag from '../../libs/tag/tag.js';
 import { buildAuthorUrl, getAuthorEntries, getAuthorNames } from '../../scripts/article.js';
 import Avatar from '../../libs/avatar/avatar.js';
@@ -96,6 +96,11 @@ function buildEyebrow(content) {
   );
 }
 
+function findFirstTag() {
+  const tags = getMetadata('article:tag').split(', ');
+  return tags.find((tag) => tag.trim().toLowerCase().startsWith('topic/') || tag.trim().toLowerCase().startsWith('industry/'));
+}
+
 /**
  * loads and decorates the hero
  * @param {Element} block The hero block element
@@ -104,18 +109,19 @@ export default async function decorate(block) {
   const isArticle = getMetadata('template') === 'article';
   const isMediaBlend = isArticle || block.classList.contains('media-blend');
   const placeholder = await fetchPlaceholders();
+  const tags = await fetchTagList();
 
   // extract block content
   const hero = document.createElement('udex-hero-banner');
   const heading = block.querySelector('h1');
   const eyebrow = block.querySelector('h6');
   let eyebrowText = eyebrow?.textContent;
-  const contentType = getMetadata('content-type').split(',')[0].trim();
+  const contentTypeTag = tags[toCamelCase(getContentType())];
 
+  // TODO tag translation
   if (!eyebrowText && isArticle) {
     // if no eyebrow text is set, use the content type for articles
-    const placeholderText = placeholder[toCamelCase(`content-type/${contentType}`)];
-    eyebrowText = placeholderText || contentType.replace('-', ' ');
+    eyebrowText = contentTypeTag?.label || getContentType().split('/')[1].replace('-', ' ');
   }
 
   const eyebrowArrow = span({ class: 'eyebrow-arrow' });
@@ -127,7 +133,8 @@ export default async function decorate(block) {
     newEyebrow = buildEyebrow(content);
   } else if (eyebrowText && isArticle) {
     // If article, add link to parent topics page, and add arrow and appropriate classes for styling
-    newEyebrow = buildEyebrow(a({ href: `/topics/${toClassName(contentType)}` }, eyebrowArrow, eyebrowText));
+    const eyeBrowHref = contentTypeTag['topic-path'] ? contentTypeTag['topic-path'] : contentTypeTag['news-path'];
+    newEyebrow = buildEyebrow(a({ href: eyeBrowHref }, eyebrowArrow, eyebrowText));
   } else if (eyebrowText) {
     // Else display simple span or nothing
     newEyebrow = buildEyebrow(eyebrowText);
@@ -178,9 +185,9 @@ export default async function decorate(block) {
 
   // Add Primary tag
   const tagContainer = div({ class: 'media-blend__tags' });
-  const firstTagText = getMetadata('topic').split(',')[0].trim();
-  if (firstTagText) {
-    tagContainer.append(new Tag(firstTagText, placeholder).render());
+  const firstTag = findFirstTag();
+  if (firstTag) {
+    tagContainer.append(new Tag(tags[toCamelCase(firstTag)]).render());
   }
 
   // convert all buttons to udex-buttons

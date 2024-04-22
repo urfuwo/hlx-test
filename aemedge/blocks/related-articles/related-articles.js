@@ -1,10 +1,10 @@
 import { ul } from '../../scripts/dom-builder.js';
 import {
-  getMetadata, fetchPlaceholders, toCamelCase, toClassName,
+  getMetadata, fetchPlaceholders, toCamelCase,
 } from '../../scripts/aem.js';
 import ffetch from '../../scripts/ffetch.js';
 import PictureCard from '../../libs/pictureCard/pictureCard.js';
-import { formatDate } from '../../scripts/utils.js';
+import { fetchTagList, formatDate } from '../../scripts/utils.js';
 import { allAuthorEntries, authorEntry } from '../../scripts/article.js';
 
 function getFilter(pageTags) {
@@ -20,28 +20,33 @@ function getFilter(pageTags) {
 
 function getPictureCard(article, placeholders, authEntry) {
   const {
-    'content-type': type, image, path, title, priority,
+    contentType, image, path, title, priority,
   } = article;
+
   const tagLabel = placeholders[toCamelCase(priority)] || '';
   const info = `Updated on ${formatDate(article.publicationDate * 1000)}`;
-  return new PictureCard(title, path, type, info, authEntry, image, tagLabel);
+  return new PictureCard(title, path, contentType, info, authEntry, image, tagLabel);
 }
 
 export default async function decorateBlock(block) {
-  const pageTags = getMetadata('article:tag')
-    .split(',')
-    .map((tag) => toClassName(tag.trim()));
+  const pageTags = getMetadata('article:tag').split(', ');
   const filter = getFilter(pageTags);
-  const limit = 4; // hardcoded for now
-  const articleStream = await ffetch(`${window.hlx.codeBasePath}/articles-index.json`)
+  const limit = 4;
+  const articles = await ffetch(`${window.hlx.codeBasePath}/articles-index.json`)
     .filter(filter)
     .limit(limit)
     .slice(0, limit - 1)
     .all();
   const placeholders = await fetchPlaceholders();
-  const authEntries = await allAuthorEntries(articleStream);
+  const tags = await fetchTagList();
+  const authEntries = await allAuthorEntries(articles);
   const cardList = ul();
-  articleStream.forEach((article) => {
+  articles.forEach((article) => {
+    const contentType = JSON.parse(article.tags).find((tag) => tag.startsWith('content-type'));
+    if (contentType) {
+      article.contentType = tags[toCamelCase(contentType)]?.label || '';
+    }
+
     const card = getPictureCard(article, placeholders, authorEntry(article, authEntries));
     cardList.append(card.render());
   });
