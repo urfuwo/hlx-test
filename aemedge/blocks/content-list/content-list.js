@@ -4,17 +4,13 @@ import { ul, h3 } from '../../scripts/dom-builder.js';
 import PictureCard from '../../libs/pictureCard/pictureCard.js';
 import Card from '../../libs/card/card.js';
 import Button from '../../libs/button/button.js';
-import { formatDate } from '../../scripts/utils.js';
+import { formatDate, extractFieldValue } from '../../scripts/utils.js';
 import { allAuthorEntries, authorEntry } from '../../scripts/article.js';
-
-function extractContentType(entry) {
-  const contentType = JSON.parse(entry.tags).find((tag) => tag.trim().toLowerCase().startsWith('content-type')).split(',');
-  return contentType[0].replace('content-type/', '');
-}
 
 function matchTags(entry, config) {
   if (!config.tags) return true;
-  return config.tags.some((item) => entry.tags.includes(item.trim()));
+  return config.tags.some((item) => JSON.parse(entry.tags)
+    .some((tag) => tag.startsWith(item.trim())));
 }
 
 function matchAuthors(entry, config) {
@@ -25,7 +21,7 @@ function matchAuthors(entry, config) {
 
 function matchContentType(entry, config) {
   if (!config['content-type']) return true;
-  return config['content-type'].some((item) => item.trim() === extractContentType(entry));
+  return config['content-type'].some((item) => item.trim() === extractFieldValue(entry, 'tags', 'content-type'));
 }
 
 function getFilter(config) {
@@ -49,7 +45,7 @@ function getInfo(article, config) {
 }
 
 function getPictureCard(article, config, placeholders, authEntry) {
-  const type = extractContentType(article);
+  const type = extractFieldValue(article, 'tags', 'content-type');
   const {
     image, path, title, priority,
   } = article;
@@ -59,7 +55,7 @@ function getPictureCard(article, config, placeholders, authEntry) {
 }
 
 function getCard(article, config) {
-  const type = extractContentType(article);
+  const type = extractFieldValue(article, 'tags', 'content-type');
   const { path, title } = article;
   const info = getInfo(article, config);
   return new Card(title, path, type, info);
