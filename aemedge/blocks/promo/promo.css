@@ -25,16 +25,16 @@
   margin: 0;
 }
 
-@media (width <640px) {
-  .promo>div {
-    flex-direction: column;
+@media (width < 640px) {
+  .promo > div {
+    flex-wrap: wrap;
   }
 }
 
 .promo p {
   font-size: var(--udexTypographyBodySFontSize);
   text-align: left;
-  
+
   p.button-container + p {
     margin-top: 0;
   }
@@ -66,14 +66,16 @@
   font-size: var(--udexTypographyEyebrowLFontSize);
   text-align: left;
   text-transform: uppercase;
-  margin: 0;
-  margin-bottom: var(--udexSpacer8);
+  margin: 0 0 var(--udexSpacer8);
   color: var(--udexColorBlue8);
 }
 
 .promo h2 {
   font-size: var(--udexTypographyHeadingMediumXSFontSize);
   text-align: left;
-  margin: 0;
-  margin-bottom: var(--udexSpacer8);
+  margin: 0 0 var(--udexSpacer8);
+}
+
+.section[data-location='sidebar'] .promo > div {
+  flex-wrap: wrap;
 }

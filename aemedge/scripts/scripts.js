@@ -10,13 +10,10 @@ import {
   loadBlock,
   loadBlocks,
   loadCSS,
-  loadFooter,
   loadSideNav,
-  loadHeader,
   sampleRUM,
   toClassName,
   toCamelCase,
-  waitForLCP,
 } from './aem.js';
 
 const LCP_BLOCKS = ['hero']; // add your LCP blocks to the list
@@ -60,6 +57,31 @@ function capitalize(name) {
   return toClassName(name)
     .replace(/-(\w)/g, (_, letter) => letter.toUpperCase())
     .replace(/^\w/, (firstLetter) => firstLetter.toUpperCase());
+}
+
+async function waitForLCP(lcpBlocks) {
+  const block = document.querySelector('.block');
+  const hasLCPBlock = block && lcpBlocks.includes(block.dataset.blockName);
+  if (hasLCPBlock) await loadBlock(block);
+
+  document.body.style.display = null;
+  const lcpCandidate = document.querySelector('main img');
+
+  await new Promise((resolve) => {
+    const computedStyle = getComputedStyle(lcpCandidate);
+    if (
+      lcpCandidate
+      && !lcpCandidate.complete
+      && !!computedStyle.display
+      && computedStyle.display !== 'none'
+    ) {
+      lcpCandidate.setAttribute('loading', 'eager');
+      lcpCandidate.addEventListener('load', resolve);
+      lcpCandidate.addEventListener('error', resolve);
+    } else {
+      resolve();
+    }
+  });
 }
 
 /**
@@ -312,6 +334,34 @@ async function loadEager(doc) {
   } catch (e) {
     // do nothing
   }
+}
+
+function isDesignSystemSite() {
+  return document.body.classList.contains('design-system');
+}
+
+/**
+ * Loads a block named 'header' into header
+ * @param {Element} header header element
+ * @returns {Promise}
+ */
+async function loadHeader(header) {
+  const headerBlock = buildBlock((isDesignSystemSite()) ? 'design-system-header' : 'header', '');
+  header.append(headerBlock);
+  decorateBlock(headerBlock);
+  return loadBlock(headerBlock);
+}
+
+/**
+ * Loads a block named 'footer' into footer
+ * @param footer footer element
+ * @returns {Promise}
+ */
+async function loadFooter(footer) {
+  const footerBlock = buildBlock(isDesignSystemSite() ? 'design-system-footer' : 'footer', '');
+  footer.append(footerBlock);
+  decorateBlock(footerBlock);
+  return loadBlock(footerBlock);
 }
 
 /**
