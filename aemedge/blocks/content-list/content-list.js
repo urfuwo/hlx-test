@@ -7,6 +7,11 @@ import Button from '../../libs/button/button.js';
 import { formatDate } from '../../scripts/utils.js';
 import { allAuthorEntries, authorEntry } from '../../scripts/article.js';
 
+function extractContentType(entry) {
+  const contentType = JSON.parse(entry.tags).find((tag) => tag.trim().toLowerCase().startsWith('content-type')).split(',');
+  return contentType[0].replace('content-type/', '');
+}
+
 function matchTags(entry, config) {
   if (!config.tags) return true;
   return config.tags.some((item) => entry.tags.includes(item.trim()));
@@ -18,21 +23,14 @@ function matchAuthors(entry, config) {
   return config.authors.some((item) => authors.includes(item.trim()));
 }
 
-function matchTopics(entry, config) {
-  if (!config.topics) return true;
-  return config.topics.some((item) => entry.topics.includes(item.trim()));
-}
-
 function matchContentType(entry, config) {
   if (!config['content-type']) return true;
-  const contentType = entry['content-type'].split(',');
-  return config['content-type'].some((item) => contentType.includes(item.trim()));
+  return config['content-type'].some((item) => item.trim() === extractContentType(entry));
 }
 
 function getFilter(config) {
   return (entry) => matchTags(entry, config)
     && matchAuthors(entry, config)
-    && matchTopics(entry, config)
     && matchContentType(entry, config);
 }
 
@@ -51,8 +49,9 @@ function getInfo(article, config) {
 }
 
 function getPictureCard(article, config, placeholders, authEntry) {
+  const type = extractContentType(article);
   const {
-    'content-type': type, image, path, title, priority,
+    image, path, title, priority,
   } = article;
   const tagLabel = placeholders[toCamelCase(priority)] || '';
   const info = getInfo(article, config);
@@ -60,7 +59,8 @@ function getPictureCard(article, config, placeholders, authEntry) {
 }
 
 function getCard(article, config) {
-  const { 'content-type': type, path, title } = article;
+  const type = extractContentType(article);
+  const { path, title } = article;
   const info = getInfo(article, config);
   return new Card(title, path, type, info);
 }
