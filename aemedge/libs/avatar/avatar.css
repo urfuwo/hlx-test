@@ -61,6 +61,10 @@
     font-weight: var(--udexTypographyFontWeightMedium);
     line-height: var(--udexTypographyDisplayLineHeight);
     color: var(--udexColorNeutralBlack);
+
+    &:not(:last-child) {
+      margin-block-end: var(--udexSpacer4);
+    }
   }
 
   & .description {
@@ -95,4 +99,9 @@
   box-shadow: 0 2px 4px rgb(34 54 73 / 20%);
   background-color: var(--background-color);
   border-radius: var(--sapTile_BorderCornerRadius);
+  align-items: center;
+
+  &:has(.description) {
+    align-items: flex-start;
+  }
 }

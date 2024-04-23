@@ -20,7 +20,7 @@ function completeEntry(entry) {
 
 async function getAuthorEntries(keys) {
   const entryFilter = ((entry) => (keys.includes(entry.path) || keys.includes(entry.author)));
-  const unsortedEntries = await ffetch(`${window.hlx.codeBasePath}/authors-index.json`).filter(entryFilter).limit(keys.length).all();
+  const unsortedEntries = await ffetch(`${window.hlx.codeBasePath}/authors-index.json`, 'sapContentHubAuthorEntries').filter(entryFilter).limit(keys.length).all();
   const sortedEntries = [];
   if (unsortedEntries) {
     keys.forEach((key) => {
@@ -52,9 +52,13 @@ function asEntry(authorName) {
     : { author: authorName, path: buildAuthorUrl(authorName) };
 }
 
+function authorEntryFromAuthor(author, authorEntries) {
+  return authorEntries.find((e) => e.author === author) || asEntry(author);
+}
+
 /* AuthorEntry for the given article, or else fallback */
 function authorEntry(article, authorEntries) {
-  return authorEntries.find((e) => e.author === article.author) || asEntry(article.author);
+  return authorEntryFromAuthor(article.author, authorEntries);
 }
 
 const defaultSuffixes = ['PhD', 'Ph.D.'];
@@ -76,6 +80,7 @@ function getAuthorNames() {
 export {
   allAuthorEntries,
   authorEntry,
+  authorEntryFromAuthor,
   getAuthorEntries,
   buildAuthorUrl,
   removeAuthorsSuffixes,

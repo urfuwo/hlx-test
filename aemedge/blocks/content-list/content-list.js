@@ -76,7 +76,7 @@ export default async function decorateBlock(block) {
   }
   const filter = getFilter(config);
   const limit = config.limit ? +config.limit[0] + 1 : -1;
-  let articleStream = await ffetch(`${window.hlx.codeBasePath}/articles-index.json`)
+  let articleStream = await ffetch(`${window.hlx.codeBasePath}/articles-index.json`, 'sapContentHubArticles')
     .filter((entry) => entry.path !== window.location.pathname)
     .filter(filter)
     .limit(limit)
