@@ -1,10 +1,15 @@
+html:has(.designportal) {
+  height: 100%;
+}
+
 .designportal.appear {
   --headerHeight: 60px;
   
   grid-template:
-    'content' auto
+    'content' 1fr
     'footer' auto
     / 1fr;
+  height: 100%;
   padding-top: var(--headerHeight);
   
   @media (width >= 980px) {
