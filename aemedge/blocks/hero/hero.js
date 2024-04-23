@@ -126,17 +126,14 @@ export default async function decorate(block) {
     eyebrowText = contentTypeTag?.label || getContentType()?.split('/')[1].replace('-', ' ');
   }
 
-  const eyebrowArrow = span({ class: 'eyebrow-arrow' });
   let newEyebrow = '';
   if (eyebrow?.firstElementChild?.tagName.toLowerCase() === 'a') {
-    // If author has added a custom link, add arrow and appropriate classes for styling
-    const content = eyebrow.firstElementChild;
-    content.insertBefore(eyebrowArrow, content.firstChild);
-    newEyebrow = buildEyebrow(content);
+    // If author has added a custom link, add appropriate classes for styling
+    newEyebrow = buildEyebrow(eyebrow.firstElementChild);
   } else if (eyebrowText && isArticle) {
-    // If article, add link to parent topics page, and add arrow and appropriate classes for styling
+    // If article, add link to parent topics page, and appropriate classes for styling
     const eyeBrowHref = contentTypeTag['topic-path'] ? contentTypeTag['topic-path'] : contentTypeTag['news-path'];
-    newEyebrow = buildEyebrow(a({ href: eyeBrowHref }, eyebrowArrow, eyebrowText));
+    newEyebrow = buildEyebrow(a({ href: eyeBrowHref }, eyebrowText));
   } else if (eyebrowText) {
     // Else display simple span or nothing
     newEyebrow = buildEyebrow(eyebrowText);
