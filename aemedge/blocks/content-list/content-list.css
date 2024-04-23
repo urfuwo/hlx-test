@@ -93,9 +93,6 @@ body.hub-l2 .content-list {
   }
 }
 
-.section.background-light,
-.section.background-dark {
-  .content-list:first-child {
-    margin-top: var(--udexSpacer56);
-  }
+:is(.background-light, .background-dark):has(.content-list-wrapper:first-child) {
+  padding-block-start: var(--udexSpacer56);
 }
