@@ -8,4 +8,4 @@ helix-importer-ui
 .DS_Store
 *.bak
 .idea
-
+tools/atom/node_modules
