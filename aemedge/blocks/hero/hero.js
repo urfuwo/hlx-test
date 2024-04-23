@@ -2,9 +2,7 @@ import '@udex/webcomponents/dist/HeroBanner.js';
 import {
   a, div, p, span,
 } from '../../scripts/dom-builder.js';
-import {
-  fetchPlaceholders, getMetadata, toCamelCase,
-} from '../../scripts/aem.js';
+import { getMetadata, toCamelCase } from '../../scripts/aem.js';
 import { fetchTagList, formatDate, getContentType } from '../../scripts/utils.js';
 import Tag from '../../libs/tag/tag.js';
 import { buildAuthorUrl, getAuthorEntries, getAuthorNames } from '../../scripts/article.js';
@@ -79,11 +77,17 @@ function decorateMetaInfo() {
   return infoBlockWrapper;
 }
 
-function replacePlaceholderText(elem, placeholder) {
+function replacePlaceholderText(elem, tags) {
   if (elem && (elem.innerText.includes('[page]') || elem.innerText.includes('[author]'))) {
-    const adaptedPath = toCamelCase(window.location.pathname
-      .replace('tags', 'tag').replace('topics', 'topic').substring(1));
-    elem.innerHTML = elem.innerHTML.replace('[page]', placeholder[adaptedPath] ? placeholder[adaptedPath] : '');
+    // find the first tag in tags which matches the path in topics-path or news-path
+    let h1TitleTag;
+    Object.keys(tags).forEach((tag) => {
+      const tagData = tags[tag];
+      if (tagData['topic-path'] === window.location.pathname || tagData['news-path'] === window.location.pathname) {
+        h1TitleTag = tagData;
+      }
+    });
+    elem.innerHTML = elem.innerHTML.replace('[page]', h1TitleTag?.label || '');
     elem.innerHTML = elem.innerHTML.replace('[author]', getMetadata('author') || '');
   }
   return elem;
@@ -108,7 +112,6 @@ function findFirstTag() {
 export default async function decorate(block) {
   const isArticle = getMetadata('template') === 'article';
   const isMediaBlend = isArticle || block.classList.contains('media-blend');
-  const placeholder = await fetchPlaceholders();
   const tags = await fetchTagList();
 
   // extract block content
@@ -118,7 +121,6 @@ export default async function decorate(block) {
   let eyebrowText = eyebrow?.textContent;
   const contentTypeTag = tags[toCamelCase(getContentType())];
 
-  // TODO tag translation
   if (!eyebrowText && isArticle) {
     // if no eyebrow text is set, use the content type for articles
     eyebrowText = contentTypeTag?.label || getContentType()?.split('/')[1].replace('-', ' ');
@@ -143,7 +145,7 @@ export default async function decorate(block) {
       class: ['hero-banner', 'media-blend__content'],
     },
     newEyebrow,
-    replacePlaceholderText(heading, placeholder),
+    replacePlaceholderText(heading, tags),
   );
   hero.append(contentSlot);
 

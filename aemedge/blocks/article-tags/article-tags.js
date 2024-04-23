@@ -10,15 +10,11 @@ export default async function decorate(block) {
   const articleTags = getMetadata('article:tag');
   if (articleTags) {
     const tags = await fetchTagList();
-    const tagsLiEL = articleTags.split(', ').map((articleTag) => {
-      let tag = tags[toCamelCase(articleTag)];
-      if (!tag) { // fallback for tags we haven't mapped
-        const articleTagArr = articleTag.split('/');
-        tag = { key: articleTag, label: articleTag, 'topic-path': `/topics/${articleTagArr[1]}` };
-        if (articleTagArr[0] === 'news-tag') {
-          tag['news-path'] = `/news/${articleTagArr[1]}`;
-        }
-      }
+    const tagsLiEL = articleTags.split(', ').filter((articleTag) => {
+      const tag = tags[toCamelCase(articleTag)];
+      return tag && (tag['topic-path'] || tag['news-path']);
+    }).map((articleTag) => {
+      const tag = tags[toCamelCase(articleTag)];
       return new Tag(tag).render();
     });
     const tagListEl = div({ class: 'tag-list' }, ...tagsLiEL);
