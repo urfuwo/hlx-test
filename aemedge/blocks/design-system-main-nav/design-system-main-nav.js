@@ -1,60 +1,17 @@
-import { getMetadata, loadCSS } from '../../scripts/aem.js';
-import { loadFragment } from '../../scripts/scripts.js';
+import { loadCSS } from '../../scripts/aem.js';
+import {
+  a,
+  div,
+  img,
+  li,
+  span,
+  ul,
+} from '../../scripts/dom-builder.js';
+import ffetch from '../../scripts/ffetch.js';
+import { convertStringToKebabCase } from '../../scripts/utils.js';
 
-/**
- * Wrap the text node of a link with a `span` element.
- * (!) Text node can also be positioned before the icon.
- * @param link {Element} The link element
- */
-function wrapLinkTextNodeWithSpan(link) {
-  Array.from(link.childNodes)
-    .forEach((node) => {
-      if (node.nodeType === Node.TEXT_NODE && node.textContent.trim().length > 0) {
-        const span = document.createElement('span');
-        span.classList.add('link-label', 'visually-hidden');
-        const textNode = node.cloneNode(true);
-        span.appendChild(textNode);
-        link.replaceChild(span, node);
-      }
-    });
-}
-
-/**
- * Function adds classes to the UL elements based on the depth of the list.
- * @param list {Element} The list element.
- */
-function addNavLevelClasses(list) {
-  /**
-   * Calculate the depth of the given list.
-   * @returns {number} The depth of the list.
-   * @param element {Element} The list element.
-   */
-  function calculateDepth(element) {
-    let depth = 0;
-    let currentList = element;
-    while (currentList.parentNode && currentList.parentNode.tagName === 'UL') {
-      depth += 1;
-      currentList = currentList.parentNode;
-    }
-    return depth;
-  }
-
-  /**
-   * Add class to the UL element based on the depth of the list.
-   */
-  if (list.tagName === 'UL') {
-    const level = calculateDepth(list) + 1;
-    list.classList.add(`main-nav-level-${level}`);
-  }
-
-  /**
-   * Recursively apply to all child UL lists
-   */
-  Array.from(list.children)
-    .forEach((child) => {
-      addNavLevelClasses(child);
-    });
-}
+const QUERY_INDEX_URL = '/design-system/fiori-design-web/mock-query-index.json';
+const VALUE_SEPARATOR = ',';
 
 /**
  * Set the current page link as active.
@@ -86,8 +43,8 @@ function setCurrentPageLink(navMain) {
  * @param mainNavWrapper {Element}
  */
 function setExpandedState(mainNavWrapper) {
-  const linksLevel1 = mainNavWrapper.querySelectorAll('.main-nav-level-1 a');
-  const linkLabels = mainNavWrapper.querySelectorAll('.link-label');
+  const linksLevel1 = mainNavWrapper.querySelectorAll('.main-nav__category-header-link');
+  const linkLabels = mainNavWrapper.querySelectorAll('.main-nav__category-header-label');
   let isExpanded = false;
   let isMouseInside = false;
 
@@ -148,7 +105,7 @@ function setExpandedState(mainNavWrapper) {
    * Ensure the nav stays expanded unless a link is specifically clicked.
    * @param event {Event} The click event.
    */
-  function handleNavClick(event) {
+  function handleNavWrapperClick(event) {
     if (event.target === mainNavWrapper) {
       event.preventDefault();
       event.stopPropagation();
@@ -172,7 +129,7 @@ function setExpandedState(mainNavWrapper) {
   // Mouse events
   mainNavWrapper.addEventListener('mouseover', handleInteraction);
   mainNavWrapper.addEventListener('mouseout', handleInteraction);
-  mainNavWrapper.addEventListener('click', handleNavClick, true);
+  mainNavWrapper.addEventListener('click', handleNavWrapperClick, true);
 
   // Keyboard events
   linksLevel1.forEach((link) => {
@@ -184,58 +141,103 @@ function setExpandedState(mainNavWrapper) {
 }
 
 /**
- * Generate the main navigation
+ * Create the main navigation structure with sublists for each category.
+ * @param data {Array} The data to be used for creating the navigation.
+ * @returns {Element} The main navigation container.
  */
-async function generateMainNavigation() {
-  const mainNavMeta = getMetadata('mainnav');
-  const mainNavPath = mainNavMeta ? new URL(mainNavMeta).pathname : '/nav';
-  const fragment = await loadFragment(mainNavPath);
-  const mainNav = document.createElement('nav');
-  const classes = [
-    'main-navigation',
-    'utility',
-  ];
+function createMainNav(data) {
+  const container = div({ class: ['main-nav__container'] });
+  const navSectionUtilities = div({ class: ['main-nav__section', 'main-nav__section-utility'] });
+  const navSectionMain = div({ class: ['main-nav__section', 'main-nav__section-main'] });
+  let currentCategory = null;
+  let currentList = null;
+  let sublist = null;
 
-  /**
-   * Iterate through the sections and decorating them.
-   */
-  while (fragment.firstElementChild) {
-    const navSection = fragment.firstElementChild;
-    const navLists = navSection.querySelectorAll('ul');
-    const navSectionLinks = navSection.querySelectorAll('a');
+  data.forEach((item) => {
+    const parts = item.breadcrumbs.split(VALUE_SEPARATOR);
+    const category = parts[0];
+    // Determine the target container for the sublist
+    const targetContainer = (['Learning', 'Community', 'Support'].includes(category)) ? navSectionUtilities : navSectionMain;
 
-    navSectionLinks.forEach((link) => {
-      wrapLinkTextNodeWithSpan(link);
-    });
+    /**
+     * Create a list item link (subentries) and append it to the sublist.
+     */
+    function createListItemLink() {
+      const listItem = li();
+      const link = a(
+        { href: item.path },
+        `${parts.slice(1)
+          .join(', ')}`,
+      );
+      listItem.appendChild(link);
+      sublist.appendChild(listItem);
+    }
 
-    navLists.forEach((list) => {
-      addNavLevelClasses(list);
-    });
+    /**
+     * Create the lists for each category.
+     */
+    function createLists() {
+      currentCategory = category;
+      currentList = ul({ class: ['main-nav__list-level-1', 'main-nav__list'] });
+      const categoryHeader = li(
+        {
+          class: 'main-nav__category-header',
+        },
+        a(
+          {
+            class: 'main-nav__category-header-link',
+            href: '#',
+            'data-category': convertStringToKebabCase(category),
+            title: `Expand/Collapse ${category} category`,
+          },
+          span(
+            {
+              class: 'main-nav__category-header-icon',
+            },
+            img({
+              src: `${window.hlx.codeBasePath}/icons/${convertStringToKebabCase(category)}.svg`,
+              alt: `${category} Icon`,
+              loading: 'lazy',
+            }),
+          ),
+          span({
+            class: [
+              'main-nav__category-header-label',
+              'visually-hidden',
+            ],
+          }, category),
+        ),
+      );
+      sublist = ul({ class: ['main-nav__list-level-2', 'main-nav__list'] });
+      categoryHeader.appendChild(sublist);
+      currentList.appendChild(categoryHeader);
+      targetContainer.appendChild(currentList);
+    }
 
-    mainNav.append(fragment.firstElementChild);
-  }
+    if (category !== currentCategory) {
+      createLists();
+    }
 
-  /**
-   * Add the section names (Figma) as classes to the main navigation.
-   */
-  classes.forEach((c, i) => {
-    const section = mainNav.children[i];
-    if (section) {
-      section.classList.add(`main-nav-${c}`);
+    if (item.path) {
+      createListItemLink();
     }
   });
 
-  return mainNav;
+  // Append the main and utility sections to the container
+  container.appendChild(navSectionMain);
+  // Append the utility section only if it contains items
+  if (navSectionUtilities.childNodes.length > 0) {
+    container.appendChild(navSectionUtilities);
+  }
+
+  return container;
 }
 
-/**
- * Decorate the main navigation block.
- * @param block
- * @returns {Promise<void>}
- */
 export default async function decorate(block) {
   await loadCSS(`${window.hlx.codeBasePath}/styles/helpers/visually-hidden.css`);
-  const mainNav = await generateMainNavigation();
+  const mainNavData = await ffetch(QUERY_INDEX_URL)
+    .all();
+  const mainNav = createMainNav(mainNavData);
   const mainNavWrapper = document.querySelector('.design-system-main-nav-wrapper');
 
   if (mainNav) {
