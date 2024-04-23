@@ -68,7 +68,7 @@ async function waitForLCP(lcpBlocks) {
   const lcpCandidate = document.querySelector('main img');
 
   await new Promise((resolve) => {
-    const computedStyle = getComputedStyle(lcpCandidate);
+    const computedStyle = lcpCandidate ? getComputedStyle(lcpCandidate) : {};
     if (
       lcpCandidate
       && !lcpCandidate.complete
