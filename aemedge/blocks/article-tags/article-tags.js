@@ -12,7 +12,7 @@ export default async function decorate(block) {
     const tags = await fetchTagList();
     const tagsLiEL = articleTags.split(', ').filter((articleTag) => {
       const tag = tags[toCamelCase(articleTag)];
-      return tag && (tag['topic-path'] || tag['news-path']);
+      return tag && !tag.key.startsWith('content-type/') && (tag['topic-path'] || tag['news-path']);
     }).map((articleTag) => {
       const tag = tags[toCamelCase(articleTag)];
       return new Tag(tag).render();
