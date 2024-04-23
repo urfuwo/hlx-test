@@ -74,6 +74,21 @@ function getContentType() {
   return tags.find((tag) => tag.trim().toLowerCase().startsWith('content-type'));
 }
 
+/**
+ * Converts a given string to "kebab case" making all letters lowercase and replacing all
+ * whitespaces with dashes.
+ * @param {string} str - The input string to be converted.
+ * @returns {string} The string in kebab case format.
+ */
+function convertStringToKebabCase(str) {
+  return str.toLowerCase().replace(/\s+/g, '-');
+}
+
 export {
-  formatDate, containerize, fetchPages, fetchTagList, getContentType,
+  formatDate,
+  containerize,
+  fetchPages,
+  fetchTagList,
+  getContentType,
+  convertStringToKebabCase,
 };
