@@ -147,17 +147,24 @@ function setExpandedState(mainNavWrapper) {
  */
 function createMainNav(data) {
   const container = div({ class: ['main-nav__container'] });
-  const navSectionUtilities = div({ class: ['main-nav__section', 'main-nav__section-utility'] });
-  const navSectionMain = div({ class: ['main-nav__section', 'main-nav__section-main'] });
+  const utilityContainer = div({ class: ['main-nav__section', 'main-nav__section-utility'] });
+  const utilityList = ul({ class: ['main-nav__list', 'main-nav__list-level-1', 'main-nav__list-utility'] });
+  const mainContainer = div({ class: ['main-nav__section', 'main-nav__section-main'] });
+  const mainList = ul({ class: ['main-nav__list', 'main-nav__list-level-1', 'main-nav__list-main'] });
+
+  // Append the lists to the corresponding containers
+  utilityContainer.appendChild(utilityList);
+  mainContainer.appendChild(mainList);
+
   let currentCategory = null;
-  let currentList = null;
   let sublist = null;
 
   data.forEach((item) => {
     const parts = item.breadcrumbs.split(VALUE_SEPARATOR);
     const category = parts[0];
-    // Determine the target container for the sublist
-    const targetContainer = (['Learning', 'Community', 'Support'].includes(category)) ? navSectionUtilities : navSectionMain;
+
+    // Choose the correct top-level list based on category
+    const targetList = (['Learning', 'Community', 'Support'].includes(category)) ? utilityList : mainList;
 
     /**
      * Create a list item link (subentries) and append it to the sublist.
@@ -178,11 +185,10 @@ function createMainNav(data) {
      */
     function createLists() {
       currentCategory = category;
-      currentList = ul({ class: ['main-nav__list-level-1', 'main-nav__list'] });
       const categoryHeader = li(
-        {
-          class: 'main-nav__category-header',
-        },
+        // {
+        //   class: 'main-nav__category-header',
+        // },
         a(
           {
             class: 'main-nav__category-header-link',
@@ -210,10 +216,10 @@ function createMainNav(data) {
       );
       sublist = ul({ class: ['main-nav__list-level-2', 'main-nav__list'] });
       categoryHeader.appendChild(sublist);
-      currentList.appendChild(categoryHeader);
-      targetContainer.appendChild(currentList);
+      targetList.appendChild(categoryHeader);
     }
 
+    // Start a new category section if transitioning to a new category
     if (category !== currentCategory) {
       createLists();
     }
@@ -224,10 +230,10 @@ function createMainNav(data) {
   });
 
   // Append the main and utility sections to the container
-  container.appendChild(navSectionMain);
-  // Append the utility section only if it contains items
-  if (navSectionUtilities.childNodes.length > 0) {
-    container.appendChild(navSectionUtilities);
+  container.appendChild(mainContainer);
+  // Append the utility container only if it contains items
+  if (utilityContainer.childNodes.length > 0) {
+    container.appendChild(utilityContainer);
   }
 
   return container;
