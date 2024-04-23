@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 
 function ensureDirectoryExistence(filePath) {
-  var dirname = path.dirname(filePath);
+  const dirname = path.dirname(filePath);
   if (fs.existsSync(dirname)) {
     return true;
   }
@@ -11,11 +11,10 @@ function ensureDirectoryExistence(filePath) {
   fs.mkdirSync(dirname);
 }
 
-const limit = "1000";
+const limit = '1000';
 
 async function createFeed(feed, allPosts) {
   console.log(`found ${allPosts.length} posts`);
-
 
   const newestPost = allPosts
     .map((post) => new Date(post.publicationDate * 1000))
@@ -76,11 +75,11 @@ const allPosts = await fetchPosts('https://main--hlx-test--urfuwo.hlx.page/aemed
 
 createFeed({
   title: 'SAP Sponsorships Archives | SAP News Center',
-  targetFile: `output/feed.xml`,
-  siteRoot: "https://main--hlx-test--urfuwo.hlx.page",
-  link:	"https://main--hlx-test--urfuwo.hlx.page/",
-  language:	"en",
-  description:	"Company &#38; Customer Stories &#124; Press Room."
+  targetFile: 'output/feed.xml',
+  siteRoot: 'https://main--hlx-test--urfuwo.hlx.page',
+  link: 'https://main--hlx-test--urfuwo.hlx.page/',
+  language: 'en',
+  description: 'Company &#38; Customer Stories &#124; Press Room.',
 }, allPosts.filter((post) => {
   const { tags } = post;
   if (!tags) return false;
@@ -106,9 +105,9 @@ map.forEach((posts, tag) => {
   createFeed({
     title: 'SAP Sponsorships Archives | SAP News Center',
     targetFile: `output/${tag}/feed.xml`,
-    siteRoot: "https://main--hlx-test--urfuwo.hlx.page",
-    link:	`https://main--hlx-test--urfuwo.hlx.page/tags/${tag}/feed.xml`,
-    language:	"en",
-    description:	"Company &#38; Customer Stories &#124; Press Room."
-  }, posts).catch(e => console.error(e));
+    siteRoot: 'https://main--hlx-test--urfuwo.hlx.page',
+    link: `https://main--hlx-test--urfuwo.hlx.page/tags/${tag}/feed.xml`,
+    language: 'en',
+    description: 'Company &#38; Customer Stories &#124; Press Room.',
+  }, posts).catch((e) => console.error(e));
 });
