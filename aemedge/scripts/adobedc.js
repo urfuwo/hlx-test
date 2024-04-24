@@ -19,14 +19,14 @@ async function sendAdobeDCBeacon(stl = null) {
 
 async function loadAdobeDC() {
   const adobeTagsSrc = {
-    dev: 'https://assets.adobedtm.com/ccc66c06b30b/f0f5170afb7e/launch-8569559a96a3-development.min.js',
-    stage: 'https://assets.adobedtm.com/ccc66c06b30b/f0f5170afb7e/launch-8569559a96a3-development.min.js',
-    prod: 'https://assets.adobedtm.com/ccc66c06b30b/f0f5170afb7e/launch-8569559a96a3-development.min.js',
+    dev: 'https://assets.adobedtm.com/ccc66c06b30b/6fa889b263e0/launch-3318725e3375-development.min.js',
+    stage: 'https://assets.adobedtm.com/ccc66c06b30b/6fa889b263e0/launch-3318725e3375-development.min.js',
+    prod: 'https://assets.adobedtm.com/ccc66c06b30b/6fa889b263e0/launch-3318725e3375-development.min.js',
   };
   const envType = getEnvType();
   if (envType && adobeTagsSrc[envType]) {
     await loadScript(adobeTagsSrc[envType], {});
-    window.console.log(`#L1-5: AdobeDC loaded at ${Date.now() - window.adobeDCStart}ms`);
+    window.console.log(`#L1-4: AdobeDC loaded at ${Date.now() - window.adobeDCStart}ms`);
   }
 }
 
