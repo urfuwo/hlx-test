@@ -34,7 +34,7 @@ function toggleAllNavSections(sections, expanded = false) {
   sections
     .querySelectorAll('.nav-sections .default-content-wrapper > ul > li')
     .forEach((section) => {
-      section.setAttribute('aria-expanded', expanded);
+      section.setAttribute('aria-expanded', Boolean(expanded).toString());
     });
 }
 
@@ -47,11 +47,12 @@ function toggleAllNavSections(sections, expanded = false) {
 function toggleMenu(nav, navSections, forceExpanded = null) {
   const expanded = forceExpanded !== null ? !forceExpanded : nav.getAttribute('aria-expanded') === 'true';
   const menuButton = nav.querySelector('.burger-menu button');
-  document.body.style.overflowY = expanded || isDesktop.matches ? '' : 'hidden';
+  const ariaExpandedOrDesktop = expanded || isDesktop.matches;
+  document.body.style.overflowY = ariaExpandedOrDesktop ? '' : 'hidden';
   nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-  toggleAllNavSections(navSections, expanded || isDesktop.matches ? 'false' : 'true');
+  toggleAllNavSections(navSections, ariaExpandedOrDesktop);
   menuButton.setAttribute('aria-label', expanded ? 'Open navigation' : 'Close navigation');
-  menuButton.setAttribute('aria-current', !expanded);
+  menuButton.setAttribute('aria-current', Boolean(!expanded).toString());
   // enable menu collapse on escape keypress
   if (!expanded || isDesktop.matches) {
     // collapse menu on escape press
@@ -166,14 +167,41 @@ function decorateLogo(nav) {
   decorateIcons(brandLogo);
 }
 
+function wrapLinkTextNodeInSpan(link, className) {
+  Array.from(link.childNodes)
+    .forEach((node) => {
+      if (node.nodeType === Node.TEXT_NODE && node.textContent.trim().length > 0) {
+        const spanElement = span({ class: className, tabindex: 0 });
+        const textNode = node.cloneNode(true);
+        spanElement.appendChild(textNode);
+        link.replaceChild(spanElement, node);
+      }
+    });
+}
+
+function decorateListItem(list, isTopLevel) {
+  let clickableElement = list;
+  if (list.querySelector('ul')) {
+    wrapLinkTextNodeInSpan(list, 'text');
+    clickableElement = list.querySelector('.text');
+    list.classList.add('nav__list-parent');
+    if (isTopLevel) {
+      list.classList.add('nav__list-parent--top');
+    }
+    list.querySelectorAll('li:has(ul)').forEach((li) => {
+      decorateListItem(li, false);
+    });
+  }
+  clickableElement.addEventListener('click', () => {
+    const expanded = list.getAttribute('aria-expanded') === 'true';
+    toggleAllNavSections(list);
+    list.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+  });
+}
+
 function createDropMenu(sections) {
   sections.querySelectorAll(':scope > .default-content-wrapper > ul > li').forEach((section) => {
-    if (section.querySelector('ul')) section.classList.add('nav-drop', 'text');
-    section.addEventListener('click', () => {
-      const expanded = section.getAttribute('aria-expanded') === 'true';
-      toggleAllNavSections(sections);
-      section.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-    });
+    decorateListItem(section, true);
   });
 }
 
@@ -205,6 +233,10 @@ async function generateTopNavigation() {
   return primaryNav;
 }
 
+function removeIconString(text) {
+  return text ? text.replace(/:.+:/, '') : '';
+}
+
 async function generateSecondaryNavigation() {
   const navMeta = getMetadata('global-nav');
   const secondaryNavPath = navMeta
@@ -234,17 +266,35 @@ async function generateSecondaryNavigation() {
   navCtaText.append(navCta.render());
   navCtaText.firstElementChild.remove();
   const navTitle = secondNav.querySelector('.nav-secondary-title');
-  navTitle.addEventListener('click', () => {
-    const expanded = secondNav.getAttribute('aria-expanded') === 'true';
-    toggleAllNavSections(secondNav);
-    secondNav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-  });
   secondNav.querySelectorAll('.default-content-wrapper a').forEach((link) => {
     const href = new URL(link.href);
     if (window.location.pathname === href.pathname) {
       link.setAttribute('aria-current', 'page');
     }
   });
+
+  const activeTabText = removeIconString(sideSections.querySelector('li[aria-current="page"] a')?.textContent);
+  const firstTabText = removeIconString(sideSections.querySelector('a').textContent);
+  const navTitleText = removeIconString(navTitle.textContent);
+  const mobileDropdownButton = button(
+    {
+      class: 'nav-secondary__dropdown',
+      'aria-expanded': 'false',
+      'aria-haspopup': 'true',
+      'aria-label': 'Secondary Navigation Dropdown',
+    },
+    span(
+      { class: 'nav-secondary__dropdown__content' },
+      span({ class: 'nav-secondary__dropdown__title' }, navTitleText),
+      span({ class: 'nav-secondary__dropdown__tab-label' }, activeTabText || firstTabText),
+    ),
+  );
+  mobileDropdownButton.addEventListener('click', () => {
+    const expanded = secondNav.getAttribute('aria-expanded') === 'true';
+    toggleAllNavSections(secondNav);
+    secondNav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+  });
+  secondNav.insertBefore(mobileDropdownButton, secondNav.firstChild);
   return secondNav;
 }
 
