@@ -74,6 +74,11 @@ function getContentType() {
   return tags.find((tag) => tag.trim().toLowerCase().startsWith('content-type'));
 }
 
+function extractFieldValue(entry, field, prefix) {
+  const value = JSON.parse(entry[field]).find((item) => item.trim().toLowerCase().startsWith(prefix)).split(',');
+  return value[0].replace(`${prefix}/`, '');
+}
+
 export {
-  formatDate, containerize, fetchPages, fetchTagList, getContentType,
+  formatDate, containerize, fetchPages, fetchTagList, getContentType, extractFieldValue,
 };

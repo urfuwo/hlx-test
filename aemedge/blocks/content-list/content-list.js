@@ -4,12 +4,13 @@ import { ul, h3 } from '../../scripts/dom-builder.js';
 import PictureCard from '../../libs/pictureCard/pictureCard.js';
 import Card from '../../libs/card/card.js';
 import Button from '../../libs/button/button.js';
-import { formatDate } from '../../scripts/utils.js';
+import { formatDate, extractFieldValue } from '../../scripts/utils.js';
 import { allAuthorEntries, authorEntry } from '../../scripts/article.js';
 
 function matchTags(entry, config) {
   if (!config.tags) return true;
-  return config.tags.some((item) => entry.tags.includes(item.trim()));
+  return config.tags.some((item) => JSON.parse(entry.tags)
+    .some((tag) => tag.startsWith(item.trim())));
 }
 
 function matchAuthors(entry, config) {
@@ -18,21 +19,14 @@ function matchAuthors(entry, config) {
   return config.authors.some((item) => authors.includes(item.trim()));
 }
 
-function matchTopics(entry, config) {
-  if (!config.topics) return true;
-  return config.topics.some((item) => entry.topics.includes(item.trim()));
-}
-
 function matchContentType(entry, config) {
   if (!config['content-type']) return true;
-  const contentType = entry['content-type'].split(',');
-  return config['content-type'].some((item) => contentType.includes(item.trim()));
+  return config['content-type'].some((item) => item.trim() === extractFieldValue(entry, 'tags', 'content-type'));
 }
 
 function getFilter(config) {
   return (entry) => matchTags(entry, config)
     && matchAuthors(entry, config)
-    && matchTopics(entry, config)
     && matchContentType(entry, config);
 }
 
@@ -51,8 +45,9 @@ function getInfo(article, config) {
 }
 
 function getPictureCard(article, config, placeholders, authEntry) {
+  const type = extractFieldValue(article, 'tags', 'content-type');
   const {
-    'content-type': type, image, path, title, priority,
+    image, path, title, priority,
   } = article;
   const tagLabel = placeholders[toCamelCase(priority)] || '';
   const info = getInfo(article, config);
@@ -60,7 +55,8 @@ function getPictureCard(article, config, placeholders, authEntry) {
 }
 
 function getCard(article, config) {
-  const { 'content-type': type, path, title } = article;
+  const type = extractFieldValue(article, 'tags', 'content-type');
+  const { path, title } = article;
   const info = getInfo(article, config);
   return new Card(title, path, type, info);
 }
