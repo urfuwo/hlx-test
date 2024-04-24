@@ -4,6 +4,7 @@ import {
 import {
   ul, li, a, span,
 } from '../../scripts/dom-builder.js';
+import { extractFieldValue, fetchTagList } from '../../scripts/utils.js';
 import ffetch from '../../scripts/ffetch.js';
 
 const ARTICLE_FORMATTER = new Intl.DateTimeFormat('default', {
@@ -15,6 +16,7 @@ const ARTICLE_FORMATTER = new Intl.DateTimeFormat('default', {
 function renderCard(card) {
   const formattedDate = ARTICLE_FORMATTER.format(new Date(card.publicationDate * 1000));
   const cardAuthorUrl = `/author/${toClassName(card.author).replace('-', '')}`; // TODO look up author URL from index
+  const contentType = extractFieldValue(card, 'tags', 'content-type');
   const cardElement = li(
     { class: 'card' },
     a(
@@ -23,7 +25,7 @@ function renderCard(card) {
     ),
     span(
       { class: 'cardcontent' },
-      span({ class: 'template' }, card['content-type'].replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())),
+      span({ class: 'template' }, contentType || ''),
       (card['hot-story'] ? span({ class: 'hot' }, 'Hot Story') : ''),
       span(
         { class: 'title' },
@@ -43,38 +45,28 @@ function renderCard(card) {
   return cardElement;
 }
 
-function getCategoryForReadMore() {
-  const tags = getMetadata('article:tag').split(',');
-  return tags.length > 0 ? tags[0] : null;
-}
+function determineContextFilter(tags) {
+  const location = window.location.pathname;
 
-function determineContextFilter() {
   // for authors, filter by author
-  if (window.location.pathname.startsWith('/author/') > 0) {
+  if (location.startsWith('/author/') > 0) {
     return (entry) => entry.author === getMetadata('author');
   }
 
-  // for topics get filter from URL
-  if (window.location.pathname.startsWith('/topics/') > 0) {
-    const topic = window.location.pathname.split('/')[2];
-    return (entry) => toClassName(entry.topics).includes(topic);
+  // check if location match is valid tag /topics/.* or /news/.*
+  if (location.match(/\/topics\/.*|\/news\/.*/) && tags) {
+    let matchedTag;
+    Object.keys(tags).forEach((tag) => {
+      const tagData = tags[tag];
+      if (location.includes(tagData['topic-path']) || location.includes(tagData['news-path'])) {
+        matchedTag = tagData;
+      }
+    });
+
+    return (entry) => entry.tags.includes(matchedTag.key);
   }
 
-  // for tags get filter from URL
-  if (window.location.pathname.startsWith('/tags/') > 0) {
-    const tag = window.location.pathname.split('/')[2];
-    return (entry) => JSON.parse(entry.tags).map((t) => toClassName(t)).includes(tag);
-  }
-
-  // for everything else, filter by category
-  return (entry) => {
-    const category = getCategoryForReadMore();
-    const tags = JSON.parse(entry.tags);
-    if (Array.isArray(tags) && entry.tags.length > 0) {
-      return tags.includes(category);
-    }
-    return false;
-  };
+  return () => true;
 }
 
 export default async function listArticles(block, config = { filter: null, maxEntries: null }) {
@@ -88,7 +80,8 @@ export default async function listArticles(block, config = { filter: null, maxEn
 
   let contextFilter = config.filter;
   if (!contextFilter) {
-    contextFilter = determineContextFilter();
+    const tags = await fetchTagList();
+    contextFilter = determineContextFilter(tags);
   }
 
   let articles = await ffetch(`${window.hlx.codeBasePath}/articles-index.json`, 'sapContentHubArticles').filter(contextFilter);
