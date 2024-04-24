@@ -13,11 +13,7 @@ function moveLinkTextNodeToSpan(link) {
   Array.from(link.childNodes)
     .forEach((node) => {
       if (node.nodeType === Node.TEXT_NODE && node.textContent.trim().length > 0) {
-        const spanElement = span(
-          {
-            class: ['button-text'],
-          },
-        );
+        const spanElement = span();
         const textNode = node.cloneNode(true);
         spanElement.appendChild(textNode);
         link.replaceChild(spanElement, node);

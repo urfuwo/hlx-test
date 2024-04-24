@@ -1,28 +1,36 @@
 .link-list {
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
+  grid-template-columns: 1fr;
   gap: var(--udexSpacer16) var(--udexSpacer48);
-  
+
   @media (width >= 980px) {
     & {
       grid-template-columns: repeat(9, 1fr);
     }
   }
-  
+
+  &:has(img) {
+    row-gap: var(--udexSpacer84);
+  }
+
   & > div {
     grid-column: 1 / -1;
-    
+
     @media (width >= 980px) {
       & {
+        grid-column: span 4;
+      }
+
+      &:has(img) {
         grid-column: span 3;
       }
     }
-    
+
     & p {
       margin: 0;
       padding: 0;
     }
-    
+
     /* Image + Headline */
     & > div:nth-child(1) {
       /* Headline (in `p`) */
@@ -31,93 +39,78 @@
         font-weight: var(--udexTypographyFontWeightMedium);
         line-height: var(--udexTypographyHeadingLineHeight);
       }
-      
+
       /* Image */
       & picture {
         display: block;
         margin-bottom: var(--udexSpacer20);
       }
-      
+
       & img {
         display: block;
         width: 100%;
       }
     }
-    
+
     /* Link + Icon (`.button-container`) */
     & > div:nth-child(2) {
-      margin-top: var(--udexSpacer20);
-      
+      border-bottom: 1px solid var(--udexColorGrey3);
+      margin-top: var(--udexSpacer16);
+      padding-bottom: 22px;
+
       & p {
-        align-items: center;
         display: flex;
-        
+
         /* Icons */
         & .icon {
           display: flex;
           width: auto;
-          
+          height: 16px;
+
           & img {
             /* --udexColorBlue7 */
             filter: brightness(0) saturate(100%) invert(34%) sepia(98%) saturate(4614%) hue-rotate(202deg) brightness(99%) contrast(103%);
           }
+
+          &:first-child {
+            margin-right: var(--udexSpacer8);
+          }
+
+          &:last-child {
+            margin-left: var(--udexSpacer8);
+          }
         }
-        
-        & .icon-slim-arrow-right {
-          height: 12px;
-        }
-        
-        & .icon-play-icon {
-          height: 16px;
-        }
-        
+
         /* Link: remove the `.button` styles */
         & a {
-          align-items: center;
-          color: var(--udexColorBlue7);
-          display: flex;
-          font-size: var(--udexTypographyNavigationMediumXLFontSize);
-          font-style: normal;
-          min-height: auto;
-          padding: 0;
-          text-decoration: none;
-          white-space: nowrap;
-          
-          /* Link + Icon */
-          & .button-text:first-child {
-            margin-right: var(--udexSpacer8);
-          }
-          
           /* Icon + Link */
-          & .icon:first-child {
-            margin-right: var(--udexSpacer8);
+          &:visited .icon img {
+            /* --udexColorBlue10 */
+            filter: brightness(0) saturate(100%) invert(11%) sepia(89%) saturate(3257%) hue-rotate(214deg) brightness(96%) contrast(112%);
           }
-          
-          &:hover,
-          &:focus,
-          &:active {
-            color: var(--udexColorBlue9);
-            
-            & .icon {
-              & img {
-                /* --udexColorBlue9 */
-                filter: brightness(0) saturate(100%) invert(16%) sepia(88%) saturate(2645%) hue-rotate(212deg) brightness(97%) contrast(107%);
-              }
-            }
+
+          &:hover .icon img {
+            /* --udexColorBlue9 */
+            filter: brightness(0) saturate(100%) invert(16%) sepia(88%) saturate(2645%) hue-rotate(212deg) brightness(97%) contrast(107%);
           }
-          
-          &:any-link {
-            border-radius: 0;
-            border: 0 none;
-            font-weight: var(--udexTypographyFontWeightRegular);
+
+          &:active .icon img {
+            /* --udexColorBlue11 */
+            filter: brightness(0) saturate(100%) invert(4%) sepia(90%) saturate(4428%) hue-rotate(230deg) brightness(98%) contrast(103%);
           }
-          
+
           /* Hide global `.button` styles */
-          &::after {
+          &:has(.icon)::after {
             display: none;
           }
         }
       }
+    }
+
+    &:has(img) > div:nth-child(2) {
+      border-bottom: none;
+      margin-top: var(--udexSpacer20);
+      padding-bottom: 0;
     }
   }
 }
