@@ -132,7 +132,7 @@ export default async function decorate(block) {
     newEyebrow = buildEyebrow(eyebrow.firstElementChild);
   } else if (eyebrowText && isArticle) {
     // If article, add link to parent topics page, and appropriate classes for styling
-    const eyeBrowHref = contentTypeTag['topic-path'] ? contentTypeTag['topic-path'] : contentTypeTag['news-path'];
+    const eyeBrowHref = contentTypeTag['topic-path'] !== '0' ? contentTypeTag['topic-path'] : contentTypeTag['news-path'];
     newEyebrow = buildEyebrow(a({ href: eyeBrowHref }, eyebrowText));
   } else if (eyebrowText) {
     // Else display simple span or nothing
