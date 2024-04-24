@@ -2,9 +2,9 @@ import { Feed } from 'feed';
 import fs from 'fs';
 import path from 'path';
 
-const siteRoot = 'https://news.sap.com';
+const siteRoot = 'https://www.sap.com';
 const sourceRoot = 'https://main--hlx-test--urfuwo.hlx.page';
-const targetRoot = '../output';
+const targetRoot = 'output';
 
 function ensureDirectoryExistence(filePath) {
   const dirname = path.dirname(filePath);
@@ -85,9 +85,9 @@ await Promise.all(allPosts.map(async (post) => {
 
 createFeed({
   title: 'SAP Sponsorships Archives | SAP News Center',
-  targetFile: `${targetRoot}/feed.xml`,
+  targetFile: `${targetRoot}/news/feed.xml`,
   siteRoot,
-  link: `${siteRoot}/feed/`,
+  link: `${siteRoot}/news/feed/`,
   language: 'en',
   description: 'Company &#38; Customer Stories &#124; Press Room.',
 }, allPosts.filter((post) => {
@@ -114,7 +114,7 @@ allPosts.forEach((post) => {
 map.forEach((posts, tag) => {
   createFeed({
     title: 'SAP Sponsorships Archives | SAP News Center',
-    targetFile: `${targetRoot}/${tag}/feed.xml`,
+    targetFile: `${targetRoot}/topics/${tag}/feed.xml`,
     siteRoot,
     link: `${siteRoot}/topics/${tag}/feed/`,
     language: 'en',
