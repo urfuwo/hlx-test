@@ -200,6 +200,29 @@ main pre {
   white-space: pre;
 }
 
+/* https://sap.frontify.com/document/223142#/-/links */
+a {
+ &:any-link {
+    color: var(--udexColorBlue7);
+    text-decoration: underline;
+  }
+  
+  &:visited {
+    color: var(--udexColorBlue10);
+  }
+  
+  &:hover,
+  &:focus{
+    color: var(--udexColorBlue9);
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  
+  &:active {
+    color: var(--udexColorBlue11);
+  }
+}
+
 .subtitle {
   & a {
     font-size: var(--udexTypographyBodyXSFontSize);
@@ -214,17 +237,6 @@ main pre {
   font-weight: var(--udexTypographyFontWeightRegular);
   line-height: var(--udexTypographyDisplayLineHeight);
   color: var(--udexColorGrey6);
-}
-
-a:any-link {
-  color: var(--udexColorBlue7);
-  text-decoration: underline;
-}
-
-a:hover {
-  color: var(--udexColorBlue9);
-  cursor: pointer;
-  text-decoration: underline;
 }
 
 main .button-container {
