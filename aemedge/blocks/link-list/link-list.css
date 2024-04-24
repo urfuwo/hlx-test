@@ -3,14 +3,18 @@
   grid-template-columns: 1fr;
   gap: var(--udexSpacer16) var(--udexSpacer48);
 
+  &:has(img) {
+    row-gap: var(--udexSpacer84);
+  }
+
   @media (width >= 980px) {
     & {
       grid-template-columns: repeat(9, 1fr);
     }
-  }
 
-  &:has(img) {
-    row-gap: var(--udexSpacer84);
+    &:has(img) {
+      row-gap: var(--udexSpacer48);
+    }
   }
 
   & > div {
