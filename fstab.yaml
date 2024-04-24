@@ -3,5 +3,5 @@ mountpoints:
 
 folders:
   /topics/: /topics/topic-template
-  /news/: /news/topic-template
+  /news/: /news/news-template
   /author/: /author/author-template
