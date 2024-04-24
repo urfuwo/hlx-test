@@ -77,11 +77,11 @@
           }
 
           &:first-child {
-            margin-right: var(--udexSpacer8);
+            margin-right: var(--udexSpacer4);
           }
 
           &:last-child {
-            margin-left: var(--udexSpacer8);
+            margin-left: var(--udexSpacer4);
           }
         }
 
