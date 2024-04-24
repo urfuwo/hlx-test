@@ -26,7 +26,7 @@ async function loadAdobeDC() {
   const envType = getEnvType();
   if (envType && adobeTagsSrc[envType]) {
     await loadScript(adobeTagsSrc[envType], {});
-    window.console.log(`#L1-4: AdobeDC loaded at ${Date.now() - window.adobeDCStart}ms`);
+    window.console.log(`#L1-4L: AdobeDC loaded at ${Date.now() - window.adobeDCStart}ms`);
   }
 }
 
