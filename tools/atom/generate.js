@@ -4,7 +4,8 @@ import path from 'path';
 
 const siteRoot = 'https://www.sap.com';
 const sourceRoot = 'https://main--hlx-test--urfuwo.hlx.page';
-const targetRoot = 'feeds';
+const targetRoot = '../../aemedge/feeds';
+const maxPosts = 30;
 
 function ensureDirectoryExistence(filePath) {
   const dirname = path.dirname(filePath);
@@ -18,7 +19,7 @@ function ensureDirectoryExistence(filePath) {
 const limit = '1000';
 
 async function createFeed(feed, allPosts) {
-  console.log(`found ${allPosts.length} posts`);
+  console.log(`found ${allPosts.length} posts - limiting to ${maxPosts}`);
 
   const newestPost = allPosts
     .map((post) => new Date(post.publicationDate * 1000))
@@ -34,7 +35,7 @@ async function createFeed(feed, allPosts) {
     language: feed.language || 'en-US',
   });
 
-  allPosts.sort((a,b) => new Date(b.date) - new Date(a.date)).filter((item, idx) => idx < 30).forEach((post) => {
+  allPosts.sort((a,b) => new Date(b.date) - new Date(a.date)).filter((item, idx) => idx < maxPosts).forEach((post) => {
     const link = feed.siteRoot + post.path;
     atomFeed.addItem({
       title: post.title,
@@ -88,7 +89,7 @@ createFeed({
   targetFile: `${targetRoot}/news/feed.xml`,
   siteRoot,
   link: `${siteRoot}/news/feed/`,
-  language: 'en',
+  language: 'en-US',
   description: 'Company &#38; Customer Stories &#124; Press Room.',
 }, allPosts.filter((post) => {
   const { tags } = post;
@@ -117,7 +118,7 @@ map.forEach((posts, tag) => {
     targetFile: `${targetRoot}/topics/${tag}/feed.xml`,
     siteRoot,
     link: `${siteRoot}/topics/${tag}/feed/`,
-    language: 'en',
+    language: 'en-US',
     description: 'Company &#38; Customer Stories &#124; Press Room.',
   }, posts).catch((e) => console.error(e));
 });

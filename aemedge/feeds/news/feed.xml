@@ -7,7 +7,7 @@
         <lastBuildDate>Thu, 28 Dec 2023 14:15:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>AEM SAP News feed generator (GitHub action)</generator>
-        <language>en</language>
+        <language>en-US</language>
         <item>
             <title><![CDATA[WEConnect International: The Power of Connection]]></title>
             <link>https://www.sap.com/blog/2023/12/weconnect-international-driving-economic-growth-gender-equality</link>
