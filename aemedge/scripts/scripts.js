@@ -377,6 +377,7 @@ async function loadPage() {
 
 async function initDataLayer() {
   window.adobeDataLayer = [];
+  const loginStatus = window.sessionStorage.getItem('loginStatus') === 'logY' ? 'yes' : 'no';
   window.adobeDataLayer.push({
     event: 'globalDL',
     site: {
@@ -385,7 +386,7 @@ async function initDataLayer() {
     },
     user: {
       type: 'visitor',
-      loginStatus: 'no',
+      loginStatus,
     },
   });
   const relpath = window.location.pathname.substring(1);
@@ -402,7 +403,7 @@ async function initDataLayer() {
     },
     user: {
       type: 'visitor',
-      loginStatus: 'no',
+      loginStatus,
     },
   });
 }
