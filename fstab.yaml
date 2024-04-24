@@ -2,6 +2,6 @@ mountpoints:
   /: https://sap.sharepoint.com/sites/207899/Shared%20Documents/website
 
 folders:
-  /tags/: /tags/tag-template
   /topics/: /topics/topic-template
+  /news/: /news/topic-template
   /author/: /author/author-template
