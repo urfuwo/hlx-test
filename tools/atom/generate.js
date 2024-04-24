@@ -2,6 +2,10 @@ import { Feed } from 'feed';
 import fs from 'fs';
 import path from 'path';
 
+const siteRoot = 'https://news.sap.com';
+const sourceRoot = 'https://main--hlx-test--urfuwo.hlx.page';
+const targetRoot = '../output';
+
 function ensureDirectoryExistence(filePath) {
   const dirname = path.dirname(filePath);
   if (fs.existsSync(dirname)) {
@@ -36,7 +40,9 @@ async function createFeed(feed, allPosts) {
       title: post.title,
       id: link,
       link,
-      content: post.description,
+      description: post.description,
+      content: post.content,
+      category: JSON.parse(post.tags).map((tag) => ({ name: tag })),
       date: new Date(post.publicationDate * 1000),
       published: new Date(post.publicationDate * 1000),
     });
@@ -70,14 +76,18 @@ async function fetchPosts(feed) {
   return allPosts;
 }
 
-const tagging = await fetchPosts('https://main--hlx-test--urfuwo.hlx.page/aemedge/tagging-contenthub.json');
-const allPosts = await fetchPosts('https://main--hlx-test--urfuwo.hlx.page/aemedge/articles-index.json');
+const tagging = await fetchPosts(`${sourceRoot}/aemedge/tagging-contenthub.json`);
+const allPosts = await fetchPosts(`${sourceRoot}/aemedge/articles-index.json`);
+await Promise.all(allPosts.map(async (post) => {
+  const resp = await fetch(`${sourceRoot}${post.path}.plain.html`);
+  post.content = await resp.text();
+}));
 
 createFeed({
   title: 'SAP Sponsorships Archives | SAP News Center',
-  targetFile: 'output/feed.xml',
-  siteRoot: 'https://main--hlx-test--urfuwo.hlx.page',
-  link: 'https://main--hlx-test--urfuwo.hlx.page/',
+  targetFile: `${targetRoot}/feed.xml`,
+  siteRoot,
+  link: `${siteRoot}/feed/`,
   language: 'en',
   description: 'Company &#38; Customer Stories &#124; Press Room.',
 }, allPosts.filter((post) => {
@@ -104,9 +114,9 @@ allPosts.forEach((post) => {
 map.forEach((posts, tag) => {
   createFeed({
     title: 'SAP Sponsorships Archives | SAP News Center',
-    targetFile: `output/${tag}/feed.xml`,
-    siteRoot: 'https://main--hlx-test--urfuwo.hlx.page',
-    link: `https://main--hlx-test--urfuwo.hlx.page/tags/${tag}/feed.xml`,
+    targetFile: `${targetRoot}/${tag}/feed.xml`,
+    siteRoot,
+    link: `${siteRoot}/topics/${tag}/feed/`,
     language: 'en',
     description: 'Company &#38; Customer Stories &#124; Press Room.',
   }, posts).catch((e) => console.error(e));
