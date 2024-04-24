@@ -9,6 +9,8 @@ const createMetadata = (main, document, html, params, urlStr) => {
     meta.Title = title.textContent.replace(/[\n\t]/gm, '').replace(/ \| .*/gm, '');
   }
 
+  meta.Template = 'Web component';
+
   const keywords = document.querySelector('[name="keywords"]');
   if (keywords) {
     meta.keywords = keywords.content;
