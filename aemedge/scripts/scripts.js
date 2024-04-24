@@ -409,11 +409,12 @@ async function loadPage() {
 async function initDataLayer() {
   window.adobeDataLayer = [];
   const loginStatus = window.sessionStorage.getItem('loginStatus') === 'logY' ? 'yes' : 'no';
+  const siteName = 'sap';
   window.adobeDataLayer.push({
     event: 'globalDL',
     site: {
       country: 'glo',
-      name: 'sap',
+      name: siteName,
     },
     user: {
       type: 'visitor',
@@ -426,7 +427,7 @@ async function initDataLayer() {
     page: {
       country: 'glo',
       language: 'en',
-      name: window.location.pathname,
+      name: `${siteName}:${window.location.pathname}`,
       section: relpath.indexOf('/') > 0 ? relpath.substring(0, relpath.indexOf('/')) : relpath,
       url: window.location.href,
       referrer: document.referrer,
