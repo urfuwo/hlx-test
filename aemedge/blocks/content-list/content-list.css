@@ -76,7 +76,6 @@ body.hub-l2 .content-list {
 @container content-list (width >= 640px) {
   .content-list ul {
     grid-template-columns: repeat(3, 1fr);
-    grid-auto-rows: 115px 100px 70px;
   }
 
   .content-list.wide ul {
@@ -87,7 +86,6 @@ body.hub-l2 .content-list {
 @container content-list (width >= 980px) {
   .content-list ul {
     grid-template-columns: repeat(4, 1fr);
-    grid-auto-rows: 115px 100px 60px;
   }
 
   .content-list.wide ul {
@@ -95,9 +93,6 @@ body.hub-l2 .content-list {
   }
 }
 
-.section.background-light,
-.section.background-dark {
-  .content-list:first-child {
-    margin-top: var(--udexSpacer56);
-  }
+:is(.background-light, .background-dark):has(.content-list-wrapper:first-child) {
+  padding-block-start: var(--udexSpacer56);
 }

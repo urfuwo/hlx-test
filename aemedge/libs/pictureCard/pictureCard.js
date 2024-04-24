@@ -6,16 +6,17 @@ import { createOptimizedPicture, loadCSS } from '../../scripts/aem.js';
 import Avatar from '../avatar/avatar.js';
 
 export default class PictureCard extends Card {
-  constructor(title, path, type, info, authorEntry, image, tagLabel, description) {
+  constructor(title, path, type, info, authorEntry, image, tagLabel, description, eager) {
     super(title, path, type, info);
     this.authorEntry = authorEntry;
     this.image = image;
     this.tagLabel = tagLabel;
     this.description = description;
+    this.eager = eager;
   }
 
   getOptimizedPicture() {
-    return createOptimizedPicture(this.image, this.title, false, [{ width: '750' }]);
+    return createOptimizedPicture(this.image, this.title, this.eager, [{ width: '750' }]);
   }
 
   getTagLabel() {
@@ -51,21 +52,24 @@ export default class PictureCard extends Card {
 
     return li(
       { class: `picture-card ${horizontal ? 'horizontal' : ''}` },
-      div(
-        { class: 'picture' },
-        a({ href: this.path, 'aria-label': this.title }, this.getOptimizedPicture()),
-      ),
-      div(
-        { class: 'cardcontent' },
-        this.getTagLabel(),
-        div({ class: 'type' }, this.getType()),
-        div({ class: 'title text' }, a({ href: this.path }, this.title)),
-        this.getDescription(horizontal),
-      ),
-      div(
-        { class: 'infoblock' },
-        this.getAvatarElement(this.authorEntry),
-        div({ class: 'info' }, this.info),
+      a(
+        { href: this.path, 'aria-label': this.title },
+        div(
+          { class: 'picture' },
+          this.getOptimizedPicture(),
+        ),
+        div(
+          { class: 'cardcontent' },
+          this.getTagLabel(),
+          div({ class: 'type' }, this.getType()),
+          div({ class: 'title text' }, span(this.title)),
+          this.getDescription(horizontal),
+        ),
+        div(
+          { class: 'infoblock' },
+          this.getAvatarElement(this.authorEntry),
+          div({ class: 'info' }, this.info),
+        ),
       ),
     );
   }

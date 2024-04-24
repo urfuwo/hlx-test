@@ -2,10 +2,8 @@ import '@udex/webcomponents/dist/HeroBanner.js';
 import {
   a, div, p, span,
 } from '../../scripts/dom-builder.js';
-import {
-  fetchPlaceholders, getMetadata, toCamelCase, toClassName,
-} from '../../scripts/aem.js';
-import { formatDate } from '../../scripts/utils.js';
+import { getMetadata, toCamelCase } from '../../scripts/aem.js';
+import { fetchTagList, formatDate, getContentType } from '../../scripts/utils.js';
 import Tag from '../../libs/tag/tag.js';
 import { buildAuthorUrl, getAuthorEntries, getAuthorNames } from '../../scripts/article.js';
 import Avatar from '../../libs/avatar/avatar.js';
@@ -79,11 +77,17 @@ function decorateMetaInfo() {
   return infoBlockWrapper;
 }
 
-function replacePlaceholderText(elem, placeholder) {
+function replacePlaceholderText(elem, tags) {
   if (elem && (elem.innerText.includes('[page]') || elem.innerText.includes('[author]'))) {
-    const adaptedPath = toCamelCase(window.location.pathname
-      .replace('tags', 'tag').replace('topics', 'topic').substring(1));
-    elem.innerHTML = elem.innerHTML.replace('[page]', placeholder[adaptedPath] ? placeholder[adaptedPath] : '');
+    // find the first tag in tags which matches the path in topics-path or news-path
+    let h1TitleTag;
+    Object.keys(tags).forEach((tag) => {
+      const tagData = tags[tag];
+      if (tagData['topic-path'] === window.location.pathname || tagData['news-path'] === window.location.pathname) {
+        h1TitleTag = tagData;
+      }
+    });
+    elem.innerHTML = elem.innerHTML.replace('[page]', h1TitleTag?.label || '');
     elem.innerHTML = elem.innerHTML.replace('[author]', getMetadata('author') || '');
   }
   return elem;
@@ -96,6 +100,11 @@ function buildEyebrow(content) {
   );
 }
 
+function findFirstTag() {
+  const tags = getMetadata('article:tag').split(', ');
+  return tags.find((tag) => tag.trim().toLowerCase().startsWith('topic/') || tag.trim().toLowerCase().startsWith('industry/'));
+}
+
 /**
  * loads and decorates the hero
  * @param {Element} block The hero block element
@@ -103,31 +112,28 @@ function buildEyebrow(content) {
 export default async function decorate(block) {
   const isArticle = getMetadata('template') === 'article';
   const isMediaBlend = isArticle || block.classList.contains('media-blend');
-  const placeholder = await fetchPlaceholders();
+  const tags = await fetchTagList();
 
   // extract block content
   const hero = document.createElement('udex-hero-banner');
   const heading = block.querySelector('h1');
   const eyebrow = block.querySelector('h6');
   let eyebrowText = eyebrow?.textContent;
-  const contentType = getMetadata('content-type').split(',')[0].trim();
+  const contentTypeTag = tags[toCamelCase(getContentType())];
 
   if (!eyebrowText && isArticle) {
     // if no eyebrow text is set, use the content type for articles
-    const placeholderText = placeholder[toCamelCase(`content-type/${contentType}`)];
-    eyebrowText = placeholderText || contentType.replace('-', ' ');
+    eyebrowText = contentTypeTag?.label || getContentType()?.split('/')[1].replace('-', ' ');
   }
 
-  const eyebrowArrow = span({ class: 'eyebrow-arrow' });
   let newEyebrow = '';
   if (eyebrow?.firstElementChild?.tagName.toLowerCase() === 'a') {
-    // If author has added a custom link, add arrow and appropriate classes for styling
-    const content = eyebrow.firstElementChild;
-    content.insertBefore(eyebrowArrow, content.firstChild);
-    newEyebrow = buildEyebrow(content);
+    // If author has added a custom link, add appropriate classes for styling
+    newEyebrow = buildEyebrow(eyebrow.firstElementChild);
   } else if (eyebrowText && isArticle) {
-    // If article, add link to parent topics page, and add arrow and appropriate classes for styling
-    newEyebrow = buildEyebrow(a({ href: `/topics/${toClassName(contentType)}` }, eyebrowArrow, eyebrowText));
+    // If article, add link to parent topics page, and appropriate classes for styling
+    const eyeBrowHref = contentTypeTag['topic-path'] ? contentTypeTag['topic-path'] : contentTypeTag['news-path'];
+    newEyebrow = buildEyebrow(a({ href: eyeBrowHref }, eyebrowText));
   } else if (eyebrowText) {
     // Else display simple span or nothing
     newEyebrow = buildEyebrow(eyebrowText);
@@ -139,7 +145,7 @@ export default async function decorate(block) {
       class: ['hero-banner', 'media-blend__content'],
     },
     newEyebrow,
-    replacePlaceholderText(heading, placeholder),
+    replacePlaceholderText(heading, tags),
   );
   hero.append(contentSlot);
 
@@ -178,9 +184,9 @@ export default async function decorate(block) {
 
   // Add Primary tag
   const tagContainer = div({ class: 'media-blend__tags' });
-  const firstTagText = getMetadata('topic').split(',')[0].trim();
-  if (firstTagText) {
-    tagContainer.append(new Tag(firstTagText, placeholder).render());
+  const firstTag = findFirstTag();
+  if (firstTag) {
+    tagContainer.append(new Tag(tags[toCamelCase(firstTag)]).render());
   }
 
   // convert all buttons to udex-buttons

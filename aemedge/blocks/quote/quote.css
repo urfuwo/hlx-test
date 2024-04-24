@@ -37,39 +37,6 @@
 
 .quote .quote-link {
     grid-area: link;
-
-    a {
-        text-decoration: none;
-        display: inline-flex;
-        align-items: center;
-    }
-
-    a:visited {
-        color: var(--udexColorBlue10);
-        text-decoration: underline;
-    }
-
-    a:hover {
-        text-decoration: underline;
-    }
-
-    a:active {
-        color: var(--udexColorBlue11);
-        text-decoration: underline;
-    }
-
-    a::after {
-        box-sizing: border-box;
-        content: "";
-        display: inline-block;
-        height: 1em;
-        width: 1em;
-        margin-left: 4px;
-
-        /* Use mask in order to be able to adjust SVG colour */
-        mask: url("/aemedge/icons/slim-arrow-right.svg") center no-repeat;
-        background-color: currentcolor;
-    }
 }
 
 .quote .avatar {

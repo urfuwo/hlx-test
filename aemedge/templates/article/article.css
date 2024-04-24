@@ -15,11 +15,14 @@ main {
   grid-auto-flow: row;
   column-gap: var(--udexGridGutters);
   margin-block-end: var(--udexSpacer84);
+  margin-inline: var(--udexGridMargins);
 
-  @media (width < 980px) {
-    & > :not(.hero-container) {
-      margin-inline: var(--udexGridMargins);
-    }
+  & .hero-container, [data-location='document-footer']:is(.section.background-dark, .section.background-light) {
+    margin-inline: calc(-1 * var(--udexGridMargins));
+  }
+
+  [data-location='document-footer']:is(.section.background-dark, .section.background-light) {
+    padding-inline: var(--udexGridMargins);
   }
 
   & > * {
@@ -30,8 +33,8 @@ main {
   }
 
   @media (width >= 980px) {
-    grid-template-columns: 8fr 4fr;
-    grid-template-rows: repeat(3, auto);
+    grid-template-columns: minmax(0, 8fr) minmax(0, 4fr);
+    grid-template-rows: repeat(99, auto);
 
     &
       > :not(
@@ -43,35 +46,34 @@ main {
           )
       ) {
       grid-column: 1 / 2;
-      margin-inline-start: var(--udexGridMargins);
       padding-block-end: 56px;
     }
 
     & > [data-location='sidebar'] {
       grid-column: 2 / 3;
-      grid-row: -3 / -2;
-      margin-inline-end: var(--udexGridMargins);
+      grid-row: 2 / -2;
+    }
+
+    & > .hero-container ~ [data-location='sidebar']  {
+      margin-block-start: var(--udexSpacer84);
     }
 
     & > [data-location='document-footer'] {
       grid-column: -3 / span 2;
-      margin-inline: var(--udexGridMargins);
       padding-block-end: 84px;
     }
 
     /* if page has table of contents it has a 3 column layout */
     &:has(.toc-container) {
-      grid-template-columns: 3fr 6fr 3fr;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 6fr) minmax(0, 3fr);
 
       & > [data-location='sidebar'] {
         grid-column: 3 / 4;
-        grid-row: -3 / -2;
-        margin-inline-end: var(--udexGridMargins);
+        grid-row: 2 / -2;
       }
 
       & > [data-location='document-footer'] {
         grid-column: -4 / span 3;
-        margin-inline: var(--udexGridMargins);
       }
 
       &
@@ -89,14 +91,23 @@ main {
     }
 
     & > .hero-container {
-      margin-block-end: var(--udexSpacer84);
       grid-column: 1 / -1;
+    }
+
+    & > .hero-container + .section {
+      padding-block-start: var(--udexSpacer84);
     }
 
     & > .toc-container {
       grid-column: 1 / 2;
-      margin-inline-start: var(--udexGridMargins);
+      grid-row: 2 / -2;
       min-width: 18ch;
+    }
+  }
+
+  [data-location="sidebar"] :is(.content-list, .article-collection) {
+    ul .card {
+      grid-column: 1 / -1;
     }
   }
 }

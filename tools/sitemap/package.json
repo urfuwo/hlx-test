@@ -1,0 +1,27 @@
+{
+  "name": "sitemap-generator",
+  "version": "1.0.0",
+  "description": "Node utility to generate sitemap for Hub pages",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Adobe",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "async": "^3.2.5",
+    "log4js": "^6.9.1",
+    "readable-web-to-node-stream": "^3.0.2",
+    "sitemap": "^7.1.1",
+    "stream-chain": "^2.2.5",
+    "stream-json": "^1.8.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-n": "^16.6.2",
+    "eslint-plugin-promise": "^6.1.1"
+  }
+}

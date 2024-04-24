@@ -9,7 +9,7 @@ Temporary location prior to enabling https://github.tools.sap/UDEx/dx-web
 
 ## Documentation
 
-All technical documentaion of the project lives in [/docs](/docs) folder.
+All technical documentation of the project lives in [/docs](/docs) folder.
 
 ## Installation
 

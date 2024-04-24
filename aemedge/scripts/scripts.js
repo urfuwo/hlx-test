@@ -10,13 +10,10 @@ import {
   loadBlock,
   loadBlocks,
   loadCSS,
-  loadFooter,
   loadSideNav,
-  loadHeader,
   sampleRUM,
   toClassName,
   toCamelCase,
-  waitForLCP,
 } from './aem.js';
 
 const LCP_BLOCKS = ['hero']; // add your LCP blocks to the list
@@ -24,6 +21,7 @@ const TEMPLATE_LIST = {
   article: 'article',
   'hub-l2': 'hub',
   'hub-l1': 'hub',
+  'web-component': 'web-component',
 };
 
 /**
@@ -60,6 +58,31 @@ function capitalize(name) {
   return toClassName(name)
     .replace(/-(\w)/g, (_, letter) => letter.toUpperCase())
     .replace(/^\w/, (firstLetter) => firstLetter.toUpperCase());
+}
+
+async function waitForLCP(lcpBlocks) {
+  const block = document.querySelector('.block');
+  const hasLCPBlock = block && lcpBlocks.includes(block.dataset.blockName);
+  if (hasLCPBlock) await loadBlock(block);
+
+  document.body.style.display = null;
+  const lcpCandidate = document.querySelector('main img');
+
+  await new Promise((resolve) => {
+    const computedStyle = lcpCandidate ? getComputedStyle(lcpCandidate) : {};
+    if (
+      lcpCandidate
+      && !lcpCandidate.complete
+      && !!computedStyle.display
+      && computedStyle.display !== 'none'
+    ) {
+      lcpCandidate.setAttribute('loading', 'eager');
+      lcpCandidate.addEventListener('load', resolve);
+      lcpCandidate.addEventListener('error', resolve);
+    } else {
+      resolve();
+    }
+  });
 }
 
 /**
@@ -320,6 +343,34 @@ async function loadEager(doc) {
   }
 }
 
+function isDesignSystemSite() {
+  return document.body.classList.contains('design-system');
+}
+
+/**
+ * Loads a block named 'header' into header
+ * @param {Element} header header element
+ * @returns {Promise}
+ */
+async function loadHeader(header) {
+  const headerBlock = buildBlock((isDesignSystemSite()) ? 'design-system-header' : 'header', '');
+  header.append(headerBlock);
+  decorateBlock(headerBlock);
+  return loadBlock(headerBlock);
+}
+
+/**
+ * Loads a block named 'footer' into footer
+ * @param footer footer element
+ * @returns {Promise}
+ */
+async function loadFooter(footer) {
+  const footerBlock = buildBlock(isDesignSystemSite() ? 'design-system-footer' : 'footer', '');
+  footer.append(footerBlock);
+  decorateBlock(footerBlock);
+  return loadBlock(footerBlock);
+}
+
 /**
  * Loads everything that doesn't need to be delayed.
  * @param {Element} doc The container element
@@ -351,10 +402,7 @@ async function loadLazy(doc) {
  */
 function loadDelayed() {
   // eslint-disable-next-line import/no-cycle
-  window.setTimeout(
-    () => import('./delayed.js'),
-    3000,
-  );
+  window.setTimeout(() => import('./delayed.js'), 3000);
   // load anything that can be postponed to the latest here
 }
 
@@ -378,11 +426,12 @@ async function loadPage() {
 async function initDataLayer() {
   window.adobeDataLayer = [];
   const loginStatus = window.sessionStorage.getItem('loginStatus') === 'logY' ? 'yes' : 'no';
+  const siteName = 'alx:l1';
   window.adobeDataLayer.push({
     event: 'globalDL',
     site: {
       country: 'glo',
-      name: 'alx:l1',
+      name: siteName,
     },
     user: {
       type: 'visitor',
@@ -395,7 +444,7 @@ async function initDataLayer() {
     page: {
       country: 'glo',
       language: 'en',
-      name: window.location.pathname,
+      name: `${siteName}:${window.location.pathname}`,
       section: relpath.indexOf('/') > 0 ? relpath.substring(0, relpath.indexOf('/')) : relpath,
       url: window.location.href,
       referrer: document.referrer,
