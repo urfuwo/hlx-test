@@ -185,6 +185,8 @@ function createMainNav(data) {
      */
     function createLists() {
       currentCategory = category;
+      sublist = ul({ class: ['main-nav__list-level-2', 'main-nav__list'], hidden: true }); // Initially hide the sublist
+
       const categoryHeader = li(
         // {
         //   class: 'main-nav__category-header',
@@ -195,6 +197,13 @@ function createMainNav(data) {
             href: '#',
             'data-category': convertStringToKebabCase(category),
             title: `Expand/Collapse ${category} category`,
+            onclick(event) {
+              // Prevent the default anchor click behavior
+              console.log(event);
+              event.preventDefault();
+              // Toggle the [hidden] attribute to show/hide the sublist
+              sublist.hidden = !sublist.hidden;
+            },
           },
           span(
             {
@@ -214,7 +223,7 @@ function createMainNav(data) {
           }, category),
         ),
       );
-      sublist = ul({ class: ['main-nav__list-level-2', 'main-nav__list'] });
+
       categoryHeader.appendChild(sublist);
       targetList.appendChild(categoryHeader);
     }
