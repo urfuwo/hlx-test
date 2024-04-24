@@ -16,6 +16,7 @@ import articlePanel from './articlePanel.js';
 import articleSidebar from './articleSidebar.js';
 import transformLightboxImages from './articleLightboxImages.js';
 import transformVimeoVideo from './vimeoVideo.js';
+import rewriteNewsUrls from './newsUrls.js';
 
 export const transformers = [
   metadata,
@@ -33,6 +34,7 @@ export const transformers = [
   transformLightboxImages,
   transformVideo,
   transformVimeoVideo,
+  rewriteNewsUrls,
 ];
 
 export const preTransformers = [
