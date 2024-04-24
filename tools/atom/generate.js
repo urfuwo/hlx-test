@@ -4,7 +4,7 @@ import path from 'path';
 
 const siteRoot = 'https://www.sap.com';
 const sourceRoot = 'https://main--hlx-test--urfuwo.hlx.page';
-const targetRoot = 'output';
+const targetRoot = 'feeds';
 
 function ensureDirectoryExistence(filePath) {
   const dirname = path.dirname(filePath);
@@ -34,7 +34,7 @@ async function createFeed(feed, allPosts) {
     language: feed.language || 'en-US',
   });
 
-  allPosts.forEach((post) => {
+  allPosts.sort((a,b) => new Date(b.date) - new Date(a.date)).filter((item, idx) => idx < 30).forEach((post) => {
     const link = feed.siteRoot + post.path;
     atomFeed.addItem({
       title: post.title,
