@@ -8,8 +8,8 @@ Before: https://main--hlx-test--urfuwo.hlx.live/blog/2023/11/idc-marketscape-sap
 After: https://<branch>--hlx-test--urfuwo.hlx.live/blog/2023/11/idc-marketscape-sap-a-leader-cloud-enabled-sourcing-applications
 
 **Design system:**
-Before: https://main--hlx-test--urfuwo.hlx.live/design-system/fiori-design-web/button
-After: https://<branch>--hlx-test--urfuwo.hlx.live/design-system/fiori-design-web/button
+Before: https://main--hlx-test--urfuwo.hlx.live/fiori-design-web/button-web-component
+After: https://<branch>--hlx-test--urfuwo.hlx.live/fiori-design-web/button-web-component
 
 
 - [ ] New Blocks introduced in this PR
