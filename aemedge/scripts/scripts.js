@@ -405,6 +405,12 @@ async function loadPage() {
   loadDelayed();
 }
 
+async function sendBeacon(stl = null) {
+  window.adobeDataLayer.push({
+    event: stl ? 'stlBeaconReady' : 'stBeaconReady',
+  });
+}
+
 async function initDataLayer() {
   window.adobeDataLayer = [];
   const loginStatus = window.sessionStorage.getItem('loginStatus') === 'logY' ? 'yes' : 'no';
@@ -436,6 +442,7 @@ async function initDataLayer() {
       loginStatus,
     },
   });
+  await sendBeacon();
 }
 
 initDataLayer();
