@@ -85,7 +85,6 @@
           }
         }
 
-        /* Link: remove the `.button` styles */
         & a {
           /* Icon + Link */
           &:visited .icon img {
@@ -103,7 +102,7 @@
             filter: brightness(0) saturate(100%) invert(4%) sepia(90%) saturate(4428%) hue-rotate(230deg) brightness(98%) contrast(103%);
           }
 
-          /* Hide global `.button` styles */
+          /* Hide global `a.button` icon */
           &:has(.icon)::after {
             display: none;
           }
