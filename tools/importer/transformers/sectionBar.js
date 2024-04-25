@@ -57,9 +57,10 @@ const sectionBar = (main, document) => {
     const header = sectionW.querySelector('h1');
     if (header?.textContent === 'When to Use') {
       header.remove();
-      const col1 = sectionW.querySelectorAll('div.vc_column_container')[1];
-      col1.after(document.createElement('hr'));
-      const block = [['When To Use'], [sectionW.innerHTML]];
+      const cols = sectionW.querySelectorAll('div.vc_column_container');
+      const col1 = cols[1]; // do
+      const col2 = cols[2]; // don't
+      const block = [['When To Use'], [col1.innerHTML], [col2.innerHTML]];
       const table = WebImporter.DOMUtils.createTable(block, document);
 
       sectionW.innerHTML = '';
