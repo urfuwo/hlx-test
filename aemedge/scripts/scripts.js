@@ -322,9 +322,15 @@ async function loadEager(doc) {
   decorateTemplateAndTheme();
   const main = doc.querySelector('main');
   if (main) {
-    await decorateMain(main);
-    document.body.classList.add('appear');
-    await waitForLCP(LCP_BLOCKS);
+    // show the LCP block in a dedicated frame to reduce TBT
+    await new Promise((resolve) => {
+      window.requestAnimationFrame(async () => {
+        await decorateMain(main);
+        document.body.classList.add('appear');
+        await waitForLCP(LCP_BLOCKS);
+        resolve();
+      });
+    });
   }
 
   try {
@@ -400,16 +406,27 @@ function loadDelayed() {
   // load anything that can be postponed to the latest here
 }
 
+async function scheduleAdobeDCLoad() {
+  const delayMs = 50;
+  window.setTimeout(
+    () => import('./adobedc.js'),
+    delayMs,
+  );
+  window.console.log(`#L1: AdobeDC load scheduled at ${Date.now() - window.adobeDCStart}ms, delayed by ${delayMs}ms`);
+}
+
 async function loadPage() {
+  window.adobeDCStart = Date.now();
   await loadEager(document);
   await loadLazy(document);
+  await scheduleAdobeDCLoad();
   loadDelayed();
 }
 
 async function initDataLayer() {
   window.adobeDataLayer = [];
   const loginStatus = window.sessionStorage.getItem('loginStatus') === 'logY' ? 'yes' : 'no';
-  const siteName = 'sap';
+  const siteName = 'alx:l1';
   window.adobeDataLayer.push({
     event: 'globalDL',
     site: {
