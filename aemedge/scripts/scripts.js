@@ -14,7 +14,9 @@ import {
   sampleRUM,
   toClassName,
   toCamelCase,
+  loadScript,
 } from './aem.js';
+import { sendBeacon } from '../libs/analytics/analytics.js';
 
 const LCP_BLOCKS = ['hero']; // add your LCP blocks to the list
 const TEMPLATE_LIST = {
@@ -407,7 +409,8 @@ async function loadPage() {
 }
 
 async function initDataLayer() {
-  window.adobeDataLayer = [];
+  await loadScript('/aemedge/libs/analytics/acdl.min.js');
+  window.adobeDataLayer = window.adobeDataLayer || [];
   const loginStatus = window.sessionStorage.getItem('loginStatus') === 'logY' ? 'yes' : 'no';
   window.adobeDataLayer.push({
     event: 'globalDL',
@@ -437,6 +440,7 @@ async function initDataLayer() {
       loginStatus,
     },
   });
+  sendBeacon(window.adobeDataLayer);
 }
 
 initDataLayer();
