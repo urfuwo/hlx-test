@@ -35,15 +35,15 @@ const articlePromo = (main, document) => {
     if (NEWSLETTER_FILTER.test(ribbon.textContent)) {
       ribbon.remove();
     } else {
-      ribbon.querySelectorAll('.NotificationRibbon__buttonWrapper--zT2sN a').forEach((a) => {
-        const wrapper = a.classList.contains('Button__primary--alIWX')
+      ribbon.querySelectorAll('[class^="NotificationRibbon__button--"]').forEach((a) => {
+        const wrapper = a.className.includes('Button__primary--')
           ? document.createElement('strong')
           : document.createElement('em');
         a.parentElement.append(wrapper);
         wrapper.append(a);
       });
 
-      ribbon.querySelectorAll('.Image__wrapper--flSSI').forEach((img) => img.remove());
+      ribbon.querySelectorAll('[class^="Image__wrapper--"]').forEach((img) => img.remove());
       const name = ribbon.classList.contains('alignleft') ? 'Promo (blue)' : 'Promo';
       const block = [[name], [ribbon.innerHTML]];
       const table = WebImporter.DOMUtils.createTable(block, document);

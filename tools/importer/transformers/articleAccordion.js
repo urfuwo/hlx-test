@@ -4,9 +4,9 @@ const articleAccordion = (main, document) => {
   // insights accordion mapped to accordion or highlighted text or toc
   main.querySelectorAll('div.section.accordion').forEach((accordionWrapper) => {
     const entries = [];
-    accordionWrapper.querySelectorAll('.AccordionItem__root--fWYZn').forEach((entryWrapper) => {
-      const entryTitle = entryWrapper.querySelector('.AccordionItem__title--mnlMe').textContent;
-      const entryContent = entryWrapper.querySelector('.AccordionItem__slideAccordion--DgFIG');
+    accordionWrapper.querySelectorAll('[class^="AccordionItem__root--"]').forEach((entryWrapper) => {
+      const entryTitle = entryWrapper.querySelector('[class^="AccordionItem__title--"]').textContent;
+      const entryContent = entryWrapper.querySelector('[class^="AccordionItem__slideAccordion--"]');
       entries.push([entryTitle, entryContent]);
     });
 

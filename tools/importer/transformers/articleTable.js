@@ -1,7 +1,7 @@
 const articleTable = (main, document) => {
   // insights
   main.querySelectorAll('table.table').forEach((table) => {
-    const tableWrapper = table.closest('.Table__root--Z4pyq');
+    const tableWrapper = table.closest('[class^="Table__root--"]');
 
     // get number of columns
     const numCols = table.rows[0]

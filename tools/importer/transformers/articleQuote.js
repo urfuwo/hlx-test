@@ -99,7 +99,7 @@ function handleInsightsQuotes(main, document) {
   });
 
   /* Insights Quote https://www.sap.com/insights/viewpoints/the-business-value-of-sustainability-is-here.html */
-  main.querySelectorAll('.TextStandard__callout--qI8L9').forEach((quoteTextElem) => {
+  main.querySelectorAll('[class^="TextStandard__callout--"]').forEach((quoteTextElem) => {
     const quoteWrapper = quoteTextElem.parentNode;
     const quote = [[quoteTextElem.textContent]];
 

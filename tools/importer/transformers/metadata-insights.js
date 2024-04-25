@@ -1,25 +1,5 @@
 /* global WebImporter */
 
-const addToSet = (map, key, value, prefix) => {
-  let v = value;
-  if (prefix && value.toLowerCase().startsWith(prefix.toLowerCase())) {
-    v = value.split('/').pop().trim();
-  }
-
-  if (!map.has(key)) {
-    map.set(key, new Set());
-  }
-  if (v) {
-    map.get(key).add(v);
-  }
-};
-
-const mapToMeta = (meta, map) => {
-  map.entries().forEach((tag) => {
-    if (tag[1].size > 0) meta[tag[0]] = [...tag[1]].join(', ');
-  });
-};
-
 // eslint-disable-next-line no-unused-vars
 const createMetadata = (main, document, html, params, urlStr) => {
   const meta = {};
@@ -36,7 +16,7 @@ const createMetadata = (main, document, html, params, urlStr) => {
 
   const keywords = document.querySelector('[name="keywords"]');
   if (keywords) {
-    meta.keywords = keywords.content;
+    meta.Keywords = keywords.content;
   }
 
   const img = document.querySelector('[property="og:image"]');
@@ -68,15 +48,16 @@ const createMetadata = (main, document, html, params, urlStr) => {
     if (data) {
       document.articleFolder = data['Content Type Category action:mapped'];
 
-      const tagging = new Map();
-      addToSet(tagging, 'topic', data['Umbrella action:mapped'], 'topic');
-      addToSet(tagging, 'topic', data['Umbrella action:mapped 2'], 'topic');
-      addToSet(tagging, 'industry', data['Industry 1 action:mapped'], 'industry');
-      addToSet(tagging, 'industry', data['Industry 2 action:mapped'], 'industry');
-      addToSet(tagging, 'content-type', data['Content Type action:mapped'], 'content-type');
-      addToSet(tagging, 'content-type', data['Content Type action:mapped 2'], 'content-type');
-      addToSet(tagging, 'clm-stage', data['Customer Lifecycle Map Stages action:mapped'], 'stage');
-      mapToMeta(meta, tagging);
+      const tagging = new Set();
+      tagging.add(data['Umbrella action:mapped']);
+      tagging.add(data['Umbrella action:mapped 2']);
+      tagging.add(data['Industry 1 action:mapped']);
+      tagging.add(data['Industry 2 action:mapped']);
+      tagging.add(data['Content Type action:mapped']);
+      tagging.add(data['Content Type action:mapped 2']);
+      tagging.add(data['Customer Lifecycle Map Stages action:mapped']);
+
+      meta.Tags = [...tagging].filter((t) => t !== '').join(', ');
 
       if (data['Original Publish Date'] && !Number.isNaN(+data['Original Publish Date'])) {
         const date = new Date(Math.round((+data['Original Publish Date'] - (1 + 25567 + 1)) * 86400 * 1000));
