@@ -19,7 +19,7 @@ const PROJECT_BASE_URL = 'https://main--hlx-test--urfuwo.hlx.page';
 const BASEPATH_MAPPING = [
   {
     type: 'feature-article',
-    basePath: '/blog',
+    basePath: '/news',
   },
   {
     type: 'blog',
