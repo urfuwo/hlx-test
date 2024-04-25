@@ -590,6 +590,7 @@ function buildBlock(blockName, content) {
           if (typeof val === 'string') {
             colEl.innerHTML += val;
           } else {
+            console.log('val', typeof val, val);
             colEl.appendChild(val);
           }
         }

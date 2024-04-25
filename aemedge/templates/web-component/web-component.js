@@ -1,6 +1,10 @@
 import { div, nav } from '../../scripts/dom-builder.js';
 import { buildBlock } from '../../scripts/aem.js';
 
+function decorateTabSections(currentTabSections) {
+  return div(...currentTabSections);
+}
+
 function decorate(doc) {
   const main = doc.querySelector('main');
   const mainNavContainer = nav();
@@ -36,7 +40,7 @@ function decorate(doc) {
   otherSections.forEach((section) => {
     if (section.querySelector('h1')?.textContent === sectionDividers[sectionDividerIndex].firstSectionTitle) {
       if (currentTabName) {
-        blockContent.push([currentTabName, div(...currentTabSections)]);
+        blockContent.push([currentTabName, decorateTabSections(currentTabSections)]);
       }
       currentTabName = sectionDividers[sectionDividerIndex].sectionName;
       currentTabSections = [section];
@@ -45,14 +49,9 @@ function decorate(doc) {
       currentTabSections.push(section);
     }
   });
-  blockContent.push([currentTabName, currentTabSections]);
+  blockContent.push([currentTabName, decorateTabSections(currentTabSections)]);
 
-  console.log('blockContent', blockContent);
-  const tabBlock = buildBlock('tabs', blockContent);
-
-  const tabSection = div(tabBlock);
-
-  main.replaceChildren(firstSection, tabSection);
+  main.replaceChildren(firstSection, div(buildBlock('tabs', blockContent)));
 }
 
 decorate(document);

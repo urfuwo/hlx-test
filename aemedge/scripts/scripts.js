@@ -89,7 +89,7 @@ async function waitForLCP(lcpBlocks) {
  * Decorates all sections in a container element.
  * @param {Element} main The container element
  */
-function decorateSections(main) {
+export function decorateSections(main) {
   const styleProperties = getComputedStyle(document.body);
   main.querySelectorAll(':scope > div').forEach((section) => {
     const wrappers = [];
@@ -371,6 +371,7 @@ async function loadFooter(footer) {
  */
 async function loadLazy(doc) {
   initSidekick();
+  // maybe loadTemplates(doc);
   const main = doc.querySelector('main');
   await loadBlocks(main);
 
