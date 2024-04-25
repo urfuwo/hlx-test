@@ -27,9 +27,15 @@
       display: grid;
       grid-auto-flow: row;
       grid-auto-rows: 1fr;
-      grid-template-columns: 3fr 2fr;
+      grid-template-columns: 1fr;
       grid-gap: var(--udexGridGutters);
       padding: 0;
+
+      @media (width >= 640px) {
+        & {
+          grid-template-columns: 3fr 2fr;
+        }
+      }
     }
   }
 }

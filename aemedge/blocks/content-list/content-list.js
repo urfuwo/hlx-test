@@ -4,11 +4,13 @@ import { ul, h3 } from '../../scripts/dom-builder.js';
 import PictureCard from '../../libs/pictureCard/pictureCard.js';
 import Card from '../../libs/card/card.js';
 import Button from '../../libs/button/button.js';
-import { formatDate } from '../../scripts/utils.js';
+import { formatDate, extractFieldValue } from '../../scripts/utils.js';
+import { allAuthorEntries, authorEntry } from '../../scripts/article.js';
 
 function matchTags(entry, config) {
   if (!config.tags) return true;
-  return config.tags.some((item) => entry.tags.includes(item.trim()));
+  return config.tags.some((item) => JSON.parse(entry.tags)
+    .some((tag) => tag.startsWith(item.trim())));
 }
 
 function matchAuthors(entry, config) {
@@ -17,28 +19,21 @@ function matchAuthors(entry, config) {
   return config.authors.some((item) => authors.includes(item.trim()));
 }
 
-function matchTopics(entry, config) {
-  if (!config.topics) return true;
-  return config.topics.some((item) => entry.topics.includes(item.trim()));
-}
-
 function matchContentType(entry, config) {
   if (!config['content-type']) return true;
-  const contentType = entry['content-type'].split(',');
-  return config['content-type'].some((item) => contentType.includes(item.trim()));
+  return config['content-type'].some((item) => item.trim() === extractFieldValue(entry, 'tags', 'content-type'));
 }
 
 function getFilter(config) {
   return (entry) => matchTags(entry, config)
     && matchAuthors(entry, config)
-    && matchTopics(entry, config)
     && matchContentType(entry, config);
 }
 
 function getInfo(article, config) {
   const { info = ['publicationDate'] } = config;
   if (info[0] === 'publicationDate') {
-    return formatDate(article.publicationDate * 1000);
+    return `Updated on ${formatDate(article.publicationDate * 1000)}`;
   }
   if (info[0] === 'author') {
     return article.author;
@@ -49,17 +44,19 @@ function getInfo(article, config) {
   return '';
 }
 
-function getPictureCard(article, config, placeholders) {
+function getPictureCard(article, config, placeholders, authEntry) {
+  const type = extractFieldValue(article, 'tags', 'content-type');
   const {
-    author, 'content-type': type, image, path, title, priority,
+    image, path, title, priority,
   } = article;
   const tagLabel = placeholders[toCamelCase(priority)] || '';
   const info = getInfo(article, config);
-  return new PictureCard(title, path, type, info, author, image, tagLabel);
+  return new PictureCard(title, path, type, info, authEntry, image, tagLabel);
 }
 
 function getCard(article, config) {
-  const { 'content-type': type, path, title } = article;
+  const type = extractFieldValue(article, 'tags', 'content-type');
+  const { path, title } = article;
   const info = getInfo(article, config);
   return new Card(title, path, type, info);
 }
@@ -75,7 +72,7 @@ export default async function decorateBlock(block) {
   }
   const filter = getFilter(config);
   const limit = config.limit ? +config.limit[0] + 1 : -1;
-  let articleStream = await ffetch(`${window.hlx.codeBasePath}/articles-index.json`)
+  let articleStream = await ffetch(`${window.hlx.codeBasePath}/articles-index.json`, 'sapContentHubArticles')
     .filter((entry) => entry.path !== window.location.pathname)
     .filter(filter)
     .limit(limit)
@@ -88,13 +85,14 @@ export default async function decorateBlock(block) {
     articleStream = articleStream.slice(0, 10); // only show first 10, rest will be paginated
     viewBtn = new Button('Show More', 'icon-link-arrow');
   }
-  const cardList = ul();
+  const authEntries = await allAuthorEntries(articleStream);
+  const cardList = ul({ class: 'card-items' });
   articleStream.forEach((article) => {
     let card;
     if (textOnly) {
       card = getCard(article, config);
     } else {
-      card = getPictureCard(article, config, placeholders);
+      card = getPictureCard(article, config, placeholders, authorEntry(article, authEntries));
     }
     cardList.append(card.render());
   });

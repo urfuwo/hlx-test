@@ -1,32 +1,18 @@
 import { loadCSS } from '../../scripts/aem.js';
-import ffetch from '../../scripts/ffetch.js';
-import { div } from '../../scripts/dom-builder.js';
-import { completeEntry, renderProfile } from '../author-profile/author-profile.js';
-
-async function getAuthorEntries(keys) {
-  const entryFilter = ((entry) => (keys.includes(entry.path)));
-  const unsortedEntries = await ffetch(`${window.hlx.codeBasePath}/authors-index.json`).filter(entryFilter).limit(keys.length).all();
-  const sortedEntries = [];
-  if (unsortedEntries) {
-    keys.forEach((key) => {
-      sortedEntries.push(completeEntry(unsortedEntries.find((entry) => (key === entry.path))));
-    });
-  }
-  return sortedEntries;
-}
+import { getAuthorEntries } from '../../scripts/article.js';
+import Profile from '../../libs/profile/profile.js';
 
 async function addAuthorProfiles(block, keys) {
   const entries = await getAuthorEntries(keys);
   if (entries && entries.length) {
-    if (keys.length > 1) {
+    const multipleProfiles = keys.length > 1;
+    entries.forEach((authorEntry) => {
+      block.append(Profile.fromAuthorEntry(authorEntry).render(false, multipleProfiles));
+    });
+    if (multipleProfiles) {
       block.classList.add(`elems${keys.length}`);
-      entries.forEach((entry) => {
-        const profile = div({ class: 'author-profile hor' }, renderProfile(entry));
-        block.append(profile);
-      });
     } else {
       block.classList.add('vertical');
-      block.append(div({ class: 'author-profile' }, renderProfile(entries[0])));
     }
   } else {
     block.parentNode.remove();
@@ -42,3 +28,5 @@ export default async function decorateBlock(block) {
   block.innerHTML = '';
   await addAuthorProfiles(block, keys);
 }
+
+export { addAuthorProfiles };

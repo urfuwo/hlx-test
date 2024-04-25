@@ -9,7 +9,7 @@ Temporary location prior to enabling https://github.tools.sap/UDEx/dx-web
 
 ## Documentation
 
-All technical documentaion of the project lives in [/docs](/docs) folder.
+All technical documentation of the project lives in [/docs](/docs) folder.
 
 ## Installation
 
@@ -86,3 +86,4 @@ Finally, when a new update of the UDEX library is pushed to the CDN, it can be i
 ```
 
 pointing it to the new release and running `npm run build`. For now, the process of updates is manual - i.e., the UDEX team needs to make a new version available on the CDN and then, the url can be updated after this is communicated OOB.
+.

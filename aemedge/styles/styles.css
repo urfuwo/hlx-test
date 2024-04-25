@@ -9,6 +9,15 @@
  * Heading/Regular: default
  */
 
+* {
+  box-sizing: border-box;
+  
+  &::before,
+  &::after {
+    box-sizing: border-box;
+  }
+}
+
 /* Fall back to Arial for 72 Brand Variable
  Added to styles.css for early loading */
 
@@ -54,6 +63,7 @@
     'Helvetica', 'sans-serif';
   --hero-margin--left: var(--udexGridMargins);
   --hero-margin--right: var(--udexGridMargins);
+  --card-tile-height: 360px;
 }
 
 /* S */
@@ -190,6 +200,22 @@ main pre {
   white-space: pre;
 }
 
+.subtitle {
+  & a {
+    font-size: var(--udexTypographyBodyXSFontSize);
+    font-weight: var(--udexTypographyFontWeightMedium);
+    line-height: var(--udexTypographyDisplayLineHeight);
+    color: var(--udexColorNeutralBlack) !important;
+  }
+}
+
+.info {
+  font-size: var(--udexTypographyNavigationRegularXSFontSize);
+  font-weight: var(--udexTypographyFontWeightRegular);
+  line-height: var(--udexTypographyDisplayLineHeight);
+  color: var(--udexColorGrey6);
+}
+
 a:any-link {
   color: var(--udexColorBlue7);
   text-decoration: underline;
@@ -218,28 +244,52 @@ main .button-container {
     border-radius: 0.5rem;
     font-style: normal;
     font-size: var(--udexTypographyNavigationMediumXLFontSize);
+    line-height: var(--udexTypographyNavigationLineHeight);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     min-height: 36px;
     padding: 9px 10px;
 
-    &:is(a):not(.primary, .secondary)::after {
-      content: '\203A';
-      position: absolute;
-      padding-inline: var(--udexSpacer4);
-      transform: scale(1.3);
-    }
-
-    &:hover {
-      color: var(--udexColorBlue9);
-    }
-
     &:any-link,
     button {
       border-radius: 0.5rem;
       border: 0.0625rem solid transparent;
       font-weight: normal;
+    }
+
+    &:is(a):not(.primary, .secondary) {
+      display: inline-flex;
+      align-items: center;
+      padding: 0;
+      min-height: 0;
+
+      &:visited {
+        color: var(--udexColorBlue10);
+      }
+
+      &:hover {
+        color: var(--udexColorBlue9);
+        text-decoration: underline;
+      }
+
+      &:active {
+        color: var(--udexColorBlue11);
+        text-decoration: underline;
+      }
+
+      &::after {
+        box-sizing: border-box;
+        content: "";
+        display: inline-block;
+        height: 1rem;
+        width: 1rem;
+        margin-left: var(--udexSpacer4);
+
+        /* Use mask in order to be able to adjust SVG colour */
+        mask: url("/aemedge/icons/slim-arrow-right.svg") center no-repeat;
+        background-color: currentcolor;
+      }
     }
 
     &.primary {
@@ -252,17 +302,69 @@ main .button-container {
         border-color: var(--udexColorBlue9);
         background-color: var(--udexColorBlue9);
       }
+
+      &:active {
+        color: var(--udexColorBlue9);
+        border-color: var(--udexColorBlue9);
+        background-color: var(--udexColorNeutralWhite);
+      }
     }
 
     &.secondary {
       color: var(--udexColorBlue9);
       border-color: var(--udexColorGrey7);
-      background: var(--udexColorNeutralWhite);
+      background-color: var(--udexColorNeutralWhite);
 
       &:hover {
         color: var(--udexColorBlue9);
         border-color: var(--udexColorGrey7);
         background-color: var(--udexColorGrey2);
+      }
+
+      &:active {
+        color: var(--udexColorBlue9);
+        border-color: var(--udexColorBlue9);
+        background-color: var(--udexColorNeutralWhite);
+      }
+    }
+  }
+}
+
+main .section.background-dark .button-container {
+  :is(.button) {
+    &.primary {
+      color: var(--udexColorBlue8);
+      border-color: var(--udexColorNeutralWhite);
+      background-color: var(--udexColorNeutralWhite);
+
+      &:hover {
+        color: var(--udexColorBlue9);
+        border-color: var(--udexColorGrey3);
+        background-color: var(--udexColorGrey3);
+      }
+
+      &:active {
+        color: var(--udexColorBlue10);
+        border-color: var(--udexColorGrey4);
+        background-color: var(--udexColorGrey4);
+      }
+    }
+
+    &.secondary {
+      color: var(--udexColorNeutralWhite);
+      border-color: var(--udexColorNeutralWhite);
+      background-color: hsl(0deg 0% 0% / 0%);
+
+      &:hover {
+        color: var(--udexColorNeutralWhite);
+        border-color: var(--udexColorNeutralWhite);
+        background-color: hsl(0deg 100% 100% / 20%);
+      }
+
+      &:active {
+        color: var(--udexColorBlue10);
+        border-color: var(--udexColorBlue10);
+        background-color: var(--udexColorGrey4);
       }
     }
   }
@@ -418,4 +520,83 @@ main .section {
 
 .fragment-container .section:last-of-type {
   padding-bottom: 0;
+}
+
+.hero-text-white-wrapper,
+.background-dark {
+  --_ui5-v1-23-0-rc-4_button_border_radius: .5rem;
+
+  udex-button {
+    --udex-button-color-primary-standard-default-background: var(--udexColorNeutralWhite);
+    --udex-button-color-primary-standard-default-border: var(--udexColorNeutralWhite);
+    --udex-button-color-primary-standard-default-text-and-icon: var(--udexColorBlue8);
+    --udex-button-color-primary-standard-hover-background: var(--udexColorGrey3);
+    --udex-button-color-primary-standard-hover-border: var(--udexColorGrey3);
+    --udex-button-color-primary-standard-hover-text-and-icon: var(--udexColorBlue9);
+    --udex-button-color-primary-standard-active-background: var(--udexColorGrey4);
+    --udex-button-color-primary-standard-active-border: var(--udexColorGrey4);
+    --udex-button-color-primary-standard-active-text-and-icon: var(--udexColorBlue10);
+    --udex-button-color-secondary-standard-default-background:  hsl(0deg 0% 0% / 0%);
+    --udex-button-color-secondary-standard-default-border: var(--udexColorNeutralWhite);
+    --udex-button-color-secondary-standard-default-text-and-icon: var(--udexColorNeutralWhite);
+    --udex-button-color-secondary-standard-hover-background: hsl(0deg 100% 100% / 20%);
+    --udex-button-color-secondary-standard-hover-border: var(--udexColorNeutralWhite);
+    --udex-button-color-secondary-standard-hover-text-and-icon: var(--udexColorNeutralWhite);
+    --udex-button-color-secondary-standard-active-background: var(--udexColorGrey4);
+    --udex-button-color-secondary-standard-active-border: var(--udexColorBlue10);
+    --udex-button-color-secondary-standard-active-text-and-icon: var(--udexColorBlue10);
+  }
+}
+
+.author-profiles,
+.profiles {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: var(--udexGridGutters);
+}
+
+/* S: use 2 per row */
+@media (width >= 640px) {
+  :is(.author-profiles,.profiles):not(.vertical) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* M: use 2 per row */
+@media (width >= 980px) {
+  :is(.author-profiles,.profiles):not(.vertical) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  :is(.author-profiles,.profiles).elems2:not(.vertical) {
+    grid-template-columns: 4fr 4fr 0.75fr;
+  }
+}
+
+/* L and XL: use 3 per row, unless there are two elements */
+@media (width >= 1280px) {
+  :is(.author-profiles,.profiles):not(.vertical) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  :is(.author-profiles,.profiles).elems2:not(.vertical) {
+    grid-template-columns: 4fr 4fr 0.75fr;
+  }
+}
+
+.section.additional-reading {
+  padding: var(--udexSpacer24) var(--udexSpacer20);
+  border-radius: var(--udexSpacer8);
+  margin-block-end: var(--udexSpacer56);
+
+  :first-child {
+    margin-block-start: 0;
+  }
+
+  :last-child {
+    margin-block-end: 0;
+  }
 }
