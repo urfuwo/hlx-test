@@ -111,7 +111,7 @@ const createMetadata = (main, document, html, params, urlStr) => {
     // map categories to topics
     const categories = [...articleContent.classList]
       .filter((className) => className.startsWith('category-'))
-      .filter((className) => className === 'category-industry')
+      .filter((className) => className !== 'category-industries')
       .map((className) => className.replace('category-', ''));
     if (categories?.length > 0) {
       document.mappingTable.topic.data
