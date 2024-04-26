@@ -409,7 +409,7 @@ async function loadPage() {
 }
 
 async function initDataLayer() {
-  await loadScript('/aemedge/libs/analytics/acdl.min.js');
+  await loadScript('/aemedge/dist/acdl.min.js');
   window.adobeDataLayer = window.adobeDataLayer || [];
   const loginStatus = window.sessionStorage.getItem('loginStatus') === 'logY' ? 'yes' : 'no';
   window.adobeDataLayer.push({
@@ -440,7 +440,7 @@ async function initDataLayer() {
       loginStatus,
     },
   });
-  sendBeacon(window.adobeDataLayer);
+  sendBeacon();
 }
 
 initDataLayer();
