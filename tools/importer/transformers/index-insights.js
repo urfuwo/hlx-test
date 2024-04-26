@@ -3,7 +3,7 @@ import articlePromo from './articlePromo.js';
 import articleHero from './articleHero.js';
 import articleVideoHero from './articleVideoHero.js';
 import authorProfile from './authorProfile.js';
-import transformVideo from './youtubeVideo.js';
+import transformVideo from './sapVideo.js';
 import articleMoreSection from './articleMoreSection.js';
 import articleQuote from './articleQuote.js';
 import articlePageFooter from './articlePageFooter.js';
@@ -13,6 +13,7 @@ import articlePanel from './articlePanel.js';
 import articleAccordion from './articleAccordion.js';
 import articleTable from './articleTable.js';
 import cleanUpImgSrc from './preProcessInsightsImgs.js';
+import articleKeyFacts from './articleFastFacts.js';
 
 export const transformers = [
   metadata,
@@ -23,6 +24,7 @@ export const transformers = [
   articleQuote,
   articleAccordion,
   articleTable,
+  articleKeyFacts,
   articlePanel,
   articleContentFooter,
   articlePageFooter,

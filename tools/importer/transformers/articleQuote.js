@@ -99,20 +99,21 @@ function handleInsightsQuotes(main, document) {
   });
 
   /* Insights Quote https://www.sap.com/insights/viewpoints/the-business-value-of-sustainability-is-here.html */
-  main.querySelectorAll('[class^="TextStandard__callout--"]').forEach((quoteTextElem) => {
-    const quoteWrapper = quoteTextElem.parentNode;
-    const quote = [[quoteTextElem.textContent]];
+  // TODO: this captures too many elements, need to refine
+  // main.querySelectorAll('[class^="TextStandard__callout--"]').forEach((quoteTextElem) => {
+  //   const quoteWrapper = quoteTextElem.parentNode;
+  //   const quote = [[quoteTextElem.textContent]];
 
-    const qSourceDiv = quoteWrapper.querySelector('.fontBook');
-    if (qSourceDiv && qSourceDiv.childElementCount === 1) {
-      quote.push([cleanQuoteSource(qSourceDiv.textContent)]);
-    }
+  //   const qSourceDiv = quoteWrapper.querySelector('.fontBook');
+  //   if (qSourceDiv && qSourceDiv.childElementCount === 1) {
+  //     quote.push([cleanQuoteSource(qSourceDiv.textContent)]);
+  //   }
 
-    const table = WebImporter.DOMUtils.createTable([['Quote'], ...quote], document);
-    if (quote.length > 1) {
-      quoteWrapper.replaceWith(table);
-    }
-  });
+  //   const table = WebImporter.DOMUtils.createTable([['Quote'], ...quote], document);
+  //   if (quote.length > 1) {
+  //     quoteWrapper.replaceWith(table);
+  //   }
+  // });
 }
 
 const transformQuote = (main, document) => {

@@ -32,7 +32,7 @@ const createMetadata = (main, document, html, params, urlStr) => {
   main.querySelectorAll('div[data-component="Section"]').forEach((sectionWrapper) => {
     if (sectionWrapper.querySelector('h2')?.textContent.indexOf('Meet the Author') > -1) {
       const authors = [];
-      sectionWrapper.querySelectorAll('.Headline__xs--v8bKJ').forEach((authorEL) => {
+      sectionWrapper.querySelectorAll('div[class^="Headline__xs--"]').forEach((authorEL) => {
         authors.push(authorEL.textContent.trim());
       });
       if (authors.length > 0) {
