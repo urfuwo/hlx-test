@@ -13,7 +13,7 @@ export default class Tag {
       loadCSS(`${window.hlx.codeBasePath}/libs/tag/tag.css`);
     }
     let tagHref = this.tag['topic-path'];
-    if (document.location.pathname.startsWith('/news/') && this.tag['news-path']) {
+    if (document.location.pathname.startsWith('/news/') || tagHref === '0') {
       tagHref = this.tag['news-path'];
     }
     return a({ class: 'tag', href: tagHref }, this.tag.label);
