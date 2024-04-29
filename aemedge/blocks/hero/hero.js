@@ -2,7 +2,7 @@ import '@udex/webcomponents/dist/HeroBanner.js';
 import {
   a, div, p, span,
 } from '../../scripts/dom-builder.js';
-import { getMetadata, toCamelCase } from '../../scripts/aem.js';
+import { fetchPlaceholders, getMetadata, toCamelCase } from '../../scripts/aem.js';
 import { fetchTagList, formatDate, getContentType } from '../../scripts/utils.js';
 import Tag from '../../libs/tag/tag.js';
 import { buildAuthorUrl, getAuthorEntries, getAuthorNames } from '../../scripts/article.js';
@@ -182,11 +182,16 @@ export default async function decorate(block) {
     }
   });
 
-  // Add Primary tag
+  // Add primary tag or news placeholder
   const tagContainer = div({ class: 'media-blend__tags' });
-  const firstTag = findFirstTag();
-  if (firstTag) {
-    tagContainer.append(new Tag(tags[toCamelCase(firstTag)]).render());
+  if (window.location.pathname.startsWith('/news/') && isArticle) {
+    const placeholders = await fetchPlaceholders();
+    tagContainer.append(new Tag({ key: 'news-center', label: placeholders[toCamelCase('SAP News Center')], 'news-path': '/news' }).render());
+  } else {
+    const firstTag = findFirstTag();
+    if (firstTag) {
+      tagContainer.append(new Tag(tags[toCamelCase(firstTag)]).render());
+    }
   }
 
   // convert all buttons to udex-buttons
