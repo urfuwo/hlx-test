@@ -18,10 +18,11 @@ const articlePromo = (main, document) => {
     });
 
     if (NEWSLETTER_FILTER.test(banner.textContent)) {
-      const block = [['Promo (Newsletter)'], [banner.innerHTML]];
-      const table = WebImporter.DOMUtils.createTable(block, document);
       banner.remove();
-      document.querySelector('div#page').append(table);
+      const newsletterFragmentLink = document.createElement('a');
+      newsletterFragmentLink.href = 'https://main--hlx-test--urfuwo.hlx.page/fragments/news/newsletter-subscription';
+      newsletterFragmentLink.textContent = newsletterFragmentLink.href;
+      document.querySelector('div#page').append(newsletterFragmentLink);
     } else {
       const name = banner.classList.contains('alignleft') ? 'Promo (blue)' : 'Promo';
       const block = [[name], [banner.innerHTML]];

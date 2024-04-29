@@ -1,5 +1,5 @@
 /* global WebImporter */
-const promoHelper = (img, headline, button) => {
+const promoHelper = (headline, button) => {
   const heading = document.createElement('h3');
   heading.textContent = headline;
   button.textContent = 'Learn more';
@@ -7,7 +7,7 @@ const promoHelper = (img, headline, button) => {
   const strong = document.createElement('strong');
   strong.append(button);
 
-  const block = [['Promo'], [img, heading, strong]];
+  const block = [['Promo'], [heading, strong]];
   return WebImporter.DOMUtils.createTable(block, document);
 };
 
@@ -35,7 +35,6 @@ const articleSidebar = (main, document) => {
     if (firstEntry) {
       contentEntryPoints[0].before(
         promoHelper(
-          firstEntry.querySelector('img'),
           firstEntry.querySelector('a').textContent,
           firstEntry.querySelector('a'),
         ),
@@ -49,7 +48,6 @@ const articleSidebar = (main, document) => {
     if (middleEntry) {
       contentEntryPoints[Math.floor(contentEntryPoints.length / 2)].after(
         promoHelper(
-          middleEntry.querySelector('img'),
           middleEntry.querySelector('a').textContent,
           middleEntry.querySelector('a'),
         ),
@@ -61,29 +59,17 @@ const articleSidebar = (main, document) => {
     );
     if (bottomEntry) {
       if (bottomEntry.querySelector('a[href*="sap-news-center-newsletter"]')) {
-        // move last element (newsletter) to the end of the page
-        const heading = document.createElement('h3');
-        const button = bottomEntry.querySelector('a');
-        heading.textContent = button.textContent;
-
-        const strong = document.createElement('strong');
-        button.textContent = 'Subscribe now';
-        strong.append(button);
-
-        const block = [
-          ['Promo (Newsletter)'],
-          [bottomEntry.querySelector('img'), heading, strong],
-        ];
-        const table = WebImporter.DOMUtils.createTable(block, document);
         bottomEntry.remove();
-        main.querySelector('div#more-posts').append(table);
+        const newsletterFragmentLink = document.createElement('a');
+        newsletterFragmentLink.href = 'https://main--hlx-test--urfuwo.hlx.page/fragments/news/newsletter-subscription';
+        newsletterFragmentLink.textContent = newsletterFragmentLink.href;
+        main.querySelector('div#more-posts').append(newsletterFragmentLink);
       } else {
         // keep it in the content as last element
         contentEntryPoints[0]
           .closest('div.entry-content')
           .append(
             promoHelper(
-              bottomEntry.querySelector('img'),
               bottomEntry.querySelector('a').textContent,
               bottomEntry.querySelector('a'),
             ),
