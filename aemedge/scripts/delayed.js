@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-cycle
-import { loadScript, sampleRUM } from './aem.js';
+import { getMetadata, loadScript, sampleRUM } from './aem.js';
 
 // Core Web Vitals RUM collection
 sampleRUM('cwv');
@@ -16,8 +16,9 @@ function getEnvType(hostname = window.location.hostname) {
 }
 
 function getScope(path = window.location.pathname) {
-  const fullScopePrefixes = ['/research/', '/resources/', '/videos/'];
-  return fullScopePrefixes.some((prefix) => path.startsWith(prefix)) ? 'full' : 'mvp';
+  return path.startsWith('/news/')
+    || (path.startsWith('/blogs/') && getMetadata('article:tag').includes('content-type/executive-blog'))
+    ? 'mvp' : 'full';
 }
 
 async function sendBeacon(stl = null) {
