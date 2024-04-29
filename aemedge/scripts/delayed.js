@@ -15,12 +15,6 @@ function getEnvType(hostname = window.location.hostname) {
   return fqdnToEnvType[hostname] || 'dev';
 }
 
-async function sendBeacon(stl = null) {
-  window.adobeDataLayer.push({
-    event: stl ? 'stlBeaconReady' : 'stBeaconReady',
-  });
-}
-
 async function loadAdobeDC() {
   const adobeTagsSrc = {
     dev: 'https://assets.adobedtm.com/ccc66c06b30b/6fa889b263e0/launch-3318725e3375-development.min.js',
@@ -29,10 +23,7 @@ async function loadAdobeDC() {
   };
   const envType = getEnvType();
   if (envType && adobeTagsSrc[envType]) {
-    if (envType !== 'dev' || ((new URLSearchParams(window.location.search)).get('tr')) != null) {
-      await loadScript(adobeTagsSrc[envType], {});
-      await sendBeacon();
-    }
+    await loadScript(adobeTagsSrc[envType], {});
   }
 }
 
