@@ -9,6 +9,15 @@
  * Heading/Regular: default
  */
 
+* {
+  box-sizing: border-box;
+  
+  &::before,
+  &::after {
+    box-sizing: border-box;
+  }
+}
+
 /* Fall back to Arial for 72 Brand Variable
  Added to styles.css for early loading */
 
@@ -191,6 +200,28 @@ main pre {
   white-space: pre;
 }
 
+a {
+ &:any-link {
+    color: var(--udexColorBlue7);
+    text-decoration: underline;
+  }
+  
+  &:visited {
+    color: var(--udexColorBlue10);
+  }
+  
+  &:hover,
+  &:focus{
+    color: var(--udexColorBlue9);
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  
+  &:active {
+    color: var(--udexColorBlue11);
+  }
+}
+
 .subtitle {
   & a {
     font-size: var(--udexTypographyBodyXSFontSize);
@@ -205,17 +236,6 @@ main pre {
   font-weight: var(--udexTypographyFontWeightRegular);
   line-height: var(--udexTypographyDisplayLineHeight);
   color: var(--udexColorGrey6);
-}
-
-a:any-link {
-  color: var(--udexColorBlue7);
-  text-decoration: underline;
-}
-
-a:hover {
-  color: var(--udexColorBlue9);
-  cursor: pointer;
-  text-decoration: underline;
 }
 
 main .button-container {

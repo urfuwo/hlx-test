@@ -21,6 +21,7 @@ const TEMPLATE_LIST = {
   article: 'article',
   'hub-l2': 'hub',
   'hub-l1': 'hub',
+  'web-component': 'web-component',
 };
 
 /**
@@ -68,7 +69,7 @@ async function waitForLCP(lcpBlocks) {
   const lcpCandidate = document.querySelector('main img');
 
   await new Promise((resolve) => {
-    const computedStyle = getComputedStyle(lcpCandidate);
+    const computedStyle = lcpCandidate ? getComputedStyle(lcpCandidate) : {};
     if (
       lcpCandidate
       && !lcpCandidate.complete
