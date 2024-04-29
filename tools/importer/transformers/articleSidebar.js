@@ -16,9 +16,7 @@ const articleSidebar = (main, document) => {
     'section#main > aside div.related-content-container',
   );
   if (sidebarElements) {
-    const entryContentDiv = document.querySelector(
-      'section#main > article > div.entry-content',
-    );
+    const entryContentDiv = document.querySelector('section#main > article > div.entry-content');
     let contentEntryPoints = [
       ...entryContentDiv.querySelectorAll('h3'),
       ...entryContentDiv.querySelectorAll('h2'),
@@ -29,34 +27,30 @@ const articleSidebar = (main, document) => {
     }
 
     // move first promo before the first heading in the text
-    const firstEntry = sidebarElements.querySelector(
-      'ul[data-position="top"] > li',
-    );
+    const firstEntry = sidebarElements.querySelector('ul[data-position="top"] > li');
     if (firstEntry) {
       contentEntryPoints[0].before(
-        promoHelper(
-          firstEntry.querySelector('a').textContent,
-          firstEntry.querySelector('a'),
-        ),
+        promoHelper(firstEntry.querySelector('a').textContent, firstEntry.querySelector('a')),
       );
     }
 
     // move second promo somewhere in the middle of the text
-    const middleEntry = sidebarElements.querySelector(
-      'ul[data-position="middle"] > li',
-    );
+    const middleEntry = sidebarElements.querySelector('ul[data-position="middle"] > li');
     if (middleEntry) {
-      contentEntryPoints[Math.floor(contentEntryPoints.length / 2)].after(
-        promoHelper(
-          middleEntry.querySelector('a').textContent,
-          middleEntry.querySelector('a'),
-        ),
-      );
+      if (middleEntry.querySelector('a[href*="sap-news-center-newsletter"]')) {
+        middleEntry.remove();
+        const newsletterFragmentLink = document.createElement('a');
+        newsletterFragmentLink.href = 'https://main--hlx-test--urfuwo.hlx.page/fragments/news/newsletter-subscription';
+        newsletterFragmentLink.textContent = newsletterFragmentLink.href;
+        main.querySelector('div#more-posts').append(newsletterFragmentLink);
+      } else {
+        contentEntryPoints[Math.floor(contentEntryPoints.length / 2)].after(
+          promoHelper(middleEntry.querySelector('a').textContent, middleEntry.querySelector('a')),
+        );
+      }
     }
 
-    const bottomEntry = sidebarElements.querySelector(
-      'ul[data-position="bottom"] > li',
-    );
+    const bottomEntry = sidebarElements.querySelector('ul[data-position="bottom"] > li');
     if (bottomEntry) {
       if (bottomEntry.querySelector('a[href*="sap-news-center-newsletter"]')) {
         bottomEntry.remove();
@@ -69,10 +63,7 @@ const articleSidebar = (main, document) => {
         contentEntryPoints[0]
           .closest('div.entry-content')
           .append(
-            promoHelper(
-              bottomEntry.querySelector('a').textContent,
-              bottomEntry.querySelector('a'),
-            ),
+            promoHelper(bottomEntry.querySelector('a').textContent, bottomEntry.querySelector('a')),
           );
       }
     }

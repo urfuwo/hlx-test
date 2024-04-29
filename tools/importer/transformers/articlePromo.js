@@ -17,12 +17,12 @@ const articlePromo = (main, document) => {
       wrapper.append(title);
     });
 
-    if (NEWSLETTER_FILTER.test(banner.textContent)) {
+    if (NEWSLETTER_FILTER.test(banner.textContent.toLowerCase())) {
       banner.remove();
       const newsletterFragmentLink = document.createElement('a');
       newsletterFragmentLink.href = 'https://main--hlx-test--urfuwo.hlx.page/fragments/news/newsletter-subscription';
       newsletterFragmentLink.textContent = newsletterFragmentLink.href;
-      document.querySelector('div#page').append(newsletterFragmentLink);
+      main.querySelector('div#more-posts').append(newsletterFragmentLink);
     } else {
       const name = banner.classList.contains('alignleft') ? 'Promo (blue)' : 'Promo';
       const block = [[name], [banner.innerHTML]];
