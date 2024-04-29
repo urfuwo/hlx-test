@@ -23,11 +23,8 @@ export default async function decorate(block) {
     }
   }
   if (linkContent && isNotArticle) {
-    // Unwrap link from button container added by aem.js
-    const link = linkContent.querySelector('a');
-    link.classList = ['col', 'content'];
+    linkContent.classList.add('col', 'content');
     linkContent.parentNode.classList.add('quote-link');
-    linkContent.parentNode.replaceChild(link, linkContent);
   } else if (linkContent) {
     // If article page, remove from DOM and ignore
     linkContent.parentNode.remove();

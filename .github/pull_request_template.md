@@ -3,8 +3,14 @@ Please always provide the [GitHub issue(s)](../issues) your PR is for, as well a
 Fix #<gh-issue-id>
 
 Test URLs:
-- Before: https://main--hlx-test--urfuwo.hlx.live/blog/2023/11/idc-marketscape-sap-a-leader-cloud-enabled-sourcing-applications
-- After: https://--hlx-test--urfuwo.hlx.live/blog/2023/11/idc-marketscape-sap-a-leader-cloud-enabled-sourcing-applications
+**Content Hub:**
+Before: https://main--hlx-test--urfuwo.hlx.live/blog/2023/11/idc-marketscape-sap-a-leader-cloud-enabled-sourcing-applications
+After: https://<branch>--hlx-test--urfuwo.hlx.live/blog/2023/11/idc-marketscape-sap-a-leader-cloud-enabled-sourcing-applications
+
+**Design system:**
+Before: https://main--hlx-test--urfuwo.hlx.live/fiori-design-web/button-web-component
+After: https://<branch>--hlx-test--urfuwo.hlx.live/fiori-design-web/button-web-component
+
 
 - [ ] New Blocks introduced in this PR
       If yes, please provide details below
