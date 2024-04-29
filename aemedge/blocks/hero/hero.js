@@ -100,9 +100,16 @@ function buildEyebrow(content) {
   );
 }
 
-function findFirstTag() {
-  const tags = getMetadata('article:tag').split(', ');
-  return tags.find((tag) => tag.trim().toLowerCase().startsWith('topic/') || tag.trim().toLowerCase().startsWith('industry/'));
+function findFirstTag(tags) {
+  const articleTags = getMetadata('article:tag');
+  const tagsLiEL = articleTags.split(', ').filter((articleTag) => {
+    const tag = tags[toCamelCase(articleTag)];
+    return tag && !tag.key.startsWith('content-type/') && (tag['topic-path'] || tag['news-path']);
+  }).map((articleTag) => new Tag(tags[toCamelCase(articleTag)]));
+  // get the first tag from the list of tags
+  return tagsLiEL[0];
+
+  // return metaTags.find((tag) => !tag.trim().toLowerCase().startsWith('content-type/'));
 }
 
 /**
@@ -186,11 +193,17 @@ export default async function decorate(block) {
   const tagContainer = div({ class: 'media-blend__tags' });
   if (window.location.pathname.startsWith('/news/') && isArticle) {
     const placeholders = await fetchPlaceholders();
-    tagContainer.append(new Tag({ key: 'news-center', label: placeholders[toCamelCase('SAP News Center')], 'news-path': '/news' }).render());
+    tagContainer.append(
+      new Tag({
+        key: 'news-center',
+        label: placeholders[toCamelCase('SAP News Center')],
+        'news-path': '/news',
+      }).render(),
+    );
   } else {
-    const firstTag = findFirstTag();
+    const firstTag = findFirstTag(tags);
     if (firstTag) {
-      tagContainer.append(new Tag(tags[toCamelCase(firstTag)]).render());
+      tagContainer.append(firstTag.render());
     }
   }
 
