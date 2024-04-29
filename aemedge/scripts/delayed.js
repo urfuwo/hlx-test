@@ -17,7 +17,7 @@ function getEnvType(hostname = window.location.hostname) {
 
 function getScope(path = window.location.pathname) {
   return path.startsWith('/news/')
-    || (path.startsWith('/blogs/') && getMetadata('article:tag').includes('content-type/executive-blog'))
+    || (path.startsWith('/blogs/') && getMetadata('article:tag')?.includes('content-type/executive-blog'))
     ? 'mvp' : 'full';
 }
 
