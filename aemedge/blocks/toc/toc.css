@@ -12,6 +12,7 @@
 }
 
 button.toc__selected {
+  position: relative;
   box-shadow: 0 var(--udexSpacer2) var(--udexSpacer8) 0 #2236494d;
   border-radius: 0.25rem;
   appearance: none;
@@ -19,6 +20,7 @@ button.toc__selected {
   background-color: var(--udexColorNeutralWhite);
   font: inherit;
   width: 100%;
+  z-index: 2;
 
   &::after {
     transform: rotate(90deg);
@@ -28,7 +30,6 @@ button.toc__selected {
 
 .toc-wrapper {
   height: 100%;
-  margin-bottom: var(--udexSpacer56);
 }
 
 .toc {
@@ -48,6 +49,8 @@ button.toc__selected {
     box-shadow: 0 var(--udexSpacer2) var(--udexSpacer8) 0 #2236494d;
     padding-block-start: var(--udexSpacer16);
     width: 100%;
+    background-color: var(--udexColorNeutralWhite);
+    z-index: 1;
   }
 
   button.toc__selected,
@@ -106,6 +109,7 @@ button.toc__selected {
   border-bottom: 0.0625rem solid var(--udexColorBlue7);
   border-end-end-radius: 0;
   border-end-start-radius: 0;
+  padding-block-end: calc(12.5px - 0.0625rem);
 
   &::after {
     background-color: var(--udexColorBlue7);
@@ -144,6 +148,10 @@ button.toc__selected {
 }
 
 @media (width >= 980px) {
+  .toc-container {
+    position: static;
+  }
+
   .toc__list {
     display: block;
   }
