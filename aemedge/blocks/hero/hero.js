@@ -106,10 +106,7 @@ function findFirstTag(tags) {
     const tag = tags[toCamelCase(articleTag)];
     return tag && !tag.key.startsWith('content-type/') && (tag['topic-path'] || tag['news-path']);
   }).map((articleTag) => new Tag(tags[toCamelCase(articleTag)]));
-  // get the first tag from the list of tags
   return tagsLiEL[0];
-
-  // return metaTags.find((tag) => !tag.trim().toLowerCase().startsWith('content-type/'));
 }
 
 /**
