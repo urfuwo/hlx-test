@@ -31,6 +31,11 @@
 .block.link-group .icon-slim-arrow-right {
   width: 18px;
   height: 18px;
+
+  & img {
+    /* --udexColorBlue7 */
+    filter: brightness(0) saturate(100%) invert(34%) sepia(98%) saturate(4614%) hue-rotate(202deg) brightness(99%) contrast(103%);
+  }
 }
 
 .block.link-group.active ul {
