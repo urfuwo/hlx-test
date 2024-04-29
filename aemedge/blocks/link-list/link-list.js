@@ -1,12 +1,6 @@
 import { span } from '../../scripts/dom-builder.js';
 
 /**
- * Link List Block
- */
-
-/**
- * Wrap the text node of a link with a `span` element.
- * (!) Text node can also be positioned before the icon.
  * @param link {Element} The link element
  */
 function moveLinkTextNodeToSpan(link) {
